@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMS_Client_2", "IMS_Client_2\IMS_Client_2.csproj", "{818F8009-F986-4DCE-91FF-435D17194BCF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{818F8009-F986-4DCE-91FF-435D17194BCF}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{818F8009-F986-4DCE-91FF-435D17194BCF}.Debug|Any CPU.Build.0 = Debug|x86
+		{818F8009-F986-4DCE-91FF-435D17194BCF}.Debug|x86.ActiveCfg = Debug|x86
+		{818F8009-F986-4DCE-91FF-435D17194BCF}.Debug|x86.Build.0 = Debug|x86
+		{818F8009-F986-4DCE-91FF-435D17194BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{818F8009-F986-4DCE-91FF-435D17194BCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{818F8009-F986-4DCE-91FF-435D17194BCF}.Release|x86.ActiveCfg = Release|x86
+		{818F8009-F986-4DCE-91FF-435D17194BCF}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BD4072A9-BF39-4E41-8456-9993BD4E8882}
+	EndGlobalSection
+EndGlobal
