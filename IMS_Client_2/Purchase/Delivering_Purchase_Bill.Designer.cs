@@ -37,15 +37,15 @@
             this.grpPurchaseBillDetail = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtItemName = new System.Windows.Forms.TextBox();
-            this.listBoxModelNo = new System.Windows.Forms.ListBox();
+            this.listBoxStyleNo = new System.Windows.Forms.ListBox();
             this.cmbCountry = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.cmbDepartment = new System.Windows.Forms.ComboBox();
+            this.cmbStyle = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblBrand = new System.Windows.Forms.Label();
             this.cmbBrand = new System.Windows.Forms.ComboBox();
             this.lblProductName = new System.Windows.Forms.Label();
-            this.lblModelNo = new System.Windows.Forms.Label();
+            this.lblStyleNo = new System.Windows.Forms.Label();
             this.cmbSizeType = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dgvQtycolor = new System.Windows.Forms.DataGridView();
@@ -150,15 +150,15 @@
             this.grpPurchaseBillDetail.BackColor = System.Drawing.Color.Transparent;
             this.grpPurchaseBillDetail.Controls.Add(this.label5);
             this.grpPurchaseBillDetail.Controls.Add(this.txtItemName);
-            this.grpPurchaseBillDetail.Controls.Add(this.listBoxModelNo);
+            this.grpPurchaseBillDetail.Controls.Add(this.listBoxStyleNo);
             this.grpPurchaseBillDetail.Controls.Add(this.cmbCountry);
             this.grpPurchaseBillDetail.Controls.Add(this.label2);
-            this.grpPurchaseBillDetail.Controls.Add(this.cmbDepartment);
+            this.grpPurchaseBillDetail.Controls.Add(this.cmbStyle);
             this.grpPurchaseBillDetail.Controls.Add(this.label1);
             this.grpPurchaseBillDetail.Controls.Add(this.lblBrand);
             this.grpPurchaseBillDetail.Controls.Add(this.cmbBrand);
             this.grpPurchaseBillDetail.Controls.Add(this.lblProductName);
-            this.grpPurchaseBillDetail.Controls.Add(this.lblModelNo);
+            this.grpPurchaseBillDetail.Controls.Add(this.lblStyleNo);
             this.grpPurchaseBillDetail.Enabled = false;
             this.grpPurchaseBillDetail.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpPurchaseBillDetail.Location = new System.Drawing.Point(8, 129);
@@ -192,16 +192,16 @@
             this.txtItemName.Enter += new System.EventHandler(this.txtSupplierBillNo_Enter);
             this.txtItemName.Leave += new System.EventHandler(this.txtSupplierBillNo_Leave);
             // 
-            // listBoxModelNo
+            // listBoxStyleNo
             // 
-            this.listBoxModelNo.FormattingEnabled = true;
-            this.listBoxModelNo.ItemHeight = 17;
-            this.listBoxModelNo.Location = new System.Drawing.Point(118, 29);
-            this.listBoxModelNo.Name = "listBoxModelNo";
-            this.listBoxModelNo.Size = new System.Drawing.Size(206, 55);
-            this.listBoxModelNo.TabIndex = 0;
-            this.listBoxModelNo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBoxModelNo_MouseClick);
-            this.listBoxModelNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBoxModelNo_KeyDown);
+            this.listBoxStyleNo.FormattingEnabled = true;
+            this.listBoxStyleNo.ItemHeight = 17;
+            this.listBoxStyleNo.Location = new System.Drawing.Point(118, 29);
+            this.listBoxStyleNo.Name = "listBoxStyleNo";
+            this.listBoxStyleNo.Size = new System.Drawing.Size(206, 55);
+            this.listBoxStyleNo.TabIndex = 0;
+            this.listBoxStyleNo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBoxModelNo_MouseClick);
+            this.listBoxStyleNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBoxModelNo_KeyDown);
             // 
             // cmbCountry
             // 
@@ -228,16 +228,16 @@
             this.label2.TabIndex = 254;
             this.label2.Text = "Country :";
             // 
-            // cmbDepartment
+            // cmbStyle
             // 
-            this.cmbDepartment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbDepartment.Enabled = false;
-            this.cmbDepartment.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbDepartment.FormattingEnabled = true;
-            this.cmbDepartment.Location = new System.Drawing.Point(118, 96);
-            this.cmbDepartment.Name = "cmbDepartment";
-            this.cmbDepartment.Size = new System.Drawing.Size(206, 27);
-            this.cmbDepartment.TabIndex = 1;
+            this.cmbStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbStyle.Enabled = false;
+            this.cmbStyle.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbStyle.FormattingEnabled = true;
+            this.cmbStyle.Location = new System.Drawing.Point(118, 96);
+            this.cmbStyle.Name = "cmbStyle";
+            this.cmbStyle.Size = new System.Drawing.Size(206, 27);
+            this.cmbStyle.TabIndex = 1;
             // 
             // label1
             // 
@@ -246,9 +246,9 @@
             this.label1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(19, 100);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 17);
+            this.label1.Size = new System.Drawing.Size(69, 17);
             this.label1.TabIndex = 252;
-            this.label1.Text = "Department :";
+            this.label1.Text = "Category :";
             // 
             // lblBrand
             // 
@@ -286,16 +286,16 @@
             this.lblProductName.TabIndex = 229;
             this.lblProductName.Text = "Item Name :";
             // 
-            // lblModelNo
+            // lblStyleNo
             // 
-            this.lblModelNo.AutoSize = true;
-            this.lblModelNo.BackColor = System.Drawing.Color.Transparent;
-            this.lblModelNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblModelNo.Location = new System.Drawing.Point(19, 34);
-            this.lblModelNo.Name = "lblModelNo";
-            this.lblModelNo.Size = new System.Drawing.Size(74, 17);
-            this.lblModelNo.TabIndex = 231;
-            this.lblModelNo.Text = "Model No :";
+            this.lblStyleNo.AutoSize = true;
+            this.lblStyleNo.BackColor = System.Drawing.Color.Transparent;
+            this.lblStyleNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStyleNo.Location = new System.Drawing.Point(19, 34);
+            this.lblStyleNo.Name = "lblStyleNo";
+            this.lblStyleNo.Size = new System.Drawing.Size(66, 17);
+            this.lblStyleNo.TabIndex = 231;
+            this.lblStyleNo.Text = "Style No :";
             // 
             // cmbSizeType
             // 
@@ -706,12 +706,12 @@
         private System.Windows.Forms.GroupBox grpPurchaseBillDetail;
         private System.Windows.Forms.ComboBox cmbCountry;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cmbDepartment;
+        private System.Windows.Forms.ComboBox cmbStyle;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblBrand;
         private System.Windows.Forms.ComboBox cmbBrand;
         private System.Windows.Forms.Label lblProductName;
-        private System.Windows.Forms.Label lblModelNo;
+        private System.Windows.Forms.Label lblStyleNo;
         private System.Windows.Forms.ComboBox cmbSizeType;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView dgvQtycolor;
@@ -721,7 +721,7 @@
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.ListBox listBoxModelNo;
+        private System.Windows.Forms.ListBox listBoxStyleNo;
         private System.Windows.Forms.TextBox txtItemName;
         private System.Windows.Forms.Label lblDiffQty;
         private System.Windows.Forms.TextBox txtDiffQty;

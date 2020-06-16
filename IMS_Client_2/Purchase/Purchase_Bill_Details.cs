@@ -35,7 +35,7 @@ namespace IMS_Client_2.Purchase
         {
             txtPurchaseInvoiceID.Clear();
             txtSupplierBillNo.Clear();
-            txtModelNo.Clear();
+            txtStyleNo.Clear();
             txtProductName.Clear();
             txtQTY.Clear();
             txtRate.Clear();
@@ -64,7 +64,7 @@ namespace IMS_Client_2.Purchase
 
         private void ClearPurchaseInvoiceBillDetails()
         {
-            txtModelNo.Clear();
+            txtStyleNo.Clear();
             txtProductName.Clear();
             txtQTY.Clear();
             txtRate.Clear();
@@ -91,10 +91,10 @@ namespace IMS_Client_2.Purchase
                 txtProductName.Focus();
                 return false;
             }
-            else if (ObjUtil.IsControlTextEmpty(txtModelNo))
+            else if (ObjUtil.IsControlTextEmpty(txtStyleNo))
             {
                 clsUtility.ShowInfoMessage("Please Model Number ", clsUtility.strProjectTitle);
-                txtModelNo.Focus();
+                txtStyleNo.Focus();
                 return false;
             }
             else if (ObjUtil.IsControlTextEmpty(txtQTY))
@@ -448,7 +448,7 @@ namespace IMS_Client_2.Purchase
             DataGridView dgv = (DataGridView)sender;
             if (dgv.DataSource != null)
             {
-                txtModelNo.Focus();
+                txtStyleNo.Focus();
                 linkAddPurchaseBillItems.Enabled = true;
             }
         }
@@ -457,7 +457,7 @@ namespace IMS_Client_2.Purchase
         {
             if (e.KeyData == Keys.Enter)
             {
-                txtModelNo.Focus();
+                txtStyleNo.Focus();
                 linkAddPurchaseBillItems.Enabled = true;
             }
         }
@@ -473,7 +473,7 @@ namespace IMS_Client_2.Purchase
                 dRow["ProductName"] = txtProductName.Text;
                 dRow["BrandID"] = cmbBrand.SelectedValue;
                 dRow["BrandName"] = cmbBrand.Text;
-                dRow["ModelNo"] = txtModelNo.Text;
+                dRow["ModelNo"] = txtStyleNo.Text;
                 dRow["QTY"] = txtQTY.Text;
                 dRow["Rate"] = txtRate.Text;
                 dRow["Total"] = Math.Round((Convert.ToInt32(txtQTY.Text) * Convert.ToDouble(txtRate.Text)), 2);

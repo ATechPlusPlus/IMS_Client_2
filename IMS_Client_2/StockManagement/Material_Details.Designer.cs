@@ -32,6 +32,10 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtSearchByBarcode = new System.Windows.Forms.TextBox();
+            this.cmbColor = new System.Windows.Forms.ComboBox();
+            this.rdSearchByColor = new System.Windows.Forms.RadioButton();
+            this.rdSearchByBarCode = new System.Windows.Forms.RadioButton();
             this.txtSearchByProductName = new System.Windows.Forms.TextBox();
             this.rdSearchByItem = new System.Windows.Forms.RadioButton();
             this.cmbShop = new System.Windows.Forms.ComboBox();
@@ -39,13 +43,11 @@
             this.rdShowAll = new System.Windows.Forms.RadioButton();
             this.dgvProductDetails = new System.Windows.Forms.DataGridView();
             this.txtProductID = new System.Windows.Forms.TextBox();
-            this.rdSearchByBarCode = new System.Windows.Forms.RadioButton();
-            this.cmbColor = new System.Windows.Forms.ComboBox();
-            this.rdSearchByColor = new System.Windows.Forms.RadioButton();
-            this.txtSearchByBarcode = new System.Windows.Forms.TextBox();
+            this.PicItem = new System.Windows.Forms.PictureBox();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicItem)).BeginInit();
             this.SuspendLayout();
             // 
             // panel2
@@ -56,7 +58,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(800, 40);
+            this.panel2.Size = new System.Drawing.Size(1009, 40);
             this.panel2.TabIndex = 110;
             // 
             // label12
@@ -90,6 +92,49 @@
             this.groupBox1.TabIndex = 206;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
+            // 
+            // txtSearchByBarcode
+            // 
+            this.txtSearchByBarcode.BackColor = System.Drawing.Color.White;
+            this.txtSearchByBarcode.Enabled = false;
+            this.txtSearchByBarcode.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearchByBarcode.Location = new System.Drawing.Point(159, 73);
+            this.txtSearchByBarcode.Name = "txtSearchByBarcode";
+            this.txtSearchByBarcode.Size = new System.Drawing.Size(181, 25);
+            this.txtSearchByBarcode.TabIndex = 234;
+            // 
+            // cmbColor
+            // 
+            this.cmbColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbColor.Enabled = false;
+            this.cmbColor.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbColor.FormattingEnabled = true;
+            this.cmbColor.Location = new System.Drawing.Point(452, 73);
+            this.cmbColor.Name = "cmbColor";
+            this.cmbColor.Size = new System.Drawing.Size(181, 27);
+            this.cmbColor.TabIndex = 233;
+            // 
+            // rdSearchByColor
+            // 
+            this.rdSearchByColor.AutoSize = true;
+            this.rdSearchByColor.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdSearchByColor.Location = new System.Drawing.Point(365, 71);
+            this.rdSearchByColor.Name = "rdSearchByColor";
+            this.rdSearchByColor.Size = new System.Drawing.Size(86, 21);
+            this.rdSearchByColor.TabIndex = 232;
+            this.rdSearchByColor.Text = "By Color :";
+            this.rdSearchByColor.UseVisualStyleBackColor = true;
+            // 
+            // rdSearchByBarCode
+            // 
+            this.rdSearchByBarCode.AutoSize = true;
+            this.rdSearchByBarCode.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdSearchByBarCode.Location = new System.Drawing.Point(17, 71);
+            this.rdSearchByBarCode.Name = "rdSearchByBarCode";
+            this.rdSearchByBarCode.Size = new System.Drawing.Size(107, 21);
+            this.rdSearchByBarCode.TabIndex = 230;
+            this.rdSearchByBarCode.Text = "By BarCode :";
+            this.rdSearchByBarCode.UseVisualStyleBackColor = true;
             // 
             // txtSearchByProductName
             // 
@@ -164,7 +209,7 @@
             this.dgvProductDetails.Location = new System.Drawing.Point(12, 178);
             this.dgvProductDetails.Name = "dgvProductDetails";
             this.dgvProductDetails.ReadOnly = true;
-            this.dgvProductDetails.Size = new System.Drawing.Size(776, 271);
+            this.dgvProductDetails.Size = new System.Drawing.Size(985, 271);
             this.dgvProductDetails.TabIndex = 207;
             this.dgvProductDetails.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvProductDetails_DataBindingComplete);
             // 
@@ -177,48 +222,17 @@
             this.txtProductID.TabIndex = 230;
             this.txtProductID.Visible = false;
             // 
-            // rdSearchByBarCode
+            // PicItem
             // 
-            this.rdSearchByBarCode.AutoSize = true;
-            this.rdSearchByBarCode.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdSearchByBarCode.Location = new System.Drawing.Point(17, 71);
-            this.rdSearchByBarCode.Name = "rdSearchByBarCode";
-            this.rdSearchByBarCode.Size = new System.Drawing.Size(107, 21);
-            this.rdSearchByBarCode.TabIndex = 230;
-            this.rdSearchByBarCode.Text = "By BarCode :";
-            this.rdSearchByBarCode.UseVisualStyleBackColor = true;
-            // 
-            // cmbColor
-            // 
-            this.cmbColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbColor.Enabled = false;
-            this.cmbColor.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbColor.FormattingEnabled = true;
-            this.cmbColor.Location = new System.Drawing.Point(452, 73);
-            this.cmbColor.Name = "cmbColor";
-            this.cmbColor.Size = new System.Drawing.Size(181, 27);
-            this.cmbColor.TabIndex = 233;
-            // 
-            // rdSearchByColor
-            // 
-            this.rdSearchByColor.AutoSize = true;
-            this.rdSearchByColor.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdSearchByColor.Location = new System.Drawing.Point(365, 71);
-            this.rdSearchByColor.Name = "rdSearchByColor";
-            this.rdSearchByColor.Size = new System.Drawing.Size(86, 21);
-            this.rdSearchByColor.TabIndex = 232;
-            this.rdSearchByColor.Text = "By Color :";
-            this.rdSearchByColor.UseVisualStyleBackColor = true;
-            // 
-            // txtSearchByBarcode
-            // 
-            this.txtSearchByBarcode.BackColor = System.Drawing.Color.White;
-            this.txtSearchByBarcode.Enabled = false;
-            this.txtSearchByBarcode.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearchByBarcode.Location = new System.Drawing.Point(159, 73);
-            this.txtSearchByBarcode.Name = "txtSearchByBarcode";
-            this.txtSearchByBarcode.Size = new System.Drawing.Size(181, 25);
-            this.txtSearchByBarcode.TabIndex = 234;
+            this.PicItem.BackColor = System.Drawing.Color.Transparent;
+            this.PicItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PicItem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PicItem.Location = new System.Drawing.Point(806, 50);
+            this.PicItem.Name = "PicItem";
+            this.PicItem.Size = new System.Drawing.Size(191, 122);
+            this.PicItem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PicItem.TabIndex = 231;
+            this.PicItem.TabStop = false;
             // 
             // Material_Details
             // 
@@ -226,7 +240,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(800, 459);
+            this.ClientSize = new System.Drawing.Size(1009, 459);
+            this.Controls.Add(this.PicItem);
             this.Controls.Add(this.txtProductID);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvProductDetails);
@@ -243,6 +258,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicItem)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -264,5 +280,6 @@
         private System.Windows.Forms.ComboBox cmbColor;
         private System.Windows.Forms.RadioButton rdSearchByColor;
         private System.Windows.Forms.RadioButton rdSearchByBarCode;
+        private System.Windows.Forms.PictureBox PicItem;
     }
 }
