@@ -350,7 +350,7 @@ namespace IMS_Client_2.Masters
             {
                 if (listBox1.SelectedIndex >= 0)
                 {
-                    DataRow[] dRow = dtSize.Select("Size= " + listBox1.SelectedItem + "");
+                    DataRow[] dRow = dtSize.Select("Size= '" + listBox1.SelectedItem + "'");
                     for (int i = 0; i < dRow.Length; i++)
                         dtSize.Rows.Remove(dRow[i]);
                     dtSize.AcceptChanges();

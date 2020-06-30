@@ -184,14 +184,9 @@ namespace IMS_Client_2.Settings
             DataTable dtFooterNote = ObjCon.ExecuteSelectStatement("select * FROM " + clsUtility.DBName + ".[dbo].[DefaultStoreSetting]");
             if (dtFooterNote!=null && dtFooterNote.Rows.Count > 0) // if data found for the PC thenupdate
             {
-                if (dtFooterNote.Rows[0]["InvoiceFooterNote"] !=DBNull.Value)
-                {
-                   
-                    
-                    ObjCon.ExecuteNonQuery("update "+ clsUtility.DBName + ".dbo.DefaultStoreSetting set InvoiceFooterNote ='"+txtFooterNote.Text+"'");
-                    clsUtility.ShowInfoMessage("Footer note has been updated.", clsUtility.strProjectTitle);
-                }
-               
+                ObjCon.ExecuteNonQuery("update " + clsUtility.DBName + ".dbo.DefaultStoreSetting set InvoiceFooterNote ='" + txtFooterNote.Text + "'");
+                clsUtility.ShowInfoMessage("Footer note has been updated.", clsUtility.strProjectTitle);
+
             }
             else
             {
