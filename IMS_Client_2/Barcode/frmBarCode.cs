@@ -12,7 +12,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using CoreApp;
-using IronBarCode;
+using ZXing;
+
 namespace IMS_Client_2.Barcode
 {
     public partial class frmBarCode : Form
@@ -23,7 +24,7 @@ namespace IMS_Client_2.Barcode
         }
         clsConnection_DAL ObjCon = new clsConnection_DAL(true);
         clsUtility ObjUtil = new clsUtility();
-        
+
         Form1 obj;
 
         string strCompanyName = "";
@@ -222,7 +223,7 @@ namespace IMS_Client_2.Barcode
 
                                     string barValue = "Product_" + ProductID;
 
-                                    objPicBox.Image = BarcodeWriter.CreateBarcode(barValue, BarcodeWriterEncoding.Code128).Image;
+                                    objPicBox.Image = Barcode.clsBarCodeUtility.GenerateBarCode(_Current_BarCodeNumber);
                                     objPicBox.SizeMode = PictureBoxSizeMode.StretchImage;
                                     objPicBox.MouseLeave += new EventHandler(obj.control_MouseLeave);
                                     obj.Controls.Add(objPicBox);
@@ -323,8 +324,8 @@ namespace IMS_Client_2.Barcode
 
         private void button1_Click(object sender, EventArgs e)
         {
-           bool result= clsUtility.ShowQuestionMessage("Are you sure, you want to print the barcode for all QTY ?", clsUtility.strProjectTitle);
-            if (result==false)
+            bool result = clsUtility.ShowQuestionMessage("Are you sure, you want to print the barcode for all QTY ?", clsUtility.strProjectTitle);
+            if (result == false)
             {
                 return;
             }
@@ -500,7 +501,7 @@ namespace IMS_Client_2.Barcode
                                         objPicBox.Location = new Point(Convert.ToInt32(strInfo[7]), Convert.ToInt32(strInfo[8]));
                                         objPicBox.BorderStyle = BorderStyle.FixedSingle;
 
-                                        objPicBox.Image = BarcodeWriter.CreateBarcode(_Current_BarCodeNumber, BarcodeWriterEncoding.Code128).Image;
+                                        objPicBox.Image = Barcode.clsBarCodeUtility.GenerateBarCode(_Current_BarCodeNumber);
                                         objPicBox.SizeMode = PictureBoxSizeMode.StretchImage;
                                         objPicBox.MouseLeave += new EventHandler(obj.control_MouseLeave);
                                         obj.Controls.Add(objPicBox);
@@ -715,9 +716,9 @@ namespace IMS_Client_2.Barcode
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            if (numericUpDown1.Value<=0)
+            if (numericUpDown1.Value <= 0)
             {
-                clsUtility.ShowInfoMessage("Please enter QTY greater than 0",clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("Please enter QTY greater than 0", clsUtility.strProjectTitle);
                 return;
             }
 
@@ -725,17 +726,18 @@ namespace IMS_Client_2.Barcode
             PrintDocument doc = new PrintDocument();
             doc.PrintPage += Doc_PrintPage;
             pd.Document = doc;
-            if (pd.ShowDialog() == DialogResult.OK)
+            //if (pd.ShowDialog() == DialogResult.OK)/
+            for (int i = 0; i < dgvProductDetails.Rows.Count; i++)
             {
-                if (dgvProductDetails.SelectedRows[0].Cells["colCHeck"].Value != DBNull.Value && Convert.ToBoolean(dgvProductDetails.SelectedRows[0].Cells["colCHeck"].Value))
+                if (dgvProductDetails.Rows[i].Cells["colCHeck"].Value != DBNull.Value && Convert.ToBoolean(dgvProductDetails.Rows[i].Cells["colCHeck"].Value))
                 {
-                    _PrintRowData = dgvProductDetails.SelectedRows[0];
+                    _PrintRowData = dgvProductDetails.Rows[i];
 
-                    int PID = Convert.ToInt32(dgvProductDetails.Rows[0].Cells["ColProductID"].Value);
-                    int QTY = Convert.ToInt32(dgvProductDetails.Rows[0].Cells["ColQTY"].Value);
+                    int PID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ColProductID"].Value);
+                    int QTY = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ColQTY"].Value);
 
-                    int SizeID = Convert.ToInt32(dgvProductDetails.Rows[0].Cells["SizeID"].Value);
-                    int ColorID = Convert.ToInt32(dgvProductDetails.Rows[0].Cells["ColColorID"].Value);
+                    int SizeID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["SizeID"].Value);
+                    int ColorID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ColColorID"].Value);
 
                     // check if barcode number exist
                     DataTable dtBarCodeNumber = ObjCon.ExecuteSelectStatement("select BarcodeNo from  " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster where ProductID=" + PID + " and ColorID=" + ColorID + " and SizeID=" + SizeID);
@@ -769,16 +771,15 @@ namespace IMS_Client_2.Barcode
                         ObjCon.ExecuteNonQuery(strUpdat);
                     }
 
-                    for (int i = 0; i < numericUpDown1.Value; i++)
+                    for (int Q = 0; Q < numericUpDown1.Value; Q++)
                     {
                         doc.Print();
-
                     }
-                   
                 }
             }
             clsUtility.ShowInfoMessage("Operation completed !", clsUtility.strProjectTitle);
 
         }
     }
+    
 }

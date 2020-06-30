@@ -24,7 +24,9 @@ namespace IMS_Client_2.Report
         public bool IsDirectPrint = false;
         private void frmSalesInvoice_Load(object sender, EventArgs e)
         {
-            string query = "SELECT p1.ProductName,s1.QTY,s1.Rate, (s1.Qty*s1.Rate) AS Total,ps.barcodeNo as BarNumber FROM " + clsUtility.DBName + ".[dbo].[SalesDetails] s1 JOIN " + clsUtility.DBName + ".dbo.ProductMaster p1 " +
+            string query = "SELECT p1.ProductName,IMS.dbo.fun_ToArabicNum(s1.QTY) as QTY," +
+                "IMS.dbo.fun_ToArabicNum(s1.Rate) as Rate,"+
+                "IMS.dbo.fun_ToArabicNum((s1.Qty*s1.Rate)) AS Total,ps.barcodeNo as BarNumber FROM " + clsUtility.DBName + ".[dbo].[SalesDetails] s1 JOIN " + clsUtility.DBName + ".dbo.ProductMaster p1 " +
                " ON s1.ProductID = p1.ProductID "+
                "  JOIN "+ clsUtility.DBName + ".dbo.ProductStockMaster ps"+
                "  ON ps.colorID=s1.ColorID and ps.SizeID=s1.SizeID "+
