@@ -155,77 +155,77 @@
             // CategoryMaster_ToolStrip
             // 
             this.CategoryMaster_ToolStrip.Name = "CategoryMaster_ToolStrip";
-            this.CategoryMaster_ToolStrip.Size = new System.Drawing.Size(196, 24);
-            this.CategoryMaster_ToolStrip.Text = "Department Master";
+            this.CategoryMaster_ToolStrip.Size = new System.Drawing.Size(192, 24);
+            this.CategoryMaster_ToolStrip.Text = "Category Master";
             this.CategoryMaster_ToolStrip.Click += new System.EventHandler(this.CategoryMaster_ToolStrip_Click);
             // 
             // countryMasterToolStripMenuItem
             // 
             this.countryMasterToolStripMenuItem.Name = "countryMasterToolStripMenuItem";
-            this.countryMasterToolStripMenuItem.Size = new System.Drawing.Size(196, 24);
+            this.countryMasterToolStripMenuItem.Size = new System.Drawing.Size(192, 24);
             this.countryMasterToolStripMenuItem.Text = "Country Master";
             this.countryMasterToolStripMenuItem.Click += new System.EventHandler(this.countryMasterToolStripMenuItem_Click);
             // 
             // StoreDetails_ToolStrip
             // 
             this.StoreDetails_ToolStrip.Name = "StoreDetails_ToolStrip";
-            this.StoreDetails_ToolStrip.Size = new System.Drawing.Size(196, 24);
+            this.StoreDetails_ToolStrip.Size = new System.Drawing.Size(192, 24);
             this.StoreDetails_ToolStrip.Text = "Store/Shop Details";
             this.StoreDetails_ToolStrip.Click += new System.EventHandler(this.StoreDetails_ToolStrip_Click);
             // 
             // SupplierDetails_ToolStrip
             // 
             this.SupplierDetails_ToolStrip.Name = "SupplierDetails_ToolStrip";
-            this.SupplierDetails_ToolStrip.Size = new System.Drawing.Size(196, 24);
+            this.SupplierDetails_ToolStrip.Size = new System.Drawing.Size(192, 24);
             this.SupplierDetails_ToolStrip.Text = "Supplier Details";
             this.SupplierDetails_ToolStrip.Click += new System.EventHandler(this.SupplierDetails_ToolStrip_Click);
             // 
             // EmployeeDetails_ToolStrip
             // 
             this.EmployeeDetails_ToolStrip.Name = "EmployeeDetails_ToolStrip";
-            this.EmployeeDetails_ToolStrip.Size = new System.Drawing.Size(196, 24);
+            this.EmployeeDetails_ToolStrip.Size = new System.Drawing.Size(192, 24);
             this.EmployeeDetails_ToolStrip.Text = "Employee Details";
             this.EmployeeDetails_ToolStrip.Click += new System.EventHandler(this.EmployeeDetails_ToolStrip_Click);
             // 
             // brandMasterToolStripMenuItem
             // 
             this.brandMasterToolStripMenuItem.Name = "brandMasterToolStripMenuItem";
-            this.brandMasterToolStripMenuItem.Size = new System.Drawing.Size(196, 24);
+            this.brandMasterToolStripMenuItem.Size = new System.Drawing.Size(192, 24);
             this.brandMasterToolStripMenuItem.Text = "Brand Master";
             this.brandMasterToolStripMenuItem.Click += new System.EventHandler(this.brandMasterToolStripMenuItem_Click);
             // 
             // productMasterToolStripMenuItem
             // 
             this.productMasterToolStripMenuItem.Name = "productMasterToolStripMenuItem";
-            this.productMasterToolStripMenuItem.Size = new System.Drawing.Size(196, 24);
+            this.productMasterToolStripMenuItem.Size = new System.Drawing.Size(192, 24);
             this.productMasterToolStripMenuItem.Text = "Item Master";
             this.productMasterToolStripMenuItem.Click += new System.EventHandler(this.productMasterToolStripMenuItem_Click);
             // 
             // CustomerMasterToolStripMenuItem
             // 
             this.CustomerMasterToolStripMenuItem.Name = "CustomerMasterToolStripMenuItem";
-            this.CustomerMasterToolStripMenuItem.Size = new System.Drawing.Size(196, 24);
+            this.CustomerMasterToolStripMenuItem.Size = new System.Drawing.Size(192, 24);
             this.CustomerMasterToolStripMenuItem.Text = "Customer Master";
             this.CustomerMasterToolStripMenuItem.Click += new System.EventHandler(this.CustomerMasterToolStripMenuItem_Click);
             // 
             // ColorMasterToolStripMenuItem
             // 
             this.ColorMasterToolStripMenuItem.Name = "ColorMasterToolStripMenuItem";
-            this.ColorMasterToolStripMenuItem.Size = new System.Drawing.Size(196, 24);
+            this.ColorMasterToolStripMenuItem.Size = new System.Drawing.Size(192, 24);
             this.ColorMasterToolStripMenuItem.Text = "Color Master";
             this.ColorMasterToolStripMenuItem.Click += new System.EventHandler(this.ColorMasterToolStripMenuItem_Click);
             // 
             // SizeTypeMasterToolStripMenuItem
             // 
             this.SizeTypeMasterToolStripMenuItem.Name = "SizeTypeMasterToolStripMenuItem";
-            this.SizeTypeMasterToolStripMenuItem.Size = new System.Drawing.Size(196, 24);
+            this.SizeTypeMasterToolStripMenuItem.Size = new System.Drawing.Size(192, 24);
             this.SizeTypeMasterToolStripMenuItem.Text = "Size Type Master";
             this.SizeTypeMasterToolStripMenuItem.Click += new System.EventHandler(this.SizeTypeMasterToolStripMenuItem_Click);
             // 
             // sizeMasterToolStripMenuItem
             // 
             this.sizeMasterToolStripMenuItem.Name = "sizeMasterToolStripMenuItem";
-            this.sizeMasterToolStripMenuItem.Size = new System.Drawing.Size(196, 24);
+            this.sizeMasterToolStripMenuItem.Size = new System.Drawing.Size(192, 24);
             this.sizeMasterToolStripMenuItem.Text = "Size Master";
             this.sizeMasterToolStripMenuItem.Click += new System.EventHandler(this.sizeMasterToolStripMenuItem_Click);
             // 

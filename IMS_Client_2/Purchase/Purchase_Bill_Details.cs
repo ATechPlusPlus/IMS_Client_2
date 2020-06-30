@@ -529,6 +529,27 @@ namespace IMS_Client_2.Purchase
             //ColDelete});
         }
 
+        private bool DuplicateUser(int i)
+        {
+            int a = 0;
+            if (i == 0)
+            {
+                a = ObjDAL.CountRecords(clsUtility.DBName + ".dbo.PurchaseInvoiceDetails", "SupplierID=" + cmbSupplier.SelectedValue + "");
+            }
+            else
+            {
+                a = ObjDAL.CountRecords(clsUtility.DBName + ".dbo.PurchaseInvoiceDetails", "BrandName='" + txtStyleNo.Text + "' AND PurchaseInvoiceID !=" + i);
+            }
+            if (a > 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         private void linkAddPurchaseBillItems_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Purchase_Bill_Details, clsFormRights.Operation.Save) || clsUtility.IsAdmin)

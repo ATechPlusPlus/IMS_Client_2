@@ -255,9 +255,9 @@
             this.lblCategory.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCategory.Location = new System.Drawing.Point(18, 79);
             this.lblCategory.Name = "lblCategory";
-            this.lblCategory.Size = new System.Drawing.Size(85, 17);
+            this.lblCategory.Size = new System.Drawing.Size(69, 17);
             this.lblCategory.TabIndex = 195;
-            this.lblCategory.Text = "Department :";
+            this.lblCategory.Text = "Category :";
             // 
             // lblProductName
             // 
