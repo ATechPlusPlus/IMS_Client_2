@@ -44,6 +44,7 @@
             this.dgvProductDetails = new System.Windows.Forms.DataGridView();
             this.txtProductID = new System.Windows.Forms.TextBox();
             this.PicItem = new System.Windows.Forms.PictureBox();
+            this.lblTotalRecords = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).BeginInit();
@@ -102,6 +103,9 @@
             this.txtSearchByBarcode.Name = "txtSearchByBarcode";
             this.txtSearchByBarcode.Size = new System.Drawing.Size(181, 25);
             this.txtSearchByBarcode.TabIndex = 234;
+            this.txtSearchByBarcode.TextChanged += new System.EventHandler(this.txtSearchByBarcode_TextChanged);
+            this.txtSearchByBarcode.MouseEnter += new System.EventHandler(this.txtSearchByProductName_Enter);
+            this.txtSearchByBarcode.MouseLeave += new System.EventHandler(this.txtSearchByProductName_Leave);
             // 
             // cmbColor
             // 
@@ -113,6 +117,7 @@
             this.cmbColor.Name = "cmbColor";
             this.cmbColor.Size = new System.Drawing.Size(181, 27);
             this.cmbColor.TabIndex = 233;
+            this.cmbColor.SelectionChangeCommitted += new System.EventHandler(this.cmbColor_SelectionChangeCommitted);
             // 
             // rdSearchByColor
             // 
@@ -124,6 +129,7 @@
             this.rdSearchByColor.TabIndex = 232;
             this.rdSearchByColor.Text = "By Color :";
             this.rdSearchByColor.UseVisualStyleBackColor = true;
+            this.rdSearchByColor.CheckedChanged += new System.EventHandler(this.rdSearchByColor_CheckedChanged);
             // 
             // rdSearchByBarCode
             // 
@@ -135,6 +141,7 @@
             this.rdSearchByBarCode.TabIndex = 230;
             this.rdSearchByBarCode.Text = "By BarCode :";
             this.rdSearchByBarCode.UseVisualStyleBackColor = true;
+            this.rdSearchByBarCode.CheckedChanged += new System.EventHandler(this.rdSearchByBarCode_CheckedChanged);
             // 
             // txtSearchByProductName
             // 
@@ -206,7 +213,7 @@
             this.dgvProductDetails.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProductDetails.BackgroundColor = System.Drawing.Color.White;
             this.dgvProductDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProductDetails.Location = new System.Drawing.Point(12, 178);
+            this.dgvProductDetails.Location = new System.Drawing.Point(12, 173);
             this.dgvProductDetails.Name = "dgvProductDetails";
             this.dgvProductDetails.ReadOnly = true;
             this.dgvProductDetails.Size = new System.Drawing.Size(985, 271);
@@ -227,12 +234,23 @@
             this.PicItem.BackColor = System.Drawing.Color.Transparent;
             this.PicItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PicItem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PicItem.Location = new System.Drawing.Point(806, 50);
+            this.PicItem.Location = new System.Drawing.Point(806, 44);
             this.PicItem.Name = "PicItem";
-            this.PicItem.Size = new System.Drawing.Size(191, 122);
+            this.PicItem.Size = new System.Drawing.Size(191, 120);
             this.PicItem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PicItem.TabIndex = 231;
             this.PicItem.TabStop = false;
+            // 
+            // lblTotalRecords
+            // 
+            this.lblTotalRecords.AutoSize = true;
+            this.lblTotalRecords.BackColor = System.Drawing.Color.Transparent;
+            this.lblTotalRecords.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalRecords.Location = new System.Drawing.Point(9, 447);
+            this.lblTotalRecords.Name = "lblTotalRecords";
+            this.lblTotalRecords.Size = new System.Drawing.Size(121, 17);
+            this.lblTotalRecords.TabIndex = 232;
+            this.lblTotalRecords.Text = "Total Records : 0";
             // 
             // Material_Details
             // 
@@ -240,7 +258,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1009, 459);
+            this.ClientSize = new System.Drawing.Size(1009, 464);
+            this.Controls.Add(this.lblTotalRecords);
             this.Controls.Add(this.PicItem);
             this.Controls.Add(this.txtProductID);
             this.Controls.Add(this.groupBox1);
@@ -281,5 +300,6 @@
         private System.Windows.Forms.RadioButton rdSearchByColor;
         private System.Windows.Forms.RadioButton rdSearchByBarCode;
         private System.Windows.Forms.PictureBox PicItem;
+        private System.Windows.Forms.Label lblTotalRecords;
     }
 }

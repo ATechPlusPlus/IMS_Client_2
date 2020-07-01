@@ -156,6 +156,7 @@ namespace IMS_Client_2.Masters
             //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
             ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit);
             grpProduct.Enabled = true;
+            grpPhoto.Enabled = true;
             txtProductName.Focus();
             txtProductName.SelectionStart = txtProductName.MaxLength;
         }

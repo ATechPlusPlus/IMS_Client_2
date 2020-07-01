@@ -93,7 +93,7 @@ namespace IMS_Client_2.Purchase
             }
             else if (ObjUtil.IsControlTextEmpty(txtStyleNo))
             {
-                clsUtility.ShowInfoMessage("Please Model Number ", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("Please Style Number ", clsUtility.strProjectTitle);
                 txtStyleNo.Focus();
                 return false;
             }
@@ -131,6 +131,12 @@ namespace IMS_Client_2.Purchase
             {
                 clsUtility.ShowInfoMessage("Please Enter Valid Rate ", clsUtility.strProjectTitle);
                 txtRate.Focus();
+                return false;
+            }
+            else if (ObjDAL.CountRecords(clsUtility.DBName + ".dbo.PurchaseInvoiceDetails", "ModelNo='" + txtStyleNo.Text.Trim() + "' AND SupplierID=" + cmbSupplier.SelectedValue) > 0)
+            {
+                clsUtility.ShowInfoMessage("Style Number is duplicate ", clsUtility.strProjectTitle);
+                txtStyleNo.Focus();
                 return false;
             }
             return true;

@@ -39,7 +39,6 @@ namespace IMS_Client_2.Purchase
             cmbBrand.DataSource = dt;
             cmbBrand.DisplayMember = "BrandName";
             cmbBrand.ValueMember = "BrandID";
-
             cmbBrand.SelectedIndex = -1;
         }
 
@@ -49,7 +48,6 @@ namespace IMS_Client_2.Purchase
             cmbCountry.DataSource = dt;
             cmbCountry.DisplayMember = "CountryName";
             cmbCountry.ValueMember = "CountryID";
-
             cmbCountry.SelectedIndex = -1;
         }
         private void FillSizeTypeData()
@@ -58,7 +56,6 @@ namespace IMS_Client_2.Purchase
             cmbSizeType.DataSource = dt;
             cmbSizeType.DisplayMember = "SizeTypeName";
             cmbSizeType.ValueMember = "SizeTypeID";
-
             cmbSizeType.SelectedIndex = -1;
         }
 
@@ -68,7 +65,6 @@ namespace IMS_Client_2.Purchase
             cmbStore.DataSource = dt;
             cmbStore.DisplayMember = "StoreName";
             cmbStore.ValueMember = "StoreID";
-
             cmbStore.SelectedIndex = -1;
         }
         private void FillCategoryData()
@@ -77,7 +73,6 @@ namespace IMS_Client_2.Purchase
             cmbStyle.DataSource = dt;
             cmbStyle.DisplayMember = "CategoryName";
             cmbStyle.ValueMember = "CategoryID";
-
             cmbStyle.SelectedIndex = -1;
         }
         private void Delivering_Purchase_Bill_Load(object sender, EventArgs e)

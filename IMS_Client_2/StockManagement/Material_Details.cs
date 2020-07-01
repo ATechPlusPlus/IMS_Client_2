@@ -99,7 +99,13 @@ namespace IMS_Client_2.StockManagement
 
         private void SearchByProductID()
         {
-            DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Material_Details " + txtProductID.Text + ",NULL");
+            //DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Material_Details " + txtProductID.Text + ",NULL");
+
+            ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, txtProductID.Text.Trim(), clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, DBNull.Value, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("BarcodeNo", SqlDbType.BigInt, DBNull.Value, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, DBNull.Value, clsConnection_DAL.ParamType.Input);
+            DataTable dt = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_Material_Details");
             if (ObjUtil.ValidateTable(dt))
             {
                 dgvProductDetails.DataSource = dt;
@@ -112,7 +118,13 @@ namespace IMS_Client_2.StockManagement
 
         private void SearchByShopID()
         {
-            DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Material_Details NULL," + cmbShop.SelectedValue);
+            //DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Material_Details NULL," + cmbShop.SelectedValue);
+
+            ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, DBNull.Value, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, cmbShop.SelectedValue, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("BarcodeNo", SqlDbType.BigInt, DBNull.Value, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, DBNull.Value, clsConnection_DAL.ParamType.Input);
+            DataTable dt = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_Material_Details");
             if (ObjUtil.ValidateTable(dt))
             {
                 dgvProductDetails.DataSource = dt;
@@ -123,6 +135,42 @@ namespace IMS_Client_2.StockManagement
             }
         }
 
+        private void SearchByBarcode()
+        {
+            //DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Material_Details NULL," + txtSearchByBarcode.Text.Trim());
+
+            ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, DBNull.Value, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, DBNull.Value, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("BarcodeNo", SqlDbType.BigInt, txtSearchByBarcode.Text.Trim(), clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, DBNull.Value, clsConnection_DAL.ParamType.Input);
+            DataTable dt = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_Material_Details");
+            if (ObjUtil.ValidateTable(dt))
+            {
+                dgvProductDetails.DataSource = dt;
+            }
+            else
+            {
+                dgvProductDetails.DataSource = null;
+            }
+        }
+        private void SearchByColor()
+        {
+            //DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Material_Details NULL," + txtSearchByBarcode.Text.Trim());
+
+            ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, DBNull.Value, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, DBNull.Value, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("BarcodeNo", SqlDbType.BigInt, DBNull.Value, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, cmbColor.SelectedValue, clsConnection_DAL.ParamType.Input);
+            DataTable dt = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_Material_Details");
+            if (ObjUtil.ValidateTable(dt))
+            {
+                dgvProductDetails.DataSource = dt;
+            }
+            else
+            {
+                dgvProductDetails.DataSource = null;
+            }
+        }
         private void Material_Details_KeyDown(object sender, KeyEventArgs e)
         {
             txtSearchByProductName.Focus();
@@ -130,13 +178,20 @@ namespace IMS_Client_2.StockManagement
 
         private void Material_Details_Load(object sender, EventArgs e)
         {
+            FillColorData();
             FillStoreData();
             LoadData();
             rdShowAll.Checked = true;
         }
         private void LoadData()
         {
-            DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Material_Details 0,0");
+            //DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Material_Details 0,0");
+
+            ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, DBNull.Value, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, DBNull.Value, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("BarcodeNo", SqlDbType.BigInt, DBNull.Value, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, DBNull.Value, clsConnection_DAL.ParamType.Input);
+            DataTable dt = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_Material_Details");
             if (ObjUtil.ValidateTable(dt))
             {
                 dgvProductDetails.DataSource = dt;
@@ -145,6 +200,18 @@ namespace IMS_Client_2.StockManagement
             {
                 dgvProductDetails.DataSource = null;
             }
+        }
+
+        private void FillColorData()
+        {
+            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.ColorMaster", "ColorID,ColorName", "ISNULL(ActiveStatus,1)=1", "ColorName ASC");
+            if (ObjUtil.ValidateTable(dt))
+            {
+                cmbColor.DataSource = dt;
+                cmbColor.DisplayMember = "ColorName";
+                cmbColor.ValueMember = "ColorID";
+            }
+            cmbColor.SelectedIndex = -1;
         }
 
         private void cmbShop_SelectionChangeCommitted(object sender, EventArgs e)
@@ -190,19 +257,23 @@ namespace IMS_Client_2.StockManagement
             {
                 cmbShop.SelectedIndex = -1;
                 txtSearchByProductName.Clear();
+                txtSearchByBarcode.Clear();
+                cmbColor.SelectedIndex = -1;
             }
         }
 
         private void dgvProductDetails_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             ObjUtil.SetRowNumber(dgvProductDetails);
-            ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.ColumnHeader);
-            //ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill);
+            //ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.ColumnHeader);
+            ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill);
             dgvProductDetails.Columns["ProductID"].Visible = false;
             dgvProductDetails.Columns["StoreID"].Visible = false;
             dgvProductDetails.Columns["CategoryID"].Visible = false;
             dgvProductDetails.Columns["SizeTypeID"].Visible = false;
             dgvProductDetails.Columns["SizeID"].Visible = false;
+
+            lblTotalRecords.Text = dgvProductDetails.Rows.Count.ToString();
         }
 
         private void txtSearchByProductName_Enter(object sender, EventArgs e)
@@ -213,6 +284,47 @@ namespace IMS_Client_2.StockManagement
         private void txtSearchByProductName_Leave(object sender, EventArgs e)
         {
             ObjUtil.SetTextHighlightColor(sender, Color.White);
+        }
+
+        private void txtSearchByBarcode_TextChanged(object sender, EventArgs e)
+        {
+            if (!ObjUtil.IsControlTextEmpty(txtSearchByBarcode))
+            {
+                SearchByBarcode();
+            }
+        }
+
+        private void rdSearchByBarCode_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdSearchByBarCode.Checked)
+            {
+                txtSearchByBarcode.Enabled = true;
+                txtSearchByBarcode.Focus();
+            }
+            else
+            {
+                txtSearchByBarcode.Enabled = false;
+                txtSearchByBarcode.Clear();
+            }
+        }
+
+        private void rdSearchByColor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdSearchByColor.Checked)
+            {
+                cmbColor.Enabled = true;
+                cmbColor.Focus();
+            }
+            else
+            {
+                cmbColor.Enabled = false;
+                cmbColor.SelectedIndex = -1;
+            }
+        }
+
+        private void cmbColor_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            SearchByColor();
         }
     }
 }
