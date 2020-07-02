@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Diagnostics;
-using System.ServiceProcess;
 using System.Runtime.CompilerServices;
+using System.ServiceProcess;
+using System.Windows.Forms;
 [assembly: SuppressIldasm]
 namespace IMS_Client_2
 {
@@ -15,6 +12,7 @@ namespace IMS_Client_2
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
+        [Obsolete]
         static void Main()
         {
             if (Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Length > 1)
@@ -24,10 +22,9 @@ namespace IMS_Client_2
             }
             else
             {
-                //string myServiceName = "MSSQL$SQLEXPRESS"; //service name of SQL Server Express
-                //string myServiceName = "MSSQLSERVER"; //service name of SQL Server Express
-
-                string myServiceName = "MSSQL$SQL2014"; //service name of SQL Server Express ashfaque
+                string myServiceName = System.Configuration.ConfigurationSettings.AppSettings["ServiceName"].ToString();
+                //string myServiceName = "MSSQLSERVER"; //service name of SQL Server Express AAMIR
+                //string myServiceName = "MSSQL$SQL2014"; //service name of SQL Server Express ashfaque
                 string status; //service status (For example, Running or Stopped)
 
                 //display service status: For example, Running, Stopped, or Paused

@@ -108,7 +108,6 @@
             this.txtEmpID.Size = new System.Drawing.Size(75, 25);
             this.txtEmpID.TabIndex = 248;
             this.txtEmpID.Visible = false;
-            this.txtEmpID.TextChanged += new System.EventHandler(this.txtEmpID_TextChanged);
             // 
             // label1
             // 
@@ -130,7 +129,6 @@
             this.dtpToDate.Size = new System.Drawing.Size(109, 25);
             this.dtpToDate.TabIndex = 9;
             this.dtpToDate.ValueChanged += new System.EventHandler(this.dtpToDate_ValueChanged);
-            this.dtpToDate.Validating += new System.ComponentModel.CancelEventHandler(this.dtpToDate_Validating);
             // 
             // txtSalesMan
             // 

@@ -24,23 +24,16 @@ namespace IMS_Client_2.Sales
         {
             ObjUtil.SetRowNumber(dgvProductDetails);
             ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill);
-
-
             dgvProductDetails.Columns["Id"].Visible = false;
             dgvProductDetails.Columns["SalesMan"].Visible = false;
             dgvProductDetails.Columns["ShopeID"].Visible = false;
-
         }
 
         private void Sales_Bill_Details_Load(object sender, EventArgs e)
         {
-
-         
-           
             FillStoreData();
             dtpToDate.MaxDate = DateTime.Now;
             dtpFromDate.MaxDate= DateTime.Now;
-
             radByDate.Checked = true;
         }
 
@@ -58,7 +51,6 @@ namespace IMS_Client_2.Sales
                 dgvProductDetails.DataSource = ObjDAL.ExecuteSelectStatement(strQ);
                 lblCOunt.Text = dgvProductDetails.Rows.Count.ToString();
             }
-           
         }
 
         private void FillStoreData()
@@ -97,16 +89,13 @@ namespace IMS_Client_2.Sales
         {
             if (radByDate.Checked)
             {
-
                 txtInvoiceNumber.Enabled = false;
                 dtpFromDate.Enabled = true;
                 dtpToDate.Enabled = true;
                 cmbShop.Enabled = false;
                 txtSalesMan.Enabled = false;
                 txtSalesMan.Clear();
-
                 dtpFromDate.Focus();
-
             }
         }
 
@@ -121,12 +110,10 @@ namespace IMS_Client_2.Sales
                 txtSalesMan.Enabled = false;
                 txtInvoiceNumber.Focus();
                 txtSalesMan.Clear();
-
             }
             else
             {
                 txtInvoiceNumber.Enabled = false;
-                    
             }
         }
 
@@ -138,12 +125,6 @@ namespace IMS_Client_2.Sales
             }
             string strCondition = " InvoiceNumber='"+txtInvoiceNumber.Text+"'";
             LoadData(strCondition);
-
-       
-                
-
-
-
         }
 
         private void radBySalesMan_CheckedChanged(object sender, EventArgs e)
@@ -157,7 +138,6 @@ namespace IMS_Client_2.Sales
                 txtSalesMan.Enabled = true;
                 txtInvoiceNumber.Clear();
                 txtSalesMan.Focus();
-
             }
         }
 
@@ -169,15 +149,11 @@ namespace IMS_Client_2.Sales
                 {
                     return;
                 }
-                DataTable dt = ObjDAL.ExecuteSelectStatement("select Empid,Name from " + clsUtility.DBName + ".dbo.employeeDetails where Name Like '" + txtSalesMan.Text + "%'");
+                DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT Empid,Name FROM " + clsUtility.DBName + ".dbo.employeeDetails WHERE Name LIKE '" + txtSalesMan.Text + "%'");
                 if (dt != null && dt.Rows.Count > 0)
                 {
-
-
                     ObjUtil.SetControlData(txtSalesMan, "Name");
                     ObjUtil.SetControlData(txtEmpID, "Empid");
-
-
                     ObjUtil.ShowDataPopup(dt, txtSalesMan, this, groupBox1);
 
                     if (ObjUtil.GetDataPopup() != null && ObjUtil.GetDataPopup().DataSource != null)
@@ -201,34 +177,23 @@ namespace IMS_Client_2.Sales
             }
             catch (Exception)
             {
-
             }
         }
 
         private void Sales_Bill_Details_KeyDown(object sender, KeyEventArgs e)
         {
             string strCondition = "SalesMan='" + txtEmpID.Text + "'";
-
             LoadData(strCondition);
         }
 
         private void Sales_Bill_Details_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             string strCondition = "SalesMan='" + txtEmpID.Text + "'";
-
             LoadData(strCondition);
-
-
-        }
-
-        private void txtEmpID_TextChanged(object sender, EventArgs e)
-        {
-           
         }
 
         private void dtpToDate_ValueChanged(object sender, EventArgs e)
         {
-
             if (dtpFromDate.Value.Date > dtpToDate.Value.Date)
             {
                 clsUtility.ShowInfoMessage("From date can not be greater then To Date.", clsUtility.strProjectTitle);
@@ -256,11 +221,6 @@ namespace IMS_Client_2.Sales
         {
             string condition = "Shopeid=" + cmbShop.SelectedValue.ToString();
             LoadData(condition);
-        }
-
-        private void dtpToDate_Validating(object sender, CancelEventArgs e)
-        {
-
         }
 
         private void dtpFromDate_ValueChanged(object sender, EventArgs e)

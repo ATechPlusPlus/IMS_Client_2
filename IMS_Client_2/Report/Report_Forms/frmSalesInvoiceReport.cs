@@ -24,12 +24,20 @@ namespace IMS_Client_2.Report
         public bool IsDirectPrint = false;
         private void frmSalesInvoice_Load(object sender, EventArgs e)
         {
-            string query = "SELECT p1.ProductName,IMS.dbo.fun_ToArabicNum(s1.QTY) as QTY," +
-                "IMS.dbo.fun_ToArabicNum(s1.Rate) as Rate,"+
-                "IMS.dbo.fun_ToArabicNum((s1.Qty*s1.Rate)) AS Total,ps.barcodeNo as BarNumber FROM " + clsUtility.DBName + ".[dbo].[SalesDetails] s1 JOIN " + clsUtility.DBName + ".dbo.ProductMaster p1 " +
-               " ON s1.ProductID = p1.ProductID "+
-               "  JOIN "+ clsUtility.DBName + ".dbo.ProductStockMaster ps"+
-               "  ON ps.colorID=s1.ColorID and ps.SizeID=s1.SizeID "+
+            //string query = "SELECT p1.ProductName,IMS.dbo.fun_ToArabicNum(s1.QTY) as QTY," +
+            //    "IMS.dbo.fun_ToArabicNum(s1.Rate) as Rate,"+
+            //    "IMS.dbo.fun_ToArabicNum((s1.Qty*s1.Rate)) AS Total,ps.barcodeNo as BarNumber FROM " + clsUtility.DBName + ".[dbo].[SalesDetails] s1 JOIN " + clsUtility.DBName + ".dbo.ProductMaster p1 " +
+            //   " ON s1.ProductID = p1.ProductID "+
+            //   "  JOIN "+ clsUtility.DBName + ".dbo.ProductStockMaster ps"+
+            //   "  ON ps.colorID=s1.ColorID and ps.SizeID=s1.SizeID "+
+            //   " WHERE s1.InvoiceID = " + InvoiceID;
+
+            string query = "SELECT p1.ProductName," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.QTY) as QTY," +
+                "" + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.Rate) as Rate," +
+                "" + clsUtility.DBName + ".dbo.fun_ToArabicNum((s1.Qty*s1.Rate)) AS Total,ps.barcodeNo as BarNumber FROM " + clsUtility.DBName + ".[dbo].[SalesDetails] s1 JOIN " + clsUtility.DBName + ".dbo.ProductMaster p1 " +
+               " ON s1.ProductID = p1.ProductID " +
+               "  JOIN " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster ps" +
+               "  ON s1.ProductID = ps.ProductID AND ps.colorID=s1.ColorID AND ps.SizeID=s1.SizeID " +
                " WHERE s1.InvoiceID = " + InvoiceID;
 
             DataTable dtSalesDetails = ObjCon.ExecuteSelectStatement(query);
