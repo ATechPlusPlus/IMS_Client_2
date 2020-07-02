@@ -38,14 +38,8 @@ namespace IMS_Client_2.Masters
         {
             if (ObjUtil.IsControlTextEmpty(txtCategoryName))
             {
-                clsUtility.ShowInfoMessage("Enter Department Name           ", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("Enter Category Name           ", clsUtility.strProjectTitle);
                 txtCategoryName.Focus();
-                return false;
-            }
-            else if (ObjUtil.IsControlTextEmpty(txtCategoryDescription))
-            {
-                clsUtility.ShowInfoMessage("Enter Department Description            ", clsUtility.strProjectTitle);
-                txtCategoryDescription.Focus();
                 return false;
             }
             else if (ObjUtil.IsControlTextEmpty(cmbActiveStatus))

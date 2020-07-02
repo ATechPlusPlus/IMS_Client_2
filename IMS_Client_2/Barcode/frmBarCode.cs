@@ -37,6 +37,7 @@ namespace IMS_Client_2.Barcode
 
         private void frmBarCode_Load(object sender, EventArgs e)
         {
+            btnPrintManualBarcode.BackgroundImage = B_Leave;
             btnPrintBarcode.BackgroundImage = B_Leave;
 
             strCompanyName = GetStoreName();
@@ -73,10 +74,7 @@ namespace IMS_Client_2.Barcode
             dgvProductDetails.Columns["ProductStockID"].Visible = false;
             dgvProductDetails.Columns["StoreID"].Visible = false;
         }
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
 
-        }
         private void AddNewPage()
         {
             obj = new Form1();
@@ -90,7 +88,7 @@ namespace IMS_Client_2.Barcode
         private string GetBarCodeSettings()
         {
             string strBarCodeSettings = null;
-            DataTable dataTable = ObjCon.ExecuteSelectStatement("SELECT BarCodeSetting from " + clsUtility.DBName + ".dbo.tblBarCodeSettings");
+            DataTable dataTable = ObjCon.ExecuteSelectStatement("SELECT BarCodeSetting FROM " + clsUtility.DBName + ".dbo.tblBarCodeSettings WITH(NOLOCK)");
             if (dataTable != null && dataTable.Rows.Count > 0)
             {
                 if (dataTable.Rows[0]["BarCodeSetting"] != DBNull.Value)
@@ -348,7 +346,7 @@ namespace IMS_Client_2.Barcode
                         int ColorID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ColColorID"].Value);
 
                         // check if barcode number exist
-                        DataTable dtBarCodeNumber = ObjCon.ExecuteSelectStatement("select BarcodeNo from  " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster where ProductID=" + PID + " and ColorID=" + ColorID + " and SizeID=" + SizeID);
+                        DataTable dtBarCodeNumber = ObjCon.ExecuteSelectStatement("select BarcodeNo FROM  " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster WITH(NOLOCK) WHERE ProductID=" + PID + " AND ColorID=" + ColorID + " AND SizeID=" + SizeID);
                         if (ObjUtil.ValidateTable(dtBarCodeNumber))
                         {
                             if (dtBarCodeNumber.Rows[0]["BarcodeNo"] != DBNull.Value && dtBarCodeNumber.Rows[0]["BarcodeNo"].ToString().Length >= 0)
@@ -366,7 +364,7 @@ namespace IMS_Client_2.Barcode
 
                                 // update the bar code in [ProductStockMaster]
                                 string strUpdate2 = "UPDATE " + clsUtility.DBName + ".[dbo].[ProductStockMaster] SET BarcodeNo='" + _Current_BarCodeNumber + "' WHERE ProductID=" + PID + " AND PurchaseInvoiceID=" + CurrentPurchaseInvoiceID +
-                             " and SizeID=" + SizeID + " AND ColorID=" + ColorID;
+                             " AND SizeID=" + SizeID + " AND ColorID=" + ColorID;
                                 ObjCon.ExecuteNonQuery(strUpdate2);
                             }
                         }
@@ -622,8 +620,8 @@ namespace IMS_Client_2.Barcode
         }
         private void LoadData()
         {
-            DataTable dtPurchaseInvDetails = ObjCon.ExecuteSelectStatement("exec " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_BulkPrint_Color_Size '" + txtPurchaseID.Text + "'");
-            if (dtPurchaseInvDetails != null && dtPurchaseInvDetails.Rows.Count > 0)
+            DataTable dtPurchaseInvDetails = ObjCon.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_BulkPrint_Color_Size '" + txtPurchaseID.Text + "'");
+            if (ObjUtil.ValidateTable(dtPurchaseInvDetails))
             {
                 dgvProductDetails.DataSource = dtPurchaseInvDetails;
                 CurrentPurchaseInvoiceID = txtPurchaseID.Text;
@@ -664,7 +662,7 @@ namespace IMS_Client_2.Barcode
         {
             try
             {
-                DataTable dt = ObjCon.ExecuteSelectStatement("exec  " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_Popup '" + txtPurchaseInvoice.Text + "', 1");
+                DataTable dt = ObjCon.ExecuteSelectStatement("EXEC  " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_Popup '" + txtPurchaseInvoice.Text + "', 1");
                 if (ObjUtil.ValidateTable(dt))
                 {
                     ObjUtil.SetControlData(txtPurchaseInvoice, "SupplierBillNo");
@@ -699,8 +697,8 @@ namespace IMS_Client_2.Barcode
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            DataTable dtPurchaseInvDetails = ObjCon.ExecuteSelectStatement("exec " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_BulkPrint_Color_Size '" + CurrentPurchaseInvoiceID + "'");
-            if (dtPurchaseInvDetails != null && dtPurchaseInvDetails.Rows.Count > 0)
+            DataTable dtPurchaseInvDetails = ObjCon.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_BulkPrint_Color_Size '" + CurrentPurchaseInvoiceID + "'");
+            if (ObjUtil.ValidateTable(dtPurchaseInvDetails))
             {
                 dgvProductDetails.DataSource = dtPurchaseInvDetails;
             }
@@ -740,7 +738,7 @@ namespace IMS_Client_2.Barcode
                     int ColorID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ColColorID"].Value);
 
                     // check if barcode number exist
-                    DataTable dtBarCodeNumber = ObjCon.ExecuteSelectStatement("select BarcodeNo from  " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster where ProductID=" + PID + " and ColorID=" + ColorID + " and SizeID=" + SizeID);
+                    DataTable dtBarCodeNumber = ObjCon.ExecuteSelectStatement("SELECT BarcodeNo FROM  " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster WITH(NOLOCK) WHERE ProductID=" + PID + " AND ColorID=" + ColorID + " AND SizeID=" + SizeID);
                     if (ObjUtil.ValidateTable(dtBarCodeNumber))
                     {
                         if (dtBarCodeNumber.Rows[0]["BarcodeNo"] != DBNull.Value && dtBarCodeNumber.Rows[0]["BarcodeNo"].ToString().Length >= 0)
@@ -758,7 +756,7 @@ namespace IMS_Client_2.Barcode
 
                             // update the bar code in [ProductStockMaster]
                             string strUpdate2 = "UPDATE " + clsUtility.DBName + ".[dbo].[ProductStockMaster] SET BarcodeNo='" + _Current_BarCodeNumber + "' WHERE ProductID=" + PID + " AND PurchaseInvoiceID=" + CurrentPurchaseInvoiceID +
-                         " and SizeID=" + SizeID + " AND ColorID=" + ColorID;
+                         " AND SizeID=" + SizeID + " AND ColorID=" + ColorID;
                             ObjCon.ExecuteNonQuery(strUpdate2);
                         }
                     }
@@ -778,8 +776,6 @@ namespace IMS_Client_2.Barcode
                 }
             }
             clsUtility.ShowInfoMessage("Operation completed !", clsUtility.strProjectTitle);
-
         }
     }
-    
 }
