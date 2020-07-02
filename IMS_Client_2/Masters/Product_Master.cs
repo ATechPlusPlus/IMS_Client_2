@@ -383,8 +383,8 @@ namespace IMS_Client_2.Masters
 
         private void btnImport_Click(object sender, EventArgs e)
         {
-            //Other_Forms.Import_Data Obj = new Other_Forms.Import_Data();
-            //Obj.Show();
+            Other_Forms.Import_ProductData Obj = new Other_Forms.Import_ProductData();
+            Obj.Show();
         }
 
         private void btnCategoryPopup_Click(object sender, EventArgs e)

@@ -25,9 +25,9 @@ namespace IMS_Client_2
             else
             {
                 //string myServiceName = "MSSQL$SQLEXPRESS"; //service name of SQL Server Express
-                string myServiceName = "MSSQLSERVER"; //service name of SQL Server Express
+                //string myServiceName = "MSSQLSERVER"; //service name of SQL Server Express
 
-                //string myServiceName = "MSSQL$SQL2014"; //service name of SQL Server Express
+                string myServiceName = "MSSQL$SQL2014"; //service name of SQL Server Express ashfaque
                 string status; //service status (For example, Running or Stopped)
 
                 //display service status: For example, Running, Stopped, or Paused
