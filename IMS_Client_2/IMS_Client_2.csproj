@@ -298,6 +298,12 @@
     <Compile Include="Purchase\frmDiffPurchaseReceviedDetails.Designer.cs">
       <DependentUpon>frmDiffPurchaseReceviedDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="Purchase\frmPurchaseDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\frmPurchaseDetails.Designer.cs">
+      <DependentUpon>frmPurchaseDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Purchase\Posting_Delivery.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -475,6 +481,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\frmDiffPurchaseReceviedDetails.resx">
       <DependentUpon>frmDiffPurchaseReceviedDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\frmPurchaseDetails.resx">
+      <DependentUpon>frmPurchaseDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\Posting_Delivery.resx">
       <DependentUpon>Posting_Delivery.cs</DependentUpon>

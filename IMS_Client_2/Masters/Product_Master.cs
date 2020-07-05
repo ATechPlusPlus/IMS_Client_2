@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -101,6 +102,27 @@ namespace IMS_Client_2.Masters
             cmbCategory.ValueMember = "CategoryID";
 
             cmbCategory.SelectedIndex = -1;
+
+
+            cmbSearchByCategory.DataSource = dt;
+            cmbSearchByCategory.DisplayMember = "CategoryName";
+            cmbSearchByCategory.ValueMember = "CategoryID";
+
+            cmbSearchByCategory.SelectedIndex = -1;
+        }
+
+        private void FillSearchCategory()
+        {
+            DataTable dt = null;
+            dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.CategoryMaster", "CategoryID,CategoryName", "ISNULL(ActiveStatus,1)=1", "CategoryName ASC");
+           
+
+
+            cmbSearchByCategory.DataSource = dt;
+            cmbSearchByCategory.DisplayMember = "CategoryName";
+            cmbSearchByCategory.ValueMember = "CategoryID";
+
+            cmbSearchByCategory.SelectedIndex = -1;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -261,8 +283,14 @@ namespace IMS_Client_2.Masters
                     cmbActiveStatus.SelectedItem = dataGridView1.SelectedRows[0].Cells["ActiveStatus"].Value.ToString();
                     if (dataGridView1.SelectedRows[0].Cells["Photo"].Value != DBNull.Value)
                     {
-                        PicProductMaster.Image = ObjUtil.GetImage((byte[])dataGridView1.SelectedRows[0].Cells["Photo"].Value);
+                        GetProductImage(dataGridView1.SelectedRows[0].Cells["Photo"].Value.ToString());
+                     
                     }
+                    else
+                    {
+                        PicProductMaster.Image = null;
+                    }
+
                     grpProduct.Enabled = false;
                     txtProductName.Focus();
                 }
@@ -299,6 +327,7 @@ namespace IMS_Client_2.Masters
 
             LoadData();
             FillDepartmentData();
+            FillSearchCategory();
         }
 
         private void btnAdd_MouseEnter(object sender, EventArgs e)
@@ -333,6 +362,7 @@ namespace IMS_Client_2.Masters
             if (rdShowAll.Checked)
             {
                 txtSearchByProduct.Enabled = false;
+                cmbSearchByCategory.Enabled = false;
                 txtSearchByProduct.Clear();
                 LoadData();
             }
@@ -362,8 +392,10 @@ namespace IMS_Client_2.Masters
             ObjUtil.SetDataGridProperty(dataGridView1, DataGridViewAutoSizeColumnsMode.Fill);
             dataGridView1.Columns["ProductID"].Visible = false;
             dataGridView1.Columns["CategoryID"].Visible = false;
-            dataGridView1.Columns["Photo"].Visible = false;
+           // dataGridView1.Columns["Photo"].Visible = false;
             lblTotalRecords.Text = "Total Records : " + dataGridView1.Rows.Count;
+
+          
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -411,6 +443,85 @@ namespace IMS_Client_2.Masters
             //    clsUtility.ShowInfoMessage("Enter Only Charactors...", clsUtility.strProjectTitle);
             //    txtProductName.Focus();
             //}
+        }
+    
+        private void GetProductImage(string ImageID)
+        {
+            DataTable dtImagePath = ObjDAL.ExecuteSelectStatement("  select ImagePath, Extension from [IMS_Client_2].dbo.DefaultStoreSetting where MachineName='" + Environment.MachineName + "'");
+            if (dtImagePath.Rows.Count>0)
+            {
+                if (dtImagePath.Rows[0]["ImagePath"]!=DBNull.Value)
+                {
+                    string ImgPath = dtImagePath.Rows[0]["ImagePath"].ToString();
+                    string extension= dtImagePath.Rows[0]["Extension"].ToString();
+
+                    string imgFile = ImgPath + "//" + ImageID + extension;
+                    if (File.Exists(imgFile))
+                    {
+                        PicProductMaster.Image = Image.FromFile(imgFile);
+                    }
+                    else
+                    {
+                        PicProductMaster.Image = null;
+                    }
+
+                       
+                    }
+                    else
+                    {
+                        MessageBox.Show("Image file for the selected product doesn't exist.",clsUtility.strProjectTitle);
+                    
+                  
+
+
+                }
+            }
+                
+
+        }
+    
+
+        private void rdSearchByCategory_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdSearchByCategory.Checked)
+            {
+                txtSearchByProduct.Enabled = false;
+                cmbSearchByCategory.Enabled = true;
+                cmbSearchByCategory.Focus();
+            }
+            else
+            {
+                cmbSearchByCategory.Enabled = false;
+                cmbSearchByCategory.SelectedIndex = -1;
+                rdShowAll.Checked = true;
+            }
+        }
+
+        private void cmbSearchByCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void cmbSearchByCategory_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+
+            if (cmbSearchByCategory.SelectedIndex == -1)
+            {
+                LoadData();
+                return;
+            }
+            //DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Product_Master '" + cmbSearchByCategory.SelectedValue + "'");
+            ObjDAL.SetStoreProcedureData("ProductName", SqlDbType.NVarChar, DBNull.Value, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("CategoryId", SqlDbType.NVarChar, cmbSearchByCategory.SelectedValue, clsConnection_DAL.ParamType.Input);
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_Product_Master");
+            DataTable dt = ds.Tables[0];
+            if (ObjUtil.ValidateTable(dt))
+            {
+                dataGridView1.DataSource = dt;
+            }
+            else
+            {
+                dataGridView1.DataSource = null;
+            }
         }
     }
 }

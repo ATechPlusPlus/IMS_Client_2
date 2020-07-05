@@ -22,30 +22,68 @@ namespace IMS_Client_2.Report
         public int InvoiceID = 0;
 
         public bool IsDirectPrint = false;
+
+        private bool IsArabicEnabled()
+        {
+
+          int count=  ObjCon.ExecuteScalarInt("select count(*) from "+ clsUtility.DBName + ".[dbo].[DefaultStoreSetting] where UserArabicNumbers=1 and MachineName='"+Environment.MachineName+"'");
+            if (count>0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         private void frmSalesInvoice_Load(object sender, EventArgs e)
         {
-            //string query = "SELECT p1.ProductName,IMS.dbo.fun_ToArabicNum(s1.QTY) as QTY," +
-            //    "IMS.dbo.fun_ToArabicNum(s1.Rate) as Rate,"+
-            //    "IMS.dbo.fun_ToArabicNum((s1.Qty*s1.Rate)) AS Total,ps.barcodeNo as BarNumber FROM " + clsUtility.DBName + ".[dbo].[SalesDetails] s1 JOIN " + clsUtility.DBName + ".dbo.ProductMaster p1 " +
-            //   " ON s1.ProductID = p1.ProductID "+
-            //   "  JOIN "+ clsUtility.DBName + ".dbo.ProductStockMaster ps"+
-            //   "  ON ps.colorID=s1.ColorID and ps.SizeID=s1.SizeID "+
-            //   " WHERE s1.InvoiceID = " + InvoiceID;
+            string query = "";
+            string strQueryHeader_Footer = "";
 
-            string query = "SELECT p1.ProductName," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.QTY) as QTY," +
-                "" + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.Rate) as Rate," +
-                "" + clsUtility.DBName + ".dbo.fun_ToArabicNum((s1.Qty*s1.Rate)) AS Total,ps.barcodeNo as BarNumber FROM " + clsUtility.DBName + ".[dbo].[SalesDetails] s1 JOIN " + clsUtility.DBName + ".dbo.ProductMaster p1 " +
+            if (IsArabicEnabled())
+            {
+                 query = "SELECT p1.ProductName," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.QTY) as QTY," +
+              "" + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.Rate) as Rate," +
+              "" + clsUtility.DBName + ".dbo.fun_ToArabicNum((s1.Qty*s1.Rate)) AS Total,ps.barcodeNo as BarNumber FROM " + clsUtility.DBName + ".[dbo].[SalesDetails] s1 JOIN " + clsUtility.DBName + ".dbo.ProductMaster p1 " +
+             " ON s1.ProductID = p1.ProductID " +
+             "  JOIN " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster ps" +
+             "  ON s1.ProductID = ps.ProductID AND ps.colorID=s1.ColorID AND ps.SizeID=s1.SizeID " +
+             " WHERE s1.InvoiceID = " + InvoiceID;
+            }
+            else
+            {
+                query = "SELECT p1.ProductName,s1.QTY," +
+                "s1.Rate," +
+                "(s1.Qty*s1.Rate) AS Total,ps.barcodeNo as BarNumber FROM " + clsUtility.DBName + ".[dbo].[SalesDetails] s1 JOIN " + clsUtility.DBName + ".dbo.ProductMaster p1 " +
                " ON s1.ProductID = p1.ProductID " +
                "  JOIN " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster ps" +
                "  ON s1.ProductID = ps.ProductID AND ps.colorID=s1.ColorID AND ps.SizeID=s1.SizeID " +
                " WHERE s1.InvoiceID = " + InvoiceID;
 
+            }
+
+          
+
             DataTable dtSalesDetails = ObjCon.ExecuteSelectStatement(query);
 
-            string strQueryHeader_Footer = "SELECT s1.InvoiceNumber,s1.InvoiceDate, c1.Name AS CustName,e1.Name AS empName,st1.StoreName AS StoreName,s1.SubTotal,s1.Discount,s1.Tax,s1.GrandTotal,s1.PaymentMode,s1.PaymentAutoID,c1.PhoneNo AS CustomerMobile FROM " + clsUtility.DBName + ".dbo.SalesInvoiceDetails s1 left JOIN " +
-                                            " " + clsUtility.DBName + ".dbo.EmployeeDetails e1 ON s1.SalesMan = e1.EmpID left JOIN" +
-                                            " " + clsUtility.DBName + ".[dbo].[CustomerMaster] c1 ON s1.CustomerID = c1.CustomerID left join" +
-                                            " " + clsUtility.DBName + ".dbo.StoreMaster st1 ON st1.StoreID = s1.ShopeID WHERE s1.Id=" + InvoiceID;
+
+            if (IsArabicEnabled())
+            {
+                 strQueryHeader_Footer = "SELECT s1.InvoiceNumber,s1.InvoiceDate, c1.Name AS CustName,e1.Name AS empName,st1.StoreName AS StoreName," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.SubTotal) as SubTotal," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.Discount) as Discount," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.Tax) as Tax," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.GrandTotal) as GrandTotal,s1.PaymentMode,s1.PaymentAutoID,c1.PhoneNo AS CustomerMobile FROM " + clsUtility.DBName + ".dbo.SalesInvoiceDetails s1 left JOIN " +
+                                          " " + clsUtility.DBName + ".dbo.EmployeeDetails e1 ON s1.SalesMan = e1.EmpID left JOIN" +
+                                          " " + clsUtility.DBName + ".[dbo].[CustomerMaster] c1 ON s1.CustomerID = c1.CustomerID left join" +
+                                          " " + clsUtility.DBName + ".dbo.StoreMaster st1 ON st1.StoreID = s1.ShopeID WHERE s1.Id=" + InvoiceID;
+
+            }
+            else
+            {
+                 strQueryHeader_Footer = "SELECT s1.InvoiceNumber,s1.InvoiceDate, c1.Name AS CustName,e1.Name AS empName,st1.StoreName AS StoreName,s1.SubTotal,s1.Discount,s1.Tax,s1.GrandTotal,s1.PaymentMode,s1.PaymentAutoID,c1.PhoneNo AS CustomerMobile FROM " + clsUtility.DBName + ".dbo.SalesInvoiceDetails s1 left JOIN " +
+                                                          " " + clsUtility.DBName + ".dbo.EmployeeDetails e1 ON s1.SalesMan = e1.EmpID left JOIN" +
+                                                          " " + clsUtility.DBName + ".[dbo].[CustomerMaster] c1 ON s1.CustomerID = c1.CustomerID left join" +
+                                                          " " + clsUtility.DBName + ".dbo.StoreMaster st1 ON st1.StoreID = s1.ShopeID WHERE s1.Id=" + InvoiceID;
+
+            }
 
             DataTable dtSalesHeader_Footer = ObjCon.ExecuteSelectStatement(strQueryHeader_Footer);
 
