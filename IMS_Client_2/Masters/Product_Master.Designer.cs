@@ -47,7 +47,7 @@
             this.txtProductName = new System.Windows.Forms.TextBox();
             this.cmbActiveStatus = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.rdSearchByCategory = new System.Windows.Forms.RadioButton();
             this.cmbSearchByCategory = new System.Windows.Forms.ComboBox();
             this.rdShowAll = new System.Windows.Forms.RadioButton();
             this.rdSearchByProduct = new System.Windows.Forms.RadioButton();
@@ -78,7 +78,7 @@
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnUpdate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdate.Location = new System.Drawing.Point(435, 68);
-            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(95, 31);
             this.btnUpdate.TabIndex = 5;
@@ -95,7 +95,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCancel.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.Location = new System.Drawing.Point(653, 68);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(95, 31);
             this.btnCancel.TabIndex = 7;
@@ -112,7 +112,7 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDelete.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.Location = new System.Drawing.Point(544, 68);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(95, 31);
             this.btnDelete.TabIndex = 6;
@@ -129,7 +129,7 @@
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnEdit.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEdit.Location = new System.Drawing.Point(328, 68);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(4);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(95, 31);
             this.btnEdit.TabIndex = 4;
@@ -146,7 +146,7 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSave.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Location = new System.Drawing.Point(219, 68);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(95, 31);
             this.btnSave.TabIndex = 3;
@@ -163,7 +163,7 @@
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAdd.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.Location = new System.Drawing.Point(100, 68);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(101, 31);
             this.btnAdd.TabIndex = 2;
@@ -189,9 +189,9 @@
             this.grpProduct.Enabled = false;
             this.grpProduct.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpProduct.Location = new System.Drawing.Point(25, 118);
-            this.grpProduct.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpProduct.Margin = new System.Windows.Forms.Padding(4);
             this.grpProduct.Name = "grpProduct";
-            this.grpProduct.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpProduct.Padding = new System.Windows.Forms.Padding(4);
             this.grpProduct.Size = new System.Drawing.Size(648, 241);
             this.grpProduct.TabIndex = 0;
             this.grpProduct.TabStop = false;
@@ -245,7 +245,7 @@
             this.btnCategoryPopup.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCategoryPopup.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCategoryPopup.Location = new System.Drawing.Point(511, 92);
-            this.btnCategoryPopup.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCategoryPopup.Margin = new System.Windows.Forms.Padding(4);
             this.btnCategoryPopup.Name = "btnCategoryPopup";
             this.btnCategoryPopup.Size = new System.Drawing.Size(36, 33);
             this.btnCategoryPopup.TabIndex = 2;
@@ -258,7 +258,7 @@
             this.cmbCategory.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCategory.FormattingEnabled = true;
             this.cmbCategory.Location = new System.Drawing.Point(212, 92);
-            this.cmbCategory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbCategory.Margin = new System.Windows.Forms.Padding(4);
             this.cmbCategory.Name = "cmbCategory";
             this.cmbCategory.Size = new System.Drawing.Size(273, 30);
             this.cmbCategory.TabIndex = 1;
@@ -304,7 +304,7 @@
             this.txtProductName.BackColor = System.Drawing.Color.White;
             this.txtProductName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtProductName.Location = new System.Drawing.Point(212, 33);
-            this.txtProductName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtProductName.Margin = new System.Windows.Forms.Padding(4);
             this.txtProductName.Name = "txtProductName";
             this.txtProductName.Size = new System.Drawing.Size(273, 29);
             this.txtProductName.TabIndex = 0;
@@ -322,7 +322,7 @@
             "Active",
             "InActive"});
             this.cmbActiveStatus.Location = new System.Drawing.Point(212, 154);
-            this.cmbActiveStatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbActiveStatus.Margin = new System.Windows.Forms.Padding(4);
             this.cmbActiveStatus.Name = "cmbActiveStatus";
             this.cmbActiveStatus.Size = new System.Drawing.Size(273, 30);
             this.cmbActiveStatus.TabIndex = 3;
@@ -330,32 +330,33 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this.rdSearchByCategory);
             this.groupBox1.Controls.Add(this.cmbSearchByCategory);
             this.groupBox1.Controls.Add(this.rdShowAll);
             this.groupBox1.Controls.Add(this.rdSearchByProduct);
             this.groupBox1.Controls.Add(this.txtSearchByProduct);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(25, 367);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(1155, 63);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
             // 
-            // radioButton1
+            // rdSearchByCategory
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton1.Location = new System.Drawing.Point(521, 28);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(134, 25);
-            this.radioButton1.TabIndex = 289;
-            this.radioButton1.Text = "By Category :";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rdSearchByCategory.AutoSize = true;
+            this.rdSearchByCategory.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdSearchByCategory.Location = new System.Drawing.Point(521, 28);
+            this.rdSearchByCategory.Margin = new System.Windows.Forms.Padding(4);
+            this.rdSearchByCategory.Name = "rdSearchByCategory";
+            this.rdSearchByCategory.Size = new System.Drawing.Size(134, 25);
+            this.rdSearchByCategory.TabIndex = 289;
+            this.rdSearchByCategory.Text = "By Category :";
+            this.rdSearchByCategory.UseVisualStyleBackColor = true;
+            this.rdSearchByCategory.CheckedChanged += new System.EventHandler(this.rdSearchByCategory_CheckedChanged);
             // 
             // cmbSearchByCategory
             // 
@@ -363,10 +364,12 @@
             this.cmbSearchByCategory.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbSearchByCategory.FormattingEnabled = true;
             this.cmbSearchByCategory.Location = new System.Drawing.Point(687, 25);
-            this.cmbSearchByCategory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbSearchByCategory.Margin = new System.Windows.Forms.Padding(4);
             this.cmbSearchByCategory.Name = "cmbSearchByCategory";
             this.cmbSearchByCategory.Size = new System.Drawing.Size(273, 30);
             this.cmbSearchByCategory.TabIndex = 288;
+            this.cmbSearchByCategory.SelectedIndexChanged += new System.EventHandler(this.cmbSearchByCategory_SelectedIndexChanged);
+            this.cmbSearchByCategory.SelectionChangeCommitted += new System.EventHandler(this.cmbSearchByCategory_SelectionChangeCommitted);
             // 
             // rdShowAll
             // 
@@ -374,7 +377,7 @@
             this.rdShowAll.Checked = true;
             this.rdShowAll.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdShowAll.Location = new System.Drawing.Point(1019, 25);
-            this.rdShowAll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdShowAll.Margin = new System.Windows.Forms.Padding(4);
             this.rdShowAll.Name = "rdShowAll";
             this.rdShowAll.Size = new System.Drawing.Size(99, 25);
             this.rdShowAll.TabIndex = 2;
@@ -388,7 +391,7 @@
             this.rdSearchByProduct.AutoSize = true;
             this.rdSearchByProduct.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdSearchByProduct.Location = new System.Drawing.Point(17, 25);
-            this.rdSearchByProduct.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdSearchByProduct.Margin = new System.Windows.Forms.Padding(4);
             this.rdSearchByProduct.Name = "rdSearchByProduct";
             this.rdSearchByProduct.Size = new System.Drawing.Size(147, 25);
             this.rdSearchByProduct.TabIndex = 0;
@@ -402,7 +405,7 @@
             this.txtSearchByProduct.Enabled = false;
             this.txtSearchByProduct.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSearchByProduct.Location = new System.Drawing.Point(212, 23);
-            this.txtSearchByProduct.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSearchByProduct.Margin = new System.Windows.Forms.Padding(4);
             this.txtSearchByProduct.Name = "txtSearchByProduct";
             this.txtSearchByProduct.Size = new System.Drawing.Size(273, 29);
             this.txtSearchByProduct.TabIndex = 1;
@@ -417,9 +420,9 @@
             this.grpGridview.Controls.Add(this.dataGridView1);
             this.grpGridview.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpGridview.Location = new System.Drawing.Point(27, 446);
-            this.grpGridview.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpGridview.Margin = new System.Windows.Forms.Padding(4);
             this.grpGridview.Name = "grpGridview";
-            this.grpGridview.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpGridview.Padding = new System.Windows.Forms.Padding(4);
             this.grpGridview.Size = new System.Drawing.Size(1155, 215);
             this.grpGridview.TabIndex = 213;
             this.grpGridview.TabStop = false;
@@ -432,7 +435,7 @@
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(8, 30);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
@@ -448,7 +451,7 @@
             this.panel2.Controls.Add(this.label12);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1201, 49);
             this.panel2.TabIndex = 216;
@@ -487,9 +490,9 @@
             this.grpPhoto.Enabled = false;
             this.grpPhoto.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpPhoto.Location = new System.Drawing.Point(857, 68);
-            this.grpPhoto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpPhoto.Margin = new System.Windows.Forms.Padding(4);
             this.grpPhoto.Name = "grpPhoto";
-            this.grpPhoto.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpPhoto.Padding = new System.Windows.Forms.Padding(4);
             this.grpPhoto.Size = new System.Drawing.Size(292, 292);
             this.grpPhoto.TabIndex = 1;
             this.grpPhoto.TabStop = false;
@@ -527,7 +530,7 @@
             // 
             this.PicProductMaster.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PicProductMaster.Location = new System.Drawing.Point(15, 31);
-            this.PicProductMaster.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PicProductMaster.Margin = new System.Windows.Forms.Padding(4);
             this.PicProductMaster.Name = "PicProductMaster";
             this.PicProductMaster.Size = new System.Drawing.Size(254, 220);
             this.PicProductMaster.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -541,7 +544,7 @@
             this.btnImport.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnImport.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnImport.Location = new System.Drawing.Point(961, 666);
-            this.btnImport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnImport.Margin = new System.Windows.Forms.Padding(4);
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(219, 31);
             this.btnImport.TabIndex = 219;
@@ -570,7 +573,7 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnAdd);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "Product_Master";
             this.ShowIcon = false;
@@ -625,7 +628,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton rdSearchByCategory;
         private System.Windows.Forms.ComboBox cmbSearchByCategory;
     }
 }
