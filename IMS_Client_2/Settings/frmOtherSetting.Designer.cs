@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOtherSetting));
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label12 = new System.Windows.Forms.Label();
+            this.txtExtension = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnStorePopup = new System.Windows.Forms.Button();
             this.lblmsg = new System.Windows.Forms.Label();
@@ -43,10 +43,15 @@
             this.lblCategoryName = new System.Windows.Forms.Label();
             this.txtPCName = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtImagePath = new System.Windows.Forms.TextBox();
+            this.chkArabicPrice = new System.Windows.Forms.CheckBox();
             this.txtFooterNote = new System.Windows.Forms.TextBox();
             this.btnFooterCancel = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.btnFooterSave = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.txtFileExtension = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -56,24 +61,24 @@
             // 
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel2.Controls.Add(this.label12);
+            this.panel2.Controls.Add(this.txtExtension);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(447, 40);
+            this.panel2.Size = new System.Drawing.Size(446, 40);
             this.panel2.TabIndex = 111;
             // 
-            // label12
+            // txtExtension
             // 
-            this.label12.AutoSize = true;
-            this.label12.BackColor = System.Drawing.Color.Transparent;
-            this.label12.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(11, 9);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(128, 22);
-            this.label12.TabIndex = 82;
-            this.label12.Text = "Other Settings";
+            this.txtExtension.AutoSize = true;
+            this.txtExtension.BackColor = System.Drawing.Color.Transparent;
+            this.txtExtension.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtExtension.ForeColor = System.Drawing.Color.White;
+            this.txtExtension.Location = new System.Drawing.Point(11, 9);
+            this.txtExtension.Name = "txtExtension";
+            this.txtExtension.Size = new System.Drawing.Size(128, 22);
+            this.txtExtension.TabIndex = 82;
+            this.txtExtension.Text = "Other Settings";
             // 
             // groupBox1
             // 
@@ -223,17 +228,40 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtFileExtension);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.txtImagePath);
+            this.groupBox2.Controls.Add(this.chkArabicPrice);
             this.groupBox2.Controls.Add(this.txtFooterNote);
             this.groupBox2.Controls.Add(this.btnFooterCancel);
+            this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.btnFooterSave);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(16, 263);
+            this.groupBox2.Location = new System.Drawing.Point(16, 256);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(419, 139);
+            this.groupBox2.Size = new System.Drawing.Size(419, 240);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Sales Invoice Footer Note :";
+            this.groupBox2.Text = "Other Settings";
+            // 
+            // txtImagePath
+            // 
+            this.txtImagePath.BackColor = System.Drawing.Color.White;
+            this.txtImagePath.Location = new System.Drawing.Point(98, 140);
+            this.txtImagePath.Name = "txtImagePath";
+            this.txtImagePath.Size = new System.Drawing.Size(315, 25);
+            this.txtImagePath.TabIndex = 195;
+            // 
+            // chkArabicPrice
+            // 
+            this.chkArabicPrice.AutoSize = true;
+            this.chkArabicPrice.Location = new System.Drawing.Point(61, 108);
+            this.chkArabicPrice.Name = "chkArabicPrice";
+            this.chkArabicPrice.Size = new System.Drawing.Size(145, 21);
+            this.chkArabicPrice.TabIndex = 193;
+            this.chkArabicPrice.Text = "Enable Arabic Price";
+            this.chkArabicPrice.UseVisualStyleBackColor = true;
             // 
             // txtFooterNote
             // 
@@ -250,7 +278,7 @@
             this.btnFooterCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFooterCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnFooterCancel.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFooterCancel.Location = new System.Drawing.Point(342, 97);
+            this.btnFooterCancel.Location = new System.Drawing.Point(342, 192);
             this.btnFooterCancel.Name = "btnFooterCancel";
             this.btnFooterCancel.Size = new System.Drawing.Size(71, 25);
             this.btnFooterCancel.TabIndex = 2;
@@ -260,13 +288,24 @@
             this.btnFooterCancel.MouseEnter += new System.EventHandler(this.btnAdd_MouseEnter);
             this.btnFooterCancel.MouseLeave += new System.EventHandler(this.btnAdd_MouseLeave);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(9, 145);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(83, 17);
+            this.label3.TabIndex = 192;
+            this.label3.Text = "Image Path :";
+            // 
             // btnFooterSave
             // 
             this.btnFooterSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnFooterSave.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFooterSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnFooterSave.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFooterSave.Location = new System.Drawing.Point(254, 97);
+            this.btnFooterSave.Location = new System.Drawing.Point(254, 192);
             this.btnFooterSave.Name = "btnFooterSave";
             this.btnFooterSave.Size = new System.Drawing.Size(76, 25);
             this.btnFooterSave.TabIndex = 1;
@@ -287,12 +326,31 @@
             this.label4.TabIndex = 192;
             this.label4.Text = "Note :";
             // 
+            // txtFileExtension
+            // 
+            this.txtFileExtension.BackColor = System.Drawing.Color.White;
+            this.txtFileExtension.Location = new System.Drawing.Point(98, 171);
+            this.txtFileExtension.Name = "txtFileExtension";
+            this.txtFileExtension.Size = new System.Drawing.Size(82, 25);
+            this.txtFileExtension.TabIndex = 197;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(9, 176);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(72, 17);
+            this.label5.TabIndex = 196;
+            this.label5.Text = "Extension :";
+            // 
             // frmOtherSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(447, 418);
+            this.ClientSize = new System.Drawing.Size(446, 515);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel2);
@@ -317,7 +375,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label txtExtension;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblCategoryName;
@@ -334,5 +392,10 @@
         private System.Windows.Forms.Button btnFooterSave;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnStorePopup;
+        private System.Windows.Forms.CheckBox chkArabicPrice;
+        private System.Windows.Forms.TextBox txtImagePath;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtFileExtension;
+        private System.Windows.Forms.Label label5;
     }
 }

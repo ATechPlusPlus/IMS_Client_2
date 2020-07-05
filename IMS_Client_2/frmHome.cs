@@ -45,6 +45,33 @@ namespace IMS_Client_2
             }
         }
 
+        private void DisplayRegistrationInfo()
+        {
+         
+            DataTable dataTable=  ObjDAL.ExecuteSelectStatement("select RegDate FROM "+clsUtility.DBName+".[dbo].[RegistrationDetails] where PcName='"+Environment.MachineName+"'");
+            
+            if (dataTable.Rows.Count>0)
+            {
+                lblRegistrationDate.Text = dataTable.Rows[0]["RegDate"].ToString();
+            }
+            else
+            {
+                lblRegistrationDate.Text = "NA";
+
+            }
+            DataTable dtCompany = ObjDAL.ExecuteSelectStatement("select CompanyName FROM " + clsUtility.DBName + ".[dbo].[CompanyMaster] ");
+            if (dtCompany.Rows.Count>0)
+            {
+                lblLicensedTo.Text = dtCompany.Rows[0]["CompanyName"].ToString();
+            }
+            else
+            {
+                lblLicensedTo.Text = "NA";
+            }
+
+
+
+        }
         private void frmHome_Load(object sender, EventArgs e)
         {
             try
@@ -65,6 +92,8 @@ namespace IMS_Client_2
                     lblLoginName.Text = "Login By : Test Admin";
                 }
                 lblVersion.Text = "Version : " + Application.ProductVersion;
+
+                DisplayRegistrationInfo();
             }
             catch { }
         }
@@ -446,6 +475,27 @@ namespace IMS_Client_2
         {
             frmUserRights frmUserRights = new frmUserRights();
             frmUserRights.ShowDialog();
+        }
+
+        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void employeeCommissionSettingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void purchaseDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Purchase.frmPurchaseDetails obj = new Purchase.frmPurchaseDetails();
+            obj.Show();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            DisplayRegistrationInfo();
         }
     }
 }

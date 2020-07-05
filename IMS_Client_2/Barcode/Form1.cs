@@ -26,7 +26,7 @@ namespace IMS_Client_2.Barcode
         {
             //start the timer that will be monitoring the mouse movement every 500 ms.
             timer1.Start();
-            txtSupplierBillNo.Focus();
+           
         }
 
         public void control_MouseEnter(object sender, EventArgs e)
@@ -481,6 +481,7 @@ namespace IMS_Client_2.Barcode
             ctrl.ContextMenuStrip = cntx;
 
             this.Controls.Add(ctrl);
+            ctrl.BringToFront();
         }
         public void AddVerticalLable(ContextMenuStrip cntx, PropertyGrid p)
         {
@@ -500,6 +501,8 @@ namespace IMS_Client_2.Barcode
             ctrl.DoubleClick += ctrl_DoubleClick;
             ctrl.ContextMenuStrip = cntx;
             this.Controls.Add(ctrl);
+
+            ctrl.BringToFront();
         }
 
         public void ctrl_DoubleClick(object sender, EventArgs e)
@@ -528,6 +531,7 @@ namespace IMS_Client_2.Barcode
             ctrl.Click += ctrl_Click;
             ctrl.ContextMenuStrip = cntx;
             this.Controls.Add(ctrl);
+            ctrl.BringToFront();
         }
         public void AddLine(ContextMenuStrip cntx, PropertyGrid p)
         {
@@ -545,6 +549,7 @@ namespace IMS_Client_2.Barcode
             ctrl.Click += ctrl_Click;
             ctrl.ContextMenuStrip = cntx;
             this.Controls.Add(ctrl);
+            ctrl.BringToFront();
         }
         public void AddButton(ContextMenuStrip cntx, PropertyGrid p)
         {
@@ -562,6 +567,7 @@ namespace IMS_Client_2.Barcode
             ctrl.Click += ctrl_Click;
             ctrl.ContextMenuStrip = cntx;
             this.Controls.Add(ctrl);
+            ctrl.BringToFront();
         }
         public void AddRectangle(ContextMenuStrip cntx, PropertyGrid p)
         {
@@ -577,6 +583,7 @@ namespace IMS_Client_2.Barcode
             ctrl.Click += ctrl_Click;
             ctrl.ContextMenuStrip = cntx;
             this.Controls.Add(ctrl);
+            ctrl.BringToFront();
         }
         public void ctrl_Click(object sender, EventArgs e)
         {
@@ -594,6 +601,7 @@ namespace IMS_Client_2.Barcode
             ctrl.MouseMove += new MouseEventHandler(control_MouseMove);
             ctrl.MouseUp += new MouseEventHandler(control_MouseUp);
             this.Controls.Add(ctrl);
+            ctrl.BringToFront();
         }
 
         enum Direction
@@ -611,22 +619,8 @@ namespace IMS_Client_2.Barcode
 
         private void button2_Click(object sender, EventArgs e)
         {
-            decimal number3 = 0;
-            bool canConvert = false;
-            try
-            {
-                canConvert = decimal.TryParse(txtSupplierBillNo.Text, out number3);
-                if (canConvert == true)
-                    MessageBox.Show("number3 now " + number3);
-                else
-                    MessageBox.Show("number3 is not a valid decimal");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message + "false");
-
-            }
-            txtSupplierBillNo.Focus();
+            
+          
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -636,71 +630,12 @@ namespace IMS_Client_2.Barcode
 
         private void txtSupplierBillNo_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = IsDecimal(txtSupplierBillNo, e);
-            //if (e.Handled == true)
-            //{
-            //    CoreApp.clsUtility.ShowInfoMessage("Enter Only Numbers...", CoreApp.clsUtility.strProjectTitle);
-            //}
-
-            //e.Handled = IsAlphaNumeric(e);
-            if (e.Handled == true)
-            {
-                CoreApp.clsUtility.ShowInfoMessage("Enter Only Charactor or Number...", CoreApp.clsUtility.strProjectTitle);
-            }
+           
         }
 
-        public bool IsDecimal(Control c, KeyPressEventArgs e)
-        {
-            bool b = false;
-            try
-            {
-                label1.Text = Convert.ToInt32(e.KeyChar).ToString();
-                TextBox txt = (TextBox)c;
-                if (e.KeyChar >= 48 && e.KeyChar <= 57 || e.KeyChar == 8 || e.KeyChar == 46)
-                {
-                    if ( (txt.SelectionStart == 0 && e.KeyChar != 46 && !txt.Text.Contains(".") ) || e.KeyChar == 8)
-                        b = false;
-                    else
-                        b = true;
+      
 
-                    if (txt.SelectionStart >= 1 && e.KeyChar == 46 && !txt.Text.Contains("."))
-                        b = false;
 
-                    else if (txt.SelectionStart >= 1 && e.KeyChar != 46)
-                        b = false;
-                }
-                else
-                {
-                    b = true;
-                }
-                return b;
-            }
-            catch (Exception)
-            {
-                return true;
-            }
-        }
-
-        private bool IsAlphaNumeric(KeyPressEventArgs e)
-        {
-            CoreApp.clsUtility ObjUtil = new CoreApp.clsUtility();
-            try
-            {
-                label1.Text = Convert.ToInt32(e.KeyChar).ToString();
-                if (ObjUtil.IsString(e) == false || ObjUtil.IsNumeric(e) == false)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            }
-            catch (Exception)
-            {
-                return true;
-            }
-        }
         private void button1_Click(object sender, EventArgs e)
         {
             SelectedControl.Text = richTextBox1.Text;

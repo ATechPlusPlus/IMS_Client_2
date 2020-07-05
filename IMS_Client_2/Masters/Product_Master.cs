@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -282,8 +283,14 @@ namespace IMS_Client_2.Masters
                     cmbActiveStatus.SelectedItem = dataGridView1.SelectedRows[0].Cells["ActiveStatus"].Value.ToString();
                     if (dataGridView1.SelectedRows[0].Cells["Photo"].Value != DBNull.Value)
                     {
-                        PicProductMaster.Image = ObjUtil.GetImage((byte[])dataGridView1.SelectedRows[0].Cells["Photo"].Value);
+                        GetProductImage(dataGridView1.SelectedRows[0].Cells["Photo"].Value.ToString());
+                     
                     }
+                    else
+                    {
+                        PicProductMaster.Image = null;
+                    }
+
                     grpProduct.Enabled = false;
                     txtProductName.Focus();
                 }
@@ -385,8 +392,10 @@ namespace IMS_Client_2.Masters
             ObjUtil.SetDataGridProperty(dataGridView1, DataGridViewAutoSizeColumnsMode.Fill);
             dataGridView1.Columns["ProductID"].Visible = false;
             dataGridView1.Columns["CategoryID"].Visible = false;
-            dataGridView1.Columns["Photo"].Visible = false;
+           // dataGridView1.Columns["Photo"].Visible = false;
             lblTotalRecords.Text = "Total Records : " + dataGridView1.Rows.Count;
+
+          
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -435,6 +444,42 @@ namespace IMS_Client_2.Masters
                 txtProductName.Focus();
             }
         }
+    
+        private void GetProductImage(string ImageID)
+        {
+            DataTable dtImagePath = ObjDAL.ExecuteSelectStatement("  select ImagePath, Extension from [IMS_Client_2].dbo.DefaultStoreSetting where MachineName='" + Environment.MachineName + "'");
+            if (dtImagePath.Rows.Count>0)
+            {
+                if (dtImagePath.Rows[0]["ImagePath"]!=DBNull.Value)
+                {
+                    string ImgPath = dtImagePath.Rows[0]["ImagePath"].ToString();
+                    string extension= dtImagePath.Rows[0]["Extension"].ToString();
+
+                    string imgFile = ImgPath + "//" + ImageID + extension;
+                    if (File.Exists(imgFile))
+                    {
+                        PicProductMaster.Image = Image.FromFile(imgFile);
+                    }
+                    else
+                    {
+                        PicProductMaster.Image = null;
+                    }
+
+                       
+                    }
+                    else
+                    {
+                        MessageBox.Show("Image file for the selected product doesn't exist.",clsUtility.strProjectTitle);
+                    
+                  
+
+
+                }
+            }
+                
+
+        }
+    
 
         private void rdSearchByCategory_CheckedChanged(object sender, EventArgs e)
         {

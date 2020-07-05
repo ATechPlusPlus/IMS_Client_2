@@ -68,6 +68,10 @@ namespace IMS_Client_2.Barcode
                 {
                     strBarCodeSettings = dataTable.Rows[0]["BarCodeSetting"].ToString();
                 }
+                else
+                {
+                    clsUtility.ShowInfoMessage("No Barcode Template found.", clsUtility.strProjectTitle);
+                }
             }
             else
             {
@@ -388,7 +392,8 @@ namespace IMS_Client_2.Barcode
         }
         private void newPageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (obj == null)
+           
+                if (obj == null)
             {
                 AddNewPage();
             }
@@ -737,56 +742,55 @@ namespace IMS_Client_2.Barcode
         }
         private void saveTemplateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            strTemplate = "";
-            //Type-IsBold-Family-argb(int)-fsize(float)-w-h-x-y-text-backColor(int)-RecBorderStyle-borderStyle-borderColor
-            WriteToLog(obj.BackColor.ToArgb().ToString() + "@" + obj.Size.Width + "@" + obj.Size.Height);
-
-            for (int i = 0; i < obj.Controls.Count; i++)
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmBarCodeDesigner, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
-                string type = obj.Controls[i].GetType().Name;
-                bool b = obj.Controls[i].Font.Bold;
-                string family = obj.Controls[i].Font.FontFamily.Name;
-                int arbg = obj.Controls[i].ForeColor.ToArgb();
-                float fsize = obj.Controls[i].Font.Size;
-                int w = obj.Controls[i].Size.Width;
-                int h = obj.Controls[i].Size.Height;
-                int x = obj.Controls[i].Location.X;
-                int y = obj.Controls[i].Location.Y;
-                string strtag = "";
-                if (obj.Controls[i].Tag != null)
+                strTemplate = "";
+                //Type-IsBold-Family-argb(int)-fsize(float)-w-h-x-y-text-backColor(int)-RecBorderStyle-borderStyle-borderColor
+                WriteToLog(obj.BackColor.ToArgb().ToString() + "@" + obj.Size.Width + "@" + obj.Size.Height);
+
+                for (int i = 0; i < obj.Controls.Count; i++)
                 {
-                    strtag = obj.Controls[i].Tag.ToString();
+                    // if control is not visible then don't save.
+                    if (!obj.Controls[i].Visible)
+                    {
+                        continue;
+                    }
+                    string type = obj.Controls[i].GetType().Name;
+                    bool b = obj.Controls[i].Font.Bold;
+                    string family = obj.Controls[i].Font.FontFamily.Name;
+                    int arbg = obj.Controls[i].ForeColor.ToArgb();
+                    float fsize = obj.Controls[i].Font.Size;
+                    int w = obj.Controls[i].Size.Width;
+                    int h = obj.Controls[i].Size.Height;
+                    int x = obj.Controls[i].Location.X;
+                    int y = obj.Controls[i].Location.Y;
+                    string strtag = "";
+                    if (obj.Controls[i].Tag != null)
+                    {
+                        strtag = obj.Controls[i].Tag.ToString();
+                    }
+
+                    string text = obj.Controls[i].Text;
+                    int backColor = obj.Controls[i].BackColor.ToArgb();
+                    string RecBorderStyle = "";
+                    string borderStyle = "";
+                    int borderColor = 0;
+
+                    if (obj.Controls[i].GetType() == typeof(uRectangle))
+                    {
+                        uRectangle rc = (uRectangle)obj.Controls[i];
+                        RecBorderStyle = rc.RectangleBorderStyle.ToString();
+                        borderStyle = rc.BorderStyle.ToString();
+                        borderColor = rc.BorderColor.ToArgb();
+                    }
+
+                    WriteToLog(type + "@" + b + "@" + family + "@" + arbg + "@" + fsize + "@" + w + "@" + h + "@" + x + "@" + y + "@" + text + "@" + backColor + "@" + RecBorderStyle + "@" + borderStyle + "@" + borderColor + "@" + strtag);
                 }
-
-                string text = obj.Controls[i].Text;
-                int backColor = obj.Controls[i].BackColor.ToArgb();
-                string RecBorderStyle = "";
-                string borderStyle = "";
-                int borderColor = 0;
-
-                if (obj.Controls[i].GetType() == typeof(uRectangle))
-                {
-                    uRectangle rc = (uRectangle)obj.Controls[i];
-                    RecBorderStyle = rc.RectangleBorderStyle.ToString();
-                    borderStyle = rc.BorderStyle.ToString();
-                    borderColor = rc.BorderColor.ToArgb();
-                }
-
-                WriteToLog(type + "@" + b + "@" + family + "@" + arbg + "@" + fsize + "@" + w + "@" + h + "@" + x + "@" + y + "@" + text + "@" + backColor + "@" + RecBorderStyle + "@" + borderStyle + "@" + borderColor + "@" + strtag);
+                SaveBarCodeSettings(strTemplate);
+                clsUtility.ShowInfoMessage("Barcode Template has been saved.", CoreApp.clsUtility.strProjectTitle);
+                
             }
-            SaveBarCodeSettings(strTemplate);
-            clsUtility.ShowInfoMessage("Barcode Template has been saved.", CoreApp.clsUtility.strProjectTitle);
-            //SaveFileDialog Obj = new SaveFileDialog();
-            //Obj.Filter = ".dat Data File (*.dat)|*.dat|All files (*.*)|*.*";
-            //Obj.FileName = "Template 01";
-            //if (Obj.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            //{
 
-            //    StreamWriter sw = new StreamWriter(Obj.FileName);
-            //    sw.WriteLine(strTemplate);
-            //    sw.Close();
-            //    MessageBox.Show("Template Saved Successfully.", "Designer Tool");
-            //}
         }
 
         private void loadTemplateToolStripMenuItem_Click(object sender, EventArgs e)
@@ -816,8 +820,13 @@ namespace IMS_Client_2.Barcode
 
         private void clearToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            obj.Controls.Clear();
-            strTemplate = "";
+            if (obj!=null)
+            {
+                obj.Controls.Clear();
+                strTemplate = "";
+
+            }
+           
         }
 
         private void toolStripMenuItem1_Click_1(object sender, EventArgs e)
@@ -827,11 +836,17 @@ namespace IMS_Client_2.Barcode
 
         private void deleteBarcodeSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (CoreApp.clsUtility.ShowQuestionMessage("Are you sure, you want to delete the bar code settings", CoreApp.clsUtility.strProjectTitle))
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmBarCodeDesigner, clsFormRights.Operation.Delete) || clsUtility.IsAdmin)
             {
-                ObjCon.ExecuteNonQuery("UPDATE "+clsUtility.DBName+ ".dbo.tblBarCodeSettings SET BarCodeSetting=NULL ");
-                clsUtility.ShowInfoMessage("Barcode setting deleted.", clsUtility.strProjectTitle);
+                if (CoreApp.clsUtility.ShowQuestionMessage("Are you sure, you want to delete the bar code settings", CoreApp.clsUtility.strProjectTitle))
+                {
+                    ObjCon.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.tblBarCodeSettings SET BarCodeSetting=NULL ");
+                    clsUtility.ShowInfoMessage("Barcode setting deleted.", clsUtility.strProjectTitle);
+                }
             }
+
+
+           
         }
 
         private void cmbProperty_SelectionChangeCommitted(object sender, EventArgs e)
@@ -849,77 +864,86 @@ namespace IMS_Client_2.Barcode
 
         private void exportAsImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int Width = obj.Size.Width;
-            int Height = obj.Size.Height;
-
-            Bitmap bm = new Bitmap(Width, Height);
-
-            obj.DrawToBitmap(bm, new Rectangle(0, 0, Width, Height));
-
-            SaveFileDialog Obj = new SaveFileDialog();
-            Obj.Filter = "Png Image File (*.png)|*.png|All files (*.*)|*.*";
-            Obj.FileName = "Default Image";
-            if (Obj.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmBarCodeDesigner, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
-                bm.Save(Obj.FileName, System.Drawing.Imaging.ImageFormat.Png);
-                DialogResult d = MessageBox.Show("Exported Succesfully.Do you want to open?", "Designer Tool", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (d == System.Windows.Forms.DialogResult.Yes)
+
+                int Width = obj.Size.Width;
+                int Height = obj.Size.Height;
+
+                Bitmap bm = new Bitmap(Width, Height);
+
+                obj.DrawToBitmap(bm, new Rectangle(0, 0, Width, Height));
+
+                SaveFileDialog Obj = new SaveFileDialog();
+                Obj.Filter = "Png Image File (*.png)|*.png|All files (*.*)|*.*";
+                Obj.FileName = "Default Image";
+                if (Obj.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    System.Diagnostics.Process.Start(Obj.FileName);
+                    bm.Save(Obj.FileName, System.Drawing.Imaging.ImageFormat.Png);
+                    DialogResult d = MessageBox.Show("Exported Succesfully.Do you want to open?", "Designer Tool", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (d == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        System.Diagnostics.Process.Start(Obj.FileName);
+                    }
                 }
             }
+
         }
         string _exportDatafile = "";
         private void exportAsFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            strTemplate = "";
-            //Type-IsBold-Family-argb(int)-fsize(float)-w-h-x-y-text-backColor(int)-RecBorderStyle-borderStyle-borderColor
-            WriteToLog(obj.BackColor.ToArgb().ToString() + "@" + obj.Size.Width + "@" + obj.Size.Height);
-
-            for (int i = 0; i < obj.Controls.Count; i++)
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmBarCodeDesigner, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
-                string type = obj.Controls[i].GetType().Name;
-                bool b = obj.Controls[i].Font.Bold;
-                string family = obj.Controls[i].Font.FontFamily.Name;
-                int arbg = obj.Controls[i].ForeColor.ToArgb();
-                float fsize = obj.Controls[i].Font.Size;
-                int w = obj.Controls[i].Size.Width;
-                int h = obj.Controls[i].Size.Height;
-                int x = obj.Controls[i].Location.X;
-                int y = obj.Controls[i].Location.Y;
-                string strtag = "";
-                if (obj.Controls[i].Tag != null)
+                strTemplate = "";
+                //Type-IsBold-Family-argb(int)-fsize(float)-w-h-x-y-text-backColor(int)-RecBorderStyle-borderStyle-borderColor
+                WriteToLog(obj.BackColor.ToArgb().ToString() + "@" + obj.Size.Width + "@" + obj.Size.Height);
+
+                for (int i = 0; i < obj.Controls.Count; i++)
                 {
-                    strtag = obj.Controls[i].Tag.ToString();
+                    string type = obj.Controls[i].GetType().Name;
+                    bool b = obj.Controls[i].Font.Bold;
+                    string family = obj.Controls[i].Font.FontFamily.Name;
+                    int arbg = obj.Controls[i].ForeColor.ToArgb();
+                    float fsize = obj.Controls[i].Font.Size;
+                    int w = obj.Controls[i].Size.Width;
+                    int h = obj.Controls[i].Size.Height;
+                    int x = obj.Controls[i].Location.X;
+                    int y = obj.Controls[i].Location.Y;
+                    string strtag = "";
+                    if (obj.Controls[i].Tag != null)
+                    {
+                        strtag = obj.Controls[i].Tag.ToString();
+                    }
+
+                    string text = obj.Controls[i].Text;
+                    int backColor = obj.Controls[i].BackColor.ToArgb();
+                    string RecBorderStyle = "";
+                    string borderStyle = "";
+                    int borderColor = 0;
+
+                    if (obj.Controls[i].GetType() == typeof(uRectangle))
+                    {
+                        uRectangle rc = (uRectangle)obj.Controls[i];
+                        RecBorderStyle = rc.RectangleBorderStyle.ToString();
+                        borderStyle = rc.BorderStyle.ToString();
+                        borderColor = rc.BorderColor.ToArgb();
+                    }
+
+                    WriteToLog(type + "@" + b + "@" + family + "@" + arbg + "@" + fsize + "@" + w + "@" + h + "@" + x + "@" + y + "@" + text + "@" + backColor + "@" + RecBorderStyle + "@" + borderStyle + "@" + borderColor + "@" + strtag);
                 }
-
-                string text = obj.Controls[i].Text;
-                int backColor = obj.Controls[i].BackColor.ToArgb();
-                string RecBorderStyle = "";
-                string borderStyle = "";
-                int borderColor = 0;
-
-                if (obj.Controls[i].GetType() == typeof(uRectangle))
+                SaveFileDialog Obj = new SaveFileDialog();
+                Obj.Filter = ".dat Data File (*.dat)|*.dat|All files (*.*)|*.*";
+                Obj.FileName = "Template 01";
+                if (Obj.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    uRectangle rc = (uRectangle)obj.Controls[i];
-                    RecBorderStyle = rc.RectangleBorderStyle.ToString();
-                    borderStyle = rc.BorderStyle.ToString();
-                    borderColor = rc.BorderColor.ToArgb();
+
+                    StreamWriter sw = new StreamWriter(Obj.FileName);
+                    sw.WriteLine(strTemplate);
+                    sw.Close();
+                    MessageBox.Show("Template Saved Successfully.", "Designer Tool");
                 }
-
-                WriteToLog(type + "@" + b + "@" + family + "@" + arbg + "@" + fsize + "@" + w + "@" + h + "@" + x + "@" + y + "@" + text + "@" + backColor + "@" + RecBorderStyle + "@" + borderStyle + "@" + borderColor + "@" + strtag);
             }
-            SaveFileDialog Obj = new SaveFileDialog();
-            Obj.Filter = ".dat Data File (*.dat)|*.dat|All files (*.*)|*.*";
-            Obj.FileName = "Template 01";
-            if (Obj.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-
-                StreamWriter sw = new StreamWriter(Obj.FileName);
-                sw.WriteLine(strTemplate);
-                sw.Close();
-                MessageBox.Show("Template Saved Successfully.", "Designer Tool");
-            }
+            
         }
 
         private void importTemplateToolStripMenuItem_Click(object sender, EventArgs e)
