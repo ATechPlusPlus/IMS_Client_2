@@ -405,12 +405,12 @@ namespace IMS_Client_2.Masters
 
         private void txtProductName_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = ObjUtil.IsString(e);
-            if (e.Handled == true)
-            {
-                clsUtility.ShowInfoMessage("Enter Only Charactors...", clsUtility.strProjectTitle);
-                txtProductName.Focus();
-            }
+            //e.Handled = ObjUtil.IsString(e);
+            //if (e.Handled == true)
+            //{
+            //    clsUtility.ShowInfoMessage("Enter Only Charactors...", clsUtility.strProjectTitle);
+            //    txtProductName.Focus();
+            //}
         }
     }
 }

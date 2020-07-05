@@ -133,23 +133,38 @@ namespace IMS_Client_2.Purchase
 
         private void FillSupplierData()
         {
+            int a = 0;
+            if (cmbSupplier.SelectedIndex >= 0)
+            {
+                a = Convert.ToInt32(cmbSupplier.SelectedValue);
+            }
             DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.SupplierMaster", "SupplierID,SupplierName", "ISNULL(ActiveStatus,1)=1", "SupplierName ASC");
             cmbSupplier.DataSource = dt;
             cmbSupplier.DisplayMember = "SupplierName";
             cmbSupplier.ValueMember = "SupplierID";
 
-            cmbSupplier.SelectedIndex = -1;
+            if (a > 0)
+                cmbSupplier.SelectedValue = a;
+            else
+                cmbSupplier.SelectedIndex = -1;
         }
 
         private void FillCountryData()
         {
-            DataTable dt = null;
-            dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.CountryMaster", "CountryID,CountryName", "ISNULL(ActiveStatus,1)=1", "CountryName ASC");
+            int CountryID = 0;
+            if (cmbCountry.SelectedIndex >= 0)
+            {
+                CountryID = Convert.ToInt32(cmbCountry.SelectedValue);
+            }
+            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.CountryMaster", "CountryID,CountryName", "ISNULL(ActiveStatus,1)=1", "CountryName ASC");
             cmbCountry.DataSource = dt;
             cmbCountry.DisplayMember = "CountryName";
             cmbCountry.ValueMember = "CountryID";
 
-            cmbCountry.SelectedIndex = -1;
+            if (CountryID > 0)
+                cmbCountry.SelectedValue = CountryID;
+            else
+                cmbCountry.SelectedIndex = -1;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -442,6 +457,7 @@ namespace IMS_Client_2.Purchase
             LoadData();
             FillSupplierData();
             FillCountryData();
+            dtpBillDate.MaxDate = DateTime.Now;
         }
 
         private void btnAdd_MouseEnter(object sender, EventArgs e)
@@ -557,6 +573,13 @@ namespace IMS_Client_2.Purchase
             {
                 object ob = ObjDAL.ExecuteScalar("SELECT CurrencyRate FROM " + clsUtility.DBName + ".dbo.CurrencyRateSetting WITH(NOLOCK) WHERE CountryID = " + cmbCountry.SelectedValue);
                 txtCurrencyRate.Text = Convert.ToDecimal(ob).ToString();
+                if (ob == null)
+                {
+                    clsUtility.ShowInfoMessage("Currency Rate is defined for Country " + cmbCountry.Text, clsUtility.strProjectTitle);
+                    btnCurrencyRatePopup.Enabled = true;
+                }
+                else
+                    btnCurrencyRatePopup.Enabled = false;
             }
         }
 
@@ -584,18 +607,28 @@ namespace IMS_Client_2.Purchase
 
         private void btnSupplierPopup_Click(object sender, EventArgs e)
         {
-            int a = 0;
-            if (cmbSupplier.SelectedIndex >= 0)
-            {
-                a = Convert.ToInt32(cmbSupplier.SelectedValue);
-            }
+            //int a = 0;
+            //if (cmbSupplier.SelectedIndex >= 0)
+            //{
+            //    a = Convert.ToInt32(cmbSupplier.SelectedValue);
+            //}
             Masters.Supplier_Details Obj = new Masters.Supplier_Details();
             Obj.ShowDialog();
             FillSupplierData();
-            if (a > 0)
-            {
-                cmbSupplier.SelectedValue = a;
-            }
+            //if (a > 0)
+            //{
+            //    cmbSupplier.SelectedValue = a;
+            //}
+            //int CountryID = 0;
+            //if (cmbCountry.SelectedIndex >= 0)
+            //{
+            //    CountryID = Convert.ToInt32(cmbCountry.SelectedValue);
+            //}
+            FillCountryData();
+            //if (CountryID > 0)
+            //{
+            //    cmbCountry.SelectedValue = CountryID;
+            //}
         }
 
         private void txtCurrencyRate_TextChanged(object sender, EventArgs e)
@@ -631,6 +664,29 @@ namespace IMS_Client_2.Purchase
             if (e.Handled == true)
             {
                 clsUtility.ShowInfoMessage("Enter Only Numbers...", clsUtility.strProjectTitle);
+            }
+        }
+
+        private void lnkRefreshData_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            LoadData();
+            FillSupplierData();
+            FillCountryData();
+            dtpBillDate.MaxDate = DateTime.Now;
+            btnCurrencyRatePopup.Enabled = false;
+        }
+
+        private void btnCurrencyRatePopup_Click(object sender, EventArgs e)
+        {
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Currency_Value_Settings) || clsUtility.IsAdmin)
+            {
+                Settings.Currency_Value_Settings Obj = new Settings.Currency_Value_Settings();
+                Obj.ShowDialog();
+                cmbSupplier_SelectionChangeCommitted(sender, e);
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
     }

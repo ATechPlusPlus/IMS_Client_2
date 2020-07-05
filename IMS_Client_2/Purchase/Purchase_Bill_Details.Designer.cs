@@ -83,6 +83,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtNewRate = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.PurchaseInvoiceDetailsID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ModelNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -335,6 +336,7 @@
             this.txtRate.BackColor = System.Drawing.Color.White;
             this.txtRate.Location = new System.Drawing.Point(482, 80);
             this.txtRate.Name = "txtRate";
+            this.txtRate.ShortcutsEnabled = false;
             this.txtRate.Size = new System.Drawing.Size(206, 25);
             this.txtRate.TabIndex = 4;
             this.txtRate.Enter += new System.EventHandler(this.txtSupplierBillNo_Enter);
@@ -508,6 +510,7 @@
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.PurchaseInvoiceDetailsID,
             this.ProductID,
             this.ProductName,
             this.ModelNo,
@@ -773,6 +776,14 @@
             this.label10.TabIndex = 291;
             this.label10.Text = "*";
             // 
+            // PurchaseInvoiceDetailsID
+            // 
+            this.PurchaseInvoiceDetailsID.DataPropertyName = "PurchaseInvoiceDetailsID";
+            this.PurchaseInvoiceDetailsID.HeaderText = "PurchaseInvoiceDetailsID";
+            this.PurchaseInvoiceDetailsID.Name = "PurchaseInvoiceDetailsID";
+            this.PurchaseInvoiceDetailsID.ReadOnly = true;
+            this.PurchaseInvoiceDetailsID.Visible = false;
+            // 
             // ProductID
             // 
             this.ProductID.DataPropertyName = "ProductID";
@@ -975,6 +986,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseInvoiceDetailsID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ModelNo;

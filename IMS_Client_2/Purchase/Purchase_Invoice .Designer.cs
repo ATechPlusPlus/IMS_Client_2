@@ -64,6 +64,7 @@
             this.lblSupplierBillNo = new System.Windows.Forms.Label();
             this.txtSupplierBillNo = new System.Windows.Forms.TextBox();
             this.grpCurrencyRate = new System.Windows.Forms.GroupBox();
+            this.btnCurrencyRatePopup = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbCountry = new System.Windows.Forms.ComboBox();
             this.txtCurrencyRate = new System.Windows.Forms.TextBox();
@@ -84,6 +85,7 @@
             this.txtLocalBillValue = new System.Windows.Forms.TextBox();
             this.txtNewPriceRate = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.lnkRefreshData = new System.Windows.Forms.LinkLabel();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.grpGridview.SuspendLayout();
@@ -547,6 +549,7 @@
             // grpCurrencyRate
             // 
             this.grpCurrencyRate.BackColor = System.Drawing.Color.Transparent;
+            this.grpCurrencyRate.Controls.Add(this.btnCurrencyRatePopup);
             this.grpCurrencyRate.Controls.Add(this.label2);
             this.grpCurrencyRate.Controls.Add(this.cmbCountry);
             this.grpCurrencyRate.Controls.Add(this.txtCurrencyRate);
@@ -555,10 +558,26 @@
             this.grpCurrencyRate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpCurrencyRate.Location = new System.Drawing.Point(20, 203);
             this.grpCurrencyRate.Name = "grpCurrencyRate";
-            this.grpCurrencyRate.Size = new System.Drawing.Size(709, 51);
+            this.grpCurrencyRate.Size = new System.Drawing.Size(733, 51);
             this.grpCurrencyRate.TabIndex = 1;
             this.grpCurrencyRate.TabStop = false;
             this.grpCurrencyRate.Text = "Currency";
+            // 
+            // btnCurrencyRatePopup
+            // 
+            this.btnCurrencyRatePopup.BackColor = System.Drawing.Color.Transparent;
+            this.btnCurrencyRatePopup.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCurrencyRatePopup.BackgroundImage")));
+            this.btnCurrencyRatePopup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnCurrencyRatePopup.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCurrencyRatePopup.Enabled = false;
+            this.btnCurrencyRatePopup.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCurrencyRatePopup.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCurrencyRatePopup.Location = new System.Drawing.Point(698, 18);
+            this.btnCurrencyRatePopup.Name = "btnCurrencyRatePopup";
+            this.btnCurrencyRatePopup.Size = new System.Drawing.Size(27, 27);
+            this.btnCurrencyRatePopup.TabIndex = 295;
+            this.btnCurrencyRatePopup.UseVisualStyleBackColor = false;
+            this.btnCurrencyRatePopup.Click += new System.EventHandler(this.btnCurrencyRatePopup_Click);
             // 
             // label2
             // 
@@ -574,6 +593,7 @@
             // cmbCountry
             // 
             this.cmbCountry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCountry.Enabled = false;
             this.cmbCountry.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCountry.FormattingEnabled = true;
             this.cmbCountry.Location = new System.Drawing.Point(128, 17);
@@ -818,6 +838,19 @@
             this.label8.TabIndex = 250;
             this.label8.Text = "Local Bill Value :";
             // 
+            // lnkRefreshData
+            // 
+            this.lnkRefreshData.AutoSize = true;
+            this.lnkRefreshData.BackColor = System.Drawing.Color.Transparent;
+            this.lnkRefreshData.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnkRefreshData.Location = new System.Drawing.Point(629, 63);
+            this.lnkRefreshData.Name = "lnkRefreshData";
+            this.lnkRefreshData.Size = new System.Drawing.Size(100, 19);
+            this.lnkRefreshData.TabIndex = 237;
+            this.lnkRefreshData.TabStop = true;
+            this.lnkRefreshData.Text = "Refresh Data";
+            this.lnkRefreshData.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkRefreshData_LinkClicked);
+            // 
             // Purchase_Invoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -825,6 +858,7 @@
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(978, 658);
+            this.Controls.Add(this.lnkRefreshData);
             this.Controls.Add(this.grpLocalCurrency);
             this.Controls.Add(this.grpForeignCurrency);
             this.Controls.Add(this.grpCurrencyRate);
@@ -922,5 +956,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.LinkLabel lnkRefreshData;
+        private System.Windows.Forms.Button btnCurrencyRatePopup;
     }
 }

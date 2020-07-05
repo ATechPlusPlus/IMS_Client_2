@@ -235,6 +235,8 @@ namespace IMS_Client_2.Purchase
                 txtItemName.Text = dRow[0]["ProductName"].ToString();
                 txtTotalQTYBill.Text = dRow[0]["QTY"].ToString();
                 cmbSizeType.SelectedValue = dRow[0]["SizeTypeID"].ToString();
+                cmbSizeType_SelectionChangeCommitted(sender, e);
+
                 cmbStore.SelectedValue = dRow[0]["StoreID"].ToString();
                 Load_Color_SizeData();
             }

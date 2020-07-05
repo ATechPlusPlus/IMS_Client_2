@@ -44,7 +44,7 @@ namespace IMS_Client_2.Masters
             }
             else if (ObjUtil.IsControlTextEmpty(cmbDepartment))
             {
-                clsUtility.ShowInfoMessage("Select Department for " + txtSizeTypeName.Text, clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("Select Category for " + txtSizeTypeName.Text, clsUtility.strProjectTitle);
                 cmbDepartment.Focus();
                 return false;
             }
