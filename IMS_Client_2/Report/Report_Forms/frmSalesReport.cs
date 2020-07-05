@@ -38,17 +38,17 @@ namespace IMS_Client_2.Report
         {
             string strCondition = "";
 
-            if (ObjUtil.IsControlTextEmpty(txtInvoiceNumber))
+            if (!ObjUtil.IsControlTextEmpty(txtInvoiceNumber))
             {
                 strCondition= "InvoiceNumber='" + txtInvoiceNumber.Text + "' AND ";
             }
 
-            if (ObjUtil.IsControlTextEmpty(txtEmpID))
+            if (!ObjUtil.IsControlTextEmpty(txtEmpID))
             {
                 strCondition += "SalesMan=" + txtEmpID.Text+" AND ";
             }
 
-            if (ObjUtil.IsControlTextEmpty(cmbShop))
+            if (cmbShop.SelectedValue!=null)
             {
                 strCondition += "ShopeID=" + cmbShop.SelectedValue.ToString()+" AND ";
             }

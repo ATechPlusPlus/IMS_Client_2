@@ -36,6 +36,7 @@ namespace IMS_Client_2.Sales
             InitItemTable();
             dtpSalesDate.Value = DateTime.Now;
             txtProductName.Focus();
+            dtpSalesDate.MaxDate= DateTime.Now;
         }
         private void btnAdd_MouseEnter(object sender, EventArgs e)
         {
@@ -170,7 +171,9 @@ namespace IMS_Client_2.Sales
             cmbShop.SelectedValue = deafultStoreID;
             if (deafultStoreID == 0)
             {
-                clsUtility.ShowInfoMessage("Please select the default shop for this client.", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("Please select the default shop for this client from Setting Window.", clsUtility.strProjectTitle);
+                Settings.frmOtherSetting otherSetting = new Settings.frmOtherSetting();
+                otherSetting.ShowDialog();
                 this.Close();
             }
         }
@@ -613,74 +616,85 @@ namespace IMS_Client_2.Sales
         }
         private void btnAdd_Click_1(object sender, EventArgs e)
         {
-            if (SalesValidation())
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Invoice,clsFormRights.Operation.Save) || clsUtility.IsAdmin)
+
             {
-                dgvProductDetails.EndEdit();
-
-                // Before sales invocing make sure you have available qty for particular store
-
-                string InvoiceDateTime = dtpSalesDate.Value.ToString("yyyy-MM-dd") + " " + DateTime.Now.ToString("HH:mm:ss");
-
-                GenerateInvoiceNumber();
-                #region SalesInvoiceDetails
-                ObjDAL.SetColumnData("InvoiceNumber", SqlDbType.NVarChar, txtInvoiceNumber.Text);
-                ObjDAL.SetColumnData("InvoiceDate", SqlDbType.DateTime, InvoiceDateTime);
-                ObjDAL.SetColumnData("SubTotal", SqlDbType.Decimal, txtSubTotal.Text);
-                ObjDAL.SetColumnData("Discount", SqlDbType.Decimal, txtDiscount.Text);
-                ObjDAL.SetColumnData("Tax", SqlDbType.Decimal, txtDeliveryCharges.Text);
-                ObjDAL.SetColumnData("GrandTotal", SqlDbType.Decimal, txtGrandTotal.Text);
-                ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
-                ObjDAL.SetColumnData("CustomerID", SqlDbType.Int, txtCustomerID.Text);
-                ObjDAL.SetColumnData("SalesMan", SqlDbType.Int, txtEmpID.Text);
-                ObjDAL.SetColumnData("ShopeID", SqlDbType.Int, cmbShop.SelectedValue.ToString());
-
-                ObjDAL.SetColumnData("PaymentMode", SqlDbType.NVarChar, lblPMode.Text);
-                ObjDAL.SetColumnData("PaymentAutoID", SqlDbType.Int, Other_Forms.frmPayment.strPaymentAutoID);
-
-                int InvoiceID = ObjDAL.InsertData(clsUtility.DBName + ".dbo.SalesInvoiceDetails", true);
-                #endregion
-
-                for (int i = 0; i < dgvProductDetails.Rows.Count; i++)
+                if (SalesValidation())
                 {
-                    string Total = dgvProductDetails.Rows[i].Cells["Total"].Value.ToString();
-                    string ProductID = dgvProductDetails.Rows[i].Cells["ProductID"].Value.ToString();
-                    string QTY = dgvProductDetails.Rows[i].Cells["QTY"].Value.ToString();
-                    string Rate = dgvProductDetails.Rows[i].Cells["Rate"].Value.ToString();
-                    string ColorID = dgvProductDetails.Rows[i].Cells["ColorID"].Value.ToString();
-                    string SizeID = dgvProductDetails.Rows[i].Cells["SizeID"].Value.ToString();
+                    dgvProductDetails.EndEdit();
 
-                    ObjDAL.SetColumnData("InvoiceID", SqlDbType.Int, InvoiceID);
-                    ObjDAL.SetColumnData("ProductID", SqlDbType.Int, ProductID);
-                    ObjDAL.SetColumnData("QTY", SqlDbType.Decimal, QTY);
+                    // Before sales invocing make sure you have available qty for particular store
+
+                    string InvoiceDateTime = dtpSalesDate.Value.ToString("yyyy-MM-dd") + " " + DateTime.Now.ToString("HH:mm:ss");
+
+                    GenerateInvoiceNumber();
+                    #region SalesInvoiceDetails
+                    ObjDAL.SetColumnData("InvoiceNumber", SqlDbType.NVarChar, txtInvoiceNumber.Text);
+                    ObjDAL.SetColumnData("InvoiceDate", SqlDbType.DateTime, InvoiceDateTime);
+                    ObjDAL.SetColumnData("SubTotal", SqlDbType.Decimal, txtSubTotal.Text);
+                    ObjDAL.SetColumnData("Discount", SqlDbType.Decimal, txtDiscount.Text);
+                    ObjDAL.SetColumnData("Tax", SqlDbType.Decimal, txtDeliveryCharges.Text);
+                    ObjDAL.SetColumnData("GrandTotal", SqlDbType.Decimal, txtGrandTotal.Text);
                     ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
-                    ObjDAL.SetColumnData("Rate", SqlDbType.Decimal, Rate);
-                    ObjDAL.SetColumnData("ColorID", SqlDbType.Int, ColorID);
-                    ObjDAL.SetColumnData("SizeID", SqlDbType.Int, SizeID);
+                    ObjDAL.SetColumnData("CustomerID", SqlDbType.Int, txtCustomerID.Text);
+                    ObjDAL.SetColumnData("SalesMan", SqlDbType.Int, txtEmpID.Text);
+                    ObjDAL.SetColumnData("ShopeID", SqlDbType.Int, cmbShop.SelectedValue.ToString());
 
-                    ObjDAL.InsertData(clsUtility.DBName + ".dbo.SalesDetails", false);
+                    ObjDAL.SetColumnData("PaymentMode", SqlDbType.NVarChar, lblPMode.Text);
+                    ObjDAL.SetColumnData("PaymentAutoID", SqlDbType.NVarChar, Other_Forms.frmPayment.strPaymentAutoID);
 
-                    ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster " +
-                                            "SET QTY=QTY-" + QTY + " WHERE ProductID=" + ProductID + " and StoreID=" + cmbShop.SelectedValue.ToString() + " AND ColorID=" + ColorID + " AND SizeID=" + SizeID);
-                }
-                clsUtility.ShowInfoMessage("Data has been saved successfully.", clsUtility.strProjectTitle);
-                ClearAll();
+                    int InvoiceID = ObjDAL.InsertData(clsUtility.DBName + ".dbo.SalesInvoiceDetails", true);
+                    if (InvoiceID == -1)
+                    {
+                        ObjDAL.ResetData();
+                        return;
+                    }
+                    #endregion
 
-                Button button = (Button)sender;
-                if (button.Name == "btnPrint")
-                {
-                    Report.frmSalesInvoiceReport frmSalesInvoice = new Report.frmSalesInvoiceReport();
-                    frmSalesInvoice.InvoiceID = InvoiceID;
-                    frmSalesInvoice.IsDirectPrint = true;
-                    frmSalesInvoice.Show();
+                    for (int i = 0; i < dgvProductDetails.Rows.Count; i++)
+                    {
+                        string Total = dgvProductDetails.Rows[i].Cells["Total"].Value.ToString();
+                        string ProductID = dgvProductDetails.Rows[i].Cells["ProductID"].Value.ToString();
+                        string QTY = dgvProductDetails.Rows[i].Cells["QTY"].Value.ToString();
+                        string Rate = dgvProductDetails.Rows[i].Cells["Rate"].Value.ToString();
+                        string ColorID = dgvProductDetails.Rows[i].Cells["ColorID"].Value.ToString();
+                        string SizeID = dgvProductDetails.Rows[i].Cells["SizeID"].Value.ToString();
+
+                        ObjDAL.SetColumnData("InvoiceID", SqlDbType.Int, InvoiceID);
+                        ObjDAL.SetColumnData("ProductID", SqlDbType.Int, ProductID);
+                        ObjDAL.SetColumnData("QTY", SqlDbType.Decimal, QTY);
+                        ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
+                        ObjDAL.SetColumnData("Rate", SqlDbType.Decimal, Rate);
+                        ObjDAL.SetColumnData("ColorID", SqlDbType.Int, ColorID);
+                        ObjDAL.SetColumnData("SizeID", SqlDbType.Int, SizeID);
+
+                        ObjDAL.InsertData(clsUtility.DBName + ".dbo.SalesDetails", false);
+
+                        ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster " +
+                                                "SET QTY=QTY-" + QTY + " WHERE ProductID=" + ProductID + " and StoreID=" + cmbShop.SelectedValue.ToString() + " AND ColorID=" + ColorID + " AND SizeID=" + SizeID);
+                    }
+                    clsUtility.ShowInfoMessage("Data has been saved successfully.", clsUtility.strProjectTitle);
+                    ClearAll();
+
+                    Button button = (Button)sender;
+                    if (button.Name == "btnPrint")
+                    {
+                        Report.frmSalesInvoiceReport frmSalesInvoice = new Report.frmSalesInvoiceReport();
+                        frmSalesInvoice.InvoiceID = InvoiceID;
+                        frmSalesInvoice.IsDirectPrint = true;
+                        frmSalesInvoice.Show();
+                    }
+                    else
+                    {
+                        Report.frmSalesInvoiceReport frmSalesInvoice = new Report.frmSalesInvoiceReport();
+                        frmSalesInvoice.InvoiceID = InvoiceID;
+                        frmSalesInvoice.IsDirectPrint = false;
+                        frmSalesInvoice.Show();
+                    }
                 }
-                else
-                {
-                    Report.frmSalesInvoiceReport frmSalesInvoice = new Report.frmSalesInvoiceReport();
-                    frmSalesInvoice.InvoiceID = InvoiceID;
-                    frmSalesInvoice.IsDirectPrint = false;
-                    frmSalesInvoice.Show();
-                }
+
             }
+             
         }
 
         private void btnSave_Click(object sender, EventArgs e)

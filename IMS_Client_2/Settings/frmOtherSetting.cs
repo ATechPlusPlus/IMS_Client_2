@@ -65,7 +65,43 @@ namespace IMS_Client_2.Settings
                 {
                     txtFooterNote.Text = "";
                 }
+
+                if (dt.Rows[0]["UserArabicNumbers"] != DBNull.Value)
+                {
+                    if ((Convert.ToBoolean(dt.Rows[0]["UserArabicNumbers"])))
+                    {
+                        chkArabicPrice.Checked = true;
+                    }
+                    else
+                    {
+                        chkArabicPrice.Checked =false;
+                    }
+                }
+                else
+                {
+                    chkArabicPrice.Checked = false;
+                }
+
+                if (dt.Rows[0]["ImagePath"] != DBNull.Value)
+                {
+                    txtImagePath.Text = dt.Rows[0]["ImagePath"].ToString();
+                }
+                else
+                {
+                    txtImagePath.Text = dt.Rows[0]["ImagePath"].ToString();
+                }
+
+                if (dt.Rows[0]["Extension"] != DBNull.Value)
+                {
+                    txtFileExtension.Text = dt.Rows[0]["Extension"].ToString();
+                }
+                else
+                {
+                    txtFileExtension.Text = "";
+                }
+
              
+
             }
             else
             {
@@ -74,54 +110,58 @@ namespace IMS_Client_2.Settings
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (txtPCName.Text.Trim().Length == 0)
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmOtherSetting,clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
-                clsUtility.ShowInfoMessage("Please enter PC name.", clsUtility.strProjectTitle);
-                txtPCName.Focus();
-                return;
-
-            }
-            else if (cmbStoreCategory.SelectedIndex == -1)
-            {
-                clsUtility.ShowInfoMessage("Please Select Store Category.", clsUtility.strProjectTitle);
-                cmbStoreCategory.Focus();
-                return;
-
-            }
-            else if (cmbStoreName.SelectedIndex == -1)
-            {
-                clsUtility.ShowInfoMessage("Please Select Store Name.", clsUtility.strProjectTitle);
-                cmbStoreName.Focus();
-                return;
-            }
-
-            int result = ObjCon.ExecuteScalarInt("SELECT count(1) FROM " + clsUtility.DBName + ".[dbo].[DefaultStoreSetting] WITH(NOLOCK) WHERE MachineName='" + txtPCName.Text + "'");
-            if (result > 0) // if data found for the PC thenupdate
-            {
-
-                ObjCon.UpdateColumnData("StoreID", SqlDbType.Int, cmbStoreName.SelectedValue);
-                ObjCon.UpdateColumnData("MachineName", SqlDbType.NVarChar, txtPCName.Text);
-                ObjCon.UpdateColumnData("StoreCategory", SqlDbType.Int, cmbStoreCategory.SelectedIndex);
-
-                int r = ObjCon.UpdateData(clsUtility.DBName + ".[dbo].[DefaultStoreSetting]", "MachineName='" + txtPCName.Text + "'");
-                if (r > 0)
+                if (txtPCName.Text.Trim().Length == 0)
                 {
-                    clsUtility.ShowInfoMessage("Default store settings has been updated.", clsUtility.strProjectTitle);
-                }
-            }
-            else
-            {
-                // else insert.
-                ObjCon.SetColumnData("StoreID", SqlDbType.Int, cmbStoreName.SelectedValue);
-                ObjCon.SetColumnData("MachineName", SqlDbType.NVarChar, txtPCName.Text);
-                ObjCon.SetColumnData("StoreCategory", SqlDbType.Int, cmbStoreCategory.SelectedIndex);
+                    clsUtility.ShowInfoMessage("Please enter PC name.", clsUtility.strProjectTitle);
+                    txtPCName.Focus();
+                    return;
 
-                int r = ObjCon.InsertData(clsUtility.DBName + ".[dbo].[DefaultStoreSetting]", false);
-                if (r > 0)
-                {
-                    clsUtility.ShowInfoMessage("Default store settings has been saved.", clsUtility.strProjectTitle);
                 }
-                lblmsg.Visible = false;
+                else if (cmbStoreCategory.SelectedIndex == -1)
+                {
+                    clsUtility.ShowInfoMessage("Please Select Store Category.", clsUtility.strProjectTitle);
+                    cmbStoreCategory.Focus();
+                    return;
+
+                }
+                else if (cmbStoreName.SelectedIndex == -1)
+                {
+                    clsUtility.ShowInfoMessage("Please Select Store Name.", clsUtility.strProjectTitle);
+                    cmbStoreName.Focus();
+                    return;
+                }
+
+                int result = ObjCon.ExecuteScalarInt("SELECT count(1) FROM " + clsUtility.DBName + ".[dbo].[DefaultStoreSetting] WITH(NOLOCK) WHERE MachineName='" + txtPCName.Text + "'");
+                if (result > 0) // if data found for the PC thenupdate
+                {
+
+                    ObjCon.UpdateColumnData("StoreID", SqlDbType.Int, cmbStoreName.SelectedValue);
+                    ObjCon.UpdateColumnData("MachineName", SqlDbType.NVarChar, txtPCName.Text);
+                    ObjCon.UpdateColumnData("StoreCategory", SqlDbType.Int, cmbStoreCategory.SelectedIndex);
+
+                    int r = ObjCon.UpdateData(clsUtility.DBName + ".[dbo].[DefaultStoreSetting]", "MachineName='" + txtPCName.Text + "'");
+                    if (r > 0)
+                    {
+                        clsUtility.ShowInfoMessage("Default store settings has been updated.", clsUtility.strProjectTitle);
+                    }
+                }
+                else
+                {
+                    // else insert.
+                    ObjCon.SetColumnData("StoreID", SqlDbType.Int, cmbStoreName.SelectedValue);
+                    ObjCon.SetColumnData("MachineName", SqlDbType.NVarChar, txtPCName.Text);
+                    ObjCon.SetColumnData("StoreCategory", SqlDbType.Int, cmbStoreCategory.SelectedIndex);
+
+                    int r = ObjCon.InsertData(clsUtility.DBName + ".[dbo].[DefaultStoreSetting]", false);
+                    if (r > 0)
+                    {
+                        clsUtility.ShowInfoMessage("Default store settings has been saved.", clsUtility.strProjectTitle);
+                    }
+                    lblmsg.Visible = false;
+                }
+
             }
         }
         private void btnAdd_MouseEnter(object sender, EventArgs e)
@@ -179,30 +219,51 @@ namespace IMS_Client_2.Settings
             ObjUtil.SetTextHighlightColor(sender, Color.White);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private string GetExtension()
         {
-            DataTable dtFooterNote = ObjCon.ExecuteSelectStatement("select * FROM " + clsUtility.DBName + ".[dbo].[DefaultStoreSetting]");
-            if (dtFooterNote!=null && dtFooterNote.Rows.Count > 0) // if data found for the PC thenupdate
+            if (txtFileExtension.Text.Trim().StartsWith("."))
             {
-                ObjCon.ExecuteNonQuery("update " + clsUtility.DBName + ".dbo.DefaultStoreSetting set InvoiceFooterNote ='" + txtFooterNote.Text + "'");
-                clsUtility.ShowInfoMessage("Footer note has been updated.", clsUtility.strProjectTitle);
-
+                return txtFileExtension.Text;
+                   
             }
             else
             {
-                // else insert.
-               
-                ObjCon.SetColumnData("InvoiceFooterNote", SqlDbType.NVarChar, txtFooterNote.Text);
-              
-
-                int r = ObjCon.InsertData(clsUtility.DBName + ".[dbo].[DefaultStoreSetting]", false);
-                if (r > 0)
-                {
-                    clsUtility.ShowInfoMessage("Foorter note settings has been saved.", clsUtility.strProjectTitle);
-                }
-                lblmsg.Visible = false;
-
+                return "." + txtFileExtension.Text;
             }
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmOtherSetting, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
+
+            {
+                DataTable dtFooterNote = ObjCon.ExecuteSelectStatement("select * FROM " + clsUtility.DBName + ".[dbo].[DefaultStoreSetting]");
+                if (dtFooterNote != null && dtFooterNote.Rows.Count > 0) // if data found for the PC thenupdate
+                {
+                    ObjCon.ExecuteNonQuery("update " + clsUtility.DBName + ".dbo.DefaultStoreSetting set InvoiceFooterNote =N'" + txtFooterNote.Text + "', UserArabicNumbers='"+chkArabicPrice.Checked.ToString()+ "', ImagePath='"+txtImagePath.Text+ "', Extension='"+GetExtension()+"'");
+                    clsUtility.ShowInfoMessage("Settings has been updated.", clsUtility.strProjectTitle);
+
+                }
+                else
+                {
+                    // else insert.
+
+                    ObjCon.SetColumnData("InvoiceFooterNote", SqlDbType.NVarChar, "N"+txtFooterNote.Text);
+                    ObjCon.SetColumnData("UserArabicNumbers", SqlDbType.Bit,chkArabicPrice.Checked);
+                    ObjCon.SetColumnData("ImagePath", SqlDbType.NVarChar, txtImagePath.Text);
+                    ObjCon.SetColumnData("Extension", SqlDbType.NVarChar, GetExtension());
+
+
+                    int r = ObjCon.InsertData(clsUtility.DBName + ".[dbo].[DefaultStoreSetting]", false);
+                    if (r > 0)
+                    {
+                        clsUtility.ShowInfoMessage("Settings has been saved.", clsUtility.strProjectTitle);
+                    }
+                    lblmsg.Visible = false;
+
+                }
+            }
+            
         }
 
         private void btnFooterCancel_Click(object sender, EventArgs e)
