@@ -163,6 +163,12 @@
     <Compile Include="Barcode\frmBarCodeDesigner.designer.cs">
       <DependentUpon>frmBarCodeDesigner.cs</DependentUpon>
     </Compile>
+    <Compile Include="Barcode\frmBarCodeStockPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Barcode\frmBarCodeStockPopup.Designer.cs">
+      <DependentUpon>frmBarCodeStockPopup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Barcode\LineControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -408,6 +414,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Barcode\frmBarCodeDesigner.resx">
       <DependentUpon>frmBarCodeDesigner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Barcode\frmBarCodeStockPopup.resx">
+      <DependentUpon>frmBarCodeStockPopup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Barcode\uRectangle.resx">
       <DependentUpon>uRectangle.cs</DependentUpon>

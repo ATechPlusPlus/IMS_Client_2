@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Material_Details));
             this.panel2 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
@@ -45,10 +46,13 @@
             this.txtProductID = new System.Windows.Forms.TextBox();
             this.PicItem = new System.Windows.Forms.PictureBox();
             this.lblTotalRecords = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.printBarcodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicItem)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -113,7 +117,7 @@
             this.cmbColor.Enabled = false;
             this.cmbColor.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbColor.FormattingEnabled = true;
-            this.cmbColor.Location = new System.Drawing.Point(452, 73);
+            this.cmbColor.Location = new System.Drawing.Point(452, 69);
             this.cmbColor.Name = "cmbColor";
             this.cmbColor.Size = new System.Drawing.Size(181, 27);
             this.cmbColor.TabIndex = 233;
@@ -213,11 +217,13 @@
             this.dgvProductDetails.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProductDetails.BackgroundColor = System.Drawing.Color.White;
             this.dgvProductDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProductDetails.ContextMenuStrip = this.contextMenuStrip1;
             this.dgvProductDetails.Location = new System.Drawing.Point(12, 173);
             this.dgvProductDetails.Name = "dgvProductDetails";
             this.dgvProductDetails.ReadOnly = true;
             this.dgvProductDetails.Size = new System.Drawing.Size(985, 271);
             this.dgvProductDetails.TabIndex = 207;
+            this.dgvProductDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellClick);
             this.dgvProductDetails.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvProductDetails_DataBindingComplete);
             // 
             // txtProductID
@@ -252,6 +258,20 @@
             this.lblTotalRecords.TabIndex = 232;
             this.lblTotalRecords.Text = "Total Records : 0";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.printBarcodeToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
+            // 
+            // printBarcodeToolStripMenuItem
+            // 
+            this.printBarcodeToolStripMenuItem.Name = "printBarcodeToolStripMenuItem";
+            this.printBarcodeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.printBarcodeToolStripMenuItem.Text = "Print Barcode";
+            this.printBarcodeToolStripMenuItem.Click += new System.EventHandler(this.printBarcodeToolStripMenuItem_Click);
+            // 
             // Material_Details
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -278,6 +298,7 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicItem)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -301,5 +322,7 @@
         private System.Windows.Forms.RadioButton rdSearchByBarCode;
         private System.Windows.Forms.PictureBox PicItem;
         private System.Windows.Forms.Label lblTotalRecords;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem printBarcodeToolStripMenuItem;
     }
 }

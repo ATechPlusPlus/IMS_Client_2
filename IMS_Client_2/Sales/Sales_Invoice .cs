@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -236,13 +237,37 @@ namespace IMS_Client_2.Sales
             {
                 if (dt.Rows[0]["Photo"] != DBNull.Value)
                 {
-                    byte[] imgData = (byte[])(dt.Rows[0]["Photo"]);
-                    imgProduct = ObjUtil.GetImage(imgData);
+                    DataTable dtImagePath = ObjDAL.ExecuteSelectStatement("  select ImagePath, Extension from [IMS_Client_2].dbo.DefaultStoreSetting where MachineName='" + Environment.MachineName + "'");
+                    if (dtImagePath.Rows.Count > 0)
+                    {
+                        if (dtImagePath.Rows[0]["ImagePath"] != DBNull.Value)
+                        {
+                            string ImgPath = dtImagePath.Rows[0]["ImagePath"].ToString();
+                            string extension = dtImagePath.Rows[0]["Extension"].ToString();
+
+                            string imgFile = ImgPath + "//" + dt.Rows[0]["Photo"].ToString() + extension;
+                            if (File.Exists(imgFile))
+                            {
+                                imgProduct = Image.FromFile(imgFile);
+                            }
+                            else
+                            {
+                                imgProduct = null;
+                            }
+
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
+
+                        }
+                    }
                 }
             }
             return imgProduct;
         }
-
+      
         private void txtProductName_TextChanged(object sender, EventArgs e)
         {
             if (cboEntryMode.SelectedIndex == 1) // if manual entry
