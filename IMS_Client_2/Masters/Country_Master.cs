@@ -109,101 +109,129 @@ namespace IMS_Client_2.Masters
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (Validateform())
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Country_Master, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
-                if (DuplicateUser(0))
+                if (Validateform())
                 {
-                    ObjDAL.SetColumnData("CountryCode", SqlDbType.NVarChar, txtCountryCode.Text.Trim());
-                    ObjDAL.SetColumnData("CountryName", SqlDbType.NVarChar, txtCountryName.Text);
-                    ObjDAL.SetColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
-                    ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
-                    if (ObjDAL.InsertData(clsUtility.DBName + ".dbo.CountryMaster", true) > 0)
+                    if (DuplicateUser(0))
                     {
-                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave, clsUtility.IsAdmin);
-                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave);
-                        clsUtility.ShowInfoMessage("Country Name : '" + txtCountryName.Text + "' is Saved Successfully..", clsUtility.strProjectTitle);
-                        ClearAll();
-                        LoadData();
-                        grpCountry.Enabled = false;
+                        ObjDAL.SetColumnData("CountryCode", SqlDbType.NVarChar, txtCountryCode.Text.Trim());
+                        ObjDAL.SetColumnData("CountryName", SqlDbType.NVarChar, txtCountryName.Text);
+                        ObjDAL.SetColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
+                        ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
+                        if (ObjDAL.InsertData(clsUtility.DBName + ".dbo.CountryMaster", true) > 0)
+                        {
+                            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave, clsUtility.IsAdmin);
+                            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave);
+                            clsUtility.ShowInfoMessage("Country Name : '" + txtCountryName.Text + "' is Saved Successfully..", clsUtility.strProjectTitle);
+                            ClearAll();
+                            LoadData();
+                            grpCountry.Enabled = false;
+                        }
+                        else
+                        {
+                            clsUtility.ShowInfoMessage("Country Name : '" + txtCountryName.Text + "' is not Saved Successfully..", clsUtility.strProjectTitle);
+                        }
+                        ObjDAL.ResetData();
                     }
                     else
                     {
-                        clsUtility.ShowInfoMessage("Country Name : '" + txtCountryName.Text + "' is not Saved Successfully..", clsUtility.strProjectTitle);
+                        clsUtility.ShowErrorMessage("'" + txtCountryName.Text + "' Country Name OR Country Code is already exist..", clsUtility.strProjectTitle);
+                        txtCountryName.Focus();
                     }
-                    ObjDAL.ResetData();
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("'" + txtCountryName.Text + "' Country Name OR Country Code is already exist..", clsUtility.strProjectTitle);
-                    txtCountryName.Focus();
-                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
-            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit);
-            grpCountry.Enabled = true;
-            txtCountryCode.Focus();
-            txtCountryCode.SelectionStart = txtCountryCode.MaxLength;
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Country_Master, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
+            {
+                //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
+                ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit);
+                grpCountry.Enabled = true;
+                txtCountryCode.Focus();
+                txtCountryCode.SelectionStart = txtCountryCode.MaxLength;
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (Validateform())
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Country_Master, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
             {
-                if (DuplicateUser(ID))
+                if (Validateform())
                 {
-                    ObjDAL.UpdateColumnData("CountryCode", SqlDbType.NVarChar, txtCountryCode.Text.Trim());
-                    ObjDAL.UpdateColumnData("CountryName", SqlDbType.NVarChar, txtCountryName.Text);
-                    ObjDAL.UpdateColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
-                    ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID);
-                    ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
-                    if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.CountryMaster", "CountryID = " + ID + "") > 0)
+                    if (DuplicateUser(ID))
                     {
-                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate, clsUtility.IsAdmin);
-                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate);
+                        ObjDAL.UpdateColumnData("CountryCode", SqlDbType.NVarChar, txtCountryCode.Text.Trim());
+                        ObjDAL.UpdateColumnData("CountryName", SqlDbType.NVarChar, txtCountryName.Text);
+                        ObjDAL.UpdateColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
+                        ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID);
+                        ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
+                        if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.CountryMaster", "CountryID = " + ID + "") > 0)
+                        {
+                            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate, clsUtility.IsAdmin);
+                            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate);
 
-                        clsUtility.ShowInfoMessage("'" + txtCountryName.Text + "' Country Name is Updated", clsUtility.strProjectTitle);
-                        LoadData();
-                        ClearAll();
-                        grpCountry.Enabled = false;
+                            clsUtility.ShowInfoMessage("'" + txtCountryName.Text + "' Country Name is Updated", clsUtility.strProjectTitle);
+                            LoadData();
+                            ClearAll();
+                            grpCountry.Enabled = false;
+                        }
+                        else
+                        {
+                            clsUtility.ShowErrorMessage("'" + txtCountryName.Text + "' Country Name is not Updated", clsUtility.strProjectTitle);
+                        }
+                        ObjDAL.ResetData();
                     }
                     else
                     {
-                        clsUtility.ShowErrorMessage("'" + txtCountryName.Text + "' Country Name is not Updated", clsUtility.strProjectTitle);
+                        clsUtility.ShowErrorMessage("'" + txtCountryName.Text + "' Country Name is already exist..", clsUtility.strProjectTitle);
+                        txtCountryName.Focus();
+                        ObjDAL.ResetData();
                     }
-                    ObjDAL.ResetData();
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("'" + txtCountryName.Text + "' Country Name is already exist..", clsUtility.strProjectTitle);
-                    txtCountryName.Focus();
-                    ObjDAL.ResetData();
-                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DialogResult d = MessageBox.Show("Are you sure want to delete '" + txtCountryName.Text + "' Country ", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            if (d == DialogResult.Yes)
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Country_Master, clsFormRights.Operation.Delete) || clsUtility.IsAdmin)
             {
-                if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.CountryMaster", "CountryName='" + txtCountryName.Text.Trim() + "'") > 0)
+                DialogResult d = MessageBox.Show("Are you sure want to delete '" + txtCountryName.Text + "' Country ", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (d == DialogResult.Yes)
                 {
-                    clsUtility.ShowInfoMessage("'" + txtCountryName.Text + "' Country Name is deleted  ", clsUtility.strProjectTitle);
-                    ClearAll();
-                    LoadData();
-                    grpCountry.Enabled = false;
-                    //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
-                    ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
+                    if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.CountryMaster", "CountryID = " + ID + "") > 0)
+                    {
+                        clsUtility.ShowInfoMessage("'" + txtCountryName.Text + "' Country Name is deleted  ", clsUtility.strProjectTitle);
+                        ClearAll();
+                        LoadData();
+                        grpCountry.Enabled = false;
+                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
+                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
+                    }
+                    else
+                    {
+                        clsUtility.ShowErrorMessage("'" + txtCountryName.Text + "' Country Name is not deleted  ", clsUtility.strProjectTitle);
+                        ObjDAL.ResetData();
+                    }
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("'" + txtCountryName.Text + "' Country Name is not deleted  ", clsUtility.strProjectTitle);
-                    ObjDAL.ResetData();
-                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 

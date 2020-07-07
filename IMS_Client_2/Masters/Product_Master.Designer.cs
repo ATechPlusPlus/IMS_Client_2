@@ -335,6 +335,7 @@
             this.rdSearchByCategory.TabIndex = 289;
             this.rdSearchByCategory.Text = "By Category :";
             this.rdSearchByCategory.UseVisualStyleBackColor = true;
+            this.rdSearchByCategory.CheckedChanged += new System.EventHandler(this.rdSearchByCategory_CheckedChanged);
             // 
             // cmbSearchByCategory
             // 

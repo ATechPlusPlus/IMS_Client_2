@@ -134,111 +134,139 @@ namespace IMS_Client_2.Masters
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (Validateform())
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Supplier_Details, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
-                if (DuplicateUser(0))
+                if (Validateform())
                 {
-                    ObjDAL.SetColumnData("SupplierName", SqlDbType.NVarChar, txtSupplierName.Text.Trim());
-                    ObjDAL.SetColumnData("CountryID", SqlDbType.Int, cmbCountry.SelectedValue);
-                    ObjDAL.SetColumnData("Phone", SqlDbType.VarChar, txtPhone.Text.Trim());
-                    ObjDAL.SetColumnData("EmailID", SqlDbType.VarChar, txtEmail.Text.Trim());
-                    ObjDAL.SetColumnData("BankName", SqlDbType.NVarChar, txtBankName.Text.Trim());
-                    ObjDAL.SetColumnData("BankAccountNo", SqlDbType.VarChar, txtBankAccNo.Text.Trim());
-                    ObjDAL.SetColumnData("BankAddress", SqlDbType.NVarChar, txtBankAdd.Text.Trim());
-                    ObjDAL.SetColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
-                    ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
-                    if (ObjDAL.InsertData(clsUtility.DBName + ".dbo.SupplierMaster", true) > 0)
+                    if (DuplicateUser(0))
                     {
-                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave, clsUtility.IsAdmin);
-                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave);
-                        clsUtility.ShowInfoMessage("Supplier Name : '" + txtSupplierName.Text + "' is Saved Successfully..", clsUtility.strProjectTitle);
-                        ClearAll();
-                        LoadData();
-                        grpSupplier.Enabled = false;
+                        ObjDAL.SetColumnData("SupplierName", SqlDbType.NVarChar, txtSupplierName.Text.Trim());
+                        ObjDAL.SetColumnData("CountryID", SqlDbType.Int, cmbCountry.SelectedValue);
+                        ObjDAL.SetColumnData("Phone", SqlDbType.VarChar, txtPhone.Text.Trim());
+                        ObjDAL.SetColumnData("EmailID", SqlDbType.VarChar, txtEmail.Text.Trim());
+                        ObjDAL.SetColumnData("BankName", SqlDbType.NVarChar, txtBankName.Text.Trim());
+                        ObjDAL.SetColumnData("BankAccountNo", SqlDbType.VarChar, txtBankAccNo.Text.Trim());
+                        ObjDAL.SetColumnData("BankAddress", SqlDbType.NVarChar, txtBankAdd.Text.Trim());
+                        ObjDAL.SetColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
+                        ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
+                        if (ObjDAL.InsertData(clsUtility.DBName + ".dbo.SupplierMaster", true) > 0)
+                        {
+                            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave, clsUtility.IsAdmin);
+                            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave);
+                            clsUtility.ShowInfoMessage("Supplier Name : '" + txtSupplierName.Text + "' is Saved Successfully..", clsUtility.strProjectTitle);
+                            ClearAll();
+                            LoadData();
+                            grpSupplier.Enabled = false;
+                        }
+                        else
+                        {
+                            clsUtility.ShowInfoMessage("Supplier : '" + txtSupplierName.Text + "' is not Saved Successfully..", clsUtility.strProjectTitle);
+                        }
+                        ObjDAL.ResetData();
                     }
                     else
                     {
-                        clsUtility.ShowInfoMessage("Supplier : '" + txtSupplierName.Text + "' is not Saved Successfully..", clsUtility.strProjectTitle);
+                        clsUtility.ShowErrorMessage("'" + txtSupplierName.Text + "' Supplier is already exist..", clsUtility.strProjectTitle);
+                        txtSupplierName.Focus();
                     }
-                    ObjDAL.ResetData();
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("'" + txtSupplierName.Text + "' Supplier is already exist..", clsUtility.strProjectTitle);
-                    txtSupplierName.Focus();
-                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
-            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit);
-            grpSupplier.Enabled = true;
-            txtSupplierName.Focus();
-            txtSupplierName.SelectionStart = txtSupplierName.MaxLength;
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Supplier_Details, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
+            {
+                //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
+                ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit);
+                grpSupplier.Enabled = true;
+                txtSupplierName.Focus();
+                txtSupplierName.SelectionStart = txtSupplierName.MaxLength;
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (Validateform())
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Supplier_Details, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
             {
-                if (DuplicateUser(ID))
+                if (Validateform())
                 {
-                    ObjDAL.UpdateColumnData("SupplierName", SqlDbType.NVarChar, txtSupplierName.Text.Trim());
-                    ObjDAL.UpdateColumnData("CountryID", SqlDbType.Int, cmbCountry.SelectedValue);
-                    ObjDAL.UpdateColumnData("Phone", SqlDbType.VarChar, txtPhone.Text.Trim());
-                    ObjDAL.UpdateColumnData("EmailID", SqlDbType.VarChar, txtEmail.Text.Trim());
-                    ObjDAL.UpdateColumnData("BankName", SqlDbType.NVarChar, txtBankName.Text.Trim());
-                    ObjDAL.UpdateColumnData("BankAccountNo", SqlDbType.VarChar, txtBankAccNo.Text.Trim());
-                    ObjDAL.UpdateColumnData("BankAddress", SqlDbType.NVarChar, txtBankAdd.Text.Trim());
-                    ObjDAL.UpdateColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
-                    ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
-                    ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
-
-                    if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.SupplierMaster", "SupplierID = " + ID) > 0)
+                    if (DuplicateUser(ID))
                     {
-                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate, clsUtility.IsAdmin);
-                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate);
+                        ObjDAL.UpdateColumnData("SupplierName", SqlDbType.NVarChar, txtSupplierName.Text.Trim());
+                        ObjDAL.UpdateColumnData("CountryID", SqlDbType.Int, cmbCountry.SelectedValue);
+                        ObjDAL.UpdateColumnData("Phone", SqlDbType.VarChar, txtPhone.Text.Trim());
+                        ObjDAL.UpdateColumnData("EmailID", SqlDbType.VarChar, txtEmail.Text.Trim());
+                        ObjDAL.UpdateColumnData("BankName", SqlDbType.NVarChar, txtBankName.Text.Trim());
+                        ObjDAL.UpdateColumnData("BankAccountNo", SqlDbType.VarChar, txtBankAccNo.Text.Trim());
+                        ObjDAL.UpdateColumnData("BankAddress", SqlDbType.NVarChar, txtBankAdd.Text.Trim());
+                        ObjDAL.UpdateColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
+                        ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
+                        ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
 
-                        clsUtility.ShowInfoMessage("'" + txtSupplierName.Text + "' Supplier is Updated", clsUtility.strProjectTitle);
-                        LoadData();
-                        ClearAll();
-                        grpSupplier.Enabled = false;
+                        if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.SupplierMaster", "SupplierID = " + ID) > 0)
+                        {
+                            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate, clsUtility.IsAdmin);
+                            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate);
+
+                            clsUtility.ShowInfoMessage("'" + txtSupplierName.Text + "' Supplier is Updated", clsUtility.strProjectTitle);
+                            LoadData();
+                            ClearAll();
+                            grpSupplier.Enabled = false;
+                        }
+                        else
+                        {
+                            clsUtility.ShowErrorMessage("'" + txtSupplierName.Text + "' Supplier is not Updated", clsUtility.strProjectTitle);
+                        }
+                        ObjDAL.ResetData();
                     }
                     else
                     {
-                        clsUtility.ShowErrorMessage("'" + txtSupplierName.Text + "' Supplier is not Updated", clsUtility.strProjectTitle);
+                        clsUtility.ShowErrorMessage("'" + txtSupplierName.Text + "' Supplier is already exist..", clsUtility.strProjectTitle);
+                        txtSupplierName.Focus();
                     }
-                    ObjDAL.ResetData();
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("'" + txtSupplierName.Text + "' Supplier is already exist..", clsUtility.strProjectTitle);
-                    txtSupplierName.Focus();
-                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DialogResult d = MessageBox.Show("Are you sure want to delete '" + txtSupplierName.Text + "' Supplier ", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            if (d == DialogResult.Yes)
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Supplier_Details, clsFormRights.Operation.Delete) || clsUtility.IsAdmin)
             {
-                if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.SupplierMaster", "SupplierID = " + ID) > 0)
+                DialogResult d = MessageBox.Show("Are you sure want to delete '" + txtSupplierName.Text + "' Supplier ", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (d == DialogResult.Yes)
                 {
-                    clsUtility.ShowInfoMessage("'" + txtSupplierName.Text + "' Supplier is deleted  ", clsUtility.strProjectTitle);
-                    ClearAll();
-                    LoadData();
-                    grpSupplier.Enabled = false;
-                    //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
-                    ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
+                    if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.SupplierMaster", "SupplierID = " + ID) > 0)
+                    {
+                        clsUtility.ShowInfoMessage("'" + txtSupplierName.Text + "' Supplier is deleted  ", clsUtility.strProjectTitle);
+                        ClearAll();
+                        LoadData();
+                        grpSupplier.Enabled = false;
+                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
+                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
+                    }
+                    else
+                    {
+                        clsUtility.ShowErrorMessage("'" + txtSupplierName.Text + "' Supplier is not deleted  ", clsUtility.strProjectTitle);
+                        ObjDAL.ResetData();
+                    }
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("'" + txtSupplierName.Text + "' Supplier is not deleted  ", clsUtility.strProjectTitle);
-                    ObjDAL.ResetData();
-                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 

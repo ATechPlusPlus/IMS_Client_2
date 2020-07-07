@@ -142,97 +142,125 @@ namespace IMS_Client_2.Settings
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (Validateform())
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Currency_Value_Settings, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
-                if (DuplicateUser(0))
+                if (Validateform())
                 {
-                    ObjDAL.SetColumnData("CountryID", SqlDbType.Int, cmbCountry.SelectedValue);
-                    ObjDAL.SetColumnData("CurrencyCode", SqlDbType.NVarChar, txtCurrencyCode.Text);
-                    ObjDAL.SetColumnData("CurrencyName", SqlDbType.NVarChar, txtCurrencyName.Text);
-                    ObjDAL.SetColumnData("CurrencyRate", SqlDbType.Decimal, txtCurrencyRate.Text);
-                    ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
-                    if (ObjDAL.InsertData(clsUtility.DBName + ".dbo.CurrencyRateSetting", true) > 0)
+                    if (DuplicateUser(0))
                     {
-                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave, clsUtility.IsAdmin);
-                        clsUtility.ShowInfoMessage("Currency Rate for '" + cmbCountry.Text + "' is Saved Successfully..", clsUtility.strProjectTitle);
-                        ClearAll();
-                        LoadData();
-                        grpCurrencyValue.Enabled = false;
+                        ObjDAL.SetColumnData("CountryID", SqlDbType.Int, cmbCountry.SelectedValue);
+                        ObjDAL.SetColumnData("CurrencyCode", SqlDbType.NVarChar, txtCurrencyCode.Text);
+                        ObjDAL.SetColumnData("CurrencyName", SqlDbType.NVarChar, txtCurrencyName.Text);
+                        ObjDAL.SetColumnData("CurrencyRate", SqlDbType.Decimal, txtCurrencyRate.Text);
+                        ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
+                        if (ObjDAL.InsertData(clsUtility.DBName + ".dbo.CurrencyRateSetting", true) > 0)
+                        {
+                            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave, clsUtility.IsAdmin);
+                            clsUtility.ShowInfoMessage("Currency Rate for '" + cmbCountry.Text + "' is Saved Successfully..", clsUtility.strProjectTitle);
+                            ClearAll();
+                            LoadData();
+                            grpCurrencyValue.Enabled = false;
+                        }
+                        else
+                        {
+                            clsUtility.ShowInfoMessage("Currency Rate for '" + cmbCountry.Text + "' is not Saved Successfully..", clsUtility.strProjectTitle);
+                        }
                     }
                     else
                     {
-                        clsUtility.ShowInfoMessage("Currency Rate for '" + cmbCountry.Text + "' is not Saved Successfully..", clsUtility.strProjectTitle);
+                        clsUtility.ShowErrorMessage("Currency Rate for '" + cmbCountry.Text + "' is already exist..", clsUtility.strProjectTitle);
+                        cmbCountry.Focus();
                     }
+                    ObjDAL.ResetData();
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("Currency Rate for '" + cmbCountry.Text + "' is already exist..", clsUtility.strProjectTitle);
-                    cmbCountry.Focus();
-                }
-                ObjDAL.ResetData();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
-            grpCurrencyValue.Enabled = true;
-            cmbCountry.Focus();
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Currency_Value_Settings, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
+            {
+                ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
+                grpCurrencyValue.Enabled = true;
+                cmbCountry.Focus();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (Validateform())
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Currency_Value_Settings, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
             {
-                if (DuplicateUser(ID))
+                if (Validateform())
                 {
-                    ObjDAL.UpdateColumnData("CountryID", SqlDbType.Int, cmbCountry.SelectedValue);
-                    ObjDAL.UpdateColumnData("CurrencyCode", SqlDbType.NVarChar, txtCurrencyCode.Text);
-                    ObjDAL.UpdateColumnData("CurrencyName", SqlDbType.NVarChar, txtCurrencyName.Text);
-                    ObjDAL.UpdateColumnData("CurrencyRate", SqlDbType.Decimal, txtCurrencyRate.Text);
-                    ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
-                    ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
-                    if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.CurrencyRateSetting", "CurrencyRateID = " + ID + "") > 0)
+                    if (DuplicateUser(ID))
                     {
-                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate, clsUtility.IsAdmin);
+                        ObjDAL.UpdateColumnData("CountryID", SqlDbType.Int, cmbCountry.SelectedValue);
+                        ObjDAL.UpdateColumnData("CurrencyCode", SqlDbType.NVarChar, txtCurrencyCode.Text);
+                        ObjDAL.UpdateColumnData("CurrencyName", SqlDbType.NVarChar, txtCurrencyName.Text);
+                        ObjDAL.UpdateColumnData("CurrencyRate", SqlDbType.Decimal, txtCurrencyRate.Text);
+                        ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
+                        ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
+                        if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.CurrencyRateSetting", "CurrencyRateID = " + ID + "") > 0)
+                        {
+                            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate, clsUtility.IsAdmin);
 
-                        clsUtility.ShowInfoMessage("Currency Rate for '" + cmbCountry.Text + "' is not Updated", clsUtility.strProjectTitle);
-                        LoadData();
-                        ClearAll();
-                        grpCurrencyValue.Enabled = false;
+                            clsUtility.ShowInfoMessage("Currency Rate for '" + cmbCountry.Text + "' is not Updated", clsUtility.strProjectTitle);
+                            LoadData();
+                            ClearAll();
+                            grpCurrencyValue.Enabled = false;
+                        }
+                        else
+                        {
+                            clsUtility.ShowInfoMessage("Currency Rate for '" + cmbCountry.Text + "' is not Updated", clsUtility.strProjectTitle);
+                        }
                     }
                     else
                     {
-                        clsUtility.ShowInfoMessage("Currency Rate for '" + cmbCountry.Text + "' is not Updated", clsUtility.strProjectTitle);
+                        clsUtility.ShowErrorMessage("Currency Rate for '" + cmbCountry.Text + "' is already exist..", clsUtility.strProjectTitle);
+                        cmbCountry.Focus();
                     }
+                    ObjDAL.ResetData();
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("Currency Rate for '" + cmbCountry.Text + "' is already exist..", clsUtility.strProjectTitle);
-                    cmbCountry.Focus();
-                }
-                ObjDAL.ResetData();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DialogResult d = MessageBox.Show("Are you sure want to delete?", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            if (d == DialogResult.Yes)
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Currency_Value_Settings, clsFormRights.Operation.Delete) || clsUtility.IsAdmin)
             {
-                if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.CurrencyRateSetting", "CurrencyRateID=" + ID) > 0)
+                DialogResult d = MessageBox.Show("Are you sure want to delete?", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (d == DialogResult.Yes)
                 {
-                    clsUtility.ShowInfoMessage("Currency Rate for '" + cmbCountry.Text + "' is Deleted  ", clsUtility.strProjectTitle);
-                    ClearAll();
-                    LoadData();
-                    grpCurrencyValue.Enabled = false;
-                    ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
+                    if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.CurrencyRateSetting", "CurrencyRateID=" + ID) > 0)
+                    {
+                        clsUtility.ShowInfoMessage("Currency Rate for '" + cmbCountry.Text + "' is Deleted  ", clsUtility.strProjectTitle);
+                        ClearAll();
+                        LoadData();
+                        grpCurrencyValue.Enabled = false;
+                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
+                    }
+                    else
+                    {
+                        clsUtility.ShowErrorMessage("Currency Rate for '" + cmbCountry.Text + "' is not Deleted  ", clsUtility.strProjectTitle);
+                        ObjDAL.ResetData();
+                    }
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("Currency Rate for '" + cmbCountry.Text + "' is not Deleted  ", clsUtility.strProjectTitle);
-                    ObjDAL.ResetData();
-                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 

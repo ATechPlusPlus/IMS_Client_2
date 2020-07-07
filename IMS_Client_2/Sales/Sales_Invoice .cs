@@ -36,7 +36,7 @@ namespace IMS_Client_2.Sales
             InitItemTable();
             dtpSalesDate.Value = DateTime.Now;
             txtProductName.Focus();
-            dtpSalesDate.MaxDate= DateTime.Now;
+            dtpSalesDate.MaxDate = DateTime.Now;
         }
         private void btnAdd_MouseEnter(object sender, EventArgs e)
         {
@@ -199,8 +199,8 @@ namespace IMS_Client_2.Sales
         {
             try
             {
-                DataTable dt = ObjDAL.ExecuteSelectStatement("select Empid,Name from " + clsUtility.DBName + ".dbo.employeeDetails where Name Like '" + txtSalesMan.Text + "%'");
-                if (dt != null && dt.Rows.Count > 0)
+                DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT Empid,Name FROM " + clsUtility.DBName + ".dbo.employeeDetails WHERE [Name] Like '" + txtSalesMan.Text + "%'");
+                if (ObjUtil.ValidateTable(dt))
                 {
                     ObjUtil.SetControlData(txtSalesMan, "Name");
                     ObjUtil.SetControlData(txtEmpID, "Empid");
@@ -231,8 +231,8 @@ namespace IMS_Client_2.Sales
         private Image GetProductPhoto(int ProductID)
         {
             Image imgProduct = null;
-            DataTable dt = ObjDAL.ExecuteSelectStatement("select Photo from " + clsUtility.DBName + ".dbo.ProductMaster where ProductID=" + ProductID);
-            if (dt != null && dt.Rows.Count >= 0)
+            DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT Photo FROM " + clsUtility.DBName + ".dbo.ProductMaster WHERE ProductID=" + ProductID);
+            if (ObjUtil.ValidateTable(dt))
             {
                 if (dt.Rows[0]["Photo"] != DBNull.Value)
                 {
@@ -255,10 +255,8 @@ namespace IMS_Client_2.Sales
                 try
                 {
                     string strQ = "EXEC " + clsUtility.DBName + ".dbo.GetProductDetailsByProductName " + cmbShop.SelectedValue.ToString() + ", '" + txtProductName.Text + "'";
-
-
                     DataTable dt = ObjDAL.ExecuteSelectStatement(strQ);
-                    if (dt != null && dt.Rows.Count > 0)
+                    if (ObjUtil.ValidateTable(dt))
                     {
                         ObjUtil.SetControlData(txtProductName, "ProductName");
                         ObjUtil.SetControlData(txtProductID, "ProductID");
@@ -334,7 +332,7 @@ namespace IMS_Client_2.Sales
 
         private void Sales_Invoice_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataTable dtSelectedProductDetails = ObjDAL.ExecuteSelectStatement("exec " + clsUtility.DBName + ".dbo.GetProductDetails_By_Color_Size " + cmbShop.SelectedValue.ToString() + "," + txtSizeID.Text + "," + txtColorID.Text);
+            DataTable dtSelectedProductDetails = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.GetProductDetails_By_Color_Size " + cmbShop.SelectedValue.ToString() + "," + txtSizeID.Text + "," + txtColorID.Text);
 
             string PID = dtSelectedProductDetails.Rows[0]["ProductID"].ToString();
             string ColorID = dtSelectedProductDetails.Rows[0]["ColorID"].ToString();
@@ -380,7 +378,7 @@ namespace IMS_Client_2.Sales
         }
         private void GetItemDetailsByProductID(string _BarCodeValue)
         {
-            DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC GetProductDetailsByBarCode " + cmbShop.SelectedValue + ", " + _BarCodeValue);
+            DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.GetProductDetailsByBarCode " + cmbShop.SelectedValue + ", " + _BarCodeValue);
             if (ObjUtil.ValidateTable(dt))
             {
                 string pID = dt.Rows[0]["ProductID"].ToString();
@@ -589,8 +587,6 @@ namespace IMS_Client_2.Sales
             txtSalesMan.Clear();
             txtColorID.Clear();
             txtSizeID.Clear();
-
-
         }
         private bool SalesValidation()
         {
@@ -609,15 +605,13 @@ namespace IMS_Client_2.Sales
             if (Other_Forms.frmPayment.strPaymentAutoID.Trim().Length == 0)
             {
                 clsUtility.ShowInfoMessage("Please Select Payment Mode.", clsUtility.strProjectTitle);
-
                 return false;
             }
             return true;
         }
         private void btnAdd_Click_1(object sender, EventArgs e)
         {
-            if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Invoice,clsFormRights.Operation.Save) || clsUtility.IsAdmin)
-
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Invoice, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
                 if (SalesValidation())
                 {
@@ -671,7 +665,7 @@ namespace IMS_Client_2.Sales
                         ObjDAL.InsertData(clsUtility.DBName + ".dbo.SalesDetails", false);
 
                         ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster " +
-                                                "SET QTY=QTY-" + QTY + " WHERE ProductID=" + ProductID + " and StoreID=" + cmbShop.SelectedValue.ToString() + " AND ColorID=" + ColorID + " AND SizeID=" + SizeID);
+                                                "SET QTY=QTY-" + QTY + " WHERE ProductID=" + ProductID + " AND StoreID=" + cmbShop.SelectedValue.ToString() + " AND ColorID=" + ColorID + " AND SizeID=" + SizeID);
                     }
                     clsUtility.ShowInfoMessage("Data has been saved successfully.", clsUtility.strProjectTitle);
                     ClearAll();
@@ -692,9 +686,7 @@ namespace IMS_Client_2.Sales
                         frmSalesInvoice.Show();
                     }
                 }
-
             }
-             
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -748,7 +740,7 @@ namespace IMS_Client_2.Sales
             {
                 if (txtCustomerMobile.Text.Trim().Length > 0)
                 {
-                    string query = "SELECT CustomerID,Name,PhoneNo FROM " + clsUtility.DBName + ".dbo.CustomerMaster WITH(NOLOCK) WHERE PhoneNo like '%" + txtCustomerMobile.Text + "%'";
+                    string query = "SELECT CustomerID,[Name],PhoneNo FROM " + clsUtility.DBName + ".dbo.CustomerMaster WITH(NOLOCK) WHERE PhoneNo like '%" + txtCustomerMobile.Text + "%'";
                     DataTable dt = ObjDAL.ExecuteSelectStatement(query);
                     if (dt != null && dt.Rows.Count > 0)
                     {

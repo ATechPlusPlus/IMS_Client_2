@@ -234,7 +234,7 @@
             this.rdShowAll.AutoSize = true;
             this.rdShowAll.Checked = true;
             this.rdShowAll.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdShowAll.Location = new System.Drawing.Point(474, 19);
+            this.rdShowAll.Location = new System.Drawing.Point(808, 20);
             this.rdShowAll.Name = "rdShowAll";
             this.rdShowAll.Size = new System.Drawing.Size(79, 21);
             this.rdShowAll.TabIndex = 2;
@@ -425,7 +425,7 @@
             // txtTotalQTY
             // 
             this.txtTotalQTY.BackColor = System.Drawing.Color.White;
-            this.txtTotalQTY.Location = new System.Drawing.Point(804, 68);
+            this.txtTotalQTY.Location = new System.Drawing.Point(804, 67);
             this.txtTotalQTY.Name = "txtTotalQTY";
             this.txtTotalQTY.Size = new System.Drawing.Size(126, 25);
             this.txtTotalQTY.TabIndex = 6;

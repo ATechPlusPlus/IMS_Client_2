@@ -166,7 +166,7 @@ namespace IMS_Client_2.Purchase
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Purchase_Bill_Details, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
-                if (Convert.ToInt32(txtDiffQty.Text) > 0 && Convert.ToInt32(txtDiffValue.Text) > 0)
+                if (Convert.ToInt32(txtDiffQty.Text) >= 0 && Convert.ToDouble(txtDiffValue.Text) >= 0)
                 {
                     DataTable dtPurchaseInvoiceBill = (DataTable)dataGridView1.DataSource;
                     if (ObjUtil.ValidateTable(dtPurchaseInvoiceBill))
@@ -222,6 +222,7 @@ namespace IMS_Client_2.Purchase
                             //}
                             ClearAll();
                             grpPurchaseBillDetail.Enabled = false;
+                            btnSave.Enabled = false;
                         }
                         else
                         {
@@ -338,7 +339,7 @@ namespace IMS_Client_2.Purchase
         {
             ObjDAL.SetStoreProcedureData("PurchaseInvoiceID", SqlDbType.Int, txtPurchaseInvoiceID.Text, clsConnection_DAL.ParamType.Input);
             //dtLoadData = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_BillDetails " + txtPurchaseInvoiceID.Text);
-            DataSet ds  = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_PurchaseInvoice_BillDetails");
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_PurchaseInvoice_BillDetails");
             dtLoadData = ds.Tables[0];
             if (ObjUtil.ValidateTable(dtLoadData))
             {
@@ -611,7 +612,7 @@ namespace IMS_Client_2.Purchase
             txtTotalValueEntered.Text = pTotalAmt.ToString();
 
             txtDiffQty.Text = (Convert.ToInt32(txtTotalQTYBill.Text) - pTotalQTY).ToString();
-            txtDiffValue.Text = (Convert.ToDouble(txtTotalValueBill.Text) - pTotalAmt).ToString();
+            txtDiffValue.Text = Math.Round(Convert.ToDouble(txtTotalValueBill.Text) - pTotalAmt,2).ToString();
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -643,7 +644,7 @@ namespace IMS_Client_2.Purchase
             {
                 if (txtSupplierBillNo.Text.Length > 0)
                 {
-                    DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_Popup " + txtSupplierBillNo.Text);
+                    DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_Popup '" + txtSupplierBillNo.Text + "'");
                     if (ObjUtil.ValidateTable(dt))
                     {
                         ObjUtil.SetControlData(txtSupplierBillNo, "SupplierBillNo");

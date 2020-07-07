@@ -118,107 +118,135 @@ namespace IMS_Client_2.Masters
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (Validateform())
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Size_Type_Master, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
-                if (DuplicateUser(0))
+                if (Validateform())
                 {
-                    ObjDAL.SetColumnData("SizeTypeName", SqlDbType.NVarChar, txtSizeTypeName.Text.Trim());
-                    //if (cmbDepartment.SelectedIndex >= 0)
-                    //{
-                    ObjDAL.SetColumnData("CategoryID", SqlDbType.Int, cmbDepartment.SelectedValue);
-                    //}
-                    ObjDAL.SetColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
-                    ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
-                    if (ObjDAL.InsertData(clsUtility.DBName + ".dbo.SizeTypeMaster", true) > 0)
+                    if (DuplicateUser(0))
                     {
-                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave, clsUtility.IsAdmin);
-                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave);
-                        clsUtility.ShowInfoMessage("Size Type Name : '" + txtSizeTypeName.Text + "' is Saved Successfully..", clsUtility.strProjectTitle);
-                        ClearAll();
-                        LoadData();
-                        grpSizeTypeDetails.Enabled = false;
+                        ObjDAL.SetColumnData("SizeTypeName", SqlDbType.NVarChar, txtSizeTypeName.Text.Trim());
+                        //if (cmbDepartment.SelectedIndex >= 0)
+                        //{
+                        ObjDAL.SetColumnData("CategoryID", SqlDbType.Int, cmbDepartment.SelectedValue);
+                        //}
+                        ObjDAL.SetColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
+                        ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
+                        if (ObjDAL.InsertData(clsUtility.DBName + ".dbo.SizeTypeMaster", true) > 0)
+                        {
+                            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave, clsUtility.IsAdmin);
+                            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave);
+                            clsUtility.ShowInfoMessage("Size Type Name : '" + txtSizeTypeName.Text + "' is Saved Successfully..", clsUtility.strProjectTitle);
+                            ClearAll();
+                            LoadData();
+                            grpSizeTypeDetails.Enabled = false;
+                        }
+                        else
+                        {
+                            clsUtility.ShowInfoMessage("Size Type Name : '" + txtSizeTypeName.Text + "' is not Saved Successfully..", clsUtility.strProjectTitle);
+                        }
+                        ObjDAL.ResetData();
                     }
                     else
                     {
-                        clsUtility.ShowInfoMessage("Size Type Name : '" + txtSizeTypeName.Text + "' is not Saved Successfully..", clsUtility.strProjectTitle);
+                        clsUtility.ShowErrorMessage("'" + txtSizeTypeName.Text + "' Size Type is already exist..", clsUtility.strProjectTitle);
+                        txtSizeTypeName.Focus();
                     }
-                    ObjDAL.ResetData();
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("'" + txtSizeTypeName.Text + "' Size Type is already exist..", clsUtility.strProjectTitle);
-                    txtSizeTypeName.Focus();
-                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
-            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit);
-            grpSizeTypeDetails.Enabled = true;
-            txtSizeTypeName.Focus();
-            txtSizeTypeName.SelectionStart = txtSizeTypeName.MaxLength;
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Size_Type_Master, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
+            {
+                //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
+                ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit);
+                grpSizeTypeDetails.Enabled = true;
+                txtSizeTypeName.Focus();
+                txtSizeTypeName.SelectionStart = txtSizeTypeName.MaxLength;
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (Validateform())
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Size_Type_Master, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
             {
-                if (DuplicateUser(ID))
+                if (Validateform())
                 {
-                    ObjDAL.UpdateColumnData("SizeTypeName", SqlDbType.NVarChar, txtSizeTypeName.Text.Trim());
-                    //if (cmbDepartment.SelectedIndex >= 0)
-                    //{
-                    ObjDAL.UpdateColumnData("CategoryID", SqlDbType.Int, cmbDepartment.SelectedValue);
-                    //}
-                    ObjDAL.UpdateColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
-                    ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
-                    ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
-
-                    if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.SizeTypeMaster", "SizeTypeID = " + ID) > 0)
+                    if (DuplicateUser(ID))
                     {
-                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate, clsUtility.IsAdmin);
-                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate);
+                        ObjDAL.UpdateColumnData("SizeTypeName", SqlDbType.NVarChar, txtSizeTypeName.Text.Trim());
+                        //if (cmbDepartment.SelectedIndex >= 0)
+                        //{
+                        ObjDAL.UpdateColumnData("CategoryID", SqlDbType.Int, cmbDepartment.SelectedValue);
+                        //}
+                        ObjDAL.UpdateColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
+                        ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
+                        ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
 
-                        clsUtility.ShowInfoMessage("'" + txtSizeTypeName.Text + "' Size Type is Updated", clsUtility.strProjectTitle);
-                        LoadData();
-                        ClearAll();
-                        grpSizeTypeDetails.Enabled = false;
+                        if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.SizeTypeMaster", "SizeTypeID = " + ID) > 0)
+                        {
+                            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate, clsUtility.IsAdmin);
+                            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate);
+
+                            clsUtility.ShowInfoMessage("'" + txtSizeTypeName.Text + "' Size Type is Updated", clsUtility.strProjectTitle);
+                            LoadData();
+                            ClearAll();
+                            grpSizeTypeDetails.Enabled = false;
+                        }
+                        else
+                        {
+                            clsUtility.ShowErrorMessage("'" + txtSizeTypeName.Text + "' Size Type is not Updated", clsUtility.strProjectTitle);
+                        }
+                        ObjDAL.ResetData();
                     }
                     else
                     {
-                        clsUtility.ShowErrorMessage("'" + txtSizeTypeName.Text + "' Size Type is not Updated", clsUtility.strProjectTitle);
+                        clsUtility.ShowErrorMessage("'" + txtSizeTypeName.Text + "' Size Type is already exist..", clsUtility.strProjectTitle);
+                        txtSizeTypeName.Focus();
                     }
-                    ObjDAL.ResetData();
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("'" + txtSizeTypeName.Text + "' Size Type is already exist..", clsUtility.strProjectTitle);
-                    txtSizeTypeName.Focus();
-                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DialogResult d = MessageBox.Show("Are you sure want to delete '" + txtSizeTypeName.Text + "' Size Type ", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            if (d == DialogResult.Yes)
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Size_Type_Master, clsFormRights.Operation.Delete) || clsUtility.IsAdmin)
             {
-                if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.SizeTypeMaster", "SizeTypeID=" + ID) > 0)
+                DialogResult d = MessageBox.Show("Are you sure want to delete '" + txtSizeTypeName.Text + "' Size Type ", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (d == DialogResult.Yes)
                 {
-                    clsUtility.ShowInfoMessage("'" + txtSizeTypeName.Text + "' Size Type is deleted  ", clsUtility.strProjectTitle);
-                    ClearAll();
-                    LoadData();
-                    grpSizeTypeDetails.Enabled = false;
-                    //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
-                    ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
+                    if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.SizeTypeMaster", "SizeTypeID=" + ID) > 0)
+                    {
+                        clsUtility.ShowInfoMessage("'" + txtSizeTypeName.Text + "' Size Type is deleted  ", clsUtility.strProjectTitle);
+                        ClearAll();
+                        LoadData();
+                        grpSizeTypeDetails.Enabled = false;
+                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
+                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
+                    }
+                    else
+                    {
+                        clsUtility.ShowErrorMessage("'" + txtSizeTypeName.Text + "' Size Type is not deleted  ", clsUtility.strProjectTitle);
+                        ObjDAL.ResetData();
+                    }
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("'" + txtSizeTypeName.Text + "' Size Type is not deleted  ", clsUtility.strProjectTitle);
-                    ObjDAL.ResetData();
-                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 

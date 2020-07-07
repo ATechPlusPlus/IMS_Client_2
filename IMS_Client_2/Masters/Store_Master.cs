@@ -111,109 +111,137 @@ namespace IMS_Client_2.Masters
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (Validateform())
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Store_Master, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
-                if (DuplicateUser(0))
+                if (Validateform())
                 {
-                    ObjDAL.SetColumnData("StoreName", SqlDbType.NVarChar, txtStoreName.Text.Trim());
-                    ObjDAL.SetColumnData("Tel", SqlDbType.VarChar, txtTel.Text.Trim());
-                    ObjDAL.SetColumnData("Fax", SqlDbType.VarChar, txtFax.Text.Trim());
-                    ObjDAL.SetColumnData("Place", SqlDbType.NVarChar, txtPlace.Text.Trim());
-                    ObjDAL.SetColumnData("StoreCategory", SqlDbType.Int, cmbStoreCat.SelectedIndex);
-                    ObjDAL.SetColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
-                    ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
-                    if (ObjDAL.InsertData(clsUtility.DBName + ".dbo.StoreMaster", true) > 0)
+                    if (DuplicateUser(0))
                     {
-                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave, clsUtility.IsAdmin);
-                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave);
+                        ObjDAL.SetColumnData("StoreName", SqlDbType.NVarChar, txtStoreName.Text.Trim());
+                        ObjDAL.SetColumnData("Tel", SqlDbType.VarChar, txtTel.Text.Trim());
+                        ObjDAL.SetColumnData("Fax", SqlDbType.VarChar, txtFax.Text.Trim());
+                        ObjDAL.SetColumnData("Place", SqlDbType.NVarChar, txtPlace.Text.Trim());
+                        ObjDAL.SetColumnData("StoreCategory", SqlDbType.Int, cmbStoreCat.SelectedIndex);
+                        ObjDAL.SetColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
+                        ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
+                        if (ObjDAL.InsertData(clsUtility.DBName + ".dbo.StoreMaster", true) > 0)
+                        {
+                            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave, clsUtility.IsAdmin);
+                            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave);
 
-                        clsUtility.ShowInfoMessage("Store : '" + txtStoreName.Text + "' is Saved Successfully..", clsUtility.strProjectTitle);
-                        ClearAll();
-                        LoadData();
-                        grpStore.Enabled = false;
+                            clsUtility.ShowInfoMessage("Store : '" + txtStoreName.Text + "' is Saved Successfully..", clsUtility.strProjectTitle);
+                            ClearAll();
+                            LoadData();
+                            grpStore.Enabled = false;
+                        }
+                        else
+                        {
+                            clsUtility.ShowInfoMessage("Store : '" + txtStoreName.Text + "' is not Saved Successfully..", clsUtility.strProjectTitle);
+                            ObjDAL.ResetData();
+                        }
                     }
                     else
                     {
-                        clsUtility.ShowInfoMessage("Store : '" + txtStoreName.Text + "' is not Saved Successfully..", clsUtility.strProjectTitle);
+                        clsUtility.ShowErrorMessage("Store : '" + txtStoreName.Text + "' is already exist..", clsUtility.strProjectTitle);
                         ObjDAL.ResetData();
+                        txtStoreName.Focus();
                     }
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("Store : '" + txtStoreName.Text + "' is already exist..", clsUtility.strProjectTitle);
-                    ObjDAL.ResetData();
-                    txtStoreName.Focus();
-                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
-            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit);
-            grpStore.Enabled = true;
-            txtStoreName.Focus();
-            txtStoreName.SelectionStart = txtStoreName.MaxLength;
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Store_Master, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
+            {
+                //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
+                ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit);
+                grpStore.Enabled = true;
+                txtStoreName.Focus();
+                txtStoreName.SelectionStart = txtStoreName.MaxLength;
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (Validateform())
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Store_Master, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
             {
-                if (DuplicateUser(ID))
+                if (Validateform())
                 {
-                    ObjDAL.UpdateColumnData("StoreName", SqlDbType.NVarChar, txtStoreName.Text.Trim());
-                    ObjDAL.UpdateColumnData("Tel", SqlDbType.VarChar, txtTel.Text.Trim());
-                    ObjDAL.UpdateColumnData("Fax", SqlDbType.VarChar, txtFax.Text.Trim());
-                    ObjDAL.UpdateColumnData("Place", SqlDbType.NVarChar, txtPlace.Text.Trim());
-                    ObjDAL.UpdateColumnData("StoreCategory", SqlDbType.Int, cmbStoreCat.SelectedIndex);
-                    ObjDAL.UpdateColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
-                    ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
-                    ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
-                    if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.StoreMaster", "StoreID = " + ID + "") > 0)
+                    if (DuplicateUser(ID))
                     {
-                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate, clsUtility.IsAdmin);
-                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate);
-                        clsUtility.ShowInfoMessage("'" + txtStoreName.Text + "' Store is Updated", clsUtility.strProjectTitle);
-                        LoadData();
-                        ClearAll();
-                        grpStore.Enabled = false;
-                        ObjDAL.ResetData();
+                        ObjDAL.UpdateColumnData("StoreName", SqlDbType.NVarChar, txtStoreName.Text.Trim());
+                        ObjDAL.UpdateColumnData("Tel", SqlDbType.VarChar, txtTel.Text.Trim());
+                        ObjDAL.UpdateColumnData("Fax", SqlDbType.VarChar, txtFax.Text.Trim());
+                        ObjDAL.UpdateColumnData("Place", SqlDbType.NVarChar, txtPlace.Text.Trim());
+                        ObjDAL.UpdateColumnData("StoreCategory", SqlDbType.Int, cmbStoreCat.SelectedIndex);
+                        ObjDAL.UpdateColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
+                        ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
+                        ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
+                        if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.StoreMaster", "StoreID = " + ID + "") > 0)
+                        {
+                            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate, clsUtility.IsAdmin);
+                            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate);
+                            clsUtility.ShowInfoMessage("'" + txtStoreName.Text + "' Store is Updated", clsUtility.strProjectTitle);
+                            LoadData();
+                            ClearAll();
+                            grpStore.Enabled = false;
+                            ObjDAL.ResetData();
+                        }
+                        else
+                        {
+                            clsUtility.ShowErrorMessage("'" + txtStoreName.Text + "' Store is not Updated", clsUtility.strProjectTitle);
+                            ObjDAL.ResetData();
+                        }
                     }
                     else
                     {
-                        clsUtility.ShowErrorMessage("'" + txtStoreName.Text + "' Store is not Updated", clsUtility.strProjectTitle);
+                        clsUtility.ShowErrorMessage("'" + txtStoreName.Text + "' Store is already exist..", clsUtility.strProjectTitle);
+                        txtStoreName.Focus();
                         ObjDAL.ResetData();
                     }
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("'" + txtStoreName.Text + "' Store is already exist..", clsUtility.strProjectTitle);
-                    txtStoreName.Focus();
-                    ObjDAL.ResetData();
-                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DialogResult d = MessageBox.Show("Are you sure want to delete '" + txtStoreName.Text + "' Store ", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            if (d == DialogResult.Yes)
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Store_Master, clsFormRights.Operation.Delete) || clsUtility.IsAdmin)
             {
-                if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.StoreMaster", "StoreID=" + ID) > 0)
+                DialogResult d = MessageBox.Show("Are you sure want to delete '" + txtStoreName.Text + "' Store ", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (d == DialogResult.Yes)
                 {
-                    clsUtility.ShowInfoMessage("'" + txtStoreName.Text + "' Store is deleted  ", clsUtility.strProjectTitle);
-                    ClearAll();
-                    LoadData();
-                    grpStore.Enabled = false;
-                    //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
-                    ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
+                    if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.StoreMaster", "StoreID=" + ID) > 0)
+                    {
+                        clsUtility.ShowInfoMessage("'" + txtStoreName.Text + "' Store is deleted  ", clsUtility.strProjectTitle);
+                        ClearAll();
+                        LoadData();
+                        grpStore.Enabled = false;
+                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
+                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
+                    }
+                    else
+                    {
+                        clsUtility.ShowErrorMessage("'" + txtStoreName.Text + "' Store is not deleted  ", clsUtility.strProjectTitle);
+                        ObjDAL.ResetData();
+                    }
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("'" + txtStoreName.Text + "' Store is not deleted  ", clsUtility.strProjectTitle);
-                    ObjDAL.ResetData();
-                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 

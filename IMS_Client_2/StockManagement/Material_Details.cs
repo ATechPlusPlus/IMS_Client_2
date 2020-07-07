@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 using CoreApp;
 
 namespace IMS_Client_2.StockManagement
@@ -273,12 +274,13 @@ namespace IMS_Client_2.StockManagement
             //ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.ColumnHeader);
             ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill);
             dgvProductDetails.Columns["ProductID"].Visible = false;
+            dgvProductDetails.Columns["Photo"].Visible = false;
             dgvProductDetails.Columns["StoreID"].Visible = false;
             dgvProductDetails.Columns["CategoryID"].Visible = false;
             dgvProductDetails.Columns["SizeTypeID"].Visible = false;
             dgvProductDetails.Columns["SizeID"].Visible = false;
 
-            lblTotalRecords.Text = dgvProductDetails.Rows.Count.ToString();
+            lblTotalRecords.Text = "Total Records : " + dgvProductDetails.Rows.Count.ToString();
         }
 
         private void txtSearchByProductName_Enter(object sender, EventArgs e)
@@ -330,6 +332,45 @@ namespace IMS_Client_2.StockManagement
         private void cmbColor_SelectionChangeCommitted(object sender, EventArgs e)
         {
             SearchByColor();
+        }
+
+        private void GetProductImage(string ImageID)
+        {
+            DataTable dtImagePath = ObjDAL.ExecuteSelectStatement("SELECT ImagePath, Extension FROM " + clsUtility.DBName + ".dbo.DefaultStoreSetting WITH(NOLOCK) WHERE MachineName='" + Environment.MachineName + "'");
+            if (ObjUtil.ValidateTable(dtImagePath))
+            {
+                if (dtImagePath.Rows[0]["ImagePath"] != DBNull.Value)
+                {
+                    string ImgPath = dtImagePath.Rows[0]["ImagePath"].ToString();
+                    string extension = dtImagePath.Rows[0]["Extension"].ToString();
+
+                    string imgFile = ImgPath + "//" + ImageID + extension;
+                    if (File.Exists(imgFile))
+                    {
+                        PicItem.Image = Image.FromFile(imgFile);
+                    }
+                    else
+                    {
+                        PicItem.Image = null;
+                    }
+                }
+                else
+                {
+                    clsUtility.ShowInfoMessage("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
+                }
+            }
+        }
+
+        private void dgvProductDetails_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvProductDetails.SelectedRows[0].Cells["Photo"].Value != DBNull.Value)
+            {
+                GetProductImage(dgvProductDetails.SelectedRows[0].Cells["Photo"].Value.ToString());
+            }
+            else
+            {
+                PicItem.Image = null;
+            }
         }
     }
 }
