@@ -633,5 +633,48 @@ namespace IMS_Client_2.Purchase
                 clsUtility.ShowInfoMessage("Enter Only Numbers...", clsUtility.strProjectTitle);
             }
         }
+
+        private void rdSearchByBillNo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdSearchByBillNo.Checked)
+            {
+                txtSearchByBillNo.Enabled = true;
+                txtSearchByBillNo.Focus();
+            }
+            else
+            {
+                txtSearchByBillNo.Enabled = false;
+                txtSearchByBillNo.Clear();
+                rdShowAll.Checked = true;
+            }
+        }
+
+        private void txtSearchByBillNo_Enter(object sender, EventArgs e)
+        {
+            ObjUtil.SetTextHighlightColor(sender);
+        }
+
+        private void txtSearchByBillNo_Leave(object sender, EventArgs e)
+        {
+            ObjUtil.SetTextHighlightColor(sender, Color.White);
+        }
+
+        private void txtSearchByBillNo_TextChanged(object sender, EventArgs e)
+        {
+            if (txtSearchByBillNo.Text.Trim().Length == 0)
+            {
+                LoadData();
+                return;
+            }
+            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID,SupplierBillNo,SupplierID,ShipmentNo,BillDate,BillValue,TotalQTY,Discount,ForeignExp,GrandTotal,LocalValue,LocalExp,LocalBillValue", "SupplierBillNo LIKE '%" + txtSearchByBillNo.Text + "%'", "BillDate");
+            if (ObjUtil.ValidateTable(dt))
+            {
+                dataGridView1.DataSource = dt;
+            }
+            else
+            {
+                dataGridView1.DataSource = null;
+            }
+        }
     }
 }

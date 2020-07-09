@@ -352,5 +352,54 @@ namespace IMS_Client_2.Masters
                 txtCustomerName.Focus();
             }
         }
+
+        private void rdSearchByCustomerMobileNo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdSearchByCustomerMobileNo.Checked)
+            {
+                txtSearchByMobileNo.Enabled = true;
+                txtSearchByMobileNo.Focus();
+            }
+            else
+            {
+                txtSearchByMobileNo.Enabled = false;
+                txtSearchByMobileNo.Clear();
+                rdShowAllOfCustomer.Checked = true;
+            }
+        }
+
+        private void txtSearchByMobileNo_Enter(object sender, EventArgs e)
+        {
+            ObjUtil.SetTextHighlightColor(sender);
+        }
+
+        private void txtSearchByMobileNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = ObjUtil.IsNumeric(e);
+            if (e.Handled == true)
+            {
+                clsUtility.ShowInfoMessage("Enter Only Charactors...", clsUtility.strProjectTitle);
+                txtCustomerName.Focus();
+            }
+        }
+
+        private void txtSearchByMobileNo_TextChanged(object sender, EventArgs e)
+        {
+            if (txtSearchByMobileNo.Text.Trim().Length == 0)
+            {
+                LoadData();
+                return;
+            }
+
+            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.CustomerMaster", "CustomerID,Name,Address,PhoneNo,(CASE WHEN ActiveStatus =1 THEN 'Active' WHEN ActiveStatus =0 THEN 'InActive' END) ActiveStatus", "PhoneNo LIKE '%" + txtSearchByMobileNo.Text + "%'", "Name");
+            if (ObjUtil.ValidateTable(dt))
+            {
+                dgvCustomerMaster.DataSource = dt;
+            }
+            else
+            {
+                dgvCustomerMaster.DataSource = null;
+            }
+        }
     }
 }

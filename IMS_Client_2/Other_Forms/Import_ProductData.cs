@@ -74,15 +74,15 @@ namespace IMS_Client_2.Other_Forms
             return;
         }
 
-        private void Inser_UpdateData(string ProductName, string CategoryID, string BrandID, string ActiveStatus)
+        private void Insert_UpdateData(string ProductName, string CategoryID, string Rate, string ActiveStatus, string CreatedBy)
         {
             try
             {
-                ObjDAL.SetColumnData("ProductName", SqlDbType.VarChar, ProductName);
-                ObjDAL.SetColumnData("CategoryID", SqlDbType.Int, CategoryID);
-                ObjDAL.SetColumnData("BrandID", SqlDbType.Int, BrandID);
-                ObjDAL.SetColumnData("ActiveStatus", SqlDbType.Bit, ActiveStatus);
-                ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, 0);
+                ObjDAL.SetColumnData("ProductName", SqlDbType.NVarChar, ProductName);
+                ObjDAL.SetColumnData("CategoryID", SqlDbType.NVarChar, CategoryID);
+                ObjDAL.SetColumnData("Rate", SqlDbType.NVarChar, Rate);
+                ObjDAL.SetColumnData("ActiveStatus", SqlDbType.NVarChar, ActiveStatus);
+                ObjDAL.SetColumnData("CreatedBy", SqlDbType.NVarChar, 0);
                 int a = ObjDAL.InsertData("ProductMaster", true);
             }
             catch (Exception ex)
@@ -108,10 +108,11 @@ namespace IMS_Client_2.Other_Forms
                 for (int i = 1; i < dtExcelData.Rows.Count; i++)
                 {
 
-                    Inser_UpdateData(dtExcelData.Rows[i][0].ToString(),
+                    Insert_UpdateData(dtExcelData.Rows[i][0].ToString(),
                                     dtExcelData.Rows[i][1].ToString(),
                                     dtExcelData.Rows[i][2].ToString(),
-                                    dtExcelData.Rows[i][3].ToString()
+                                    dtExcelData.Rows[i][3].ToString(),
+                                    dtExcelData.Rows[i][4].ToString()
                                     );
 
                     SetProgressPercent(i, dtExcelData.Rows.Count);
@@ -124,6 +125,8 @@ namespace IMS_Client_2.Other_Forms
                 SetProgressPercent(0, 100);
                 SetLableText("Operation completed");
                 MessageBox.Show("Data Imported.");
+                this.Close();                
+
             }
         }
 

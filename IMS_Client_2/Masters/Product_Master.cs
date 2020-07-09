@@ -364,6 +364,7 @@ namespace IMS_Client_2.Masters
                 txtSearchByProduct.Enabled = false;
                 cmbSearchByCategory.Enabled = false;
                 txtSearchByProduct.Clear();
+                cmbSearchByCategory.SelectedIndex = -1;
                 LoadData();
             }
         }
@@ -416,7 +417,9 @@ namespace IMS_Client_2.Masters
         private void btnImport_Click(object sender, EventArgs e)
         {
             Other_Forms.Import_ProductData Obj = new Other_Forms.Import_ProductData();
-            Obj.Show();
+            Obj.ShowDialog();
+            LoadData();
+            
         }
 
         private void btnCategoryPopup_Click(object sender, EventArgs e)
@@ -523,5 +526,7 @@ namespace IMS_Client_2.Masters
                 dataGridView1.DataSource = null;
             }
         }
+
+        
     }
 }
