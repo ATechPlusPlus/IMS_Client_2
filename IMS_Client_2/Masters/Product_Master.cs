@@ -100,14 +100,11 @@ namespace IMS_Client_2.Masters
             cmbCategory.DataSource = dt;
             cmbCategory.DisplayMember = "CategoryName";
             cmbCategory.ValueMember = "CategoryID";
-
             cmbCategory.SelectedIndex = -1;
-
 
             cmbSearchByCategory.DataSource = dt;
             cmbSearchByCategory.DisplayMember = "CategoryName";
             cmbSearchByCategory.ValueMember = "CategoryID";
-
             cmbSearchByCategory.SelectedIndex = -1;
         }
 
@@ -115,13 +112,9 @@ namespace IMS_Client_2.Masters
         {
             DataTable dt = null;
             dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.CategoryMaster", "CategoryID,CategoryName", "ISNULL(ActiveStatus,1)=1", "CategoryName ASC");
-           
-
-
             cmbSearchByCategory.DataSource = dt;
             cmbSearchByCategory.DisplayMember = "CategoryName";
             cmbSearchByCategory.ValueMember = "CategoryID";
-
             cmbSearchByCategory.SelectedIndex = -1;
         }
 
@@ -137,112 +130,140 @@ namespace IMS_Client_2.Masters
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (Validateform())
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Product_Master, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
-                if (DuplicateUser(0))
+                if (Validateform())
                 {
-                    ObjDAL.SetColumnData("ProductName", SqlDbType.NVarChar, txtProductName.Text.Trim());
-                    ObjDAL.SetColumnData("CategoryID", SqlDbType.Int, cmbCategory.SelectedValue);
-                    ObjDAL.SetColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
-                    ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
-                    if (PicProductMaster.Image != null)
+                    if (DuplicateUser(0))
                     {
-                        ObjDAL.SetColumnData("Photo", SqlDbType.VarBinary, ObjUtil.GetImageBytes(PicProductMaster.Image));
-                    }
-                    if (ObjDAL.InsertData(clsUtility.DBName + ".dbo.ProductMaster", true) > 0)
-                    {
-                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave, clsUtility.IsAdmin);
-                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave);
-                        clsUtility.ShowInfoMessage("Product Name : '" + txtProductName.Text + "' is Saved Successfully..", clsUtility.strProjectTitle);
-                        ClearAll();
-                        LoadData();
-                        grpProduct.Enabled = false;
+                        ObjDAL.SetColumnData("ProductName", SqlDbType.NVarChar, txtProductName.Text.Trim());
+                        ObjDAL.SetColumnData("CategoryID", SqlDbType.Int, cmbCategory.SelectedValue);
+                        ObjDAL.SetColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
+                        ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
+                        if (PicProductMaster.Image != null)
+                        {
+                            ObjDAL.SetColumnData("Photo", SqlDbType.VarBinary, ObjUtil.GetImageBytes(PicProductMaster.Image));
+                        }
+                        if (ObjDAL.InsertData(clsUtility.DBName + ".dbo.ProductMaster", true) > 0)
+                        {
+                            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave, clsUtility.IsAdmin);
+                            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave);
+                            clsUtility.ShowInfoMessage("Product Name : '" + txtProductName.Text + "' is Saved Successfully..", clsUtility.strProjectTitle);
+                            ClearAll();
+                            LoadData();
+                            grpProduct.Enabled = false;
+                        }
+                        else
+                        {
+                            clsUtility.ShowInfoMessage("Product Name : '" + txtProductName.Text + "' is not Saved Successfully..", clsUtility.strProjectTitle);
+                            ObjDAL.ResetData();
+                        }
                     }
                     else
                     {
-                        clsUtility.ShowInfoMessage("Product Name : '" + txtProductName.Text + "' is not Saved Successfully..", clsUtility.strProjectTitle);
+                        clsUtility.ShowErrorMessage("'" + txtProductName.Text + "' Product is already exist..", clsUtility.strProjectTitle);
                         ObjDAL.ResetData();
+                        txtProductName.Focus();
                     }
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("'" + txtProductName.Text + "' Product is already exist..", clsUtility.strProjectTitle);
-                    ObjDAL.ResetData();
-                    txtProductName.Focus();
-                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
-            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit);
-            grpProduct.Enabled = true;
-            grpPhoto.Enabled = true;
-            txtProductName.Focus();
-            txtProductName.SelectionStart = txtProductName.MaxLength;
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Product_Master, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
+            {
+                //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
+                ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit);
+                grpProduct.Enabled = true;
+                grpPhoto.Enabled = true;
+                txtProductName.Focus();
+                txtProductName.SelectionStart = txtProductName.MaxLength;
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (Validateform())
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Product_Master, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
             {
-                if (DuplicateUser(ID))
+                if (Validateform())
                 {
-                    ObjDAL.UpdateColumnData("ProductName", SqlDbType.NVarChar, txtProductName.Text.Trim());
-                    ObjDAL.UpdateColumnData("CategoryID", SqlDbType.Int, cmbCategory.SelectedValue);
-                    ObjDAL.UpdateColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
-                    ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
-                    ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
-                    if (PicProductMaster.Image != null)
+                    if (DuplicateUser(ID))
                     {
-                        ObjDAL.UpdateColumnData("Photo", SqlDbType.VarBinary, ObjUtil.GetImageBytes(PicProductMaster.Image));
-                    }
-                    if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.ProductMaster", "ProductID = " + ID + "") > 0)
-                    {
-                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate, clsUtility.IsAdmin);
-                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate);
+                        ObjDAL.UpdateColumnData("ProductName", SqlDbType.NVarChar, txtProductName.Text.Trim());
+                        ObjDAL.UpdateColumnData("CategoryID", SqlDbType.Int, cmbCategory.SelectedValue);
+                        ObjDAL.UpdateColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
+                        ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
+                        ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
+                        if (PicProductMaster.Image != null)
+                        {
+                            ObjDAL.UpdateColumnData("Photo", SqlDbType.VarBinary, ObjUtil.GetImageBytes(PicProductMaster.Image));
+                        }
+                        if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.ProductMaster", "ProductID = " + ID + "") > 0)
+                        {
+                            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate, clsUtility.IsAdmin);
+                            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate);
 
-                        clsUtility.ShowInfoMessage("'" + txtProductName.Text + "' Product is Updated", clsUtility.strProjectTitle);
-                        LoadData();
-                        ClearAll();
-                        grpProduct.Enabled = false;
-                        ObjDAL.ResetData();
+                            clsUtility.ShowInfoMessage("'" + txtProductName.Text + "' Product is Updated", clsUtility.strProjectTitle);
+                            LoadData();
+                            ClearAll();
+                            grpProduct.Enabled = false;
+                            ObjDAL.ResetData();
+                        }
+                        else
+                        {
+                            clsUtility.ShowErrorMessage("'" + txtProductName.Text + "' Product is not Updated", clsUtility.strProjectTitle);
+                            ObjDAL.ResetData();
+                        }
                     }
                     else
                     {
-                        clsUtility.ShowErrorMessage("'" + txtProductName.Text + "' Product is not Updated", clsUtility.strProjectTitle);
+                        clsUtility.ShowErrorMessage("'" + txtProductName.Text + "' Product is already exist..", clsUtility.strProjectTitle);
+                        txtProductName.Focus();
                         ObjDAL.ResetData();
                     }
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("'" + txtProductName.Text + "' Product is already exist..", clsUtility.strProjectTitle);
-                    txtProductName.Focus();
-                    ObjDAL.ResetData();
-                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DialogResult d = MessageBox.Show("Are you sure want to delete '" + txtProductName.Text + "' Product ", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            if (d == DialogResult.Yes)
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Product_Master, clsFormRights.Operation.Delete) || clsUtility.IsAdmin)
             {
-                if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.ProductMaster", "ProductName='" + txtProductName.Text.Trim() + "'") > 0)
+                DialogResult d = MessageBox.Show("Are you sure want to delete '" + txtProductName.Text + "' Product ", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (d == DialogResult.Yes)
                 {
-                    clsUtility.ShowInfoMessage("'" + txtProductName.Text + "' Product is deleted  ", clsUtility.strProjectTitle);
-                    ClearAll();
-                    LoadData();
-                    grpProduct.Enabled = false;
-                    //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
-                    ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
+                    if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.ProductMaster", "ProductName='" + txtProductName.Text.Trim() + "'") > 0)
+                    {
+                        clsUtility.ShowInfoMessage("'" + txtProductName.Text + "' Product is deleted  ", clsUtility.strProjectTitle);
+                        ClearAll();
+                        LoadData();
+                        grpProduct.Enabled = false;
+                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
+                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
+                    }
+                    else
+                    {
+                        clsUtility.ShowErrorMessage("'" + txtProductName.Text + "' Product is not deleted  ", clsUtility.strProjectTitle);
+                        ObjDAL.ResetData();
+                    }
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("'" + txtProductName.Text + "' Product is not deleted  ", clsUtility.strProjectTitle);
-                    ObjDAL.ResetData();
-                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 
@@ -284,7 +305,6 @@ namespace IMS_Client_2.Masters
                     if (dataGridView1.SelectedRows[0].Cells["Photo"].Value != DBNull.Value)
                     {
                         GetProductImage(dataGridView1.SelectedRows[0].Cells["Photo"].Value.ToString());
-                     
                     }
                     else
                     {
@@ -393,10 +413,8 @@ namespace IMS_Client_2.Masters
             ObjUtil.SetDataGridProperty(dataGridView1, DataGridViewAutoSizeColumnsMode.Fill);
             dataGridView1.Columns["ProductID"].Visible = false;
             dataGridView1.Columns["CategoryID"].Visible = false;
-           // dataGridView1.Columns["Photo"].Visible = false;
+            // dataGridView1.Columns["Photo"].Visible = false;
             lblTotalRecords.Text = "Total Records : " + dataGridView1.Rows.Count;
-
-          
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -440,23 +458,23 @@ namespace IMS_Client_2.Masters
 
         private void txtProductName_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = ObjUtil.IsString(e);
-            if (e.Handled == true)
-            {
-                clsUtility.ShowInfoMessage("Enter Only Charactors...", clsUtility.strProjectTitle);
-                txtProductName.Focus();
-            }
+            //e.Handled = ObjUtil.IsString(e);
+            //if (e.Handled == true)
+            //{
+            //    clsUtility.ShowInfoMessage("Enter Only Charactors...", clsUtility.strProjectTitle);
+            //    txtProductName.Focus();
+            //}
         }
-    
+
         private void GetProductImage(string ImageID)
         {
-            DataTable dtImagePath = ObjDAL.ExecuteSelectStatement("  select ImagePath, Extension from [IMS_Client_2].dbo.DefaultStoreSetting where MachineName='" + Environment.MachineName + "'");
-            if (dtImagePath.Rows.Count>0)
+            DataTable dtImagePath = ObjDAL.ExecuteSelectStatement("SELECT ImagePath, Extension FROM " + clsUtility.DBName + ".dbo.DefaultStoreSetting WITH(NOLOCK) WHERE MachineName='" + Environment.MachineName + "'");
+            if (ObjUtil.ValidateTable(dtImagePath))
             {
-                if (dtImagePath.Rows[0]["ImagePath"]!=DBNull.Value)
+                if (dtImagePath.Rows[0]["ImagePath"] != DBNull.Value)
                 {
                     string ImgPath = dtImagePath.Rows[0]["ImagePath"].ToString();
-                    string extension= dtImagePath.Rows[0]["Extension"].ToString();
+                    string extension = dtImagePath.Rows[0]["Extension"].ToString();
 
                     string imgFile = ImgPath + "//" + ImageID + extension;
                     if (File.Exists(imgFile))
@@ -467,22 +485,13 @@ namespace IMS_Client_2.Masters
                     {
                         PicProductMaster.Image = null;
                     }
-
-                       
-                    }
-                    else
-                    {
-                        MessageBox.Show("Image file for the selected product doesn't exist.",clsUtility.strProjectTitle);
-                    
-                  
-
-
+                }
+                else
+                {
+                    clsUtility.ShowInfoMessage("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
                 }
             }
-                
-
         }
-    
 
         private void rdSearchByCategory_CheckedChanged(object sender, EventArgs e)
         {
@@ -498,10 +507,6 @@ namespace IMS_Client_2.Masters
                 cmbSearchByCategory.SelectedIndex = -1;
                 rdShowAll.Checked = true;
             }
-        }
-
-        private void cmbSearchByCategory_SelectedIndexChanged(object sender, EventArgs e)
-        {
         }
 
         private void cmbSearchByCategory_SelectionChangeCommitted(object sender, EventArgs e)

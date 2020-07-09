@@ -214,7 +214,6 @@
             // 
             this.grpCountry.BackColor = System.Drawing.Color.Transparent;
             this.grpCountry.Controls.Add(this.dataGridView1);
-            this.grpCountry.Enabled = false;
             this.grpCountry.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpCountry.Location = new System.Drawing.Point(5, 281);
             this.grpCountry.Name = "grpCountry";

@@ -347,16 +347,14 @@
             // 
             // rdSearchByCategory
             // 
-            this.rdSearchByCategory.AutoSize = true;
-            this.rdSearchByCategory.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdSearchByCategory.Location = new System.Drawing.Point(521, 28);
-            this.rdSearchByCategory.Margin = new System.Windows.Forms.Padding(4);
-            this.rdSearchByCategory.Name = "rdSearchByCategory";
-            this.rdSearchByCategory.Size = new System.Drawing.Size(134, 25);
-            this.rdSearchByCategory.TabIndex = 289;
-            this.rdSearchByCategory.Text = "By Category :";
-            this.rdSearchByCategory.UseVisualStyleBackColor = true;
-            this.rdSearchByCategory.CheckedChanged += new System.EventHandler(this.rdSearchByCategory_CheckedChanged);
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton1.Location = new System.Drawing.Point(391, 23);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(108, 21);
+            this.radioButton1.TabIndex = 289;
+            this.radioButton1.Text = "By Category :";
+            this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // cmbSearchByCategory
             // 

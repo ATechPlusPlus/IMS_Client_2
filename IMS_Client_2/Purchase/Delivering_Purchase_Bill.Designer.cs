@@ -40,7 +40,7 @@
             this.listBoxStyleNo = new System.Windows.Forms.ListBox();
             this.cmbCountry = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.cmbStyle = new System.Windows.Forms.ComboBox();
+            this.cmbCategory = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblBrand = new System.Windows.Forms.Label();
             this.cmbBrand = new System.Windows.Forms.ComboBox();
@@ -153,7 +153,7 @@
             this.grpPurchaseBillDetail.Controls.Add(this.listBoxStyleNo);
             this.grpPurchaseBillDetail.Controls.Add(this.cmbCountry);
             this.grpPurchaseBillDetail.Controls.Add(this.label2);
-            this.grpPurchaseBillDetail.Controls.Add(this.cmbStyle);
+            this.grpPurchaseBillDetail.Controls.Add(this.cmbCategory);
             this.grpPurchaseBillDetail.Controls.Add(this.label1);
             this.grpPurchaseBillDetail.Controls.Add(this.lblBrand);
             this.grpPurchaseBillDetail.Controls.Add(this.cmbBrand);
@@ -228,16 +228,16 @@
             this.label2.TabIndex = 254;
             this.label2.Text = "Country :";
             // 
-            // cmbStyle
+            // cmbCategory
             // 
-            this.cmbStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbStyle.Enabled = false;
-            this.cmbStyle.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbStyle.FormattingEnabled = true;
-            this.cmbStyle.Location = new System.Drawing.Point(118, 96);
-            this.cmbStyle.Name = "cmbStyle";
-            this.cmbStyle.Size = new System.Drawing.Size(206, 27);
-            this.cmbStyle.TabIndex = 1;
+            this.cmbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCategory.Enabled = false;
+            this.cmbCategory.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbCategory.FormattingEnabled = true;
+            this.cmbCategory.Location = new System.Drawing.Point(118, 96);
+            this.cmbCategory.Name = "cmbCategory";
+            this.cmbCategory.Size = new System.Drawing.Size(206, 27);
+            this.cmbCategory.TabIndex = 1;
             // 
             // label1
             // 
@@ -513,6 +513,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(7, 504);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dataGridView1.Size = new System.Drawing.Size(959, 147);
             this.dataGridView1.TabIndex = 271;
@@ -706,7 +707,7 @@
         private System.Windows.Forms.GroupBox grpPurchaseBillDetail;
         private System.Windows.Forms.ComboBox cmbCountry;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cmbStyle;
+        private System.Windows.Forms.ComboBox cmbCategory;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblBrand;
         private System.Windows.Forms.ComboBox cmbBrand;

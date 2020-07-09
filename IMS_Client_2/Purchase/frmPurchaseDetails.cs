@@ -17,14 +17,18 @@ namespace IMS_Client_2.Purchase
             InitializeComponent();
         }
 
+        clsConnection_DAL ObjDAL = new clsConnection_DAL(true);
+        clsUtility ObjUtil = new clsUtility();
+
+        Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
+        Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
         private void btnViewDetails_Click(object sender, EventArgs e)
         {
-            if (txtSupplierBillNo.Text.Trim().Length==0)
+            if (ObjUtil.IsControlTextEmpty(txtSupplierBillNo))
             {
                 clsUtility.ShowInfoMessage("Please Enter Bill Number.", clsUtility.strProjectTitle);
+                txtSupplierBillNo.Focus();
                 return;
-
-
             }
 
             ObjDAL.SetStoreProcedureData("BillNo", SqlDbType.NVarChar, txtPurchaseInvoiceID.Text,  clsConnection_DAL.ParamType.Input);
@@ -41,22 +45,19 @@ namespace IMS_Client_2.Purchase
                 {
                     dgvPurchaseItem.DataSource = ds.Tables[2];
                 }
-
                 dgvPurchaseInvoice.ClearSelection();
                 dgvPurchaseInvoiceDetail.ClearSelection();
                 dgvPurchaseItem.ClearSelection();
-            
             }
         }
-        clsConnection_DAL ObjDAL = new clsConnection_DAL(true);
-        clsUtility ObjUtil = new clsUtility();
+
         private void txtSupplierBillNo_TextChanged(object sender, EventArgs e)
         {
             try
             {
                 if (txtSupplierBillNo.Text.Length > 0)
                 {
-                    DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_Popup " + txtSupplierBillNo.Text + ",2");
+                    DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_Popup '" + txtSupplierBillNo.Text + "', 2");
                     if (ObjUtil.ValidateTable(dt))
                     {
                         ObjUtil.SetControlData(txtSupplierBillNo, "SupplierBillNo");
@@ -91,31 +92,31 @@ namespace IMS_Client_2.Purchase
             }
             catch (Exception)
             {
-
             }
         }
-        Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
-        Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
+
         private void frmPurchaseDetails_Load(object sender, EventArgs e)
         {
             btnViewDetails.BackgroundImage = B_Leave;
-            
         }
 
         private void dgvPurchaseInvoice_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
+            ObjUtil.SetRowNumber(dgvPurchaseInvoice);
             ObjUtil.SetDataGridProperty(dgvPurchaseInvoice, DataGridViewAutoSizeColumnsMode.ColumnHeader);
             dgvPurchaseInvoice.Columns["PurchaseInvoiceID"].Visible = false;
         }
 
         private void dgvPurchaseInvoiceDetail_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
+            ObjUtil.SetRowNumber(dgvPurchaseInvoiceDetail);
             ObjUtil.SetDataGridProperty(dgvPurchaseInvoiceDetail, DataGridViewAutoSizeColumnsMode.Fill);
             dgvPurchaseInvoiceDetail.Columns["PurchaseInvoiceID"].Visible = false;
         }
 
         private void dgvPurchaseItem_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
+            ObjUtil.SetRowNumber(dgvPurchaseItem);
             ObjUtil.SetDataGridProperty(dgvPurchaseItem, DataGridViewAutoSizeColumnsMode.Fill);
             dgvPurchaseItem.Columns["PurchaseInvoiceID"].Visible = false;
         }

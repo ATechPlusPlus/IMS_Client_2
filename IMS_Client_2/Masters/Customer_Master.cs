@@ -51,7 +51,7 @@ namespace IMS_Client_2.Masters
                 return false;
             }
 
-            else if(ObjUtil.IsControlTextEmpty(cmbCustomerActiveStatus))
+            else if (ObjUtil.IsControlTextEmpty(cmbCustomerActiveStatus))
             {
                 clsUtility.ShowInfoMessage("Select Active Status.", clsUtility.strProjectTitle);
                 cmbCustomerActiveStatus.Focus();
@@ -85,7 +85,7 @@ namespace IMS_Client_2.Masters
         {
             DataTable dt = null;
             dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.CustomerMaster", "CustomerID,Name,Address,PhoneNo,(CASE WHEN ActiveStatus =1 THEN 'Active' WHEN ActiveStatus =0 THEN 'InActive' END) ActiveStatus", "Name");
-            
+
             if (ObjUtil.ValidateTable(dt))
             {
                 dgvCustomerMaster.DataSource = dt;
@@ -107,103 +107,131 @@ namespace IMS_Client_2.Masters
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (ValidateForm())
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Customer_Master, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
-                if (DuplicateUser(0))
+                if (ValidateForm())
                 {
-                    ObjDAL.SetColumnData("Name", SqlDbType.NVarChar, txtCustomerName.Text.Trim());
-                    ObjDAL.SetColumnData("Address", SqlDbType.NVarChar, txtCustomerAddress.Text.Trim());
-                    ObjDAL.SetColumnData("PhoneNo", SqlDbType.NVarChar, txtCustomerPhoneNo.Text.Trim());
-                    ObjDAL.SetColumnData("ActiveStatus", SqlDbType.Bit, cmbCustomerActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
-                    ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
-                    if (ObjDAL.InsertData(clsUtility.DBName + ".dbo.CustomerMaster", true) > 0)
+                    if (DuplicateUser(0))
                     {
-                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave, clsUtility.IsAdmin);
-                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave);
-                        clsUtility.ShowInfoMessage("Customer Name : '" + txtCustomerName.Text + "' is Saved Successfully..", clsUtility.strProjectTitle);
-                        ClearAll();
-                        LoadData();
-                        grpCustomer.Enabled = false;
+                        ObjDAL.SetColumnData("Name", SqlDbType.NVarChar, txtCustomerName.Text.Trim());
+                        ObjDAL.SetColumnData("Address", SqlDbType.NVarChar, txtCustomerAddress.Text.Trim());
+                        ObjDAL.SetColumnData("PhoneNo", SqlDbType.NVarChar, txtCustomerPhoneNo.Text.Trim());
+                        ObjDAL.SetColumnData("ActiveStatus", SqlDbType.Bit, cmbCustomerActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
+                        ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
+                        if (ObjDAL.InsertData(clsUtility.DBName + ".dbo.CustomerMaster", true) > 0)
+                        {
+                            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave, clsUtility.IsAdmin);
+                            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave);
+                            clsUtility.ShowInfoMessage("Customer Name : '" + txtCustomerName.Text + "' is Saved Successfully..", clsUtility.strProjectTitle);
+                            ClearAll();
+                            LoadData();
+                            grpCustomer.Enabled = false;
+                        }
+                        else
+                        {
+                            clsUtility.ShowInfoMessage("Customer Name : '" + txtCustomerName.Text + "' is not Saved Successfully..", clsUtility.strProjectTitle);
+                        }
                     }
                     else
                     {
-                        clsUtility.ShowInfoMessage("Customer Name : '" + txtCustomerName.Text + "' is not Saved Successfully..", clsUtility.strProjectTitle);
+                        clsUtility.ShowErrorMessage("'" + txtCustomerName.Text + "' Customer is already exist..", clsUtility.strProjectTitle);
+                        txtCustomerName.Focus();
                     }
+                    ObjDAL.ResetData();
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("'" + txtCustomerName.Text + "' Customer is already exist..", clsUtility.strProjectTitle);
-                    txtCustomerName.Focus();
-                }
-                ObjDAL.ResetData();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
-            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit);
-            grpCustomer.Enabled = true;
-            txtCustomerName.Focus();
-            txtCustomerName.SelectionStart = txtCustomerName.MaxLength;
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Customer_Master, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
+            {
+                //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
+                ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit);
+                grpCustomer.Enabled = true;
+                txtCustomerName.Focus();
+                txtCustomerName.SelectionStart = txtCustomerName.MaxLength;
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (ValidateForm())
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Customer_Master, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
             {
-                if (DuplicateUser(ID))
+                if (ValidateForm())
                 {
-                    ObjDAL.UpdateColumnData("Name", SqlDbType.NVarChar, txtCustomerName.Text.Trim());
-                    ObjDAL.UpdateColumnData("Address", SqlDbType.NVarChar, txtCustomerAddress.Text.Trim());
-                    ObjDAL.UpdateColumnData("PhoneNo", SqlDbType.NVarChar, txtCustomerPhoneNo.Text.Trim());
-                    ObjDAL.UpdateColumnData("ActiveStatus", SqlDbType.Bit, cmbCustomerActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
-                    ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
-                    ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
-
-                    if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.CustomerMaster", "CustomerID = " + ID + "") > 0)
+                    if (DuplicateUser(ID))
                     {
-                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate, clsUtility.IsAdmin);
-                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate);
+                        ObjDAL.UpdateColumnData("Name", SqlDbType.NVarChar, txtCustomerName.Text.Trim());
+                        ObjDAL.UpdateColumnData("Address", SqlDbType.NVarChar, txtCustomerAddress.Text.Trim());
+                        ObjDAL.UpdateColumnData("PhoneNo", SqlDbType.NVarChar, txtCustomerPhoneNo.Text.Trim());
+                        ObjDAL.UpdateColumnData("ActiveStatus", SqlDbType.Bit, cmbCustomerActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
+                        ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
+                        ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
 
-                        clsUtility.ShowInfoMessage("'" + txtCustomerName.Text + "' Customer is Updated", clsUtility.strProjectTitle);
-                        LoadData();
-                        ClearAll();
-                        grpCustomer.Enabled = false;
+                        if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.CustomerMaster", "CustomerID = " + ID + "") > 0)
+                        {
+                            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate, clsUtility.IsAdmin);
+                            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate);
+
+                            clsUtility.ShowInfoMessage("'" + txtCustomerName.Text + "' Customer is Updated", clsUtility.strProjectTitle);
+                            LoadData();
+                            ClearAll();
+                            grpCustomer.Enabled = false;
+                        }
+                        else
+                        {
+                            clsUtility.ShowErrorMessage("'" + txtCustomerName.Text + "' Customer is not Updated", clsUtility.strProjectTitle);
+                        }
                     }
                     else
                     {
-                        clsUtility.ShowErrorMessage("'" + txtCustomerName.Text + "' Customer is not Updated", clsUtility.strProjectTitle);
+                        clsUtility.ShowErrorMessage("'" + txtCustomerName.Text + "' Customer is already exist..", clsUtility.strProjectTitle);
+                        txtCustomerName.Focus();
                     }
+                    ObjDAL.ResetData();
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("'" + txtCustomerName.Text + "' Customer is already exist..", clsUtility.strProjectTitle);
-                    txtCustomerName.Focus();
-                }
-                ObjDAL.ResetData();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DialogResult d = MessageBox.Show("Are you sure want to delete '" + txtCustomerName.Text + "' Customer ", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            if (d == DialogResult.Yes)
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Customer_Master, clsFormRights.Operation.Delete) || clsUtility.IsAdmin)
             {
-                if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.CustomerMaster", "Name='" + txtCustomerName.Text.Trim() + "'") > 0)
+                DialogResult d = MessageBox.Show("Are you sure want to delete '" + txtCustomerName.Text + "' Customer ", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (d == DialogResult.Yes)
                 {
-                    clsUtility.ShowInfoMessage("'" + txtCustomerName.Text + "' Customer is deleted  ", clsUtility.strProjectTitle);
-                    ClearAll();
-                    LoadData();
-                    grpCustomer.Enabled = false;
-                    //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
-                    ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
+                    if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.CustomerMaster", "Name='" + txtCustomerName.Text.Trim() + "'") > 0)
+                    {
+                        clsUtility.ShowInfoMessage("'" + txtCustomerName.Text + "' Customer is deleted  ", clsUtility.strProjectTitle);
+                        ClearAll();
+                        LoadData();
+                        grpCustomer.Enabled = false;
+                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
+                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
+                    }
+                    else
+                    {
+                        clsUtility.ShowErrorMessage("'" + txtCustomerName.Text + "' Customer is not deleted  ", clsUtility.strProjectTitle);
+                        ObjDAL.ResetData();
+                    }
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("'" + txtCustomerName.Text + "' Customer is not deleted  ", clsUtility.strProjectTitle);
-                    ObjDAL.ResetData();
-                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 

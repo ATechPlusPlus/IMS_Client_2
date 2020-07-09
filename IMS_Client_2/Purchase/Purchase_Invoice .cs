@@ -21,6 +21,7 @@ namespace IMS_Client_2.Purchase
         clsConnection_DAL ObjDAL = new clsConnection_DAL(true);
 
         int ID = 0;
+        bool IsInvoiceDone = false;
 
         Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
         Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
@@ -48,6 +49,9 @@ namespace IMS_Client_2.Purchase
             grpCurrencyRate.Enabled = false;
             grpForeignCurrency.Enabled = false;
             grpLocalCurrency.Enabled = false;
+
+            IsInvoiceDone = false;
+            ID = 0;
         }
 
         private bool Validateform()
@@ -119,7 +123,7 @@ namespace IMS_Client_2.Purchase
 
         private void LoadData()
         {
-            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID,SupplierBillNo,SupplierID,ShipmentNo,BillDate,BillValue,TotalQTY,Discount,ForeignExp,GrandTotal,LocalValue,LocalExp,LocalBillValue", "BillDate");
+            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID,SupplierBillNo,SupplierID,ShipmentNo,BillDate,BillValue,TotalQTY,Discount,ForeignExp,GrandTotal,LocalValue,LocalExp,LocalBillValue,IsInvoiceDone", "BillDate");
 
             if (ObjUtil.ValidateTable(dt))
             {
@@ -133,23 +137,38 @@ namespace IMS_Client_2.Purchase
 
         private void FillSupplierData()
         {
+            int a = 0;
+            if (cmbSupplier.SelectedIndex >= 0)
+            {
+                a = Convert.ToInt32(cmbSupplier.SelectedValue);
+            }
             DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.SupplierMaster", "SupplierID,SupplierName", "ISNULL(ActiveStatus,1)=1", "SupplierName ASC");
             cmbSupplier.DataSource = dt;
             cmbSupplier.DisplayMember = "SupplierName";
             cmbSupplier.ValueMember = "SupplierID";
 
-            cmbSupplier.SelectedIndex = -1;
+            if (a > 0)
+                cmbSupplier.SelectedValue = a;
+            else
+                cmbSupplier.SelectedIndex = -1;
         }
 
         private void FillCountryData()
         {
-            DataTable dt = null;
-            dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.CountryMaster", "CountryID,CountryName", "ISNULL(ActiveStatus,1)=1", "CountryName ASC");
+            int CountryID = 0;
+            if (cmbCountry.SelectedIndex >= 0)
+            {
+                CountryID = Convert.ToInt32(cmbCountry.SelectedValue);
+            }
+            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.CountryMaster", "CountryID,CountryName", "ISNULL(ActiveStatus,1)=1", "CountryName ASC");
             cmbCountry.DataSource = dt;
             cmbCountry.DisplayMember = "CountryName";
             cmbCountry.ValueMember = "CountryID";
 
-            cmbCountry.SelectedIndex = -1;
+            if (CountryID > 0)
+                cmbCountry.SelectedValue = CountryID;
+            else
+                cmbCountry.SelectedIndex = -1;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -297,24 +316,35 @@ namespace IMS_Client_2.Purchase
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Purchase_Invoice, clsFormRights.Operation.Delete) || clsUtility.IsAdmin)
             {
-                DialogResult d = MessageBox.Show("Are you sure want to delete Supplier Bill No. '" + txtSupplierBillNo.Text + "'", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                if (d == DialogResult.Yes)
+                if (!IsInvoiceDone)
                 {
-                    if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID=" + ID + "") > 0)
+                    DialogResult d = MessageBox.Show("Are you sure want to delete Supplier Bill No. '" + txtSupplierBillNo.Text + "'", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    if (d == DialogResult.Yes)
                     {
-                        clsUtility.ShowInfoMessage("Supplier Bill No. '" + txtSupplierBillNo.Text + "' is deleted", clsUtility.strProjectTitle);
-                        ClearAll();
-                        LoadData();
-                        grpPurchaseInvoice.Enabled = false;
-                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
-                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
-                    }
-                    else
-                    {
-                        clsUtility.ShowInfoMessage("Supplier Bill No. '" + txtSupplierBillNo.Text + "' is not deleted", clsUtility.strProjectTitle);
-                        ObjDAL.ResetData();
+                        ObjDAL.SetStoreProcedureData("PurchaseInvoiceID", SqlDbType.Int, ID, clsConnection_DAL.ParamType.Input);
+                        DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Delete_PurchaseInvoice");
+                        //if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID=" + ID + "") > 0)
+                        if (ObjUtil.ValidateTable(ds.Tables[0]))
+                        {
+                            clsUtility.ShowInfoMessage("Supplier Bill No. '" + txtSupplierBillNo.Text + "' is deleted", clsUtility.strProjectTitle);
+                            ClearAll();
+                            LoadData();
+                            grpPurchaseInvoice.Enabled = false;
+                            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
+                            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
+                        }
+                        else
+                        {
+                            clsUtility.ShowInfoMessage("Supplier Bill No. '" + txtSupplierBillNo.Text + "' is not deleted", clsUtility.strProjectTitle);
+                            ObjDAL.ResetData();
+                        }
                     }
                 }
+                else
+                {
+                    clsUtility.ShowInfoMessage("Supplier Bill No. '" + txtSupplierBillNo.Text + "' is Posted.\n You can't be delete Posted Invoice.", clsUtility.strProjectTitle);
+                }
+
             }
             else
             {
@@ -354,6 +384,8 @@ namespace IMS_Client_2.Purchase
                     //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterGridClick, clsUtility.IsAdmin);
                     ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterGridClick);
                     ID = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["PurchaseInvoiceID"].Value);
+                    IsInvoiceDone = Convert.ToBoolean(dataGridView1.SelectedRows[0].Cells["IsInvoiceDone"].Value);
+
                     txtSupplierBillNo.Text = dataGridView1.SelectedRows[0].Cells["SupplierBillNo"].Value.ToString();
                     cmbSupplier.SelectedValue = dataGridView1.SelectedRows[0].Cells["SupplierID"].Value.ToString();
 
@@ -375,6 +407,15 @@ namespace IMS_Client_2.Purchase
 
                     grpPurchaseInvoice.Enabled = false;
                     txtSupplierBillNo.Focus();
+                    if (IsInvoiceDone)
+                    {
+                        EnableDisableControl(false);
+                    }
+                    else
+                    {
+                        EnableDisableControl(true);
+                    }
+
                 }
                 catch (Exception ex)
                 {
@@ -382,7 +423,12 @@ namespace IMS_Client_2.Purchase
                 }
             }
         }
-
+        private void EnableDisableControl(bool b)
+        {
+            txtTotalQTY.Enabled = b;
+            txtBillValue.Enabled = b;
+            dtpBillDate.Enabled = b;
+        }
         private void txtSupplierBillNo_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Down)
@@ -442,6 +488,7 @@ namespace IMS_Client_2.Purchase
             LoadData();
             FillSupplierData();
             FillCountryData();
+            dtpBillDate.MaxDate = DateTime.Now;
         }
 
         private void btnAdd_MouseEnter(object sender, EventArgs e)
@@ -505,6 +552,7 @@ namespace IMS_Client_2.Purchase
             ObjUtil.SetDataGridProperty(dataGridView1, DataGridViewAutoSizeColumnsMode.ColumnHeader);
             //ObjUtil.SetDataGridProperty(dataGridView1, DataGridViewAutoSizeColumnsMode.Fill);
             dataGridView1.Columns["PurchaseInvoiceID"].Visible = false;
+            dataGridView1.Columns["IsInvoiceDone"].Visible = false;
             dataGridView1.Columns["SupplierID"].Visible = false;
             lblTotalRecords.Text = "Total Records : " + dataGridView1.Rows.Count;
         }
@@ -557,6 +605,13 @@ namespace IMS_Client_2.Purchase
             {
                 object ob = ObjDAL.ExecuteScalar("SELECT CurrencyRate FROM " + clsUtility.DBName + ".dbo.CurrencyRateSetting WITH(NOLOCK) WHERE CountryID = " + cmbCountry.SelectedValue);
                 txtCurrencyRate.Text = Convert.ToDecimal(ob).ToString();
+                if (ob == null)
+                {
+                    clsUtility.ShowInfoMessage("Currency Rate is defined for Country " + cmbCountry.Text, clsUtility.strProjectTitle);
+                    btnCurrencyRatePopup.Enabled = true;
+                }
+                else
+                    btnCurrencyRatePopup.Enabled = false;
             }
         }
 
@@ -584,18 +639,28 @@ namespace IMS_Client_2.Purchase
 
         private void btnSupplierPopup_Click(object sender, EventArgs e)
         {
-            int a = 0;
-            if (cmbSupplier.SelectedIndex >= 0)
-            {
-                a = Convert.ToInt32(cmbSupplier.SelectedValue);
-            }
+            //int a = 0;
+            //if (cmbSupplier.SelectedIndex >= 0)
+            //{
+            //    a = Convert.ToInt32(cmbSupplier.SelectedValue);
+            //}
             Masters.Supplier_Details Obj = new Masters.Supplier_Details();
             Obj.ShowDialog();
             FillSupplierData();
-            if (a > 0)
-            {
-                cmbSupplier.SelectedValue = a;
-            }
+            //if (a > 0)
+            //{
+            //    cmbSupplier.SelectedValue = a;
+            //}
+            //int CountryID = 0;
+            //if (cmbCountry.SelectedIndex >= 0)
+            //{
+            //    CountryID = Convert.ToInt32(cmbCountry.SelectedValue);
+            //}
+            FillCountryData();
+            //if (CountryID > 0)
+            //{
+            //    cmbCountry.SelectedValue = CountryID;
+            //}
         }
 
         private void txtCurrencyRate_TextChanged(object sender, EventArgs e)
@@ -674,6 +739,29 @@ namespace IMS_Client_2.Purchase
             else
             {
                 dataGridView1.DataSource = null;
+            }
+        }
+
+        private void lnkRefreshData_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            LoadData();
+            FillSupplierData();
+            FillCountryData();
+            dtpBillDate.MaxDate = DateTime.Now;
+            btnCurrencyRatePopup.Enabled = false;
+        }
+
+        private void btnCurrencyRatePopup_Click(object sender, EventArgs e)
+        {
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Currency_Value_Settings) || clsUtility.IsAdmin)
+            {
+                Settings.Currency_Value_Settings Obj = new Settings.Currency_Value_Settings();
+                Obj.ShowDialog();
+                cmbSupplier_SelectionChangeCommitted(sender, e);
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
     }

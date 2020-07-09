@@ -68,7 +68,7 @@ namespace IMS_Client_2.Purchase
                     bool b = clsUtility.ShowQuestionMessage("Are you sure want to post for " + txtSupplierBillNo.Text + " ?", clsUtility.strProjectTitle);
                     if (b)
                     {
-                        string para = txtPurchaseInvoiceID.Text + "," + cmbStore.SelectedValue + "," + txtTotalQTY.Text + "," + cmbEntryType.SelectedIndex + "," + txtSupplierBillNo.Text + "," + clsUtility.LoginID;
+                        string para = txtPurchaseInvoiceID.Text + "," + cmbStore.SelectedValue + "," + txtTotalQTY.Text + "," + cmbEntryType.SelectedIndex + ",'" + txtSupplierBillNo.Text + "'," + clsUtility.LoginID;
 
                         DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Insert_PurchaseInvoice_BulkPrint_Color_Size " + para);
                         if (ObjUtil.ValidateTable(dt))

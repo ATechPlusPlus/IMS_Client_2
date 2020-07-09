@@ -48,7 +48,7 @@ namespace IMS_Client_2.Settings
         }
         private void BindStoreSettingData()
         {
-            DataTable dt = ObjCon.ExecuteSelectStatement("SELECT * FROM " + clsUtility.DBName + ".[dbo].[DefaultStoreSetting] WITH(NOLOCK) where MachineName='" + Environment.MachineName + "'");
+            DataTable dt = ObjCon.ExecuteSelectStatement("SELECT * FROM " + clsUtility.DBName + ".[dbo].[DefaultStoreSetting] WITH(NOLOCK) WHERE MachineName='" + Environment.MachineName + "'");
             if (ObjUtil.ValidateTable(dt))
             {
                 lblmsg.Visible = false;
@@ -99,9 +99,6 @@ namespace IMS_Client_2.Settings
                 {
                     txtFileExtension.Text = "";
                 }
-
-             
-
             }
             else
             {
@@ -161,7 +158,6 @@ namespace IMS_Client_2.Settings
                     }
                     lblmsg.Visible = false;
                 }
-
             }
         }
         private void btnAdd_MouseEnter(object sender, EventArgs e)
@@ -192,7 +188,7 @@ namespace IMS_Client_2.Settings
             }
             else if (cmbStoreCategory.SelectedIndex == 1) // Wearhouse
             {
-                DataTable dt = ObjCon.ExecuteSelectStatement("select StoreID, StoreName FROM " + clsUtility.DBName + ".[dbo].[StoreMaster] WITH(NOLOCK) WHERE StoreCategory = 1");
+                DataTable dt = ObjCon.ExecuteSelectStatement("SELECT StoreID, StoreName FROM " + clsUtility.DBName + ".[dbo].[StoreMaster] WITH(NOLOCK) WHERE StoreCategory = 1");
                 if (ObjUtil.ValidateTable(dt))
                 {
                     cmbStoreName.DataSource = dt;
@@ -223,8 +219,7 @@ namespace IMS_Client_2.Settings
         {
             if (txtFileExtension.Text.Trim().StartsWith("."))
             {
-                return txtFileExtension.Text;
-                   
+                return txtFileExtension.Text;   
             }
             else
             {
@@ -233,26 +228,21 @@ namespace IMS_Client_2.Settings
         }
         private void button2_Click(object sender, EventArgs e)
         {
-            
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmOtherSetting, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
-
             {
-                DataTable dtFooterNote = ObjCon.ExecuteSelectStatement("select * FROM " + clsUtility.DBName + ".[dbo].[DefaultStoreSetting]");
-                if (dtFooterNote != null && dtFooterNote.Rows.Count > 0) // if data found for the PC thenupdate
+                DataTable dtFooterNote = ObjCon.ExecuteSelectStatement("SELECT * FROM " + clsUtility.DBName + ".[dbo].[DefaultStoreSetting] WITH(NOLOCK)");
+                if (ObjUtil.ValidateTable(dtFooterNote)) // if data found for the PC thenupdate
                 {
-                    ObjCon.ExecuteNonQuery("update " + clsUtility.DBName + ".dbo.DefaultStoreSetting set InvoiceFooterNote =N'" + txtFooterNote.Text + "', UserArabicNumbers='"+chkArabicPrice.Checked.ToString()+ "', ImagePath='"+txtImagePath.Text+ "', Extension='"+GetExtension()+"'");
+                    ObjCon.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.DefaultStoreSetting SET InvoiceFooterNote =N'" + txtFooterNote.Text + "', UserArabicNumbers='"+chkArabicPrice.Checked.ToString()+ "', ImagePath='"+txtImagePath.Text+ "', Extension='"+GetExtension()+"'");
                     clsUtility.ShowInfoMessage("Settings has been updated.", clsUtility.strProjectTitle);
-
                 }
                 else
                 {
                     // else insert.
-
                     ObjCon.SetColumnData("InvoiceFooterNote", SqlDbType.NVarChar, "N"+txtFooterNote.Text);
                     ObjCon.SetColumnData("UserArabicNumbers", SqlDbType.Bit,chkArabicPrice.Checked);
                     ObjCon.SetColumnData("ImagePath", SqlDbType.NVarChar, txtImagePath.Text);
                     ObjCon.SetColumnData("Extension", SqlDbType.NVarChar, GetExtension());
-
 
                     int r = ObjCon.InsertData(clsUtility.DBName + ".[dbo].[DefaultStoreSetting]", false);
                     if (r > 0)
@@ -260,10 +250,8 @@ namespace IMS_Client_2.Settings
                         clsUtility.ShowInfoMessage("Settings has been saved.", clsUtility.strProjectTitle);
                     }
                     lblmsg.Visible = false;
-
                 }
-            }
-            
+            } 
         }
 
         private void btnFooterCancel_Click(object sender, EventArgs e)
