@@ -38,6 +38,8 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rdSearchByBillNo = new System.Windows.Forms.RadioButton();
+            this.txtSearchByBillNo = new System.Windows.Forms.TextBox();
             this.rdShowAll = new System.Windows.Forms.RadioButton();
             this.rdSearchByShipment = new System.Windows.Forms.RadioButton();
             this.txtSearchByShipmentNo = new System.Windows.Forms.TextBox();
@@ -85,8 +87,6 @@
             this.txtLocalBillValue = new System.Windows.Forms.TextBox();
             this.txtNewPriceRate = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.rdSearchByBillNo = new System.Windows.Forms.RadioButton();
-            this.txtSearchByBillNo = new System.Windows.Forms.TextBox();
             this.lnkRefreshData = new System.Windows.Forms.LinkLabel();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -105,7 +105,7 @@
             this.panel2.Controls.Add(this.label12);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1304, 49);
             this.panel2.TabIndex = 110;
@@ -130,7 +130,7 @@
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnUpdate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdate.Location = new System.Drawing.Point(497, 70);
-            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(95, 31);
             this.btnUpdate.TabIndex = 7;
@@ -147,7 +147,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCancel.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.Location = new System.Drawing.Point(716, 70);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(95, 31);
             this.btnCancel.TabIndex = 9;
@@ -164,7 +164,7 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDelete.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.Location = new System.Drawing.Point(607, 70);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(95, 31);
             this.btnDelete.TabIndex = 8;
@@ -181,7 +181,7 @@
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnEdit.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEdit.Location = new System.Drawing.Point(391, 70);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(4);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(95, 31);
             this.btnEdit.TabIndex = 6;
@@ -198,7 +198,7 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSave.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Location = new System.Drawing.Point(281, 70);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(95, 31);
             this.btnSave.TabIndex = 5;
@@ -215,7 +215,7 @@
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAdd.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.Location = new System.Drawing.Point(163, 70);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(101, 31);
             this.btnAdd.TabIndex = 4;
@@ -235,13 +235,40 @@
             this.groupBox1.Controls.Add(this.txtSearchByShipmentNo);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(20, 491);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(1268, 63);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
+            // 
+            // rdSearchByBillNo
+            // 
+            this.rdSearchByBillNo.AutoSize = true;
+            this.rdSearchByBillNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdSearchByBillNo.Location = new System.Drawing.Point(12, 26);
+            this.rdSearchByBillNo.Margin = new System.Windows.Forms.Padding(4);
+            this.rdSearchByBillNo.Name = "rdSearchByBillNo";
+            this.rdSearchByBillNo.Size = new System.Drawing.Size(118, 25);
+            this.rdSearchByBillNo.TabIndex = 3;
+            this.rdSearchByBillNo.Text = "By Bill No :";
+            this.rdSearchByBillNo.UseVisualStyleBackColor = true;
+            this.rdSearchByBillNo.CheckedChanged += new System.EventHandler(this.rdSearchByBillNo_CheckedChanged);
+            // 
+            // txtSearchByBillNo
+            // 
+            this.txtSearchByBillNo.BackColor = System.Drawing.Color.White;
+            this.txtSearchByBillNo.Enabled = false;
+            this.txtSearchByBillNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearchByBillNo.Location = new System.Drawing.Point(139, 23);
+            this.txtSearchByBillNo.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSearchByBillNo.Name = "txtSearchByBillNo";
+            this.txtSearchByBillNo.Size = new System.Drawing.Size(243, 29);
+            this.txtSearchByBillNo.TabIndex = 4;
+            this.txtSearchByBillNo.TextChanged += new System.EventHandler(this.txtSearchByBillNo_TextChanged);
+            this.txtSearchByBillNo.Enter += new System.EventHandler(this.txtSearchByBillNo_Enter);
+            this.txtSearchByBillNo.Leave += new System.EventHandler(this.txtSearchByBillNo_Leave);
             // 
             // rdShowAll
             // 
@@ -249,7 +276,7 @@
             this.rdShowAll.Checked = true;
             this.rdShowAll.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdShowAll.Location = new System.Drawing.Point(905, 23);
-            this.rdShowAll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdShowAll.Margin = new System.Windows.Forms.Padding(4);
             this.rdShowAll.Name = "rdShowAll";
             this.rdShowAll.Size = new System.Drawing.Size(99, 25);
             this.rdShowAll.TabIndex = 2;
@@ -263,7 +290,7 @@
             this.rdSearchByShipment.AutoSize = true;
             this.rdSearchByShipment.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdSearchByShipment.Location = new System.Drawing.Point(436, 24);
-            this.rdSearchByShipment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdSearchByShipment.Margin = new System.Windows.Forms.Padding(4);
             this.rdSearchByShipment.Name = "rdSearchByShipment";
             this.rdSearchByShipment.Size = new System.Drawing.Size(164, 25);
             this.rdSearchByShipment.TabIndex = 0;
@@ -277,7 +304,7 @@
             this.txtSearchByShipmentNo.Enabled = false;
             this.txtSearchByShipmentNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSearchByShipmentNo.Location = new System.Drawing.Point(609, 22);
-            this.txtSearchByShipmentNo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSearchByShipmentNo.Margin = new System.Windows.Forms.Padding(4);
             this.txtSearchByShipmentNo.Name = "txtSearchByShipmentNo";
             this.txtSearchByShipmentNo.Size = new System.Drawing.Size(243, 29);
             this.txtSearchByShipmentNo.TabIndex = 1;
@@ -291,9 +318,9 @@
             this.grpGridview.Controls.Add(this.dataGridView1);
             this.grpGridview.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpGridview.Location = new System.Drawing.Point(20, 560);
-            this.grpGridview.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpGridview.Margin = new System.Windows.Forms.Padding(4);
             this.grpGridview.Name = "grpGridview";
-            this.grpGridview.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpGridview.Padding = new System.Windows.Forms.Padding(4);
             this.grpGridview.Size = new System.Drawing.Size(1268, 215);
             this.grpGridview.TabIndex = 234;
             this.grpGridview.TabStop = false;
@@ -306,7 +333,7 @@
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(8, 26);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
@@ -351,9 +378,9 @@
             this.grpPurchaseInvoice.Enabled = false;
             this.grpPurchaseInvoice.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpPurchaseInvoice.Location = new System.Drawing.Point(27, 113);
-            this.grpPurchaseInvoice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpPurchaseInvoice.Margin = new System.Windows.Forms.Padding(4);
             this.grpPurchaseInvoice.Name = "grpPurchaseInvoice";
-            this.grpPurchaseInvoice.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpPurchaseInvoice.Padding = new System.Windows.Forms.Padding(4);
             this.grpPurchaseInvoice.Size = new System.Drawing.Size(1267, 130);
             this.grpPurchaseInvoice.TabIndex = 0;
             this.grpPurchaseInvoice.TabStop = false;
@@ -433,7 +460,7 @@
             this.btnSupplierPopup.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSupplierPopup.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSupplierPopup.Location = new System.Drawing.Point(467, 82);
-            this.btnSupplierPopup.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSupplierPopup.Margin = new System.Windows.Forms.Padding(4);
             this.btnSupplierPopup.Name = "btnSupplierPopup";
             this.btnSupplierPopup.Size = new System.Drawing.Size(36, 33);
             this.btnSupplierPopup.TabIndex = 4;
@@ -456,7 +483,7 @@
             // 
             this.txtTotalQTY.BackColor = System.Drawing.Color.White;
             this.txtTotalQTY.Location = new System.Drawing.Point(1072, 84);
-            this.txtTotalQTY.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTotalQTY.Margin = new System.Windows.Forms.Padding(4);
             this.txtTotalQTY.Name = "txtTotalQTY";
             this.txtTotalQTY.Size = new System.Drawing.Size(167, 29);
             this.txtTotalQTY.TabIndex = 6;
@@ -482,7 +509,7 @@
             // 
             this.txtBillValue.BackColor = System.Drawing.Color.White;
             this.txtBillValue.Location = new System.Drawing.Point(655, 82);
-            this.txtBillValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtBillValue.Margin = new System.Windows.Forms.Padding(4);
             this.txtBillValue.Name = "txtBillValue";
             this.txtBillValue.Size = new System.Drawing.Size(273, 29);
             this.txtBillValue.TabIndex = 5;
@@ -498,7 +525,7 @@
             this.cmbSupplier.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbSupplier.FormattingEnabled = true;
             this.cmbSupplier.Location = new System.Drawing.Point(167, 82);
-            this.cmbSupplier.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbSupplier.Margin = new System.Windows.Forms.Padding(4);
             this.cmbSupplier.Name = "cmbSupplier";
             this.cmbSupplier.Size = new System.Drawing.Size(273, 30);
             this.cmbSupplier.Sorted = true;
@@ -522,7 +549,7 @@
             this.dtpBillDate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpBillDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpBillDate.Location = new System.Drawing.Point(1072, 34);
-            this.dtpBillDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpBillDate.Margin = new System.Windows.Forms.Padding(4);
             this.dtpBillDate.Name = "dtpBillDate";
             this.dtpBillDate.Size = new System.Drawing.Size(167, 29);
             this.dtpBillDate.TabIndex = 2;
@@ -555,7 +582,7 @@
             // 
             this.txtShipmentNo.BackColor = System.Drawing.Color.White;
             this.txtShipmentNo.Location = new System.Drawing.Point(655, 34);
-            this.txtShipmentNo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtShipmentNo.Margin = new System.Windows.Forms.Padding(4);
             this.txtShipmentNo.Name = "txtShipmentNo";
             this.txtShipmentNo.Size = new System.Drawing.Size(273, 29);
             this.txtShipmentNo.TabIndex = 1;
@@ -579,7 +606,7 @@
             // 
             this.txtSupplierBillNo.BackColor = System.Drawing.Color.White;
             this.txtSupplierBillNo.Location = new System.Drawing.Point(167, 34);
-            this.txtSupplierBillNo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSupplierBillNo.Margin = new System.Windows.Forms.Padding(4);
             this.txtSupplierBillNo.Name = "txtSupplierBillNo";
             this.txtSupplierBillNo.Size = new System.Drawing.Size(273, 29);
             this.txtSupplierBillNo.TabIndex = 0;
@@ -598,9 +625,9 @@
             this.grpCurrencyRate.Enabled = false;
             this.grpCurrencyRate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpCurrencyRate.Location = new System.Drawing.Point(27, 250);
-            this.grpCurrencyRate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpCurrencyRate.Margin = new System.Windows.Forms.Padding(4);
             this.grpCurrencyRate.Name = "grpCurrencyRate";
-            this.grpCurrencyRate.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpCurrencyRate.Padding = new System.Windows.Forms.Padding(4);
             this.grpCurrencyRate.Size = new System.Drawing.Size(945, 63);
             this.grpCurrencyRate.TabIndex = 1;
             this.grpCurrencyRate.TabStop = false;
@@ -641,7 +668,7 @@
             this.cmbCountry.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCountry.FormattingEnabled = true;
             this.cmbCountry.Location = new System.Drawing.Point(171, 21);
-            this.cmbCountry.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbCountry.Margin = new System.Windows.Forms.Padding(4);
             this.cmbCountry.Name = "cmbCountry";
             this.cmbCountry.Size = new System.Drawing.Size(273, 30);
             this.cmbCountry.Sorted = true;
@@ -653,7 +680,7 @@
             this.txtCurrencyRate.BackColor = System.Drawing.Color.White;
             this.txtCurrencyRate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCurrencyRate.Location = new System.Drawing.Point(648, 23);
-            this.txtCurrencyRate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCurrencyRate.Margin = new System.Windows.Forms.Padding(4);
             this.txtCurrencyRate.Name = "txtCurrencyRate";
             this.txtCurrencyRate.ReadOnly = true;
             this.txtCurrencyRate.Size = new System.Drawing.Size(273, 29);
@@ -687,9 +714,9 @@
             this.grpForeignCurrency.Enabled = false;
             this.grpForeignCurrency.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpForeignCurrency.Location = new System.Drawing.Point(29, 329);
-            this.grpForeignCurrency.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpForeignCurrency.Margin = new System.Windows.Forms.Padding(4);
             this.grpForeignCurrency.Name = "grpForeignCurrency";
-            this.grpForeignCurrency.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpForeignCurrency.Padding = new System.Windows.Forms.Padding(4);
             this.grpForeignCurrency.Size = new System.Drawing.Size(456, 155);
             this.grpForeignCurrency.TabIndex = 2;
             this.grpForeignCurrency.TabStop = false;
@@ -712,7 +739,7 @@
             this.txtForeignExp.BackColor = System.Drawing.Color.White;
             this.txtForeignExp.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtForeignExp.Location = new System.Drawing.Point(199, 26);
-            this.txtForeignExp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtForeignExp.Margin = new System.Windows.Forms.Padding(4);
             this.txtForeignExp.Name = "txtForeignExp";
             this.txtForeignExp.Size = new System.Drawing.Size(243, 29);
             this.txtForeignExp.TabIndex = 0;
@@ -739,7 +766,7 @@
             this.txtForeignDiscount.BackColor = System.Drawing.Color.White;
             this.txtForeignDiscount.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtForeignDiscount.Location = new System.Drawing.Point(200, 66);
-            this.txtForeignDiscount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtForeignDiscount.Margin = new System.Windows.Forms.Padding(4);
             this.txtForeignDiscount.Name = "txtForeignDiscount";
             this.txtForeignDiscount.Size = new System.Drawing.Size(243, 29);
             this.txtForeignDiscount.TabIndex = 1;
@@ -754,7 +781,7 @@
             this.txtNetValue.BackColor = System.Drawing.Color.White;
             this.txtNetValue.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNetValue.Location = new System.Drawing.Point(200, 107);
-            this.txtNetValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNetValue.Margin = new System.Windows.Forms.Padding(4);
             this.txtNetValue.Name = "txtNetValue";
             this.txtNetValue.ReadOnly = true;
             this.txtNetValue.Size = new System.Drawing.Size(243, 29);
@@ -789,9 +816,9 @@
             this.grpLocalCurrency.Enabled = false;
             this.grpLocalCurrency.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpLocalCurrency.Location = new System.Drawing.Point(504, 329);
-            this.grpLocalCurrency.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpLocalCurrency.Margin = new System.Windows.Forms.Padding(4);
             this.grpLocalCurrency.Name = "grpLocalCurrency";
-            this.grpLocalCurrency.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpLocalCurrency.Padding = new System.Windows.Forms.Padding(4);
             this.grpLocalCurrency.Size = new System.Drawing.Size(784, 155);
             this.grpLocalCurrency.TabIndex = 3;
             this.grpLocalCurrency.TabStop = false;
@@ -814,7 +841,7 @@
             this.txtLocalValue.BackColor = System.Drawing.Color.White;
             this.txtLocalValue.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLocalValue.Location = new System.Drawing.Point(179, 22);
-            this.txtLocalValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtLocalValue.Margin = new System.Windows.Forms.Padding(4);
             this.txtLocalValue.Name = "txtLocalValue";
             this.txtLocalValue.ReadOnly = true;
             this.txtLocalValue.Size = new System.Drawing.Size(243, 29);
@@ -841,7 +868,7 @@
             this.txtLocalExp.BackColor = System.Drawing.Color.White;
             this.txtLocalExp.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLocalExp.Location = new System.Drawing.Point(179, 63);
-            this.txtLocalExp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtLocalExp.Margin = new System.Windows.Forms.Padding(4);
             this.txtLocalExp.Name = "txtLocalExp";
             this.txtLocalExp.Size = new System.Drawing.Size(243, 29);
             this.txtLocalExp.TabIndex = 1;
@@ -868,7 +895,7 @@
             this.txtLocalBillValue.BackColor = System.Drawing.Color.White;
             this.txtLocalBillValue.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLocalBillValue.Location = new System.Drawing.Point(179, 103);
-            this.txtLocalBillValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtLocalBillValue.Margin = new System.Windows.Forms.Padding(4);
             this.txtLocalBillValue.Name = "txtLocalBillValue";
             this.txtLocalBillValue.ReadOnly = true;
             this.txtLocalBillValue.Size = new System.Drawing.Size(243, 29);
@@ -882,7 +909,7 @@
             this.txtNewPriceRate.BackColor = System.Drawing.Color.White;
             this.txtNewPriceRate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNewPriceRate.Location = new System.Drawing.Point(593, 103);
-            this.txtNewPriceRate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNewPriceRate.Margin = new System.Windows.Forms.Padding(4);
             this.txtNewPriceRate.Name = "txtNewPriceRate";
             this.txtNewPriceRate.ReadOnly = true;
             this.txtNewPriceRate.Size = new System.Drawing.Size(167, 29);
@@ -910,38 +937,11 @@
             this.lnkRefreshData.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lnkRefreshData.Location = new System.Drawing.Point(629, 63);
             this.lnkRefreshData.Name = "lnkRefreshData";
-            this.lnkRefreshData.Size = new System.Drawing.Size(100, 19);
+            this.lnkRefreshData.Size = new System.Drawing.Size(123, 23);
             this.lnkRefreshData.TabIndex = 237;
             this.lnkRefreshData.TabStop = true;
             this.lnkRefreshData.Text = "Refresh Data";
             this.lnkRefreshData.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkRefreshData_LinkClicked);
-            // 
-            // rdSearchByBillNo
-            // 
-            this.rdSearchByBillNo.AutoSize = true;
-            this.rdSearchByBillNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdSearchByBillNo.Location = new System.Drawing.Point(12, 26);
-            this.rdSearchByBillNo.Margin = new System.Windows.Forms.Padding(4);
-            this.rdSearchByBillNo.Name = "rdSearchByBillNo";
-            this.rdSearchByBillNo.Size = new System.Drawing.Size(118, 25);
-            this.rdSearchByBillNo.TabIndex = 3;
-            this.rdSearchByBillNo.Text = "By Bill No :";
-            this.rdSearchByBillNo.UseVisualStyleBackColor = true;
-            this.rdSearchByBillNo.CheckedChanged += new System.EventHandler(this.rdSearchByBillNo_CheckedChanged);
-            // 
-            // txtSearchByBillNo
-            // 
-            this.txtSearchByBillNo.BackColor = System.Drawing.Color.White;
-            this.txtSearchByBillNo.Enabled = false;
-            this.txtSearchByBillNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearchByBillNo.Location = new System.Drawing.Point(139, 23);
-            this.txtSearchByBillNo.Margin = new System.Windows.Forms.Padding(4);
-            this.txtSearchByBillNo.Name = "txtSearchByBillNo";
-            this.txtSearchByBillNo.Size = new System.Drawing.Size(243, 29);
-            this.txtSearchByBillNo.TabIndex = 4;
-            this.txtSearchByBillNo.TextChanged += new System.EventHandler(this.txtSearchByBillNo_TextChanged);
-            this.txtSearchByBillNo.Enter += new System.EventHandler(this.txtSearchByBillNo_Enter);
-            this.txtSearchByBillNo.Leave += new System.EventHandler(this.txtSearchByBillNo_Leave);
             // 
             // Purchase_Invoice
             // 
@@ -966,7 +966,7 @@
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "Purchase_Invoice";
             this.ShowIcon = false;
