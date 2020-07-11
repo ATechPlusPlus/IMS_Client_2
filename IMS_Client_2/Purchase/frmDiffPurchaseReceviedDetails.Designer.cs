@@ -179,6 +179,7 @@
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dataGridView1.Size = new System.Drawing.Size(990, 188);
             this.dataGridView1.TabIndex = 265;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
             // 
             // label1
@@ -288,6 +289,8 @@
             // 
             // PicProductImg
             // 
+            this.PicProductImg.BackColor = System.Drawing.Color.Transparent;
+            this.PicProductImg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PicProductImg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PicProductImg.Location = new System.Drawing.Point(852, 46);
             this.PicProductImg.Name = "PicProductImg";

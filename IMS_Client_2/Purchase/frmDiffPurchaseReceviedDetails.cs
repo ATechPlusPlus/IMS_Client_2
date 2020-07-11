@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 using CoreApp;
 
 namespace IMS_Client_2.Purchase
@@ -102,8 +103,48 @@ namespace IMS_Client_2.Purchase
             ObjUtil.SetDataGridProperty(dataGridView1, DataGridViewAutoSizeColumnsMode.ColumnHeader);
             //ObjUtil.SetDataGridProperty(dataGridView1, DataGridViewAutoSizeColumnsMode.Fill);
             dataGridView1.Columns["ProductID"].Visible = false;
+            dataGridView1.Columns["Photo"].Visible = false;
             dataGridView1.Columns["SupplierID"].Visible = false;
             dataGridView1.Columns["CountryID"].Visible = false;
+        }
+
+        private void GetProductImage(string ImageID)
+        {
+            DataTable dtImagePath = ObjDAL.ExecuteSelectStatement("SELECT ImagePath, Extension FROM " + clsUtility.DBName + ".dbo.DefaultStoreSetting WITH(NOLOCK) WHERE MachineName='" + Environment.MachineName + "'");
+            if (ObjUtil.ValidateTable(dtImagePath))
+            {
+                if (dtImagePath.Rows[0]["ImagePath"] != DBNull.Value)
+                {
+                    string ImgPath = dtImagePath.Rows[0]["ImagePath"].ToString();
+                    string extension = dtImagePath.Rows[0]["Extension"].ToString();
+
+                    string imgFile = ImgPath + "//" + ImageID + extension;
+                    if (File.Exists(imgFile))
+                    {
+                        PicProductImg.Image = Image.FromFile(imgFile);
+                    }
+                    else
+                    {
+                        PicProductImg.Image = null;
+                    }
+                }
+                else
+                {
+                    clsUtility.ShowInfoMessage("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
+                }
+            }
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView1.SelectedRows[0].Cells["Photo"].Value != DBNull.Value)
+            {
+                GetProductImage(dataGridView1.SelectedRows[0].Cells["Photo"].Value.ToString());
+            }
+            else
+            {
+                PicProductImg.Image = null;
+            }
         }
     }
 }

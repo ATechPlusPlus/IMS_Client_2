@@ -99,104 +99,132 @@ namespace IMS_Client_2.Masters
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (Validateform())
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Category_Master, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
-                if (DuplicateUser(0))
+                if (Validateform())
                 {
-                    ObjDAL.SetColumnData("CategoryName", SqlDbType.NVarChar, txtCategoryName.Text.Trim());
-                    ObjDAL.SetColumnData("CategoryDescription", SqlDbType.NVarChar, txtCategoryDescription.Text);
-                    ObjDAL.SetColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
-                    ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
-                    if (ObjDAL.InsertData(clsUtility.DBName + ".dbo.CategoryMaster", true) > 0)
+                    if (DuplicateUser(0))
                     {
-                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave);
-                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave, clsUtility.IsAdmin);
-                        clsUtility.ShowInfoMessage("Category Name : '" + txtCategoryName.Text + "' is Saved Successfully..", clsUtility.strProjectTitle);
-                        ClearAll();
-                        LoadData();
-                        grpCategory.Enabled = false;
+                        ObjDAL.SetColumnData("CategoryName", SqlDbType.NVarChar, txtCategoryName.Text.Trim());
+                        ObjDAL.SetColumnData("CategoryDescription", SqlDbType.NVarChar, txtCategoryDescription.Text);
+                        ObjDAL.SetColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
+                        ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
+                        if (ObjDAL.InsertData(clsUtility.DBName + ".dbo.CategoryMaster", true) > 0)
+                        {
+                            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave);
+                            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave, clsUtility.IsAdmin);
+                            clsUtility.ShowInfoMessage("Category Name : '" + txtCategoryName.Text + "' is Saved Successfully..", clsUtility.strProjectTitle);
+                            ClearAll();
+                            LoadData();
+                            grpCategory.Enabled = false;
+                        }
+                        else
+                        {
+                            clsUtility.ShowInfoMessage("Category Name : '" + txtCategoryName.Text + "' is not Saved Successfully..", clsUtility.strProjectTitle);
+                            ObjDAL.ResetData();
+                        }
                     }
                     else
                     {
-                        clsUtility.ShowInfoMessage("Category Name : '" + txtCategoryName.Text + "' is not Saved Successfully..", clsUtility.strProjectTitle);
+                        clsUtility.ShowErrorMessage("'" + txtCategoryName.Text + "' Category is already exist..", clsUtility.strProjectTitle);
                         ObjDAL.ResetData();
+                        txtCategoryName.Focus();
                     }
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("'" + txtCategoryName.Text + "' Category is already exist..", clsUtility.strProjectTitle);
-                    ObjDAL.ResetData();
-                    txtCategoryName.Focus();
-                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
-            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit);
-            grpCategory.Enabled = true;
-            txtCategoryName.Focus();
-            txtCategoryName.SelectionStart = txtCategoryName.MaxLength;
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Category_Master, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
+            {
+                //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
+                ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit);
+                grpCategory.Enabled = true;
+                txtCategoryName.Focus();
+                txtCategoryName.SelectionStart = txtCategoryName.MaxLength;
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (Validateform())
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Category_Master, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
             {
-                if (DuplicateUser(ID))
+                if (Validateform())
                 {
-                    ObjDAL.UpdateColumnData("CategoryName", SqlDbType.NVarChar, txtCategoryName.Text.Trim());
-                    ObjDAL.UpdateColumnData("CategoryDescription", SqlDbType.NVarChar, txtCategoryDescription.Text);
-                    ObjDAL.UpdateColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
-                    ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
-                    ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
-
-                    if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.CategoryMaster", "CategoryID = " + ID + "") > 0)
+                    if (DuplicateUser(ID))
                     {
-                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate);
-                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate, clsUtility.IsAdmin);
+                        ObjDAL.UpdateColumnData("CategoryName", SqlDbType.NVarChar, txtCategoryName.Text.Trim());
+                        ObjDAL.UpdateColumnData("CategoryDescription", SqlDbType.NVarChar, txtCategoryDescription.Text);
+                        ObjDAL.UpdateColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
+                        ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
+                        ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
 
-                        clsUtility.ShowInfoMessage("'" + txtCategoryName.Text + "' Category is Updated", clsUtility.strProjectTitle);
-                        LoadData();
-                        ClearAll();
-                        grpCategory.Enabled = false;
-                        ObjDAL.ResetData();
+                        if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.CategoryMaster", "CategoryID = " + ID + "") > 0)
+                        {
+                            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate);
+                            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate, clsUtility.IsAdmin);
+
+                            clsUtility.ShowInfoMessage("'" + txtCategoryName.Text + "' Category is Updated", clsUtility.strProjectTitle);
+                            LoadData();
+                            ClearAll();
+                            grpCategory.Enabled = false;
+                            ObjDAL.ResetData();
+                        }
+                        else
+                        {
+                            clsUtility.ShowErrorMessage("'" + txtCategoryName.Text + "' Category is not Updated", clsUtility.strProjectTitle);
+                            ObjDAL.ResetData();
+                        }
                     }
                     else
                     {
-                        clsUtility.ShowErrorMessage("'" + txtCategoryName.Text + "' Category is not Updated", clsUtility.strProjectTitle);
+                        clsUtility.ShowErrorMessage("'" + txtCategoryName.Text + "' Category is already exist..", clsUtility.strProjectTitle);
+                        txtCategoryName.Focus();
                         ObjDAL.ResetData();
                     }
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("'" + txtCategoryName.Text + "' Category is already exist..", clsUtility.strProjectTitle);
-                    txtCategoryName.Focus();
-                    ObjDAL.ResetData();
-                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DialogResult d = MessageBox.Show("Are you sure want to delete '" + txtCategoryName.Text + "' Category ", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            if (d == DialogResult.Yes)
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Category_Master, clsFormRights.Operation.Delete) || clsUtility.IsAdmin)
             {
-                if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.CategoryMaster", "CategoryName='" + txtCategoryName.Text.Trim() + "'") > 0)
+                DialogResult d = MessageBox.Show("Are you sure want to delete '" + txtCategoryName.Text + "' Category ", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (d == DialogResult.Yes)
                 {
-                    clsUtility.ShowInfoMessage("'" + txtCategoryName.Text + "' Category is deleted  ", clsUtility.strProjectTitle);
-                    ClearAll();
-                    LoadData();
-                    grpCategory.Enabled = false;
-                    //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
-                    ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
+                    if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.CategoryMaster", "CategoryName='" + txtCategoryName.Text.Trim() + "'") > 0)
+                    {
+                        clsUtility.ShowInfoMessage("'" + txtCategoryName.Text + "' Category is deleted  ", clsUtility.strProjectTitle);
+                        ClearAll();
+                        LoadData();
+                        grpCategory.Enabled = false;
+                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
+                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
+                    }
+                    else
+                    {
+                        clsUtility.ShowErrorMessage("'" + txtCategoryName.Text + "' Category is not deleted  ", clsUtility.strProjectTitle);
+                        ObjDAL.ResetData();
+                    }
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("'" + txtCategoryName.Text + "' Category is not deleted  ", clsUtility.strProjectTitle);
-                    ObjDAL.ResetData();
-                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 

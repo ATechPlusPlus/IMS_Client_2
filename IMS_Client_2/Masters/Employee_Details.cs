@@ -102,9 +102,16 @@ namespace IMS_Client_2.Masters
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (ValidateEmployee())
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Employee_Details, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
-                SaveEmployee();
+                if (ValidateEmployee())
+                {
+                    SaveEmployee();
+                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
         private void CreateNewUser(int EmployeeID)
@@ -154,13 +161,13 @@ namespace IMS_Client_2.Masters
                 return false;
             }
 
-            else if (radFemale.Checked==false && radMale.Checked==false)
+            else if (radFemale.Checked == false && radMale.Checked == false)
             {
                 clsUtility.ShowInfoMessage("Please Select Gender.", clsUtility.strProjectTitle);
                 radMale.Focus();
                 radMale.Checked = false;
                 radFemale.Checked = false;
-                    
+
 
                 return false;
             }
@@ -214,7 +221,7 @@ namespace IMS_Client_2.Masters
             {
                 ObjDAL.SetColumnData("DOB", SqlDbType.DateTime, DBNull.Value);
             }
-         
+
             ObjDAL.SetColumnData("Address", SqlDbType.NVarChar, txtAdd.Text.Trim());
 
             if (PicEmployee.Image != null)
@@ -247,7 +254,7 @@ namespace IMS_Client_2.Masters
 
         private void LoadData()
         {
-            string q = " select e1.EmpID,EmployeeCode,Name,ShopID,(CASE WHEN e1.Gender =1 THEN 'Male' WHEN e1.Gender =0 THEN 'Female' END) Gender,DOB,[Address],Photo, s1.StoreName FROM " + clsUtility.DBName + ".dbo.EmployeeDetails e1 join " + clsUtility.DBName + ".dbo.StoreMaster s1" +
+            string q = "SELECT e1.EmpID,EmployeeCode,Name,ShopID,(CASE WHEN e1.Gender =1 THEN 'Male' WHEN e1.Gender =0 THEN 'Female' END) Gender,DOB,[Address],Photo, s1.StoreName FROM " + clsUtility.DBName + ".dbo.EmployeeDetails e1 JOIN " + clsUtility.DBName + ".dbo.StoreMaster s1" +
               " ON e1.ShopID=s1.StoreID ORDER BY EmpID DESC";
             DataTable dataTable = ObjDAL.ExecuteSelectStatement(q);
             if (ObjUtil.ValidateTable(dataTable))
@@ -364,17 +371,31 @@ namespace IMS_Client_2.Masters
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
-            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit);
-            grpEmployee.Enabled = true;
-            txtEmployeeCode.Focus();
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Employee_Details, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
+            {
+                //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
+                ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit);
+                grpEmployee.Enabled = true;
+                txtEmployeeCode.Focus();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (ValidateEmployee())
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Employee_Details, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
             {
-                UpdateEmployee();
+                if (ValidateEmployee())
+                {
+                    UpdateEmployee();
+                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
         private void UpdateEmployee()
@@ -399,7 +420,7 @@ namespace IMS_Client_2.Masters
                 ObjDAL.UpdateColumnData("DOB", SqlDbType.DateTime, DBNull.Value);
             }
 
-               
+
             ObjDAL.UpdateColumnData("Address", SqlDbType.NVarChar, txtAdd.Text.Trim());
 
             if (PicEmployee.Image != null)
@@ -460,23 +481,30 @@ namespace IMS_Client_2.Masters
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DialogResult d = MessageBox.Show("Are you sure want to delete '" + txtName.Text + "' ? ", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            if (d == DialogResult.Yes)
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Employee_Details, clsFormRights.Operation.Delete) || clsUtility.IsAdmin)
             {
-                if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.EmployeeDetails", "EmpID='" + EmployeeID + "'") > 0)
+                DialogResult d = MessageBox.Show("Are you sure want to delete '" + txtName.Text + "' ? ", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (d == DialogResult.Yes)
                 {
-                    clsUtility.ShowInfoMessage("'" + txtName.Text + "' Employee has been deleted.  ", clsUtility.strProjectTitle);
-                    ClearAll();
-                    LoadData();
-                    grpEmployee.Enabled = false;
-                    //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
-                    ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
+                    if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.EmployeeDetails", "EmpID='" + EmployeeID + "'") > 0)
+                    {
+                        clsUtility.ShowInfoMessage("'" + txtName.Text + "' Employee has been deleted.  ", clsUtility.strProjectTitle);
+                        ClearAll();
+                        LoadData();
+                        grpEmployee.Enabled = false;
+                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
+                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
+                    }
+                    else
+                    {
+                        clsUtility.ShowErrorMessage("Failed to delete the employee. ", clsUtility.strProjectTitle);
+                        ObjDAL.ResetData();
+                    }
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("Failed to delete the employee. ", clsUtility.strProjectTitle);
-                    ObjDAL.ResetData();
-                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 

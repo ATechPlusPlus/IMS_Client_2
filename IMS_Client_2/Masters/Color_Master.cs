@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -99,102 +100,130 @@ namespace IMS_Client_2.Masters
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (ValidateForm())
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Color_Master, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
-                if (DuplicateColor(0))
+                if (ValidateForm())
                 {
-                    ObjDAL.SetColumnData("ColorName", SqlDbType.NVarChar, txtColorName.Text.Trim());
-                    ObjDAL.SetColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
-                    ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
-                    if (ObjDAL.InsertData(clsUtility.DBName + ".dbo.ColorMaster", true) > 0)
+                    if (DuplicateColor(0))
                     {
-                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave, clsUtility.IsAdmin);
-                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave);
-                        clsUtility.ShowInfoMessage("Color Name : '" + txtColorName.Text + "' is Saved Successfully..", clsUtility.strProjectTitle);
-                        ClearAll();
-                        LoadData();
-                        grpColorDetails.Enabled = false;
+                        ObjDAL.SetColumnData("ColorName", SqlDbType.NVarChar, txtColorName.Text.Trim());
+                        ObjDAL.SetColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
+                        ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
+                        if (ObjDAL.InsertData(clsUtility.DBName + ".dbo.ColorMaster", true) > 0)
+                        {
+                            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave, clsUtility.IsAdmin);
+                            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave);
+                            clsUtility.ShowInfoMessage("Color Name : '" + txtColorName.Text + "' is Saved Successfully..", clsUtility.strProjectTitle);
+                            ClearAll();
+                            LoadData();
+                            grpColorDetails.Enabled = false;
+                        }
+                        else
+                        {
+                            clsUtility.ShowInfoMessage("Color Name : '" + txtColorName.Text + "' is not Saved Successfully..", clsUtility.strProjectTitle);
+                            ObjDAL.ResetData();
+                        }
                     }
                     else
                     {
-                        clsUtility.ShowInfoMessage("Color Name : '" + txtColorName.Text + "' is not Saved Successfully..", clsUtility.strProjectTitle);
+                        clsUtility.ShowErrorMessage("'" + txtColorName.Text + "' Color is already exist..", clsUtility.strProjectTitle);
                         ObjDAL.ResetData();
+                        txtColorName.Focus();
                     }
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("'" + txtColorName.Text + "' Color is already exist..", clsUtility.strProjectTitle);
-                    ObjDAL.ResetData();
-                    txtColorName.Focus();
-                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
-            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit);
-            grpColorDetails.Enabled = true;
-            txtColorName.Focus();
-            txtColorName.SelectionStart = txtColorName.MaxLength;
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Color_Master, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
+            {
+                //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
+                ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit);
+                grpColorDetails.Enabled = true;
+                txtColorName.Focus();
+                txtColorName.SelectionStart = txtColorName.MaxLength;
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (ValidateForm())
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Color_Master, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
             {
-                if (DuplicateColor(ID))
+                if (ValidateForm())
                 {
-                    ObjDAL.UpdateColumnData("ColorName", SqlDbType.NVarChar, txtColorName.Text.Trim());
-                    ObjDAL.UpdateColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
-                    ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
-                    ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
-
-                    if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.ColorMaster", "ColorID = " + ID + "") > 0)
+                    if (DuplicateColor(ID))
                     {
-                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate, clsUtility.IsAdmin);
-                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate);
+                        ObjDAL.UpdateColumnData("ColorName", SqlDbType.NVarChar, txtColorName.Text.Trim());
+                        ObjDAL.UpdateColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
+                        ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
+                        ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
 
-                        clsUtility.ShowInfoMessage("'" + txtColorName.Text + "' Color is Updated", clsUtility.strProjectTitle);
-                        LoadData();
-                        ClearAll();
-                        grpColorDetails.Enabled = false;
-                        ObjDAL.ResetData();
+                        if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.ColorMaster", "ColorID = " + ID + "") > 0)
+                        {
+                            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate, clsUtility.IsAdmin);
+                            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate);
+
+                            clsUtility.ShowInfoMessage("'" + txtColorName.Text + "' Color is Updated", clsUtility.strProjectTitle);
+                            LoadData();
+                            ClearAll();
+                            grpColorDetails.Enabled = false;
+                            ObjDAL.ResetData();
+                        }
+                        else
+                        {
+                            clsUtility.ShowErrorMessage("'" + txtColorName.Text + "' Color is not Updated", clsUtility.strProjectTitle);
+                            ObjDAL.ResetData();
+                        }
                     }
                     else
                     {
-                        clsUtility.ShowErrorMessage("'" + txtColorName.Text + "' Color is not Updated", clsUtility.strProjectTitle);
+                        clsUtility.ShowErrorMessage("'" + txtColorName.Text + "' Color is already exist..", clsUtility.strProjectTitle);
+                        txtColorName.Focus();
                         ObjDAL.ResetData();
                     }
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("'" + txtColorName.Text + "' Color is already exist..", clsUtility.strProjectTitle);
-                    txtColorName.Focus();
-                    ObjDAL.ResetData();
-                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DialogResult d = MessageBox.Show("Are you sure want to delete '" + txtColorName.Text + "' Color ", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            if (d == DialogResult.Yes)
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Color_Master, clsFormRights.Operation.Delete) || clsUtility.IsAdmin)
             {
-                if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.ColorMaster", "ColorName='" + txtColorName.Text.Trim() + "'") > 0)
+                DialogResult d = MessageBox.Show("Are you sure want to delete '" + txtColorName.Text + "' Color ", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (d == DialogResult.Yes)
                 {
-                    clsUtility.ShowInfoMessage("'" + txtColorName.Text + "' Color is deleted  ", clsUtility.strProjectTitle);
-                    ClearAll();
-                    LoadData();
-                    grpColorDetails.Enabled = false;
-                    //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
-                    ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
+                    if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.ColorMaster", "ColorID = " + ID + "") > 0)
+                    {
+                        clsUtility.ShowInfoMessage("'" + txtColorName.Text + "' Color is deleted  ", clsUtility.strProjectTitle);
+                        ClearAll();
+                        LoadData();
+                        grpColorDetails.Enabled = false;
+                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
+                        ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
+                    }
+                    else
+                    {
+                        clsUtility.ShowErrorMessage("'" + txtColorName.Text + "' Color is not deleted  ", clsUtility.strProjectTitle);
+                        ObjDAL.ResetData();
+                    }
                 }
-                else
-                {
-                    clsUtility.ShowErrorMessage("'" + txtColorName.Text + "' Color is not deleted  ", clsUtility.strProjectTitle);
-                    ObjDAL.ResetData();
-                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 

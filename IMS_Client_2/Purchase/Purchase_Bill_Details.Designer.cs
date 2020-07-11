@@ -83,6 +83,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtNewRate = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.PurchaseInvoiceDetailsID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ModelNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -95,7 +96,6 @@
             this.AddedRatio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SuppossedPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SalesPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColDelete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel2.SuspendLayout();
             this.grpPurchaseBillDetail.SuspendLayout();
             this.grpGridview.SuspendLayout();
@@ -335,6 +335,7 @@
             this.txtRate.BackColor = System.Drawing.Color.White;
             this.txtRate.Location = new System.Drawing.Point(482, 80);
             this.txtRate.Name = "txtRate";
+            this.txtRate.ShortcutsEnabled = false;
             this.txtRate.Size = new System.Drawing.Size(206, 25);
             this.txtRate.TabIndex = 4;
             this.txtRate.Enter += new System.EventHandler(this.txtSupplierBillNo_Enter);
@@ -508,6 +509,7 @@
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.PurchaseInvoiceDetailsID,
             this.ProductID,
             this.ProductName,
             this.ModelNo,
@@ -519,8 +521,7 @@
             this.LocalCost,
             this.AddedRatio,
             this.SuppossedPrice,
-            this.SalesPrice,
-            this.ColDelete});
+            this.SalesPrice});
             this.dataGridView1.Location = new System.Drawing.Point(6, 21);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
@@ -528,6 +529,7 @@
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
+            this.dataGridView1.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView1_ColumnAdded);
             this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
             // 
             // lblTotalValueEntered
@@ -773,6 +775,14 @@
             this.label10.TabIndex = 291;
             this.label10.Text = "*";
             // 
+            // PurchaseInvoiceDetailsID
+            // 
+            this.PurchaseInvoiceDetailsID.DataPropertyName = "PurchaseInvoiceDetailsID";
+            this.PurchaseInvoiceDetailsID.HeaderText = "PurchaseInvoiceDetailsID";
+            this.PurchaseInvoiceDetailsID.Name = "PurchaseInvoiceDetailsID";
+            this.PurchaseInvoiceDetailsID.ReadOnly = true;
+            this.PurchaseInvoiceDetailsID.Visible = false;
+            // 
             // ProductID
             // 
             this.ProductID.DataPropertyName = "ProductID";
@@ -854,14 +864,6 @@
             this.SalesPrice.HeaderText = "EndUser";
             this.SalesPrice.Name = "SalesPrice";
             this.SalesPrice.ReadOnly = true;
-            // 
-            // ColDelete
-            // 
-            this.ColDelete.DataPropertyName = "Delete";
-            this.ColDelete.HeaderText = "Delete";
-            this.ColDelete.Name = "ColDelete";
-            this.ColDelete.Text = "Delete";
-            this.ColDelete.UseColumnTextForButtonValue = true;
             // 
             // Purchase_Bill_Details
             // 
@@ -975,6 +977,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseInvoiceDetailsID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ModelNo;
@@ -987,6 +990,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AddedRatio;
         private System.Windows.Forms.DataGridViewTextBoxColumn SuppossedPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn SalesPrice;
-        private System.Windows.Forms.DataGridViewButtonColumn ColDelete;
     }
 }

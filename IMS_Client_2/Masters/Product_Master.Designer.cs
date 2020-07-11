@@ -47,7 +47,7 @@
             this.txtProductName = new System.Windows.Forms.TextBox();
             this.cmbActiveStatus = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.rdSearchByCategory = new System.Windows.Forms.RadioButton();
             this.cmbSearchByCategory = new System.Windows.Forms.ComboBox();
             this.rdShowAll = new System.Windows.Forms.RadioButton();
             this.rdSearchByProduct = new System.Windows.Forms.RadioButton();
@@ -312,7 +312,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this.rdSearchByCategory);
             this.groupBox1.Controls.Add(this.cmbSearchByCategory);
             this.groupBox1.Controls.Add(this.rdShowAll);
             this.groupBox1.Controls.Add(this.rdSearchByProduct);
@@ -325,16 +325,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
             // 
-            // radioButton1
+            // rdSearchByCategory
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton1.Location = new System.Drawing.Point(391, 23);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(108, 21);
-            this.radioButton1.TabIndex = 289;
-            this.radioButton1.Text = "By Category :";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rdSearchByCategory.AutoSize = true;
+            this.rdSearchByCategory.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdSearchByCategory.Location = new System.Drawing.Point(391, 23);
+            this.rdSearchByCategory.Name = "rdSearchByCategory";
+            this.rdSearchByCategory.Size = new System.Drawing.Size(108, 21);
+            this.rdSearchByCategory.TabIndex = 289;
+            this.rdSearchByCategory.Text = "By Category :";
+            this.rdSearchByCategory.UseVisualStyleBackColor = true;
+            this.rdSearchByCategory.CheckedChanged += new System.EventHandler(this.rdSearchByCategory_CheckedChanged);
             // 
             // cmbSearchByCategory
             // 
@@ -345,6 +346,7 @@
             this.cmbSearchByCategory.Name = "cmbSearchByCategory";
             this.cmbSearchByCategory.Size = new System.Drawing.Size(206, 27);
             this.cmbSearchByCategory.TabIndex = 288;
+            this.cmbSearchByCategory.SelectionChangeCommitted += new System.EventHandler(this.cmbSearchByCategory_SelectionChangeCommitted);
             // 
             // rdShowAll
             // 
@@ -589,7 +591,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton rdSearchByCategory;
         private System.Windows.Forms.ComboBox cmbSearchByCategory;
     }
 }

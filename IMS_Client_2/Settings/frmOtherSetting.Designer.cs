@@ -43,6 +43,8 @@
             this.lblCategoryName = new System.Windows.Forms.Label();
             this.txtPCName = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtFileExtension = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.txtImagePath = new System.Windows.Forms.TextBox();
             this.chkArabicPrice = new System.Windows.Forms.CheckBox();
             this.txtFooterNote = new System.Windows.Forms.TextBox();
@@ -50,8 +52,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnFooterSave = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtFileExtension = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -245,6 +245,27 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Other Settings";
             // 
+            // txtFileExtension
+            // 
+            this.txtFileExtension.BackColor = System.Drawing.Color.White;
+            this.txtFileExtension.Location = new System.Drawing.Point(98, 171);
+            this.txtFileExtension.Name = "txtFileExtension";
+            this.txtFileExtension.Size = new System.Drawing.Size(82, 25);
+            this.txtFileExtension.TabIndex = 197;
+            this.txtFileExtension.Enter += new System.EventHandler(this.txtPCName_Enter);
+            this.txtFileExtension.Leave += new System.EventHandler(this.txtPCName_Leave);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(9, 176);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(72, 17);
+            this.label5.TabIndex = 196;
+            this.label5.Text = "Extension :";
+            // 
             // txtImagePath
             // 
             this.txtImagePath.BackColor = System.Drawing.Color.White;
@@ -252,6 +273,8 @@
             this.txtImagePath.Name = "txtImagePath";
             this.txtImagePath.Size = new System.Drawing.Size(315, 25);
             this.txtImagePath.TabIndex = 195;
+            this.txtImagePath.Enter += new System.EventHandler(this.txtPCName_Enter);
+            this.txtImagePath.Leave += new System.EventHandler(this.txtPCName_Leave);
             // 
             // chkArabicPrice
             // 
@@ -271,6 +294,8 @@
             this.txtFooterNote.Name = "txtFooterNote";
             this.txtFooterNote.Size = new System.Drawing.Size(352, 56);
             this.txtFooterNote.TabIndex = 0;
+            this.txtFooterNote.Enter += new System.EventHandler(this.txtPCName_Enter);
+            this.txtFooterNote.Leave += new System.EventHandler(this.txtPCName_Leave);
             // 
             // btnFooterCancel
             // 
@@ -325,25 +350,6 @@
             this.label4.Size = new System.Drawing.Size(44, 17);
             this.label4.TabIndex = 192;
             this.label4.Text = "Note :";
-            // 
-            // txtFileExtension
-            // 
-            this.txtFileExtension.BackColor = System.Drawing.Color.White;
-            this.txtFileExtension.Location = new System.Drawing.Point(98, 171);
-            this.txtFileExtension.Name = "txtFileExtension";
-            this.txtFileExtension.Size = new System.Drawing.Size(82, 25);
-            this.txtFileExtension.TabIndex = 197;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(9, 176);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(72, 17);
-            this.label5.TabIndex = 196;
-            this.label5.Text = "Extension :";
             // 
             // frmOtherSetting
             // 

@@ -64,7 +64,7 @@ namespace IMS_Client_2.Purchase
             {
                 if (txtSupplierBillNo.Text.Length > 0)
                 {
-                    DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_Popup " + txtSupplierBillNo.Text + ",2");
+                    DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_Popup '" + txtSupplierBillNo.Text + "', 2");
                     if (ObjUtil.ValidateTable(dt))
                     {
                         ObjUtil.SetControlData(txtSupplierBillNo, "SupplierBillNo");

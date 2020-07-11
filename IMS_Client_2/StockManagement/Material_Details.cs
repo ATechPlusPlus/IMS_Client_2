@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 using CoreApp;
 
 namespace IMS_Client_2.StockManagement
@@ -106,10 +107,11 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, DBNull.Value, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("BarcodeNo", SqlDbType.BigInt, DBNull.Value, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, DBNull.Value, clsConnection_DAL.ParamType.Input);
-            DataSet dt = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_Material_Details");
-            if (ObjUtil.ValidateTable(dt.Tables[0]))
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_Material_Details");
+            DataTable dt = ds.Tables[0];
+            if (ObjUtil.ValidateTable(dt))
             {
-                dgvProductDetails.DataSource = dt.Tables[0];
+                dgvProductDetails.DataSource = dt;
             }
             else
             {
@@ -125,10 +127,11 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, cmbShop.SelectedValue, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("BarcodeNo", SqlDbType.BigInt, DBNull.Value, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, DBNull.Value, clsConnection_DAL.ParamType.Input);
-            DataSet dt = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_Material_Details");
-            if (ObjUtil.ValidateTable(dt.Tables[0]))
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_Material_Details");
+            DataTable dt = ds.Tables[0];
+            if (ObjUtil.ValidateTable(dt))
             {
-                dgvProductDetails.DataSource = dt.Tables[0];
+                dgvProductDetails.DataSource = dt;
             }
             else
             {
@@ -144,10 +147,11 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, DBNull.Value, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("BarcodeNo", SqlDbType.BigInt, txtSearchByBarcode.Text.Trim(), clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, DBNull.Value, clsConnection_DAL.ParamType.Input);
-            DataSet dt = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_Material_Details");
-            if (ObjUtil.ValidateTable(dt.Tables[0]))
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_Material_Details");
+            DataTable dt = ds.Tables[0];
+            if (ObjUtil.ValidateTable(dt))
             {
-                dgvProductDetails.DataSource = dt.Tables[0];
+                dgvProductDetails.DataSource = dt;
             }
             else
             {
@@ -162,10 +166,11 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, DBNull.Value, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("BarcodeNo", SqlDbType.BigInt, DBNull.Value, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, cmbColor.SelectedValue, clsConnection_DAL.ParamType.Input);
-            DataSet dt = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_Material_Details");
-            if (ObjUtil.ValidateTable(dt.Tables[0]))
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_Material_Details");
+            DataTable dt = ds.Tables[0];
+            if (ObjUtil.ValidateTable(dt))
             {
-                dgvProductDetails.DataSource = dt.Tables[0];
+                dgvProductDetails.DataSource = dt;
             }
             else
             {
@@ -192,10 +197,11 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, DBNull.Value, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("BarcodeNo", SqlDbType.BigInt, DBNull.Value, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, DBNull.Value, clsConnection_DAL.ParamType.Input);
-            DataSet dt = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_Material_Details");
-            if (ObjUtil.ValidateTable(dt.Tables[0]))
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_Material_Details");
+            DataTable dt = ds.Tables[0];
+            if (ObjUtil.ValidateTable(dt))
             {
-                dgvProductDetails.DataSource = dt.Tables[0];
+                dgvProductDetails.DataSource = dt;
             }
             else
             {
@@ -306,6 +312,7 @@ namespace IMS_Client_2.StockManagement
             //ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.ColumnHeader);
             ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill);
             dgvProductDetails.Columns["ProductID"].Visible = false;
+            dgvProductDetails.Columns["Photo"].Visible = false;
             dgvProductDetails.Columns["StoreID"].Visible = false;
             dgvProductDetails.Columns["CategoryID"].Visible = false;
             dgvProductDetails.Columns["SizeTypeID"].Visible = false;
