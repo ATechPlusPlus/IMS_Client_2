@@ -96,7 +96,6 @@
             this.AddedRatio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SuppossedPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SalesPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColDelete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel2.SuspendLayout();
             this.grpPurchaseBillDetail.SuspendLayout();
             this.grpGridview.SuspendLayout();
@@ -522,8 +521,7 @@
             this.LocalCost,
             this.AddedRatio,
             this.SuppossedPrice,
-            this.SalesPrice,
-            this.ColDelete});
+            this.SalesPrice});
             this.dataGridView1.Location = new System.Drawing.Point(6, 21);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
@@ -531,6 +529,7 @@
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
+            this.dataGridView1.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView1_ColumnAdded);
             this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
             // 
             // lblTotalValueEntered
@@ -866,14 +865,6 @@
             this.SalesPrice.Name = "SalesPrice";
             this.SalesPrice.ReadOnly = true;
             // 
-            // ColDelete
-            // 
-            this.ColDelete.DataPropertyName = "Delete";
-            this.ColDelete.HeaderText = "Delete";
-            this.ColDelete.Name = "ColDelete";
-            this.ColDelete.Text = "Delete";
-            this.ColDelete.UseColumnTextForButtonValue = true;
-            // 
             // Purchase_Bill_Details
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -999,6 +990,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AddedRatio;
         private System.Windows.Forms.DataGridViewTextBoxColumn SuppossedPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn SalesPrice;
-        private System.Windows.Forms.DataGridViewButtonColumn ColDelete;
     }
 }
