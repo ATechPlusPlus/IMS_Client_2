@@ -565,15 +565,23 @@ namespace IMS_Client_2
 
         private void btnOpenCash_Click(object sender, EventArgs e)
         {
-           bool result=  clsUtility.ShowQuestionMessage("Are you sure, you want to open cash box ?", clsUtility.strProjectTitle);
-            if (result)
+            if (btnOpenCash.Text=="View Details")
             {
-                this.Cursor = Cursors.WaitCursor;
-                System.Threading.Thread.Sleep(2000);
-                OpenCashBox();
-                this.Cursor = Cursors.Default;
-
+                // Enter code for opening Cash clsoing window
             }
+            else
+            {
+                bool result = clsUtility.ShowQuestionMessage("Are you sure, you want to open cash box ?", clsUtility.strProjectTitle);
+                if (result)
+                {
+                    this.Cursor = Cursors.WaitCursor;
+                    System.Threading.Thread.Sleep(2000);
+                    OpenCashBox();
+                    this.Cursor = Cursors.Default;
+
+                }
+            }
+           
         }
         private int GetDefaultStoreID()
         {
