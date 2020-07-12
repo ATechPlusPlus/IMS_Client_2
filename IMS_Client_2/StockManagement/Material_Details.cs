@@ -312,7 +312,7 @@ namespace IMS_Client_2.StockManagement
             //ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.ColumnHeader);
             ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill);
             dgvProductDetails.Columns["ProductID"].Visible = false;
-            dgvProductDetails.Columns["Photo"].Visible = false;
+            //dgvProductDetails.Columns["Photo"].Visible = false;
             dgvProductDetails.Columns["StoreID"].Visible = false;
             dgvProductDetails.Columns["CategoryID"].Visible = false;
             dgvProductDetails.Columns["SizeTypeID"].Visible = false;

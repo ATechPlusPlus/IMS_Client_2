@@ -31,7 +31,30 @@ namespace IMS_Client_2
         {
            
         }
+        private void LoadCashStatus()
+        {
+           DataTable dtCashMaster=  ObjDAL.ExecuteSelectStatement("select * from [dbo].[tblMasterCashClosing] where Convert(date,CashBOxDateTime)=Convert(date,getdate())");
+            if (dtCashMaster.Rows.Count>0)
+            {
+                if (Convert.ToBoolean(dtCashMaster.Rows[0]["CashStatus"]))
+                {
+                    label7.Text = "CLOSED";
+                }
+                else
+                {
+                  
+                    label7.Text = "OPEN";
+                    btnOpenCash.Text = "View Details";
 
+                }
+               
+               
+            }
+            else
+            {
+                label7.Text = "NA";
+            }
+        }
         private void otherArtsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmDatabaseMaintenance) || clsUtility.IsAdmin)
@@ -92,12 +115,25 @@ namespace IMS_Client_2
                     lblLoginName.Text = "Login By : Test Admin";
                 }
                 lblVersion.Text = "Version : " + Application.ProductVersion;
-
+                btnOpenCash.BackgroundImage = B_Leave;
                 DisplayRegistrationInfo();
+                LoadCashStatus();
             }
             catch { }
         }
+        private void btnAdd_MouseEnter(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            btn.BackgroundImage = B_Enter;
+        }
 
+        private void btnAdd_MouseLeave(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            btn.BackgroundImage = B_Leave;
+        }
+        Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
+        Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
         private void frmHome_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!IsLogOut)
@@ -213,8 +249,19 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Invoice) || clsUtility.IsAdmin)
             {
-                Sales.Sales_Invoice Obj = new Sales.Sales_Invoice();
-                Obj.Show();
+                if (label7.Text=="OPEN")
+                {
+                    Sales.Sales_Invoice Obj = new Sales.Sales_Invoice();
+                    //  Obj.Size = new Size(921, 743);
+                    Obj.IsReplaceReturnMode = false;
+                    Obj.Show();
+                }
+                else
+                {
+                    clsUtility.ShowInfoMessage("Please close your previous day cash box and Open a new cash box for today.", clsUtility.strProjectTitle);
+                }
+
+            
             }
             else
             {
@@ -496,6 +543,68 @@ namespace IMS_Client_2
         private void label2_Click(object sender, EventArgs e)
         {
             DisplayRegistrationInfo();
+        }
+
+        private void replaceReturnItemsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            if (label7.Text == "OPEN")
+            {
+                Sales.frmReplaceReturnPopup obj = new Sales.frmReplaceReturnPopup();
+                obj.ShowDialog();
+                //  Obj.Size = new Size(921, 743);
+              
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("Please close your previous day cash box and Open a new cash box for today.", clsUtility.strProjectTitle);
+            }
+
+          
+        }
+
+        private void btnOpenCash_Click(object sender, EventArgs e)
+        {
+           bool result=  clsUtility.ShowQuestionMessage("Are you sure, you want to open cash box ?", clsUtility.strProjectTitle);
+            if (result)
+            {
+                this.Cursor = Cursors.WaitCursor;
+                System.Threading.Thread.Sleep(2000);
+                OpenCashBox();
+                this.Cursor = Cursors.Default;
+
+            }
+        }
+        private int GetDefaultStoreID()
+        {
+           return    ObjDAL.ExecuteScalarInt("select StoreID from "+clsUtility.DBName+".dbo.DefaultStoreSetting where MachineName="+Environment.MachineName);
+        }
+        private void OpenCashBox()
+        {
+            string NexCashNumber = GetCashNumber();
+
+            ObjDAL.SetColumnData("CashNo",SqlDbType.NVarChar, NexCashNumber);
+            ObjDAL.SetColumnData("CashBoxDateTime", SqlDbType.DateTime, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            ObjDAL.SetColumnData("EmployeeID",SqlDbType.Int,CoreApp.clsUtility.LoginID);
+            ObjDAL.SetColumnData("CashStatus",SqlDbType.Bit,false);
+            ObjDAL.SetColumnData("CreatedOn",SqlDbType.DateTime, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            ObjDAL.SetColumnData("CreatedBy",SqlDbType.Int, CoreApp.clsUtility.LoginID);
+           
+            
+           int result= ObjDAL.InsertData(clsUtility.DBName + ".[dbo].tblMasterCashClosing",false);
+            if (result>0)
+            {
+                clsUtility.ShowInfoMessage("Cash Box has been opened !", clsUtility.strProjectTitle);
+                btnOpenCash.Text = "View Details";
+                LoadCashStatus();
+            }
+
+        }
+        private string GetCashNumber()
+        {
+            //SequenceInvoice : this is a sequance object created in SQL ( this is not a table)
+            long LastID = (long)ObjDAL.ExecuteScalar("SELECT NEXT VALUE FOR " + clsUtility.DBName + ".[dbo].Seq_CashNumber");
+            return LastID.ToString();
         }
     }
 }
