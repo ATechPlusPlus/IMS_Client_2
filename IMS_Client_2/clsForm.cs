@@ -36,6 +36,7 @@ namespace IMS_Client_2
             Purchase_Invoice = 31,
             frmBarCode = 32,
             frmBarCodeDesigner = 33,
+            frmCloseCashBandMaster = 34,
             frmDatabaseMaintenance = 7///commented
         }
         public enum Operation
@@ -50,7 +51,6 @@ namespace IMS_Client_2
         public static bool HasFormRight(Forms formName)
         {
             int fID = (int)formName;
-
             return CoreApp.clsUtility.HasFormRights(fID);
         }
 

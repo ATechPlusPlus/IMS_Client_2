@@ -266,18 +266,21 @@
     <Compile Include="Masters\Supplier_Details.Designer.cs">
       <DependentUpon>Supplier_Details.cs</DependentUpon>
     </Compile>
+    <Compile Include="Masters\frmCloseCashBandMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\frmCloseCashBandMaster.Designer.cs">
+      <DependentUpon>frmCloseCashBandMaster.cs</DependentUpon>
+    </Compile>
+<<<<<<< HEAD
     <Compile Include="Other_Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Other_Forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Other_Forms\frmCashBoxOpenPopUp.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Other_Forms\frmCashBoxOpenPopUp.Designer.cs">
-      <DependentUpon>frmCashBoxOpenPopUp.cs</DependentUpon>
-    </Compile>
+=======
+>>>>>>> parent of 907dc1e... Major changes
     <Compile Include="Other_Forms\frmPayment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -368,12 +371,15 @@
     <Compile Include="Report\Report_Forms\frmSalesReport.Designer.cs">
       <DependentUpon>frmSalesReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sales\frmReplaceReturnPopup.cs">
+<<<<<<< HEAD
+    <Compile Include="Sales\frmCloseShifWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sales\frmReplaceReturnPopup.Designer.cs">
-      <DependentUpon>frmReplaceReturnPopup.cs</DependentUpon>
+    <Compile Include="Sales\frmCloseShifWindow.Designer.cs">
+      <DependentUpon>frmCloseShifWindow.cs</DependentUpon>
     </Compile>
+=======
+>>>>>>> parent of 907dc1e... Major changes
     <Compile Include="Sales\NumberToEnglish.cs" />
     <Compile Include="Sales\Sales_Bill_Details.cs">
       <SubType>Form</SubType>
@@ -435,6 +441,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmHome.resx">
       <DependentUpon>frmHome.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
@@ -447,6 +454,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\Customer_Master.resx">
       <DependentUpon>Customer_Master.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\frmCloseCashBandMaster.resx">
+      <DependentUpon>frmCloseCashBandMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\Product_Master.resx">
       <DependentUpon>Product_Master.cs</DependentUpon>
@@ -477,9 +487,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Other_Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Other_Forms\frmCashBoxOpenPopUp.resx">
-      <DependentUpon>frmCashBoxOpenPopUp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Other_Forms\frmPayment.resx">
       <DependentUpon>frmPayment.cs</DependentUpon>
@@ -526,9 +533,12 @@
     <EmbeddedResource Include="Report\Report_Forms\frmSalesReport.resx">
       <DependentUpon>frmSalesReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sales\frmReplaceReturnPopup.resx">
-      <DependentUpon>frmReplaceReturnPopup.cs</DependentUpon>
+<<<<<<< HEAD
+    <EmbeddedResource Include="Sales\frmCloseShifWindow.resx">
+      <DependentUpon>frmCloseShifWindow.cs</DependentUpon>
     </EmbeddedResource>
+=======
+>>>>>>> parent of 907dc1e... Major changes
     <EmbeddedResource Include="Sales\Sales_Bill_Details.resx">
       <DependentUpon>Sales_Bill_Details.cs</DependentUpon>
     </EmbeddedResource>

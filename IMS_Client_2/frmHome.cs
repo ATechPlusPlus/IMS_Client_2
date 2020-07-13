@@ -31,10 +31,11 @@ namespace IMS_Client_2
         {
            
         }
+<<<<<<< HEAD
         private void LoadCashStatus()
         {
-           DataTable dtCashMaster=  ObjDAL.ExecuteSelectStatement("select * from [dbo].[tblMasterCashClosing] where Convert(date,CashBOxDateTime)=Convert(date,getdate())");
-            if (dtCashMaster.Rows.Count>0)
+            DataTable dtCashMaster = ObjDAL.ExecuteSelectStatement("select * from [dbo].[tblMasterCashClosing] where Convert(date,CashBOxDateTime)=Convert(date,getdate())");
+            if (dtCashMaster.Rows.Count > 0)
             {
                 if (Convert.ToBoolean(dtCashMaster.Rows[0]["CashStatus"]))
                 {
@@ -42,19 +43,23 @@ namespace IMS_Client_2
                 }
                 else
                 {
-                  
+
                     label7.Text = "OPEN";
                     btnOpenCash.Text = "View Details";
 
                 }
-               
-               
+
+
             }
             else
             {
                 label7.Text = "NA";
             }
         }
+
+=======
+
+>>>>>>> parent of 907dc1e... Major changes
         private void otherArtsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmDatabaseMaintenance) || clsUtility.IsAdmin)
@@ -115,25 +120,12 @@ namespace IMS_Client_2
                     lblLoginName.Text = "Login By : Test Admin";
                 }
                 lblVersion.Text = "Version : " + Application.ProductVersion;
-                btnOpenCash.BackgroundImage = B_Leave;
+
                 DisplayRegistrationInfo();
-                LoadCashStatus();
             }
             catch { }
         }
-        private void btnAdd_MouseEnter(object sender, EventArgs e)
-        {
-            Button btn = (Button)sender;
-            btn.BackgroundImage = B_Enter;
-        }
 
-        private void btnAdd_MouseLeave(object sender, EventArgs e)
-        {
-            Button btn = (Button)sender;
-            btn.BackgroundImage = B_Leave;
-        }
-        Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
-        Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
         private void frmHome_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!IsLogOut)
@@ -249,19 +241,8 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Invoice) || clsUtility.IsAdmin)
             {
-                if (label7.Text=="OPEN")
-                {
-                    Sales.Sales_Invoice Obj = new Sales.Sales_Invoice();
-                    //  Obj.Size = new Size(921, 743);
-                    Obj.IsReplaceReturnMode = false;
-                    Obj.Show();
-                }
-                else
-                {
-                    clsUtility.ShowInfoMessage("Please close your previous day cash box and Open a new cash box for today.", clsUtility.strProjectTitle);
-                }
-
-            
+                Sales.Sales_Invoice Obj = new Sales.Sales_Invoice();
+                Obj.Show();
             }
             else
             {
@@ -544,14 +525,15 @@ namespace IMS_Client_2
         {
             DisplayRegistrationInfo();
         }
+<<<<<<< HEAD
 
         private void replaceReturnItemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
             if (label7.Text == "OPEN")
             {
-                Sales.frmReplaceReturnPopup obj = new Sales.frmReplaceReturnPopup();
-                obj.ShowDialog();
+                //Sales.frmReplaceReturnPopup obj = new Sales.frmReplaceReturnPopup();
+                //obj.ShowDialog();
                 //  Obj.Size = new Size(921, 743);
               
             }
@@ -565,15 +547,23 @@ namespace IMS_Client_2
 
         private void btnOpenCash_Click(object sender, EventArgs e)
         {
-           bool result=  clsUtility.ShowQuestionMessage("Are you sure, you want to open cash box ?", clsUtility.strProjectTitle);
-            if (result)
+            if (btnOpenCash.Text=="View Details")
             {
-                this.Cursor = Cursors.WaitCursor;
-                System.Threading.Thread.Sleep(2000);
-                OpenCashBox();
-                this.Cursor = Cursors.Default;
-
+                // Enter code for opening Cash clsoing window
             }
+            else
+            {
+                bool result = clsUtility.ShowQuestionMessage("Are you sure, you want to open cash box ?", clsUtility.strProjectTitle);
+                if (result)
+                {
+                    this.Cursor = Cursors.WaitCursor;
+                    System.Threading.Thread.Sleep(2000);
+                    OpenCashBox();
+                    this.Cursor = Cursors.Default;
+
+                }
+            }
+           
         }
         private int GetDefaultStoreID()
         {
@@ -596,7 +586,7 @@ namespace IMS_Client_2
             {
                 clsUtility.ShowInfoMessage("Cash Box has been opened !", clsUtility.strProjectTitle);
                 btnOpenCash.Text = "View Details";
-                LoadCashStatus();
+                //LoadCashStatus();
             }
 
         }
@@ -606,5 +596,26 @@ namespace IMS_Client_2
             long LastID = (long)ObjDAL.ExecuteScalar("SELECT NEXT VALUE FOR " + clsUtility.DBName + ".[dbo].Seq_CashNumber");
             return LastID.ToString();
         }
+
+        private void closeBALMasterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmCloseCashBandMaster) || clsUtility.IsAdmin)
+            {
+                Masters.frmCloseCashBandMaster Obj = new Masters.frmCloseCashBandMaster();
+                Obj.Show();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
+        }
+
+        private void closeCashToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Sales.frmCloseShifWindow Obj = new Sales.frmCloseShifWindow();
+            Obj.Show();
+        }
+=======
+>>>>>>> parent of 907dc1e... Major changes
     }
 }

@@ -927,7 +927,8 @@ namespace IMS_Client_2.Purchase
                     out newInteger) || newInteger < 0)
                 {
                     e.Cancel = true;
-                    dgvQtycolor.Rows[e.RowIndex].ErrorText = "Size must be a Positive integer";
+                    clsUtility.ShowInfoMessage("Enter Only Numbers..", clsUtility.strProjectTitle);
+                    //dgvQtycolor.Rows[e.RowIndex].ErrorText = "Size must be a Positive integer";
                 }
             }
         }

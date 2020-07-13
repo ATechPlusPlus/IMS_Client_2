@@ -46,6 +46,8 @@
             this.txtProductID = new System.Windows.Forms.TextBox();
             this.PicItem = new System.Windows.Forms.PictureBox();
             this.lblTotalRecords = new System.Windows.Forms.Label();
+            this.rdSearchByStyleNo = new System.Windows.Forms.RadioButton();
+            this.txtSearchByStyleNo = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.printBarcodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2.SuspendLayout();
@@ -60,10 +62,11 @@
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel2.Controls.Add(this.label12);
+            this.panel2.Controls.Add(this.txtProductID);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1009, 40);
+            this.panel2.Size = new System.Drawing.Size(1129, 40);
             this.panel2.TabIndex = 110;
             // 
             // label12
@@ -81,6 +84,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.txtSearchByStyleNo);
+            this.groupBox1.Controls.Add(this.rdSearchByStyleNo);
             this.groupBox1.Controls.Add(this.txtSearchByBarcode);
             this.groupBox1.Controls.Add(this.cmbColor);
             this.groupBox1.Controls.Add(this.rdSearchByColor);
@@ -91,9 +96,9 @@
             this.groupBox1.Controls.Add(this.rdSearchByStore);
             this.groupBox1.Controls.Add(this.rdShowAll);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 50);
+            this.groupBox1.Location = new System.Drawing.Point(12, 47);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(776, 114);
+            this.groupBox1.Size = new System.Drawing.Size(952, 120);
             this.groupBox1.TabIndex = 206;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
@@ -201,7 +206,7 @@
             this.rdShowAll.AutoSize = true;
             this.rdShowAll.Checked = true;
             this.rdShowAll.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdShowAll.Location = new System.Drawing.Point(666, 24);
+            this.rdShowAll.Location = new System.Drawing.Point(656, 74);
             this.rdShowAll.Name = "rdShowAll";
             this.rdShowAll.Size = new System.Drawing.Size(79, 21);
             this.rdShowAll.TabIndex = 106;
@@ -221,7 +226,7 @@
             this.dgvProductDetails.Location = new System.Drawing.Point(12, 173);
             this.dgvProductDetails.Name = "dgvProductDetails";
             this.dgvProductDetails.ReadOnly = true;
-            this.dgvProductDetails.Size = new System.Drawing.Size(985, 271);
+            this.dgvProductDetails.Size = new System.Drawing.Size(1105, 271);
             this.dgvProductDetails.TabIndex = 207;
             this.dgvProductDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellClick);
             this.dgvProductDetails.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvProductDetails_DataBindingComplete);
@@ -229,7 +234,7 @@
             // txtProductID
             // 
             this.txtProductID.BackColor = System.Drawing.Color.White;
-            this.txtProductID.Location = new System.Drawing.Point(744, 40);
+            this.txtProductID.Location = new System.Drawing.Point(750, 9);
             this.txtProductID.Name = "txtProductID";
             this.txtProductID.Size = new System.Drawing.Size(38, 20);
             this.txtProductID.TabIndex = 230;
@@ -240,9 +245,9 @@
             this.PicItem.BackColor = System.Drawing.Color.Transparent;
             this.PicItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PicItem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PicItem.Location = new System.Drawing.Point(806, 44);
+            this.PicItem.Location = new System.Drawing.Point(970, 46);
             this.PicItem.Name = "PicItem";
-            this.PicItem.Size = new System.Drawing.Size(191, 120);
+            this.PicItem.Size = new System.Drawing.Size(147, 120);
             this.PicItem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PicItem.TabIndex = 231;
             this.PicItem.TabStop = false;
@@ -257,6 +262,31 @@
             this.lblTotalRecords.Size = new System.Drawing.Size(121, 17);
             this.lblTotalRecords.TabIndex = 232;
             this.lblTotalRecords.Text = "Total Records : 0";
+            // 
+            // rdSearchByStyleNo
+            // 
+            this.rdSearchByStyleNo.AutoSize = true;
+            this.rdSearchByStyleNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdSearchByStyleNo.Location = new System.Drawing.Point(656, 24);
+            this.rdSearchByStyleNo.Name = "rdSearchByStyleNo";
+            this.rdSearchByStyleNo.Size = new System.Drawing.Size(105, 21);
+            this.rdSearchByStyleNo.TabIndex = 235;
+            this.rdSearchByStyleNo.Text = "By Style No :";
+            this.rdSearchByStyleNo.UseVisualStyleBackColor = true;
+            this.rdSearchByStyleNo.CheckedChanged += new System.EventHandler(this.rdSearchByStyleNo_CheckedChanged);
+            // 
+            // txtSearchByStyleNo
+            // 
+            this.txtSearchByStyleNo.BackColor = System.Drawing.Color.White;
+            this.txtSearchByStyleNo.Enabled = false;
+            this.txtSearchByStyleNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearchByStyleNo.Location = new System.Drawing.Point(762, 24);
+            this.txtSearchByStyleNo.Name = "txtSearchByStyleNo";
+            this.txtSearchByStyleNo.Size = new System.Drawing.Size(181, 25);
+            this.txtSearchByStyleNo.TabIndex = 237;
+            this.txtSearchByStyleNo.TextChanged += new System.EventHandler(this.txtSearchByStyleNo_TextChanged);
+            this.txtSearchByStyleNo.Enter += new System.EventHandler(this.txtSearchByProductName_Enter);
+            this.txtSearchByStyleNo.Leave += new System.EventHandler(this.txtSearchByProductName_Leave);
             // 
             // contextMenuStrip1
             // 
@@ -278,10 +308,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1009, 464);
+            this.ClientSize = new System.Drawing.Size(1129, 464);
             this.Controls.Add(this.lblTotalRecords);
             this.Controls.Add(this.PicItem);
-            this.Controls.Add(this.txtProductID);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvProductDetails);
             this.Controls.Add(this.panel2);
@@ -322,6 +351,8 @@
         private System.Windows.Forms.RadioButton rdSearchByBarCode;
         private System.Windows.Forms.PictureBox PicItem;
         private System.Windows.Forms.Label lblTotalRecords;
+        private System.Windows.Forms.RadioButton rdSearchByStyleNo;
+        private System.Windows.Forms.TextBox txtSearchByStyleNo;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem printBarcodeToolStripMenuItem;
     }
