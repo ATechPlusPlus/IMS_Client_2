@@ -25,6 +25,9 @@ namespace IMS_Client_2
         clsUtility ObjUtil = new clsUtility();
         clsConnection_DAL ObjDAL = new clsConnection_DAL(true);
 
+        Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
+        Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
+
         static UserManagement.frmUserManagement ObjUserManag = new UserManagement.frmUserManagement();
 
         private void userCreationToolStripMenuItem_Click(object sender, EventArgs e)
@@ -57,9 +60,6 @@ namespace IMS_Client_2
             }
         }
 
-=======
-
->>>>>>> parent of 907dc1e... Major changes
         private void otherArtsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmDatabaseMaintenance) || clsUtility.IsAdmin)
@@ -124,6 +124,17 @@ namespace IMS_Client_2
                 DisplayRegistrationInfo();
             }
             catch { }
+        }
+        private void btnAdd_MouseEnter(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            btn.BackgroundImage = B_Enter;
+        }
+
+        private void btnAdd_MouseLeave(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            btn.BackgroundImage = B_Leave;
         }
 
         private void frmHome_FormClosing(object sender, FormClosingEventArgs e)
@@ -597,7 +608,7 @@ namespace IMS_Client_2
             return LastID.ToString();
         }
 
-        private void closeBALMasterToolStripMenuItem_Click(object sender, EventArgs e)
+        private void closeCashBandMasterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmCloseCashBandMaster) || clsUtility.IsAdmin)
             {
@@ -615,6 +626,5 @@ namespace IMS_Client_2
             Sales.frmCloseShifWindow Obj = new Sales.frmCloseShifWindow();
             Obj.Show();
         }
-
     }
 }

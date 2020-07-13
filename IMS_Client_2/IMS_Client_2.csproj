@@ -272,7 +272,6 @@
     <Compile Include="Masters\frmCloseCashBandMaster.Designer.cs">
       <DependentUpon>frmCloseCashBandMaster.cs</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Other_Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -375,15 +374,18 @@
     <Compile Include="Report\Report_Forms\frmSalesReport.Designer.cs">
       <DependentUpon>frmSalesReport.cs</DependentUpon>
     </Compile>
-
     <Compile Include="Sales\frmCloseShifWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Sales\frmCloseShifWindow.Designer.cs">
       <DependentUpon>frmCloseShifWindow.cs</DependentUpon>
     </Compile>
-
-
+    <Compile Include="Sales\frmReplaceReturnPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\frmReplaceReturnPopup.Designer.cs">
+      <DependentUpon>frmReplaceReturnPopup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sales\NumberToEnglish.cs" />
     <Compile Include="Sales\Sales_Bill_Details.cs">
       <SubType>Form</SubType>
@@ -492,6 +494,9 @@
     <EmbeddedResource Include="Other_Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Other_Forms\frmCashBoxOpenPopUp.resx">
+      <DependentUpon>frmCashBoxOpenPopUp.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Other_Forms\frmPayment.resx">
       <DependentUpon>frmPayment.cs</DependentUpon>
     </EmbeddedResource>
@@ -537,12 +542,12 @@
     <EmbeddedResource Include="Report\Report_Forms\frmSalesReport.resx">
       <DependentUpon>frmSalesReport.cs</DependentUpon>
     </EmbeddedResource>
-
     <EmbeddedResource Include="Sales\frmCloseShifWindow.resx">
       <DependentUpon>frmCloseShifWindow.cs</DependentUpon>
     </EmbeddedResource>
-
-
+    <EmbeddedResource Include="Sales\frmReplaceReturnPopup.resx">
+      <DependentUpon>frmReplaceReturnPopup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sales\Sales_Bill_Details.resx">
       <DependentUpon>Sales_Bill_Details.cs</DependentUpon>
     </EmbeddedResource>

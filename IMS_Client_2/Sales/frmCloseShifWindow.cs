@@ -70,7 +70,7 @@ namespace IMS_Client_2.Sales
         private void dgvCloseCash_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             dgvCloseCash.Columns["CashBandID"].Visible = false;
-            dgvCloseCash.Columns["CashBandValue"].Visible = false;
+            dgvCloseCash.Columns["CashBand"].Visible = false;
         }
     }
 }
