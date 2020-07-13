@@ -31,7 +31,7 @@ namespace IMS_Client_2
         {
            
         }
-<<<<<<< HEAD
+
         private void LoadCashStatus()
         {
             DataTable dtCashMaster = ObjDAL.ExecuteSelectStatement("select * from [dbo].[tblMasterCashClosing] where Convert(date,CashBOxDateTime)=Convert(date,getdate())");
@@ -525,7 +525,7 @@ namespace IMS_Client_2
         {
             DisplayRegistrationInfo();
         }
-<<<<<<< HEAD
+
 
         private void replaceReturnItemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -615,7 +615,6 @@ namespace IMS_Client_2
             Sales.frmCloseShifWindow Obj = new Sales.frmCloseShifWindow();
             Obj.Show();
         }
-=======
->>>>>>> parent of 907dc1e... Major changes
+
     }
 }

@@ -279,8 +279,12 @@
     <Compile Include="Other_Forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-=======
->>>>>>> parent of 907dc1e... Major changes
+    <Compile Include="Other_Forms\frmCashBoxOpenPopUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other_Forms\frmCashBoxOpenPopUp.Designer.cs">
+      <DependentUpon>frmCashBoxOpenPopUp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Other_Forms\frmPayment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -371,15 +375,15 @@
     <Compile Include="Report\Report_Forms\frmSalesReport.Designer.cs">
       <DependentUpon>frmSalesReport.cs</DependentUpon>
     </Compile>
-<<<<<<< HEAD
+
     <Compile Include="Sales\frmCloseShifWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Sales\frmCloseShifWindow.Designer.cs">
       <DependentUpon>frmCloseShifWindow.cs</DependentUpon>
     </Compile>
-=======
->>>>>>> parent of 907dc1e... Major changes
+
+
     <Compile Include="Sales\NumberToEnglish.cs" />
     <Compile Include="Sales\Sales_Bill_Details.cs">
       <SubType>Form</SubType>
@@ -533,12 +537,12 @@
     <EmbeddedResource Include="Report\Report_Forms\frmSalesReport.resx">
       <DependentUpon>frmSalesReport.cs</DependentUpon>
     </EmbeddedResource>
-<<<<<<< HEAD
+
     <EmbeddedResource Include="Sales\frmCloseShifWindow.resx">
       <DependentUpon>frmCloseShifWindow.cs</DependentUpon>
     </EmbeddedResource>
-=======
->>>>>>> parent of 907dc1e... Major changes
+
+
     <EmbeddedResource Include="Sales\Sales_Bill_Details.resx">
       <DependentUpon>Sales_Bill_Details.cs</DependentUpon>
     </EmbeddedResource>

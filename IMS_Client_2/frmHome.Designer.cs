@@ -82,7 +82,7 @@
             this.lblLicensedTo = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-<<<<<<< HEAD
+
             this.panel2 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.btnOpenCash = new System.Windows.Forms.Button();
@@ -90,8 +90,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.closeCashToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-=======
->>>>>>> parent of 907dc1e... Major changes
+
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -347,11 +346,11 @@
             // 
             this.hardwarePartsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SalesInvoice_ToolStrip,
-<<<<<<< HEAD
+
             this.closeCashToolStripMenuItem,
             this.replaceReturnItemsToolStripMenuItem,
-=======
->>>>>>> parent of 907dc1e... Major changes
+
+
             this.SalesBillDetails_ToolStrip});
             this.hardwarePartsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("hardwarePartsToolStripMenuItem.Image")));
             this.hardwarePartsToolStripMenuItem.Name = "hardwarePartsToolStripMenuItem";
@@ -603,7 +602,7 @@
             this.label2.Text = "Registration Info :";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
-<<<<<<< HEAD
+
             // panel2
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -779,7 +778,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem purchaseDetailsToolStripMenuItem;
-<<<<<<< HEAD
+
         private System.Windows.Forms.ToolStripMenuItem closeBALMasterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeCashToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem replaceReturnItemsToolStripMenuItem;
@@ -789,8 +788,8 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnOpenCash;
-=======
->>>>>>> parent of 907dc1e... Major changes
+
+
     }
 }
 
