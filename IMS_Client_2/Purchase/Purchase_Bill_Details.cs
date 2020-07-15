@@ -543,6 +543,8 @@ namespace IMS_Client_2.Purchase
             pEnteredQTY = Convert.ToInt32(txtTotalQTYEntered.Text) + Convert.ToInt32(txtQTY.Text);
             if (pEnteredQTY <= Convert.ToInt32(txtTotalQTYBill.Text))
             {
+                pAddRatio = Convert.ToInt32(cmbAddRatio.SelectedItem) * 0.01;
+
                 DataRow dRow = dtPurchaseInvoice.NewRow();
                 dRow["PurchaseInvoiceDetailsID"] = 0;
                 dRow["ProductID"] = txtProductID.Text;
@@ -552,8 +554,10 @@ namespace IMS_Client_2.Purchase
                 dRow["ModelNo"] = txtStyleNo.Text;
                 dRow["QTY"] = txtQTY.Text;
                 dRow["Rate"] = txtRate.Text;
-                dRow["Total"] = Math.Round((Convert.ToInt32(txtQTY.Text) * Convert.ToDouble(txtRate.Text)), 2);
-                double pLocalCost = Math.Round(LocalBillValue / Convert.ToInt32(txtTotalQTYBill.Text), 2);
+                double pTotal= Math.Round((Convert.ToInt32(txtQTY.Text) * Convert.ToDouble(txtRate.Text)), 2);
+                dRow["Total"] = pTotal;
+                //double pLocalCost = Math.Round(LocalBillValue / Convert.ToInt32(txtTotalQTYBill.Text), 2);
+                double pLocalCost = Math.Round(pTotal / Convert.ToInt32(txtQTY.Text), 2);
                 dRow["LocalCost"] = pLocalCost;
                 dRow["AddedRatio"] = cmbAddRatio.SelectedItem;
                 dRow["SuppossedPrice"] = pLocalCost + (pLocalCost * pAddRatio);
@@ -671,13 +675,22 @@ namespace IMS_Client_2.Purchase
                         DialogResult d = MessageBox.Show("Are you sure want to delete ? ", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                         if (d == DialogResult.Yes)
                         {
+                            int a = 0;
                             DataTable dt = (DataTable)dataGridView1.DataSource;
-                            dt.Rows[e.RowIndex].Delete();
+
                             if (pPurchaseInvoiceDetailsID > 0)
                             {
-                                ObjDAL.DeleteData(clsUtility.DBName + ".[dbo].[PurchaseInvoiceDetails]", "PurchaseInvoiceDetailsID=" + pPurchaseInvoiceDetailsID);
+                                a = ObjDAL.DeleteData(clsUtility.DBName + ".[dbo].[PurchaseInvoiceDetails]", "PurchaseInvoiceDetailsID=" + pPurchaseInvoiceDetailsID);
                             }
-                            dt.AcceptChanges();
+                            if (a > 0 || pPurchaseInvoiceDetailsID == 0)
+                            {
+                                dt.Rows[e.RowIndex].Delete();
+                                dt.AcceptChanges();
+                            }
+                            else
+                            {
+                                clsUtility.ShowInfoMessage("Unable to delete Style No. "+ dataGridView1.Rows[e.RowIndex].Cells["ModelNo"].Value, clsUtility.strProjectTitle);
+                            }
                             dataGridView1.DataSource = dt;
                             //dataGridView1.Rows.RemoveAt(e.RowIndex);
                             //dataGridView1.EndEdit();
@@ -819,6 +832,56 @@ namespace IMS_Client_2.Purchase
             }
         }
 
+        private void dataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (e.ColumnIndex == 7 && e.FormattedValue.ToString() != "")
+            {
+                e.Cancel = false;
+                dataGridView1.Rows[e.RowIndex].ErrorText = "";
+                int newInteger = 0;
+                if (dataGridView1.Rows[e.RowIndex].IsNewRow) { return; }
+                if (!int.TryParse(e.FormattedValue.ToString(),
+                    out newInteger) || newInteger < 0)
+                {
+                    e.Cancel = true;
+                    //dataGridView1.Rows[e.RowIndex].ErrorText = "QTY must be a Positive integer";
+                    clsUtility.ShowInfoMessage("Enter Only Numbers..", clsUtility.strProjectTitle);
+                }
+                #region Numeric validation from CoreApp
+                //e.Cancel = ObjUtil.IsNumeric(e.FormattedValue.ToString());
+                //if (e.Cancel == false)
+                //{
+                //    clsUtility.ShowInfoMessage("Enter Only Numbers..", clsUtility.strProjectTitle);
+                //    e.Cancel = true;
+                //}
+                //else
+                //{
+                //    e.Cancel = false;
+                //}
+                #endregion
+            }
+            else if (e.ColumnIndex == 11 && e.FormattedValue.ToString() != "")
+            {
+                e.Cancel = false;
+                dataGridView1.Rows[e.RowIndex].ErrorText = "";
+                int newInteger = 0;
+                if (dataGridView1.Rows[e.RowIndex].IsNewRow) { return; }
+                if (!int.TryParse(e.FormattedValue.ToString(),
+                    out newInteger) || newInteger < 0)
+                {
+                    e.Cancel = true;
+                    //dataGridView1.Rows[e.RowIndex].ErrorText = "QTY must be a Positive integer";
+                    clsUtility.ShowInfoMessage("Enter Only Numbers..", clsUtility.strProjectTitle);
+                }
+                else if (Convert.ToInt32(e.FormattedValue) < 200 || Convert.ToInt32(e.FormattedValue) > 300)
+                {
+                    e.Cancel = true;
+                    //dataGridView1.Rows[e.RowIndex].ErrorText = "QTY must be a Positive integer";
+                    clsUtility.ShowInfoMessage("Enter Ratio between 200 to 300..", clsUtility.strProjectTitle);
+                }
+            }
+        }
+
         private void Purchase_Bill_Details_Supplier_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Enter)
@@ -851,4 +914,4 @@ namespace IMS_Client_2.Purchase
             }
         }
     }
-}  
+}

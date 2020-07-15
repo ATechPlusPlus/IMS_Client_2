@@ -338,3 +338,9 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/IMS_Client_2/Masters/frmCloseCashBandMaster.cs
+/IMS_Client_2/Masters/frmCloseCashBandMaster.Designer.cs
+/IMS_Client_2/Masters/frmCloseCashBandMaster.resx
+/IMS_Client_2/Sales/frmCloseShifWindow.cs
+/IMS_Client_2/Sales/frmCloseShifWindow.Designer.cs
+/IMS_Client_2/Sales/frmCloseShifWindow.resx

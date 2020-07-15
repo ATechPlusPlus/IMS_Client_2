@@ -529,6 +529,7 @@
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
+            this.dataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView1_CellValidating);
             this.dataGridView1.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView1_ColumnAdded);
             this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
             // 
@@ -850,6 +851,7 @@
             this.AddedRatio.HeaderText = "AddedRatio%";
             this.AddedRatio.Name = "AddedRatio";
             this.AddedRatio.ReadOnly = true;
+            this.AddedRatio.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // SuppossedPrice
             // 
