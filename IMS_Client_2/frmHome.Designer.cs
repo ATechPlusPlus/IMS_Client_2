@@ -33,6 +33,7 @@
             this.userCreationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userCreationToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.userRightsManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.storeRightsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mobilePartsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CategoryMaster_ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.countryMasterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,6 +63,7 @@
             this.SalesBillDetails_ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.MaterialDetails_ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
+            this.stockTransferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SalesReport_ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.otherArtsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,6 +89,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.brachReceiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -122,7 +125,8 @@
             // 
             this.userCreationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.userCreationToolStripMenuItem1,
-            this.userRightsManagementToolStripMenuItem});
+            this.userRightsManagementToolStripMenuItem,
+            this.storeRightsToolStripMenuItem});
             this.userCreationToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("userCreationToolStripMenuItem.Image")));
             this.userCreationToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.userCreationToolStripMenuItem.Name = "userCreationToolStripMenuItem";
@@ -134,16 +138,23 @@
             // userCreationToolStripMenuItem1
             // 
             this.userCreationToolStripMenuItem1.Name = "userCreationToolStripMenuItem1";
-            this.userCreationToolStripMenuItem1.Size = new System.Drawing.Size(163, 24);
+            this.userCreationToolStripMenuItem1.Size = new System.Drawing.Size(185, 24);
             this.userCreationToolStripMenuItem1.Text = "User Creation";
             this.userCreationToolStripMenuItem1.Click += new System.EventHandler(this.userCreationToolStripMenuItem1_Click);
             // 
             // userRightsManagementToolStripMenuItem
             // 
             this.userRightsManagementToolStripMenuItem.Name = "userRightsManagementToolStripMenuItem";
-            this.userRightsManagementToolStripMenuItem.Size = new System.Drawing.Size(163, 24);
-            this.userRightsManagementToolStripMenuItem.Text = "User Rights";
+            this.userRightsManagementToolStripMenuItem.Size = new System.Drawing.Size(185, 24);
+            this.userRightsManagementToolStripMenuItem.Text = "User Form Rights";
             this.userRightsManagementToolStripMenuItem.Click += new System.EventHandler(this.userRightsManagementToolStripMenuItem_Click);
+            // 
+            // storeRightsToolStripMenuItem
+            // 
+            this.storeRightsToolStripMenuItem.Name = "storeRightsToolStripMenuItem";
+            this.storeRightsToolStripMenuItem.Size = new System.Drawing.Size(185, 24);
+            this.storeRightsToolStripMenuItem.Text = "User Store Rights";
+            this.storeRightsToolStripMenuItem.Click += new System.EventHandler(this.storeRightsToolStripMenuItem_Click);
             // 
             // mobilePartsToolStripMenuItem
             // 
@@ -367,7 +378,9 @@
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MaterialDetails_ToolStrip});
+            this.MaterialDetails_ToolStrip,
+            this.stockTransferToolStripMenuItem,
+            this.brachReceiveToolStripMenuItem});
             this.toolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1.Image")));
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(135, 36);
@@ -377,9 +390,16 @@
             // MaterialDetails_ToolStrip
             // 
             this.MaterialDetails_ToolStrip.Name = "MaterialDetails_ToolStrip";
-            this.MaterialDetails_ToolStrip.Size = new System.Drawing.Size(177, 24);
+            this.MaterialDetails_ToolStrip.Size = new System.Drawing.Size(180, 24);
             this.MaterialDetails_ToolStrip.Text = " Material Details";
             this.MaterialDetails_ToolStrip.Click += new System.EventHandler(this.MaterialDetails_ToolStrip_Click);
+            // 
+            // stockTransferToolStripMenuItem
+            // 
+            this.stockTransferToolStripMenuItem.Name = "stockTransferToolStripMenuItem";
+            this.stockTransferToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.stockTransferToolStripMenuItem.Text = "Store Transfer";
+            this.stockTransferToolStripMenuItem.Click += new System.EventHandler(this.stockTransferToolStripMenuItem_Click);
             // 
             // reportsToolStripMenuItem
             // 
@@ -661,6 +681,13 @@
             this.label9.TabIndex = 28;
             this.label9.Text = "Today\'s Cash Box";
             // 
+            // brachReceiveToolStripMenuItem
+            // 
+            this.brachReceiveToolStripMenuItem.Name = "brachReceiveToolStripMenuItem";
+            this.brachReceiveToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.brachReceiveToolStripMenuItem.Text = "Brach Receive";
+            this.brachReceiveToolStripMenuItem.Click += new System.EventHandler(this.brachReceiveToolStripMenuItem_Click);
+            // 
             // frmHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -761,6 +788,9 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnOpenCash;
+        private System.Windows.Forms.ToolStripMenuItem storeRightsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stockTransferToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem brachReceiveToolStripMenuItem;
     }
 }
 

@@ -286,7 +286,7 @@
             this.grpUserGridview.Size = new System.Drawing.Size(225, 305);
             this.grpUserGridview.TabIndex = 193;
             this.grpUserGridview.TabStop = false;
-            this.grpUserGridview.Text = "Users";
+            this.grpUserGridview.Text = "Existing Users";
             // 
             // dgvUser
             // 
