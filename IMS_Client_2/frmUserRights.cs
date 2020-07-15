@@ -186,6 +186,7 @@ namespace IMS_Client_2
             if (b)
             {
                 ClearAll();
+               
                 grpUserName.Enabled = false;
                 grpRights.Enabled = false;
                 ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterCancel);

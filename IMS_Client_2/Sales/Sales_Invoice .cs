@@ -1049,7 +1049,8 @@ namespace IMS_Client_2.Sales
             {
                 if (e.KeyData == Keys.Enter)
                 {
-                 
+
+
                     if (IsReplaceReturnMode && radReplace.Checked)
                     {
                         // get the data froms sales.
