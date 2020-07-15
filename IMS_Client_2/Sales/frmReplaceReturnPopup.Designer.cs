@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmReplaceReturnPopup));
             this.lblActiveStatus = new System.Windows.Forms.Label();
             this.txtOldInvoiceNumber = new System.Windows.Forms.TextBox();
-            this.btnPrint = new System.Windows.Forms.Button();
+            this.btnOk = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -58,21 +58,21 @@
             this.txtOldInvoiceNumber.Size = new System.Drawing.Size(171, 25);
             this.txtOldInvoiceNumber.TabIndex = 194;
             // 
-            // btnPrint
+            // btnOk
             // 
-            this.btnPrint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnPrint.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnPrint.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrint.Location = new System.Drawing.Point(208, 140);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(76, 25);
-            this.btnPrint.TabIndex = 250;
-            this.btnPrint.Text = "OK";
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            this.btnPrint.MouseEnter += new System.EventHandler(this.btnAdd_MouseEnter);
-            this.btnPrint.MouseLeave += new System.EventHandler(this.btnAdd_MouseLeave);
+            this.btnOk.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnOk.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnOk.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOk.Location = new System.Drawing.Point(208, 140);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(76, 25);
+            this.btnOk.TabIndex = 250;
+            this.btnOk.Text = "OK";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnPrint_Click);
+            this.btnOk.MouseEnter += new System.EventHandler(this.btnAdd_MouseEnter);
+            this.btnOk.MouseLeave += new System.EventHandler(this.btnAdd_MouseLeave);
             // 
             // panel2
             // 
@@ -111,6 +111,7 @@
             // 
             // frmReplaceReturnPopup
             // 
+            this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
@@ -118,7 +119,7 @@
             this.ClientSize = new System.Drawing.Size(384, 195);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.btnPrint);
+            this.Controls.Add(this.btnOk);
             this.Controls.Add(this.lblActiveStatus);
             this.Controls.Add(this.txtOldInvoiceNumber);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -140,7 +141,7 @@
 
         private System.Windows.Forms.Label lblActiveStatus;
         private System.Windows.Forms.TextBox txtOldInvoiceNumber;
-        private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label1;

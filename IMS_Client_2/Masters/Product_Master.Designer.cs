@@ -332,7 +332,7 @@
             this.rdSearchByCategory.Location = new System.Drawing.Point(391, 23);
             this.rdSearchByCategory.Name = "rdSearchByCategory";
             this.rdSearchByCategory.Size = new System.Drawing.Size(108, 21);
-            this.rdSearchByCategory.TabIndex = 289;
+            this.rdSearchByCategory.TabIndex = 11;
             this.rdSearchByCategory.Text = "By Category :";
             this.rdSearchByCategory.UseVisualStyleBackColor = true;
             this.rdSearchByCategory.CheckedChanged += new System.EventHandler(this.rdSearchByCategory_CheckedChanged);
@@ -340,12 +340,13 @@
             // cmbSearchByCategory
             // 
             this.cmbSearchByCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSearchByCategory.Enabled = false;
             this.cmbSearchByCategory.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbSearchByCategory.FormattingEnabled = true;
             this.cmbSearchByCategory.Location = new System.Drawing.Point(515, 20);
             this.cmbSearchByCategory.Name = "cmbSearchByCategory";
             this.cmbSearchByCategory.Size = new System.Drawing.Size(206, 27);
-            this.cmbSearchByCategory.TabIndex = 288;
+            this.cmbSearchByCategory.TabIndex = 12;
             this.cmbSearchByCategory.SelectionChangeCommitted += new System.EventHandler(this.cmbSearchByCategory_SelectionChangeCommitted);
             // 
             // rdShowAll
@@ -356,7 +357,7 @@
             this.rdShowAll.Location = new System.Drawing.Point(764, 20);
             this.rdShowAll.Name = "rdShowAll";
             this.rdShowAll.Size = new System.Drawing.Size(79, 21);
-            this.rdShowAll.TabIndex = 2;
+            this.rdShowAll.TabIndex = 13;
             this.rdShowAll.TabStop = true;
             this.rdShowAll.Text = "Show All";
             this.rdShowAll.UseVisualStyleBackColor = true;
@@ -369,7 +370,7 @@
             this.rdSearchByProduct.Location = new System.Drawing.Point(13, 20);
             this.rdSearchByProduct.Name = "rdSearchByProduct";
             this.rdSearchByProduct.Size = new System.Drawing.Size(121, 21);
-            this.rdSearchByProduct.TabIndex = 0;
+            this.rdSearchByProduct.TabIndex = 9;
             this.rdSearchByProduct.Text = "By Item Name :";
             this.rdSearchByProduct.UseVisualStyleBackColor = true;
             this.rdSearchByProduct.CheckedChanged += new System.EventHandler(this.rdSearchByProduct_CheckedChanged);
@@ -382,7 +383,7 @@
             this.txtSearchByProduct.Location = new System.Drawing.Point(159, 19);
             this.txtSearchByProduct.Name = "txtSearchByProduct";
             this.txtSearchByProduct.Size = new System.Drawing.Size(206, 25);
-            this.txtSearchByProduct.TabIndex = 1;
+            this.txtSearchByProduct.TabIndex = 10;
             this.txtSearchByProduct.TextChanged += new System.EventHandler(this.txtSearchByProduct_TextChanged);
             this.txtSearchByProduct.Enter += new System.EventHandler(this.txtProductName_Enter);
             this.txtSearchByProduct.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtProductName_KeyPress);
@@ -411,7 +412,7 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dataGridView1.Size = new System.Drawing.Size(854, 145);
-            this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.TabIndex = 214;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
             // 
@@ -460,7 +461,7 @@
             this.grpPhoto.Location = new System.Drawing.Point(643, 55);
             this.grpPhoto.Name = "grpPhoto";
             this.grpPhoto.Size = new System.Drawing.Size(219, 237);
-            this.grpPhoto.TabIndex = 1;
+            this.grpPhoto.TabIndex = 14;
             this.grpPhoto.TabStop = false;
             this.grpPhoto.Text = "Photo";
             // 
@@ -472,7 +473,7 @@
             this.linkLabel2.Location = new System.Drawing.Point(80, 208);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(49, 17);
-            this.linkLabel2.TabIndex = 1;
+            this.linkLabel2.TabIndex = 16;
             this.linkLabel2.TabStop = true;
             this.linkLabel2.Text = "Cancel";
             this.linkLabel2.Visible = false;
@@ -486,7 +487,7 @@
             this.linkLabel1.Location = new System.Drawing.Point(8, 208);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(66, 17);
-            this.linkLabel1.TabIndex = 0;
+            this.linkLabel1.TabIndex = 15;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Browse...";
             this.linkLabel1.Visible = false;
@@ -515,6 +516,8 @@
             this.btnImport.Text = "Import data From Excel";
             this.btnImport.UseVisualStyleBackColor = true;
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            this.btnImport.MouseEnter += new System.EventHandler(this.btnAdd_MouseEnter);
+            this.btnImport.MouseLeave += new System.EventHandler(this.btnAdd_MouseLeave);
             // 
             // Product_Master
             // 

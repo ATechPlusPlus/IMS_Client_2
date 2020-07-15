@@ -72,7 +72,6 @@ namespace IMS_Client_2.Masters
 
         private void LoadData()
         {
-            ObjDAL.SetStoreProcedureData("Status", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_CashBand_Master");
             DataTable dt = ds.Tables[0];
             if (ObjUtil.ValidateTable(dt))

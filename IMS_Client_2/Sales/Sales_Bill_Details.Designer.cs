@@ -114,7 +114,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(231, 108);
+            this.label1.Location = new System.Drawing.Point(237, 108);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 17);
             this.label1.TabIndex = 247;
@@ -124,7 +124,7 @@
             // 
             this.dtpToDate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpToDate.Location = new System.Drawing.Point(265, 104);
+            this.dtpToDate.Location = new System.Drawing.Point(271, 104);
             this.dtpToDate.Name = "dtpToDate";
             this.dtpToDate.Size = new System.Drawing.Size(109, 25);
             this.dtpToDate.TabIndex = 9;
@@ -135,7 +135,7 @@
             this.txtSalesMan.BackColor = System.Drawing.Color.White;
             this.txtSalesMan.Enabled = false;
             this.txtSalesMan.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSalesMan.Location = new System.Drawing.Point(121, 64);
+            this.txtSalesMan.Location = new System.Drawing.Point(127, 64);
             this.txtSalesMan.Name = "txtSalesMan";
             this.txtSalesMan.Size = new System.Drawing.Size(251, 25);
             this.txtSalesMan.TabIndex = 6;
@@ -149,9 +149,9 @@
             this.radBySalesMan.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radBySalesMan.Location = new System.Drawing.Point(18, 64);
             this.radBySalesMan.Name = "radBySalesMan";
-            this.radBySalesMan.Size = new System.Drawing.Size(103, 21);
+            this.radBySalesMan.Size = new System.Drawing.Size(110, 21);
             this.radBySalesMan.TabIndex = 5;
-            this.radBySalesMan.Text = "By Salsman :";
+            this.radBySalesMan.Text = "By Salesman :";
             this.radBySalesMan.UseVisualStyleBackColor = true;
             this.radBySalesMan.CheckedChanged += new System.EventHandler(this.radBySalesMan_CheckedChanged);
             // 
@@ -159,7 +159,7 @@
             // 
             this.dtpFromDate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFromDate.Location = new System.Drawing.Point(121, 104);
+            this.dtpFromDate.Location = new System.Drawing.Point(127, 104);
             this.dtpFromDate.Name = "dtpFromDate";
             this.dtpFromDate.Size = new System.Drawing.Size(107, 25);
             this.dtpFromDate.TabIndex = 8;
@@ -182,7 +182,7 @@
             this.txtInvoiceNumber.BackColor = System.Drawing.Color.White;
             this.txtInvoiceNumber.Enabled = false;
             this.txtInvoiceNumber.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtInvoiceNumber.Location = new System.Drawing.Point(121, 25);
+            this.txtInvoiceNumber.Location = new System.Drawing.Point(127, 25);
             this.txtInvoiceNumber.Name = "txtInvoiceNumber";
             this.txtInvoiceNumber.Size = new System.Drawing.Size(251, 25);
             this.txtInvoiceNumber.TabIndex = 1;

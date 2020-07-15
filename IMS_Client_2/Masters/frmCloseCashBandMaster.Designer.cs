@@ -72,9 +72,9 @@
             this.label12.ForeColor = System.Drawing.Color.White;
             this.label12.Location = new System.Drawing.Point(11, 9);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(207, 22);
+            this.label12.Size = new System.Drawing.Size(210, 22);
             this.label12.TabIndex = 82;
-            this.label12.Text = "Closing Balance Master";
+            this.label12.Text = "Close CashBand Master";
             // 
             // btnUpdate
             // 
@@ -180,7 +180,7 @@
             this.grpClosingBALMaster.Size = new System.Drawing.Size(445, 142);
             this.grpClosingBALMaster.TabIndex = 118;
             this.grpClosingBALMaster.TabStop = false;
-            this.grpClosingBALMaster.Text = "Closing Balance Master";
+            this.grpClosingBALMaster.Text = "Close CashBand Master";
             // 
             // label2
             // 
@@ -297,7 +297,7 @@
             this.dgvCashBand.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCashBand_CellDoubleClick);
             this.dgvCashBand.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvCashBand_DataBindingComplete);
             // 
-            // frmCloseBALMaster
+            // frmCloseCashBandMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -316,10 +316,10 @@
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "frmCloseBALMaster";
+            this.Name = "frmCloseCashBandMaster";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Closing Balance Master";
+            this.Text = "Close CashBand Master";
             this.Load += new System.EventHandler(this.frmCloseBALMaster_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();

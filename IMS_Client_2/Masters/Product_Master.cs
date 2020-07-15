@@ -81,7 +81,7 @@ namespace IMS_Client_2.Masters
         {
             ObjUtil.SetDataGridProperty(dataGridView1, DataGridViewAutoSizeColumnsMode.Fill);
             DataTable dt = null;
-            dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Product_Master '0'");
+            dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Product_Master '0',0 ");
 
             if (ObjUtil.ValidateTable(dt))
             {
@@ -338,7 +338,7 @@ namespace IMS_Client_2.Masters
             btnUpdate.BackgroundImage = B_Leave;
             btnDelete.BackgroundImage = B_Leave;
             btnCancel.BackgroundImage = B_Leave;
-
+            btnImport.BackgroundImage = B_Leave;
             //clsUtility.IsAdmin = true;//removed
 
             ObjUtil.RegisterCommandButtons(btnAdd, btnSave, btnEdit, btnUpdate, btnDelete, btnCancel);
@@ -347,7 +347,9 @@ namespace IMS_Client_2.Masters
 
             LoadData();
             FillDepartmentData();
-            FillSearchCategory();
+            //FillSearchCategory();
+
+            grpProduct.Focus();
         }
 
         private void btnAdd_MouseEnter(object sender, EventArgs e)
@@ -434,25 +436,38 @@ namespace IMS_Client_2.Masters
 
         private void btnImport_Click(object sender, EventArgs e)
         {
-            Other_Forms.Import_ProductData Obj = new Other_Forms.Import_ProductData();
-            Obj.ShowDialog();
-            LoadData();
-            
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Import_ProductData) || clsUtility.IsAdmin)
+            {
+                Other_Forms.Import_ProductData Obj = new Other_Forms.Import_ProductData();
+                Obj.ShowDialog();
+                LoadData();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
 
         private void btnCategoryPopup_Click(object sender, EventArgs e)
         {
-            int a = 0;
-            if (cmbCategory.SelectedIndex >= 0)
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Category_Master) || clsUtility.IsAdmin)
             {
-                a = Convert.ToInt32(cmbCategory.SelectedValue);
+                int a = 0;
+                if (cmbCategory.SelectedIndex >= 0)
+                {
+                    a = Convert.ToInt32(cmbCategory.SelectedValue);
+                }
+                Masters.Category_Master Obj = new Category_Master();
+                Obj.ShowDialog();
+                FillDepartmentData();
+                if (a > 0)
+                {
+                    cmbCategory.SelectedValue = a;
+                }
             }
-            Masters.Category_Master Obj = new Category_Master();
-            Obj.ShowDialog();
-            FillDepartmentData();
-            if (a > 0)
+            else
             {
-                cmbCategory.SelectedValue = a;
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 
@@ -493,22 +508,6 @@ namespace IMS_Client_2.Masters
             }
         }
 
-        private void rdSearchByCategory_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdSearchByCategory.Checked)
-            {
-                txtSearchByProduct.Enabled = false;
-                cmbSearchByCategory.Enabled = true;
-                cmbSearchByCategory.Focus();
-            }
-            else
-            {
-                cmbSearchByCategory.Enabled = false;
-                cmbSearchByCategory.SelectedIndex = -1;
-                rdShowAll.Checked = true;
-            }
-        }
-
         private void cmbSearchByCategory_SelectionChangeCommitted(object sender, EventArgs e)
         {
 
@@ -519,7 +518,7 @@ namespace IMS_Client_2.Masters
             }
             //DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Product_Master '" + cmbSearchByCategory.SelectedValue + "'");
             ObjDAL.SetStoreProcedureData("ProductName", SqlDbType.NVarChar, DBNull.Value, clsConnection_DAL.ParamType.Input);
-            ObjDAL.SetStoreProcedureData("CategoryId", SqlDbType.NVarChar, cmbSearchByCategory.SelectedValue, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("CategoryId", SqlDbType.Int, cmbSearchByCategory.SelectedValue, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_Product_Master");
             DataTable dt = ds.Tables[0];
             if (ObjUtil.ValidateTable(dt))
@@ -532,6 +531,19 @@ namespace IMS_Client_2.Masters
             }
         }
 
-        
+        private void rdSearchByCategory_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdSearchByCategory.Checked)
+            {
+                cmbSearchByCategory.Enabled = true;
+                cmbSearchByCategory.Focus();
+            }
+            else
+            {
+                cmbSearchByCategory.Enabled = false;
+                cmbSearchByCategory.SelectedIndex = -1;
+                rdShowAll.Checked = true;
+            }
+        }
     }
 }

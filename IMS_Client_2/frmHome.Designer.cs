@@ -131,7 +131,6 @@
             this.userCreationToolStripMenuItem.Size = new System.Drawing.Size(164, 36);
             this.userCreationToolStripMenuItem.Text = "User Management";
             this.userCreationToolStripMenuItem.ToolTipText = "User Creation";
-            this.userCreationToolStripMenuItem.Click += new System.EventHandler(this.userCreationToolStripMenuItem_Click);
             // 
             // userCreationToolStripMenuItem1
             // 
@@ -267,7 +266,6 @@
             this.toolStripMenuItem4.Size = new System.Drawing.Size(96, 36);
             this.toolStripMenuItem4.Text = "Purchase";
             this.toolStripMenuItem4.ToolTipText = "Hardware Parts";
-            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
             // PurchaseInvoice_ToolStrip
             // 

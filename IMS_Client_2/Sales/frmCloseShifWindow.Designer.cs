@@ -29,13 +29,15 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCloseShifWindow));
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Cash");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Credits");
             this.panel2 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.btnCloseCash = new System.Windows.Forms.Button();
             this.btnOpenCash = new System.Windows.Forms.Button();
             this.grpReturned = new System.Windows.Forms.GroupBox();
-            this.lblReturned = new System.Windows.Forms.Label();
             this.lblReturnedAmount = new System.Windows.Forms.Label();
+            this.lblReturned = new System.Windows.Forms.Label();
             this.lblShop = new System.Windows.Forms.Label();
             this.lblCashierName = new System.Windows.Forms.Label();
             this.lblCashNo = new System.Windows.Forms.Label();
@@ -44,10 +46,10 @@
             this.btnPreview = new System.Windows.Forms.Button();
             this.lblTotal = new System.Windows.Forms.Label();
             this.txtTotalValue = new System.Windows.Forms.TextBox();
-            this.listBox1CloseShiftMenu = new System.Windows.Forms.ListBox();
             this.txtCashNo = new System.Windows.Forms.TextBox();
             this.txtCashierName = new System.Windows.Forms.TextBox();
             this.cmbShop = new System.Windows.Forms.ComboBox();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.panel2.SuspendLayout();
             this.grpReturned.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCloseCash)).BeginInit();
@@ -80,14 +82,16 @@
             // 
             this.btnCloseCash.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnCloseCash.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCloseCash.Enabled = false;
             this.btnCloseCash.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCloseCash.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCloseCash.Location = new System.Drawing.Point(168, 550);
+            this.btnCloseCash.Location = new System.Drawing.Point(153, 550);
             this.btnCloseCash.Name = "btnCloseCash";
-            this.btnCloseCash.Size = new System.Drawing.Size(112, 25);
+            this.btnCloseCash.Size = new System.Drawing.Size(140, 29);
             this.btnCloseCash.TabIndex = 115;
             this.btnCloseCash.Text = "Close Cash";
             this.btnCloseCash.UseVisualStyleBackColor = true;
+            this.btnCloseCash.Click += new System.EventHandler(this.btnCloseCash_Click);
             this.btnCloseCash.MouseEnter += new System.EventHandler(this.btnOpenCash_MouseEnter);
             this.btnCloseCash.MouseLeave += new System.EventHandler(this.btnOpenCash_MouseLeave);
             // 
@@ -95,14 +99,16 @@
             // 
             this.btnOpenCash.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnOpenCash.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOpenCash.Enabled = false;
             this.btnOpenCash.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnOpenCash.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpenCash.Location = new System.Drawing.Point(38, 550);
+            this.btnOpenCash.Location = new System.Drawing.Point(8, 550);
             this.btnOpenCash.Name = "btnOpenCash";
-            this.btnOpenCash.Size = new System.Drawing.Size(112, 25);
+            this.btnOpenCash.Size = new System.Drawing.Size(140, 29);
             this.btnOpenCash.TabIndex = 114;
             this.btnOpenCash.Text = "Open Cash Box";
             this.btnOpenCash.UseVisualStyleBackColor = true;
+            this.btnOpenCash.Click += new System.EventHandler(this.btnOpenCash_Click);
             this.btnOpenCash.MouseEnter += new System.EventHandler(this.btnOpenCash_MouseEnter);
             this.btnOpenCash.MouseLeave += new System.EventHandler(this.btnOpenCash_MouseLeave);
             // 
@@ -121,17 +127,6 @@
             this.grpReturned.TabStop = false;
             this.grpReturned.Text = "Returned Amount";
             // 
-            // lblReturned
-            // 
-            this.lblReturned.AutoSize = true;
-            this.lblReturned.Font = new System.Drawing.Font("Times New Roman", 11.25F);
-            this.lblReturned.Location = new System.Drawing.Point(57, 29);
-            this.lblReturned.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblReturned.Name = "lblReturned";
-            this.lblReturned.Size = new System.Drawing.Size(128, 17);
-            this.lblReturned.TabIndex = 0;
-            this.lblReturned.Text = "Returned Amount = ";
-            // 
             // lblReturnedAmount
             // 
             this.lblReturnedAmount.AutoSize = true;
@@ -143,41 +138,52 @@
             this.lblReturnedAmount.TabIndex = 1;
             this.lblReturnedAmount.Text = "0";
             // 
+            // lblReturned
+            // 
+            this.lblReturned.AutoSize = true;
+            this.lblReturned.Font = new System.Drawing.Font("Times New Roman", 11.25F);
+            this.lblReturned.Location = new System.Drawing.Point(57, 29);
+            this.lblReturned.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblReturned.Name = "lblReturned";
+            this.lblReturned.Size = new System.Drawing.Size(128, 17);
+            this.lblReturned.TabIndex = 0;
+            this.lblReturned.Text = "Returned Amount = ";
+            // 
             // lblShop
             // 
             this.lblShop.AutoSize = true;
             this.lblShop.BackColor = System.Drawing.Color.White;
             this.lblShop.Font = new System.Drawing.Font("Times New Roman", 11.25F);
-            this.lblShop.Location = new System.Drawing.Point(12, 68);
+            this.lblShop.Location = new System.Drawing.Point(12, 53);
             this.lblShop.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblShop.Name = "lblShop";
-            this.lblShop.Size = new System.Drawing.Size(40, 17);
+            this.lblShop.Size = new System.Drawing.Size(44, 17);
             this.lblShop.TabIndex = 2;
-            this.lblShop.Text = "Shop:";
+            this.lblShop.Text = "Shop :";
             // 
             // lblCashierName
             // 
             this.lblCashierName.AutoSize = true;
             this.lblCashierName.BackColor = System.Drawing.Color.White;
             this.lblCashierName.Font = new System.Drawing.Font("Times New Roman", 11.25F);
-            this.lblCashierName.Location = new System.Drawing.Point(209, 68);
+            this.lblCashierName.Location = new System.Drawing.Point(209, 53);
             this.lblCashierName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCashierName.Name = "lblCashierName";
-            this.lblCashierName.Size = new System.Drawing.Size(96, 17);
+            this.lblCashierName.Size = new System.Drawing.Size(100, 17);
             this.lblCashierName.TabIndex = 120;
-            this.lblCashierName.Text = "Cashier Name:";
+            this.lblCashierName.Text = "Cashier Name :";
             // 
             // lblCashNo
             // 
             this.lblCashNo.AutoSize = true;
             this.lblCashNo.BackColor = System.Drawing.Color.White;
             this.lblCashNo.Font = new System.Drawing.Font("Times New Roman", 11.25F);
-            this.lblCashNo.Location = new System.Drawing.Point(419, 68);
+            this.lblCashNo.Location = new System.Drawing.Point(419, 53);
             this.lblCashNo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCashNo.Name = "lblCashNo";
-            this.lblCashNo.Size = new System.Drawing.Size(93, 17);
+            this.lblCashNo.Size = new System.Drawing.Size(97, 17);
             this.lblCashNo.TabIndex = 121;
-            this.lblCashNo.Text = "Cash Number:";
+            this.lblCashNo.Text = "Cash Number :";
             // 
             // dgvCloseCash
             // 
@@ -192,17 +198,21 @@
             this.dgvCloseCash.RowTemplate.Height = 24;
             this.dgvCloseCash.Size = new System.Drawing.Size(353, 297);
             this.dgvCloseCash.TabIndex = 122;
+            this.dgvCloseCash.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCloseCash_CellEndEdit);
+            this.dgvCloseCash.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvCloseCash_CellValidating);
+            this.dgvCloseCash.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvCloseCash_ColumnAdded);
             this.dgvCloseCash.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvCloseCash_DataBindingComplete);
             // 
             // btnPrint
             // 
             this.btnPrint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnPrint.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPrint.Enabled = false;
             this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnPrint.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrint.Location = new System.Drawing.Point(444, 550);
+            this.btnPrint.Location = new System.Drawing.Point(443, 550);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(112, 25);
+            this.btnPrint.Size = new System.Drawing.Size(140, 29);
             this.btnPrint.TabIndex = 123;
             this.btnPrint.Text = "Print";
             this.btnPrint.UseVisualStyleBackColor = true;
@@ -213,11 +223,12 @@
             // 
             this.btnPreview.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnPreview.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPreview.Enabled = false;
             this.btnPreview.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnPreview.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPreview.Location = new System.Drawing.Point(304, 550);
+            this.btnPreview.Location = new System.Drawing.Point(298, 550);
             this.btnPreview.Name = "btnPreview";
-            this.btnPreview.Size = new System.Drawing.Size(112, 25);
+            this.btnPreview.Size = new System.Drawing.Size(140, 29);
             this.btnPreview.TabIndex = 124;
             this.btnPreview.Text = "Preview";
             this.btnPreview.UseVisualStyleBackColor = true;
@@ -246,24 +257,11 @@
             this.txtTotalValue.Size = new System.Drawing.Size(162, 25);
             this.txtTotalValue.TabIndex = 126;
             // 
-            // listBox1CloseShiftMenu
-            // 
-            this.listBox1CloseShiftMenu.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBox1CloseShiftMenu.FormattingEnabled = true;
-            this.listBox1CloseShiftMenu.ItemHeight = 17;
-            this.listBox1CloseShiftMenu.Items.AddRange(new object[] {
-            "Cash",
-            "Credits"});
-            this.listBox1CloseShiftMenu.Location = new System.Drawing.Point(411, 204);
-            this.listBox1CloseShiftMenu.Name = "listBox1CloseShiftMenu";
-            this.listBox1CloseShiftMenu.Size = new System.Drawing.Size(178, 55);
-            this.listBox1CloseShiftMenu.TabIndex = 127;
-            // 
             // txtCashNo
             // 
             this.txtCashNo.BackColor = System.Drawing.Color.White;
             this.txtCashNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCashNo.Location = new System.Drawing.Point(422, 86);
+            this.txtCashNo.Location = new System.Drawing.Point(422, 75);
             this.txtCashNo.Margin = new System.Windows.Forms.Padding(2);
             this.txtCashNo.Name = "txtCashNo";
             this.txtCashNo.ReadOnly = true;
@@ -274,7 +272,7 @@
             // 
             this.txtCashierName.BackColor = System.Drawing.Color.White;
             this.txtCashierName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCashierName.Location = new System.Drawing.Point(212, 86);
+            this.txtCashierName.Location = new System.Drawing.Point(212, 75);
             this.txtCashierName.Margin = new System.Windows.Forms.Padding(2);
             this.txtCashierName.Name = "txtCashierName";
             this.txtCashierName.ReadOnly = true;
@@ -290,11 +288,25 @@
             this.cmbShop.Items.AddRange(new object[] {
             "Active",
             "InActive"});
-            this.cmbShop.Location = new System.Drawing.Point(15, 86);
+            this.cmbShop.Location = new System.Drawing.Point(15, 75);
             this.cmbShop.Margin = new System.Windows.Forms.Padding(2);
             this.cmbShop.Name = "cmbShop";
             this.cmbShop.Size = new System.Drawing.Size(162, 25);
             this.cmbShop.TabIndex = 130;
+            // 
+            // listView1
+            // 
+            this.listView1.HideSelection = false;
+            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem3,
+            listViewItem4});
+            this.listView1.Location = new System.Drawing.Point(406, 204);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(178, 97);
+            this.listView1.TabIndex = 131;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Tile;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // frmCloseShifWindow
             // 
@@ -303,10 +315,10 @@
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(628, 585);
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.cmbShop);
             this.Controls.Add(this.txtCashierName);
             this.Controls.Add(this.txtCashNo);
-            this.Controls.Add(this.listBox1CloseShiftMenu);
             this.Controls.Add(this.txtTotalValue);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.btnPreview);
@@ -353,9 +365,9 @@
         private System.Windows.Forms.Button btnPreview;
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.TextBox txtTotalValue;
-        private System.Windows.Forms.ListBox listBox1CloseShiftMenu;
         private System.Windows.Forms.TextBox txtCashNo;
         private System.Windows.Forms.TextBox txtCashierName;
         private System.Windows.Forms.ComboBox cmbShop;
+        private System.Windows.Forms.ListView listView1;
     }
 }

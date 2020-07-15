@@ -21,6 +21,8 @@ namespace IMS_Client_2
 
         bool IsLogOut = false;
         public int Login_History_ID = 0;
+        public static int Home_MasterCashClosingID = 0;
+        bool IsForeCloseCash = false;
 
         clsUtility ObjUtil = new clsUtility();
         clsConnection_DAL ObjDAL = new clsConnection_DAL(true);
@@ -30,29 +32,36 @@ namespace IMS_Client_2
 
         static UserManagement.frmUserManagement ObjUserManag = new UserManagement.frmUserManagement();
 
-        private void userCreationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-           
-        }
-
         private void LoadCashStatus()
         {
-            DataTable dtCashMaster = ObjDAL.ExecuteSelectStatement("select * from [dbo].[tblMasterCashClosing] where Convert(date,CashBOxDateTime)=Convert(date,getdate())");
-            if (dtCashMaster.Rows.Count > 0)
+            int pStoreID = GetDefaultStoreID();
+            DataTable dtCashMaster = ObjDAL.ExecuteSelectStatement("SELECT TOP 1 * FROM " + clsUtility.DBName + ".[dbo].[tblMasterCashClosing] WITH(NOLOCK) WHERE StoreID=" + pStoreID + " ORDER BY CashBoxDate DESC");
+
+            //DataTable dtCashMaster = ObjDAL.ExecuteSelectStatement("SELECT * FROM " + clsUtility.DBName + ".[dbo].[tblMasterCashClosing] WITH(NOLOCK) WHERE CashBOxDate=CONVERT(DATE,GETDATE()) AND StoreID=" + pStoreID);
+            if (ObjUtil.ValidateTable(dtCashMaster))
             {
+                Home_MasterCashClosingID = Convert.ToInt32(dtCashMaster.Rows[0]["MasterCashClosingID"]);
                 if (Convert.ToBoolean(dtCashMaster.Rows[0]["CashStatus"]))
                 {
+                    if (DateTime.Now.ToString("yyyy-MM-dd") == Convert.ToDateTime(dtCashMaster.Rows[0]["CashBoxDate"]).ToString("yyyy-MM-dd"))
+                    {
+                        btnOpenCash.Text = "View Details";
+                    }
+                    IsForeCloseCash = false;
                     label7.Text = "CLOSED";
                 }
                 else
                 {
-
                     label7.Text = "OPEN";
                     btnOpenCash.Text = "View Details";
-
+                    if (DateTime.Now.ToString("yyyy-MM-dd") != Convert.ToDateTime(dtCashMaster.Rows[0]["CashBoxDate"]).ToString("yyyy-MM-dd"))
+                    {
+                        IsForeCloseCash = true;
+                        clsUtility.ShowInfoMessage("Please close your previous day cash box and Open a new cash box for today.", clsUtility.strProjectTitle);
+                        return;
+                    }
+                    IsForeCloseCash = false;
                 }
-
-
             }
             else
             {
@@ -75,10 +84,9 @@ namespace IMS_Client_2
 
         private void DisplayRegistrationInfo()
         {
-         
-            DataTable dataTable=  ObjDAL.ExecuteSelectStatement("select RegDate FROM "+clsUtility.DBName+".[dbo].[RegistrationDetails] where PcName='"+Environment.MachineName+"'");
-            
-            if (dataTable.Rows.Count>0)
+            DataTable dataTable = ObjDAL.ExecuteSelectStatement("SELECT RegDate FROM " + clsUtility.DBName + ".[dbo].[RegistrationDetails] WITH(NOLOCK) where PcName='" + Environment.MachineName + "'");
+
+            if (ObjUtil.ValidateTable(dataTable))
             {
                 lblRegistrationDate.Text = dataTable.Rows[0]["RegDate"].ToString();
             }
@@ -87,8 +95,8 @@ namespace IMS_Client_2
                 lblRegistrationDate.Text = "NA";
 
             }
-            DataTable dtCompany = ObjDAL.ExecuteSelectStatement("select CompanyName FROM " + clsUtility.DBName + ".[dbo].[CompanyMaster] ");
-            if (dtCompany.Rows.Count>0)
+            DataTable dtCompany = ObjDAL.ExecuteSelectStatement("SELECT CompanyName FROM " + clsUtility.DBName + ".[dbo].[CompanyMaster] WITH(NOLOCK)");
+            if (ObjUtil.ValidateTable(dtCompany))
             {
                 lblLicensedTo.Text = dtCompany.Rows[0]["CompanyName"].ToString();
             }
@@ -96,14 +104,13 @@ namespace IMS_Client_2
             {
                 lblLicensedTo.Text = "NA";
             }
-
-
-
         }
         private void frmHome_Load(object sender, EventArgs e)
         {
             try
             {
+                btnOpenCash.BackgroundImage = B_Leave;
+
                 clsUtility.DBName = "IMS_Client_2";
                 clsUtility.LoginID = 1;
                 //clsUtility.IsAdmin = false;
@@ -111,8 +118,7 @@ namespace IMS_Client_2
                 clsUtility.strProjectTitle = "IMS";
                 if (clsUtility.LoginID > 0)
                 {
-
-                    object ob = ObjDAL.ExecuteScalar("SELECT UserName from " + clsUtility.DBName + ".[dbo].[UserManagement] WHERE UserID =" + clsUtility.LoginID);
+                    object ob = ObjDAL.ExecuteScalar("SELECT UserName from " + clsUtility.DBName + ".[dbo].[UserManagement] WITH(NOLOCK) WHERE UserID =" + clsUtility.LoginID);
                     lblLoginName.Text = "Login By : " + ob.ToString();
                 }
                 else
@@ -122,6 +128,7 @@ namespace IMS_Client_2
                 lblVersion.Text = "Version : " + Application.ProductVersion;
 
                 DisplayRegistrationInfo();
+                LoadCashStatus();
             }
             catch { }
         }
@@ -252,8 +259,22 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Invoice) || clsUtility.IsAdmin)
             {
-                Sales.Sales_Invoice Obj = new Sales.Sales_Invoice();
-                Obj.Show();
+                if (label7.Text == "OPEN")
+                {
+                    if (!IsForeCloseCash)
+                    {
+                        Sales.Sales_Invoice Obj = new Sales.Sales_Invoice();
+                        Obj.Show();
+                    }
+                    else
+                    {
+                        clsUtility.ShowInfoMessage("Please close your previous day cash box and Open a new cash box for today.", clsUtility.strProjectTitle);
+                    }
+                }
+                else
+                {
+                    clsUtility.ShowInfoMessage("There is no Opened Cash for today.", clsUtility.strProjectTitle);
+                }
             }
             else
             {
@@ -516,16 +537,6 @@ namespace IMS_Client_2
             frmUserRights.ShowDialog();
         }
 
-        private void toolStripMenuItem4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void employeeCommissionSettingToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void purchaseDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Purchase.frmPurchaseDetails obj = new Purchase.frmPurchaseDetails();
@@ -537,67 +548,79 @@ namespace IMS_Client_2
             DisplayRegistrationInfo();
         }
 
-
         private void replaceReturnItemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             if (label7.Text == "OPEN")
             {
-                //Sales.frmReplaceReturnPopup obj = new Sales.frmReplaceReturnPopup();
-                //obj.ShowDialog();
-                //  Obj.Size = new Size(921, 743);
-              
+                if (!IsForeCloseCash)
+                {
+                    Sales.frmReplaceReturnPopup obj = new Sales.frmReplaceReturnPopup();
+                    obj.ShowDialog();
+                    obj.Size = new Size(921, 743);
+                }
+                else
+                {
+                    clsUtility.ShowInfoMessage("Please close your previous day cash box and Open a new cash box for today.", clsUtility.strProjectTitle);
+                }
             }
             else
             {
-                clsUtility.ShowInfoMessage("Please close your previous day cash box and Open a new cash box for today.", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("There is no Opened Cash for today.", clsUtility.strProjectTitle);
             }
-
-          
         }
 
         private void btnOpenCash_Click(object sender, EventArgs e)
         {
-            if (btnOpenCash.Text=="View Details")
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmCloseShifWindow) || clsUtility.IsAdmin)
             {
-                // Enter code for opening Cash clsoing window
+                if (btnOpenCash.Text == "View Details")
+                {
+                    // Enter code for opening Cash clsoing window
+                    Sales.frmCloseShifWindow Obj = new Sales.frmCloseShifWindow();
+                    Obj.pMasterCashClosingID = Home_MasterCashClosingID;
+                    Obj.ShowDialog();
+                    LoadCashStatus();
+                }
+                else
+                {
+                    bool result = clsUtility.ShowQuestionMessage("Are you sure, you want to open cash box ?", clsUtility.strProjectTitle);
+                    if (result)
+                    {
+                        this.Cursor = Cursors.WaitCursor;
+                        System.Threading.Thread.Sleep(2000);
+                        OpenCashBox();
+                        this.Cursor = Cursors.Default;
+                    }
+                }
             }
             else
             {
-                bool result = clsUtility.ShowQuestionMessage("Are you sure, you want to open cash box ?", clsUtility.strProjectTitle);
-                if (result)
-                {
-                    this.Cursor = Cursors.WaitCursor;
-                    System.Threading.Thread.Sleep(2000);
-                    OpenCashBox();
-                    this.Cursor = Cursors.Default;
-
-                }
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
-           
+
         }
         private int GetDefaultStoreID()
         {
-           return    ObjDAL.ExecuteScalarInt("select StoreID from "+clsUtility.DBName+".dbo.DefaultStoreSetting where MachineName="+Environment.MachineName);
+            return ObjDAL.ExecuteScalarInt("SELECT StoreID FROM " + clsUtility.DBName + ".dbo.DefaultStoreSetting WITH(NOLOCK) WHERE MachineName='" + Environment.MachineName + "'");
         }
         private void OpenCashBox()
         {
             string NexCashNumber = GetCashNumber();
+            int pStoreID = GetDefaultStoreID();
+            ObjDAL.SetColumnData("CashNo", SqlDbType.NVarChar, NexCashNumber);
+            ObjDAL.SetColumnData("StoreID", SqlDbType.Int, pStoreID);
+            ObjDAL.SetColumnData("CashBoxDate", SqlDbType.Date, DateTime.Now.ToString("yyyy-MM-dd"));
+            ObjDAL.SetColumnData("EmployeeID", SqlDbType.Int, clsUtility.LoginID);
+            ObjDAL.SetColumnData("CashStatus", SqlDbType.Bit, false);
+            ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
 
-            ObjDAL.SetColumnData("CashNo",SqlDbType.NVarChar, NexCashNumber);
-            ObjDAL.SetColumnData("CashBoxDateTime", SqlDbType.DateTime, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-            ObjDAL.SetColumnData("EmployeeID",SqlDbType.Int,CoreApp.clsUtility.LoginID);
-            ObjDAL.SetColumnData("CashStatus",SqlDbType.Bit,false);
-            ObjDAL.SetColumnData("CreatedOn",SqlDbType.DateTime, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-            ObjDAL.SetColumnData("CreatedBy",SqlDbType.Int, CoreApp.clsUtility.LoginID);
-           
-            
-           int result= ObjDAL.InsertData(clsUtility.DBName + ".[dbo].tblMasterCashClosing",false);
-            if (result>0)
+            int result = ObjDAL.InsertData(clsUtility.DBName + ".[dbo].tblMasterCashClosing", true);
+            if (result > 0)
             {
-                clsUtility.ShowInfoMessage("Cash Box has been opened !", clsUtility.strProjectTitle);
+                Home_MasterCashClosingID = result;
+                clsUtility.ShowInfoMessage("Cash Box has been Opened !", clsUtility.strProjectTitle);
                 btnOpenCash.Text = "View Details";
-                //LoadCashStatus();
+                LoadCashStatus();
             }
 
         }
@@ -623,8 +646,17 @@ namespace IMS_Client_2
 
         private void closeCashToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Sales.frmCloseShifWindow Obj = new Sales.frmCloseShifWindow();
-            Obj.Show();
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmCloseShifWindow) || clsUtility.IsAdmin)
+            {
+                Sales.frmCloseShifWindow Obj = new Sales.frmCloseShifWindow();
+                Obj.pMasterCashClosingID = Home_MasterCashClosingID;
+                Obj.ShowDialog();
+                LoadCashStatus();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
     }
 }

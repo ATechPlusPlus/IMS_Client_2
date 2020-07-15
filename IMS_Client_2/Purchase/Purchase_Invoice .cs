@@ -524,6 +524,8 @@ namespace IMS_Client_2.Purchase
             {
                 txtSearchByShipmentNo.Enabled = false;
                 txtSearchByShipmentNo.Clear();
+                txtSearchByBillNo.Enabled = false;
+                txtSearchByBillNo.Clear();
                 LoadData();
             }
         }
@@ -535,7 +537,7 @@ namespace IMS_Client_2.Purchase
                 LoadData();
                 return;
             }
-            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID,SupplierBillNo,SupplierID,ShipmentNo,BillDate,BillValue,TotalQTY,Discount,ForeignExp,GrandTotal,LocalValue,LocalExp,LocalBillValue", "ShipmentNo LIKE '%" + txtSearchByShipmentNo.Text + "%'", "BillDate");
+            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID,SupplierBillNo,SupplierID,ShipmentNo,BillDate,BillValue,TotalQTY,Discount,ForeignExp,GrandTotal,LocalValue,LocalExp,LocalBillValue,IsInvoiceDone", "ShipmentNo LIKE '%" + txtSearchByShipmentNo.Text + "%'", "BillDate");
             if (ObjUtil.ValidateTable(dt))
             {
                 dataGridView1.DataSource = dt;
@@ -731,7 +733,7 @@ namespace IMS_Client_2.Purchase
                 LoadData();
                 return;
             }
-            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID,SupplierBillNo,SupplierID,ShipmentNo,BillDate,BillValue,TotalQTY,Discount,ForeignExp,GrandTotal,LocalValue,LocalExp,LocalBillValue", "SupplierBillNo LIKE '%" + txtSearchByBillNo.Text + "%'", "BillDate");
+            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID,SupplierBillNo,SupplierID,ShipmentNo,BillDate,BillValue,TotalQTY,Discount,ForeignExp,GrandTotal,LocalValue,LocalExp,LocalBillValue,IsInvoiceDone", "SupplierBillNo LIKE '%" + txtSearchByBillNo.Text + "%'", "BillDate");
             if (ObjUtil.ValidateTable(dt))
             {
                 dataGridView1.DataSource = dt;

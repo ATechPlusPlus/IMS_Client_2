@@ -165,7 +165,6 @@ namespace IMS_Client_2.Purchase
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
-
             if (Convert.ToInt32(txtDiffQty.Text) >= 0 && Convert.ToDouble(txtDiffValue.Text) >= 0)
             {
                 DataTable dtPurchaseInvoiceBill = (DataTable)dataGridView1.DataSource;

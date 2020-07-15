@@ -37,6 +37,8 @@ namespace IMS_Client_2
             frmBarCode = 32,
             frmBarCodeDesigner = 33,
             frmCloseCashBandMaster = 34,
+            frmCloseShifWindow = 35,
+            Import_ProductData=36,
             frmDatabaseMaintenance = 7///commented
         }
         public enum Operation

@@ -22,9 +22,7 @@ namespace IMS_Client_2.Sales
         clsConnection_DAL ObjCon = new clsConnection_DAL(true);
         private void frmReplaceReturnPopup_Load(object sender, EventArgs e)
         {
-           btnPrint.BackgroundImage = B_Leave;
-
-
+            btnOk.BackgroundImage = B_Leave;
         }
         private void btnAdd_MouseEnter(object sender, EventArgs e)
         {
@@ -40,15 +38,15 @@ namespace IMS_Client_2.Sales
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            if (txtOldInvoiceNumber.Text.Trim().Length==0)
+            if (txtOldInvoiceNumber.Text.Trim().Length == 0)
             {
                 clsUtility.ShowInfoMessage("Please Enter Old Invoice Number.", clsUtility.strProjectTitle);
                 return;
             }
-            DataTable dataTable= ObjCon.ExecuteSelectStatement("select ID from "+CoreApp.clsUtility.DBName+".dbo.SalesInvoiceDetails where InvoiceNumber='" + txtOldInvoiceNumber.Text + "'");
+            DataTable dataTable = ObjCon.ExecuteSelectStatement("SELECT ID FROM " + clsUtility.DBName + ".dbo.SalesInvoiceDetails WITH(NOLOCK) WHERE InvoiceNumber='" + txtOldInvoiceNumber.Text + "'");
             if (dataTable.Rows.Count == 0)
             {
-                clsUtility.ShowInfoMessage("No Invoice found for Invoice Number: " + txtOldInvoiceNumber.Text,clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("No Invoice found for Invoice Number: " + txtOldInvoiceNumber.Text, clsUtility.strProjectTitle);
                 return;
             }
             else
@@ -59,13 +57,9 @@ namespace IMS_Client_2.Sales
                 sales_Invoice.lblActiveStatus.ForeColor = Color.Maroon;
                 sales_Invoice.IsReplaceReturnMode = true;
                 sales_Invoice.OldInvoiceID = dataTable.Rows[0]["ID"].ToString();
-
                 sales_Invoice.Show();
                 this.Close();
-
             }
         }
-
-
     }
 }

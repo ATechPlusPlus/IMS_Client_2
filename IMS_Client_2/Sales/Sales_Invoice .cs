@@ -21,6 +21,7 @@ namespace IMS_Client_2.Sales
         clsConnection_DAL ObjDAL = new clsConnection_DAL(true);
         clsUtility ObjUtil = new clsUtility();
 
+        bool isFromTabChanged = false;
         public bool IsReplaceReturnMode = false;
         public string OldInvoiceID = "";
 
@@ -38,7 +39,6 @@ namespace IMS_Client_2.Sales
             btnPrint.BackgroundImage = B_Leave;
             btnSaveData.BackgroundImage = B_Leave;
 
-
             BindStoreDetails();
 
             // GenerateInvoiceNumber();
@@ -52,7 +52,6 @@ namespace IMS_Client_2.Sales
                 radNewItem.Visible = false;
                 radReplace.Visible = false;
                 lblTitle.Visible = false;
-
                 label16.Enabled = false;
                 txtOldBillAmount.Enabled = false;
             }
@@ -62,11 +61,6 @@ namespace IMS_Client_2.Sales
                 label16.Enabled = true;
                 txtOldBillAmount.Enabled = true;
             }
-
-
-
-
-
         }
         private void btnAdd_MouseEnter(object sender, EventArgs e)
         {
@@ -93,10 +87,8 @@ namespace IMS_Client_2.Sales
 
             dtItemDetails.Columns.Add("OIRate");
             dtItemDetails.Columns.Add("Adj_Amount");
-
             dtItemDetails.Columns.Add("Total");
             dtItemDetails.Columns.Add("Delete");
-
 
             dtReplcaeItemDetails.Columns.Add("ProductID");
             dtReplcaeItemDetails.Columns.Add("ProductName");
@@ -109,7 +101,6 @@ namespace IMS_Client_2.Sales
             dtReplcaeItemDetails.Columns.Add("Rate");
             dtReplcaeItemDetails.Columns.Add("Total");
             dtReplcaeItemDetails.Columns.Add("Delete");
-
         }
         private void AddRowToItemDetails(string productID, string name, string qty, string rate, string total,
             string BarCode, string SizeID, string Size, string ColorID, string Color)
@@ -150,10 +141,6 @@ namespace IMS_Client_2.Sales
                 decimal odlRate = Convert.ToDecimal(dataSet.Tables[0].Rows[0]["Rate"]);
                 decimal adAmount = CurrentRate - odlRate;
                 drow["Adj_Amount"] = adAmount.ToString();
-
-
-
-
             }
 
         }
@@ -308,20 +295,41 @@ namespace IMS_Client_2.Sales
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Masters.Store_Master Obj = new Masters.Store_Master();
-            Obj.Show();
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Store_Master) || clsUtility.IsAdmin)
+            {
+                Masters.Store_Master Obj = new Masters.Store_Master();
+                Obj.Show();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
 
         private void btnDrug_Click(object sender, EventArgs e)
         {
-            Masters.Employee_Details Obj = new Masters.Employee_Details();
-            Obj.Show();
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Employee_Details) || clsUtility.IsAdmin)
+            {
+                Masters.Employee_Details Obj = new Masters.Employee_Details();
+                Obj.Show();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Masters.Customer_Master customer_Master = new Masters.Customer_Master();
-            customer_Master.ShowDialog();
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Customer_Master) || clsUtility.IsAdmin)
+            {
+                Masters.Customer_Master customer_Master = new Masters.Customer_Master();
+                customer_Master.ShowDialog();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
         private void txtSalesMan_TextChanged(object sender, EventArgs e)
         {
@@ -381,8 +389,6 @@ namespace IMS_Client_2.Sales
                             {
                                 imgProduct = null;
                             }
-
-
                         }
                         else
                         {
@@ -532,12 +538,7 @@ namespace IMS_Client_2.Sales
                     return true;
                 }
             }
-
-
             return false;
-
-
-
         }
 
         private bool CheckProductQTY_Non_BarCode(string PID, string SizeID, string ColorID, decimal CurQTY)
@@ -638,7 +639,6 @@ namespace IMS_Client_2.Sales
             ObjUtil.SetRowNumber(dgvProductDetails);
 
             dgvProductDetails.Columns["ProductID"].Visible = false;
-
             dgvProductDetails.Columns["ColoriD"].Visible = false;
             dgvProductDetails.Columns["SizeiD"].Visible = false;
             if (IsReplaceReturnMode)
@@ -646,7 +646,6 @@ namespace IMS_Client_2.Sales
                 dgvProductDetails.Columns["OIRate"].Visible = true;
                 dgvProductDetails.Columns["Adj_Amount"].Visible = false;
                 ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill);
-
             }
             else
             {
@@ -654,7 +653,6 @@ namespace IMS_Client_2.Sales
                 dgvProductDetails.Columns["Adj_Amount"].Visible = false;
                 ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill);
             }
-
         }
 
         private void dgvProductDetails_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -823,7 +821,6 @@ namespace IMS_Client_2.Sales
 
             string InvoiceDateTime = dtpSalesDate.Value.ToString("yyyy-MM-dd") + " " + DateTime.Now.ToString("HH:mm:ss");
 
-
             #region SalesInvoiceDetails
             ObjDAL.SetColumnData("InvoiceNumber", SqlDbType.NVarChar, GenerateInvoiceNumber());
             ObjDAL.SetColumnData("InvoiceDate", SqlDbType.DateTime, InvoiceDateTime);
@@ -835,7 +832,6 @@ namespace IMS_Client_2.Sales
             ObjDAL.SetColumnData("CustomerID", SqlDbType.Int, txtCustomerID.Text);
             ObjDAL.SetColumnData("SalesMan", SqlDbType.Int, txtEmpID.Text);
             ObjDAL.SetColumnData("ShopeID", SqlDbType.Int, cmbShop.SelectedValue.ToString());
-
             ObjDAL.SetColumnData("PaymentMode", SqlDbType.NVarChar, lblPMode.Text);
             ObjDAL.SetColumnData("PaymentAutoID", SqlDbType.NVarChar, Other_Forms.frmPayment.strPaymentAutoID);
 
@@ -873,39 +869,32 @@ namespace IMS_Client_2.Sales
             if (lblPMode.Text == "K Net" || lblPMode.Text == "Visa" || lblPMode.Text == "Master Card" || lblPMode.Text == "Other")
             {
                 // check if any entry is there
-                string strQ = " select MasterCashClosingID from " + clsUtility.DBName + ".[dbo].[tblMasterCashClosing] where Convert(Date,cashboxDateTime)=Convert(date,getdate())";
-                int MasterCashClosingID = ObjDAL.ExecuteScalarInt(strQ);
+                //string strQ = " SELECT MasterCashClosingID FROM " + clsUtility.DBName + ".[dbo].[tblMasterCashClosing] WITH(NOLOCK) WHERE cashboxDate=CONVERT(DATE,GETDATE())";
+                //int MasterCashClosingID = ObjDAL.ExecuteScalarInt(strQ);
+                int MasterCashClosingID = frmHome.Home_MasterCashClosingID;
 
-
-                int count = ObjDAL.ExecuteScalarInt("select count(*) from " + clsUtility.DBName + ".[dbo].[tblCreditClosing] where MasterCashClosingID=" + MasterCashClosingID);
+                int count = ObjDAL.ExecuteScalarInt("SELECT COUNT(1) FROM " + clsUtility.DBName + ".[dbo].[tblCreditClosing] WITH(NOLOCK) WHERE MasterCashClosingID=" + MasterCashClosingID);
                 if (count == 0)  // if NOT found for today
                 {
                     ObjDAL.SetColumnData("MasterCashClosingID", SqlDbType.Int, MasterCashClosingID);
-
                     ObjDAL.SetColumnData("Type", SqlDbType.NVarChar, lblPMode.Text);
-
                     ObjDAL.SetColumnData("Count", SqlDbType.Int, 1);
                     ObjDAL.SetColumnData("Value", SqlDbType.Decimal, txtGrandTotal.Text);
-                    ObjDAL.SetColumnData("CreatedOn", SqlDbType.DateTime, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                     ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
                     ObjDAL.InsertData(clsUtility.DBName + ".[dbo].[tblCreditClosing]", false);
                 }
                 else
                 {
                     // update the tblCreditClosing, Add count and amount to the exsting value
-                    string strUpdate = "  update " + clsUtility.DBName + ".[dbo].[tblCreditClosing] set Count=Count+1 , Value=value+" + txtGrandTotal.Text +
-                                    " where MasterCashClosingID=" + MasterCashClosingID;
-
+                    string strUpdate = "  UPDATE " + clsUtility.DBName + ".[dbo].[tblCreditClosing] SET Count=Count+1 , Value=value+" + txtGrandTotal.Text +
+                                    " WHERE MasterCashClosingID=" + MasterCashClosingID;
                     ObjDAL.ExecuteNonQuery(strUpdate);
                 }
-
             }
-
             return InvoiceID;
         }
         private void DoReplaceReturn()
         {
-
             // Take the return and add to stock
             for (int i = 0; i < dgvReplaceReturn.Rows.Count; i++)
             {
@@ -917,15 +906,12 @@ namespace IMS_Client_2.Sales
                 string SizeID = dgvReplaceReturn.Rows[i].Cells["RepalceSizeID"].Value.ToString();
                 string barcodeNumber = dgvReplaceReturn.Rows[i].Cells["ReplaceBarcode"].Value.ToString();
 
-
                 ObjDAL.SetColumnData("OldInvoiceID", SqlDbType.Int, OldInvoiceID);
                 ObjDAL.SetColumnData("ProductID", SqlDbType.Int, ProductID);
                 ObjDAL.SetColumnData("QTY", SqlDbType.Decimal, QTY);
-
                 ObjDAL.SetColumnData("Rate", SqlDbType.Decimal, Rate);
                 ObjDAL.SetColumnData("ColorID", SqlDbType.Int, ColorID);
                 ObjDAL.SetColumnData("SizeID", SqlDbType.Int, SizeID);
-                ObjDAL.SetColumnData("CreatedOn", SqlDbType.DateTime, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
                 ObjDAL.SetColumnData("BarCode", SqlDbType.NVarChar, barcodeNumber);
 
@@ -937,16 +923,15 @@ namespace IMS_Client_2.Sales
             }
 
             //Cash Return Entry
-            string strQ = " select MasterCashClosingID from " + clsUtility.DBName + ".[dbo].[tblMasterCashClosing] where Convert(Date,cashboxDateTime)=Convert(date,getdate())";
-            int MasterCashClosingID = ObjDAL.ExecuteScalarInt(strQ);
+            //string strQ = " SELECT MasterCashClosingID FROM " + clsUtility.DBName + ".[dbo].[tblMasterCashClosing] WITH(NOLOCK) WHERE cashboxDate)=CONVERT(DATE,GETDATE())";
+            //int MasterCashClosingID = ObjDAL.ExecuteScalarInt(strQ);
+            int MasterCashClosingID = frmHome.Home_MasterCashClosingID;
 
-
-            int count = ObjDAL.ExecuteScalarInt("select count(*) from [IMS_Client_2].[dbo].[tblCashReturn] where MasterCashClosingID=" + MasterCashClosingID);
+            int count = ObjDAL.ExecuteScalarInt("SELECT COUNT(1) FROM " + clsUtility.DBName + ".[dbo].[tblCashReturn] WITH(NOLOCK) WHERE MasterCashClosingID=" + MasterCashClosingID);
             if (count == 0)  // if NOT found for today
             {
                 ObjDAL.SetColumnData("MasterCashClosingID", SqlDbType.Int, MasterCashClosingID);
                 ObjDAL.SetColumnData("Value", SqlDbType.Decimal, txtOldBillAmount.Text);
-                ObjDAL.SetColumnData("CreatedOn", SqlDbType.Date, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
                 ObjDAL.InsertData(clsUtility.DBName + ".[dbo].[tblCashReturn]", false);
             }
@@ -954,13 +939,11 @@ namespace IMS_Client_2.Sales
             {
                 // update the tblCashReturn, Add value the exsting value
 
-                string strUpdate = "  update " + clsUtility.DBName + ".[dbo].[tblCashReturn] set Value=value+" + txtOldBillAmount.Text +
-                                      "where MasterCashClosingID=" + MasterCashClosingID;
+                string strUpdate = "  UPDATE " + clsUtility.DBName + ".[dbo].[tblCashReturn] SET Value=value+" + txtOldBillAmount.Text +
+                                      "WHERE MasterCashClosingID=" + MasterCashClosingID;
 
                 ObjDAL.ExecuteNonQuery(strUpdate);
             }
-
-
         }
 
         private void btnAdd_Click_1(object sender, EventArgs e)
@@ -985,9 +968,8 @@ namespace IMS_Client_2.Sales
                             NewInvoiceID = DoNewSales();
 
                             // update the crossponding old invoice ID
-                            ObjDAL.ExecuteNonQuery("update [IMS_Client_2].[dbo].[tblReplaceReturn] set NewInvoiceID=" + NewInvoiceID + " where OldInvoiceID=" + OldInvoiceID);
+                            ObjDAL.ExecuteNonQuery("UPDATE [IMS_Client_2].[dbo].[tblReplaceReturn] set NewInvoiceID=" + NewInvoiceID + " where OldInvoiceID=" + OldInvoiceID);
                         }
-
                     }
 
                     clsUtility.ShowInfoMessage("Data has been saved successfully.", clsUtility.strProjectTitle);
@@ -1059,7 +1041,6 @@ namespace IMS_Client_2.Sales
                     {   //txtProductName contains barcode.
                         GetItemDetailsByProductID(txtBarCode.Text);
                     }
-
                 }
             }
             else
@@ -1074,14 +1055,13 @@ namespace IMS_Client_2.Sales
         private void GetDataFromSales(string barcode)
         {
 
-            string strQ = "select * from (select InvoiceID, ProductID, " +
-                        " (select ProductName from ProductMaster where ProductID = s1.ProductID) as ProductName, " +
+            string strQ = "SELECT * FROM (SELECT InvoiceID, ProductID, " +
+                        " (SELECT ProductName FROM ProductMaster WHERE ProductID = s1.ProductID) AS ProductName, " +
                         " QTY, Rate, ColorID, " +
-                        " (select ColorName from ColorMaster where ColorID = s1.ColorID) as Color, " +
-                        " (select Size from SizeMaster where SizeID = s1.SizeID) as Size,SizeID, " +
-                        " (select BarcodeNo from ProductStockColorSizeMaster where ColorID = s1.ColorID and SizeID = s1.SizeID and ProductID = s1.ProductID ) as BarCode from SalesDetails s1" +
-                        " where InvoiceID = " + OldInvoiceID + " ) as tb where BarCode = '" + barcode + "'";
-
+                        " (SELECT ColorName FROM ColorMaster WHERE ColorID = s1.ColorID) AS Color, " +
+                        " (SELECT Size FROM SizeMaster WHERE SizeID = s1.SizeID) AS Size,SizeID, " +
+                        " (SELECT BarcodeNo FROM ProductStockColorSizeMaster WHERE ColorID = s1.ColorID AND SizeID = s1.SizeID AND ProductID = s1.ProductID ) AS BarCode FROM SalesDetails s1" +
+                        " WHERE InvoiceID = " + OldInvoiceID + " ) AS tb WHERE BarCode = '" + barcode + "'";
 
             DataTable dtSalesDetails = ObjDAL.ExecuteSelectStatement(strQ);
             if (dtSalesDetails.Rows.Count > 0)
@@ -1117,14 +1097,10 @@ namespace IMS_Client_2.Sales
                     CalculateGrandTotal();
                     dgvReplaceReturn.ClearSelection();
                     txtBarCode.Focus();
-
-
-
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.ToString());
-
+                    clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
                 }
 
             }
@@ -1269,7 +1245,6 @@ namespace IMS_Client_2.Sales
                 isFromTabChanged = false;
                 return;
             }
-
             tabControl1.SelectedIndex = 1;
             lblTitle.Text = "Replace/Return";
             txtBarCode.Focus();
@@ -1304,7 +1279,7 @@ namespace IMS_Client_2.Sales
                 picProduct.Image = GetProductPhoto(Convert.ToInt32(_PID));
             }
         }
-        bool isFromTabChanged = false;
+
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControl1.SelectedIndex == 0)
@@ -1320,8 +1295,17 @@ namespace IMS_Client_2.Sales
                 isFromTabChanged = true;
                 radReplace.Checked = true;
                 txtTotalItems.Text = "Replace/Return Items :" + dgvReplaceReturn.Rows.Count.ToString();
-
             }
+        }
+
+        private void txtSalesMan_Enter(object sender, EventArgs e)
+        {
+            ObjUtil.SetTextHighlightColor(sender);
+        }
+
+        private void txtSalesMan_Leave(object sender, EventArgs e)
+        {
+            ObjUtil.SetTextHighlightColor(sender, System.Drawing.Color.White);
         }
     }
 }
