@@ -112,7 +112,7 @@ namespace IMS_Client_2
                 btnOpenCash.BackgroundImage = B_Leave;
 
                 clsUtility.DBName = "IMS_Client_2";
-                clsUtility.LoginID = 1;
+                clsUtility.LoginID = 5;
                 //clsUtility.IsAdmin = false;
                 clsUtility.IsAdmin = true;
                 clsUtility.strProjectTitle = "IMS";
@@ -599,6 +599,7 @@ namespace IMS_Client_2
             }
 
         }
+
         private int GetDefaultStoreID()
         {
             return ObjDAL.ExecuteScalarInt("SELECT StoreID FROM " + clsUtility.DBName + ".dbo.DefaultStoreSetting WITH(NOLOCK) WHERE MachineName='" + Environment.MachineName + "'");
@@ -629,6 +630,24 @@ namespace IMS_Client_2
             //SequenceInvoice : this is a sequance object created in SQL ( this is not a table)
             long LastID = (long)ObjDAL.ExecuteScalar("SELECT NEXT VALUE FOR " + clsUtility.DBName + ".[dbo].Seq_CashNumber");
             return LastID.ToString();
+        }
+
+        private void storeRightsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Other_Forms.frmStoreRights frmStoreRights = new Other_Forms.frmStoreRights();
+            frmStoreRights.ShowDialog();
+        }
+
+        private void stockTransferToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StockManagement.frmStoreTransfer frmStoreTransfer = new StockManagement.frmStoreTransfer();
+            frmStoreTransfer.Show();
+        }
+
+        private void brachReceiveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StockManagement.frmReceivedBranchTransfer frmReceived = new StockManagement.frmReceivedBranchTransfer();
+            frmReceived.Show();
         }
 
         private void closeCashBandMasterToolStripMenuItem_Click(object sender, EventArgs e)

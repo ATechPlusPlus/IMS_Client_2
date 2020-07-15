@@ -290,6 +290,12 @@
     <Compile Include="Other_Forms\frmPayment.Designer.cs">
       <DependentUpon>frmPayment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Other_Forms\frmStoreRights.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other_Forms\frmStoreRights.Designer.cs">
+      <DependentUpon>frmStoreRights.cs</DependentUpon>
+    </Compile>
     <Compile Include="Other_Forms\Import_ProductData.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -374,6 +380,12 @@
     <Compile Include="Report\Report_Forms\frmSalesReport.Designer.cs">
       <DependentUpon>frmSalesReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sales\frmQTYValidation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\frmQTYValidation.Designer.cs">
+      <DependentUpon>frmQTYValidation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sales\frmCloseShifWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -422,6 +434,24 @@
     </Compile>
     <Compile Include="SplashWindow.designer.cs">
       <DependentUpon>SplashWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StockManagement\frmTransferCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManagement\frmTransferCheck.Designer.cs">
+      <DependentUpon>frmTransferCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StockManagement\frmReceiveBranchTransfer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManagement\frmReceiveBranchTransfer.Designer.cs">
+      <DependentUpon>frmReceiveBranchTransfer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StockManagement\frmStoreTransfer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManagement\frmStoreTransfer.Designer.cs">
+      <DependentUpon>frmStoreTransfer.cs</DependentUpon>
     </Compile>
     <!-- <Compile Include="SqlServerTypes\Loader.cs" /> -->
     <Compile Include="StockManagement\Material_Details.cs">
@@ -500,6 +530,9 @@
     <EmbeddedResource Include="Other_Forms\frmPayment.resx">
       <DependentUpon>frmPayment.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Other_Forms\frmStoreRights.resx">
+      <DependentUpon>frmStoreRights.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Other_Forms\Import_ProductData.resx">
       <DependentUpon>Import_ProductData.cs</DependentUpon>
     </EmbeddedResource>
@@ -542,6 +575,9 @@
     <EmbeddedResource Include="Report\Report_Forms\frmSalesReport.resx">
       <DependentUpon>frmSalesReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sales\frmQTYValidation.resx">
+      <DependentUpon>frmQTYValidation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sales\frmCloseShifWindow.resx">
       <DependentUpon>frmCloseShifWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -565,6 +601,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SplashWindow.resx">
       <DependentUpon>SplashWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockManagement\frmTransferCheck.resx">
+      <DependentUpon>frmTransferCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockManagement\frmReceiveBranchTransfer.resx">
+      <DependentUpon>frmReceiveBranchTransfer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockManagement\frmStoreTransfer.resx">
+      <DependentUpon>frmStoreTransfer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StockManagement\Material_Details.resx">
       <DependentUpon>Material_Details.cs</DependentUpon>
