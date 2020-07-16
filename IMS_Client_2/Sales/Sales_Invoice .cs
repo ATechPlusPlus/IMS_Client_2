@@ -267,6 +267,26 @@ namespace IMS_Client_2.Sales
         }
         private string GenerateInvoiceNumber()
         {
+            string InvoiceNumber = "";
+            if (IsReplaceReturnMode)
+            {
+                //SequenceInvoice : this is a sequance object created in SQL ( this is not a table)
+                int LastID = ObjDAL.ExecuteScalarInt("SELECT NEXT VALUE FOR " + clsUtility.DBName + ".[dbo].SequenceInvoice");
+                 InvoiceNumber = "RE-" + LastID;
+
+            }
+            else
+            {
+                //SequenceInvoice : this is a sequance object created in SQL ( this is not a table)
+                int LastID = ObjDAL.ExecuteScalarInt("SELECT NEXT VALUE FOR " + clsUtility.DBName + ".[dbo].SequenceInvoice");
+                 InvoiceNumber = "INV-" + LastID;
+
+            }
+
+            return InvoiceNumber;
+        }
+        private string GenerateReplaceReturnInvoiceNumber()
+        {
             //SequenceInvoice : this is a sequance object created in SQL ( this is not a table)
             int LastID = ObjDAL.ExecuteScalarInt("SELECT NEXT VALUE FOR " + clsUtility.DBName + ".[dbo].SequenceInvoice");
             string InvoiceNumber = "INV-" + LastID;
@@ -810,6 +830,18 @@ namespace IMS_Client_2.Sales
                 clsUtility.ShowInfoMessage("Please Select Payment Mode.", clsUtility.strProjectTitle);
                 return false;
             }
+            if (!IsReplaceReturnMode)
+            {
+                if (txtGrandTotal.Text.Trim().Length != 0)
+                {
+                    if (Convert.ToDecimal(txtGrandTotal.Text) <= 0)
+                    {
+                        clsUtility.ShowInfoMessage("You can not print invoice for negative grand total.", clsUtility.strProjectTitle);
+                        return false;
+                    }
+                }
+            }
+            
             return true;
         }
 
@@ -865,31 +897,36 @@ namespace IMS_Client_2.Sales
                 ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster " +
                                         "SET QTY=QTY-" + QTY + " WHERE ProductID=" + ProductID + " AND StoreID=" + cmbShop.SelectedValue.ToString() + " AND ColorID=" + ColorID + " AND SizeID=" + SizeID);
             }
-            // save the payment details
-            if (lblPMode.Text == "K Net" || lblPMode.Text == "Visa" || lblPMode.Text == "Master Card" || lblPMode.Text == "Other")
-            {
-                // check if any entry is there
-                //string strQ = " SELECT MasterCashClosingID FROM " + clsUtility.DBName + ".[dbo].[tblMasterCashClosing] WITH(NOLOCK) WHERE cashboxDate=CONVERT(DATE,GETDATE())";
-                //int MasterCashClosingID = ObjDAL.ExecuteScalarInt(strQ);
-                int MasterCashClosingID = frmHome.Home_MasterCashClosingID;
+            if (Convert.ToDecimal(txtGrandTotal.Text)>=0) 
+            {  
+                // save the payment details
+                if (lblPMode.Text == "K Net" || lblPMode.Text == "Visa" || lblPMode.Text == "Master Card" || lblPMode.Text == "Other")
+                {
+                    // check if any entry is there
+                    //string strQ = " SELECT MasterCashClosingID FROM " + clsUtility.DBName + ".[dbo].[tblMasterCashClosing] WITH(NOLOCK) WHERE cashboxDate=CONVERT(DATE,GETDATE())";
+                    //int MasterCashClosingID = ObjDAL.ExecuteScalarInt(strQ);
+                    int MasterCashClosingID = frmHome.Home_MasterCashClosingID;
 
-                int count = ObjDAL.ExecuteScalarInt("SELECT COUNT(1) FROM " + clsUtility.DBName + ".[dbo].[tblCreditClosing] WITH(NOLOCK) WHERE MasterCashClosingID=" + MasterCashClosingID);
-                if (count == 0)  // if NOT found for today
-                {
-                    ObjDAL.SetColumnData("MasterCashClosingID", SqlDbType.Int, MasterCashClosingID);
-                    ObjDAL.SetColumnData("Type", SqlDbType.NVarChar, lblPMode.Text);
-                    ObjDAL.SetColumnData("Count", SqlDbType.Int, 1);
-                    ObjDAL.SetColumnData("Value", SqlDbType.Decimal, txtGrandTotal.Text);
-                    ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
-                    ObjDAL.InsertData(clsUtility.DBName + ".[dbo].[tblCreditClosing]", false);
+                    int count = ObjDAL.ExecuteScalarInt("SELECT COUNT(1) FROM " + clsUtility.DBName + ".[dbo].[tblCreditClosing] WITH(NOLOCK) WHERE MasterCashClosingID=" + MasterCashClosingID + " AND Type='" + lblPMode.Text + "'");
+                    if (count == 0)  // if NOT found for today
+                    {
+                        ObjDAL.SetColumnData("MasterCashClosingID", SqlDbType.Int, MasterCashClosingID);
+                        ObjDAL.SetColumnData("Type", SqlDbType.NVarChar, lblPMode.Text);
+                        ObjDAL.SetColumnData("Count", SqlDbType.Int, 1);
+                        ObjDAL.SetColumnData("Value", SqlDbType.Decimal, txtGrandTotal.Text);
+                        ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
+                        ObjDAL.InsertData(clsUtility.DBName + ".[dbo].[tblCreditClosing]", false);
+                    }
+                    else
+                    {
+                        // update the tblCreditClosing, Add count and amount to the exsting value
+                        string strUpdate = "  UPDATE " + clsUtility.DBName + ".[dbo].[tblCreditClosing] SET Count=Count+1 , Value=value+" + txtGrandTotal.Text +
+                                        ",Type='" + lblPMode.Text + "' WHERE MasterCashClosingID=" + MasterCashClosingID;
+                        ObjDAL.ExecuteNonQuery(strUpdate);
+                    }
                 }
-                else
-                {
-                    // update the tblCreditClosing, Add count and amount to the exsting value
-                    string strUpdate = "  UPDATE " + clsUtility.DBName + ".[dbo].[tblCreditClosing] SET Count=Count+1 , Value=value+" + txtGrandTotal.Text +
-                                    " WHERE MasterCashClosingID=" + MasterCashClosingID;
-                    ObjDAL.ExecuteNonQuery(strUpdate);
-                }
+
+
             }
             return InvoiceID;
         }

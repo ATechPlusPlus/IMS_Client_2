@@ -330,5 +330,67 @@ namespace IMS_Client_2.Sales
                 dgvCloseCash.DataSource = dtCredit;
             }
         }
+
+        private void PrintReport(bool Direct)
+        {
+            ObjDAL.SetStoreProcedureData("MasterCashClosingID", SqlDbType.Int, pMasterCashClosingID, clsConnection_DAL.ParamType.Input);
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_CashClosing_Details");
+
+            DataTable dtCashDetails = ds.Tables[0];
+            DataTable dtCredit = ds.Tables[1];
+
+
+
+            Report.Report_Forms.frmClosingCashReport frmClosingCashReport = new Report.Report_Forms.frmClosingCashReport();
+            frmClosingCashReport.CashierNo = GetCashierNumber(dtCashDetails.Rows[0]["EmployeeID"].ToString()); ;
+            frmClosingCashReport.ShopAddress = GetShopAddress();
+            frmClosingCashReport.ShopName = cmbShop.Text.ToString();
+            frmClosingCashReport.CashNumber = dtCashDetails.Rows[0]["CashNo"].ToString();
+            frmClosingCashReport.TotalCash = dtCashDetails.Rows[0]["TotalCashValue"].ToString();
+            frmClosingCashReport.TotalCredit = GetTotalCreditValue();
+            frmClosingCashReport.GrandToatl = Convert.ToString(Convert.ToDecimal(frmClosingCashReport.TotalCash) + Convert.ToDecimal(frmClosingCashReport.TotalCredit));
+            frmClosingCashReport.dtCashDetails = dtCashDetails;
+            frmClosingCashReport.IsDirectPrint = Direct;
+            frmClosingCashReport.dtCreditDetails = dtCredit;
+            frmClosingCashReport.Show();
+        }
+        private void btnPreview_Click(object sender, EventArgs e)
+        {
+            PrintReport(false);
+
+
+        }
+        private string GetCashierNumber(string empID)
+        {
+           
+           object obj    = ObjDAL.ExecuteScalar("select EmployeeCode from " + clsUtility.DBName + ".dbo.EmployeeDetails where EmpID=" + empID);
+            if (obj==null)
+            {
+                return "NA";
+            }
+            else
+            {
+               return obj.ToString();
+            }
+        }
+        private string GetShopAddress()
+        {
+
+          return  ObjDAL.ExecuteScalar("select Place+' ,Tel :'+Tel from StoreMaster where StoreID="+cmbShop.SelectedValue.ToString()).ToString();
+        }
+        private string GetTotalCreditValue()
+        {
+            DataTable dt = ObjDAL.ExecuteSelectStatement("select SUM(Value) from [dbo].[tblCreditClosing] where MasterCashClosingID=" + pMasterCashClosingID);
+            if (dt.Rows.Count > 0)
+            {
+             return   dt.Rows[0][0].ToString();
+            }
+            return "0";
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            PrintReport(true);
+        }
     }
 }

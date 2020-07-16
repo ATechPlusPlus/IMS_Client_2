@@ -137,7 +137,11 @@ namespace IMS_Client_2.Report
             reportViewer1.LocalReport.DataSources.Add(rds);
             reportViewer1.LocalReport.DataSources.Add(rds2);
 
+            reportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout);
+            reportViewer1.ZoomMode = ZoomMode.Percent;
+            reportViewer1.ZoomPercent = 100;
             this.reportViewer1.RefreshReport();
+           
 
             if (IsDirectPrint)
             {

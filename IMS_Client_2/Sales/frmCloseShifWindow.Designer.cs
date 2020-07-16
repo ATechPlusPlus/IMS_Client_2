@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCloseShifWindow));
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Cash");
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Credits");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Cash");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Credits");
             this.panel2 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.btnCloseCash = new System.Windows.Forms.Button();
@@ -216,6 +216,7 @@
             this.btnPrint.TabIndex = 123;
             this.btnPrint.Text = "Print";
             this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             this.btnPrint.MouseEnter += new System.EventHandler(this.btnOpenCash_MouseEnter);
             this.btnPrint.MouseLeave += new System.EventHandler(this.btnOpenCash_MouseLeave);
             // 
@@ -232,6 +233,7 @@
             this.btnPreview.TabIndex = 124;
             this.btnPreview.Text = "Preview";
             this.btnPreview.UseVisualStyleBackColor = true;
+            this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
             this.btnPreview.MouseEnter += new System.EventHandler(this.btnOpenCash_MouseEnter);
             this.btnPreview.MouseLeave += new System.EventHandler(this.btnOpenCash_MouseLeave);
             // 
@@ -298,8 +300,8 @@
             // 
             this.listView1.HideSelection = false;
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
+            listViewItem1,
+            listViewItem2});
             this.listView1.Location = new System.Drawing.Point(406, 204);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(178, 97);
