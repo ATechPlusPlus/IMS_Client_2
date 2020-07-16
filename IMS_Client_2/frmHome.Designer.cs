@@ -66,6 +66,7 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.MaterialDetails_ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.stockTransferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.brachReceiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SalesReport_ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.otherArtsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,7 +92,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.brachReceiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.transferWatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -396,7 +397,8 @@
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MaterialDetails_ToolStrip,
             this.stockTransferToolStripMenuItem,
-            this.brachReceiveToolStripMenuItem});
+            this.brachReceiveToolStripMenuItem,
+            this.transferWatchToolStripMenuItem});
             this.toolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1.Image")));
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(135, 36);
@@ -416,6 +418,13 @@
             this.stockTransferToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.stockTransferToolStripMenuItem.Text = "Store Transfer";
             this.stockTransferToolStripMenuItem.Click += new System.EventHandler(this.stockTransferToolStripMenuItem_Click);
+            // 
+            // brachReceiveToolStripMenuItem
+            // 
+            this.brachReceiveToolStripMenuItem.Name = "brachReceiveToolStripMenuItem";
+            this.brachReceiveToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.brachReceiveToolStripMenuItem.Text = "Branch Receive";
+            this.brachReceiveToolStripMenuItem.Click += new System.EventHandler(this.brachReceiveToolStripMenuItem_Click);
             // 
             // reportsToolStripMenuItem
             // 
@@ -697,12 +706,12 @@
             this.label9.TabIndex = 28;
             this.label9.Text = "Today\'s Cash Box";
             // 
-            // brachReceiveToolStripMenuItem
+            // transferWatchToolStripMenuItem
             // 
-            this.brachReceiveToolStripMenuItem.Name = "brachReceiveToolStripMenuItem";
-            this.brachReceiveToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
-            this.brachReceiveToolStripMenuItem.Text = "Brach Receive";
-            this.brachReceiveToolStripMenuItem.Click += new System.EventHandler(this.brachReceiveToolStripMenuItem_Click);
+            this.transferWatchToolStripMenuItem.Name = "transferWatchToolStripMenuItem";
+            this.transferWatchToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.transferWatchToolStripMenuItem.Text = "Transfer Watch";
+            this.transferWatchToolStripMenuItem.Click += new System.EventHandler(this.transferWatchToolStripMenuItem_Click);
             // 
             // frmHome
             // 
@@ -809,5 +818,6 @@
         private System.Windows.Forms.ToolStripMenuItem brachReceiveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeCashBandMasterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeCashToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem transferWatchToolStripMenuItem;
     }
 }

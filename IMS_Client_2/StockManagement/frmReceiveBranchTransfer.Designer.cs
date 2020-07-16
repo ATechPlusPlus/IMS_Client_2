@@ -32,8 +32,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.dgvProductDetails = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.btnSaveData = new System.Windows.Forms.Button();
             this.TransferID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FromStore = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Branch = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,6 +41,9 @@
             this.Sender = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Post = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Identical = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnSaveData = new System.Windows.Forms.Button();
+            this.lnkRefreshData = new System.Windows.Forms.LinkLabel();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).BeginInit();
             this.SuspendLayout();
@@ -55,7 +56,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(800, 40);
+            this.panel2.Size = new System.Drawing.Size(804, 40);
             this.panel2.TabIndex = 113;
             // 
             // label12
@@ -87,39 +88,13 @@
             this.Sender,
             this.Post,
             this.Identical});
-            this.dgvProductDetails.Location = new System.Drawing.Point(1, 44);
+            this.dgvProductDetails.Location = new System.Drawing.Point(1, 74);
             this.dgvProductDetails.Name = "dgvProductDetails";
             this.dgvProductDetails.ReadOnly = true;
             this.dgvProductDetails.Size = new System.Drawing.Size(800, 232);
             this.dgvProductDetails.TabIndex = 205;
             this.dgvProductDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellClick);
             this.dgvProductDetails.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvProductDetails_DataBindingComplete);
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(721, 282);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(76, 25);
-            this.button1.TabIndex = 254;
-            this.button1.Text = "Close";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // btnSaveData
-            // 
-            this.btnSaveData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnSaveData.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSaveData.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSaveData.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveData.Location = new System.Drawing.Point(630, 282);
-            this.btnSaveData.Name = "btnSaveData";
-            this.btnSaveData.Size = new System.Drawing.Size(76, 25);
-            this.btnSaveData.TabIndex = 253;
-            this.btnSaveData.Text = "Recieve ";
-            this.btnSaveData.UseVisualStyleBackColor = true;
             // 
             // TransferID
             // 
@@ -185,14 +160,59 @@
             this.Identical.Name = "Identical";
             this.Identical.ReadOnly = true;
             // 
+            // btnClose
+            // 
+            this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnClose.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Location = new System.Drawing.Point(721, 312);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(76, 25);
+            this.btnClose.TabIndex = 254;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // btnSaveData
+            // 
+            this.btnSaveData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSaveData.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSaveData.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSaveData.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveData.Location = new System.Drawing.Point(630, 312);
+            this.btnSaveData.Name = "btnSaveData";
+            this.btnSaveData.Size = new System.Drawing.Size(76, 25);
+            this.btnSaveData.TabIndex = 253;
+            this.btnSaveData.Text = "Recieve ";
+            this.btnSaveData.UseVisualStyleBackColor = true;
+            this.btnSaveData.Click += new System.EventHandler(this.btnSaveData_Click);
+            this.btnSaveData.MouseEnter += new System.EventHandler(this.btnSaveData_MouseEnter);
+            this.btnSaveData.MouseLeave += new System.EventHandler(this.btnSaveData_MouseLeave);
+            // 
+            // lnkRefreshData
+            // 
+            this.lnkRefreshData.AutoSize = true;
+            this.lnkRefreshData.BackColor = System.Drawing.Color.Transparent;
+            this.lnkRefreshData.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnkRefreshData.Location = new System.Drawing.Point(626, 43);
+            this.lnkRefreshData.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lnkRefreshData.Name = "lnkRefreshData";
+            this.lnkRefreshData.Size = new System.Drawing.Size(100, 19);
+            this.lnkRefreshData.TabIndex = 255;
+            this.lnkRefreshData.TabStop = true;
+            this.lnkRefreshData.Text = "Refresh Data";
+            this.lnkRefreshData.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkRefreshData_LinkClicked);
+            // 
             // frmReceivedBranchTransfer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(800, 356);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(804, 356);
+            this.Controls.Add(this.lnkRefreshData);
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSaveData);
             this.Controls.Add(this.dgvProductDetails);
             this.Controls.Add(this.panel2);
@@ -207,6 +227,7 @@
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -215,7 +236,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.DataGridView dgvProductDetails;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnSaveData;
         private System.Windows.Forms.DataGridViewTextBoxColumn TransferID;
         private System.Windows.Forms.DataGridViewTextBoxColumn FromStore;
@@ -226,5 +247,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Sender;
         private System.Windows.Forms.DataGridViewTextBoxColumn Post;
         private System.Windows.Forms.DataGridViewButtonColumn Identical;
+        private System.Windows.Forms.LinkLabel lnkRefreshData;
     }
 }

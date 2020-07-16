@@ -453,6 +453,12 @@
     <Compile Include="StockManagement\frmStoreTransfer.Designer.cs">
       <DependentUpon>frmStoreTransfer.cs</DependentUpon>
     </Compile>
+    <Compile Include="StockManagement\frmTransferWatch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManagement\frmTransferWatch.Designer.cs">
+      <DependentUpon>frmTransferWatch.cs</DependentUpon>
+    </Compile>
     <!-- <Compile Include="SqlServerTypes\Loader.cs" /> -->
     <Compile Include="StockManagement\Material_Details.cs">
       <SubType>Form</SubType>
@@ -610,6 +616,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StockManagement\frmStoreTransfer.resx">
       <DependentUpon>frmStoreTransfer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockManagement\frmTransferWatch.resx">
+      <DependentUpon>frmTransferWatch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StockManagement\Material_Details.resx">
       <DependentUpon>Material_Details.cs</DependentUpon>

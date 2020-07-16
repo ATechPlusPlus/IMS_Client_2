@@ -677,5 +677,11 @@ namespace IMS_Client_2
                 clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
+
+        private void transferWatchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StockManagement.frmTransferWatch Obj = new StockManagement.frmTransferWatch();
+            Obj.Show();
+        }
     }
 }

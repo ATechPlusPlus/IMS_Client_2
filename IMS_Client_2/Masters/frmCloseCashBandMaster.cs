@@ -54,11 +54,11 @@ namespace IMS_Client_2.Masters
             int a = 0;
             if (i == 0)
             {
-                a = ObjDAL.CountRecords(clsUtility.DBName + ".dbo.tblCloseBALMaster", "CashBand='" + txtCashBand.Text.Trim() + "'");
+                a = ObjDAL.CountRecords(clsUtility.DBName + ".dbo.tblCloseCashBandMaster", "CashBand='" + txtCashBand.Text.Trim() + "'");
             }
             else
             {
-                a = ObjDAL.CountRecords(clsUtility.DBName + ".dbo.tblCloseBALMaster", "CashBand='" + txtCashBand.Text + "' AND CashBandID !=" + i);
+                a = ObjDAL.CountRecords(clsUtility.DBName + ".dbo.tblCloseCashBandMaster", "CashBand='" + txtCashBand.Text + "' AND CashBandID !=" + i);
             }
             if (a > 0)
             {
