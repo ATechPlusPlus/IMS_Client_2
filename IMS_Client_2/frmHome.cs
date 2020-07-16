@@ -22,7 +22,7 @@ namespace IMS_Client_2
         bool IsLogOut = false;
         public int Login_History_ID = 0;
         public static int Home_MasterCashClosingID = 0;
-        bool IsForeCloseCash = false;
+        bool IsForceCloseCash = false;
 
         clsUtility ObjUtil = new clsUtility();
         clsConnection_DAL ObjDAL = new clsConnection_DAL(true);
@@ -47,7 +47,7 @@ namespace IMS_Client_2
                     {
                         btnOpenCash.Text = "View Details";
                     }
-                    IsForeCloseCash = false;
+                    IsForceCloseCash = false;
                     label7.Text = "CLOSED";
                 }
                 else
@@ -56,11 +56,11 @@ namespace IMS_Client_2
                     btnOpenCash.Text = "View Details";
                     if (DateTime.Now.ToString("yyyy-MM-dd") != Convert.ToDateTime(dtCashMaster.Rows[0]["CashBoxDate"]).ToString("yyyy-MM-dd"))
                     {
-                        IsForeCloseCash = true;
+                        IsForceCloseCash = true;
                         clsUtility.ShowInfoMessage("Please close your previous day cash box and Open a new cash box for today.", clsUtility.strProjectTitle);
                         return;
                     }
-                    IsForeCloseCash = false;
+                    IsForceCloseCash = false;
                 }
             }
             else
@@ -259,8 +259,22 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Invoice) || clsUtility.IsAdmin)
             {
-                Sales.Sales_Invoice Obj = new Sales.Sales_Invoice();
-                Obj.Show();
+                if (label7.Text == "OPEN")
+                {
+                    if (!IsForceCloseCash)
+                    {
+                        Sales.Sales_Invoice Obj = new Sales.Sales_Invoice();
+                        Obj.Show();
+                    }
+                    else
+                    {
+                        clsUtility.ShowInfoMessage("Please close your previous day cash box and Open a new cash box for today.", clsUtility.strProjectTitle);
+                    }
+                }
+                else
+                {
+                    clsUtility.ShowInfoMessage("There is no Opened Cash for today.", clsUtility.strProjectTitle);
+                }
             }
             else
             {
@@ -538,7 +552,7 @@ namespace IMS_Client_2
         {
             if (label7.Text == "OPEN")
             {
-                if (!IsForeCloseCash)
+                if (!IsForceCloseCash)
                 {
                     Sales.frmReplaceReturnPopup obj = new Sales.frmReplaceReturnPopup();
                     obj.ShowDialog();
@@ -583,7 +597,6 @@ namespace IMS_Client_2
             {
                 clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
-
         }
 
         private int GetDefaultStoreID()

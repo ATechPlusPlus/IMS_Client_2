@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-
-namespace IMS_Client_2
+﻿namespace IMS_Client_2
 {
     public class clsFormRights
     {
