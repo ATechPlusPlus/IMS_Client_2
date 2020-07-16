@@ -259,22 +259,8 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Invoice) || clsUtility.IsAdmin)
             {
-                if (label7.Text == "OPEN")
-                {
-                    if (!IsForeCloseCash)
-                    {
-                        Sales.Sales_Invoice Obj = new Sales.Sales_Invoice();
-                        Obj.Show();
-                    }
-                    else
-                    {
-                        clsUtility.ShowInfoMessage("Please close your previous day cash box and Open a new cash box for today.", clsUtility.strProjectTitle);
-                    }
-                }
-                else
-                {
-                    clsUtility.ShowInfoMessage("There is no Opened Cash for today.", clsUtility.strProjectTitle);
-                }
+                Sales.Sales_Invoice Obj = new Sales.Sales_Invoice();
+                Obj.Show();
             }
             else
             {

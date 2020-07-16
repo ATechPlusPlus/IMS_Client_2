@@ -117,6 +117,7 @@
       <HintPath>..\packages\CoreAppLib.1.0.10\lib\RegistrationProcess.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.ServiceProcess, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -125,6 +126,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -346,6 +348,14 @@
     <Compile Include="Purchase\Purchase_Invoice .Designer.cs">
       <DependentUpon>Purchase_Invoice .cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\RDLC_DataSets\ds_ClosingCash.cs">
+      <DependentUpon>ds_ClosingCash.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Report\RDLC_DataSets\ds_ClosingCash.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_ClosingCash.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Report\RDLC_DataSets\ds_InvoiceHeader.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -368,6 +378,12 @@
       <DependentUpon>ds_SalesInvoiceReport.xsd</DependentUpon>
     </Compile>
     <Compile Include="Report\ReportPrinting.cs" />
+    <Compile Include="Report\Report_Forms\frmClosingCashReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\Report_Forms\frmClosingCashReport.Designer.cs">
+      <DependentUpon>frmClosingCashReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\Report_Forms\frmSalesInvoiceReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -573,8 +589,12 @@
     <EmbeddedResource Include="Purchase\Purchase_Invoice .resx">
       <DependentUpon>Purchase_Invoice .cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\RDLC_Files\CashClosingReport.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\SalesInoviceReport.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\Sales_Invoice.rdlc" />
+    <EmbeddedResource Include="Report\Report_Forms\frmClosingCashReport.resx">
+      <DependentUpon>frmClosingCashReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\Report_Forms\frmSalesInvoiceReport.resx">
       <DependentUpon>frmSalesInvoiceReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -638,6 +658,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Report\RDLC_DataSets\ds_ClosingCash.xsc">
+      <DependentUpon>ds_ClosingCash.xsd</DependentUpon>
+    </None>
+    <None Include="Report\RDLC_DataSets\ds_ClosingCash.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_ClosingCash.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Report\RDLC_DataSets\ds_ClosingCash.xss">
+      <DependentUpon>ds_ClosingCash.xsd</DependentUpon>
+    </None>
     <None Include="Report\RDLC_DataSets\ds_InvoiceHeader.xsc">
       <DependentUpon>ds_InvoiceHeader.xsd</DependentUpon>
     </None>

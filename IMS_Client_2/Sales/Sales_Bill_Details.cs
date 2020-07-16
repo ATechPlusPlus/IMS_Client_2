@@ -35,6 +35,8 @@ namespace IMS_Client_2.Sales
             dtpToDate.MaxDate = DateTime.Now;
             dtpFromDate.MaxDate= DateTime.Now;
             radByDate.Checked = true;
+            string condition = " Convert(date,InvoiceDate) between Convert(Date,'" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "') and Convert(date,'" + dtpToDate.Value.ToString("yyyy-MM-dd") + "')";
+            LoadData(condition);
         }
 
         private void LoadData(string strCondition)
