@@ -12,16 +12,17 @@ namespace IMS_Client_2.Report.Report_Forms
 {
     public partial class frmClosingCashReport : Form
     {
-        public string ShopName, ShopAddress, CashierNo, CashNumber, TotalCash, TotalCredit, GrandToatl;
-        public DataTable dtCashDetails = new DataTable();
-        public DataTable dtCreditDetails = new DataTable();
-
-
         public frmClosingCashReport()
         {
             InitializeComponent();
         }
-       public bool IsDirectPrint = false;
+
+        public DataTable dtCashDetails = new DataTable();
+        public DataTable dtCreditDetails = new DataTable();
+
+        public string ShopName, ShopAddress, CashierNo, CashNumber, TotalCash, TotalCredit, GrandToatl;
+        public bool IsDirectPrint = false;
+
         private void frmClosingCashReport_Load(object sender, EventArgs e)
         {
             if (IsDirectPrint)
@@ -38,26 +39,24 @@ namespace IMS_Client_2.Report.Report_Forms
                 // this.reportViewer1.LocalReport.ReportEmbeddedResource = "IMS_Client_2.Report.RDLC_Files.CashClosingReport.rdlc";
                 LoadReport();
 
-
                 reportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout);
                 reportViewer1.ZoomMode = ZoomMode.Percent;
                 reportViewer1.ZoomPercent = 100;
                 this.reportViewer1.RefreshReport();
             }
-           
+
         }
         private void LoadReport()
         {
             reportViewer1.LocalReport.DataSources.Clear();
 
             ReportDataSource rds = new ReportDataSource("dsCashClosing", dtCashDetails);
-             ReportDataSource rds2 = new ReportDataSource("dsCreditClosing", dtCreditDetails);
-
+            ReportDataSource rds2 = new ReportDataSource("dsCreditClosing", dtCreditDetails);
 
             // creating the parameter with the extact name as in the report.
             ReportParameter param1 = new ReportParameter("ShopeName", ShopName, true);
             ReportParameter param2 = new ReportParameter("Address", ShopAddress, true);
-            ReportParameter param3 = new ReportParameter("Date", DateTime.Now.Date.ToShortDateString(), true);
+            ReportParameter param3 = new ReportParameter("Date", DateTime.Now.Date.ToString("yyyy-MM-dd"), true);
             ReportParameter param4 = new ReportParameter("Time", DateTime.Now.ToShortTimeString(), true);
             ReportParameter param5 = new ReportParameter("CasheirNo", CashierNo, true);
             ReportParameter param6 = new ReportParameter("CashNo", CashNumber, true);
@@ -79,10 +78,9 @@ namespace IMS_Client_2.Report.Report_Forms
 
 
             reportViewer1.LocalReport.DataSources.Add(rds);
-           reportViewer1.LocalReport.DataSources.Add(rds2);
+            reportViewer1.LocalReport.DataSources.Add(rds2);
 
             this.reportViewer1.RefreshReport();
-
         }
     }
 }

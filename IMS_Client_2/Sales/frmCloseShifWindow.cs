@@ -49,8 +49,11 @@ namespace IMS_Client_2.Sales
                         dgvCloseCash.ReadOnly = false;
                         btnOpenCash.Enabled = false;
                         btnCloseCash.Enabled = true;
-                        btnPreview.Enabled = true;
-                        btnPrint.Enabled = true;
+                        btnPreview.Enabled = false;
+                        btnPrint.Enabled = false;
+
+                        //btnPreview.Enabled = true;
+                        //btnPrint.Enabled = true;
                     }
                     else
                     {
@@ -67,8 +70,11 @@ namespace IMS_Client_2.Sales
                             dgvCloseCash.ReadOnly = true;
                             btnOpenCash.Enabled = true;
                             btnCloseCash.Enabled = false;
-                            btnPreview.Enabled = false;
-                            btnPrint.Enabled = false;
+                            btnPreview.Enabled = true;
+                            btnPrint.Enabled = true;
+
+                            //btnPreview.Enabled = false;
+                            //btnPrint.Enabled = false;
                         }
                     }
                     txtCashNo.Text = dt.Rows[0]["CashNo"].ToString();
@@ -96,7 +102,6 @@ namespace IMS_Client_2.Sales
             }
         }
 
-
         private int GetDefaultStoreID()
         {
             return ObjDAL.ExecuteScalarInt("SELECT StoreID FROM " + clsUtility.DBName + ".dbo.DefaultStoreSetting WITH(NOLOCK) WHERE MachineName='" + Environment.MachineName + "'");
@@ -114,19 +119,6 @@ namespace IMS_Client_2.Sales
             listView1.Items[0].Selected = true;
 
             //LoadData();
-
-            //int a = ObjDAL.CountRecords(clsUtility.DBName + ".[dbo].[tblMasterCashClosing]", "StoreID=" + pStoreID + " AND CashBoxDate=GETDATE()");
-            //if (a > 0)
-            //{
-            //    LoadData();
-            //}
-            //else
-            //{
-            //    btnOpenCash.Enabled = true;
-            //    btnCloseCash.Enabled = false;
-            //    btnPreview.Enabled = false;
-            //    btnPrint.Enabled = false;
-            //}
         }
 
         private void btnOpenCash_MouseEnter(object sender, EventArgs e)
@@ -340,7 +332,6 @@ namespace IMS_Client_2.Sales
             DataTable dtCredit = ds.Tables[1];
 
 
-
             Report.Report_Forms.frmClosingCashReport frmClosingCashReport = new Report.Report_Forms.frmClosingCashReport();
             frmClosingCashReport.CashierNo = GetCashierNumber(dtCashDetails.Rows[0]["EmployeeID"].ToString()); ;
             frmClosingCashReport.ShopAddress = GetShopAddress();
@@ -357,33 +348,29 @@ namespace IMS_Client_2.Sales
         private void btnPreview_Click(object sender, EventArgs e)
         {
             PrintReport(false);
-
-
         }
         private string GetCashierNumber(string empID)
         {
-           
-           object obj    = ObjDAL.ExecuteScalar("select EmployeeCode from " + clsUtility.DBName + ".dbo.EmployeeDetails where EmpID=" + empID);
-            if (obj==null)
+            object obj = ObjDAL.ExecuteScalar("SELECT EmployeeCode FROM " + clsUtility.DBName + ".dbo.EmployeeDetails WITH(NOLOCK) WHERE EmpID=" + empID);
+            if (obj == null)
             {
                 return "NA";
             }
             else
             {
-               return obj.ToString();
+                return obj.ToString();
             }
         }
         private string GetShopAddress()
         {
-
-          return  ObjDAL.ExecuteScalar("select Place+' ,Tel :'+Tel from StoreMaster where StoreID="+cmbShop.SelectedValue.ToString()).ToString();
+            return ObjDAL.ExecuteScalar("SELECT Place+' ,Tel :'+Tel FROM " + clsUtility.DBName + ".dbo.StoreMaster WITH(NOLOCK) WHERE StoreID=" + cmbShop.SelectedValue.ToString()).ToString();
         }
         private string GetTotalCreditValue()
         {
-            DataTable dt = ObjDAL.ExecuteSelectStatement("select SUM(Value) from [dbo].[tblCreditClosing] where MasterCashClosingID=" + pMasterCashClosingID);
-            if (dt.Rows.Count > 0)
+            DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT ISNULL(SUM(Value),0) FROM " + clsUtility.DBName + ".[dbo].[tblCreditClosing] WITH(NOLOCK) WHERE MasterCashClosingID=" + pMasterCashClosingID);
+            if (ObjUtil.ValidateTable(dt))
             {
-             return   dt.Rows[0][0].ToString();
+                return dt.Rows[0][0].ToString();
             }
             return "0";
         }
