@@ -59,6 +59,7 @@ namespace IMS_Client_2.StockManagement
         {
             ObjUtil.SetRowNumber(dgvProductDetails);
             ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill);
+            dgvProductDetails.Columns["StoreTransferID"].Visible = false;
         }
 
         private void dgvProductDetails_CellClick(object sender, DataGridViewCellEventArgs e)
