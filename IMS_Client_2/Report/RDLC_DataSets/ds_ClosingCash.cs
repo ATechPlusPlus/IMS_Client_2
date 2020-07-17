@@ -4,5 +4,8 @@
 
     partial class ds_ClosingCash
     {
+        partial class dtClosingCashDataTable
+        {
+        }
     }
 }

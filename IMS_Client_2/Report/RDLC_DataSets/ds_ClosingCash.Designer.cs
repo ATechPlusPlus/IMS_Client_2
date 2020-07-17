@@ -314,11 +314,11 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class dtClosingCashDataTable : global::System.Data.TypedTableBase<dtClosingCashRow> {
             
-            private global::System.Data.DataColumn columnCashBand;
-            
             private global::System.Data.DataColumn columnCount;
             
             private global::System.Data.DataColumn columnValue;
+            
+            private global::System.Data.DataColumn columnCashBandValue;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -355,14 +355,6 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn CashBandColumn {
-                get {
-                    return this.columnCashBand;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataColumn CountColumn {
                 get {
                     return this.columnCount;
@@ -374,6 +366,14 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             public global::System.Data.DataColumn ValueColumn {
                 get {
                     return this.columnValue;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn CashBandValueColumn {
+                get {
+                    return this.columnCashBandValue;
                 }
             }
             
@@ -414,12 +414,12 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtClosingCashRow AdddtClosingCashRow(string CashBand, string Count, string Value) {
+            public dtClosingCashRow AdddtClosingCashRow(string Count, string Value, string CashBandValue) {
                 dtClosingCashRow rowdtClosingCashRow = ((dtClosingCashRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        CashBand,
                         Count,
-                        Value};
+                        Value,
+                        CashBandValue};
                 rowdtClosingCashRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtClosingCashRow);
                 return rowdtClosingCashRow;
@@ -442,20 +442,20 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             internal void InitVars() {
-                this.columnCashBand = base.Columns["CashBand"];
                 this.columnCount = base.Columns["Count"];
                 this.columnValue = base.Columns["Value"];
+                this.columnCashBandValue = base.Columns["CashBandValue"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             private void InitClass() {
-                this.columnCashBand = new global::System.Data.DataColumn("CashBand", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCashBand);
                 this.columnCount = new global::System.Data.DataColumn("Count", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCount);
                 this.columnValue = new global::System.Data.DataColumn("Value", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnValue);
+                this.columnCashBandValue = new global::System.Data.DataColumn("CashBandValue", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCashBandValue);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -873,22 +873,6 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string CashBand {
-                get {
-                    try {
-                        return ((string)(this[this.tabledtClosingCash.CashBandColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CashBand\' in table \'dtClosingCash\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabledtClosingCash.CashBandColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public string Count {
                 get {
                     try {
@@ -921,14 +905,18 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsCashBandNull() {
-                return this.IsNull(this.tabledtClosingCash.CashBandColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetCashBandNull() {
-                this[this.tabledtClosingCash.CashBandColumn] = global::System.Convert.DBNull;
+            public string CashBandValue {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtClosingCash.CashBandValueColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CashBandValue\' in table \'dtClosingCash\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtClosingCash.CashBandValueColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -953,6 +941,18 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetValueNull() {
                 this[this.tabledtClosingCash.ValueColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsCashBandValueNull() {
+                return this.IsNull(this.tabledtClosingCash.CashBandValueColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetCashBandValueNull() {
+                this[this.tabledtClosingCash.CashBandValueColumn] = global::System.Convert.DBNull;
             }
         }
         

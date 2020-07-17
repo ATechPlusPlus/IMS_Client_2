@@ -17,16 +17,16 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
-        <Field Name="CashBand">
-          <DataField>CashBand</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="Count">
           <DataField>Count</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Value">
           <DataField>Value</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CashBandValue">
+          <DataField>CashBandValue</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -68,7 +68,7 @@
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
- 
+
       <Body>
         <ReportItems>
           <Textbox Name="ShopeName">
@@ -285,7 +285,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Casheir No :</Value>
+                    <Value>Cashier No :</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>11pt</FontSize>
@@ -581,14 +581,14 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="CashBand">
+                        <Textbox Name="CashBandValue">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!CashBand.Value</Value>
+                                  <Value>=Fields!CashBandValue.Value</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -600,7 +600,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>CashBand</rd:DefaultName>
+                          <rd:DefaultName>CashBandValue</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -1319,7 +1319,7 @@
         <InteractiveWidth>3.14in</InteractiveWidth>
         <Style />
       </Page>
-  
+   
   <ReportParameters>
     <ReportParameter Name="ShopeName">
       <DataType>String</DataType>

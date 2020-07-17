@@ -307,7 +307,7 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             
             private global::System.Data.DataColumn columnColorName;
             
-            private global::System.Data.DataColumn columnBarcode;
+            private global::System.Data.DataColumn columnBarcodeNo;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -456,9 +456,9 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn BarcodeColumn {
+            public global::System.Data.DataColumn BarcodeNoColumn {
                 get {
-                    return this.columnBarcode;
+                    return this.columnBarcodeNo;
                 }
             }
             
@@ -499,7 +499,7 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public SalesInvoiceReportRow AddSalesInvoiceReportRow(string InvoiceNumber, string InvoiceDate, string SubTotal, string Discount, string Tax, string GrandTotal, string Name, string StoreName, int InvoiceID, string ProductName, string QTY, string Rate, string Size, string ColorName, string Barcode) {
+            public SalesInvoiceReportRow AddSalesInvoiceReportRow(string InvoiceNumber, string InvoiceDate, string SubTotal, string Discount, string Tax, string GrandTotal, string Name, string StoreName, int InvoiceID, string ProductName, string QTY, string Rate, string Size, string ColorName, string BarcodeNo) {
                 SalesInvoiceReportRow rowSalesInvoiceReportRow = ((SalesInvoiceReportRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         InvoiceNumber,
@@ -516,7 +516,7 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
                         Rate,
                         Size,
                         ColorName,
-                        Barcode};
+                        BarcodeNo};
                 rowSalesInvoiceReportRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSalesInvoiceReportRow);
                 return rowSalesInvoiceReportRow;
@@ -560,7 +560,7 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
                 this.columnRate = base.Columns["Rate"];
                 this.columnSize = base.Columns["Size"];
                 this.columnColorName = base.Columns["ColorName"];
-                this.columnBarcode = base.Columns["Barcode"];
+                this.columnBarcodeNo = base.Columns["BarcodeNo"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -594,8 +594,8 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
                 base.Columns.Add(this.columnSize);
                 this.columnColorName = new global::System.Data.DataColumn("ColorName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnColorName);
-                this.columnBarcode = new global::System.Data.DataColumn("Barcode", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnBarcode);
+                this.columnBarcodeNo = new global::System.Data.DataColumn("BarcodeNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBarcodeNo);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnInvoiceID}, true));
                 this.columnInvoiceID.AllowDBNull = false;
@@ -961,17 +961,17 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string Barcode {
+            public string BarcodeNo {
                 get {
                     try {
-                        return ((string)(this[this.tableSalesInvoiceReport.BarcodeColumn]));
+                        return ((string)(this[this.tableSalesInvoiceReport.BarcodeNoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Barcode\' in table \'SalesInvoiceReport\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'BarcodeNo\' in table \'SalesInvoiceReport\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableSalesInvoiceReport.BarcodeColumn] = value;
+                    this[this.tableSalesInvoiceReport.BarcodeNoColumn] = value;
                 }
             }
             
@@ -1133,14 +1133,14 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsBarcodeNull() {
-                return this.IsNull(this.tableSalesInvoiceReport.BarcodeColumn);
+            public bool IsBarcodeNoNull() {
+                return this.IsNull(this.tableSalesInvoiceReport.BarcodeNoColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetBarcodeNull() {
-                this[this.tableSalesInvoiceReport.BarcodeColumn] = global::System.Convert.DBNull;
+            public void SetBarcodeNoNull() {
+                this[this.tableSalesInvoiceReport.BarcodeNoColumn] = global::System.Convert.DBNull;
             }
         }
         
