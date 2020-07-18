@@ -59,7 +59,6 @@ namespace IMS_Client_2.StockManagement
         {
             ObjUtil.SetRowNumber(dgvProductDetails);
             ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill);
-            dgvProductDetails.Columns["StoreTransferID"].Visible = false;
         }
 
         private void dgvProductDetails_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -106,7 +105,6 @@ namespace IMS_Client_2.StockManagement
 
         private void btnSaveData_Click(object sender, EventArgs e)
         {
-            //Create SP and Store into two tables tblStoreTransferReceiveBillDetails,tblStoreTransferReceiveBillItemDetails
             if (StoreBillDetailsID > 0)
             {
                 ObjDAL.SetStoreProcedureData("ReceiveBillNo", SqlDbType.NVarChar, GenerateReceiveBillNumber(), clsConnection_DAL.ParamType.Input);

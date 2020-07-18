@@ -34,6 +34,7 @@ namespace IMS_Client_2.StockManagement
             btncancel.BackgroundImage = B_Leave;
 
             txtBarCode.Focus();
+            pnlViolet.BackColor = Color.Violet;
             LoadData();
         }
 
@@ -86,12 +87,39 @@ namespace IMS_Client_2.StockManagement
                     drow[0]["EnterQTY"] = pTotal;
                     dtStoreTransfer.AcceptChanges();
                     dgvProductDetails.DataSource = dtStoreTransfer;
-                    
+
                     txtBarCode.Clear();
                     txtBarCode.Focus();
                 }
                 else
                 {
+                    ObjDAL.SetStoreProcedureData("BillNo", SqlDbType.NVarChar, txtBillNo.Text.Trim(), clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("BarCode", SqlDbType.Int, txtBarCode.Text, clsConnection_DAL.ParamType.Input);
+                    DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_ProductDetails_ForVioletColor");
+                    if (ds != null && ds.Tables.Count > 0)
+                    {
+                        DataTable dt = ds.Tables[0];
+                        if (ObjUtil.ValidateTable(dt))
+                        {
+
+                            DataRow row = dtStoreTransfer.NewRow();
+                            row["Barcode"] = dt.Rows[0]["Barcode"];
+                            row["CellColor"] = dt.Rows[0]["CellColor"];
+                            row["ModelNo"] = dt.Rows[0]["ModelNo"];
+                            row["ProductID"] = dt.Rows[0]["ProductID"];
+                            row["BillQTY"] = 0;
+                            row["EnterQTY"] = 1;
+                            row["Item"] = dt.Rows[0]["Item"];
+                            row["Color"] = dt.Rows[0]["Color"];
+                            row["Size"] = dt.Rows[0]["Size"];
+                            dtStoreTransfer.Rows.Add(row);
+                            dtStoreTransfer.AcceptChanges();
+                            dgvProductDetails.DataSource = dtStoreTransfer;
+
+                            txtBarCode.Clear();
+                            txtBarCode.Focus();
+                        }
+                    }
                     return;
                 }
             }
@@ -137,6 +165,10 @@ namespace IMS_Client_2.StockManagement
                 {
                     dgvProductDetails.Rows[i].Cells["State"].Style.BackColor = Color.Orange;
                 }
+                else if (dgvProductDetails.Rows[i].Cells["CellColor"].Value.ToString() == "Violet")
+                {
+                    dgvProductDetails.Rows[i].Cells["State"].Style.BackColor = Color.Violet;
+                }
             }
             dgvProductDetails.ClearSelection();
         }
@@ -149,8 +181,8 @@ namespace IMS_Client_2.StockManagement
             {
                 if (dt.Rows[0]["Photo"] != DBNull.Value)
                 {
-                    DataTable dtImagePath = ObjDAL.ExecuteSelectStatement("  SELECT ImagePath, Extension FROM " + clsUtility.DBName + ".dbo.DefaultStoreSetting WHERE MachineName='" + Environment.MachineName + "'");
-                    if (dtImagePath.Rows.Count > 0)
+                    DataTable dtImagePath = ObjDAL.ExecuteSelectStatement("  SELECT ImagePath, Extension FROM " + clsUtility.DBName + ".dbo.DefaultStoreSetting WITH(NOLOCK) WHERE MachineName='" + Environment.MachineName + "'");
+                    if (ObjUtil.ValidateTable(dtImagePath))
                     {
                         if (dtImagePath.Rows[0]["ImagePath"] != DBNull.Value)
                         {
@@ -195,6 +227,9 @@ namespace IMS_Client_2.StockManagement
             if (ValidateEnterQTY())
             {
                 int a = 0;
+                DataRow[] drow = dtStoreTransfer.Select("BillQTY=0");
+                drow[0].Delete();
+                dtStoreTransfer.AcceptChanges();
                 for (int i = 0; i < dtStoreTransfer.Rows.Count; i++)
                 {
                     ObjDAL.UpdateColumnData("EnterQTY", SqlDbType.Int, dtStoreTransfer.Rows[i]["EnterQTY"]);
@@ -242,7 +277,7 @@ namespace IMS_Client_2.StockManagement
                     return;
                 }
 
-                int ProductID = Convert.ToInt32(dgvProductDetails.SelectedRows[0].Cells["ProductID"]);
+                int ProductID = Convert.ToInt32(dgvProductDetails.SelectedRows[0].Cells["ProductID"].Value);
                 picProduct.Image = GetProductPhoto(ProductID);
             }
             catch (Exception ex)
