@@ -76,17 +76,22 @@ namespace IMS_Client_2.StockManagement
         }
         private void LoadToStore()
         {
-            string strQ = "select StoreID,StoreName from StoreMaster where StoreID in  " +
-                           " (select StoreID from tblStoreUserRights where UserID = " + clsUtility.LoginID + " AND StoreID not in (" + cmdFrom.SelectedValue + "))";
-
-            DataTable ftToStore = ObjCon.ExecuteSelectStatement(strQ);
-            if (ftToStore.Rows.Count > 0)
+            if (cmdFrom.SelectedValue!=null)
             {
-                cmdTo.DataSource = ftToStore;
-                cmdTo.DisplayMember = "StoreName";
-                cmdTo.ValueMember = "StoreID";
+                string strQ = "select StoreID,StoreName from StoreMaster where StoreID in  " +
+                             " (select StoreID from tblStoreUserRights where UserID = " + clsUtility.LoginID + " AND StoreID not in (" + cmdFrom.SelectedValue + "))";
+
+                DataTable ftToStore = ObjCon.ExecuteSelectStatement(strQ);
+                if (ftToStore.Rows.Count > 0)
+                {
+                    cmdTo.DataSource = ftToStore;
+                    cmdTo.DisplayMember = "StoreName";
+                    cmdTo.ValueMember = "StoreID";
+                }
+                cmdTo.SelectedIndex = -1;
+
             }
-            cmdTo.SelectedIndex = -1;
+           
         }
         private string GenerateBillNumber()
         {
