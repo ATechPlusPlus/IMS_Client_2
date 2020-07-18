@@ -130,7 +130,7 @@ namespace IMS_Client_2.Barcode
             }
             else if (objLable.Tag.ToString().Trim() == "BarcodeNo")
             {
-                objLable.Text = selectedRow.Cells["barcodeno"].Value.ToString();
+                objLable.Text = _Current_BarCodeNumber;
             }
         }
         private void LoadTemplate(DataGridViewRow _Row)
