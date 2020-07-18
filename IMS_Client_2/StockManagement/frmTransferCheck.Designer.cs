@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTransferCheck));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -45,11 +45,11 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlGreen = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.pnlRed = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.pnlOrange = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.btncancel = new System.Windows.Forms.Button();
@@ -58,15 +58,18 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtTotalQTY = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.pnlViolet = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picProduct)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.pnlGreen.SuspendLayout();
+            this.pnlRed.SuspendLayout();
+            this.pnlOrange.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.pnlViolet.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -141,14 +144,14 @@
             this.dgvProductDetails.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProductDetails.BackgroundColor = System.Drawing.Color.White;
             this.dgvProductDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProductDetails.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProductDetails.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvProductDetails.Location = new System.Drawing.Point(12, 141);
             this.dgvProductDetails.Name = "dgvProductDetails";
             this.dgvProductDetails.ReadOnly = true;
@@ -247,14 +250,14 @@
             this.pictureBox1.TabIndex = 260;
             this.pictureBox1.TabStop = false;
             // 
-            // panel1
+            // pnlGreen
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Location = new System.Drawing.Point(15, 415);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 63);
-            this.panel1.TabIndex = 262;
+            this.pnlGreen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.pnlGreen.Controls.Add(this.label5);
+            this.pnlGreen.Location = new System.Drawing.Point(15, 413);
+            this.pnlGreen.Name = "pnlGreen";
+            this.pnlGreen.Size = new System.Drawing.Size(194, 63);
+            this.pnlGreen.TabIndex = 262;
             // 
             // label5
             // 
@@ -262,20 +265,20 @@
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(13, 25);
+            this.label5.Location = new System.Drawing.Point(5, 24);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(168, 17);
             this.label5.TabIndex = 263;
             this.label5.Text = "Green for Identical QTY";
             // 
-            // panel3
+            // pnlRed
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.panel3.Controls.Add(this.label6);
-            this.panel3.Location = new System.Drawing.Point(260, 415);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(200, 63);
-            this.panel3.TabIndex = 264;
+            this.pnlRed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.pnlRed.Controls.Add(this.label6);
+            this.pnlRed.Location = new System.Drawing.Point(249, 413);
+            this.pnlRed.Name = "pnlRed";
+            this.pnlRed.Size = new System.Drawing.Size(194, 63);
+            this.pnlRed.TabIndex = 264;
             // 
             // label6
             // 
@@ -283,20 +286,20 @@
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(2, 25);
+            this.label6.Location = new System.Drawing.Point(1, 25);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(195, 17);
             this.label6.TabIndex = 263;
             this.label6.Text = "Red For Shortage Item QTY";
             // 
-            // panel4
+            // pnlOrange
             // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.panel4.Controls.Add(this.label8);
-            this.panel4.Location = new System.Drawing.Point(512, 415);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(200, 63);
-            this.panel4.TabIndex = 265;
+            this.pnlOrange.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.pnlOrange.Controls.Add(this.label8);
+            this.pnlOrange.Location = new System.Drawing.Point(483, 413);
+            this.pnlOrange.Name = "pnlOrange";
+            this.pnlOrange.Size = new System.Drawing.Size(194, 63);
+            this.pnlOrange.TabIndex = 265;
             // 
             // label8
             // 
@@ -304,7 +307,7 @@
             this.label8.BackColor = System.Drawing.Color.Transparent;
             this.label8.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(6, 25);
+            this.label8.Location = new System.Drawing.Point(2, 25);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(190, 17);
             this.label8.TabIndex = 263;
@@ -401,6 +404,27 @@
             this.label10.Text = "Toatl QTY :";
             this.label10.Visible = false;
             // 
+            // pnlViolet
+            // 
+            this.pnlViolet.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.pnlViolet.Controls.Add(this.label11);
+            this.pnlViolet.Location = new System.Drawing.Point(717, 413);
+            this.pnlViolet.Name = "pnlViolet";
+            this.pnlViolet.Size = new System.Drawing.Size(194, 63);
+            this.pnlViolet.TabIndex = 271;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.Transparent;
+            this.label11.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.White;
+            this.label11.Location = new System.Drawing.Point(6, 25);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(176, 17);
+            this.label11.TabIndex = 263;
+            this.label11.Text = "Violet for Not Exist Items";
+            // 
             // frmTransferCheck
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -408,14 +432,15 @@
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(914, 519);
+            this.Controls.Add(this.pnlViolet);
             this.Controls.Add(this.txtValue);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.txtTotalQTY);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.panel5);
-            this.Controls.Add(this.panel4);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlOrange);
+            this.Controls.Add(this.pnlRed);
+            this.Controls.Add(this.pnlGreen);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
@@ -442,13 +467,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.picProduct)).EndInit();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            this.pnlGreen.ResumeLayout(false);
+            this.pnlGreen.PerformLayout();
+            this.pnlRed.ResumeLayout(false);
+            this.pnlRed.PerformLayout();
+            this.pnlOrange.ResumeLayout(false);
+            this.pnlOrange.PerformLayout();
             this.panel5.ResumeLayout(false);
+            this.pnlViolet.ResumeLayout(false);
+            this.pnlViolet.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -471,11 +498,11 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlGreen;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel pnlRed;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel pnlOrange;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button btncancel;
@@ -484,5 +511,7 @@
         private System.Windows.Forms.Label label9;
         public System.Windows.Forms.TextBox txtTotalQTY;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Panel pnlViolet;
+        private System.Windows.Forms.Label label11;
     }
 }

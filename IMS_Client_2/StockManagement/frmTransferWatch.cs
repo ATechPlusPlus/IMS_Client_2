@@ -26,7 +26,7 @@ namespace IMS_Client_2.StockManagement
         private void dgvTransferWatch_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             ObjUtil.SetRowNumber(dgvTransferWatch);
-            ObjUtil.SetDataGridProperty(dgvTransferWatch, DataGridViewAutoSizeColumnsMode.ColumnHeader);
+            ObjUtil.SetDataGridProperty(dgvTransferWatch, DataGridViewAutoSizeColumnsMode.DisplayedCells);
             //ObjUtil.SetDataGridProperty(dgvTransferWatch, DataGridViewAutoSizeColumnsMode.Fill);
 
             dgvTransferWatch.Columns["StoreTransferID"].Visible = false;
