@@ -43,19 +43,6 @@
             this.txtBarCode = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dgvProductDetails = new System.Windows.Forms.DataGridView();
-            this.ProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BarcodeNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QTY = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OIRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Adj_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Color = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SizeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColDelete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label5 = new System.Windows.Forms.Label();
             this.txtTotalQTY = new System.Windows.Forms.TextBox();
             this.txtValue = new System.Windows.Forms.TextBox();
@@ -69,6 +56,19 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.lblBillStatus = new System.Windows.Forms.Label();
+            this.ProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BarcodeNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BillQTY = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OIRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Adj_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Color = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SizeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColDelete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).BeginInit();
             this.panel1.SuspendLayout();
@@ -217,7 +217,7 @@
             this.ProductName,
             this.BarcodeNo,
             this.Rate,
-            this.QTY,
+            this.BillQTY,
             this.OIRate,
             this.Adj_Amount,
             this.ColorID,
@@ -243,90 +243,6 @@
             this.dgvProductDetails.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellEndEdit);
             this.dgvProductDetails.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvProductDetails_DataBindingComplete);
             this.dgvProductDetails.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvProductDetails_KeyDown);
-            // 
-            // ProductID
-            // 
-            this.ProductID.DataPropertyName = "ProductID";
-            this.ProductID.HeaderText = "ProductID";
-            this.ProductID.Name = "ProductID";
-            // 
-            // ProductName
-            // 
-            this.ProductName.DataPropertyName = "ProductName";
-            this.ProductName.HeaderText = "ProductName";
-            this.ProductName.Name = "ProductName";
-            this.ProductName.ReadOnly = true;
-            // 
-            // BarcodeNo
-            // 
-            this.BarcodeNo.DataPropertyName = "BarcodeNo";
-            this.BarcodeNo.HeaderText = "BarcodeNo";
-            this.BarcodeNo.Name = "BarcodeNo";
-            // 
-            // Rate
-            // 
-            this.Rate.DataPropertyName = "Rate";
-            this.Rate.HeaderText = "Rate";
-            this.Rate.Name = "Rate";
-            this.Rate.ReadOnly = true;
-            // 
-            // QTY
-            // 
-            this.QTY.DataPropertyName = "QTY";
-            this.QTY.HeaderText = "QTY";
-            this.QTY.Name = "QTY";
-            // 
-            // OIRate
-            // 
-            this.OIRate.DataPropertyName = "OIRate";
-            this.OIRate.HeaderText = "Old_Invoice_Rate";
-            this.OIRate.Name = "OIRate";
-            // 
-            // Adj_Amount
-            // 
-            this.Adj_Amount.DataPropertyName = "Adj_Amount";
-            this.Adj_Amount.HeaderText = "Adj_Amount";
-            this.Adj_Amount.Name = "Adj_Amount";
-            this.Adj_Amount.Visible = false;
-            // 
-            // ColorID
-            // 
-            this.ColorID.DataPropertyName = "ColorID";
-            this.ColorID.HeaderText = "ColorID";
-            this.ColorID.Name = "ColorID";
-            this.ColorID.Visible = false;
-            // 
-            // Color
-            // 
-            this.Color.DataPropertyName = "Color";
-            this.Color.HeaderText = "Color";
-            this.Color.Name = "Color";
-            // 
-            // Size
-            // 
-            this.Size.DataPropertyName = "Size";
-            this.Size.HeaderText = "Size";
-            this.Size.Name = "Size";
-            // 
-            // SizeID
-            // 
-            this.SizeID.DataPropertyName = "SizeID";
-            this.SizeID.HeaderText = "SizeID";
-            this.SizeID.Name = "SizeID";
-            this.SizeID.Visible = false;
-            // 
-            // Total
-            // 
-            this.Total.DataPropertyName = "Total";
-            this.Total.HeaderText = "Total";
-            this.Total.Name = "Total";
-            this.Total.ReadOnly = true;
-            // 
-            // ColDelete
-            // 
-            this.ColDelete.DataPropertyName = "Delete";
-            this.ColDelete.HeaderText = "Delete";
-            this.ColDelete.Name = "ColDelete";
             // 
             // label5
             // 
@@ -491,6 +407,90 @@
             this.lblBillStatus.TabIndex = 260;
             this.lblBillStatus.Text = "Not Posted";
             // 
+            // ProductID
+            // 
+            this.ProductID.DataPropertyName = "ProductID";
+            this.ProductID.HeaderText = "ProductID";
+            this.ProductID.Name = "ProductID";
+            // 
+            // ProductName
+            // 
+            this.ProductName.DataPropertyName = "ProductName";
+            this.ProductName.HeaderText = "ProductName";
+            this.ProductName.Name = "ProductName";
+            this.ProductName.ReadOnly = true;
+            // 
+            // BarcodeNo
+            // 
+            this.BarcodeNo.DataPropertyName = "BarcodeNo";
+            this.BarcodeNo.HeaderText = "BarcodeNo";
+            this.BarcodeNo.Name = "BarcodeNo";
+            // 
+            // Rate
+            // 
+            this.Rate.DataPropertyName = "Rate";
+            this.Rate.HeaderText = "Rate";
+            this.Rate.Name = "Rate";
+            this.Rate.ReadOnly = true;
+            // 
+            // BillQTY
+            // 
+            this.BillQTY.DataPropertyName = "BillQTY";
+            this.BillQTY.HeaderText = "QTY";
+            this.BillQTY.Name = "BillQTY";
+            // 
+            // OIRate
+            // 
+            this.OIRate.DataPropertyName = "OIRate";
+            this.OIRate.HeaderText = "Old_Invoice_Rate";
+            this.OIRate.Name = "OIRate";
+            // 
+            // Adj_Amount
+            // 
+            this.Adj_Amount.DataPropertyName = "Adj_Amount";
+            this.Adj_Amount.HeaderText = "Adj_Amount";
+            this.Adj_Amount.Name = "Adj_Amount";
+            this.Adj_Amount.Visible = false;
+            // 
+            // ColorID
+            // 
+            this.ColorID.DataPropertyName = "ColorID";
+            this.ColorID.HeaderText = "ColorID";
+            this.ColorID.Name = "ColorID";
+            this.ColorID.Visible = false;
+            // 
+            // Color
+            // 
+            this.Color.DataPropertyName = "Color";
+            this.Color.HeaderText = "Color";
+            this.Color.Name = "Color";
+            // 
+            // Size
+            // 
+            this.Size.DataPropertyName = "Size";
+            this.Size.HeaderText = "Size";
+            this.Size.Name = "Size";
+            // 
+            // SizeID
+            // 
+            this.SizeID.DataPropertyName = "SizeID";
+            this.SizeID.HeaderText = "SizeID";
+            this.SizeID.Name = "SizeID";
+            this.SizeID.Visible = false;
+            // 
+            // Total
+            // 
+            this.Total.DataPropertyName = "Total";
+            this.Total.HeaderText = "Total";
+            this.Total.Name = "Total";
+            this.Total.ReadOnly = true;
+            // 
+            // ColDelete
+            // 
+            this.ColDelete.DataPropertyName = "Delete";
+            this.ColDelete.HeaderText = "Delete";
+            this.ColDelete.Name = "ColDelete";
+            // 
             // frmStoreTransfer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -553,19 +553,6 @@
         private System.Windows.Forms.TextBox txtBarCode;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridView dgvProductDetails;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProductID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProductName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BarcodeNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Rate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn QTY;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OIRate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Adj_Amount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColorID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Color;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Size;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SizeID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Total;
-        private System.Windows.Forms.DataGridViewButtonColumn ColDelete;
         private System.Windows.Forms.Label label5;
         public System.Windows.Forms.TextBox txtTotalQTY;
         public System.Windows.Forms.TextBox txtValue;
@@ -579,5 +566,18 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label lblBillStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BarcodeNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Rate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BillQTY;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OIRate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Adj_Amount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColorID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Color;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Size;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SizeID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Total;
+        private System.Windows.Forms.DataGridViewButtonColumn ColDelete;
     }
 }
