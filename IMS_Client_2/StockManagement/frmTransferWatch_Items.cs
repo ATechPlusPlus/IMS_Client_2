@@ -22,25 +22,13 @@ namespace IMS_Client_2.StockManagement
 
         private void LoadData()
         {
-            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_StoreTransfer_List");
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_StoreTransfer_ListItems");
             if (ds != null && ds.Tables.Count > 0)
             {
                 DataTable dt = ds.Tables[0];
                 if (ObjUtil.ValidateTable(dt))
                 {
                     dgvTransferWatch.DataSource = dt;
-                    if (dgvTransferWatch.Columns.Contains("ColView"))
-                    {
-                        dgvTransferWatch.Columns.Remove("ColView");
-                    }
-                    DataGridViewButtonColumn ColView = new DataGridViewButtonColumn();
-                    ColView.DataPropertyName = "View";
-                    ColView.HeaderText = "View";
-                    ColView.Name = "ColView";
-                    ColView.Text = "View";
-                    ColView.UseColumnTextForButtonValue = true;
-                    //dataGridView1.Columns.Add(ColView);
-                    dgvTransferWatch.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { ColView });
                 }
                 else
                 {
