@@ -76,17 +76,22 @@ namespace IMS_Client_2.StockManagement
         }
         private void LoadToStore()
         {
-            string strQ = "select StoreID,StoreName from StoreMaster where StoreID in  " +
-                           " (select StoreID from tblStoreUserRights where UserID = " + clsUtility.LoginID + " AND StoreID not in (" + cmdFrom.SelectedValue + "))";
-
-            DataTable ftToStore = ObjCon.ExecuteSelectStatement(strQ);
-            if (ftToStore.Rows.Count > 0)
+            if (cmdFrom.SelectedValue!=null)
             {
-                cmdTo.DataSource = ftToStore;
-                cmdTo.DisplayMember = "StoreName";
-                cmdTo.ValueMember = "StoreID";
+                string strQ = "select StoreID,StoreName from StoreMaster where StoreID in  " +
+                             " (select StoreID from tblStoreUserRights where UserID = " + clsUtility.LoginID + " AND StoreID not in (" + cmdFrom.SelectedValue + "))";
+
+                DataTable ftToStore = ObjCon.ExecuteSelectStatement(strQ);
+                if (ftToStore.Rows.Count > 0)
+                {
+                    cmdTo.DataSource = ftToStore;
+                    cmdTo.DisplayMember = "StoreName";
+                    cmdTo.ValueMember = "StoreID";
+                }
+                cmdTo.SelectedIndex = -1;
+
             }
-            cmdTo.SelectedIndex = -1;
+           
         }
         private string GenerateBillNumber()
         {
@@ -173,7 +178,7 @@ namespace IMS_Client_2.StockManagement
             dtItemDetails.Columns.Add("Color");
             dtItemDetails.Columns.Add("SizeID");
             dtItemDetails.Columns.Add("Size");
-            dtItemDetails.Columns.Add("QTY");
+            dtItemDetails.Columns.Add("BillQTY");
             dtItemDetails.Columns.Add("Rate");
 
             dtItemDetails.Columns.Add("OIRate");
@@ -186,11 +191,11 @@ namespace IMS_Client_2.StockManagement
         {
             DataRow[] dRow = dtItemDetails.Select("BarcodeNo='" + barCode + "'");
             // add one qty
-            decimal NewQTY = Convert.ToDecimal(dRow[0]["QTY"]) + 1;
+            decimal NewQTY = Convert.ToDecimal(dRow[0]["BillQTY"]) + 1;
             if (CheckProductQTY(barCode, Convert.ToDecimal(NewQTY)))
             {
                 // set to col
-                dRow[0]["QTY"] = NewQTY.ToString();
+                dRow[0]["BillQTY"] = NewQTY.ToString();
                 // cal total
                 decimal total = rate * NewQTY;
                 // set the total
@@ -245,7 +250,7 @@ namespace IMS_Client_2.StockManagement
             DataRow dRow = dtItemDetails.NewRow();
             dRow["ProductID"] = productID;
             dRow["ProductName"] = name;
-            dRow["QTY"] = qty;
+            dRow["BillQTY"] = qty;
             dRow["Rate"] = rate;
             dRow["Total"] = total;
             dRow["Delete"] = "Delete";
@@ -332,7 +337,7 @@ namespace IMS_Client_2.StockManagement
 
             for (int i = 0; i < dgvProductDetails.Rows.Count; i++)
             {
-                TotalQTY += Convert.ToDecimal(dgvProductDetails.Rows[i].Cells["QTY"].Value);
+                TotalQTY += Convert.ToDecimal(dgvProductDetails.Rows[i].Cells["BillQTY"].Value);
             }
 
             txtTotalQTY.Text = TotalQTY.ToString();
@@ -366,7 +371,7 @@ namespace IMS_Client_2.StockManagement
         {
             try
             {
-                _StartValue = Convert.ToDecimal(dgvProductDetails.Rows[e.RowIndex].Cells["QTY"].Value);
+                _StartValue = Convert.ToDecimal(dgvProductDetails.Rows[e.RowIndex].Cells["BillQTY"].Value);
             }
             catch (Exception)
             {
@@ -376,16 +381,16 @@ namespace IMS_Client_2.StockManagement
         private void dgvProductDetails_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             //dgvProductDetails.Columns[e.ColumnIndex].Name == "Rate" ||
-            if (dgvProductDetails.Columns[e.ColumnIndex].Name == "QTY")
+            if (dgvProductDetails.Columns[e.ColumnIndex].Name == "BillQTY")
             {
                 string pID = dgvProductDetails.Rows[e.RowIndex].Cells["ProductID"].Value.ToString();
                 string sizeid = dgvProductDetails.Rows[e.RowIndex].Cells["SizeID"].Value.ToString();
                 string colorid = dgvProductDetails.Rows[e.RowIndex].Cells["ColorID"].Value.ToString();
-                decimal QTY = Convert.ToDecimal(dgvProductDetails.Rows[e.RowIndex].Cells["QTY"].Value);
+                decimal QTY = Convert.ToDecimal(dgvProductDetails.Rows[e.RowIndex].Cells["BillQTY"].Value);
                 if (QTY < 0)
                 {
                     clsUtility.ShowInfoMessage("The QTY can not be negative. Default 1 QTY will be set.", clsUtility.strProjectTitle);
-                    dgvProductDetails.Rows[e.RowIndex].Cells["QTY"].Value = "1";
+                    dgvProductDetails.Rows[e.RowIndex].Cells["BillQTY"].Value = "1";
                     QTY = 1;
                 }
                 decimal Rate = Convert.ToDecimal(dgvProductDetails.Rows[e.RowIndex].Cells["Rate"].Value);
@@ -399,7 +404,7 @@ namespace IMS_Client_2.StockManagement
                 }
                 else
                 {
-                    dgvProductDetails.Rows[e.RowIndex].Cells["QTY"].Value = _StartValue;
+                    dgvProductDetails.Rows[e.RowIndex].Cells["BillQTY"].Value = _StartValue;
                     CalculateGrandTotal();
 
                     clsUtility.ShowInfoMessage("QTY : " + QTY + " NOT avaiable for the Product : " + dgvProductDetails.Rows[e.RowIndex].Cells["ProductName"].Value, clsUtility.strProjectTitle);

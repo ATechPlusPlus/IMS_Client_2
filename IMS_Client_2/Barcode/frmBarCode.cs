@@ -773,6 +773,11 @@ namespace IMS_Client_2.Barcode
                             if (dtBarCodeNumber.Rows[0]["BarcodeNo"] != DBNull.Value && dtBarCodeNumber.Rows[0]["BarcodeNo"].ToString().Length >= 0)
                             {
                                 _Current_BarCodeNumber = dtBarCodeNumber.Rows[0]["BarcodeNo"].ToString();
+
+                                // update the bar code in [ProductStockMaster]
+                                string strUpdate2 = "UPDATE " + clsUtility.DBName + ".[dbo].[ProductStockMaster] SET BarcodeNo='" + _Current_BarCodeNumber + "' WHERE ProductID=" + PID + " AND PurchaseInvoiceID=" + CurrentPurchaseInvoiceID +
+                             " AND SizeID=" + SizeID + " AND ColorID=" + ColorID;
+                                ObjCon.ExecuteNonQuery(strUpdate2);
                             }
                             else
                             {
