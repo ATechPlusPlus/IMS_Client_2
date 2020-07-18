@@ -42,6 +42,18 @@ namespace IMS_Client_2.StockManagement
                 if (ObjUtil.ValidateTable(dt))
                 {
                     dgvTransferWatch.DataSource = dt;
+                    if (dgvTransferWatch.Columns.Contains("ColView"))
+                    {
+                        dgvTransferWatch.Columns.Remove("ColView");
+                    }
+                    DataGridViewButtonColumn ColView = new DataGridViewButtonColumn();
+                    ColView.DataPropertyName = "View";
+                    ColView.HeaderText = "View";
+                    ColView.Name = "ColView";
+                    ColView.Text = "View";
+                    ColView.UseColumnTextForButtonValue = true;
+                    //dataGridView1.Columns.Add(ColView);
+                    dgvTransferWatch.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { ColView });
                 }
                 else
                 {
