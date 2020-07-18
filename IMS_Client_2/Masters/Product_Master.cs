@@ -101,11 +101,6 @@ namespace IMS_Client_2.Masters
             cmbCategory.DisplayMember = "CategoryName";
             cmbCategory.ValueMember = "CategoryID";
             cmbCategory.SelectedIndex = -1;
-
-            cmbSearchByCategory.DataSource = dt;
-            cmbSearchByCategory.DisplayMember = "CategoryName";
-            cmbSearchByCategory.ValueMember = "CategoryID";
-            cmbSearchByCategory.SelectedIndex = -1;
         }
 
         private void FillSearchCategory()
@@ -347,7 +342,7 @@ namespace IMS_Client_2.Masters
 
             LoadData();
             FillDepartmentData();
-            //FillSearchCategory();
+            FillSearchCategory();
 
             grpProduct.Focus();
         }

@@ -101,12 +101,13 @@ namespace IMS_Client_2.Other_Forms
         }
 
         //private void Insert_UpdateData(string ProductName, string CategoryID, string Rate, string ActiveStatus, string CreatedBy)
-        private void Insert_UpdateData(string ProductName, string CategoryID)
+        private void Insert_UpdateData(string ProductName, string CategoryID,string ProductArabicName)
         {
             try
             {
                 ObjDAL.SetColumnData("ProductName", SqlDbType.NVarChar, ProductName);
                 ObjDAL.SetColumnData("CategoryID", SqlDbType.Int, CategoryID);
+                ObjDAL.SetColumnData("ProductArabicName", SqlDbType.NVarChar, ProductArabicName);
                 //ObjDAL.SetColumnData("Rate", SqlDbType.NVarChar, Rate);
                 //ObjDAL.SetColumnData("ActiveStatus", SqlDbType.NVarChar, ActiveStatus);
                 //ObjDAL.SetColumnData("CreatedBy", SqlDbType.NVarChar, 0);
@@ -134,7 +135,8 @@ namespace IMS_Client_2.Other_Forms
                         {
 
                             Insert_UpdateData(dtExcelData.Rows[i][0].ToString(),
-                                             dtExcelData.Rows[i][1].ToString()
+                                             dtExcelData.Rows[i][1].ToString(),
+                                             dtExcelData.Rows[i][2].ToString()
                                             );
 
                             SetProgressPercent(i, dtExcelData.Rows.Count);
