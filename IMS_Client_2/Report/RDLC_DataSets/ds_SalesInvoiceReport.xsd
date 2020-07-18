@@ -12,7 +12,7 @@
   <xs:element name="ds_SalesInvoiceReport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ds_SalesInvoiceReport" msprop:Generator_UserDSName="ds_SalesInvoiceReport">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="SalesInvoiceReport" msprop:Generator_TableClassName="SalesInvoiceReportDataTable" msprop:Generator_TableVarName="tableSalesInvoiceReport" msprop:Generator_TablePropName="SalesInvoiceReport" msprop:Generator_RowDeletingName="SalesInvoiceReportRowDeleting" msprop:Generator_RowChangingName="SalesInvoiceReportRowChanging" msprop:Generator_RowEvHandlerName="SalesInvoiceReportRowChangeEventHandler" msprop:Generator_RowDeletedName="SalesInvoiceReportRowDeleted" msprop:Generator_UserTableName="SalesInvoiceReport" msprop:Generator_RowChangedName="SalesInvoiceReportRowChanged" msprop:Generator_RowEvArgName="SalesInvoiceReportRowChangeEvent" msprop:Generator_RowClassName="SalesInvoiceReportRow">
+        <xs:element name="SalesInvoiceReport" msprop:Generator_TableClassName="SalesInvoiceReportDataTable" msprop:Generator_TableVarName="tableSalesInvoiceReport" msprop:Generator_RowChangedName="SalesInvoiceReportRowChanged" msprop:Generator_TablePropName="SalesInvoiceReport" msprop:Generator_RowDeletingName="SalesInvoiceReportRowDeleting" msprop:Generator_RowChangingName="SalesInvoiceReportRowChanging" msprop:Generator_RowEvHandlerName="SalesInvoiceReportRowChangeEventHandler" msprop:Generator_RowDeletedName="SalesInvoiceReportRowDeleted" msprop:Generator_RowClassName="SalesInvoiceReportRow" msprop:Generator_UserTableName="SalesInvoiceReport" msprop:Generator_RowEvArgName="SalesInvoiceReportRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="InvoiceNumber" msprop:Generator_ColumnVarNameInTable="columnInvoiceNumber" msprop:Generator_ColumnPropNameInRow="InvoiceNumber" msprop:Generator_ColumnPropNameInTable="InvoiceNumberColumn" msprop:Generator_UserColumnName="InvoiceNumber" type="xs:string" minOccurs="0" />
@@ -29,7 +29,7 @@
               <xs:element name="Rate" msprop:Generator_ColumnVarNameInTable="columnRate" msprop:Generator_ColumnPropNameInRow="Rate" msprop:Generator_ColumnPropNameInTable="RateColumn" msprop:Generator_UserColumnName="Rate" type="xs:string" minOccurs="0" />
               <xs:element name="Size" msprop:Generator_ColumnVarNameInTable="columnSize" msprop:Generator_ColumnPropNameInRow="Size" msprop:Generator_ColumnPropNameInTable="SizeColumn" msprop:Generator_UserColumnName="Size" type="xs:string" minOccurs="0" />
               <xs:element name="ColorName" msprop:Generator_ColumnVarNameInTable="columnColorName" msprop:Generator_ColumnPropNameInRow="ColorName" msprop:Generator_ColumnPropNameInTable="ColorNameColumn" msprop:Generator_UserColumnName="ColorName" type="xs:string" minOccurs="0" />
-              <xs:element name="Barcode" msprop:Generator_ColumnVarNameInTable="columnBarcode" msprop:Generator_ColumnPropNameInRow="Barcode" msprop:Generator_ColumnPropNameInTable="BarcodeColumn" msprop:Generator_UserColumnName="Barcode" type="xs:string" minOccurs="0" />
+              <xs:element name="BarcodeNo" msprop:Generator_ColumnVarNameInTable="columnBarcodeNo" msprop:Generator_ColumnPropNameInRow="BarcodeNo" msprop:Generator_ColumnPropNameInTable="BarcodeNoColumn" msprop:Generator_UserColumnName="BarcodeNo" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
