@@ -84,26 +84,39 @@ namespace IMS_Client_2
 
         private void DisplayRegistrationInfo()
         {
-            DataTable dataTable = ObjDAL.ExecuteSelectStatement("SELECT RegDate FROM " + clsUtility.DBName + ".[dbo].[RegistrationDetails] WITH(NOLOCK) where PcName='" + Environment.MachineName + "'");
-
-            if (ObjUtil.ValidateTable(dataTable))
+            //DataTable dataTable = ObjDAL.ExecuteSelectStatement("SELECT CONVERT(date,RegDate) RegDate FROM " + clsUtility.DBName + ".[dbo].[RegistrationDetails] WITH(NOLOCK) where PcName='" + Environment.MachineName + "'");
+            object ob = ObjDAL.ExecuteScalar("SELECT CONVERT(date,RegDate) RegDate FROM " + clsUtility.DBName + ".[dbo].[RegistrationDetails] WITH(NOLOCK) where PcName='" + Environment.MachineName + "'");
+            //if (ObjUtil.ValidateTable(dataTable))
+            if (ob != null)
             {
-                lblRegistrationDate.Text = dataTable.Rows[0]["RegDate"].ToString();
+                lblRegistrationDate.Text = Convert.ToDateTime(ob).ToString("yyyy-MM-dd");
+                //lblRegistrationDate.Text = dataTable.Rows[0]["RegDate"].ToString();
             }
             else
             {
                 lblRegistrationDate.Text = "NA";
 
             }
-            DataTable dtCompany = ObjDAL.ExecuteSelectStatement("SELECT CompanyName FROM " + clsUtility.DBName + ".[dbo].[CompanyMaster] WITH(NOLOCK)");
-            if (ObjUtil.ValidateTable(dtCompany))
+
+            object company = ObjDAL.ExecuteScalar("SELECT CompanyName FROM " + clsUtility.DBName + ".[dbo].[CompanyMaster] WITH(NOLOCK)");
+            if (company != null)
             {
-                lblLicensedTo.Text = dtCompany.Rows[0]["CompanyName"].ToString();
+                lblLicensedTo.Text = company.ToString();
             }
             else
             {
                 lblLicensedTo.Text = "NA";
             }
+
+            //DataTable dtCompany = ObjDAL.ExecuteSelectStatement("SELECT CompanyName FROM " + clsUtility.DBName + ".[dbo].[CompanyMaster] WITH(NOLOCK)");
+            //if (ObjUtil.ValidateTable(dtCompany))
+            //{
+            //    lblLicensedTo.Text = dtCompany.Rows[0]["CompanyName"].ToString();
+            //}
+            //else
+            //{
+            //    lblLicensedTo.Text = "NA";
+            //}
         }
         private void frmHome_Load(object sender, EventArgs e)
         {
