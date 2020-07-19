@@ -101,7 +101,6 @@
             this.txtPurchaseID.Name = "txtPurchaseID";
             this.txtPurchaseID.Size = new System.Drawing.Size(50, 25);
             this.txtPurchaseID.TabIndex = 227;
-            this.txtPurchaseID.Visible = false;
             // 
             // grpGridview
             // 

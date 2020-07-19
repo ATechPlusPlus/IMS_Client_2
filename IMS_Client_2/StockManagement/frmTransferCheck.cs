@@ -228,8 +228,11 @@ namespace IMS_Client_2.StockManagement
             {
                 int a = 0;
                 DataRow[] drow = dtStoreTransfer.Select("BillQTY=0");
-                drow[0].Delete();
-                dtStoreTransfer.AcceptChanges();
+                if (drow.Length > 0)
+                {
+                    drow[0].Delete();
+                    dtStoreTransfer.AcceptChanges();
+                }
                 for (int i = 0; i < dtStoreTransfer.Rows.Count; i++)
                 {
                     ObjDAL.UpdateColumnData("EnterQTY", SqlDbType.Int, dtStoreTransfer.Rows[i]["EnterQTY"]);

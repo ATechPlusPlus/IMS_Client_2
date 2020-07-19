@@ -223,9 +223,9 @@
             this.radByShope.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radByShope.Location = new System.Drawing.Point(427, 26);
             this.radByShope.Name = "radByShope";
-            this.radByShope.Size = new System.Drawing.Size(90, 21);
+            this.radByShope.Size = new System.Drawing.Size(83, 21);
             this.radByShope.TabIndex = 2;
-            this.radByShope.Text = "By Shope :";
+            this.radByShope.Text = "By Shop :";
             this.radByShope.UseVisualStyleBackColor = true;
             this.radByShope.CheckedChanged += new System.EventHandler(this.radByShope_CheckedChanged);
             // 

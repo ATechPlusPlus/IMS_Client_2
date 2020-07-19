@@ -272,14 +272,14 @@ namespace IMS_Client_2.Sales
             {
                 //SequenceInvoice : this is a sequance object created in SQL ( this is not a table)
                 int LastID = ObjDAL.ExecuteScalarInt("SELECT NEXT VALUE FOR " + clsUtility.DBName + ".[dbo].SequenceInvoice");
-                 InvoiceNumber = "RE-" + LastID;
+                InvoiceNumber = "RE-" + LastID;
 
             }
             else
             {
                 //SequenceInvoice : this is a sequance object created in SQL ( this is not a table)
                 int LastID = ObjDAL.ExecuteScalarInt("SELECT NEXT VALUE FOR " + clsUtility.DBName + ".[dbo].SequenceInvoice");
-                 InvoiceNumber = "INV-" + LastID;
+                InvoiceNumber = "INV-" + LastID;
 
             }
 
@@ -841,7 +841,7 @@ namespace IMS_Client_2.Sales
                     }
                 }
             }
-            
+
             return true;
         }
 
@@ -897,8 +897,8 @@ namespace IMS_Client_2.Sales
                 ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster " +
                                         "SET QTY=QTY-" + QTY + " WHERE ProductID=" + ProductID + " AND StoreID=" + cmbShop.SelectedValue.ToString() + " AND ColorID=" + ColorID + " AND SizeID=" + SizeID);
             }
-            if (Convert.ToDecimal(txtGrandTotal.Text)>=0) 
-            {  
+            if (Convert.ToDecimal(txtGrandTotal.Text) >= 0)
+            {
                 // save the payment details
                 if (lblPMode.Text == "K Net" || lblPMode.Text == "Visa" || lblPMode.Text == "Master Card" || lblPMode.Text == "Other")
                 {
@@ -1098,7 +1098,7 @@ namespace IMS_Client_2.Sales
                         " QTY, Rate, ColorID, " +
                         " (SELECT ColorName FROM ColorMaster WHERE ColorID = s1.ColorID) AS Color, " +
                         " (SELECT Size FROM SizeMaster WHERE SizeID = s1.SizeID) AS Size,SizeID, " +
-                        " (SELECT BarcodeNo FROM ProductStockColorSizeMaster WHERE ColorID = s1.ColorID AND SizeID = s1.SizeID AND ProductID = s1.ProductID ) AS BarCode FROM SalesDetails s1" +
+                        " (SELECT BarcodeNo FROM ProductStockColorSizeMaster WHERE ColorID = s1.ColorID AND SizeID = s1.SizeID AND ProductID = s1.ProductID AND StoreID=" + cmbShop.SelectedValue + ") AS BarCode FROM SalesDetails s1" +
                         " WHERE InvoiceID = " + OldInvoiceID + " ) AS tb WHERE BarCode = '" + barcode + "'";
 
             DataTable dtSalesDetails = ObjDAL.ExecuteSelectStatement(strQ);
@@ -1297,7 +1297,7 @@ namespace IMS_Client_2.Sales
 
         private void dgvReplaceReturn_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex == -1 || e.ColumnIndex==-1)
+            if (e.RowIndex == -1 || e.ColumnIndex == -1)
             {
                 return;
             }
