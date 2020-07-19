@@ -1297,7 +1297,7 @@ namespace IMS_Client_2.Sales
 
         private void dgvReplaceReturn_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex == -1)
+            if (e.RowIndex == -1 || e.ColumnIndex==-1)
             {
                 return;
             }
