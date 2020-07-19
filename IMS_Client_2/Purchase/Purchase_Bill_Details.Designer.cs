@@ -59,9 +59,21 @@
             this.lblBillDate = new System.Windows.Forms.Label();
             this.lblSupplierBillNo = new System.Windows.Forms.Label();
             this.txtSupplierBillNo = new System.Windows.Forms.TextBox();
-            this.btnLoadfrmXLS = new System.Windows.Forms.Button();
             this.grpGridview = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.PurchaseInvoiceDetailsID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ModelNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BrandID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BrandName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QTY = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LocalCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AddedRatio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SuppossedPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SalesPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblTotalValueEntered = new System.Windows.Forms.Label();
             this.txtTotalValueEntered = new System.Windows.Forms.TextBox();
             this.lblTotalValueBill = new System.Windows.Forms.Label();
@@ -83,19 +95,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtNewRate = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.PurchaseInvoiceDetailsID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ModelNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BrandID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BrandName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QTY = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LocalCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AddedRatio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SuppossedPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SalesPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2.SuspendLayout();
             this.grpPurchaseBillDetail.SuspendLayout();
             this.grpGridview.SuspendLayout();
@@ -474,21 +473,6 @@
             this.txtSupplierBillNo.Enter += new System.EventHandler(this.txtSupplierBillNo_Enter);
             this.txtSupplierBillNo.Leave += new System.EventHandler(this.txtSupplierBillNo_Leave);
             // 
-            // btnLoadfrmXLS
-            // 
-            this.btnLoadfrmXLS.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnLoadfrmXLS.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLoadfrmXLS.Enabled = false;
-            this.btnLoadfrmXLS.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnLoadfrmXLS.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoadfrmXLS.Location = new System.Drawing.Point(810, 103);
-            this.btnLoadfrmXLS.Name = "btnLoadfrmXLS";
-            this.btnLoadfrmXLS.Size = new System.Drawing.Size(147, 27);
-            this.btnLoadfrmXLS.TabIndex = 243;
-            this.btnLoadfrmXLS.Text = "Load Bill from XLS";
-            this.btnLoadfrmXLS.UseVisualStyleBackColor = true;
-            this.btnLoadfrmXLS.Visible = false;
-            // 
             // grpGridview
             // 
             this.grpGridview.BackColor = System.Drawing.Color.Transparent;
@@ -532,6 +516,97 @@
             this.dataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView1_CellValidating);
             this.dataGridView1.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView1_ColumnAdded);
             this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
+            // 
+            // PurchaseInvoiceDetailsID
+            // 
+            this.PurchaseInvoiceDetailsID.DataPropertyName = "PurchaseInvoiceDetailsID";
+            this.PurchaseInvoiceDetailsID.HeaderText = "PurchaseInvoiceDetailsID";
+            this.PurchaseInvoiceDetailsID.Name = "PurchaseInvoiceDetailsID";
+            this.PurchaseInvoiceDetailsID.ReadOnly = true;
+            this.PurchaseInvoiceDetailsID.Visible = false;
+            // 
+            // ProductID
+            // 
+            this.ProductID.DataPropertyName = "ProductID";
+            this.ProductID.HeaderText = "ProductID";
+            this.ProductID.Name = "ProductID";
+            this.ProductID.Visible = false;
+            // 
+            // ProductName
+            // 
+            this.ProductName.DataPropertyName = "ProductName";
+            this.ProductName.HeaderText = "Item Name";
+            this.ProductName.Name = "ProductName";
+            this.ProductName.ReadOnly = true;
+            // 
+            // ModelNo
+            // 
+            this.ModelNo.DataPropertyName = "ModelNo";
+            this.ModelNo.HeaderText = "Style No";
+            this.ModelNo.Name = "ModelNo";
+            this.ModelNo.ReadOnly = true;
+            // 
+            // BrandID
+            // 
+            this.BrandID.DataPropertyName = "BrandID";
+            this.BrandID.HeaderText = "BrandID";
+            this.BrandID.Name = "BrandID";
+            this.BrandID.Visible = false;
+            // 
+            // BrandName
+            // 
+            this.BrandName.DataPropertyName = "BrandName";
+            this.BrandName.HeaderText = "Brand Name";
+            this.BrandName.Name = "BrandName";
+            this.BrandName.ReadOnly = true;
+            // 
+            // QTY
+            // 
+            this.QTY.DataPropertyName = "QTY";
+            this.QTY.HeaderText = "QTY";
+            this.QTY.Name = "QTY";
+            // 
+            // Rate
+            // 
+            this.Rate.DataPropertyName = "Rate";
+            this.Rate.HeaderText = "Cost Price";
+            this.Rate.Name = "Rate";
+            // 
+            // Total
+            // 
+            this.Total.DataPropertyName = "Total";
+            this.Total.HeaderText = "Total";
+            this.Total.Name = "Total";
+            this.Total.ReadOnly = true;
+            // 
+            // LocalCost
+            // 
+            this.LocalCost.DataPropertyName = "LocalCost";
+            this.LocalCost.HeaderText = "Local Cost";
+            this.LocalCost.Name = "LocalCost";
+            this.LocalCost.ReadOnly = true;
+            // 
+            // AddedRatio
+            // 
+            this.AddedRatio.DataPropertyName = "AddedRatio";
+            this.AddedRatio.HeaderText = "AddedRatio%";
+            this.AddedRatio.Name = "AddedRatio";
+            this.AddedRatio.ReadOnly = true;
+            this.AddedRatio.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // SuppossedPrice
+            // 
+            this.SuppossedPrice.DataPropertyName = "SuppossedPrice";
+            this.SuppossedPrice.HeaderText = "SuppossedPrice";
+            this.SuppossedPrice.Name = "SuppossedPrice";
+            this.SuppossedPrice.ReadOnly = true;
+            // 
+            // SalesPrice
+            // 
+            this.SalesPrice.DataPropertyName = "EndUser";
+            this.SalesPrice.HeaderText = "EndUser";
+            this.SalesPrice.Name = "SalesPrice";
+            this.SalesPrice.ReadOnly = true;
             // 
             // lblTotalValueEntered
             // 
@@ -776,97 +851,6 @@
             this.label10.TabIndex = 291;
             this.label10.Text = "*";
             // 
-            // PurchaseInvoiceDetailsID
-            // 
-            this.PurchaseInvoiceDetailsID.DataPropertyName = "PurchaseInvoiceDetailsID";
-            this.PurchaseInvoiceDetailsID.HeaderText = "PurchaseInvoiceDetailsID";
-            this.PurchaseInvoiceDetailsID.Name = "PurchaseInvoiceDetailsID";
-            this.PurchaseInvoiceDetailsID.ReadOnly = true;
-            this.PurchaseInvoiceDetailsID.Visible = false;
-            // 
-            // ProductID
-            // 
-            this.ProductID.DataPropertyName = "ProductID";
-            this.ProductID.HeaderText = "ProductID";
-            this.ProductID.Name = "ProductID";
-            this.ProductID.Visible = false;
-            // 
-            // ProductName
-            // 
-            this.ProductName.DataPropertyName = "ProductName";
-            this.ProductName.HeaderText = "Item Name";
-            this.ProductName.Name = "ProductName";
-            this.ProductName.ReadOnly = true;
-            // 
-            // ModelNo
-            // 
-            this.ModelNo.DataPropertyName = "ModelNo";
-            this.ModelNo.HeaderText = "Style No";
-            this.ModelNo.Name = "ModelNo";
-            this.ModelNo.ReadOnly = true;
-            // 
-            // BrandID
-            // 
-            this.BrandID.DataPropertyName = "BrandID";
-            this.BrandID.HeaderText = "BrandID";
-            this.BrandID.Name = "BrandID";
-            this.BrandID.Visible = false;
-            // 
-            // BrandName
-            // 
-            this.BrandName.DataPropertyName = "BrandName";
-            this.BrandName.HeaderText = "Brand Name";
-            this.BrandName.Name = "BrandName";
-            this.BrandName.ReadOnly = true;
-            // 
-            // QTY
-            // 
-            this.QTY.DataPropertyName = "QTY";
-            this.QTY.HeaderText = "QTY";
-            this.QTY.Name = "QTY";
-            // 
-            // Rate
-            // 
-            this.Rate.DataPropertyName = "Rate";
-            this.Rate.HeaderText = "Cost Price";
-            this.Rate.Name = "Rate";
-            // 
-            // Total
-            // 
-            this.Total.DataPropertyName = "Total";
-            this.Total.HeaderText = "Total";
-            this.Total.Name = "Total";
-            this.Total.ReadOnly = true;
-            // 
-            // LocalCost
-            // 
-            this.LocalCost.DataPropertyName = "LocalCost";
-            this.LocalCost.HeaderText = "Local Cost";
-            this.LocalCost.Name = "LocalCost";
-            this.LocalCost.ReadOnly = true;
-            // 
-            // AddedRatio
-            // 
-            this.AddedRatio.DataPropertyName = "AddedRatio";
-            this.AddedRatio.HeaderText = "AddedRatio%";
-            this.AddedRatio.Name = "AddedRatio";
-            this.AddedRatio.ReadOnly = true;
-            this.AddedRatio.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // SuppossedPrice
-            // 
-            this.SuppossedPrice.DataPropertyName = "SuppossedPrice";
-            this.SuppossedPrice.HeaderText = "SuppossedPrice";
-            this.SuppossedPrice.Name = "SuppossedPrice";
-            this.SuppossedPrice.ReadOnly = true;
-            // 
-            // SalesPrice
-            // 
-            this.SalesPrice.DataPropertyName = "EndUser";
-            this.SalesPrice.HeaderText = "EndUser";
-            this.SalesPrice.Name = "SalesPrice";
-            this.SalesPrice.ReadOnly = true;
-            // 
             // Purchase_Bill_Details
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -896,7 +880,6 @@
             this.Controls.Add(this.lblTotalValueEntered);
             this.Controls.Add(this.txtTotalValueEntered);
             this.Controls.Add(this.grpGridview);
-            this.Controls.Add(this.btnLoadfrmXLS);
             this.Controls.Add(this.lblSupplierBillNo);
             this.Controls.Add(this.txtSupplierBillNo);
             this.Controls.Add(this.grpPurchaseBillDetail);
@@ -945,7 +928,6 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Label lblBrand;
         private System.Windows.Forms.ComboBox cmbBrand;
-        private System.Windows.Forms.Button btnLoadfrmXLS;
         private System.Windows.Forms.GroupBox grpGridview;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label lblTotalValueEntered;

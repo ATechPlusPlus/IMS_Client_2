@@ -29,17 +29,18 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTransferWatch));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.dgvTransferWatch = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rdByBillStatus = new System.Windows.Forms.RadioButton();
+            this.cmbBillStatus = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dtpToDate = new System.Windows.Forms.DateTimePicker();
             this.dtpFromDate = new System.Windows.Forms.DateTimePicker();
             this.rdByDate = new System.Windows.Forms.RadioButton();
-            this.cmbBillStatus = new System.Windows.Forms.ComboBox();
-            this.rdByBillStatus = new System.Windows.Forms.RadioButton();
+            this.rdSearchByAll = new System.Windows.Forms.RadioButton();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransferWatch)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -53,7 +54,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(800, 40);
+            this.panel2.Size = new System.Drawing.Size(969, 40);
             this.panel2.TabIndex = 114;
             // 
             // label12
@@ -75,24 +76,26 @@
             this.dgvTransferWatch.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvTransferWatch.BackgroundColor = System.Drawing.Color.White;
             this.dgvTransferWatch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvTransferWatch.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvTransferWatch.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvTransferWatch.Location = new System.Drawing.Point(4, 128);
             this.dgvTransferWatch.Name = "dgvTransferWatch";
             this.dgvTransferWatch.ReadOnly = true;
-            this.dgvTransferWatch.Size = new System.Drawing.Size(794, 293);
+            this.dgvTransferWatch.Size = new System.Drawing.Size(953, 293);
             this.dgvTransferWatch.TabIndex = 211;
+            this.dgvTransferWatch.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTransferWatch_CellClick);
             this.dgvTransferWatch.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvTransferWatch_DataBindingComplete);
             // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.rdSearchByAll);
             this.groupBox1.Controls.Add(this.rdByBillStatus);
             this.groupBox1.Controls.Add(this.cmbBillStatus);
             this.groupBox1.Controls.Add(this.label1);
@@ -102,10 +105,37 @@
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold);
             this.groupBox1.Location = new System.Drawing.Point(7, 45);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(786, 66);
+            this.groupBox1.Size = new System.Drawing.Size(950, 66);
             this.groupBox1.TabIndex = 212;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
+            // 
+            // rdByBillStatus
+            // 
+            this.rdByBillStatus.AutoSize = true;
+            this.rdByBillStatus.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdByBillStatus.Location = new System.Drawing.Point(427, 28);
+            this.rdByBillStatus.Name = "rdByBillStatus";
+            this.rdByBillStatus.Size = new System.Drawing.Size(113, 21);
+            this.rdByBillStatus.TabIndex = 254;
+            this.rdByBillStatus.Text = "By Bill Status :";
+            this.rdByBillStatus.UseVisualStyleBackColor = true;
+            this.rdByBillStatus.CheckedChanged += new System.EventHandler(this.rdByBillStatus_CheckedChanged);
+            // 
+            // cmbBillStatus
+            // 
+            this.cmbBillStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbBillStatus.Enabled = false;
+            this.cmbBillStatus.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbBillStatus.FormattingEnabled = true;
+            this.cmbBillStatus.Items.AddRange(new object[] {
+            "Not Received",
+            "Received"});
+            this.cmbBillStatus.Location = new System.Drawing.Point(555, 25);
+            this.cmbBillStatus.Name = "cmbBillStatus";
+            this.cmbBillStatus.Size = new System.Drawing.Size(198, 27);
+            this.cmbBillStatus.TabIndex = 253;
+            this.cmbBillStatus.SelectionChangeCommitted += new System.EventHandler(this.cmbBillStatus_SelectionChangeCommitted);
             // 
             // label1
             // 
@@ -127,6 +157,7 @@
             this.dtpToDate.Name = "dtpToDate";
             this.dtpToDate.Size = new System.Drawing.Size(109, 25);
             this.dtpToDate.TabIndex = 250;
+            this.dtpToDate.ValueChanged += new System.EventHandler(this.dtpToDate_ValueChanged);
             // 
             // dtpFromDate
             // 
@@ -137,6 +168,7 @@
             this.dtpFromDate.Name = "dtpFromDate";
             this.dtpFromDate.Size = new System.Drawing.Size(107, 25);
             this.dtpFromDate.TabIndex = 249;
+            this.dtpFromDate.ValueChanged += new System.EventHandler(this.dtpFromDate_ValueChanged);
             // 
             // rdByDate
             // 
@@ -150,31 +182,19 @@
             this.rdByDate.UseVisualStyleBackColor = true;
             this.rdByDate.CheckedChanged += new System.EventHandler(this.rdByDate_CheckedChanged);
             // 
-            // cmbBillStatus
+            // rdSearchByAll
             // 
-            this.cmbBillStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbBillStatus.Enabled = false;
-            this.cmbBillStatus.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbBillStatus.FormattingEnabled = true;
-            this.cmbBillStatus.Items.AddRange(new object[] {
-            "Not Received",
-            "Received"});
-            this.cmbBillStatus.Location = new System.Drawing.Point(560, 25);
-            this.cmbBillStatus.Name = "cmbBillStatus";
-            this.cmbBillStatus.Size = new System.Drawing.Size(198, 27);
-            this.cmbBillStatus.TabIndex = 253;
-            // 
-            // rdByBillStatus
-            // 
-            this.rdByBillStatus.AutoSize = true;
-            this.rdByBillStatus.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdByBillStatus.Location = new System.Drawing.Point(432, 28);
-            this.rdByBillStatus.Name = "rdByBillStatus";
-            this.rdByBillStatus.Size = new System.Drawing.Size(113, 21);
-            this.rdByBillStatus.TabIndex = 254;
-            this.rdByBillStatus.Text = "By Bill Status :";
-            this.rdByBillStatus.UseVisualStyleBackColor = true;
-            this.rdByBillStatus.CheckedChanged += new System.EventHandler(this.rdByBillStatus_CheckedChanged);
+            this.rdSearchByAll.AutoSize = true;
+            this.rdSearchByAll.Checked = true;
+            this.rdSearchByAll.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdSearchByAll.Location = new System.Drawing.Point(821, 28);
+            this.rdSearchByAll.Name = "rdSearchByAll";
+            this.rdSearchByAll.Size = new System.Drawing.Size(79, 21);
+            this.rdSearchByAll.TabIndex = 255;
+            this.rdSearchByAll.TabStop = true;
+            this.rdSearchByAll.Text = "Show All";
+            this.rdSearchByAll.UseVisualStyleBackColor = true;
+            this.rdSearchByAll.CheckedChanged += new System.EventHandler(this.rdSearchByAll_CheckedChanged);
             // 
             // frmTransferWatch
             // 
@@ -182,7 +202,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(969, 450);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvTransferWatch);
             this.Controls.Add(this.panel2);
@@ -214,5 +234,6 @@
         private System.Windows.Forms.RadioButton rdByDate;
         private System.Windows.Forms.RadioButton rdByBillStatus;
         private System.Windows.Forms.ComboBox cmbBillStatus;
+        private System.Windows.Forms.RadioButton rdSearchByAll;
     }
 }

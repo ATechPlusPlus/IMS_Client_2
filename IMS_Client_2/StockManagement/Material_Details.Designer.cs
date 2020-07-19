@@ -32,7 +32,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Material_Details));
             this.panel2 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
+            this.txtProductID = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtSearchByStyleNo = new System.Windows.Forms.TextBox();
+            this.rdSearchByStyleNo = new System.Windows.Forms.RadioButton();
             this.txtSearchByBarcode = new System.Windows.Forms.TextBox();
             this.cmbColor = new System.Windows.Forms.ComboBox();
             this.rdSearchByColor = new System.Windows.Forms.RadioButton();
@@ -43,18 +46,15 @@
             this.rdSearchByStore = new System.Windows.Forms.RadioButton();
             this.rdShowAll = new System.Windows.Forms.RadioButton();
             this.dgvProductDetails = new System.Windows.Forms.DataGridView();
-            this.txtProductID = new System.Windows.Forms.TextBox();
-            this.PicItem = new System.Windows.Forms.PictureBox();
-            this.lblTotalRecords = new System.Windows.Forms.Label();
-            this.rdSearchByStyleNo = new System.Windows.Forms.RadioButton();
-            this.txtSearchByStyleNo = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.printBarcodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PicItem = new System.Windows.Forms.PictureBox();
+            this.lblTotalRecords = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PicItem)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PicItem)).BeginInit();
             this.SuspendLayout();
             // 
             // panel2
@@ -81,6 +81,15 @@
             this.label12.TabIndex = 82;
             this.label12.Text = "Material Details";
             // 
+            // txtProductID
+            // 
+            this.txtProductID.BackColor = System.Drawing.Color.White;
+            this.txtProductID.Location = new System.Drawing.Point(750, 9);
+            this.txtProductID.Name = "txtProductID";
+            this.txtProductID.Size = new System.Drawing.Size(38, 20);
+            this.txtProductID.TabIndex = 230;
+            this.txtProductID.Visible = false;
+            // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
@@ -103,6 +112,31 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
             // 
+            // txtSearchByStyleNo
+            // 
+            this.txtSearchByStyleNo.BackColor = System.Drawing.Color.White;
+            this.txtSearchByStyleNo.Enabled = false;
+            this.txtSearchByStyleNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearchByStyleNo.Location = new System.Drawing.Point(762, 24);
+            this.txtSearchByStyleNo.Name = "txtSearchByStyleNo";
+            this.txtSearchByStyleNo.Size = new System.Drawing.Size(181, 25);
+            this.txtSearchByStyleNo.TabIndex = 237;
+            this.txtSearchByStyleNo.TextChanged += new System.EventHandler(this.txtSearchByStyleNo_TextChanged);
+            this.txtSearchByStyleNo.Enter += new System.EventHandler(this.txtSearchByProductName_Enter);
+            this.txtSearchByStyleNo.Leave += new System.EventHandler(this.txtSearchByProductName_Leave);
+            // 
+            // rdSearchByStyleNo
+            // 
+            this.rdSearchByStyleNo.AutoSize = true;
+            this.rdSearchByStyleNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdSearchByStyleNo.Location = new System.Drawing.Point(656, 24);
+            this.rdSearchByStyleNo.Name = "rdSearchByStyleNo";
+            this.rdSearchByStyleNo.Size = new System.Drawing.Size(105, 21);
+            this.rdSearchByStyleNo.TabIndex = 235;
+            this.rdSearchByStyleNo.Text = "By Style No :";
+            this.rdSearchByStyleNo.UseVisualStyleBackColor = true;
+            this.rdSearchByStyleNo.CheckedChanged += new System.EventHandler(this.rdSearchByStyleNo_CheckedChanged);
+            // 
             // txtSearchByBarcode
             // 
             this.txtSearchByBarcode.BackColor = System.Drawing.Color.White;
@@ -112,7 +146,7 @@
             this.txtSearchByBarcode.Name = "txtSearchByBarcode";
             this.txtSearchByBarcode.Size = new System.Drawing.Size(181, 25);
             this.txtSearchByBarcode.TabIndex = 234;
-            this.txtSearchByBarcode.TextChanged += new System.EventHandler(this.txtSearchByBarcode_TextChanged);
+            this.txtSearchByBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearchByBarcode_KeyDown);
             this.txtSearchByBarcode.MouseEnter += new System.EventHandler(this.txtSearchByProductName_Enter);
             this.txtSearchByBarcode.MouseLeave += new System.EventHandler(this.txtSearchByProductName_Leave);
             // 
@@ -231,14 +265,19 @@
             this.dgvProductDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellClick);
             this.dgvProductDetails.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvProductDetails_DataBindingComplete);
             // 
-            // txtProductID
+            // contextMenuStrip1
             // 
-            this.txtProductID.BackColor = System.Drawing.Color.White;
-            this.txtProductID.Location = new System.Drawing.Point(750, 9);
-            this.txtProductID.Name = "txtProductID";
-            this.txtProductID.Size = new System.Drawing.Size(38, 20);
-            this.txtProductID.TabIndex = 230;
-            this.txtProductID.Visible = false;
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.printBarcodeToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(146, 26);
+            // 
+            // printBarcodeToolStripMenuItem
+            // 
+            this.printBarcodeToolStripMenuItem.Name = "printBarcodeToolStripMenuItem";
+            this.printBarcodeToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.printBarcodeToolStripMenuItem.Text = "Print Barcode";
+            this.printBarcodeToolStripMenuItem.Click += new System.EventHandler(this.printBarcodeToolStripMenuItem_Click);
             // 
             // PicItem
             // 
@@ -262,45 +301,6 @@
             this.lblTotalRecords.Size = new System.Drawing.Size(121, 17);
             this.lblTotalRecords.TabIndex = 232;
             this.lblTotalRecords.Text = "Total Records : 0";
-            // 
-            // rdSearchByStyleNo
-            // 
-            this.rdSearchByStyleNo.AutoSize = true;
-            this.rdSearchByStyleNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdSearchByStyleNo.Location = new System.Drawing.Point(656, 24);
-            this.rdSearchByStyleNo.Name = "rdSearchByStyleNo";
-            this.rdSearchByStyleNo.Size = new System.Drawing.Size(105, 21);
-            this.rdSearchByStyleNo.TabIndex = 235;
-            this.rdSearchByStyleNo.Text = "By Style No :";
-            this.rdSearchByStyleNo.UseVisualStyleBackColor = true;
-            this.rdSearchByStyleNo.CheckedChanged += new System.EventHandler(this.rdSearchByStyleNo_CheckedChanged);
-            // 
-            // txtSearchByStyleNo
-            // 
-            this.txtSearchByStyleNo.BackColor = System.Drawing.Color.White;
-            this.txtSearchByStyleNo.Enabled = false;
-            this.txtSearchByStyleNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearchByStyleNo.Location = new System.Drawing.Point(762, 24);
-            this.txtSearchByStyleNo.Name = "txtSearchByStyleNo";
-            this.txtSearchByStyleNo.Size = new System.Drawing.Size(181, 25);
-            this.txtSearchByStyleNo.TabIndex = 237;
-            this.txtSearchByStyleNo.TextChanged += new System.EventHandler(this.txtSearchByStyleNo_TextChanged);
-            this.txtSearchByStyleNo.Enter += new System.EventHandler(this.txtSearchByProductName_Enter);
-            this.txtSearchByStyleNo.Leave += new System.EventHandler(this.txtSearchByProductName_Leave);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.printBarcodeToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
-            // 
-            // printBarcodeToolStripMenuItem
-            // 
-            this.printBarcodeToolStripMenuItem.Name = "printBarcodeToolStripMenuItem";
-            this.printBarcodeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.printBarcodeToolStripMenuItem.Text = "Print Barcode";
-            this.printBarcodeToolStripMenuItem.Click += new System.EventHandler(this.printBarcodeToolStripMenuItem_Click);
             // 
             // Material_Details
             // 
@@ -326,8 +326,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PicItem)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PicItem)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
