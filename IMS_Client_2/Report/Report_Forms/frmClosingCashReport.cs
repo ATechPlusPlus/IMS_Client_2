@@ -44,7 +44,7 @@ namespace IMS_Client_2.Report.Report_Forms
                     }
 
                 }
-                printerSetting.PrinterName = clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.BarCodePrinter);
+                printerSetting.PrinterName = clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.InvoicePrinter);
 
 
 
