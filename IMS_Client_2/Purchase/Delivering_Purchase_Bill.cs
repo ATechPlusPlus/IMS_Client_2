@@ -235,7 +235,10 @@ namespace IMS_Client_2.Purchase
                 {
                     FillColorSizeGrid();
                 }
-                cmbStore.SelectedValue = dRow[0]["StoreID"].ToString();
+                if (dRow[0]["StoreID"] != DBNull.Value)
+                {
+                    cmbStore.SelectedValue = dRow[0]["StoreID"].ToString();
+                }
                 Load_Color_SizeData();
                 if (ObjUtil.ValidateTable((DataTable)dgvQtycolor.DataSource))
                 {
