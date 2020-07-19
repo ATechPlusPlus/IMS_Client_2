@@ -157,6 +157,22 @@ namespace IMS_Client_2.Barcode
             {
                 objLable.Text = _Current_BarCodeNumber;
             }
+            else if (objLable.Tag.ToString().Trim() == "Category")
+            {
+                
+                string pID = selectedRow.Cells["ColProductID"].Value.ToString();
+
+                string str = "  select  (  select top(1)   CategoryName from [IMS_Client_2].[dbo].[CategoryMaster] where CategoryID=p1.CategoryID) as CategoryName " +
+                            "from [IMS_Client_2].[dbo].[ProductMaster] as p1 where p1.ProductID = "+ pID;
+
+               object cat=  ObjCon.ExecuteScalar(str);
+                if (cat!=null)
+                {
+                    objLable.Text = cat.ToString();
+
+                }
+                
+            }
         }
         private void LoadTemplate(DataGridViewRow _Row)
         {

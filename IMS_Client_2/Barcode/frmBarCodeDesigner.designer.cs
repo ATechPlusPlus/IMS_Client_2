@@ -59,6 +59,9 @@
             this.aDDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportAsImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportAsFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,9 +74,6 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.label4 = new System.Windows.Forms.Label();
             this.cmbProperty = new System.Windows.Forms.ComboBox();
-            this.exportAsImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportAsFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
@@ -369,6 +369,27 @@
             this.exportToolStripMenuItem.Text = "Export Template";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
+            // exportAsImageToolStripMenuItem
+            // 
+            this.exportAsImageToolStripMenuItem.Name = "exportAsImageToolStripMenuItem";
+            this.exportAsImageToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.exportAsImageToolStripMenuItem.Text = "Export as Image";
+            this.exportAsImageToolStripMenuItem.Click += new System.EventHandler(this.exportAsImageToolStripMenuItem_Click);
+            // 
+            // exportAsFileToolStripMenuItem
+            // 
+            this.exportAsFileToolStripMenuItem.Name = "exportAsFileToolStripMenuItem";
+            this.exportAsFileToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.exportAsFileToolStripMenuItem.Text = "Export as Data File";
+            this.exportAsFileToolStripMenuItem.Click += new System.EventHandler(this.exportAsFileToolStripMenuItem_Click);
+            // 
+            // importTemplateToolStripMenuItem
+            // 
+            this.importTemplateToolStripMenuItem.Name = "importTemplateToolStripMenuItem";
+            this.importTemplateToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.importTemplateToolStripMenuItem.Text = "Import Template";
+            this.importTemplateToolStripMenuItem.Click += new System.EventHandler(this.importTemplateToolStripMenuItem_Click);
+            // 
             // saveTemplateToolStripMenuItem
             // 
             this.saveTemplateToolStripMenuItem.Name = "saveTemplateToolStripMenuItem";
@@ -466,35 +487,15 @@
             "Color",
             "BarcodeNo",
             "Model",
-            "Rate"});
+            "Rate",
+            "Category"});
             this.cmbProperty.Location = new System.Drawing.Point(166, 77);
             this.cmbProperty.Name = "cmbProperty";
             this.cmbProperty.Size = new System.Drawing.Size(162, 25);
             this.cmbProperty.TabIndex = 12;
             this.cmbProperty.SelectionChangeCommitted += new System.EventHandler(this.cmbProperty_SelectionChangeCommitted);
             // 
-            // exportAsImageToolStripMenuItem
-            // 
-            this.exportAsImageToolStripMenuItem.Name = "exportAsImageToolStripMenuItem";
-            this.exportAsImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.exportAsImageToolStripMenuItem.Text = "Export as Image";
-            this.exportAsImageToolStripMenuItem.Click += new System.EventHandler(this.exportAsImageToolStripMenuItem_Click);
-            // 
-            // exportAsFileToolStripMenuItem
-            // 
-            this.exportAsFileToolStripMenuItem.Name = "exportAsFileToolStripMenuItem";
-            this.exportAsFileToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.exportAsFileToolStripMenuItem.Text = "Export as Data File";
-            this.exportAsFileToolStripMenuItem.Click += new System.EventHandler(this.exportAsFileToolStripMenuItem_Click);
-            // 
-            // importTemplateToolStripMenuItem
-            // 
-            this.importTemplateToolStripMenuItem.Name = "importTemplateToolStripMenuItem";
-            this.importTemplateToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
-            this.importTemplateToolStripMenuItem.Text = "Import Template";
-            this.importTemplateToolStripMenuItem.Click += new System.EventHandler(this.importTemplateToolStripMenuItem_Click);
-            // 
-            // DefaultStoreSetting
+            // frmBarCodeDesigner
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -506,7 +507,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "DefaultStoreSetting";
+            this.Name = "frmBarCodeDesigner";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BarCode Designer";
             this.Load += new System.EventHandler(this.frmHome_Load);
