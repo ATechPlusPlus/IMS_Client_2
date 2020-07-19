@@ -43,6 +43,8 @@ namespace IMS_Client_2.Barcode
             strCompanyName = GetStoreName();
 
             btnSearch.BackgroundImage = B_Leave;
+
+            txtPurchaseInvoice.Focus();
         }
         private void btnAdd_MouseEnter(object sender, EventArgs e)
         {
@@ -126,11 +128,50 @@ namespace IMS_Client_2.Barcode
             }
             else if (objLable.Tag.ToString().Trim() == "Rate")
             {
-                objLable.Text = selectedRow.Cells["Rate"].Value.ToString();
+                try
+                {
+                    if (chkPrintRate.Checked)
+                    {
+                        if (selectedRow.Cells["Rate"].Value != DBNull.Value)
+                        {
+
+
+                            objLable.Text = Convert.ToDecimal(selectedRow.Cells["Rate"].Value).ToString("F") + " KWD";
+                        }
+
+                    }
+                    else
+                    {
+                        objLable.Text = string.Empty;
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                  
+                }
+               
             }
             else if (objLable.Tag.ToString().Trim() == "BarcodeNo")
             {
                 objLable.Text = _Current_BarCodeNumber;
+            }
+            else if (objLable.Tag.ToString().Trim() == "Category")
+            {
+                
+                string pID = selectedRow.Cells["ColProductID"].Value.ToString();
+
+                string str = "  select  (  select top(1)   CategoryName from [IMS_Client_2].[dbo].[CategoryMaster] where CategoryID=p1.CategoryID) as CategoryName " +
+                            "from [IMS_Client_2].[dbo].[ProductMaster] as p1 where p1.ProductID = "+ pID;
+
+               object cat=  ObjCon.ExecuteScalar(str);
+                if (cat!=null)
+                {
+                    objLable.Text = cat.ToString();
+
+                }
+                
             }
         }
         private void LoadTemplate(DataGridViewRow _Row)
@@ -386,8 +427,11 @@ namespace IMS_Client_2.Barcode
                         }
                     }
                 }
+                this.Focus();
+                this.Activate();
                 clsUtility.ShowInfoMessage("Operation completed !", clsUtility.strProjectTitle);
-
+                this.Focus();
+                this.BringToFront();
                 RefreshData();
             }
               
@@ -449,17 +493,54 @@ namespace IMS_Client_2.Barcode
                                         objLable.Size = new Size(Convert.ToInt32(strInfo[5]), Convert.ToInt32(strInfo[6]));
                                         objLable.Location = new Point(Convert.ToInt32(strInfo[7]), Convert.ToInt32(strInfo[8]));
                                         objLable.Text = strInfo[9];
-
+                                        objLable.BackColor = Color.Green;
                                         objLable.BackColor = Color.FromArgb(Convert.ToInt32(strInfo[10]));
                                         objLable.Tag = strInfo[14];
 
+
+                                        try
+                                        {
+                                            // int to enum
+                                            objLable.TextAlign = (ContentAlignment)Convert.ToInt32(strInfo[15]);
+                                        }
+                                        catch
+                                        {
+
+
+                                        }
                                         SetBarCodeValues(objLable, _PrintRowData);
 
                                         obj.Controls.Add(objLable);
                                         obj.Refresh();
 
+                                        StringFormat sf = new StringFormat();
+                                        sf.LineAlignment = StringAlignment.Center;
+                                        sf.Alignment = StringAlignment.Center;
+
                                         string caption3 = string.Format(objLable.Text);
-                                        g.DrawString(caption3, objLable.Font, System.Drawing.Brushes.Black, objLable.Location.X, objLable.Location.Y);
+                                        if (objLable.TextAlign==ContentAlignment.MiddleCenter)
+                                        {
+
+                                            // get the location of that control respective to bardcode panel
+                                            RectangleF drawRect = objLable.ClientRectangle;
+                                            drawRect.X = objLable.Location.X;
+                                            drawRect.Y = objLable.Location.Y;
+
+                                            // DRAW BACKGROUND REC ( Important for Testing )
+                                            //Pen blackPen = new Pen(Color.Red);
+                                            //e.Graphics.DrawRectangle(blackPen,drawRect.X,drawRect.Y,drawRect.Width,drawRect.Height);
+
+                                            // Set format of string.
+                                            StringFormat drawFormat = new StringFormat();
+                                            drawFormat.Alignment = StringAlignment.Center;
+
+                                            g.DrawString(caption3, objLable.Font, System.Drawing.Brushes.Black, drawRect, drawFormat);
+                                        }
+                                        else
+                                        {
+                                            g.DrawString(caption3, objLable.Font, System.Drawing.Brushes.Black, objLable.Location.X, objLable.Location.Y);
+                                        }
+                                       
                                     }
                                     else if (strInfo[0] == "VerticalLabel")
                                     {
@@ -673,6 +754,7 @@ namespace IMS_Client_2.Barcode
                 {
                     ObjUtil.SetControlData(txtPurchaseInvoice, "SupplierBillNo");
                     ObjUtil.SetControlData(txtPurchaseID, "PurchaseInvoiceID");
+                 
                     ObjUtil.ShowDataPopup(dt, txtPurchaseInvoice, this, this);
 
                     if (ObjUtil.GetDataPopup() != null && ObjUtil.GetDataPopup().DataSource != null)
@@ -684,11 +766,11 @@ namespace IMS_Client_2.Barcode
                         {
                             ObjUtil.GetDataPopup().Columns["PurchaseInvoiceID"].Visible = false;
                             ObjUtil.GetDataPopup().Columns["SupplierID"].Visible = false;
-                            ObjUtil.SetDataPopupSize(400, 0);
+                           
                         }
                     }
-                    //ObjUtil.GetDataPopup().CellClick += frmSalecounter_CellClick;
-                    //ObjUtil.GetDataPopup().KeyDown += frmSalecounter_KeyDown;
+                    ObjUtil.GetDataPopup().CellClick += FrmBarCode_CellClick;
+                    ObjUtil.GetDataPopup().KeyDown += FrmBarCode_KeyDown; ;
                 }
                 else
                 {
@@ -699,6 +781,19 @@ namespace IMS_Client_2.Barcode
             {
 
             }
+        }
+
+        private void FrmBarCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                LoadData();
+            }
+        }
+
+        private void FrmBarCode_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            LoadData();
         }
 
         private void RefreshData()
@@ -738,6 +833,7 @@ namespace IMS_Client_2.Barcode
 
             }
         }
+      
         private void button1_Click_1(object sender, EventArgs e)
         {
 
@@ -750,7 +846,21 @@ namespace IMS_Client_2.Barcode
                 }
 
                 PrintDialog pd = new PrintDialog();
+                PrinterSettings printerSetting = new PrinterSettings();
+                if (clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.BarCodePrinter).Trim().Length==0)
+                {
+                     bool b=    clsUtility.ShowQuestionMessage("Printer Not Configured for barcode. Do you want to print on default printer?",clsUtility.strProjectTitle);
+                    if (b==false)
+                    {
+                        return;
+                    }
+
+                }
+                printerSetting.PrinterName = clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.BarCodePrinter);
+
                 PrintDocument doc = new PrintDocument();
+                doc.PrinterSettings = printerSetting;
+
                 doc.PrintPage += Doc_PrintPage;
                 pd.Document = doc;
                 //if (pd.ShowDialog() == DialogResult.OK)/
@@ -809,7 +919,10 @@ namespace IMS_Client_2.Barcode
                         }
                     }
                 }
+                this.Focus();
+                this.BringToFront();
                 clsUtility.ShowInfoMessage("Operation completed !", clsUtility.strProjectTitle);
+                this.Activate();
                 RefreshData();
             }
             

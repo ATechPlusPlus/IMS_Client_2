@@ -1,9 +1,12 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using CoreApp;
+using IMS_Client_2.Barcode;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -30,7 +33,22 @@ namespace IMS_Client_2.Report.Report_Forms
                 LoadReport();
                 ReportPrinting reportPrinting = new ReportPrinting();
                 reportPrinting.Export(this.reportViewer1.LocalReport);
-                reportPrinting.Print();
+
+                PrinterSettings printerSetting = new PrinterSettings();
+                if (clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.InvoicePrinter).Trim().Length == 0)
+                {
+                    bool b = clsUtility.ShowQuestionMessage("Printer Not Configured for barcode. Do you want to print on default printer?", clsUtility.strProjectTitle);
+                    if (b == false)
+                    {
+                        return;
+                    }
+
+                }
+                printerSetting.PrinterName = clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.BarCodePrinter);
+
+
+
+                reportPrinting.Print(printerSetting);
 
                 this.Close();
             }

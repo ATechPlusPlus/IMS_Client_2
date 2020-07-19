@@ -38,6 +38,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
+            this.txtPurchaseID = new System.Windows.Forms.TextBox();
             this.grpGridview = new System.Windows.Forms.GroupBox();
             this.chkAll = new System.Windows.Forms.CheckBox();
             this.dgvProductDetails = new System.Windows.Forms.DataGridView();
@@ -58,10 +59,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtPurchaseInvoice = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.txtPurchaseID = new System.Windows.Forms.TextBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.btnPrintManualBarcode = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.chkPrintRate = new System.Windows.Forms.CheckBox();
             this.panel2.SuspendLayout();
             this.grpGridview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).BeginInit();
@@ -73,6 +74,7 @@
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel2.Controls.Add(this.label12);
+            this.panel2.Controls.Add(this.txtPurchaseID);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
@@ -90,6 +92,16 @@
             this.label12.Size = new System.Drawing.Size(150, 22);
             this.label12.TabIndex = 82;
             this.label12.Text = "Barcode Printing";
+            // 
+            // txtPurchaseID
+            // 
+            this.txtPurchaseID.BackColor = System.Drawing.Color.White;
+            this.txtPurchaseID.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPurchaseID.Location = new System.Drawing.Point(526, 0);
+            this.txtPurchaseID.Name = "txtPurchaseID";
+            this.txtPurchaseID.Size = new System.Drawing.Size(50, 25);
+            this.txtPurchaseID.TabIndex = 227;
+            this.txtPurchaseID.Visible = false;
             // 
             // grpGridview
             // 
@@ -279,7 +291,7 @@
             this.txtPurchaseInvoice.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPurchaseInvoice.Location = new System.Drawing.Point(157, 54);
             this.txtPurchaseInvoice.Name = "txtPurchaseInvoice";
-            this.txtPurchaseInvoice.Size = new System.Drawing.Size(196, 25);
+            this.txtPurchaseInvoice.Size = new System.Drawing.Size(150, 25);
             this.txtPurchaseInvoice.TabIndex = 223;
             this.txtPurchaseInvoice.TextChanged += new System.EventHandler(this.txtPurchaseInvoice_TextChanged);
             // 
@@ -289,25 +301,16 @@
             this.btnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSearch.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.Location = new System.Drawing.Point(359, 54);
+            this.btnSearch.Location = new System.Drawing.Point(313, 54);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(85, 25);
             this.btnSearch.TabIndex = 226;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Visible = false;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             this.btnSearch.MouseEnter += new System.EventHandler(this.btnAdd_MouseEnter);
             this.btnSearch.MouseLeave += new System.EventHandler(this.btnAdd_MouseLeave);
-            // 
-            // txtPurchaseID
-            // 
-            this.txtPurchaseID.BackColor = System.Drawing.Color.White;
-            this.txtPurchaseID.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPurchaseID.Location = new System.Drawing.Point(477, 46);
-            this.txtPurchaseID.Name = "txtPurchaseID";
-            this.txtPurchaseID.Size = new System.Drawing.Size(50, 25);
-            this.txtPurchaseID.TabIndex = 227;
-            this.txtPurchaseID.Visible = false;
             // 
             // linkLabel1
             // 
@@ -341,10 +344,29 @@
             // numericUpDown1
             // 
             this.numericUpDown1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown1.Location = new System.Drawing.Point(685, 50);
+            this.numericUpDown1.Location = new System.Drawing.Point(663, 52);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(71, 25);
             this.numericUpDown1.TabIndex = 230;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // chkPrintRate
+            // 
+            this.chkPrintRate.AutoSize = true;
+            this.chkPrintRate.BackColor = System.Drawing.Color.Transparent;
+            this.chkPrintRate.Checked = true;
+            this.chkPrintRate.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPrintRate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkPrintRate.Location = new System.Drawing.Point(663, 87);
+            this.chkPrintRate.Name = "chkPrintRate";
+            this.chkPrintRate.Size = new System.Drawing.Size(87, 21);
+            this.chkPrintRate.TabIndex = 231;
+            this.chkPrintRate.Text = "Print Rate";
+            this.chkPrintRate.UseVisualStyleBackColor = false;
             // 
             // frmBarCode
             // 
@@ -354,10 +376,10 @@
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(907, 588);
+            this.Controls.Add(this.chkPrintRate);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.btnPrintManualBarcode);
             this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.txtPurchaseID);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtPurchaseInvoice);
             this.Controls.Add(this.label4);
@@ -410,5 +432,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn BarcodeNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn SizeID;
         private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseInvoiceID;
+        private System.Windows.Forms.CheckBox chkPrintRate;
     }
 }

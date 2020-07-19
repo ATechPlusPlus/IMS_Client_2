@@ -318,17 +318,17 @@ namespace IMS_Client_2.StockManagement
                 txtSearchByStyleNo.Clear();
             }
         }
-       
+
         private void GetProductImage(string ProductID)
         {
             string ImageID = "";
-            DataTable dtPhotoNumber=  ObjDAL.ExecuteSelectStatement("select Photo FROM "+clsUtility.DBName+".[dbo].[ProductMaster] where ProductID="+ ProductID + "");
-            if (dtPhotoNumber.Rows.Count>0)
+            DataTable dtPhotoNumber = ObjDAL.ExecuteSelectStatement("select Photo FROM " + clsUtility.DBName + ".[dbo].[ProductMaster] where ProductID=" + ProductID + "");
+            if (dtPhotoNumber.Rows.Count > 0)
             {
-                ImageID= dtPhotoNumber.Rows[0]["Photo"].ToString();
-            }  
-           
-            DataTable dtImagePath = ObjDAL.ExecuteSelectStatement("  select ImagePath, Extension from "+ clsUtility.DBName + ".dbo.DefaultStoreSetting where MachineName='" + Environment.MachineName + "'");
+                ImageID = dtPhotoNumber.Rows[0]["Photo"].ToString();
+            }
+
+            DataTable dtImagePath = ObjDAL.ExecuteSelectStatement("  select ImagePath, Extension from " + clsUtility.DBName + ".dbo.DefaultStoreSetting where MachineName='" + Environment.MachineName + "'");
             if (dtImagePath.Rows.Count > 0)
             {
                 if (dtImagePath.Rows[0]["ImagePath"] != DBNull.Value)
@@ -382,14 +382,6 @@ namespace IMS_Client_2.StockManagement
             ObjUtil.SetTextHighlightColor(sender, Color.White);
         }
 
-        private void txtSearchByBarcode_TextChanged(object sender, EventArgs e)
-        {
-            if (!ObjUtil.IsControlTextEmpty(txtSearchByBarcode))
-            {
-                SearchByBarcode();
-            }
-        }
-
         private void rdSearchByBarCode_CheckedChanged(object sender, EventArgs e)
         {
             if (rdSearchByBarCode.Checked)
@@ -426,11 +418,11 @@ namespace IMS_Client_2.StockManagement
         private void dgvProductDetails_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
-            if(dgvProductDetails.SelectedRows.Count>0)
+            if (dgvProductDetails.SelectedRows.Count > 0)
             {
                 GetProductImage(dgvProductDetails.SelectedRows[0].Cells["ProductID"].Value.ToString());
             }
-            
+
         }
 
         private void printBarcodeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -438,7 +430,7 @@ namespace IMS_Client_2.StockManagement
 
 
             DataGridViewSelectedRowCollection dgvRows = dgvProductDetails.SelectedRows;
-            if (dgvProductDetails.SelectedRows!=null && dgvProductDetails.SelectedRows.Count>0)
+            if (dgvProductDetails.SelectedRows != null && dgvProductDetails.SelectedRows.Count > 0)
             {
                 Barcode.frmBarCodeStockPopup frmBarCode = new Barcode.frmBarCodeStockPopup();
                 frmBarCode.dgvRows = dgvRows;
@@ -448,7 +440,7 @@ namespace IMS_Client_2.StockManagement
             {
                 clsUtility.ShowInfoMessage("Please select record.", clsUtility.strProjectTitle);
             }
-          
+
         }
 
         private void txtSearchByStyleNo_TextChanged(object sender, EventArgs e)
@@ -504,6 +496,17 @@ namespace IMS_Client_2.StockManagement
             {
                 txtSearchByStyleNo.Enabled = false;
                 txtSearchByStyleNo.Clear();
+            }
+        }
+
+        private void txtSearchByBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                if (!ObjUtil.IsControlTextEmpty(txtSearchByBarcode))
+                {
+                    SearchByBarcode();
+                }
             }
         }
     }

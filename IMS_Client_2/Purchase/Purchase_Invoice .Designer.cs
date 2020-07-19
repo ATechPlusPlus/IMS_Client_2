@@ -602,7 +602,7 @@
             this.btnCurrencyRatePopup.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCurrencyRatePopup.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCurrencyRatePopup.Location = new System.Drawing.Point(697, 18);
-            this.btnCurrencyRatePopup.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCurrencyRatePopup.Margin = new System.Windows.Forms.Padding(2);
             this.btnCurrencyRatePopup.Name = "btnCurrencyRatePopup";
             this.btnCurrencyRatePopup.Size = new System.Drawing.Size(27, 27);
             this.btnCurrencyRatePopup.TabIndex = 295;
@@ -888,7 +888,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(978, 609);
+            this.ClientSize = new System.Drawing.Size(978, 656);
             this.Controls.Add(this.lnkRefreshData);
             this.Controls.Add(this.grpLocalCurrency);
             this.Controls.Add(this.grpForeignCurrency);

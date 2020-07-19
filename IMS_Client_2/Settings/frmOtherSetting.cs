@@ -31,8 +31,22 @@ namespace IMS_Client_2.Settings
             btnFooterSave.BackgroundImage = B_Leave;
 
             txtPCName.Text = Environment.MachineName;
+            txtMachineName.Text= Environment.MachineName;
             LoadStore();
             BindStoreSettingData();
+            LoadPrinter();
+            BindPrinterDetails();
+        }
+        private void LoadPrinter()
+        {
+            foreach (string printer in System.Drawing.Printing.PrinterSettings.InstalledPrinters)
+            {
+                cmbBarcodPrinter.Items.Add(printer);
+                cmbInvoicePrinter.Items.Add(printer);
+                
+            }
+
+          
         }
       
         private void LoadStore()
@@ -265,6 +279,70 @@ namespace IMS_Client_2.Settings
             Masters.Store_Master Obj = new Masters.Store_Master();
             Obj.ShowDialog();
             LoadStore();
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            if (cmbBarcodPrinter.SelectedIndex==-1)
+            {
+                clsUtility.ShowInfoMessage("Please select your printer.", clsUtility.strProjectTitle);
+                return;
+            }
+            else if (cmbInvoicePrinter.SelectedIndex==-1)
+            {
+                clsUtility.ShowInfoMessage("Please select your function.", clsUtility.strProjectTitle);
+                return;
+            }
+            SavePrinterSetting();
+
+        }
+        private void BindPrinterDetails()
+        {
+            DataTable dtPrinter = ObjCon.ExecuteSelectStatement("select * from "+ clsUtility.DBName+ ".dbo.[tblPrinterSetting] where MachineName = '"+txtMachineName.Text+"'");
+            if (dtPrinter.Rows.Count>0)
+            {
+                cmbBarcodPrinter.SelectedItem = dtPrinter.Rows[0]["BarCodePrinter"].ToString();
+
+                cmbInvoicePrinter.SelectedItem = dtPrinter.Rows[0]["InvoicePrinter"].ToString();
+            }
+        }
+        private void SavePrinterSetting()
+        {
+            int count=ObjCon.CountRecords(clsUtility.DBName + ".[dbo].[tblPrinterSetting]", "MachineName='"+Environment.MachineName+"'");
+            if (count==0)
+            {
+              
+               
+                ObjCon.SetColumnData("MachineName", SqlDbType.NVarChar,Environment.MachineName);
+                ObjCon.SetColumnData("BarCodePrinter", SqlDbType.NVarChar, cmbBarcodPrinter.SelectedItem.ToString());
+                ObjCon.SetColumnData("InvoicePrinter", SqlDbType.NVarChar, cmbInvoicePrinter.SelectedItem.ToString());
+
+
+                ObjCon.SetColumnData("CreatedOn", SqlDbType.DateTime,DateTime.Now);
+                ObjCon.SetColumnData("CreateBy", SqlDbType.Int,clsUtility.LoginID);
+               
+                ObjCon.InsertData(clsUtility.DBName+".dbo.tblPrinterSetting", false);
+            }
+            else
+            {
+             
+          
+                ObjCon.UpdateColumnData("MachineName", SqlDbType.NVarChar, Environment.MachineName);
+               ObjCon.UpdateColumnData("BarCodePrinter", SqlDbType.NVarChar, cmbBarcodPrinter.SelectedItem.ToString());
+                ObjCon.UpdateColumnData("InvoicePrinter", SqlDbType.NVarChar, cmbInvoicePrinter.SelectedItem.ToString());
+
+                ObjCon.UpdateColumnData("ModifiedOn", SqlDbType.DateTime, DateTime.Now);
+                ObjCon.UpdateColumnData("ModifiedBy", SqlDbType.Int, clsUtility.LoginID);
+                ObjCon.UpdateData(clsUtility.DBName+".dbo.tblPrinterSetting", "MachineName='"+Environment.MachineName+"'");
+            }
+            clsUtility.ShowInfoMessage("Printer settings has been saved.", clsUtility.strProjectTitle);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            cmbInvoicePrinter.SelectedIndex = -1;
+            cmbBarcodPrinter.SelectedIndex = -1;
+            
         }
     }
 }

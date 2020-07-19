@@ -320,6 +320,8 @@ namespace IMS_Client_2.Barcode
         private void frmHome_Load(object sender, EventArgs e)
         {
             isLoad = true;
+
+            LoadTemplate(false);
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
@@ -572,6 +574,18 @@ namespace IMS_Client_2.Barcode
                                     objLable.BackColor = Color.FromArgb(Convert.ToInt32(strInfo[10]));
                                     objLable.Tag = strInfo[14];
 
+                                    try
+                                    {
+                                        // int to enum
+                                        objLable.TextAlign = (ContentAlignment)Convert.ToInt32(strInfo[15]);
+                                    }
+                                    catch 
+                                    {
+
+                                      
+                                    }
+                                   
+
                                     objLable.MouseEnter += new EventHandler(obj.control_MouseEnter);
                                     objLable.MouseLeave += new EventHandler(obj.control_MouseLeave);
                                     objLable.MouseDown += new MouseEventHandler(obj.control_MouseDown);
@@ -735,7 +749,7 @@ namespace IMS_Client_2.Barcode
                         this.Focus();
                         this.Activate();
 
-                        clsUtility.ShowInfoMessage("Template Loaded Successfully.", "Designer Tool");
+                      //  clsUtility.ShowInfoMessage("Template Loaded Successfully.", "Designer Tool");
                     }
                 }
             }
@@ -744,6 +758,11 @@ namespace IMS_Client_2.Barcode
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmBarCodeDesigner, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
+                if (obj==null)
+                {
+                    clsUtility.ShowInfoMessage("Please design your barcode.", clsUtility.strProjectTitle);
+                    return;
+                }
                 strTemplate = "";
                 //Type-IsBold-Family-argb(int)-fsize(float)-w-h-x-y-text-backColor(int)-RecBorderStyle-borderStyle-borderColor
                 WriteToLog(obj.BackColor.ToArgb().ToString() + "@" + obj.Size.Width + "@" + obj.Size.Height);
@@ -775,6 +794,11 @@ namespace IMS_Client_2.Barcode
                     string RecBorderStyle = "";
                     string borderStyle = "";
                     int borderColor = 0;
+                    int textAlightment = 0;
+                    if (obj.Controls[i].GetType() == typeof(Label))
+                    {
+                        textAlightment =(int)((Label)(obj.Controls[i])).TextAlign;
+                    }
 
                     if (obj.Controls[i].GetType() == typeof(uRectangle))
                     {
@@ -784,7 +808,7 @@ namespace IMS_Client_2.Barcode
                         borderColor = rc.BorderColor.ToArgb();
                     }
 
-                    WriteToLog(type + "@" + b + "@" + family + "@" + arbg + "@" + fsize + "@" + w + "@" + h + "@" + x + "@" + y + "@" + text + "@" + backColor + "@" + RecBorderStyle + "@" + borderStyle + "@" + borderColor + "@" + strtag);
+                    WriteToLog(type + "@" + b + "@" + family + "@" + arbg + "@" + fsize + "@" + w + "@" + h + "@" + x + "@" + y + "@" + text + "@" + backColor + "@" + RecBorderStyle + "@" + borderStyle + "@" + borderColor + "@" + strtag+"@"+ textAlightment);
                 }
                 SaveBarCodeSettings(strTemplate);
                 clsUtility.ShowInfoMessage("Barcode Template has been saved.", CoreApp.clsUtility.strProjectTitle);

@@ -189,6 +189,8 @@
             // 
             this.dgvCloseCash.AllowUserToAddRows = false;
             this.dgvCloseCash.AllowUserToDeleteRows = false;
+            this.dgvCloseCash.AllowUserToResizeColumns = false;
+            this.dgvCloseCash.AllowUserToResizeRows = false;
             this.dgvCloseCash.BackgroundColor = System.Drawing.Color.White;
             this.dgvCloseCash.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCloseCash.Location = new System.Drawing.Point(38, 204);

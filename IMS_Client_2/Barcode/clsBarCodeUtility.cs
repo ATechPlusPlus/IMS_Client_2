@@ -1,16 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using ZXing;
 using ZXing.Common;
+using CoreApp;
 namespace IMS_Client_2.Barcode
 {
     class clsBarCodeUtility
     {
+       
 
+       public  enum PrinterType
+        {
+           BarCodePrinter,
+           InvoicePrinter
+        }
+        public static string GetPrinterName(PrinterType printerType )
+        {
+            CoreApp.clsConnection_DAL ObjCon = new clsConnection_DAL(true);
+            string printerName = "";
+            if (printerType==PrinterType.BarCodePrinter)
+            {
+                DataTable dtPrinter = ObjCon.ExecuteSelectStatement("select * from [tblPrinterSetting] where machineName='" + Environment.MachineName + "' ");
+                if (dtPrinter.Rows.Count > 0)
+                {
+                    printerName = dtPrinter.Rows[0]["BarCodePrinter"].ToString();
+                }
 
+            }
+            else if (printerType==PrinterType.InvoicePrinter)
+            {
+                DataTable dtPrinter = ObjCon.ExecuteSelectStatement("select * from [tblPrinterSetting] where machineName='" + Environment.MachineName + "' ");
+                if (dtPrinter.Rows.Count > 0)
+                {
+                    printerName = dtPrinter.Rows[0]["InvoicePrinter"].ToString();
+                }
+
+            }
+           
+
+            return printerName;
+        }
 
         public static Bitmap GenerateBarCode(string strValue)
         {
