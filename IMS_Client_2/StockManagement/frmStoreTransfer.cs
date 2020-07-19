@@ -62,8 +62,20 @@ namespace IMS_Client_2.StockManagement
         }
         private void LoadFromStore()
         {
-            string strQ = "select StoreID,StoreName from StoreMaster where StoreID in  " +
-                            " (select StoreID from  tblStoreUserRights where UserID = " + clsUtility.LoginID + ")";
+            string strQ = "";
+            if (clsUtility.IsAdmin)
+            {
+                 strQ = "select StoreID,StoreName from " + clsUtility.DBName + ".dbo.StoreMaster ";
+                cmdFrom.Enabled = true;
+
+            }
+            else
+            {
+                cmdFrom.Enabled = false;
+                strQ = "select StoreID,StoreName from " + clsUtility.DBName + ".dbo.StoreMaster where StoreID in  " +
+                           " (select StoreID from  " + clsUtility.DBName + ".dbo.tblStoreUserRights where UserID = " + clsUtility.LoginID + ")";
+
+            }
 
 
             DataTable dtFromStore = ObjCon.ExecuteSelectStatement(strQ);
@@ -76,10 +88,23 @@ namespace IMS_Client_2.StockManagement
         }
         private void LoadToStore()
         {
+            string strQ = "";
             if (cmdFrom.SelectedValue!=null)
             {
-                string strQ = "select StoreID,StoreName from StoreMaster where StoreID in  " +
-                             " (select StoreID from tblStoreUserRights where UserID = " + clsUtility.LoginID + " AND StoreID not in (" + cmdFrom.SelectedValue + "))";
+
+                if (clsUtility.IsAdmin)
+                {
+                    strQ = "select StoreID,StoreName from StoreMaster where StoreID not in (" + cmdFrom.SelectedValue + ")";
+
+                 
+
+                }
+                else
+                {
+                     strQ = "select StoreID,StoreName from StoreMaster where StoreID in  " +
+                               " (select StoreID from tblStoreUserRights where UserID = " + clsUtility.LoginID + " AND StoreID not in (" + cmdFrom.SelectedValue + "))";
+
+                }
 
                 DataTable ftToStore = ObjCon.ExecuteSelectStatement(strQ);
                 if (ftToStore.Rows.Count > 0)

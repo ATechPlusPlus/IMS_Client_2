@@ -78,6 +78,23 @@ namespace IMS_Client_2.Report
             ev.HasMorePages = (m_currentPageIndex < m_streams.Count);
         }
 
+        public void Print(PrinterSettings ps)
+        {
+            if (m_streams == null || m_streams.Count == 0)
+                throw new Exception("Error: no stream to print.");
+            PrintDocument printDoc = new PrintDocument();
+            printDoc.PrinterSettings = ps;
+            if (!printDoc.PrinterSettings.IsValid)
+            {
+                throw new Exception("Error: cannot find the default printer.");
+            }
+            else
+            {
+                printDoc.PrintPage += new PrintPageEventHandler(PrintPage);
+                m_currentPageIndex = 0;
+                printDoc.Print();
+            }
+        }
         public void Print()
         {
             if (m_streams == null || m_streams.Count == 0)
