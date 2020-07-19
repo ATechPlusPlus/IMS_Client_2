@@ -136,7 +136,7 @@ namespace IMS_Client_2.Barcode
                         {
 
 
-                            objLable.Text = Convert.ToDecimal(selectedRow.Cells["Rate"].Value).ToString("F") + " KWD";
+                            objLable.Text ="KD "+ Convert.ToDecimal(selectedRow.Cells["Rate"].Value).ToString("F") ;
                         }
 
                     }
