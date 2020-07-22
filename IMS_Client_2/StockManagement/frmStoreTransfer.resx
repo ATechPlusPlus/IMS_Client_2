@@ -413,7 +413,7 @@
   <metadata name="BillQTY.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="OIRate.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="StockQTY.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Adj_Amount.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -437,6 +437,14 @@
   <metadata name="ColDelete.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="panel1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAIAAACjcKk8AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAACusAAArrAYKLDVoAAABzSURBVEhL7cvBCgEBAAbhef+XcVAOLkrtpi0KRVvaA5JI
+        wmFTNPsMfkem7zr4Rf/5w35yfr2N0T6NcW+NcX0Y43QzxuFijN3ZGM3RGPXeGKutMRaNMaYbY1S1Mcq1
+        McZLY4zmxhjOjDGojNGfGKNXGCrsAAgTjvMItAaEAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAABGdBTUEAALGPC/xhBQAAoURJREFUeF7t
@@ -1129,6 +1137,14 @@
         3ytXf9qIr4bxepge9MOPmcIVNHQRUEIAUoPcShAU1GM66aeN+GoYr4fpQT/8mClcgUORWBeD8aA/f1qH
         8XqYHvTDj5mCf8jQST4jZDcN4/UwPeiHH35cGTA+6IcfflwZMD7ohx9+XBkwPuiHH35cCaD/9f8BE+2X
         K/1xME8AAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="$this.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAIAAACjcKk8AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAACusAAArrAYKLDVoAAABzSURBVEhL7cvBCgEBAAbhef+XcVAOLkrtpi0KRVvaA5JI
+        wmFTNPsMfkem7zr4Rf/5w35yfr2N0T6NcW+NcX0Y43QzxuFijN3ZGM3RGPXeGKutMRaNMaYbY1S1Mcq1
+        McZLY4zmxhjOjDGojNGfGKNXGCrsAAgTjvMItAaEAAAAAElFTkSuQmCC
 </value>
   </data>
 </root>

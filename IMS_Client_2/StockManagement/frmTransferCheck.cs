@@ -142,6 +142,8 @@ namespace IMS_Client_2.StockManagement
             ObjUtil.SetRowNumber(dgvProductDetails);
             ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill);
 
+            
+
             dgvProductDetails.Columns["TransferItemID"].Visible = false;
             dgvProductDetails.Columns["StoreBillDetailsID"].Visible = false;
             dgvProductDetails.Columns["ProductID"].Visible = false;
@@ -150,6 +152,8 @@ namespace IMS_Client_2.StockManagement
             dgvProductDetails.Columns["TotalQTY"].Visible = false;
             dgvProductDetails.Columns["Total"].Visible = false;
             dgvProductDetails.Columns["CellColor"].Visible = false;
+
+
 
             for (int i = 0; i < dgvProductDetails.Rows.Count; i++)
             {

@@ -289,6 +289,12 @@
     <Compile Include="Other_Forms\frmCashBoxOpenPopUp.Designer.cs">
       <DependentUpon>frmCashBoxOpenPopUp.cs</DependentUpon>
     </Compile>
+    <Compile Include="Other_Forms\frmDiscountLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other_Forms\frmDiscountLogin.Designer.cs">
+      <DependentUpon>frmDiscountLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Other_Forms\frmPayment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -557,6 +563,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Other_Forms\frmCashBoxOpenPopUp.resx">
       <DependentUpon>frmCashBoxOpenPopUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other_Forms\frmDiscountLogin.resx">
+      <DependentUpon>frmDiscountLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Other_Forms\frmPayment.resx">
       <DependentUpon>frmPayment.cs</DependentUpon>

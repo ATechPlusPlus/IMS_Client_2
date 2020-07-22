@@ -4,6 +4,10 @@
 
     partial class ds_SalesDetails
     {
+        partial class tblPaymentDataTable
+        {
+        }
+
         partial class tblSalesDetailsDataTable
         {
         }

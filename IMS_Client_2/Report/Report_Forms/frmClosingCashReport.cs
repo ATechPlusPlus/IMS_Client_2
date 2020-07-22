@@ -38,19 +38,21 @@ namespace IMS_Client_2.Report.Report_Forms
                 if (clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.InvoicePrinter).Trim().Length == 0)
                 {
                     bool b = clsUtility.ShowQuestionMessage("Printer Not Configured for barcode. Do you want to print on default printer?", clsUtility.strProjectTitle);
-                    if (b == false)
+                    if (b)
                     {
-                        return;
+                        reportPrinting.Print();
                     }
 
                 }
-                printerSetting.PrinterName = clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.InvoicePrinter);
+                else
+                {
+                    printerSetting.PrinterName = clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.InvoicePrinter);
 
+                    reportPrinting.Print(printerSetting);
 
-
-                reportPrinting.Print(printerSetting);
-
-                this.Close();
+                    this.Close();
+                }
+               
             }
             else
             {
