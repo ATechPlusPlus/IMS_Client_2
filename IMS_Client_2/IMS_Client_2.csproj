@@ -411,6 +411,12 @@
     <Compile Include="Report\Report_Forms\frmSalesReport.Designer.cs">
       <DependentUpon>frmSalesReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\Report_Forms\tblMiniSalesReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\Report_Forms\tblMiniSalesReport.Designer.cs">
+      <DependentUpon>tblMiniSalesReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sales\frmQTYValidation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -627,6 +633,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Report_Forms\frmSalesReport.resx">
       <DependentUpon>frmSalesReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Report_Forms\tblMiniSalesReport.resx">
+      <DependentUpon>tblMiniSalesReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\frmQTYValidation.resx">
       <DependentUpon>frmQTYValidation.cs</DependentUpon>

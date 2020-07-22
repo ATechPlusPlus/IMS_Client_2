@@ -22,8 +22,9 @@ namespace IMS_Client_2.Report.Report_Forms
 
         public DataTable dtCashDetails = new DataTable();
         public DataTable dtCreditDetails = new DataTable();
+        public DataTable dtExpanses = new DataTable();
 
-        public string ShopName, ShopAddress, CashierNo, CashNumber, TotalCash, TotalCredit, GrandToatl;
+        public string ShopName, ShopAddress, CashierNo, CashNumber, TotalCash, TotalCredit, GrandToatl,TotalExpenses,PettyCash;
         public bool IsDirectPrint = false;
 
         private void frmClosingCashReport_Load(object sender, EventArgs e)
@@ -72,6 +73,7 @@ namespace IMS_Client_2.Report.Report_Forms
 
             ReportDataSource rds = new ReportDataSource("dsCashClosing", dtCashDetails);
             ReportDataSource rds2 = new ReportDataSource("dsCreditClosing", dtCreditDetails);
+            ReportDataSource rds3 = new ReportDataSource("dsExpenses", dtExpanses);
 
             // creating the parameter with the extact name as in the report.
             ReportParameter param1 = new ReportParameter("ShopeName", ShopName, true);
@@ -84,6 +86,9 @@ namespace IMS_Client_2.Report.Report_Forms
             ReportParameter param7 = new ReportParameter("TotalCash", TotalCash, true);
             ReportParameter param8 = new ReportParameter("GrandCashValue", GrandToatl, true);
 
+            ReportParameter param11 = new ReportParameter("PettyCash", PettyCash, true);
+            ReportParameter param12 = new ReportParameter("TotalExpenses", TotalExpenses, true);
+
 
             // adding the parameter in the report dynamically
             reportViewer1.LocalReport.SetParameters(param1);
@@ -95,10 +100,14 @@ namespace IMS_Client_2.Report.Report_Forms
             reportViewer1.LocalReport.SetParameters(param7);
             reportViewer1.LocalReport.SetParameters(param8);
             reportViewer1.LocalReport.SetParameters(param9);
+            reportViewer1.LocalReport.SetParameters(param11);
+            reportViewer1.LocalReport.SetParameters(param12);
+
 
 
             reportViewer1.LocalReport.DataSources.Add(rds);
             reportViewer1.LocalReport.DataSources.Add(rds2);
+            reportViewer1.LocalReport.DataSources.Add(rds3);
 
             this.reportViewer1.RefreshReport();
         }

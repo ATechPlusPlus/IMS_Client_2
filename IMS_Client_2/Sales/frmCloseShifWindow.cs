@@ -536,7 +536,22 @@ namespace IMS_Client_2.Sales
 
             DataTable dtCashDetails = ds.Tables[0];
             DataTable dtCredit = ds.Tables[1];
+            string TotalExpenses = "0.00";
+            try
+            {
+                if (dtExpenses != null && dtExpenses.Rows.Count > 0)
+                {
+                    DataRow[] dr = dtExpenses.Select("SUM(ExpensesAmt)");
+                    TotalExpenses = Convert.ToString(dr[0]);
+                }
 
+            }
+            catch (Exception)
+            {
+
+              
+            }
+           
 
             Report.Report_Forms.frmClosingCashReport frmClosingCashReport = new Report.Report_Forms.frmClosingCashReport();
             frmClosingCashReport.CashierNo = GetCashierNumber(dtCashDetails.Rows[0]["EmployeeID"].ToString()); ;
@@ -549,6 +564,10 @@ namespace IMS_Client_2.Sales
             frmClosingCashReport.dtCashDetails = dtCashDetails;
             frmClosingCashReport.IsDirectPrint = Direct;
             frmClosingCashReport.dtCreditDetails = dtCredit;
+            frmClosingCashReport.PettyCash = lblPettyCashBAL.Text;
+            frmClosingCashReport.dtExpanses = this.dtExpenses;
+            frmClosingCashReport.TotalExpenses = TotalExpenses;
+
             frmClosingCashReport.Show();
         }
         private void btnPreview_Click(object sender, EventArgs e)
