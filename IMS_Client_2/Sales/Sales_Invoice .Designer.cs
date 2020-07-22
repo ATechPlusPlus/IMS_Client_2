@@ -93,11 +93,13 @@
             this.btnSaveData = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.txtCredit = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.txtCash = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.picOther = new System.Windows.Forms.PictureBox();
             this.PicMaster = new System.Windows.Forms.PictureBox();
             this.picVisa = new System.Windows.Forms.PictureBox();
             this.picCash = new System.Windows.Forms.PictureBox();
@@ -128,7 +130,6 @@
             this.groupBox3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picOther)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicMaster)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picVisa)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCash)).BeginInit();
@@ -550,10 +551,12 @@
             this.txtDiscount.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDiscount.Location = new System.Drawing.Point(145, 115);
             this.txtDiscount.Name = "txtDiscount";
+            this.txtDiscount.ReadOnly = true;
             this.txtDiscount.Size = new System.Drawing.Size(123, 25);
             this.txtDiscount.TabIndex = 208;
             this.txtDiscount.Text = "0";
             this.txtDiscount.TextChanged += new System.EventHandler(this.txtDiscount_TextChanged);
+            this.txtDiscount.DoubleClick += new System.EventHandler(this.txtDiscount_DoubleClick);
             this.txtDiscount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDiscount_KeyPress);
             // 
             // label7
@@ -740,6 +743,7 @@
             this.label16.Size = new System.Drawing.Size(109, 17);
             this.label16.TabIndex = 218;
             this.label16.Text = "Old Bill Amount :";
+            this.label16.Click += new System.EventHandler(this.label16_Click);
             // 
             // txtNewBillAmount
             // 
@@ -837,11 +841,13 @@
             // groupBox4
             // 
             this.groupBox4.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox4.Controls.Add(this.txtCredit);
+            this.groupBox4.Controls.Add(this.label17);
+            this.groupBox4.Controls.Add(this.txtCash);
             this.groupBox4.Controls.Add(this.label15);
             this.groupBox4.Controls.Add(this.label14);
             this.groupBox4.Controls.Add(this.label13);
             this.groupBox4.Controls.Add(this.label10);
-            this.groupBox4.Controls.Add(this.picOther);
             this.groupBox4.Controls.Add(this.PicMaster);
             this.groupBox4.Controls.Add(this.picVisa);
             this.groupBox4.Controls.Add(this.picCash);
@@ -854,16 +860,49 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Payment Option";
             // 
+            // txtCredit
+            // 
+            this.txtCredit.BackColor = System.Drawing.Color.White;
+            this.txtCredit.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCredit.Location = new System.Drawing.Point(229, 174);
+            this.txtCredit.Name = "txtCredit";
+            this.txtCredit.ReadOnly = true;
+            this.txtCredit.Size = new System.Drawing.Size(104, 25);
+            this.txtCredit.TabIndex = 222;
+            this.txtCredit.Text = "0";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.BackColor = System.Drawing.Color.Transparent;
+            this.label17.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(168, 177);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(59, 17);
+            this.label17.TabIndex = 221;
+            this.label17.Text = "Credit :";
+            // 
+            // txtCash
+            // 
+            this.txtCash.BackColor = System.Drawing.Color.White;
+            this.txtCash.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCash.Location = new System.Drawing.Point(229, 140);
+            this.txtCash.Name = "txtCash";
+            this.txtCash.ReadOnly = true;
+            this.txtCash.Size = new System.Drawing.Size(104, 25);
+            this.txtCash.TabIndex = 220;
+            this.txtCash.Text = "0";
+            // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.BackColor = System.Drawing.Color.Transparent;
             this.label15.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(166, 158);
+            this.label15.Location = new System.Drawing.Point(168, 144);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(47, 17);
-            this.label15.TabIndex = 218;
-            this.label15.Text = "Other";
+            this.label15.Size = new System.Drawing.Size(50, 17);
+            this.label15.TabIndex = 220;
+            this.label15.Text = "Cash :";
             // 
             // label14
             // 
@@ -898,19 +937,6 @@
             this.label10.TabIndex = 205;
             this.label10.Text = "Cash";
             // 
-            // picOther
-            // 
-            this.picOther.BackColor = System.Drawing.Color.Transparent;
-            this.picOther.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picOther.Image = ((System.Drawing.Image)(resources.GetObject("picOther.Image")));
-            this.picOther.Location = new System.Drawing.Point(143, 98);
-            this.picOther.Name = "picOther";
-            this.picOther.Size = new System.Drawing.Size(89, 67);
-            this.picOther.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picOther.TabIndex = 214;
-            this.picOther.TabStop = false;
-            this.picOther.Click += new System.EventHandler(this.picOther_Click);
-            // 
             // PicMaster
             // 
             this.PicMaster.BackColor = System.Drawing.Color.Transparent;
@@ -929,9 +955,9 @@
             this.picVisa.BackColor = System.Drawing.Color.Transparent;
             this.picVisa.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picVisa.Image = ((System.Drawing.Image)(resources.GetObject("picVisa.Image")));
-            this.picVisa.Location = new System.Drawing.Point(244, 22);
+            this.picVisa.Location = new System.Drawing.Point(244, 7);
             this.picVisa.Name = "picVisa";
-            this.picVisa.Size = new System.Drawing.Size(90, 78);
+            this.picVisa.Size = new System.Drawing.Size(96, 90);
             this.picVisa.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picVisa.TabIndex = 212;
             this.picVisa.TabStop = false;
@@ -1029,7 +1055,9 @@
             this.dgvReplaceReturn.Name = "dgvReplaceReturn";
             this.dgvReplaceReturn.Size = new System.Drawing.Size(891, 270);
             this.dgvReplaceReturn.TabIndex = 0;
+            this.dgvReplaceReturn.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvReplaceReturn_CellBeginEdit);
             this.dgvReplaceReturn.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReplaceReturn_CellClick);
+            this.dgvReplaceReturn.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReplaceReturn_CellEndEdit);
             // 
             // ReplaceProductID
             // 
@@ -1056,7 +1084,6 @@
             this.ReplaceRate.DataPropertyName = "Rate";
             this.ReplaceRate.HeaderText = "Rate";
             this.ReplaceRate.Name = "ReplaceRate";
-            this.ReplaceRate.ReadOnly = true;
             // 
             // ReplaceQTY
             // 
@@ -1196,7 +1223,6 @@
             this.panel1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picOther)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicMaster)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picVisa)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCash)).EndInit();
@@ -1248,11 +1274,9 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.PictureBox picOther;
         private System.Windows.Forms.PictureBox PicMaster;
         private System.Windows.Forms.PictureBox picVisa;
         private System.Windows.Forms.PictureBox picCash;
@@ -1291,6 +1315,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SizeID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
         private System.Windows.Forms.DataGridViewButtonColumn ColDelete;
+        private System.Windows.Forms.TextBox txtCredit;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox txtCash;
+        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.DataGridViewTextBoxColumn ReplaceProductID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ReplaceProductName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ReplaceBarcode;

@@ -87,7 +87,8 @@ namespace IMS_Client_2.Report
             printDoc.PrinterSettings = ps;
             if (!printDoc.PrinterSettings.IsValid)
             {
-                throw new Exception("Error: cannot find the default printer.");
+                System.Windows.Forms.MessageBox.Show("Error: cannot find the default printer.");
+                
             }
             else
             {

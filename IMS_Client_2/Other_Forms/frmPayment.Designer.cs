@@ -41,6 +41,9 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.txtAmount = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPaymentMode)).BeginInit();
             this.panel1.SuspendLayout();
@@ -96,7 +99,7 @@
             this.picPaymentMode.BackColor = System.Drawing.Color.Transparent;
             this.picPaymentMode.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picPaymentMode.Image = ((System.Drawing.Image)(resources.GetObject("picPaymentMode.Image")));
-            this.picPaymentMode.Location = new System.Drawing.Point(197, 98);
+            this.picPaymentMode.Location = new System.Drawing.Point(151, 98);
             this.picPaymentMode.Name = "picPaymentMode";
             this.picPaymentMode.Size = new System.Drawing.Size(120, 114);
             this.picPaymentMode.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -108,20 +111,21 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 221);
+            this.label1.Location = new System.Drawing.Point(15, 218);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(171, 17);
+            this.label1.Size = new System.Drawing.Size(130, 17);
             this.label1.TabIndex = 221;
-            this.label1.Text = "Enter Payment Number :";
+            this.label1.Text = "Payment Number :";
             // 
             // txtPaymentAutoID
             // 
             this.txtPaymentAutoID.BackColor = System.Drawing.Color.White;
-            this.txtPaymentAutoID.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPaymentAutoID.Location = new System.Drawing.Point(194, 218);
+            this.txtPaymentAutoID.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPaymentAutoID.Location = new System.Drawing.Point(151, 218);
             this.txtPaymentAutoID.Name = "txtPaymentAutoID";
-            this.txtPaymentAutoID.Size = new System.Drawing.Size(191, 25);
+            this.txtPaymentAutoID.Size = new System.Drawing.Size(163, 25);
             this.txtPaymentAutoID.TabIndex = 222;
+            this.txtPaymentAutoID.TextChanged += new System.EventHandler(this.txtPaymentAutoID_TextChanged);
             this.txtPaymentAutoID.Enter += new System.EventHandler(this.txtPaymentAutoID_Enter);
             this.txtPaymentAutoID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPaymentAutoID_KeyPress);
             this.txtPaymentAutoID.Leave += new System.EventHandler(this.txtPaymentAutoID_Leave);
@@ -136,7 +140,7 @@
             this.panel1.Controls.Add(this.btnAdd);
             this.panel1.Controls.Add(this.btnSave);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 260);
+            this.panel1.Location = new System.Drawing.Point(0, 302);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(397, 40);
             this.panel1.TabIndex = 255;
@@ -167,7 +171,7 @@
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(71, 25);
             this.btnCancel.TabIndex = 250;
-            this.btnCancel.Text = "Cancel";
+            this.btnCancel.Text = "Close";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.button2_Click);
             this.btnCancel.MouseEnter += new System.EventHandler(this.btnAdd_MouseEnter);
@@ -199,13 +203,50 @@
             this.btnSave.Text = "Cancel";
             this.btnSave.UseVisualStyleBackColor = true;
             // 
+            // txtAmount
+            // 
+            this.txtAmount.BackColor = System.Drawing.Color.White;
+            this.txtAmount.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAmount.Location = new System.Drawing.Point(151, 258);
+            this.txtAmount.Name = "txtAmount";
+            this.txtAmount.Size = new System.Drawing.Size(129, 25);
+            this.txtAmount.TabIndex = 257;
+            this.txtAmount.Text = "0";
+            this.txtAmount.TextChanged += new System.EventHandler(this.txtAmount_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(18, 258);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(69, 17);
+            this.label2.TabIndex = 256;
+            this.label2.Text = "Amount :";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Times New Roman", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(280, 262);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 17);
+            this.label3.TabIndex = 258;
+            this.label3.Text = "KD ";
+            // 
             // frmPayment
             // 
+            this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(397, 300);
+            this.ClientSize = new System.Drawing.Size(397, 342);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtAmount);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.txtPaymentAutoID);
             this.Controls.Add(this.label1);
@@ -237,12 +278,15 @@
         private System.Windows.Forms.Label lblProductName;
         public System.Windows.Forms.Label lblPaymentMode;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtPaymentAutoID;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
         public System.Windows.Forms.PictureBox picPaymentMode;
+        private System.Windows.Forms.TextBox txtAmount;
+        private System.Windows.Forms.Label label2;
+        public System.Windows.Forms.TextBox txtPaymentAutoID;
+        private System.Windows.Forms.Label label3;
     }
 }

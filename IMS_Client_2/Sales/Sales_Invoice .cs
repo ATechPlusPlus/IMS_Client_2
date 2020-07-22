@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using CoreApp;
-
+using IMS_Client_2.Barcode;
 
 namespace IMS_Client_2.Sales
 {
@@ -430,48 +430,7 @@ namespace IMS_Client_2.Sales
                     return;
                 }
 
-                try
-                {
-                    //string strQ = "EXEC " + clsUtility.DBName + ".dbo.GetProductDetailsByProductName " + cmbShop.SelectedValue.ToString() + ", '" + txtBarCode.Text + "'";
-                    //DataTable dt = ObjDAL.ExecuteSelectStatement(strQ);
-                    //if (ObjUtil.ValidateTable(dt))
-                    //{
-                    //    ObjUtil.SetControlData(txtBarCode, "ProductName");
-                    //    ObjUtil.SetControlData(txtProductID, "ProductID");
-
-                    //    ObjUtil.SetControlData(txtColorID, "ColorID");
-                    //    ObjUtil.SetControlData(txtSizeID, "SizeID");
-
-                    //    ObjUtil.ShowDataPopup(dt, txtBarCode, this, this);
-
-                    //    if (ObjUtil.GetDataPopup() != null && ObjUtil.GetDataPopup().DataSource != null)
-                    //    {
-                    //        // if there is only one column                
-                    //        ObjUtil.GetDataPopup().AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-                    //        if (ObjUtil.GetDataPopup().ColumnCount > 0)
-                    //        {
-                    //            ObjUtil.GetDataPopup().Columns["ProductID"].Visible = false;
-
-                    //            ObjUtil.GetDataPopup().Columns["ColorID"].Visible = false;
-                    //            ObjUtil.GetDataPopup().Columns["QTY"].Visible = false;
-                    //            ObjUtil.GetDataPopup().Columns["SizeID"].Visible = false;
-                    //            ObjUtil.GetDataPopup().Columns["ColorName"].HeaderText = "Color";
-
-                    //            ObjUtil.SetDataPopupSize(450, 0);
-                    //        }
-                    //    }
-                    //    ObjUtil.GetDataPopup().CellClick += Sales_Invoice_CellClick;
-                    //    ObjUtil.GetDataPopup().KeyDown += Sales_Invoice_KeyDown;
-                    //}
-                    //else
-                    //{
-                    //    ObjUtil.CloseAutoExtender();
-                    //}
-                }
-                catch (Exception)
-                {
-                }
+               
             }
             else
             {
@@ -615,11 +574,13 @@ namespace IMS_Client_2.Sales
                 else
                 {
                     clsUtility.ShowInfoMessage("No QTY avaiable for the Product : " + txtBarCode.Text, clsUtility.strProjectTitle);
+                    txtBarCode.Clear();
                 }
             }
             else
             {
                 clsUtility.ShowInfoMessage("No Product Found for the barcode value : " + _BarCodeValue, clsUtility.strProjectTitle);
+                txtBarCode.Clear();
             }
         }
 
@@ -657,7 +618,7 @@ namespace IMS_Client_2.Sales
         private void dgvProductDetails_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             ObjUtil.SetRowNumber(dgvProductDetails);
-
+            txtTotalItems.Text = "New Items Count :" + dgvProductDetails.Rows.Count.ToString();
             dgvProductDetails.Columns["ProductID"].Visible = false;
             dgvProductDetails.Columns["ColoriD"].Visible = false;
             dgvProductDetails.Columns["SizeiD"].Visible = false;
@@ -757,6 +718,30 @@ namespace IMS_Client_2.Sales
             txtGrandTotal.Text = Math.Round(GrandTotal, 2).ToString();
         }
 
+        private bool ValidateGrandTotal()
+        {
+
+
+            decimal FinalTotal = Convert.ToDecimal(txtCash.Text) + Convert.ToDecimal(txtCredit.Text);
+
+            decimal GrandTotal = Convert.ToDecimal(txtGrandTotal.Text);
+
+            if (FinalTotal == GrandTotal)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+
+
+
+
+
+        }
+
 
         private void dgvProductDetails_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -783,9 +768,18 @@ namespace IMS_Client_2.Sales
 
         private void ClearAll()
         {
+       
+            txtOldBillAmount.ReadOnly = false;
+
+            Other_Forms.frmDiscountLogin.IsValidAdmin = false;
+            txtDiscount.ReadOnly = false;
+            txtCash.Clear();
+            txtCredit.Clear();
+
             txtOldBillAmount.Clear();
             txtNewBillAmount.Clear();
-            Other_Forms.frmPayment.strPaymentAutoID = "";
+            Other_Forms.frmPayment.ResetData();
+
             lblPMode.Text = "";
             txtCustomerID.Clear();
             txtCustomerMobile.Clear();
@@ -825,26 +819,78 @@ namespace IMS_Client_2.Sales
                 txtSalesMan.Focus();
                 return false;
             }
-            if (Other_Forms.frmPayment.strPaymentAutoID.Trim().Length == 0)
+
+            if (txtGrandTotal.Text.Trim().Length != 0)
             {
-                clsUtility.ShowInfoMessage("Please Select Payment Mode.", clsUtility.strProjectTitle);
-                return false;
-            }
-            if (!IsReplaceReturnMode)
-            {
-                if (txtGrandTotal.Text.Trim().Length != 0)
+                if (Convert.ToDecimal(txtGrandTotal.Text) <= 0)
                 {
-                    if (Convert.ToDecimal(txtGrandTotal.Text) <= 0)
-                    {
-                        clsUtility.ShowInfoMessage("You can not print invoice for negative grand total.", clsUtility.strProjectTitle);
-                        return false;
-                    }
+                    clsUtility.ShowInfoMessage("You can not print invoice for negative grand total.", clsUtility.strProjectTitle);
+                    return false;
                 }
             }
+            if (!ValidateGrandTotal())
+            {
+                clsUtility.ShowInfoMessage("Cash and Credit amount must be equal to Grand Total.", clsUtility.strProjectTitle);
+                return false;
+            }
 
+           
             return true;
         }
+        private void InsertPayment(int SalesInvoiceID)
+        {
+            try
+            {
+                for (int i = 0; i < IMS_Client_2.Other_Forms.frmPayment.lstPaymnetType.Count; i++)
+                {
+                    string amount = "0";
+                    string number = "0";
 
+                    switch (IMS_Client_2.Other_Forms.frmPayment.lstPaymnetType[i])
+                    {
+                        case "K Net":
+                            amount = IMS_Client_2.Other_Forms.frmPayment.KNET_Amount.ToString();
+                            number = IMS_Client_2.Other_Forms.frmPayment.KNET_Number;
+                            break;
+
+                        case "Visa":
+                            amount = IMS_Client_2.Other_Forms.frmPayment.VisaAmount.ToString();
+                            number = IMS_Client_2.Other_Forms.frmPayment.VisaNumber;
+                            break;
+
+                        case "Master Card":
+                            amount = IMS_Client_2.Other_Forms.frmPayment.MasterCardAmount.ToString();
+                            number = IMS_Client_2.Other_Forms.frmPayment.MasterCarNumber;
+
+                            break;
+
+                        case "Cash":
+                            amount = IMS_Client_2.Other_Forms.frmPayment.CashAmount.ToString();
+                            number = "000000";
+                            break;
+
+
+
+                    }
+
+                    ObjDAL.SetColumnData("PaymentType", SqlDbType.NVarChar, IMS_Client_2.Other_Forms.frmPayment.lstPaymnetType[i].ToString());
+                    ObjDAL.SetColumnData("Amount", SqlDbType.Decimal, Convert.ToDecimal(amount));
+                    ObjDAL.SetColumnData("SalesInvoiceID", SqlDbType.Int, SalesInvoiceID);
+                    ObjDAL.SetColumnData("PaymentNumber", SqlDbType.NVarChar, number);
+
+
+                    ObjDAL.InsertData(clsUtility.DBName + ".dbo.tblSalesPayment", false);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString()); ;
+
+            }
+
+
+        }
         private int DoNewSales()
         {
             dgvProductDetails.EndEdit();
@@ -864,8 +910,7 @@ namespace IMS_Client_2.Sales
             ObjDAL.SetColumnData("CustomerID", SqlDbType.Int, txtCustomerID.Text);
             ObjDAL.SetColumnData("SalesMan", SqlDbType.Int, txtEmpID.Text);
             ObjDAL.SetColumnData("ShopeID", SqlDbType.Int, cmbShop.SelectedValue.ToString());
-            ObjDAL.SetColumnData("PaymentMode", SqlDbType.NVarChar, lblPMode.Text);
-            ObjDAL.SetColumnData("PaymentAutoID", SqlDbType.NVarChar, Other_Forms.frmPayment.strPaymentAutoID);
+
 
             int InvoiceID = ObjDAL.InsertData(clsUtility.DBName + ".dbo.SalesInvoiceDetails", true);
             if (InvoiceID == -1)
@@ -874,6 +919,7 @@ namespace IMS_Client_2.Sales
                 return InvoiceID;
             }
             #endregion
+            InsertPayment(InvoiceID);
 
             for (int i = 0; i < dgvProductDetails.Rows.Count; i++)
             {
@@ -985,8 +1031,17 @@ namespace IMS_Client_2.Sales
 
         private void btnAdd_Click_1(object sender, EventArgs e)
         {
+            Button button = (Button)sender;
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Invoice, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
+                if (button.Name == "btnPrint")
+                {
+                    if (clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.InvoicePrinter).Trim().Length == 0)
+                    {
+                        clsUtility.ShowInfoMessage("Printer Not Configured for Invoice Print. Please configure the printer from Setting menu.", clsUtility.strProjectTitle);
+                        return;
+                    }
+                }
                 if (SalesValidation())
                 {
                     int NewInvoiceID = 0;
@@ -1012,7 +1067,7 @@ namespace IMS_Client_2.Sales
                     clsUtility.ShowInfoMessage("Data has been saved successfully.", clsUtility.strProjectTitle);
                     ClearAll();
 
-                    Button button = (Button)sender;
+
 
                     if (button.Name == "btnSaveData")
                     {
@@ -1051,6 +1106,9 @@ namespace IMS_Client_2.Sales
         }
 
         decimal _StartValue = 0;
+
+        decimal _OldRateStartValue = 0;
+
         private void dgvProductDetails_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             try
@@ -1098,7 +1156,7 @@ namespace IMS_Client_2.Sales
                         " QTY, Rate, ColorID, " +
                         " (SELECT ColorName FROM ColorMaster WHERE ColorID = s1.ColorID) AS Color, " +
                         " (SELECT Size FROM SizeMaster WHERE SizeID = s1.SizeID) AS Size,SizeID, " +
-                        " (SELECT BarcodeNo FROM ProductStockColorSizeMaster WHERE ColorID = s1.ColorID AND SizeID = s1.SizeID AND ProductID = s1.ProductID AND StoreID=" + cmbShop.SelectedValue + ") AS BarCode FROM SalesDetails s1" +
+                        "'"+ barcode + "' AS BarCode FROM SalesDetails s1" +
                         " WHERE InvoiceID = " + OldInvoiceID + " ) AS tb WHERE BarCode = '" + barcode + "'";
 
             DataTable dtSalesDetails = ObjDAL.ExecuteSelectStatement(strQ);
@@ -1158,7 +1216,7 @@ namespace IMS_Client_2.Sales
                     DataTable dt = ObjDAL.ExecuteSelectStatement(query);
                     if (dt != null && dt.Rows.Count > 0)
                     {
-                        ObjUtil.SetControlData(txtCustomerName, "Name");
+
                         ObjUtil.SetControlData(txtCustomerMobile, "PhoneNo");
                         ObjUtil.SetControlData(txtCustomerID, "CustomerID");
 
@@ -1172,7 +1230,7 @@ namespace IMS_Client_2.Sales
                             if (ObjUtil.GetDataPopup().ColumnCount > 0)
                             {
                                 ObjUtil.GetDataPopup().Columns["CustomerID"].Visible = false;
-                                ObjUtil.SetDataPopupSize(450, 0);
+                                ObjUtil.SetDataPopupSize(300, 0);
                             }
                         }
                         //ObjUtil.GetDataPopup().CellClick += Sales_Invoice_CellClick;
@@ -1190,47 +1248,67 @@ namespace IMS_Client_2.Sales
         }
         private void picCash_Click(object sender, EventArgs e)
         {
+
+
+
             lblPMode.Text = "Cash";
-            //deafult auto ID for cash is four times zero
-            Other_Forms.frmPayment.strPaymentAutoID = "0000";
+            Other_Forms.frmPayment frmPayment = new Other_Forms.frmPayment();
+
+            frmPayment.txtPaymentAutoID.Enabled = false;
+
+            frmPayment.lblPaymentMode.Text = "Cash";
+            frmPayment.picPaymentMode.Image = picCash.Image;
+            frmPayment.ShowDialog();
+
+            txtCredit.Text = Other_Forms.frmPayment.GetTotalCreditAmount().ToString();
+            txtCash.Text = Other_Forms.frmPayment.GetTotalCash().ToString();
+
         }
         private void picKnet_Click(object sender, EventArgs e)
         {
             lblPMode.Text = "K Net";
             Other_Forms.frmPayment frmPayment = new Other_Forms.frmPayment();
-            Other_Forms.frmPayment.strPaymentAutoID = "";
+
             frmPayment.lblPaymentMode.Text = "K Net";
             frmPayment.picPaymentMode.Image = picKnet.Image;
             frmPayment.ShowDialog();
+
+
+
+            txtCredit.Text = Other_Forms.frmPayment.GetTotalCreditAmount().ToString();
+            txtCash.Text = Other_Forms.frmPayment.GetTotalCash().ToString();
         }
 
         private void picVisa_Click(object sender, EventArgs e)
         {
             lblPMode.Text = "Visa";
             Other_Forms.frmPayment frmPayment = new Other_Forms.frmPayment();
-            Other_Forms.frmPayment.strPaymentAutoID = "";
+
             frmPayment.lblPaymentMode.Text = "Visa";
             frmPayment.picPaymentMode.Image = picVisa.Image;
             frmPayment.ShowDialog();
+
+
+            txtCredit.Text = Other_Forms.frmPayment.GetTotalCreditAmount().ToString();
+            txtCash.Text = Other_Forms.frmPayment.GetTotalCash().ToString();
         }
         private void PicMaster_Click(object sender, EventArgs e)
         {
             lblPMode.Text = "Master Card";
             Other_Forms.frmPayment frmPayment = new Other_Forms.frmPayment();
-            Other_Forms.frmPayment.strPaymentAutoID = "";
+
             frmPayment.lblPaymentMode.Text = "Master Card";
             frmPayment.picPaymentMode.Image = PicMaster.Image;
             frmPayment.ShowDialog();
+
+
+            txtCredit.Text = Other_Forms.frmPayment.GetTotalCreditAmount().ToString();
+            txtCash.Text = Other_Forms.frmPayment.GetTotalCash().ToString();
         }
 
         private void picOther_Click(object sender, EventArgs e)
         {
-            lblPMode.Text = "Other";
-            Other_Forms.frmPayment frmPayment = new Other_Forms.frmPayment();
-            Other_Forms.frmPayment.strPaymentAutoID = "";
-            frmPayment.lblPaymentMode.Text = "Other";
-            frmPayment.picPaymentMode.Image = picOther.Image;
-            frmPayment.ShowDialog();
+
         }
         private void lblActiveStatus_Click(object sender, EventArgs e)
         {
@@ -1344,6 +1422,63 @@ namespace IMS_Client_2.Sales
         private void txtSalesMan_Leave(object sender, EventArgs e)
         {
             ObjUtil.SetTextHighlightColor(sender, System.Drawing.Color.White);
+        }
+
+        private void txtDiscount_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtDiscount_DoubleClick(object sender, EventArgs e)
+        {
+            Other_Forms.frmDiscountLogin frmDiscountLogin = new Other_Forms.frmDiscountLogin();
+            frmDiscountLogin.ShowDialog();
+            if (Other_Forms.frmDiscountLogin.IsValidAdmin)
+            {
+                txtDiscount.ReadOnly = false;
+            }
+            else
+            {
+                txtDiscount.ReadOnly = true;
+            }
+
+
+        }
+
+        private void dgvReplaceReturn_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            try
+            {
+                _OldRateStartValue = Convert.ToDecimal(dgvReplaceReturn.Rows[e.RowIndex].Cells["ReplaceRate"].Value);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void dgvReplaceReturn_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            //dgvProductDetails.Columns[e.ColumnIndex].Name == "Rate" ||
+            if (dgvReplaceReturn.Columns[e.ColumnIndex].Name == "ReplaceRate")
+            {
+               
+                decimal QTY = Convert.ToDecimal(dgvReplaceReturn.Rows[e.RowIndex].Cells["ReplaceQTY"].Value);
+               
+                decimal Rate = Convert.ToDecimal(dgvReplaceReturn.Rows[e.RowIndex].Cells["ReplaceRate"].Value);
+                decimal Total = QTY * Rate;
+
+                dgvReplaceReturn.Rows[e.RowIndex].Cells["ColReplaceTotal"].Value = Total;
+
+
+               CalculateGrandTotal();
+              
+            }
+        }
+
+        private void label16_Click(object sender, EventArgs e)
+        {
+            txtOldBillAmount.Enabled = true;
+            txtOldBillAmount.ReadOnly = false;
         }
     }
 }

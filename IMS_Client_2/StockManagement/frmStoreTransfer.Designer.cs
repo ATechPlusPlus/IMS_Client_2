@@ -61,7 +61,7 @@
             this.BarcodeNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BillQTY = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OIRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StockQTY = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Adj_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Color = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -109,6 +109,7 @@
             this.lblCategoryName.Size = new System.Drawing.Size(81, 17);
             this.lblCategoryName.TabIndex = 190;
             this.lblCategoryName.Text = "From Store :";
+            this.lblCategoryName.Click += new System.EventHandler(this.lblCategoryName_Click);
             // 
             // cmdFrom
             // 
@@ -180,7 +181,6 @@
             this.txtInvoiceNumber.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtInvoiceNumber.Location = new System.Drawing.Point(607, 43);
             this.txtInvoiceNumber.Name = "txtInvoiceNumber";
-            this.txtInvoiceNumber.ReadOnly = true;
             this.txtInvoiceNumber.Size = new System.Drawing.Size(145, 25);
             this.txtInvoiceNumber.TabIndex = 198;
             // 
@@ -218,7 +218,7 @@
             this.BarcodeNo,
             this.Rate,
             this.BillQTY,
-            this.OIRate,
+            this.StockQTY,
             this.Adj_Amount,
             this.ColorID,
             this.Color,
@@ -293,7 +293,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel1.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
+            this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel1.Controls.Add(this.btncancel);
             this.panel1.Controls.Add(this.btnSaveData);
@@ -372,6 +372,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 257;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // label7
             // 
@@ -412,6 +413,7 @@
             this.ProductID.DataPropertyName = "ProductID";
             this.ProductID.HeaderText = "ProductID";
             this.ProductID.Name = "ProductID";
+            this.ProductID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // ProductName
             // 
@@ -419,6 +421,7 @@
             this.ProductName.HeaderText = "ProductName";
             this.ProductName.Name = "ProductName";
             this.ProductName.ReadOnly = true;
+            this.ProductName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // BarcodeNo
             // 
@@ -439,11 +442,12 @@
             this.BillQTY.HeaderText = "QTY";
             this.BillQTY.Name = "BillQTY";
             // 
-            // OIRate
+            // StockQTY
             // 
-            this.OIRate.DataPropertyName = "OIRate";
-            this.OIRate.HeaderText = "Old_Invoice_Rate";
-            this.OIRate.Name = "OIRate";
+            this.StockQTY.DataPropertyName = "StockQTY";
+            this.StockQTY.HeaderText = "StockQTY";
+            this.StockQTY.Name = "StockQTY";
+            this.StockQTY.Visible = false;
             // 
             // Adj_Amount
             // 
@@ -457,6 +461,7 @@
             this.ColorID.DataPropertyName = "ColorID";
             this.ColorID.HeaderText = "ColorID";
             this.ColorID.Name = "ColorID";
+            this.ColorID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.ColorID.Visible = false;
             // 
             // Color
@@ -495,7 +500,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 592);
             this.Controls.Add(this.lblBillStatus);
@@ -571,7 +576,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn BarcodeNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Rate;
         private System.Windows.Forms.DataGridViewTextBoxColumn BillQTY;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OIRate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StockQTY;
         private System.Windows.Forms.DataGridViewTextBoxColumn Adj_Amount;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColorID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Color;

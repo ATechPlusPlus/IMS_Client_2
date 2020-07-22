@@ -42,6 +42,7 @@ namespace IMS_Client_2.Report
         {
             string query = "";
             string strQueryHeader_Footer = "";
+            string PaymentQuery = "";
 
             if (IsArabicEnabled())
             {
@@ -52,6 +53,8 @@ namespace IMS_Client_2.Report
              "  JOIN " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster ps" +
              "  ON s1.ProductID = ps.ProductID AND ps.colorID=s1.ColorID AND ps.SizeID=s1.SizeID " +
              " WHERE s1.InvoiceID = " + InvoiceID;
+
+                PaymentQuery = " select PaymentType," + clsUtility.DBName + ".dbo.fun_ToArabicNum(Amount) as Amount from "+ clsUtility.DBName + ".dbo.[tblSalesPayment]  where SalesInvoiceID=" + InvoiceID;
             }
             else
             {
@@ -63,11 +66,15 @@ namespace IMS_Client_2.Report
                "  ON s1.ProductID = ps.ProductID AND ps.colorID=s1.ColorID AND ps.SizeID=s1.SizeID " +
                " WHERE s1.InvoiceID = " + InvoiceID;
 
+
+                PaymentQuery = "select PaymentTYpe,Amount from [IMS_Client_2].dbo.[tblSalesPayment]  where SalesInvoiceID=" + InvoiceID;
+
             }
 
           
 
             DataTable dtSalesDetails = ObjCon.ExecuteSelectStatement(query);
+            DataTable dtPaymentDetails = ObjCon.ExecuteSelectStatement(PaymentQuery);
 
 
             if (IsArabicEnabled())
@@ -93,6 +100,9 @@ namespace IMS_Client_2.Report
 
             ReportDataSource rds = new ReportDataSource("ds_SalesDetails", dtSalesDetails);
             ReportDataSource rds2 = new ReportDataSource("ds_InvoiceHeader", dtSalesHeader_Footer);
+            ReportDataSource rds3 = new ReportDataSource("ds_Payment", dtPaymentDetails);
+
+            
 
             string strcomName = "";
             string strAddress = "";
@@ -121,9 +131,30 @@ namespace IMS_Client_2.Report
             {
                 strcomName = "Default Store/Shop Name";
                 strAddress = "Default Address Line. Road No, Block No, Pin Code and State.";
+            
             }
 
-            string NetAmt = new Sales.NumberToEnglish().changeCurrencyToWords(dtSalesHeader_Footer.Rows[0]["GrandTotal"].ToString());
+
+            string NetAmt = "NA";
+            try
+            {
+                DataTable dtNetAmount = ObjCon.ExecuteSelectStatement("select SUM(Amount) from   [IMS_Client_2].dbo.[tblSalesPayment] where SalesInvoiceID=" + InvoiceID);
+                if (dtNetAmount.Rows.Count > 0)
+                {
+                    NetAmt = new Sales.NumberToEnglish().changeCurrencyToWords(dtNetAmount.Rows[0][0].ToString());
+                }
+            }
+            catch (Exception)
+            {
+
+              
+            }
+           
+
+           
+            
+            
+            
             // creating the parameter with the extact name as in the report.
             ReportParameter param1 = new ReportParameter("CompanyName", strcomName, true);
             ReportParameter param2 = new ReportParameter("CompanyAddress", strAddress, true);
@@ -138,6 +169,7 @@ namespace IMS_Client_2.Report
 
             reportViewer1.LocalReport.DataSources.Add(rds);
             reportViewer1.LocalReport.DataSources.Add(rds2);
+            reportViewer1.LocalReport.DataSources.Add(rds3);
 
             reportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout);
             reportViewer1.ZoomMode = ZoomMode.Percent;
@@ -159,20 +191,21 @@ namespace IMS_Client_2.Report
                 PrinterSettings printerSetting = new PrinterSettings();
                 if (clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.InvoicePrinter).Trim().Length == 0)
                 {
-                    bool b = clsUtility.ShowQuestionMessage("Printer Not Configured for barcode. Do you want to print on default printer?", clsUtility.strProjectTitle);
-                    if (b == false)
+                    bool b = clsUtility.ShowQuestionMessage("Printer Not Configured for Invoice. Do you want to print on default printer?", clsUtility.strProjectTitle);
+                    if (b)
                     {
-                        return;
+                        reportPrinting.Print();
                     }
 
                 }
-                printerSetting.PrinterName = clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.InvoicePrinter);
+                else
+                {
+                    printerSetting.PrinterName = clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.InvoicePrinter);
+                    reportPrinting.Print(printerSetting);
 
-
-
-                reportPrinting.Print(printerSetting);
-                
+                }
                 this.Close();
+
             }
         }
     }
