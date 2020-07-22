@@ -22,6 +22,7 @@ namespace IMS_Client_2
         bool IsLogOut = false;
         public int Login_History_ID = 0;
         public static int Home_MasterCashClosingID = 0;
+        public static int Home_StoreID = 0;
         bool IsForceCloseCash = false;
 
         clsUtility ObjUtil = new clsUtility();
@@ -34,7 +35,7 @@ namespace IMS_Client_2
 
         private void LoadCashStatus()
         {
-            int pStoreID = GetDefaultStoreID();
+            int pStoreID = Home_StoreID;
             DataTable dtCashMaster = ObjDAL.ExecuteSelectStatement("SELECT TOP 1 * FROM " + clsUtility.DBName + ".[dbo].[tblMasterCashClosing] WITH(NOLOCK) WHERE StoreID=" + pStoreID + " ORDER BY CashBoxDate DESC");
 
             //DataTable dtCashMaster = ObjDAL.ExecuteSelectStatement("SELECT * FROM " + clsUtility.DBName + ".[dbo].[tblMasterCashClosing] WITH(NOLOCK) WHERE CashBOxDate=CONVERT(DATE,GETDATE()) AND StoreID=" + pStoreID);
@@ -84,18 +85,14 @@ namespace IMS_Client_2
 
         private void DisplayRegistrationInfo()
         {
-            //DataTable dataTable = ObjDAL.ExecuteSelectStatement("SELECT CONVERT(date,RegDate) RegDate FROM " + clsUtility.DBName + ".[dbo].[RegistrationDetails] WITH(NOLOCK) where PcName='" + Environment.MachineName + "'");
             object ob = ObjDAL.ExecuteScalar("SELECT CONVERT(date,RegDate) RegDate FROM " + clsUtility.DBName + ".[dbo].[RegistrationDetails] WITH(NOLOCK) where PcName='" + Environment.MachineName + "'");
-            //if (ObjUtil.ValidateTable(dataTable))
             if (ob != null)
             {
                 lblRegistrationDate.Text = Convert.ToDateTime(ob).ToString("yyyy-MM-dd");
-                //lblRegistrationDate.Text = dataTable.Rows[0]["RegDate"].ToString();
             }
             else
             {
                 lblRegistrationDate.Text = "NA";
-
             }
 
             object company = ObjDAL.ExecuteScalar("SELECT CompanyName FROM " + clsUtility.DBName + ".[dbo].[CompanyMaster] WITH(NOLOCK)");
@@ -107,16 +104,24 @@ namespace IMS_Client_2
             {
                 lblLicensedTo.Text = "NA";
             }
+        }
 
-            //DataTable dtCompany = ObjDAL.ExecuteSelectStatement("SELECT CompanyName FROM " + clsUtility.DBName + ".[dbo].[CompanyMaster] WITH(NOLOCK)");
-            //if (ObjUtil.ValidateTable(dtCompany))
-            //{
-            //    lblLicensedTo.Text = dtCompany.Rows[0]["CompanyName"].ToString();
-            //}
-            //else
-            //{
-            //    lblLicensedTo.Text = "NA";
-            //}
+        private void GetDefaultShop()
+        {
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".[dbo].SPR_GetDefaultShopName");
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                DataTable dt = ds.Tables[0];
+                if (ObjUtil.ValidateTable(dt))
+                {
+                    Home_StoreID = Convert.ToInt32(dt.Rows[0]["StoreID"]);
+                    lblShopName.Text = lblShopName.Text + dt.Rows[0]["StoreName"];
+                }
+                else
+                {
+                    lblShopName.Text = lblShopName.Text + "NA";
+                }
+            }
         }
         private void frmHome_Load(object sender, EventArgs e)
         {
@@ -124,8 +129,8 @@ namespace IMS_Client_2
             {
                 btnOpenCash.BackgroundImage = B_Leave;
 
-                //clsUtility.DBName = "IMS_Client_2";
-                //clsUtility.LoginID = 5;
+                clsUtility.DBName = "IMS_Client_2";
+                clsUtility.LoginID = 5;
                 //clsUtility.IsAdmin = false;
                 clsUtility.IsAdmin = true;
                 clsUtility.strProjectTitle = "IMS";
@@ -141,6 +146,7 @@ namespace IMS_Client_2
                 lblVersion.Text = "Version : " + Application.ProductVersion;
 
                 DisplayRegistrationInfo();
+                GetDefaultShop();
                 LoadCashStatus();
             }
             catch { }
@@ -546,6 +552,13 @@ namespace IMS_Client_2
 
         private void userRightsManagementToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Invoice) || clsUtility.IsAdmin)
+            //{
+            //}
+            //else
+            //{
+            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            //}
             frmUserRights frmUserRights = new frmUserRights();
             frmUserRights.ShowDialog();
         }
@@ -612,14 +625,14 @@ namespace IMS_Client_2
             }
         }
 
-        private int GetDefaultStoreID()
-        {
-            return ObjDAL.ExecuteScalarInt("SELECT StoreID FROM " + clsUtility.DBName + ".dbo.DefaultStoreSetting WITH(NOLOCK) WHERE MachineName='" + Environment.MachineName + "'");
-        }
+        //private int GetDefaultStoreID()
+        //{
+        //    return ObjDAL.ExecuteScalarInt("SELECT StoreID FROM " + clsUtility.DBName + ".dbo.DefaultStoreSetting WITH(NOLOCK) WHERE MachineName='" + Environment.MachineName + "'");
+        //}
         private void OpenCashBox()
         {
             string NexCashNumber = GetCashNumber();
-            int pStoreID = GetDefaultStoreID();
+            int pStoreID = Home_StoreID;
             ObjDAL.SetColumnData("CashNo", SqlDbType.NVarChar, NexCashNumber);
             ObjDAL.SetColumnData("StoreID", SqlDbType.Int, pStoreID);
             ObjDAL.SetColumnData("CashBoxDate", SqlDbType.Date, DateTime.Now.ToString("yyyy-MM-dd"));
@@ -646,18 +659,39 @@ namespace IMS_Client_2
 
         private void storeRightsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Invoice) || clsUtility.IsAdmin)
+            //{
+            //}
+            //else
+            //{
+            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            //}
             Other_Forms.frmStoreRights frmStoreRights = new Other_Forms.frmStoreRights();
             frmStoreRights.ShowDialog();
         }
 
         private void stockTransferToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Invoice) || clsUtility.IsAdmin)
+            //{
+            //}
+            //else
+            //{
+            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            //}
             StockManagement.frmStoreTransfer frmStoreTransfer = new StockManagement.frmStoreTransfer();
             frmStoreTransfer.Show();
         }
 
         private void brachReceiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Invoice) || clsUtility.IsAdmin)
+            //{
+            //}
+            //else
+            //{
+            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            //}
             StockManagement.frmReceivedBranchTransfer frmReceived = new StockManagement.frmReceivedBranchTransfer();
             frmReceived.Show();
         }
@@ -692,7 +726,27 @@ namespace IMS_Client_2
 
         private void transferWatchToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Invoice) || clsUtility.IsAdmin)
+            //{
+            //}
+            //else
+            //{
+            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            //}
             StockManagement.frmTransferWatch Obj = new StockManagement.frmTransferWatch();
+            Obj.Show();
+        }
+
+        private void loadPettyCashToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Invoice) || clsUtility.IsAdmin)
+            //{
+            //}
+            //else
+            //{
+            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            //}
+            Other_Forms.frmPettyCash Obj = new Other_Forms.frmPettyCash();
             Obj.Show();
         }
     }

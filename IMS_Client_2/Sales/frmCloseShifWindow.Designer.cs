@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCloseShifWindow));
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Cash");
             System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Credits");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Expenses");
             this.panel2 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.btnCloseCash = new System.Windows.Forms.Button();
@@ -50,9 +51,13 @@
             this.txtCashierName = new System.Windows.Forms.TextBox();
             this.cmbShop = new System.Windows.Forms.ComboBox();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.grpPettyCashBAL = new System.Windows.Forms.GroupBox();
+            this.lblPettyCashBAL = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.grpReturned.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCloseCash)).BeginInit();
+            this.grpPettyCashBAL.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -118,11 +123,11 @@
             this.grpReturned.Controls.Add(this.lblReturnedAmount);
             this.grpReturned.Controls.Add(this.lblReturned);
             this.grpReturned.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold);
-            this.grpReturned.Location = new System.Drawing.Point(38, 133);
+            this.grpReturned.Location = new System.Drawing.Point(12, 133);
             this.grpReturned.Margin = new System.Windows.Forms.Padding(2);
             this.grpReturned.Name = "grpReturned";
             this.grpReturned.Padding = new System.Windows.Forms.Padding(2);
-            this.grpReturned.Size = new System.Drawing.Size(445, 58);
+            this.grpReturned.Size = new System.Drawing.Size(281, 58);
             this.grpReturned.TabIndex = 119;
             this.grpReturned.TabStop = false;
             this.grpReturned.Text = "Returned Amount";
@@ -145,9 +150,9 @@
             this.lblReturned.Location = new System.Drawing.Point(57, 29);
             this.lblReturned.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblReturned.Name = "lblReturned";
-            this.lblReturned.Size = new System.Drawing.Size(128, 17);
+            this.lblReturned.Size = new System.Drawing.Size(132, 17);
             this.lblReturned.TabIndex = 0;
-            this.lblReturned.Text = "Returned Amount = ";
+            this.lblReturned.Text = "Returned Amount  = ";
             // 
             // lblShop
             // 
@@ -303,14 +308,52 @@
             this.listView1.HideSelection = false;
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1,
-            listViewItem2});
+            listViewItem2,
+            listViewItem3});
             this.listView1.Location = new System.Drawing.Point(406, 204);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(178, 97);
+            this.listView1.Size = new System.Drawing.Size(192, 104);
             this.listView1.TabIndex = 131;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Tile;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            // 
+            // grpPettyCashBAL
+            // 
+            this.grpPettyCashBAL.BackColor = System.Drawing.Color.Transparent;
+            this.grpPettyCashBAL.Controls.Add(this.lblPettyCashBAL);
+            this.grpPettyCashBAL.Controls.Add(this.label2);
+            this.grpPettyCashBAL.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold);
+            this.grpPettyCashBAL.Location = new System.Drawing.Point(324, 133);
+            this.grpPettyCashBAL.Margin = new System.Windows.Forms.Padding(2);
+            this.grpPettyCashBAL.Name = "grpPettyCashBAL";
+            this.grpPettyCashBAL.Padding = new System.Windows.Forms.Padding(2);
+            this.grpPettyCashBAL.Size = new System.Drawing.Size(281, 58);
+            this.grpPettyCashBAL.TabIndex = 120;
+            this.grpPettyCashBAL.TabStop = false;
+            this.grpPettyCashBAL.Text = "Petty Cash Balance";
+            // 
+            // lblPettyCashBAL
+            // 
+            this.lblPettyCashBAL.AutoSize = true;
+            this.lblPettyCashBAL.Font = new System.Drawing.Font("Times New Roman", 11.25F);
+            this.lblPettyCashBAL.Location = new System.Drawing.Point(196, 29);
+            this.lblPettyCashBAL.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPettyCashBAL.Name = "lblPettyCashBAL";
+            this.lblPettyCashBAL.Size = new System.Drawing.Size(15, 17);
+            this.lblPettyCashBAL.TabIndex = 1;
+            this.lblPettyCashBAL.Text = "0";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 11.25F);
+            this.label2.Location = new System.Drawing.Point(57, 29);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(130, 17);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Petty Cash BAL  =  ";
             // 
             // frmCloseShifWindow
             // 
@@ -319,6 +362,7 @@
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(628, 585);
+            this.Controls.Add(this.grpPettyCashBAL);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.cmbShop);
             this.Controls.Add(this.txtCashierName);
@@ -347,6 +391,8 @@
             this.grpReturned.ResumeLayout(false);
             this.grpReturned.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCloseCash)).EndInit();
+            this.grpPettyCashBAL.ResumeLayout(false);
+            this.grpPettyCashBAL.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -373,5 +419,8 @@
         private System.Windows.Forms.TextBox txtCashierName;
         private System.Windows.Forms.ComboBox cmbShop;
         private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.GroupBox grpPettyCashBAL;
+        private System.Windows.Forms.Label lblPettyCashBAL;
+        private System.Windows.Forms.Label label2;
     }
 }

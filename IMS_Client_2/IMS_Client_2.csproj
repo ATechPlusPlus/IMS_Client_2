@@ -295,6 +295,12 @@
     <Compile Include="Other_Forms\frmPayment.Designer.cs">
       <DependentUpon>frmPayment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Other_Forms\frmPettyCash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other_Forms\frmPettyCash.Designer.cs">
+      <DependentUpon>frmPettyCash.cs</DependentUpon>
+    </Compile>
     <Compile Include="Other_Forms\frmStoreRights.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -560,6 +566,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Other_Forms\frmPayment.resx">
       <DependentUpon>frmPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other_Forms\frmPettyCash.resx">
+      <DependentUpon>frmPettyCash.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Other_Forms\frmStoreRights.resx">
       <DependentUpon>frmStoreRights.cs</DependentUpon>

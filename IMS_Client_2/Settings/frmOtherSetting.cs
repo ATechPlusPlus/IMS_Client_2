@@ -16,22 +16,24 @@ namespace IMS_Client_2.Settings
         {
             InitializeComponent();
         }
-        
+
         clsConnection_DAL ObjCon = new clsConnection_DAL(true);
         clsUtility ObjUtil = new clsUtility();
 
         Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
         Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
-        
+
         private void frmOtherSetting_Load(object sender, EventArgs e)
         {
             btnAdd.BackgroundImage = B_Leave;
             btnSave.BackgroundImage = B_Leave;
-            btnFooterCancel.BackgroundImage= B_Leave;
+            btnFooterCancel.BackgroundImage = B_Leave;
             btnFooterSave.BackgroundImage = B_Leave;
+            btnPrinterSave.BackgroundImage = B_Leave;
+            btnPrinterCancel.BackgroundImage = B_Leave;
 
             txtPCName.Text = Environment.MachineName;
-            txtMachineName.Text= Environment.MachineName;
+            txtMachineName.Text = Environment.MachineName;
             LoadStore();
             BindStoreSettingData();
             LoadPrinter();
@@ -43,12 +45,9 @@ namespace IMS_Client_2.Settings
             {
                 cmbBarcodPrinter.Items.Add(printer);
                 cmbInvoicePrinter.Items.Add(printer);
-                
             }
-
-          
         }
-      
+
         private void LoadStore()
         {
             DataTable dt = ObjCon.ExecuteSelectStatement("SELECT StoreID, StoreName FROM " + clsUtility.DBName + ".[dbo].[StoreMaster] WITH(NOLOCK) ");
@@ -71,7 +70,7 @@ namespace IMS_Client_2.Settings
                 //we are binding store category by index value.
                 cmbStoreCategory.SelectedIndex = Convert.ToInt32(dt.Rows[0]["StoreCategory"]);
 
-                if (dt.Rows[0]["InvoiceFooterNote"]!=DBNull.Value)
+                if (dt.Rows[0]["InvoiceFooterNote"] != DBNull.Value)
                 {
                     txtFooterNote.Text = dt.Rows[0]["InvoiceFooterNote"].ToString();
                 }
@@ -88,7 +87,7 @@ namespace IMS_Client_2.Settings
                     }
                     else
                     {
-                        chkArabicPrice.Checked =false;
+                        chkArabicPrice.Checked = false;
                     }
                 }
                 else
@@ -121,7 +120,7 @@ namespace IMS_Client_2.Settings
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmOtherSetting,clsFormRights.Operation.Save) || clsUtility.IsAdmin)
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmOtherSetting, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
                 if (txtPCName.Text.Trim().Length == 0)
                 {
@@ -147,7 +146,6 @@ namespace IMS_Client_2.Settings
                 int result = ObjCon.ExecuteScalarInt("SELECT count(1) FROM " + clsUtility.DBName + ".[dbo].[DefaultStoreSetting] WITH(NOLOCK) WHERE MachineName='" + txtPCName.Text + "'");
                 if (result > 0) // if data found for the PC thenupdate
                 {
-
                     ObjCon.UpdateColumnData("StoreID", SqlDbType.Int, cmbStoreName.SelectedValue);
                     ObjCon.UpdateColumnData("MachineName", SqlDbType.NVarChar, txtPCName.Text);
                     ObjCon.UpdateColumnData("StoreCategory", SqlDbType.Int, cmbStoreCategory.SelectedIndex);
@@ -197,7 +195,6 @@ namespace IMS_Client_2.Settings
                     cmbStoreName.DisplayMember = "StoreName";
                     cmbStoreName.ValueMember = "StoreID";
                     cmbStoreName.SelectedIndex = -1;
-
                 }
             }
             else if (cmbStoreCategory.SelectedIndex == 1) // Wearhouse
@@ -233,7 +230,7 @@ namespace IMS_Client_2.Settings
         {
             if (txtFileExtension.Text.Trim().StartsWith("."))
             {
-                return txtFileExtension.Text;   
+                return txtFileExtension.Text;
             }
             else
             {
@@ -247,14 +244,14 @@ namespace IMS_Client_2.Settings
                 DataTable dtFooterNote = ObjCon.ExecuteSelectStatement("SELECT * FROM " + clsUtility.DBName + ".[dbo].[DefaultStoreSetting] WITH(NOLOCK)");
                 if (ObjUtil.ValidateTable(dtFooterNote)) // if data found for the PC thenupdate
                 {
-                    ObjCon.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.DefaultStoreSetting SET InvoiceFooterNote =N'" + txtFooterNote.Text + "', UserArabicNumbers='"+chkArabicPrice.Checked.ToString()+ "', ImagePath='"+txtImagePath.Text+ "', Extension='"+GetExtension()+"'");
+                    ObjCon.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.DefaultStoreSetting SET InvoiceFooterNote =N'" + txtFooterNote.Text + "', UserArabicNumbers='" + chkArabicPrice.Checked.ToString() + "', ImagePath='" + txtImagePath.Text + "', Extension='" + GetExtension() + "'");
                     clsUtility.ShowInfoMessage("Settings has been updated.", clsUtility.strProjectTitle);
                 }
                 else
                 {
                     // else insert.
-                    ObjCon.SetColumnData("InvoiceFooterNote", SqlDbType.NVarChar, "N"+txtFooterNote.Text);
-                    ObjCon.SetColumnData("UserArabicNumbers", SqlDbType.Bit,chkArabicPrice.Checked);
+                    ObjCon.SetColumnData("InvoiceFooterNote", SqlDbType.NVarChar, "N" + txtFooterNote.Text);
+                    ObjCon.SetColumnData("UserArabicNumbers", SqlDbType.Bit, chkArabicPrice.Checked);
                     ObjCon.SetColumnData("ImagePath", SqlDbType.NVarChar, txtImagePath.Text);
                     ObjCon.SetColumnData("Extension", SqlDbType.NVarChar, GetExtension());
 
@@ -265,7 +262,7 @@ namespace IMS_Client_2.Settings
                     }
                     lblmsg.Visible = false;
                 }
-            } 
+            }
         }
 
         private void btnFooterCancel_Click(object sender, EventArgs e)
@@ -283,12 +280,12 @@ namespace IMS_Client_2.Settings
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            if (cmbBarcodPrinter.SelectedIndex==-1)
+            if (cmbBarcodPrinter.SelectedIndex == -1)
             {
                 clsUtility.ShowInfoMessage("Please select your printer.", clsUtility.strProjectTitle);
                 return;
             }
-            else if (cmbInvoicePrinter.SelectedIndex==-1)
+            else if (cmbInvoicePrinter.SelectedIndex == -1)
             {
                 clsUtility.ShowInfoMessage("Please select your function.", clsUtility.strProjectTitle);
                 return;
@@ -298,42 +295,32 @@ namespace IMS_Client_2.Settings
         }
         private void BindPrinterDetails()
         {
-            DataTable dtPrinter = ObjCon.ExecuteSelectStatement("select * from "+ clsUtility.DBName+ ".dbo.[tblPrinterSetting] where MachineName = '"+txtMachineName.Text+"'");
-            if (dtPrinter.Rows.Count>0)
+            DataTable dtPrinter = ObjCon.ExecuteSelectStatement("SELECT * FROM " + clsUtility.DBName + ".dbo.[tblPrinterSetting] WHERE MachineName = '" + txtMachineName.Text + "'");
+            if (ObjUtil.ValidateTable(dtPrinter))
             {
                 cmbBarcodPrinter.SelectedItem = dtPrinter.Rows[0]["BarCodePrinter"].ToString();
-
                 cmbInvoicePrinter.SelectedItem = dtPrinter.Rows[0]["InvoicePrinter"].ToString();
             }
         }
         private void SavePrinterSetting()
         {
-            int count=ObjCon.CountRecords(clsUtility.DBName + ".[dbo].[tblPrinterSetting]", "MachineName='"+Environment.MachineName+"'");
-            if (count==0)
+            int count = ObjCon.CountRecords(clsUtility.DBName + ".[dbo].[tblPrinterSetting]", "MachineName='" + Environment.MachineName + "'");
+            if (count == 0)
             {
-              
-               
-                ObjCon.SetColumnData("MachineName", SqlDbType.NVarChar,Environment.MachineName);
+                ObjCon.SetColumnData("MachineName", SqlDbType.NVarChar, Environment.MachineName);
                 ObjCon.SetColumnData("BarCodePrinter", SqlDbType.NVarChar, cmbBarcodPrinter.SelectedItem.ToString());
                 ObjCon.SetColumnData("InvoicePrinter", SqlDbType.NVarChar, cmbInvoicePrinter.SelectedItem.ToString());
-
-
-                ObjCon.SetColumnData("CreatedOn", SqlDbType.DateTime,DateTime.Now);
-                ObjCon.SetColumnData("CreateBy", SqlDbType.Int,clsUtility.LoginID);
-               
-                ObjCon.InsertData(clsUtility.DBName+".dbo.tblPrinterSetting", false);
+                ObjCon.SetColumnData("CreateBy", SqlDbType.Int, clsUtility.LoginID);
+                ObjCon.InsertData(clsUtility.DBName + ".dbo.tblPrinterSetting", false);
             }
             else
             {
-             
-          
                 ObjCon.UpdateColumnData("MachineName", SqlDbType.NVarChar, Environment.MachineName);
-               ObjCon.UpdateColumnData("BarCodePrinter", SqlDbType.NVarChar, cmbBarcodPrinter.SelectedItem.ToString());
+                ObjCon.UpdateColumnData("BarCodePrinter", SqlDbType.NVarChar, cmbBarcodPrinter.SelectedItem.ToString());
                 ObjCon.UpdateColumnData("InvoicePrinter", SqlDbType.NVarChar, cmbInvoicePrinter.SelectedItem.ToString());
-
-                ObjCon.UpdateColumnData("ModifiedOn", SqlDbType.DateTime, DateTime.Now);
-                ObjCon.UpdateColumnData("ModifiedBy", SqlDbType.Int, clsUtility.LoginID);
-                ObjCon.UpdateData(clsUtility.DBName+".dbo.tblPrinterSetting", "MachineName='"+Environment.MachineName+"'");
+                ObjCon.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
+                ObjCon.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID);
+                ObjCon.UpdateData(clsUtility.DBName + ".dbo.tblPrinterSetting", "MachineName='" + Environment.MachineName + "'");
             }
             clsUtility.ShowInfoMessage("Printer settings has been saved.", clsUtility.strProjectTitle);
         }
@@ -342,7 +329,7 @@ namespace IMS_Client_2.Settings
         {
             cmbInvoicePrinter.SelectedIndex = -1;
             cmbBarcodPrinter.SelectedIndex = -1;
-            
+
         }
     }
 }

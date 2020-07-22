@@ -67,6 +67,7 @@
             this.MaterialDetails_ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.stockTransferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.brachReceiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.transferWatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SalesReport_ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.otherArtsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,6 +78,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblLoginName = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblVersion = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblShopName = new System.Windows.Forms.ToolStripStatusLabel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.picLogOut = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -92,7 +94,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.transferWatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadPettyCashToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -408,23 +410,30 @@
             // MaterialDetails_ToolStrip
             // 
             this.MaterialDetails_ToolStrip.Name = "MaterialDetails_ToolStrip";
-            this.MaterialDetails_ToolStrip.Size = new System.Drawing.Size(180, 24);
+            this.MaterialDetails_ToolStrip.Size = new System.Drawing.Size(177, 24);
             this.MaterialDetails_ToolStrip.Text = " Material Details";
             this.MaterialDetails_ToolStrip.Click += new System.EventHandler(this.MaterialDetails_ToolStrip_Click);
             // 
             // stockTransferToolStripMenuItem
             // 
             this.stockTransferToolStripMenuItem.Name = "stockTransferToolStripMenuItem";
-            this.stockTransferToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.stockTransferToolStripMenuItem.Size = new System.Drawing.Size(177, 24);
             this.stockTransferToolStripMenuItem.Text = "Store Transfer";
             this.stockTransferToolStripMenuItem.Click += new System.EventHandler(this.stockTransferToolStripMenuItem_Click);
             // 
             // brachReceiveToolStripMenuItem
             // 
             this.brachReceiveToolStripMenuItem.Name = "brachReceiveToolStripMenuItem";
-            this.brachReceiveToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.brachReceiveToolStripMenuItem.Size = new System.Drawing.Size(177, 24);
             this.brachReceiveToolStripMenuItem.Text = "Branch Receive";
             this.brachReceiveToolStripMenuItem.Click += new System.EventHandler(this.brachReceiveToolStripMenuItem_Click);
+            // 
+            // transferWatchToolStripMenuItem
+            // 
+            this.transferWatchToolStripMenuItem.Name = "transferWatchToolStripMenuItem";
+            this.transferWatchToolStripMenuItem.Size = new System.Drawing.Size(177, 24);
+            this.transferWatchToolStripMenuItem.Text = "Transfer Watch";
+            this.transferWatchToolStripMenuItem.Click += new System.EventHandler(this.transferWatchToolStripMenuItem_Click);
             // 
             // reportsToolStripMenuItem
             // 
@@ -460,7 +469,8 @@
             this.toolStripMenuItem2.BackColor = System.Drawing.Color.Transparent;
             this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CurrencyValueSetting_ToolStrip,
-            this.defaultStoreSettingsToolStripMenuItem});
+            this.defaultStoreSettingsToolStripMenuItem,
+            this.loadPettyCashToolStripMenuItem});
             this.toolStripMenuItem2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem2.Image")));
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(88, 36);
@@ -496,7 +506,8 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblLoginName,
-            this.lblVersion});
+            this.lblVersion,
+            this.lblShopName});
             this.statusStrip1.Location = new System.Drawing.Point(0, 484);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
@@ -513,9 +524,15 @@
             // lblVersion
             // 
             this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(1192, 17);
+            this.lblVersion.Size = new System.Drawing.Size(1097, 17);
             this.lblVersion.Spring = true;
             this.lblVersion.Text = "Version : ";
+            // 
+            // lblShopName
+            // 
+            this.lblShopName.Name = "lblShopName";
+            this.lblShopName.Size = new System.Drawing.Size(95, 17);
+            this.lblShopName.Text = "Shop Name : ";
             // 
             // pictureBox2
             // 
@@ -706,12 +723,12 @@
             this.label9.TabIndex = 28;
             this.label9.Text = "Today\'s Cash Box";
             // 
-            // transferWatchToolStripMenuItem
+            // loadPettyCashToolStripMenuItem
             // 
-            this.transferWatchToolStripMenuItem.Name = "transferWatchToolStripMenuItem";
-            this.transferWatchToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
-            this.transferWatchToolStripMenuItem.Text = "Transfer Watch";
-            this.transferWatchToolStripMenuItem.Click += new System.EventHandler(this.transferWatchToolStripMenuItem_Click);
+            this.loadPettyCashToolStripMenuItem.Name = "loadPettyCashToolStripMenuItem";
+            this.loadPettyCashToolStripMenuItem.Size = new System.Drawing.Size(216, 24);
+            this.loadPettyCashToolStripMenuItem.Text = "Load Petty Cash";
+            this.loadPettyCashToolStripMenuItem.Click += new System.EventHandler(this.loadPettyCashToolStripMenuItem_Click);
             // 
             // frmHome
             // 
@@ -819,5 +836,7 @@
         private System.Windows.Forms.ToolStripMenuItem closeCashBandMasterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeCashToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem transferWatchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel lblShopName;
+        private System.Windows.Forms.ToolStripMenuItem loadPettyCashToolStripMenuItem;
     }
 }

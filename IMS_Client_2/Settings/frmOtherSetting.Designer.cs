@@ -59,8 +59,8 @@
             this.cmbInvoicePrinter = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.cmbBarcodPrinter = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnPrinterCancel = new System.Windows.Forms.Button();
+            this.btnPrinterSave = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.txtExtension = new System.Windows.Forms.Label();
@@ -386,8 +386,8 @@
             this.groupBox3.Controls.Add(this.cmbInvoicePrinter);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.cmbBarcodPrinter);
-            this.groupBox3.Controls.Add(this.button1);
-            this.groupBox3.Controls.Add(this.button2);
+            this.groupBox3.Controls.Add(this.btnPrinterCancel);
+            this.groupBox3.Controls.Add(this.btnPrinterSave);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(441, 6);
@@ -416,6 +416,8 @@
             this.txtMachineName.ReadOnly = true;
             this.txtMachineName.Size = new System.Drawing.Size(240, 25);
             this.txtMachineName.TabIndex = 196;
+            this.txtMachineName.Enter += new System.EventHandler(this.txtPCName_Enter);
+            this.txtMachineName.Leave += new System.EventHandler(this.txtPCName_Leave);
             // 
             // cmbInvoicePrinter
             // 
@@ -448,33 +450,33 @@
             this.cmbBarcodPrinter.Size = new System.Drawing.Size(240, 27);
             this.cmbBarcodPrinter.TabIndex = 193;
             // 
-            // button1
+            // btnPrinterCancel
             // 
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(314, 192);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(71, 25);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Cancel";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnPrinterCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnPrinterCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPrinterCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPrinterCancel.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrinterCancel.Location = new System.Drawing.Point(314, 192);
+            this.btnPrinterCancel.Name = "btnPrinterCancel";
+            this.btnPrinterCancel.Size = new System.Drawing.Size(71, 25);
+            this.btnPrinterCancel.TabIndex = 2;
+            this.btnPrinterCancel.Text = "Cancel";
+            this.btnPrinterCancel.UseVisualStyleBackColor = true;
+            this.btnPrinterCancel.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // btnPrinterSave
             // 
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(226, 192);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(76, 25);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Save";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            this.btnPrinterSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnPrinterSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPrinterSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPrinterSave.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrinterSave.Location = new System.Drawing.Point(226, 192);
+            this.btnPrinterSave.Name = "btnPrinterSave";
+            this.btnPrinterSave.Size = new System.Drawing.Size(76, 25);
+            this.btnPrinterSave.TabIndex = 1;
+            this.btnPrinterSave.Text = "Save";
+            this.btnPrinterSave.UseVisualStyleBackColor = true;
+            this.btnPrinterSave.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // label8
             // 
@@ -570,8 +572,8 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnPrinterCancel;
+        private System.Windows.Forms.Button btnPrinterSave;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cmbBarcodPrinter;
         private System.Windows.Forms.ComboBox cmbInvoicePrinter;

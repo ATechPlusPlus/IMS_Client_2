@@ -5,8 +5,11 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using CoreApp;
+using Button = System.Windows.Forms.Button;
+using Image = System.Drawing.Image;
 
 namespace IMS_Client_2.Sales
 {
@@ -22,89 +25,116 @@ namespace IMS_Client_2.Sales
 
         public int pMasterCashClosingID = 0;
         int pStoreID = 0;
+        decimal ExpensesAmt = 0,PettyCashBAL=0;
+        object Cashtotal = 0;
 
+        DataTable dtCash = new DataTable();
         DataTable dtCredit = new DataTable();
+        DataTable dtExpenses = new DataTable();
 
         Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
         Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
 
         private void ClearAll()
         {
+            Cashtotal = 0;
             txtTotalValue.Clear();
+            dtCash = null;
+            dtExpenses = null;
         }
 
         private void LoadData()
         {
-            ObjDAL.SetStoreProcedureData("MasterCashClosingID", SqlDbType.Int, pMasterCashClosingID, clsConnection_DAL.ParamType.Input);
-            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_CashClosing_Details");
-            if (ds.Tables.Count > 0)
+            try
             {
-                DataTable dt = ds.Tables[0];
-                dtCredit = ds.Tables[1];
-                if (ObjUtil.ValidateTable(dt))
+                ObjDAL.SetStoreProcedureData("MasterCashClosingID", SqlDbType.Int, pMasterCashClosingID, clsConnection_DAL.ParamType.Input);
+                ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
+                ObjDAL.SetStoreProcedureData("PettyCashBAL", SqlDbType.Decimal, lblPettyCashBAL.Text, clsConnection_DAL.ParamType.Output);
+                DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_CashClosing_Details");
+                if (ds != null && ds.Tables.Count > 0)
                 {
-                    dgvCloseCash.DataSource = dt;
-                    if (Convert.ToInt32(dt.Rows[0]["CashStatus"]) == 0)
-                    {
-                        dgvCloseCash.ReadOnly = false;
-                        btnOpenCash.Enabled = false;
-                        btnCloseCash.Enabled = true;
-                        btnPreview.Enabled = false;
-                        btnPrint.Enabled = false;
+                    DataTable dt = ds.Tables[0];
+                    dtCredit = ds.Tables[1];
+                    dtExpenses = ds.Tables[2];
 
-                        //btnPreview.Enabled = true;
-                        //btnPrint.Enabled = true;
-                    }
-                    else
+                    DataTable dtoutput = ObjDAL.GetOutputParmData();
+                    if (ObjUtil.ValidateTable(dtoutput))
                     {
-                        if (DateTime.Now.ToString("yyyy-MM-dd") == Convert.ToDateTime(dt.Rows[0]["CashBoxDate"]).ToString("yyyy-MM-dd"))
+                        PettyCashBAL = Convert.ToDecimal(dtoutput.Rows[0][1]);
+                        lblPettyCashBAL.Text = PettyCashBAL.ToString();
+                    }
+
+                    if (ObjUtil.ValidateTable(dt))
+                    {
+                        dgvCloseCash.DataSource = dt;
+                        dtCash = dt;
+                        if (Convert.ToInt32(dt.Rows[0]["CashStatus"]) == 0)
                         {
-                            dgvCloseCash.ReadOnly = true;
+                            dgvCloseCash.ReadOnly = false;
                             btnOpenCash.Enabled = false;
-                            btnCloseCash.Enabled = false;
-                            btnPreview.Enabled = true;
-                            btnPrint.Enabled = true;
+                            btnCloseCash.Enabled = true;
+                            btnPreview.Enabled = false;
+                            btnPrint.Enabled = false;
+
+                            //btnPreview.Enabled = true;
+                            //btnPrint.Enabled = true;
+                            dgvCloseCash.DataSource = dtCash;
                         }
                         else
                         {
-                            dgvCloseCash.ReadOnly = true;
-                            btnOpenCash.Enabled = true;
-                            btnCloseCash.Enabled = false;
-                            btnPreview.Enabled = true;
-                            btnPrint.Enabled = true;
+                            if (DateTime.Now.ToString("yyyy-MM-dd") == Convert.ToDateTime(dt.Rows[0]["CashBoxDate"]).ToString("yyyy-MM-dd"))
+                            {
+                                dgvCloseCash.ReadOnly = true;
+                                btnOpenCash.Enabled = false;
+                                btnCloseCash.Enabled = false;
+                                btnPreview.Enabled = true;
+                                btnPrint.Enabled = true;
+                            }
+                            else
+                            {
+                                dgvCloseCash.ReadOnly = true;
+                                btnOpenCash.Enabled = true;
+                                btnCloseCash.Enabled = false;
+                                btnPreview.Enabled = true;
+                                btnPrint.Enabled = true;
 
-                            //btnPreview.Enabled = false;
-                            //btnPrint.Enabled = false;
+                                //btnPreview.Enabled = false;
+                                //btnPrint.Enabled = false;
+                            }
                         }
+                        txtCashNo.Text = dt.Rows[0]["CashNo"].ToString();
+                        txtCashierName.Text = dt.Rows[0]["Name"].ToString();
+                        cmbShop.SelectedValue = dt.Rows[0]["StoreID"];
+                        lblReturnedAmount.Text = dt.Rows[0]["CashReturn"].ToString();
+                        txtTotalValue.Text = dt.Rows[0]["TotalCashValue"].ToString();
                     }
-                    txtCashNo.Text = dt.Rows[0]["CashNo"].ToString();
-                    txtCashierName.Text = dt.Rows[0]["Name"].ToString();
-                    cmbShop.SelectedValue = dt.Rows[0]["StoreID"];
-                    lblReturnedAmount.Text = dt.Rows[0]["CashReturn"].ToString();
-                    txtTotalValue.Text = dt.Rows[0]["TotalCashValue"].ToString();
+                    else
+                    {
+                        dgvCloseCash.DataSource = null;
+                        dtCash = null;
+                        dtExpenses = null;
+                        btnOpenCash.Enabled = true;
+                        btnCloseCash.Enabled = false;
+                        btnPreview.Enabled = false;
+                        btnPrint.Enabled = false;
+                    }
+                    ObjDAL.ResetData();
                 }
                 else
                 {
+                    dtCash = null;
+                    dtExpenses = null;
                     dgvCloseCash.DataSource = null;
-                    btnOpenCash.Enabled = true;
+                    btnOpenCash.Enabled = false;
                     btnCloseCash.Enabled = false;
                     btnPreview.Enabled = false;
-                    btnPreview.Enabled = false;
+                    btnPrint.Enabled = false;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                dgvCloseCash.DataSource = null;
-                btnOpenCash.Enabled = false;
-                btnCloseCash.Enabled = false;
-                btnPreview.Enabled = false;
-                btnPreview.Enabled = false;
+                clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
             }
-        }
-
-        private int GetDefaultStoreID()
-        {
-            return ObjDAL.ExecuteScalarInt("SELECT StoreID FROM " + clsUtility.DBName + ".dbo.DefaultStoreSetting WITH(NOLOCK) WHERE MachineName='" + Environment.MachineName + "'");
         }
 
         private void frmCloseShifWindow_Load(object sender, EventArgs e)
@@ -114,7 +144,7 @@ namespace IMS_Client_2.Sales
             btnPreview.BackgroundImage = B_Leave;
             btnPrint.BackgroundImage = B_Leave;
 
-            pStoreID = GetDefaultStoreID();
+            pStoreID = frmHome.Home_StoreID;
             FillStoreData();
             listView1.Items[0].Selected = true;
 
@@ -136,7 +166,7 @@ namespace IMS_Client_2.Sales
         private void dgvCloseCash_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             ObjUtil.SetRowNumber(dgvCloseCash);
-
+            ObjUtil.SetDataGridProperty(dgvCloseCash, DataGridViewAutoSizeColumnsMode.DisplayedCells);
             if (listView1.Items[0].Selected)
             {
                 dgvCloseCash.Columns["CashBandID"].Visible = false;
@@ -151,11 +181,25 @@ namespace IMS_Client_2.Sales
                 dgvCloseCash.Columns["TotalCashValue"].Visible = false;
                 dgvCloseCash.Columns["Name"].Visible = false;
                 dgvCloseCash.Columns["CashReturn"].Visible = false;
+
+                CalcTotalCashBand();
             }
             else if (listView1.Items[1].Selected)
             {
                 dgvCloseCash.Columns["CreditClosingID"].Visible = false;
                 dgvCloseCash.Columns["MasterCashClosingID"].Visible = false;
+            }
+            else if (listView1.Items[2].Selected)
+            {
+                if (dgvCloseCash.Columns.Contains("PettyCashExpID"))
+                {
+                    dgvCloseCash.Columns["PettyCashExpID"].Visible = false;
+                }
+                if (dgvCloseCash.Columns.Contains("MasterCashClosingID"))
+                {
+                    dgvCloseCash.Columns["MasterCashClosingID"].Visible = false;
+                }
+                CalcTotalPettyCashExp();
             }
         }
 
@@ -169,7 +213,7 @@ namespace IMS_Client_2.Sales
         private void OpenCashBox()
         {
             string NexCashNumber = GetCashNumber();
-            int pStoreID = GetDefaultStoreID();
+            int pStoreID = frmHome.Home_StoreID;
             ObjDAL.SetColumnData("CashNo", SqlDbType.NVarChar, NexCashNumber);
             ObjDAL.SetColumnData("StoreID", SqlDbType.Int, pStoreID);
             ObjDAL.SetColumnData("CashBoxDate", SqlDbType.Date, DateTime.Now.ToString("yyyy-MM-dd"));
@@ -213,7 +257,7 @@ namespace IMS_Client_2.Sales
             }
             if (ID > 0)
             {
-                ObjDAL.UpdateColumnData("TotalCashValue", SqlDbType.Decimal, txtTotalValue.Text);
+                ObjDAL.UpdateColumnData("TotalCashValue", SqlDbType.Decimal, Cashtotal);
                 ObjDAL.UpdateColumnData("CashStatus", SqlDbType.Int, 1);
                 ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID);
                 ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
@@ -224,17 +268,76 @@ namespace IMS_Client_2.Sales
                 }
             }
         }
+
+        private void InsertPettyCashExpenses()
+        {
+            bool b = false;
+            if (ObjUtil.ValidateTable(dtExpenses))
+            {
+                for (int i = 0; i < dtExpenses.Rows.Count; i++)
+                {
+                    ObjDAL.SetStoreProcedureData("PettyCashExpAmt", SqlDbType.Decimal, dtExpenses.Rows[i]["ExpensesAmt"], clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("Particulars", SqlDbType.NVarChar, dtExpenses.Rows[i]["Particulars"], clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("MasterCashClosingID", SqlDbType.Int, dtExpenses.Rows[i]["MasterCashClosingID"], clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
+
+                    b = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".[dbo].SPR_Insert_PettyCashExpAmt");
+                }
+                if (b)
+                {
+                    clsUtility.ShowInfoMessage("Petty Cash Book has been Saved !", clsUtility.strProjectTitle);
+                }
+            }
+        }
+
+        private bool ValidatePettyCashExpAmt()
+        {
+            if (PettyCashBAL >= ExpensesAmt)
+            {
+                for (int i = 0; i < dtExpenses.Rows.Count; i++)
+                {
+                    if (dtExpenses.Rows[i]["MasterCashClosingID"] == DBNull.Value || dtExpenses.Rows[i]["MasterCashClosingID"].ToString() == "" || Convert.ToInt32(dtExpenses.Rows[i]["ExpensesAmt"]) == 0)
+                    {
+                        dtExpenses.Rows[i].Delete();
+                        dtExpenses.AcceptChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        if (dtExpenses.Rows[i]["Particulars"] == DBNull.Value || dtExpenses.Rows[i]["ExpensesAmt"] == DBNull.Value)
+                        {
+                            clsUtility.ShowInfoMessage("Enter valid entry for Expenses", clsUtility.strProjectTitle);
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have added Extra "+(ExpensesAmt - PettyCashBAL) +" Expenses..", clsUtility.strProjectTitle);
+                return false;
+            }
+        }
+
         private void btnCloseCash_Click(object sender, EventArgs e)
         {
-            if (listView1.Items[0].Selected)
+            if (listView1.Items[0].Selected || listView1.Items[2].Selected)
             {
-                DataTable dt = (DataTable)dgvCloseCash.DataSource;
-                double total = Convert.ToDouble(txtTotalValue.Text);
+                //DataTable dt = (DataTable)dgvCloseCash.DataSource;
+                DataTable dt = dtCash;
+                double total = Convert.ToDouble(Cashtotal);
                 if (ObjUtil.ValidateTable(dt) && total > 0)
                 {
-                    InsertCloseCashBand(dt);
-                    ClearAll();
-                    LoadData();
+                    if (ValidatePettyCashExpAmt())
+                    {
+                        InsertCloseCashBand(dt);
+                        InsertPettyCashExpenses();
+                        ClearAll();
+                        listView1.Items[0].Selected = true;
+                        //LoadData();
+                    }
                 }
                 else
                 {
@@ -249,18 +352,47 @@ namespace IMS_Client_2.Sales
 
         private void dgvCloseCash_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            if (e.ColumnIndex == 3 && e.FormattedValue.ToString() != "")
+            if (listView1.Items[0].Selected)
             {
-                e.Cancel = false;
-                dgvCloseCash.Rows[e.RowIndex].ErrorText = "";
-                int newInteger = 0;
-                if (dgvCloseCash.Rows[e.RowIndex].IsNewRow) { return; }
-                if (!int.TryParse(e.FormattedValue.ToString(),
-                    out newInteger) || newInteger < 0)
+                if (e.ColumnIndex == 3 && e.FormattedValue.ToString() != "")
                 {
-                    e.Cancel = true;
-                    clsUtility.ShowInfoMessage("Enter Only Numbers..", clsUtility.strProjectTitle);
-                    //dgvQtycolor.Rows[e.RowIndex].ErrorText = "Size must be a Positive integer";
+                    e.Cancel = false;
+                    dgvCloseCash.Rows[e.RowIndex].ErrorText = "";
+                    int newInteger = 0;
+                    if (dgvCloseCash.Rows[e.RowIndex].IsNewRow) { return; }
+                    if (!int.TryParse(e.FormattedValue.ToString(),
+                        out newInteger) || newInteger < 0)
+                    {
+                        e.Cancel = true;
+                        clsUtility.ShowInfoMessage("Enter Only Numbers..", clsUtility.strProjectTitle);
+                        //dgvQtycolor.Rows[e.RowIndex].ErrorText = "Size must be a Positive integer";
+                    }
+                }
+            }
+            else if (listView1.Items[2].Selected)
+            {
+                //if (e.ColumnIndex == 2 && e.FormattedValue.ToString() == "")
+                //{
+                //    e.Cancel = false;
+                //    if (dgvCloseCash.Rows[e.RowIndex].IsNewRow) { return; }
+                //    if (e.FormattedValue.ToString() == "")
+                //    {
+                //        e.Cancel = true;
+                //        clsUtility.ShowInfoMessage("Enter Particulars for Expenses..", clsUtility.strProjectTitle);
+                //    }
+                //}
+                if (e.ColumnIndex == 3 && e.FormattedValue.ToString() != "")
+                {
+                    if (dgvCloseCash.Rows[e.RowIndex].IsNewRow) { return; }
+
+                    decimal newDecimal = 0;
+                    if (!decimal.TryParse(e.FormattedValue.ToString(),
+                        out newDecimal) || newDecimal < 0)
+                    {
+                        e.Cancel = true;
+                        clsUtility.ShowInfoMessage("Enter Only Numbers..", clsUtility.strProjectTitle);
+                        //dgvQtycolor.Rows[e.RowIndex].ErrorText = "Size must be a Positive integer";
+                    }
                 }
             }
         }
@@ -275,16 +407,38 @@ namespace IMS_Client_2.Sales
 
         private void CalcTotalCashBand()
         {
-            DataTable dt = (DataTable)dgvCloseCash.DataSource;
+            //DataTable dt = (DataTable)dgvCloseCash.DataSource;
+            DataTable dt = dtCash;
             if (ObjUtil.ValidateTable(dt))
             {
                 //DataRow[] drow = dt.Select("SUM(Value)");
                 //txtTotalValue.Text = drow[0].ToString();
-                object total = dt.Compute("SUM(Value)", string.Empty);
-                txtTotalValue.Text = total.ToString();
+                Cashtotal = dt.Compute("SUM(Value)", string.Empty);
+                txtTotalValue.Text = Cashtotal.ToString();
             }
-
         }
+
+        private void CalcTotalPettyCashExp()
+        {
+            try
+            {
+                DataTable dt = dtExpenses;
+                if (ObjUtil.ValidateTable(dt))
+                {
+                    //DataRow[] drow = dt.Select("SUM(ExpensesAmt)");
+                    //txtTotalValue.Text = drow[0].ToString();
+
+                    //object total = dt.Compute("SUM(ExpensesAmt)", "ExpensesAmt IS NOT NULL");
+                    if (dt.Rows[0]["ExpensesAmt"] != DBNull.Value)
+                    {
+                        ExpensesAmt = dt.AsEnumerable().Sum(x => Convert.ToDecimal(x["ExpensesAmt"]));
+                        txtTotalValue.Text = ExpensesAmt.ToString();
+                    }
+                }
+            }
+            catch { }
+        }
+
         private void dgvCloseCash_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (listView1.Items[0].Selected)
@@ -294,6 +448,23 @@ namespace IMS_Client_2.Sales
                 dgvCloseCash.Rows[e.RowIndex].Cells["Value"].Value = Math.Round(CashBand * Count, 3);
 
                 CalcTotalCashBand();
+            }
+            else if (listView1.Items[2].Selected)
+            {
+                if (ObjUtil.ValidateTable(dtExpenses))
+                {
+                    dtExpenses.Rows[e.RowIndex]["MasterCashClosingID"] = pMasterCashClosingID;
+                    dtExpenses.Rows[e.RowIndex]["PettyCashExpID"] = 0;
+                    if (e.RowIndex + 1 == dgvCloseCash.Rows.Count)
+                    {
+                        DataRow Row = dtExpenses.NewRow();
+                        Row["ExpensesAmt"] = 0;
+                        dtExpenses.Rows.Add(Row);
+                    }
+                    dtExpenses.AcceptChanges();
+                    dgvCloseCash.DataSource = dtExpenses;
+                }
+                CalcTotalPettyCashExp();
             }
         }
 
@@ -307,25 +478,60 @@ namespace IMS_Client_2.Sales
                     dgvCloseCash.Columns["Count"].ReadOnly = false;
                 }
             }
+            else if (listView1.Items[2].Selected)
+            {
+                if (dgvCloseCash.Columns.Contains("Particulars"))
+                {
+                    dgvCloseCash.Columns["Particulars"].ReadOnly = false;
+                }
+                if (dgvCloseCash.Columns.Contains("ExpensesAmt"))
+                {
+                    dgvCloseCash.Columns["ExpensesAmt"].ReadOnly = false;
+                }
+            }
             dgvCloseCash.Columns[e.Column.Index].SortMode = DataGridViewColumnSortMode.NotSortable;
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listView1.Items[0].Selected)
+            try
+            {
+                if (listView1.Items[0].Selected)
+                {
+                    if (!ObjUtil.ValidateTable(dtCash))
+                    {
+                        LoadData();
+                    }
+                    else
+                    {
+                        dgvCloseCash.DataSource = dtCash;
+                    }
+                }
+                else if (listView1.Items[1].Selected)
+                {
+                    //dtCash = (DataTable)dgvCloseCash.DataSource;
+                    txtTotalValue.Clear();
+                    dgvCloseCash.DataSource = dtCredit;
+                }
+                else if (listView1.Items[2].Selected)
+                {
+                    //dtCash = (DataTable)dgvCloseCash.DataSource;
+                    txtTotalValue.Clear();
+                    dgvCloseCash.DataSource = dtExpenses;
+                }
+            }
+            catch (Exception ex)
             {
                 LoadData();
-            }
-            else if (listView1.Items[1].Selected)
-            {
-                txtTotalValue.Clear();
-                dgvCloseCash.DataSource = dtCredit;
+                clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
             }
         }
 
         private void PrintReport(bool Direct)
         {
             ObjDAL.SetStoreProcedureData("MasterCashClosingID", SqlDbType.Int, pMasterCashClosingID, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("PettyCashBAL", SqlDbType.Decimal, lblPettyCashBAL.Text, clsConnection_DAL.ParamType.Output);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_CashClosing_Details");
 
             DataTable dtCashDetails = ds.Tables[0];
