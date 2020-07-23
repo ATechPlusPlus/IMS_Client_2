@@ -191,6 +191,7 @@
             this.label3.Size = new System.Drawing.Size(112, 17);
             this.label3.TabIndex = 213;
             this.label3.Text = "Recieve Bill No. :";
+            this.label3.Visible = false;
             // 
             // txtReceiveBillNo
             // 
@@ -200,6 +201,7 @@
             this.txtReceiveBillNo.Name = "txtReceiveBillNo";
             this.txtReceiveBillNo.Size = new System.Drawing.Size(99, 25);
             this.txtReceiveBillNo.TabIndex = 214;
+            this.txtReceiveBillNo.Visible = false;
             // 
             // picProduct
             // 
@@ -275,7 +277,7 @@
             // 
             // pnlRed
             // 
-            this.pnlRed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.pnlRed.BackColor = System.Drawing.Color.Red;
             this.pnlRed.Controls.Add(this.label6);
             this.pnlRed.Location = new System.Drawing.Point(249, 413);
             this.pnlRed.Name = "pnlRed";
@@ -392,7 +394,6 @@
             this.txtTotalQTY.ReadOnly = true;
             this.txtTotalQTY.Size = new System.Drawing.Size(178, 25);
             this.txtTotalQTY.TabIndex = 268;
-            this.txtTotalQTY.Visible = false;
             // 
             // label10
             // 
@@ -404,7 +405,6 @@
             this.label10.Size = new System.Drawing.Size(78, 17);
             this.label10.TabIndex = 267;
             this.label10.Text = "Total QTY :";
-            this.label10.Visible = false;
             // 
             // pnlViolet
             // 

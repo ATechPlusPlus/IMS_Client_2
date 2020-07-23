@@ -41,7 +41,7 @@ namespace IMS_Client_2.StockManagement
 
                     txtTotalBillQTY.Text = dt.Rows[0]["TotalQTY"].ToString();
                     txtTotalEnterQTY.Text = dt.Rows[0]["ReceivedTotalQTY"].ToString();
-                    
+
                 }
                 else
                 {
@@ -58,10 +58,7 @@ namespace IMS_Client_2.StockManagement
         private void dgvTransferWatch_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             ObjUtil.SetRowNumber(dgvTransferWatch);
-            dgvTransferWatch.Columns[10].Width = 100;
             ObjUtil.SetDataGridProperty(dgvTransferWatch, DataGridViewAutoSizeColumnsMode.DisplayedCells);
-
-            dgvTransferWatch.Columns[11].Width = 100;
 
             dgvTransferWatch.Columns["TransferItemID"].Visible = false;
             dgvTransferWatch.Columns["StoreBillDetailsID"].Visible = false;
@@ -91,13 +88,11 @@ namespace IMS_Client_2.StockManagement
                     dgvTransferWatch.Rows[i].Cells["State"].Style.BackColor = Color.Orange;
                 }
             }
-            dgvTransferWatch.Columns[12].Width = 100;
             dgvTransferWatch.ClearSelection();
-        }
 
-        private void dgvTransferWatch_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            dgvTransferWatch.Rows[e.RowIndex].Selected = false;
+            dgvTransferWatch.RowsDefaultCellStyle.SelectionBackColor = Color.Transparent;
+            dgvTransferWatch.RowsDefaultCellStyle.SelectionForeColor = Color.Transparent;
+            //dgvTransferWatch.SelectionMode = DataGridViewSelectionMode.CellSelect;
         }
     }
 }

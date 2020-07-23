@@ -75,12 +75,13 @@ namespace IMS_Client_2.StockManagement
                     int pTotal = 0;
                     int pEnterQty = drow[0]["EnterQTY"].ToString() == "" ? 0 : Convert.ToInt32(drow[0]["EnterQTY"]);
                     int pBillQty = Convert.ToInt32(drow[0]["BillQTY"]);
-                    pTotal = pBillQty + pEnterQty;
+                    //pTotal = pBillQty + pEnterQty;
+                    pTotal = pEnterQty + 1;
                     if (pBillQty == pTotal)
                     {
                         drow[0]["CellColor"] = "Green";
                     }
-                    else
+                    else if(pBillQty < pTotal)
                     {
                         drow[0]["CellColor"] = "Orange";
                     }
@@ -101,7 +102,6 @@ namespace IMS_Client_2.StockManagement
                         DataTable dt = ds.Tables[0];
                         if (ObjUtil.ValidateTable(dt))
                         {
-
                             DataRow row = dtStoreTransfer.NewRow();
                             row["Barcode"] = dt.Rows[0]["Barcode"];
                             row["CellColor"] = dt.Rows[0]["CellColor"];
@@ -118,6 +118,10 @@ namespace IMS_Client_2.StockManagement
 
                             txtBarCode.Clear();
                             txtBarCode.Focus();
+                        }
+                        else
+                        {
+                            clsUtility.ShowInfoMessage("No Product Found for the barcode value : " + txtBarCode.Text, clsUtility.strProjectTitle);
                         }
                     }
                     return;
@@ -140,9 +144,7 @@ namespace IMS_Client_2.StockManagement
         private void dgvProductDetails_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             ObjUtil.SetRowNumber(dgvProductDetails);
-            ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill);
-
-            
+            ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill, Color.White);
 
             dgvProductDetails.Columns["TransferItemID"].Visible = false;
             dgvProductDetails.Columns["StoreBillDetailsID"].Visible = false;
@@ -152,8 +154,6 @@ namespace IMS_Client_2.StockManagement
             dgvProductDetails.Columns["TotalQTY"].Visible = false;
             dgvProductDetails.Columns["Total"].Visible = false;
             dgvProductDetails.Columns["CellColor"].Visible = false;
-
-
 
             for (int i = 0; i < dgvProductDetails.Rows.Count; i++)
             {
@@ -175,6 +175,11 @@ namespace IMS_Client_2.StockManagement
                 }
             }
             dgvProductDetails.ClearSelection();
+            //dgvProductDetails.RowsDefaultCellStyle.SelectionBackColor = Color.White;
+            //dgvProductDetails.RowsDefaultCellStyle.SelectionForeColor = Color.Black;
+            dgvProductDetails.RowsDefaultCellStyle.SelectionBackColor = Color.Transparent;
+            dgvProductDetails.RowsDefaultCellStyle.SelectionForeColor = Color.Transparent;
+            //1dgvProductDetails.SelectionMode = DataGridViewSelectionMode.CellSelect;
         }
 
         private Image GetProductPhoto(int ProductID)

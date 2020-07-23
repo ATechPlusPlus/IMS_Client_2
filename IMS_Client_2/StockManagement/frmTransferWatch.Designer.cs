@@ -29,18 +29,18 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTransferWatch));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.dgvTransferWatch = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rdSearchByAll = new System.Windows.Forms.RadioButton();
             this.rdByBillStatus = new System.Windows.Forms.RadioButton();
             this.cmbBillStatus = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dtpToDate = new System.Windows.Forms.DateTimePicker();
             this.dtpFromDate = new System.Windows.Forms.DateTimePicker();
             this.rdByDate = new System.Windows.Forms.RadioButton();
-            this.rdSearchByAll = new System.Windows.Forms.RadioButton();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransferWatch)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -76,14 +76,14 @@
             this.dgvTransferWatch.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvTransferWatch.BackgroundColor = System.Drawing.Color.White;
             this.dgvTransferWatch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvTransferWatch.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvTransferWatch.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvTransferWatch.Location = new System.Drawing.Point(4, 128);
             this.dgvTransferWatch.Name = "dgvTransferWatch";
             this.dgvTransferWatch.ReadOnly = true;
@@ -109,6 +109,20 @@
             this.groupBox1.TabIndex = 212;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
+            // 
+            // rdSearchByAll
+            // 
+            this.rdSearchByAll.AutoSize = true;
+            this.rdSearchByAll.Checked = true;
+            this.rdSearchByAll.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdSearchByAll.Location = new System.Drawing.Point(821, 28);
+            this.rdSearchByAll.Name = "rdSearchByAll";
+            this.rdSearchByAll.Size = new System.Drawing.Size(79, 21);
+            this.rdSearchByAll.TabIndex = 255;
+            this.rdSearchByAll.TabStop = true;
+            this.rdSearchByAll.Text = "Show All";
+            this.rdSearchByAll.UseVisualStyleBackColor = true;
+            this.rdSearchByAll.CheckedChanged += new System.EventHandler(this.rdSearchByAll_CheckedChanged);
             // 
             // rdByBillStatus
             // 
@@ -181,20 +195,6 @@
             this.rdByDate.Text = "By Date :";
             this.rdByDate.UseVisualStyleBackColor = true;
             this.rdByDate.CheckedChanged += new System.EventHandler(this.rdByDate_CheckedChanged);
-            // 
-            // rdSearchByAll
-            // 
-            this.rdSearchByAll.AutoSize = true;
-            this.rdSearchByAll.Checked = true;
-            this.rdSearchByAll.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdSearchByAll.Location = new System.Drawing.Point(821, 28);
-            this.rdSearchByAll.Name = "rdSearchByAll";
-            this.rdSearchByAll.Size = new System.Drawing.Size(79, 21);
-            this.rdSearchByAll.TabIndex = 255;
-            this.rdSearchByAll.TabStop = true;
-            this.rdSearchByAll.Text = "Show All";
-            this.rdSearchByAll.UseVisualStyleBackColor = true;
-            this.rdSearchByAll.CheckedChanged += new System.EventHandler(this.rdSearchByAll_CheckedChanged);
             // 
             // frmTransferWatch
             // 

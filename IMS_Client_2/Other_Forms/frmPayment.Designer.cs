@@ -125,7 +125,6 @@
             this.txtPaymentAutoID.Name = "txtPaymentAutoID";
             this.txtPaymentAutoID.Size = new System.Drawing.Size(163, 25);
             this.txtPaymentAutoID.TabIndex = 222;
-            this.txtPaymentAutoID.TextChanged += new System.EventHandler(this.txtPaymentAutoID_TextChanged);
             this.txtPaymentAutoID.Enter += new System.EventHandler(this.txtPaymentAutoID_Enter);
             this.txtPaymentAutoID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPaymentAutoID_KeyPress);
             this.txtPaymentAutoID.Leave += new System.EventHandler(this.txtPaymentAutoID_Leave);
@@ -212,7 +211,6 @@
             this.txtAmount.Size = new System.Drawing.Size(129, 25);
             this.txtAmount.TabIndex = 257;
             this.txtAmount.Text = "0";
-            this.txtAmount.TextChanged += new System.EventHandler(this.txtAmount_TextChanged);
             // 
             // label2
             // 

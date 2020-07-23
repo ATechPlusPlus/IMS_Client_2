@@ -89,7 +89,14 @@ namespace IMS_Client_2.StockManagement
                 cmbBillStatus.SelectedIndex = -1;
                 cmbBillStatus.Enabled = false;
 
-                dgvTransferWatch.DataSource = null;
+                if (dgvTransferWatch.Columns.Contains("ColView"))
+                {
+                    dgvTransferWatch.Columns.Remove("ColView");
+                }
+                if (dgvTransferWatch.Columns.Contains("Sr.No."))
+                {
+                    dgvTransferWatch.Columns.Remove("Sr.No.");
+                }
             }
             else
             {
@@ -108,7 +115,14 @@ namespace IMS_Client_2.StockManagement
                 dtpFromDate.Value = DateTime.Now;
                 dtpToDate.Value = DateTime.Now;
 
-                dgvTransferWatch.DataSource = null;
+                if (dgvTransferWatch.Columns.Contains("ColView"))
+                {
+                    dgvTransferWatch.Columns.Remove("ColView");
+                }
+                if (dgvTransferWatch.Columns.Contains("Sr.No."))
+                {
+                    dgvTransferWatch.Columns.Remove("Sr.No.");
+                }
             }
             else
             {

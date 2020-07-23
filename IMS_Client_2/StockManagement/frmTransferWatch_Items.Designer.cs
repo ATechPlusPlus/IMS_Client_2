@@ -95,7 +95,6 @@
             this.dgvTransferWatch.Size = new System.Drawing.Size(744, 293);
             this.dgvTransferWatch.TabIndex = 212;
             this.dgvTransferWatch.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvTransferWatch_DataBindingComplete);
-            this.dgvTransferWatch.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTransferWatch_RowEnter);
             // 
             // txtTotalBillQTY
             // 

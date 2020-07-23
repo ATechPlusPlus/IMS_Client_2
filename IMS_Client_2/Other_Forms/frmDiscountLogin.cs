@@ -16,14 +16,17 @@ namespace IMS_Client_2.Other_Forms
         {
             InitializeComponent();
         }
+
         public static bool IsValidAdmin = false;
-        clsUtility objUtil = new clsUtility();
+        
+        clsUtility ObjUtil = new clsUtility();
         clsConnection_DAL ObjDAL = new clsConnection_DAL(true);
+
         private void btnSaveData_Click(object sender, EventArgs e)
         {
-            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.UserManagement", "UserID,UserName,Password,IsAdmin", "Password='" + objUtil.Encrypt(txtDiscountPass.Text, true) + "' and ISNULL(Isblock,0)=0", "UserID DESC");
+            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.UserManagement", "UserID,UserName,Password,IsAdmin", "Password='" + ObjUtil.Encrypt(txtDiscountPass.Text, true) + "' AND ISNULL(Isblock,0)=0", "UserID DESC");
             //int a = ObjDAL.ExecuteScalarInt("select Count(*) From CyberCafeManagement.dbo.login where UserName='" + txtUserName.Text.Trim() + "' and Password='" + txtPassword.Text.Trim() + "'");                 
-            if (dt != null && dt.Rows.Count > 0)
+            if (ObjUtil.ValidateTable(dt))
             {
                 if (Convert.ToBoolean(dt.Rows[0]["IsAdmin"]))
                 {
@@ -34,14 +37,14 @@ namespace IMS_Client_2.Other_Forms
                 {
                     IsValidAdmin = false;
                     clsUtility.ShowInfoMessage("User is not an Admin. Please enter admin password.", clsUtility.strProjectTitle);
+                    txtDiscountPass.Focus();
                 }
-              
-                
             }
             else
             {
                 IsValidAdmin = false;
                 clsUtility.ShowInfoMessage("Invalid password..", clsUtility.strProjectTitle);
+                txtDiscountPass.Focus();
             }
         }
     }

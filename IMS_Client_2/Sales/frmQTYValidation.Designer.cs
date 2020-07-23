@@ -35,7 +35,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnSaveData = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
@@ -71,8 +71,10 @@
             this.txtQTY.Location = new System.Drawing.Point(126, 128);
             this.txtQTY.Name = "txtQTY";
             this.txtQTY.Size = new System.Drawing.Size(178, 25);
-            this.txtQTY.TabIndex = 203;
-            this.txtQTY.TextChanged += new System.EventHandler(this.txtBarCode_TextChanged);
+            this.txtQTY.TabIndex = 0;
+            this.txtQTY.Enter += new System.EventHandler(this.txtQTY_Enter);
+            this.txtQTY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtQTY_KeyPress);
+            this.txtQTY.Leave += new System.EventHandler(this.txtQTY_Leave);
             // 
             // label4
             // 
@@ -85,7 +87,6 @@
             this.label4.Size = new System.Drawing.Size(306, 17);
             this.label4.TabIndex = 204;
             this.label4.Text = "Please count items and add it in the \"Added QTY \"";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label1
             // 
@@ -111,19 +112,23 @@
             this.btnSaveData.Text = "OK";
             this.btnSaveData.UseVisualStyleBackColor = true;
             this.btnSaveData.Click += new System.EventHandler(this.btnSaveData_Click);
+            this.btnSaveData.MouseEnter += new System.EventHandler(this.btnSaveData_MouseEnter);
+            this.btnSaveData.MouseLeave += new System.EventHandler(this.btnSaveData_MouseLeave);
             // 
-            // button1
+            // btnClose
             // 
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(239, 223);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(76, 25);
-            this.button1.TabIndex = 252;
-            this.button1.Text = "Close";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnClose.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Location = new System.Drawing.Point(239, 223);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(76, 25);
+            this.btnClose.TabIndex = 252;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.MouseEnter += new System.EventHandler(this.btnSaveData_MouseEnter);
+            this.btnClose.MouseLeave += new System.EventHandler(this.btnSaveData_MouseLeave);
             // 
             // label2
             // 
@@ -149,6 +154,7 @@
             // 
             // frmQTYValidation
             // 
+            this.AcceptButton = this.btnSaveData;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
@@ -156,7 +162,7 @@
             this.ClientSize = new System.Drawing.Size(327, 260);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSaveData);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtQTY);
@@ -185,7 +191,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnSaveData;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
     }
