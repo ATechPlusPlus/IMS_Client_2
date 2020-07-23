@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ds_MiniSalesReport" targetNamespace="http://tempuri.org/ds_MiniSalesReport.xsd" xmlns:mstns="http://tempuri.org/ds_MiniSalesReport.xsd" xmlns="http://tempuri.org/ds_MiniSalesReport.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ds_MiniSalesReport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ds_MiniSalesReport" msprop:Generator_UserDSName="ds_MiniSalesReport">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dt_MiniSales" msprop:Generator_TableClassName="dt_MiniSalesDataTable" msprop:Generator_TableVarName="tabledt_MiniSales" msprop:Generator_RowChangedName="dt_MiniSalesRowChanged" msprop:Generator_TablePropName="dt_MiniSales" msprop:Generator_RowDeletingName="dt_MiniSalesRowDeleting" msprop:Generator_RowChangingName="dt_MiniSalesRowChanging" msprop:Generator_RowEvHandlerName="dt_MiniSalesRowChangeEventHandler" msprop:Generator_RowDeletedName="dt_MiniSalesRowDeleted" msprop:Generator_RowClassName="dt_MiniSalesRow" msprop:Generator_UserTableName="dt_MiniSales" msprop:Generator_RowEvArgName="dt_MiniSalesRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="GenericColumn" msprop:Generator_ColumnVarNameInTable="columnGenericColumn" msprop:Generator_ColumnPropNameInRow="GenericColumn" msprop:Generator_ColumnPropNameInTable="GenericColumnColumn" msprop:Generator_UserColumnName="GenericColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="QTY" msprop:Generator_ColumnVarNameInTable="columnQTY" msprop:Generator_ColumnPropNameInRow="QTY" msprop:Generator_ColumnPropNameInTable="QTYColumn" msprop:Generator_UserColumnName="QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="Rate" msprop:Generator_ColumnVarNameInTable="columnRate" msprop:Generator_ColumnPropNameInRow="Rate" msprop:Generator_ColumnPropNameInTable="RateColumn" msprop:Generator_UserColumnName="Rate" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

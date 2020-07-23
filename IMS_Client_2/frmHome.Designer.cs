@@ -96,6 +96,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.pettyCashExpReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.miniSalesReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -441,6 +442,7 @@
             this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SalesReport_ToolStrip,
             this.pettyCashExpReportToolStripMenuItem});
+            this.miniSalesReportToolStripMenuItem});
             this.reportsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("reportsToolStripMenuItem.Image")));
             this.reportsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
@@ -451,7 +453,7 @@
             // SalesReport_ToolStrip
             // 
             this.SalesReport_ToolStrip.Name = "SalesReport_ToolStrip";
-            this.SalesReport_ToolStrip.Size = new System.Drawing.Size(218, 24);
+            this.SalesReport_ToolStrip.Size = new System.Drawing.Size(187, 24);
             this.SalesReport_ToolStrip.Text = "Sales Report";
             this.SalesReport_ToolStrip.ToolTipText = "Monthly Sales Report";
             this.SalesReport_ToolStrip.Click += new System.EventHandler(this.SalesReport_ToolStrip_Click);
@@ -737,7 +739,14 @@
             this.pettyCashExpReportToolStripMenuItem.Name = "pettyCashExpReportToolStripMenuItem";
             this.pettyCashExpReportToolStripMenuItem.Size = new System.Drawing.Size(218, 24);
             this.pettyCashExpReportToolStripMenuItem.Text = "Petty Cash Exp Report";
+            
+            // miniSalesReportToolStripMenuItem
+
             this.pettyCashExpReportToolStripMenuItem.Click += new System.EventHandler(this.pettyCashExpReportToolStripMenuItem_Click);
+            this.miniSalesReportToolStripMenuItem.Name = "miniSalesReportToolStripMenuItem";
+            this.miniSalesReportToolStripMenuItem.Size = new System.Drawing.Size(187, 24);
+            this.miniSalesReportToolStripMenuItem.Text = "Mini Sales Report";
+            this.miniSalesReportToolStripMenuItem.Click += new System.EventHandler(this.miniSalesReportToolStripMenuItem_Click);
             // 
             // frmHome
             // 
@@ -848,5 +857,6 @@
         private System.Windows.Forms.ToolStripStatusLabel lblShopName;
         private System.Windows.Forms.ToolStripMenuItem loadPettyCashToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pettyCashExpReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem miniSalesReportToolStripMenuItem;
     }
 }

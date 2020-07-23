@@ -383,6 +383,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ds_InvoiceHeader.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Report\RDLC_DataSets\ds_MiniSalesReport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_MiniSalesReport.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Report\RDLC_DataSets\ds_SalesDetails.cs">
       <DependentUpon>ds_SalesDetails.xsd</DependentUpon>
     </Compile>
@@ -633,6 +638,7 @@
       <DependentUpon>frmPettyCashExpReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\RDLC_Files\CashClosingReport.rdlc" />
+    <EmbeddedResource Include="Report\RDLC_Files\MiniSalesReport.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\SalesInoviceReport.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\Sales_Invoice.rdlc" />
     <EmbeddedResource Include="Report\Report_Forms\frmClosingCashReport.resx">
@@ -728,6 +734,17 @@
     </None>
     <None Include="Report\RDLC_DataSets\ds_InvoiceHeader.xss">
       <DependentUpon>ds_InvoiceHeader.xsd</DependentUpon>
+    </None>
+    <None Include="Report\RDLC_DataSets\ds_MiniSalesReport.xsc">
+      <DependentUpon>ds_MiniSalesReport.xsd</DependentUpon>
+    </None>
+    <None Include="Report\RDLC_DataSets\ds_MiniSalesReport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_MiniSalesReport.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Report\RDLC_DataSets\ds_MiniSalesReport.xss">
+      <DependentUpon>ds_MiniSalesReport.xsd</DependentUpon>
     </None>
     <None Include="Report\RDLC_DataSets\ds_SalesDetails.xsc">
       <DependentUpon>ds_SalesDetails.xsd</DependentUpon>

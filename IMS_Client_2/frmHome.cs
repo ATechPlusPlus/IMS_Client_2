@@ -762,5 +762,12 @@ namespace IMS_Client_2
             Report.frmPettyCashExpReport Obj = new Report.frmPettyCashExpReport();
             Obj.ShowDialog();
         }
+
+        private void miniSalesReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            Report.Report_Forms.tblMiniSalesReport frmminiSalesReport = new Report.Report_Forms.tblMiniSalesReport();
+            frmminiSalesReport.Show();
+        }
     }
 }
