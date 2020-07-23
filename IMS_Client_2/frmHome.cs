@@ -749,5 +749,12 @@ namespace IMS_Client_2
             Other_Forms.frmPettyCash Obj = new Other_Forms.frmPettyCash();
             Obj.Show();
         }
+
+        private void miniSalesReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            Report.Report_Forms.tblMiniSalesReport frmminiSalesReport = new Report.Report_Forms.tblMiniSalesReport();
+            frmminiSalesReport.Show();
+        }
     }
 }

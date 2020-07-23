@@ -74,6 +74,7 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.CurrencyValueSetting_ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.defaultStoreSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadPettyCashToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblLoginName = new System.Windows.Forms.ToolStripStatusLabel();
@@ -94,7 +95,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.loadPettyCashToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.miniSalesReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -438,7 +439,8 @@
             // reportsToolStripMenuItem
             // 
             this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.SalesReport_ToolStrip});
+            this.SalesReport_ToolStrip,
+            this.miniSalesReportToolStripMenuItem});
             this.reportsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("reportsToolStripMenuItem.Image")));
             this.reportsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
@@ -449,7 +451,7 @@
             // SalesReport_ToolStrip
             // 
             this.SalesReport_ToolStrip.Name = "SalesReport_ToolStrip";
-            this.SalesReport_ToolStrip.Size = new System.Drawing.Size(156, 24);
+            this.SalesReport_ToolStrip.Size = new System.Drawing.Size(187, 24);
             this.SalesReport_ToolStrip.Text = "Sales Report";
             this.SalesReport_ToolStrip.ToolTipText = "Monthly Sales Report";
             this.SalesReport_ToolStrip.Click += new System.EventHandler(this.SalesReport_ToolStrip_Click);
@@ -490,6 +492,13 @@
             this.defaultStoreSettingsToolStripMenuItem.Size = new System.Drawing.Size(216, 24);
             this.defaultStoreSettingsToolStripMenuItem.Text = "Other Settings";
             this.defaultStoreSettingsToolStripMenuItem.Click += new System.EventHandler(this.defaultStoreSettingsToolStripMenuItem_Click);
+            // 
+            // loadPettyCashToolStripMenuItem
+            // 
+            this.loadPettyCashToolStripMenuItem.Name = "loadPettyCashToolStripMenuItem";
+            this.loadPettyCashToolStripMenuItem.Size = new System.Drawing.Size(216, 24);
+            this.loadPettyCashToolStripMenuItem.Text = "Load Petty Cash";
+            this.loadPettyCashToolStripMenuItem.Click += new System.EventHandler(this.loadPettyCashToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -723,12 +732,12 @@
             this.label9.TabIndex = 28;
             this.label9.Text = "Today\'s Cash Box";
             // 
-            // loadPettyCashToolStripMenuItem
+            // miniSalesReportToolStripMenuItem
             // 
-            this.loadPettyCashToolStripMenuItem.Name = "loadPettyCashToolStripMenuItem";
-            this.loadPettyCashToolStripMenuItem.Size = new System.Drawing.Size(216, 24);
-            this.loadPettyCashToolStripMenuItem.Text = "Load Petty Cash";
-            this.loadPettyCashToolStripMenuItem.Click += new System.EventHandler(this.loadPettyCashToolStripMenuItem_Click);
+            this.miniSalesReportToolStripMenuItem.Name = "miniSalesReportToolStripMenuItem";
+            this.miniSalesReportToolStripMenuItem.Size = new System.Drawing.Size(187, 24);
+            this.miniSalesReportToolStripMenuItem.Text = "Mini Sales Report";
+            this.miniSalesReportToolStripMenuItem.Click += new System.EventHandler(this.miniSalesReportToolStripMenuItem_Click);
             // 
             // frmHome
             // 
@@ -838,5 +847,6 @@
         private System.Windows.Forms.ToolStripMenuItem transferWatchToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel lblShopName;
         private System.Windows.Forms.ToolStripMenuItem loadPettyCashToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem miniSalesReportToolStripMenuItem;
     }
 }
