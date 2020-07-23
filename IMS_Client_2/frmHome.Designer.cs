@@ -441,7 +441,7 @@
             // 
             this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SalesReport_ToolStrip,
-            this.pettyCashExpReportToolStripMenuItem});
+            this.pettyCashExpReportToolStripMenuItem,
             this.miniSalesReportToolStripMenuItem});
             this.reportsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("reportsToolStripMenuItem.Image")));
             this.reportsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
