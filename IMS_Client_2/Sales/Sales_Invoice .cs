@@ -142,7 +142,6 @@ namespace IMS_Client_2.Sales
                 decimal adAmount = CurrentRate - odlRate;
                 drow["Adj_Amount"] = adAmount.ToString();
             }
-
         }
         private void AddRowToReplaceItemDetails(string productID, string name, string qty, string rate, string total,
        string BarCode, string SizeID, string Size, string ColorID, string Color)
@@ -273,16 +272,13 @@ namespace IMS_Client_2.Sales
                 //SequenceInvoice : this is a sequance object created in SQL ( this is not a table)
                 int LastID = ObjDAL.ExecuteScalarInt("SELECT NEXT VALUE FOR " + clsUtility.DBName + ".[dbo].SequenceInvoice");
                 InvoiceNumber = "RE-" + LastID;
-
             }
             else
             {
                 //SequenceInvoice : this is a sequance object created in SQL ( this is not a table)
                 int LastID = ObjDAL.ExecuteScalarInt("SELECT NEXT VALUE FOR " + clsUtility.DBName + ".[dbo].SequenceInvoice");
                 InvoiceNumber = "INV-" + LastID;
-
             }
-
             return InvoiceNumber;
         }
         private string GenerateReplaceReturnInvoiceNumber()
@@ -290,7 +286,6 @@ namespace IMS_Client_2.Sales
             //SequenceInvoice : this is a sequance object created in SQL ( this is not a table)
             int LastID = ObjDAL.ExecuteScalarInt("SELECT NEXT VALUE FOR " + clsUtility.DBName + ".[dbo].SequenceInvoice");
             string InvoiceNumber = "INV-" + LastID;
-
             return InvoiceNumber;
         }
         private void BindStoreDetails()
@@ -302,7 +297,8 @@ namespace IMS_Client_2.Sales
             cmbShop.ValueMember = "StoreID";
             cmbShop.SelectedIndex = -1;
             // set Default store
-            int deafultStoreID = ObjDAL.ExecuteScalarInt("SELECT Storeid FROM " + clsUtility.DBName + ".[dbo].[DefaultStoreSetting] WITH(NOLOCK) WHERE MachineName = '" + Environment.MachineName + "'");
+            //int deafultStoreID = ObjDAL.ExecuteScalarInt("SELECT Storeid FROM " + clsUtility.DBName + ".[dbo].[DefaultStoreSetting] WITH(NOLOCK) WHERE MachineName = '" + Environment.MachineName + "'");
+            int deafultStoreID = frmHome.Home_StoreID;
             cmbShop.SelectedValue = deafultStoreID;
             if (deafultStoreID == 0)
             {
@@ -355,7 +351,7 @@ namespace IMS_Client_2.Sales
         {
             try
             {
-                DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT Empid,Name FROM " + clsUtility.DBName + ".dbo.employeeDetails WHERE [Name] Like '" + txtSalesMan.Text + "%'");
+                DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT Empid,Name FROM " + clsUtility.DBName + ".dbo.employeeDetails WITH(NOLOCK) WHERE [Name] Like '" + txtSalesMan.Text + "%'");
                 if (ObjUtil.ValidateTable(dt))
                 {
                     ObjUtil.SetControlData(txtSalesMan, "Name");
@@ -392,8 +388,8 @@ namespace IMS_Client_2.Sales
             {
                 if (dt.Rows[0]["Photo"] != DBNull.Value)
                 {
-                    DataTable dtImagePath = ObjDAL.ExecuteSelectStatement("  select ImagePath, Extension from [IMS_Client_2].dbo.DefaultStoreSetting where MachineName='" + Environment.MachineName + "'");
-                    if (dtImagePath.Rows.Count > 0)
+                    DataTable dtImagePath = ObjDAL.ExecuteSelectStatement("  SELECT ImagePath, Extension FROM " + clsUtility.DBName + ".dbo.DefaultStoreSetting WITH(NOLOCK) WHERE MachineName='" + Environment.MachineName + "'");
+                    if (ObjUtil.ValidateTable(dtImagePath))
                     {
                         if (dtImagePath.Rows[0]["ImagePath"] != DBNull.Value)
                         {
@@ -412,8 +408,7 @@ namespace IMS_Client_2.Sales
                         }
                         else
                         {
-                            MessageBox.Show("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
-
+                            clsUtility.ShowInfoMessage("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
                         }
                     }
                 }
@@ -429,8 +424,6 @@ namespace IMS_Client_2.Sales
                 {
                     return;
                 }
-
-               
             }
             else
             {
@@ -720,8 +713,6 @@ namespace IMS_Client_2.Sales
 
         private bool ValidateGrandTotal()
         {
-
-
             decimal FinalTotal = Convert.ToDecimal(txtCash.Text) + Convert.ToDecimal(txtCredit.Text);
 
             decimal GrandTotal = Convert.ToDecimal(txtGrandTotal.Text);
@@ -734,14 +725,7 @@ namespace IMS_Client_2.Sales
             {
                 return false;
             }
-
-
-
-
-
-
         }
-
 
         private void dgvProductDetails_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -768,7 +752,7 @@ namespace IMS_Client_2.Sales
 
         private void ClearAll()
         {
-       
+
             txtOldBillAmount.ReadOnly = false;
 
             Other_Forms.frmDiscountLogin.IsValidAdmin = false;
@@ -833,8 +817,6 @@ namespace IMS_Client_2.Sales
                 clsUtility.ShowInfoMessage("Cash and Credit amount must be equal to Grand Total.", clsUtility.strProjectTitle);
                 return false;
             }
-
-           
             return true;
         }
         private void InsertPayment(int SalesInvoiceID)
@@ -868,9 +850,6 @@ namespace IMS_Client_2.Sales
                             amount = IMS_Client_2.Other_Forms.frmPayment.CashAmount.ToString();
                             number = "000000";
                             break;
-
-
-
                     }
 
                     ObjDAL.SetColumnData("PaymentType", SqlDbType.NVarChar, IMS_Client_2.Other_Forms.frmPayment.lstPaymnetType[i].ToString());
@@ -878,18 +857,14 @@ namespace IMS_Client_2.Sales
                     ObjDAL.SetColumnData("SalesInvoiceID", SqlDbType.Int, SalesInvoiceID);
                     ObjDAL.SetColumnData("PaymentNumber", SqlDbType.NVarChar, number);
 
-
                     ObjDAL.InsertData(clsUtility.DBName + ".dbo.tblSalesPayment", false);
                 }
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString()); ;
-
+                clsUtility.ShowErrorMessage(ex.ToString(),clsUtility.strProjectTitle);
             }
-
-
         }
         private int DoNewSales()
         {
@@ -910,7 +885,6 @@ namespace IMS_Client_2.Sales
             ObjDAL.SetColumnData("CustomerID", SqlDbType.Int, txtCustomerID.Text);
             ObjDAL.SetColumnData("SalesMan", SqlDbType.Int, txtEmpID.Text);
             ObjDAL.SetColumnData("ShopeID", SqlDbType.Int, cmbShop.SelectedValue.ToString());
-
 
             int InvoiceID = ObjDAL.InsertData(clsUtility.DBName + ".dbo.SalesInvoiceDetails", true);
             if (InvoiceID == -1)
@@ -971,8 +945,6 @@ namespace IMS_Client_2.Sales
                         ObjDAL.ExecuteNonQuery(strUpdate);
                     }
                 }
-
-
             }
             return InvoiceID;
         }
@@ -1067,8 +1039,6 @@ namespace IMS_Client_2.Sales
                     clsUtility.ShowInfoMessage("Data has been saved successfully.", clsUtility.strProjectTitle);
                     ClearAll();
 
-
-
                     if (button.Name == "btnSaveData")
                     {
                         this.Close();
@@ -1126,8 +1096,6 @@ namespace IMS_Client_2.Sales
             {
                 if (e.KeyData == Keys.Enter)
                 {
-
-
                     if (IsReplaceReturnMode && radReplace.Checked)
                     {
                         // get the data froms sales.
@@ -1156,11 +1124,11 @@ namespace IMS_Client_2.Sales
                         " QTY, Rate, ColorID, " +
                         " (SELECT ColorName FROM ColorMaster WHERE ColorID = s1.ColorID) AS Color, " +
                         " (SELECT Size FROM SizeMaster WHERE SizeID = s1.SizeID) AS Size,SizeID, " +
-                        "'"+ barcode + "' AS BarCode FROM SalesDetails s1" +
+                        "'" + barcode + "' AS BarCode FROM SalesDetails s1" +
                         " WHERE InvoiceID = " + OldInvoiceID + " ) AS tb WHERE BarCode = '" + barcode + "'";
 
             DataTable dtSalesDetails = ObjDAL.ExecuteSelectStatement(strQ);
-            if (dtSalesDetails.Rows.Count > 0)
+            if (ObjUtil.ValidateTable(dtSalesDetails))
             {
                 try
                 {
@@ -1198,7 +1166,6 @@ namespace IMS_Client_2.Sales
                 {
                     clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
                 }
-
             }
             else
             {
@@ -1248,9 +1215,6 @@ namespace IMS_Client_2.Sales
         }
         private void picCash_Click(object sender, EventArgs e)
         {
-
-
-
             lblPMode.Text = "Cash";
             Other_Forms.frmPayment frmPayment = new Other_Forms.frmPayment();
 
@@ -1262,7 +1226,6 @@ namespace IMS_Client_2.Sales
 
             txtCredit.Text = Other_Forms.frmPayment.GetTotalCreditAmount().ToString();
             txtCash.Text = Other_Forms.frmPayment.GetTotalCash().ToString();
-
         }
         private void picKnet_Click(object sender, EventArgs e)
         {
@@ -1272,8 +1235,6 @@ namespace IMS_Client_2.Sales
             frmPayment.lblPaymentMode.Text = "K Net";
             frmPayment.picPaymentMode.Image = picKnet.Image;
             frmPayment.ShowDialog();
-
-
 
             txtCredit.Text = Other_Forms.frmPayment.GetTotalCreditAmount().ToString();
             txtCash.Text = Other_Forms.frmPayment.GetTotalCash().ToString();
@@ -1288,7 +1249,6 @@ namespace IMS_Client_2.Sales
             frmPayment.picPaymentMode.Image = picVisa.Image;
             frmPayment.ShowDialog();
 
-
             txtCredit.Text = Other_Forms.frmPayment.GetTotalCreditAmount().ToString();
             txtCash.Text = Other_Forms.frmPayment.GetTotalCash().ToString();
         }
@@ -1301,15 +1261,10 @@ namespace IMS_Client_2.Sales
             frmPayment.picPaymentMode.Image = PicMaster.Image;
             frmPayment.ShowDialog();
 
-
             txtCredit.Text = Other_Forms.frmPayment.GetTotalCreditAmount().ToString();
             txtCash.Text = Other_Forms.frmPayment.GetTotalCash().ToString();
         }
 
-        private void picOther_Click(object sender, EventArgs e)
-        {
-
-        }
         private void lblActiveStatus_Click(object sender, EventArgs e)
         {
             txtInvoiceNumber.ReadOnly = false;
@@ -1424,11 +1379,6 @@ namespace IMS_Client_2.Sales
             ObjUtil.SetTextHighlightColor(sender, System.Drawing.Color.White);
         }
 
-        private void txtDiscount_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void txtDiscount_DoubleClick(object sender, EventArgs e)
         {
             Other_Forms.frmDiscountLogin frmDiscountLogin = new Other_Forms.frmDiscountLogin();
@@ -1441,8 +1391,6 @@ namespace IMS_Client_2.Sales
             {
                 txtDiscount.ReadOnly = true;
             }
-
-
         }
 
         private void dgvReplaceReturn_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -1461,17 +1409,14 @@ namespace IMS_Client_2.Sales
             //dgvProductDetails.Columns[e.ColumnIndex].Name == "Rate" ||
             if (dgvReplaceReturn.Columns[e.ColumnIndex].Name == "ReplaceRate")
             {
-               
                 decimal QTY = Convert.ToDecimal(dgvReplaceReturn.Rows[e.RowIndex].Cells["ReplaceQTY"].Value);
-               
+
                 decimal Rate = Convert.ToDecimal(dgvReplaceReturn.Rows[e.RowIndex].Cells["ReplaceRate"].Value);
                 decimal Total = QTY * Rate;
 
                 dgvReplaceReturn.Rows[e.RowIndex].Cells["ColReplaceTotal"].Value = Total;
 
-
-               CalculateGrandTotal();
-              
+                CalculateGrandTotal();
             }
         }
 

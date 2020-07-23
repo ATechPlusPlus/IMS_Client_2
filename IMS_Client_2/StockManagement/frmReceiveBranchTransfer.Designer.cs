@@ -32,9 +32,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.dgvProductDetails = new System.Windows.Forms.DataGridView();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.btnSaveData = new System.Windows.Forms.Button();
-            this.lnkRefreshData = new System.Windows.Forms.LinkLabel();
             this.TransferID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FromStore = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Branch = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,6 +41,9 @@
             this.Sender = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Post = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Identical = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnSaveData = new System.Windows.Forms.Button();
+            this.lnkRefreshData = new System.Windows.Forms.LinkLabel();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).BeginInit();
             this.SuspendLayout();
@@ -95,50 +95,6 @@
             this.dgvProductDetails.TabIndex = 205;
             this.dgvProductDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellClick);
             this.dgvProductDetails.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvProductDetails_DataBindingComplete);
-            // 
-            // btnClose
-            // 
-            this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnClose.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(721, 312);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(76, 25);
-            this.btnClose.TabIndex = 254;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // btnSaveData
-            // 
-            this.btnSaveData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnSaveData.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSaveData.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSaveData.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveData.Location = new System.Drawing.Point(630, 312);
-            this.btnSaveData.Name = "btnSaveData";
-            this.btnSaveData.Size = new System.Drawing.Size(76, 25);
-            this.btnSaveData.TabIndex = 253;
-            this.btnSaveData.Text = "Recieve ";
-            this.btnSaveData.UseVisualStyleBackColor = true;
-            this.btnSaveData.Click += new System.EventHandler(this.btnSaveData_Click);
-            this.btnSaveData.MouseEnter += new System.EventHandler(this.btnSaveData_MouseEnter);
-            this.btnSaveData.MouseLeave += new System.EventHandler(this.btnSaveData_MouseLeave);
-            // 
-            // lnkRefreshData
-            // 
-            this.lnkRefreshData.AutoSize = true;
-            this.lnkRefreshData.BackColor = System.Drawing.Color.Transparent;
-            this.lnkRefreshData.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnkRefreshData.Location = new System.Drawing.Point(626, 43);
-            this.lnkRefreshData.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lnkRefreshData.Name = "lnkRefreshData";
-            this.lnkRefreshData.Size = new System.Drawing.Size(100, 19);
-            this.lnkRefreshData.TabIndex = 255;
-            this.lnkRefreshData.TabStop = true;
-            this.lnkRefreshData.Text = "Refresh Data";
-            this.lnkRefreshData.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkRefreshData_LinkClicked);
             // 
             // TransferID
             // 
@@ -204,6 +160,52 @@
             this.Identical.HeaderText = "Identical";
             this.Identical.Name = "Identical";
             this.Identical.ReadOnly = true;
+            // 
+            // btnClose
+            // 
+            this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnClose.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Location = new System.Drawing.Point(721, 312);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(76, 25);
+            this.btnClose.TabIndex = 254;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.btnClose.MouseEnter += new System.EventHandler(this.btnSaveData_MouseEnter);
+            this.btnClose.MouseLeave += new System.EventHandler(this.btnSaveData_MouseLeave);
+            // 
+            // btnSaveData
+            // 
+            this.btnSaveData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSaveData.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSaveData.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSaveData.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveData.Location = new System.Drawing.Point(630, 312);
+            this.btnSaveData.Name = "btnSaveData";
+            this.btnSaveData.Size = new System.Drawing.Size(76, 25);
+            this.btnSaveData.TabIndex = 253;
+            this.btnSaveData.Text = "Recieve ";
+            this.btnSaveData.UseVisualStyleBackColor = true;
+            this.btnSaveData.Click += new System.EventHandler(this.btnSaveData_Click);
+            this.btnSaveData.MouseEnter += new System.EventHandler(this.btnSaveData_MouseEnter);
+            this.btnSaveData.MouseLeave += new System.EventHandler(this.btnSaveData_MouseLeave);
+            // 
+            // lnkRefreshData
+            // 
+            this.lnkRefreshData.AutoSize = true;
+            this.lnkRefreshData.BackColor = System.Drawing.Color.Transparent;
+            this.lnkRefreshData.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnkRefreshData.Location = new System.Drawing.Point(626, 43);
+            this.lnkRefreshData.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lnkRefreshData.Name = "lnkRefreshData";
+            this.lnkRefreshData.Size = new System.Drawing.Size(100, 19);
+            this.lnkRefreshData.TabIndex = 255;
+            this.lnkRefreshData.TabStop = true;
+            this.lnkRefreshData.Text = "Refresh Data";
+            this.lnkRefreshData.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkRefreshData_LinkClicked);
             // 
             // frmReceivedBranchTransfer
             // 

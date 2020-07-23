@@ -16,8 +16,6 @@ namespace IMS_Client_2.Other_Forms
         {
             InitializeComponent();
         }
-      
-
 
         public static string KNET_Number { get; set; }
       
@@ -33,7 +31,6 @@ namespace IMS_Client_2.Other_Forms
         public static decimal CashAmount { get; set; }
 
         public static List<string> lstPaymnetType = new List<string>();
-
 
         Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
         Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
@@ -61,7 +58,6 @@ namespace IMS_Client_2.Other_Forms
             {
                 txtAmount.Text = CashAmount.ToString();
                 txtPaymentAutoID.Text = "00000000";
-
             }
         }
         public static void ResetData()
@@ -100,8 +96,6 @@ namespace IMS_Client_2.Other_Forms
                 {
                     KNET_Amount = 0;
                     KNET_Number = txtPaymentAutoID.Text;
-
-
                 }
                 else if (lblPaymentMode.Text == "Visa")
                 {
@@ -116,10 +110,7 @@ namespace IMS_Client_2.Other_Forms
                 else if (lblPaymentMode.Text == "Cash")
                 {
                     CashAmount = Convert.ToDecimal(txtAmount.Text);
-
                 }
-
-
             }
             else
             {
@@ -132,8 +123,6 @@ namespace IMS_Client_2.Other_Forms
                 {
                     KNET_Amount = Convert.ToDecimal(txtAmount.Text);
                     KNET_Number = txtPaymentAutoID.Text;
-
-
                 }
                 else if (lblPaymentMode.Text == "Visa")
                 {
@@ -150,9 +139,7 @@ namespace IMS_Client_2.Other_Forms
                     CashAmount = Convert.ToDecimal(txtAmount.Text);
 
                 }
-
             }
-            
             this.Close();
         }
 
@@ -161,7 +148,6 @@ namespace IMS_Client_2.Other_Forms
             txtPaymentAutoID.Clear();
             txtAmount.Text = "0";
             this.Close();
-
         }
 
         private void frmPayment_Load(object sender, EventArgs e)
@@ -208,15 +194,6 @@ namespace IMS_Client_2.Other_Forms
         public static decimal GetTotalCash()
         {
             return Convert.ToDecimal(CashAmount);
-        }
-        private void txtAmount_TextChanged(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void txtPaymentAutoID_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

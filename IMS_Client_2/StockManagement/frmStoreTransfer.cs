@@ -48,9 +48,8 @@ namespace IMS_Client_2.StockManagement
 
         private void BindDefaultFromStore()
         {
-            string str = "select StoreID from DefaultStoreSetting where MachineName='" + Environment.MachineName + "'";
-
-            int deafultStoreID = ObjCon.ExecuteScalarInt("SELECT Storeid FROM " + clsUtility.DBName + ".[dbo].[DefaultStoreSetting] WITH(NOLOCK) WHERE MachineName = '" + Environment.MachineName + "'");
+            //int deafultStoreID = ObjCon.ExecuteScalarInt("SELECT Storeid FROM " + clsUtility.DBName + ".[dbo].[DefaultStoreSetting] WITH(NOLOCK) WHERE MachineName = '" + Environment.MachineName + "'");
+            int deafultStoreID = frmHome.Home_StoreID;
             cmdFrom.SelectedValue = deafultStoreID;
             if (deafultStoreID == 0)
             {
@@ -65,21 +64,17 @@ namespace IMS_Client_2.StockManagement
             string strQ = "";
             if (clsUtility.IsAdmin)
             {
-                 strQ = "select StoreID,StoreName from " + clsUtility.DBName + ".dbo.StoreMaster ";
+                strQ = "SELECT StoreID,StoreName FROM " + clsUtility.DBName + ".dbo.StoreMaster WITH(NOLOCK)";
                 cmdFrom.Enabled = true;
-
             }
             else
             {
                 cmdFrom.Enabled = false;
-                strQ = "select StoreID,StoreName from " + clsUtility.DBName + ".dbo.StoreMaster where StoreID in  " +
-                           " (select StoreID from  " + clsUtility.DBName + ".dbo.tblStoreUserRights where UserID = " + clsUtility.LoginID + ")";
-
+                strQ = "SELECT StoreID,StoreName FROM " + clsUtility.DBName + ".dbo.StoreMaster WHERE StoreID in  " +
+                           " (SELECT StoreID FROM  " + clsUtility.DBName + ".dbo.tblStoreUserRights WHERE UserID = " + clsUtility.LoginID + ")";
             }
-
-
             DataTable dtFromStore = ObjCon.ExecuteSelectStatement(strQ);
-            if (dtFromStore.Rows.Count > 0)
+            if (ObjUtil.ValidateTable(dtFromStore))
             {
                 cmdFrom.DataSource = dtFromStore;
                 cmdFrom.DisplayMember = "StoreName";
@@ -89,34 +84,29 @@ namespace IMS_Client_2.StockManagement
         private void LoadToStore()
         {
             string strQ = "";
-            if (cmdFrom.SelectedValue!=null)
+            if (cmdFrom.SelectedValue != null)
             {
 
                 if (clsUtility.IsAdmin)
                 {
-                    strQ = "select StoreID,StoreName from StoreMaster where StoreID not in (" + cmdFrom.SelectedValue + ")";
-
-                 
-
+                    strQ = "SELECT StoreID,StoreName FROM StoreMaster WITH(NOLOCK) WHERE StoreID NOT IN (" + cmdFrom.SelectedValue + ")";
                 }
                 else
                 {
-                     strQ = "select StoreID,StoreName from StoreMaster where StoreID in  " +
-                               " (select StoreID from tblStoreUserRights where UserID = " + clsUtility.LoginID + " AND StoreID not in (" + cmdFrom.SelectedValue + "))";
-
+                    strQ = "SELECT StoreID,StoreName FROM StoreMaster WHERE StoreID IN  " +
+                              " (SELECT StoreID FROM tblStoreUserRights WHERE UserID = " + clsUtility.LoginID + " AND StoreID NOT IN (" + cmdFrom.SelectedValue + "))";
                 }
 
                 DataTable ftToStore = ObjCon.ExecuteSelectStatement(strQ);
-                if (ftToStore.Rows.Count > 0)
+                if (ObjUtil.ValidateTable(ftToStore))
                 {
                     cmdTo.DataSource = ftToStore;
                     cmdTo.DisplayMember = "StoreName";
                     cmdTo.ValueMember = "StoreID";
                 }
                 cmdTo.SelectedIndex = -1;
-
             }
-           
+
         }
         private string GenerateBillNumber()
         {
@@ -128,7 +118,7 @@ namespace IMS_Client_2.StockManagement
         }
         private void TransferStock()
         {
-            if (Bill_ID.Trim().Length==0)
+            if (Bill_ID.Trim().Length == 0)
             {
                 ObjCon.SetColumnData("BillNo", SqlDbType.NVarChar, GenerateBillNumber());
                 ObjCon.SetColumnData("FromStore", SqlDbType.Int, cmdFrom.SelectedValue);
@@ -139,7 +129,6 @@ namespace IMS_Client_2.StockManagement
                 ObjCon.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
 
                 int TransferID = ObjCon.InsertData(clsUtility.DBName + ".dbo.tblStoreTransferBillDetails", true);
-
 
                 if (TransferID > 0)
                 {
@@ -172,17 +161,20 @@ namespace IMS_Client_2.StockManagement
             }
             else
             {
-                ObjCon.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, dtpSalesDate.Value.ToString("yyyy-MM-dd"));
+                ObjCon.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
                 ObjCon.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID);
                 ObjCon.UpdateData(clsUtility.DBName + ".dbo.tblStoreTransferBillDetails", "StoreTransferID='" + Bill_ID + "'");
 
-
-                ObjCon.ExecuteNonQuery("Delete "+ clsUtility.DBName + ".dbo.tblStoreTransferItemDetails where StoreBillDetailsID=" +Bill_ID);
+                ObjCon.ExecuteNonQuery("Delete " + clsUtility.DBName + ".dbo.tblStoreTransferItemDetails WHERE StoreBillDetailsID=" + Bill_ID);
+                int pBillQTY = 0;
                 for (int i = 0; i < dgvProductDetails.Rows.Count; i++)
                 {
                     string Total = dgvProductDetails.Rows[i].Cells["Total"].Value.ToString();
                     string ProductID = dgvProductDetails.Rows[i].Cells["ProductID"].Value.ToString();
+                    
                     string QTY = dgvProductDetails.Rows[i].Cells["BillQTY"].Value.ToString();
+                    pBillQTY += Convert.ToInt32(QTY);
+
                     string Rate = dgvProductDetails.Rows[i].Cells["Rate"].Value.ToString();
                     string ColorID = dgvProductDetails.Rows[i].Cells["ColorID"].Value.ToString();
                     string SizeID = dgvProductDetails.Rows[i].Cells["SizeID"].Value.ToString();
@@ -200,16 +192,17 @@ namespace IMS_Client_2.StockManagement
                     ObjCon.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
 
                     ObjCon.InsertData(clsUtility.DBName + ".dbo.tblStoreTransferItemDetails", false);
-                   
                 }
+                ObjCon.UpdateColumnData("TotalQTY", SqlDbType.Int, pBillQTY);
+                ObjCon.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
+                ObjCon.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID);
+                ObjCon.UpdateData(clsUtility.DBName + ".dbo.tblStoreTransferBillDetails", "StoreTransferID='" + Bill_ID + "'");
+
                 clsUtility.ShowInfoMessage("Item has been transferd to selected store.", clsUtility.strProjectTitle);
                 ClearAll();
-
             }
-            
-           
         }
-       
+
         DataTable dtItemDetails = new DataTable();
         private bool IsItemExist(string barCode)
         {
@@ -234,12 +227,9 @@ namespace IMS_Client_2.StockManagement
             dtItemDetails.Columns.Add("Size");
             dtItemDetails.Columns.Add("BillQTY");
             dtItemDetails.Columns.Add("StockQTY");
-            
             dtItemDetails.Columns.Add("Rate");
-
             dtItemDetails.Columns.Add("OIRate");
             dtItemDetails.Columns.Add("Adj_Amount");
-
             dtItemDetails.Columns.Add("Total");
             dtItemDetails.Columns.Add("Delete");
         }
@@ -294,7 +284,7 @@ namespace IMS_Client_2.StockManagement
         }
 
         private void AddRowToItemDetails(string productID, string name, string qty, string rate, string total,
-           string BarCode, string SizeID, string Size, string ColorID, string Color,string stockQTY)
+           string BarCode, string SizeID, string Size, string ColorID, string Color, string stockQTY)
         {
             DataRow dRow = dtItemDetails.NewRow();
             dRow["ProductID"] = productID;
@@ -324,7 +314,7 @@ namespace IMS_Client_2.StockManagement
                 string name = dt.Rows[0]["ProductName"].ToString();
                 string rate = dt.Rows[0]["Rate"].ToString();
                 string barCode = dt.Rows[0]["BarcodeNo"].ToString();
-                 string stockQTY = dt.Rows[0]["QTY"].ToString();
+                string stockQTY = dt.Rows[0]["QTY"].ToString();
 
                 string qty = "1";
                 string SizeID = dt.Rows[0]["SizeID"].ToString();
@@ -379,12 +369,13 @@ namespace IMS_Client_2.StockManagement
             for (int i = 0; i < dgvProductDetails.Rows.Count; i++)
             {
                 NewBillAmount += Convert.ToDecimal(dgvProductDetails.Rows[i].Cells["Total"].Value);
-            }
-
-            for (int i = 0; i < dgvProductDetails.Rows.Count; i++)
-            {
                 TotalQTY += Convert.ToDecimal(dgvProductDetails.Rows[i].Cells["BillQTY"].Value);
             }
+
+            //for (int i = 0; i < dgvProductDetails.Rows.Count; i++)
+            //{
+            //    TotalQTY += Convert.ToDecimal(dgvProductDetails.Rows[i].Cells["BillQTY"].Value);
+            //}
 
             txtTotalQTY.Text = TotalQTY.ToString();
             txtValue.Text = NewBillAmount.ToString();
@@ -400,21 +391,18 @@ namespace IMS_Client_2.StockManagement
             ObjUtil.SetRowNumber(dgvProductDetails);
 
             dgvProductDetails.Columns["ProductID"].Visible = false;
-
             dgvProductDetails.Columns["ColoriD"].Visible = false;
             dgvProductDetails.Columns["SizeiD"].Visible = false;
             dgvProductDetails.Columns["OIRate"].Visible = false;
             dgvProductDetails.Columns["Adj_Amount"].Visible = false;
-            ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill,System.Drawing.Color.White);
+            ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill, System.Drawing.Color.White);
             dgvProductDetails.ClearSelection();
 
-            if (txtInvoiceNumber.Text.Trim().Length==0)
+            if (txtInvoiceNumber.Text.Trim().Length == 0)
             {
                 dgvProductDetails.RowsDefaultCellStyle.SelectionBackColor = System.Drawing.Color.White;
                 dgvProductDetails.RowsDefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             }
-           
-
         }
 
         private void dgvProductDetails_KeyDown(object sender, KeyEventArgs e)
@@ -442,7 +430,7 @@ namespace IMS_Client_2.StockManagement
                 string sizeid = dgvProductDetails.Rows[e.RowIndex].Cells["SizeID"].Value.ToString();
                 string colorid = dgvProductDetails.Rows[e.RowIndex].Cells["ColorID"].Value.ToString();
                 decimal QTY = Convert.ToDecimal(dgvProductDetails.Rows[e.RowIndex].Cells["BillQTY"].Value);
-                
+
                 decimal Rate = Convert.ToDecimal(dgvProductDetails.Rows[e.RowIndex].Cells["Rate"].Value);
                 decimal Total = QTY * Rate;
                 string _barNo = dgvProductDetails.Rows[e.RowIndex].Cells["Barcodeno"].Value.ToString();
@@ -473,8 +461,6 @@ namespace IMS_Client_2.StockManagement
                 int _PID = Convert.ToInt32(dgvProductDetails.Rows[e.RowIndex].Cells["ProductID"].Value);
                 picProduct.Image = GetProductPhoto(Convert.ToInt32(_PID));
             }
-
-            
         }
 
         private void txtBarCode_KeyDown(object sender, KeyEventArgs e)
@@ -502,20 +488,16 @@ namespace IMS_Client_2.StockManagement
             }
         }
 
-        private void txtBarCode_TextChanged(object sender, EventArgs e)
-        {
-        }
         private bool IsValidateQTY()
         {
             bool Result = true;
-               
+
             for (int i = 0; i < dgvProductDetails.Rows.Count; i++)
             {
-
                 int QTY = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["BillQTY"].Value);
                 int StockQTY = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["StockQTY"].Value);
 
-                if (QTY> StockQTY)
+                if (QTY > StockQTY)
                 {
                     dgvProductDetails.Rows[i].DefaultCellStyle.BackColor = System.Drawing.Color.Red;
                     dgvProductDetails.Rows[i].DefaultCellStyle.ForeColor = System.Drawing.Color.White;
@@ -523,7 +505,6 @@ namespace IMS_Client_2.StockManagement
                 }
             }
             dgvProductDetails.ClearSelection();
-
             return Result;
         }
         private void btnSaveData_Click(object sender, EventArgs e)
@@ -539,7 +520,7 @@ namespace IMS_Client_2.StockManagement
                 clsUtility.ShowInfoMessage("Please Enter Items.", clsUtility.strProjectTitle);
                 return;
             }
-            if (lblBillStatus.Text== "Posted")
+            if (lblBillStatus.Text == "Posted")
             {
                 clsUtility.ShowInfoMessage("The Bill Status is Posted. you can not make any changes.", clsUtility.strProjectTitle);
                 return;
@@ -559,24 +540,22 @@ namespace IMS_Client_2.StockManagement
                     TransferStock();
                 }
             }
-         
-
-         
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            if (txtInvoiceNumber.Text.Trim().Length==0)
+            if (txtInvoiceNumber.Text.Trim().Length == 0)
             {
                 clsUtility.ShowInfoMessage("Please enter Bill Number.", clsUtility.strProjectTitle);
+                txtInvoiceNumber.Focus();
                 return;
             }
 
-            if (cmdFrom.SelectedIndex==-1)
-            {
-                clsUtility.ShowInfoMessage("Please select the from store.", clsUtility.strProjectTitle);
-                return;
-            }
+            //if (cmdFrom.SelectedIndex==-1)
+            //{
+            //    clsUtility.ShowInfoMessage("Please select the from store.", clsUtility.strProjectTitle);
+            //    return;
+            //}
             SearchBill();
         }
         string Bill_ID = "";
@@ -584,31 +563,29 @@ namespace IMS_Client_2.StockManagement
         {
             try
             {
-                string strQ = "select * from tblStoreTransferBillDetails where BillNo='" + txtInvoiceNumber.Text + "' and FromStore=" + cmdFrom.SelectedValue;
+                //string strQ = "SELECT * FROM tblStoreTransferBillDetails WITH(NOLOCK) WHERE BillNo='" + txtInvoiceNumber.Text + "' AND FromStore=" + cmdFrom.SelectedValue;
+
+                string strQ = "SELECT * FROM tblStoreTransferBillDetails WITH(NOLOCK) WHERE BillNo='" + txtInvoiceNumber.Text + "'";
 
                 DataTable dtDetails = ObjCon.ExecuteSelectStatement(strQ);
-                if (dtDetails.Rows.Count > 0)
+                if (ObjUtil.ValidateTable(dtDetails))
                 {
-                     Bill_ID = dtDetails.Rows[0]["StoreTransferID"].ToString();
-
+                    Bill_ID = dtDetails.Rows[0]["StoreTransferID"].ToString();
+                    cmdFrom.SelectedValue = dtDetails.Rows[0]["FromStore"];
                     cmdTo.SelectedValue = dtDetails.Rows[0]["ToStore"];
-                    lblBillStatus.Text= dtDetails.Rows[0]["BillStatus"].ToString();
+                    lblBillStatus.Text = dtDetails.Rows[0]["BillStatus"].ToString();
                     dtpSalesDate.Value = Convert.ToDateTime(dtDetails.Rows[0]["BillDate"]);
-
 
                     string strItemQuery = "select ProductID,(select ProductName from ProductMaster where ProductID=ts.ProductID) as ProductName, BillQTY,Rate,Total,Barcode,SizeID," +
                                           " (select Size from SizeMaster where SizeID = ts.SizeID) as Size,ColorID," +
                                           " (select ColorName from ColorMaster where ColorID = ts.ColorID) as ColorName," +
-                                           "(select QTY from ProductStockColorSizeMaster where StoreID = "+cmdFrom.SelectedValue+" and BarcodeNo = ts.Barcode) as StockQTY" +
-                                          " from tblStoreTransferItemDetails ts where StoreBillDetailsID = "+ Bill_ID;
+                                           "(select QTY from ProductStockColorSizeMaster where StoreID = " + cmdFrom.SelectedValue + " and BarcodeNo = ts.Barcode) as StockQTY" +
+                                          " from tblStoreTransferItemDetails ts where StoreBillDetailsID = " + Bill_ID;
 
-
-
-                  DataTable dtOldBill= ObjCon.ExecuteSelectStatement(strItemQuery);
-                    if (dtOldBill.Rows.Count>0)
+                    DataTable dtOldBill = ObjCon.ExecuteSelectStatement(strItemQuery);
+                    if (ObjUtil.ValidateTable(dtOldBill))
                     {
                         dtItemDetails.Clear();
-
                         for (int i = 0; i < dtOldBill.Rows.Count; i++)
                         {
                             string pID = dtOldBill.Rows[i]["ProductID"].ToString();
@@ -616,7 +593,6 @@ namespace IMS_Client_2.StockManagement
                             string rate = dtOldBill.Rows[i]["Rate"].ToString();
                             string barCode = dtOldBill.Rows[i]["Barcode"].ToString();
                             string qty = dtOldBill.Rows[i]["BillQTY"].ToString();
-
 
                             string SizeID = dtOldBill.Rows[i]["SizeID"].ToString();
                             string Size = dtOldBill.Rows[i]["Size"].ToString();
@@ -626,27 +602,22 @@ namespace IMS_Client_2.StockManagement
                             string StockQTY = dtOldBill.Rows[i]["StockQTY"].ToString();
 
                             AddRowToItemDetails(pID, name, qty, rate, total.ToString(), barCode, SizeID, Size, ColorID, ColorName, StockQTY);
-
                         }
                         CalculateGrandTotal();
-
                     }
-
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
             }
-            
         }
 
         private void lblCategoryName_Click(object sender, EventArgs e)
         {
-            if(dgvProductDetails.Columns["StockQTY"].Visible)
+            if (dgvProductDetails.Columns["StockQTY"].Visible)
             {
                 dgvProductDetails.Columns["StockQTY"].Visible = false;
-
             }
             else
             {

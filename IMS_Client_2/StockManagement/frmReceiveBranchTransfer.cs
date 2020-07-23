@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
 using CoreApp;
 
 namespace IMS_Client_2.StockManagement
@@ -33,13 +32,7 @@ namespace IMS_Client_2.StockManagement
         }
         private void LoadData()
         {
-            //string query = "select StoreTransferID, " +
-            //                "(select StoreName from StoreMaster where StoreID = sm.FromStore) as Branch, BillNo," +
-            //                " BillDate, TotalQTY, ' ' as Sender, ' ' as Post, 'Identical' as Identical" +
-
-            //                 " from " + clsUtility.DBName + ".[dbo].[tblStoreTransferBillDetails] as sm";
-
-            //DataTable dt = ObjDAL.ExecuteSelectStatement(query);
+            ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_ReceiveBranch_Transfer_List");
             if (ds != null && ds.Tables.Count > 0)
             {
@@ -109,6 +102,7 @@ namespace IMS_Client_2.StockManagement
             {
                 ObjDAL.SetStoreProcedureData("ReceiveBillNo", SqlDbType.NVarChar, GenerateReceiveBillNumber(), clsConnection_DAL.ParamType.Input);
                 ObjDAL.SetStoreProcedureData("StoreBillDetailsID", SqlDbType.Int, StoreBillDetailsID, clsConnection_DAL.ParamType.Input);
+                ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
                 ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
                 DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Insert_ReceiveBillDetails");
                 if (ds != null && ds.Tables.Count > 0)
@@ -116,6 +110,11 @@ namespace IMS_Client_2.StockManagement
                     DataTable dt = ds.Tables[0];
                     if (ObjUtil.ValidateTable(dt))
                     {
+                        if (Convert.ToInt32(dt.Rows[0]["Flag"]) == 1)
+                        {
+                            StoreBillDetailsID = 0;
+                            LoadData();
+                        }
                         clsUtility.ShowInfoMessage(dt.Rows[0]["Msg"].ToString(), clsUtility.strProjectTitle);
                     }
                 }
@@ -124,6 +123,7 @@ namespace IMS_Client_2.StockManagement
             {
                 clsUtility.ShowInfoMessage("There is no Update found for Receive Bill details.", clsUtility.strProjectTitle);
             }
+            ObjDAL.ResetData();
         }
 
         private void btnClose_Click(object sender, EventArgs e)

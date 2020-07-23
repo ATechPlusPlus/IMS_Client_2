@@ -463,6 +463,8 @@
             this.btnPrinterCancel.Text = "Cancel";
             this.btnPrinterCancel.UseVisualStyleBackColor = true;
             this.btnPrinterCancel.Click += new System.EventHandler(this.button1_Click);
+            this.btnPrinterCancel.MouseEnter += new System.EventHandler(this.btnAdd_MouseEnter);
+            this.btnPrinterCancel.MouseLeave += new System.EventHandler(this.btnAdd_MouseLeave);
             // 
             // btnPrinterSave
             // 
@@ -477,6 +479,8 @@
             this.btnPrinterSave.Text = "Save";
             this.btnPrinterSave.UseVisualStyleBackColor = true;
             this.btnPrinterSave.Click += new System.EventHandler(this.button2_Click_1);
+            this.btnPrinterSave.MouseEnter += new System.EventHandler(this.btnAdd_MouseEnter);
+            this.btnPrinterSave.MouseLeave += new System.EventHandler(this.btnAdd_MouseLeave);
             // 
             // label8
             // 

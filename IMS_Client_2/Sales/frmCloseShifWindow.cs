@@ -25,7 +25,7 @@ namespace IMS_Client_2.Sales
 
         public int pMasterCashClosingID = 0;
         int pStoreID = 0;
-        decimal ExpensesAmt = 0,PettyCashBAL=0;
+        decimal ExpensesAmt = 0, PettyCashBAL = 0;
         object Cashtotal = 0;
 
         DataTable dtCash = new DataTable();
@@ -166,7 +166,7 @@ namespace IMS_Client_2.Sales
         private void dgvCloseCash_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             ObjUtil.SetRowNumber(dgvCloseCash);
-            ObjUtil.SetDataGridProperty(dgvCloseCash, DataGridViewAutoSizeColumnsMode.DisplayedCells);
+            ObjUtil.SetDataGridProperty(dgvCloseCash, DataGridViewAutoSizeColumnsMode.Fill, Color.White);
             if (listView1.Items[0].Selected)
             {
                 dgvCloseCash.Columns["CashBandID"].Visible = false;
@@ -183,6 +183,9 @@ namespace IMS_Client_2.Sales
                 dgvCloseCash.Columns["CashReturn"].Visible = false;
 
                 CalcTotalCashBand();
+
+                dgvCloseCash.RowsDefaultCellStyle.SelectionBackColor = Color.White;
+                dgvCloseCash.RowsDefaultCellStyle.SelectionForeColor = Color.Black;
             }
             else if (listView1.Items[1].Selected)
             {
@@ -200,7 +203,11 @@ namespace IMS_Client_2.Sales
                     dgvCloseCash.Columns["MasterCashClosingID"].Visible = false;
                 }
                 CalcTotalPettyCashExp();
+
+                dgvCloseCash.RowsDefaultCellStyle.SelectionBackColor = System.Drawing.Color.White;
+                dgvCloseCash.RowsDefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             }
+            dgvCloseCash.ClearSelection();
         }
 
         private string GetCashNumber()
@@ -297,7 +304,7 @@ namespace IMS_Client_2.Sales
             {
                 for (int i = 0; i < dtExpenses.Rows.Count; i++)
                 {
-                    if (dtExpenses.Rows[i]["MasterCashClosingID"] == DBNull.Value || dtExpenses.Rows[i]["MasterCashClosingID"].ToString() == "" || Convert.ToInt32(dtExpenses.Rows[i]["ExpensesAmt"]) == 0)
+                    if (dtExpenses.Rows[i]["MasterCashClosingID"] == DBNull.Value || dtExpenses.Rows[i]["MasterCashClosingID"].ToString() == "" || Convert.ToDecimal(dtExpenses.Rows[i]["ExpensesAmt"]) == 0)
                     {
                         dtExpenses.Rows[i].Delete();
                         dtExpenses.AcceptChanges();
@@ -305,7 +312,7 @@ namespace IMS_Client_2.Sales
                     }
                     else
                     {
-                        if (dtExpenses.Rows[i]["Particulars"] == DBNull.Value || dtExpenses.Rows[i]["ExpensesAmt"] == DBNull.Value)
+                        if (dtExpenses.Rows[i]["Particulars"] == DBNull.Value || dtExpenses.Rows[i]["Particulars"].ToString() == "" || dtExpenses.Rows[i]["ExpensesAmt"] == DBNull.Value)
                         {
                             clsUtility.ShowInfoMessage("Enter valid entry for Expenses", clsUtility.strProjectTitle);
                             return false;
@@ -316,7 +323,7 @@ namespace IMS_Client_2.Sales
             }
             else
             {
-                clsUtility.ShowInfoMessage("You have added Extra "+(ExpensesAmt - PettyCashBAL) +" Expenses..", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("You have added Extra " + (PettyCashBAL - ExpensesAmt) + " Expenses..", clsUtility.strProjectTitle);
                 return false;
             }
         }
@@ -541,17 +548,13 @@ namespace IMS_Client_2.Sales
             {
                 if (dtExpenses != null && dtExpenses.Rows.Count > 0)
                 {
-                    DataRow[] dr = dtExpenses.Select("SUM(ExpensesAmt)");
-                    TotalExpenses = Convert.ToString(dr[0]);
+                    TotalExpenses = Convert.ToString(dtExpenses.Compute("Sum(ExpensesAmt)", string.Empty));
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-              
             }
-           
 
             Report.Report_Forms.frmClosingCashReport frmClosingCashReport = new Report.Report_Forms.frmClosingCashReport();
             frmClosingCashReport.CashierNo = GetCashierNumber(dtCashDetails.Rows[0]["EmployeeID"].ToString()); ;

@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.IO;
 using CoreApp;
 
 namespace IMS_Client_2.StockManagement
@@ -63,7 +62,6 @@ namespace IMS_Client_2.StockManagement
                     }
                     else
                     {
-
                         ObjUtil.CloseAutoExtender();
                     }
                 }
@@ -140,6 +138,7 @@ namespace IMS_Client_2.StockManagement
             {
                 dgvProductDetails.DataSource = null;
             }
+            ObjDAL.ResetData();
         }
 
         private void SearchByShopID()
@@ -161,6 +160,7 @@ namespace IMS_Client_2.StockManagement
             {
                 dgvProductDetails.DataSource = null;
             }
+            ObjDAL.ResetData();
         }
 
         private void SearchByBarcode()
@@ -182,6 +182,7 @@ namespace IMS_Client_2.StockManagement
             {
                 dgvProductDetails.DataSource = null;
             }
+            ObjDAL.ResetData();
         }
         private void SearchByColor()
         {
@@ -202,6 +203,7 @@ namespace IMS_Client_2.StockManagement
             {
                 dgvProductDetails.DataSource = null;
             }
+            ObjDAL.ResetData();
         }
 
         private void SearchByStyleNo()
@@ -223,6 +225,7 @@ namespace IMS_Client_2.StockManagement
             {
                 dgvProductDetails.DataSource = null;
             }
+            ObjDAL.ResetData();
         }
 
         private void Material_Details_KeyDown(object sender, KeyEventArgs e)
@@ -256,6 +259,7 @@ namespace IMS_Client_2.StockManagement
             {
                 dgvProductDetails.DataSource = null;
             }
+            ObjDAL.ResetData();
         }
 
         private void FillColorData()
@@ -322,14 +326,17 @@ namespace IMS_Client_2.StockManagement
         private void GetProductImage(string ProductID)
         {
             string ImageID = "";
-            DataTable dtPhotoNumber = ObjDAL.ExecuteSelectStatement("select Photo FROM " + clsUtility.DBName + ".[dbo].[ProductMaster] where ProductID=" + ProductID + "");
-            if (dtPhotoNumber.Rows.Count > 0)
+            DataTable dtPhotoNumber = ObjDAL.ExecuteSelectStatement("SELECT Photo FROM " + clsUtility.DBName + ".[dbo].[ProductMaster] WITH(NOLOCK) WHERE ProductID=" + ProductID + "");
+            if (ObjUtil.ValidateTable(dtPhotoNumber))
             {
                 ImageID = dtPhotoNumber.Rows[0]["Photo"].ToString();
             }
-
-            DataTable dtImagePath = ObjDAL.ExecuteSelectStatement("  select ImagePath, Extension from " + clsUtility.DBName + ".dbo.DefaultStoreSetting where MachineName='" + Environment.MachineName + "'");
-            if (dtImagePath.Rows.Count > 0)
+            else
+            {
+                PicItem.Image = null;
+            }
+            DataTable dtImagePath = ObjDAL.ExecuteSelectStatement(" SELECT ImagePath, Extension FROM " + clsUtility.DBName + ".dbo.DefaultStoreSetting WITH(NOLOCK) WHERE MachineName='" + Environment.MachineName + "'");
+            if (ObjUtil.ValidateTable(dtImagePath))
             {
                 if (dtImagePath.Rows[0]["ImagePath"] != DBNull.Value)
                 {
@@ -345,17 +352,14 @@ namespace IMS_Client_2.StockManagement
                     {
                         PicItem.Image = null;
                     }
-
                 }
                 else
                 {
-                    MessageBox.Show("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
-
+                    clsUtility.ShowInfoMessage("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
                 }
             }
-
-
         }
+
         private void dgvProductDetails_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             ObjUtil.SetRowNumber(dgvProductDetails);
@@ -368,7 +372,7 @@ namespace IMS_Client_2.StockManagement
             dgvProductDetails.Columns["SizeTypeID"].Visible = false;
             dgvProductDetails.Columns["SizeID"].Visible = false;
 
-            lblTotalRecords.Text = dgvProductDetails.Rows.Count.ToString();
+            lblTotalRecords.Text = "Total Records : " + dgvProductDetails.Rows.Count.ToString();
             dgvProductDetails.MultiSelect = true;
         }
 
@@ -422,7 +426,6 @@ namespace IMS_Client_2.StockManagement
             {
                 GetProductImage(dgvProductDetails.SelectedRows[0].Cells["ProductID"].Value.ToString());
             }
-
         }
 
         private void printBarcodeToolStripMenuItem_Click(object sender, EventArgs e)

@@ -552,7 +552,7 @@ namespace IMS_Client_2
 
         private void userRightsManagementToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Invoice) || clsUtility.IsAdmin)
+            //if (clsFormRights.HasFormRight(clsFormRights.Forms.frmUserRights) || clsUtility.IsAdmin)
             //{
             //}
             //else
@@ -659,7 +659,7 @@ namespace IMS_Client_2
 
         private void storeRightsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Invoice) || clsUtility.IsAdmin)
+            //if (clsFormRights.HasFormRight(clsFormRights.Forms.frmStoreRights) || clsUtility.IsAdmin)
             //{
             //}
             //else
@@ -672,7 +672,7 @@ namespace IMS_Client_2
 
         private void stockTransferToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Invoice) || clsUtility.IsAdmin)
+            //if (clsFormRights.HasFormRight(clsFormRights.Forms.frmStoreTransfer) || clsUtility.IsAdmin)
             //{
             //}
             //else
@@ -685,7 +685,7 @@ namespace IMS_Client_2
 
         private void brachReceiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Invoice) || clsUtility.IsAdmin)
+            //if (clsFormRights.HasFormRight(clsFormRights.Forms.frmReceivedBranchTransfer) || clsUtility.IsAdmin)
             //{
             //}
             //else
@@ -726,7 +726,7 @@ namespace IMS_Client_2
 
         private void transferWatchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Invoice) || clsUtility.IsAdmin)
+            //if (clsFormRights.HasFormRight(clsFormRights.Forms.frmTransferWatch) || clsUtility.IsAdmin)
             //{
             //}
             //else
@@ -739,7 +739,7 @@ namespace IMS_Client_2
 
         private void loadPettyCashToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Invoice) || clsUtility.IsAdmin)
+            //if (clsFormRights.HasFormRight(clsFormRights.Forms.frmPettyCash) || clsUtility.IsAdmin)
             //{
             //}
             //else
@@ -748,6 +748,19 @@ namespace IMS_Client_2
             //}
             Other_Forms.frmPettyCash Obj = new Other_Forms.frmPettyCash();
             Obj.Show();
+        }
+
+        private void pettyCashExpReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //if (clsFormRights.HasFormRight(clsFormRights.Forms.frmPettyCashExpReport) || clsUtility.IsAdmin)
+            //{
+            //}
+            //else
+            //{
+            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            //}
+            Report.frmPettyCashExpReport Obj = new Report.frmPettyCashExpReport();
+            Obj.ShowDialog();
         }
     }
 }
