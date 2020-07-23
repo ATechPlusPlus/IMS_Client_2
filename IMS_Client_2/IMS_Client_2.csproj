@@ -631,6 +631,7 @@
     <EmbeddedResource Include="Report\RDLC_Files\MiniSalesReport.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\SalesInoviceReport.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\Sales_Invoice.rdlc" />
+    <EmbeddedResource Include="Report\RDLC_Files\StoreTransferDetails.rdlc" />
     <EmbeddedResource Include="Report\Report_Forms\frmClosingCashReport.resx">
       <DependentUpon>frmClosingCashReport.cs</DependentUpon>
     </EmbeddedResource>
