@@ -546,11 +546,10 @@ namespace IMS_Client_2.Sales
             string TotalExpenses = "0.00";
             try
             {
-                if (dtExpenses != null && dtExpenses.Rows.Count > 0)
+                if (ObjUtil.ValidateTable(dtExpenses))
                 {
                     TotalExpenses = Convert.ToString(dtExpenses.Compute("Sum(ExpensesAmt)", string.Empty));
                 }
-
             }
             catch (Exception ex)
             {
@@ -568,6 +567,9 @@ namespace IMS_Client_2.Sales
             frmClosingCashReport.IsDirectPrint = Direct;
             frmClosingCashReport.dtCreditDetails = dtCredit;
             frmClosingCashReport.PettyCash = lblPettyCashBAL.Text;
+
+            frmClosingCashReport.PettyCashBeforeExp = Convert.ToDecimal(lblPettyCashBAL.Text + TotalExpenses).ToString();
+
             frmClosingCashReport.dtExpanses = this.dtExpenses;
             frmClosingCashReport.TotalExpenses = TotalExpenses;
 

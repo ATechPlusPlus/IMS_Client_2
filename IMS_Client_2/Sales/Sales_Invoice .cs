@@ -863,7 +863,7 @@ namespace IMS_Client_2.Sales
             }
             catch (Exception ex)
             {
-                clsUtility.ShowErrorMessage(ex.ToString(),clsUtility.strProjectTitle);
+                clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
             }
         }
         private int DoNewSales()
@@ -1032,7 +1032,7 @@ namespace IMS_Client_2.Sales
                             NewInvoiceID = DoNewSales();
 
                             // update the crossponding old invoice ID
-                            ObjDAL.ExecuteNonQuery("UPDATE [IMS_Client_2].[dbo].[tblReplaceReturn] set NewInvoiceID=" + NewInvoiceID + " where OldInvoiceID=" + OldInvoiceID);
+                            ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".[dbo].[tblReplaceReturn] set NewInvoiceID=" + NewInvoiceID + " where OldInvoiceID=" + OldInvoiceID);
                         }
                     }
 

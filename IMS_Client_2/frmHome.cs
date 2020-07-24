@@ -115,11 +115,11 @@ namespace IMS_Client_2
                 if (ObjUtil.ValidateTable(dt))
                 {
                     Home_StoreID = Convert.ToInt32(dt.Rows[0]["StoreID"]);
-                    lblShopName.Text = lblShopName.Text + dt.Rows[0]["StoreName"];
+                    lblShopName.Text = "Shop Name : " + dt.Rows[0]["StoreName"];
                 }
                 else
                 {
-                    lblShopName.Text = lblShopName.Text + "NA";
+                    lblShopName.Text = "Shop Name : " + "NA";
                 }
             }
         }
@@ -385,6 +385,7 @@ namespace IMS_Client_2
             {
                 frmOtherSetting frmOtherSetting = new frmOtherSetting();
                 frmOtherSetting.ShowDialog();
+                GetDefaultShop();
             }
             else
             {

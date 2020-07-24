@@ -43,19 +43,6 @@
             this.txtBarCode = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dgvProductDetails = new System.Windows.Forms.DataGridView();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtTotalQTY = new System.Windows.Forms.TextBox();
-            this.txtValue = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btncancel = new System.Windows.Forms.Button();
-            this.btnSaveData = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.picProduct = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.lblBillStatus = new System.Windows.Forms.Label();
             this.ProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BarcodeNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,6 +56,19 @@
             this.SizeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColDelete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtTotalQTY = new System.Windows.Forms.TextBox();
+            this.txtValue = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btncancel = new System.Windows.Forms.Button();
+            this.btnSaveData = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.picProduct = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lblBillStatus = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).BeginInit();
             this.panel1.SuspendLayout();
@@ -243,12 +243,100 @@
             this.dgvProductDetails.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvProductDetails_DataBindingComplete);
             this.dgvProductDetails.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvProductDetails_KeyDown);
             // 
+            // ProductID
+            // 
+            this.ProductID.DataPropertyName = "ProductID";
+            this.ProductID.HeaderText = "ProductID";
+            this.ProductID.Name = "ProductID";
+            this.ProductID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ProductName
+            // 
+            this.ProductName.DataPropertyName = "ProductName";
+            this.ProductName.HeaderText = "ProductName";
+            this.ProductName.Name = "ProductName";
+            this.ProductName.ReadOnly = true;
+            this.ProductName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // BarcodeNo
+            // 
+            this.BarcodeNo.DataPropertyName = "BarcodeNo";
+            this.BarcodeNo.HeaderText = "BarcodeNo";
+            this.BarcodeNo.Name = "BarcodeNo";
+            // 
+            // Rate
+            // 
+            this.Rate.DataPropertyName = "Rate";
+            this.Rate.HeaderText = "Rate";
+            this.Rate.Name = "Rate";
+            this.Rate.ReadOnly = true;
+            // 
+            // BillQTY
+            // 
+            this.BillQTY.DataPropertyName = "BillQTY";
+            this.BillQTY.HeaderText = "QTY";
+            this.BillQTY.Name = "BillQTY";
+            // 
+            // StockQTY
+            // 
+            this.StockQTY.DataPropertyName = "StockQTY";
+            this.StockQTY.HeaderText = "StockQTY";
+            this.StockQTY.Name = "StockQTY";
+            this.StockQTY.Visible = false;
+            // 
+            // Adj_Amount
+            // 
+            this.Adj_Amount.DataPropertyName = "Adj_Amount";
+            this.Adj_Amount.HeaderText = "Adj_Amount";
+            this.Adj_Amount.Name = "Adj_Amount";
+            this.Adj_Amount.Visible = false;
+            // 
+            // ColorID
+            // 
+            this.ColorID.DataPropertyName = "ColorID";
+            this.ColorID.HeaderText = "ColorID";
+            this.ColorID.Name = "ColorID";
+            this.ColorID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ColorID.Visible = false;
+            // 
+            // Color
+            // 
+            this.Color.DataPropertyName = "Color";
+            this.Color.HeaderText = "Color";
+            this.Color.Name = "Color";
+            // 
+            // Size
+            // 
+            this.Size.DataPropertyName = "Size";
+            this.Size.HeaderText = "Size";
+            this.Size.Name = "Size";
+            // 
+            // SizeID
+            // 
+            this.SizeID.DataPropertyName = "SizeID";
+            this.SizeID.HeaderText = "SizeID";
+            this.SizeID.Name = "SizeID";
+            this.SizeID.Visible = false;
+            // 
+            // Total
+            // 
+            this.Total.DataPropertyName = "Total";
+            this.Total.HeaderText = "Total";
+            this.Total.Name = "Total";
+            this.Total.ReadOnly = true;
+            // 
+            // ColDelete
+            // 
+            this.ColDelete.DataPropertyName = "Delete";
+            this.ColDelete.HeaderText = "Delete";
+            this.ColDelete.Name = "ColDelete";
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(568, 463);
+            this.label5.Location = new System.Drawing.Point(570, 463);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(78, 17);
             this.label5.TabIndex = 204;
@@ -260,7 +348,7 @@
             this.txtTotalQTY.BackColor = System.Drawing.Color.White;
             this.txtTotalQTY.Enabled = false;
             this.txtTotalQTY.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalQTY.Location = new System.Drawing.Point(652, 460);
+            this.txtTotalQTY.Location = new System.Drawing.Point(654, 460);
             this.txtTotalQTY.Name = "txtTotalQTY";
             this.txtTotalQTY.ReadOnly = true;
             this.txtTotalQTY.Size = new System.Drawing.Size(134, 25);
@@ -406,94 +494,6 @@
             this.lblBillStatus.Size = new System.Drawing.Size(81, 17);
             this.lblBillStatus.TabIndex = 260;
             this.lblBillStatus.Text = "Not Posted";
-            // 
-            // ProductID
-            // 
-            this.ProductID.DataPropertyName = "ProductID";
-            this.ProductID.HeaderText = "ProductID";
-            this.ProductID.Name = "ProductID";
-            this.ProductID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // ProductName
-            // 
-            this.ProductName.DataPropertyName = "ProductName";
-            this.ProductName.HeaderText = "ProductName";
-            this.ProductName.Name = "ProductName";
-            this.ProductName.ReadOnly = true;
-            this.ProductName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // BarcodeNo
-            // 
-            this.BarcodeNo.DataPropertyName = "BarcodeNo";
-            this.BarcodeNo.HeaderText = "BarcodeNo";
-            this.BarcodeNo.Name = "BarcodeNo";
-            // 
-            // Rate
-            // 
-            this.Rate.DataPropertyName = "Rate";
-            this.Rate.HeaderText = "Rate";
-            this.Rate.Name = "Rate";
-            this.Rate.ReadOnly = true;
-            // 
-            // BillQTY
-            // 
-            this.BillQTY.DataPropertyName = "BillQTY";
-            this.BillQTY.HeaderText = "QTY";
-            this.BillQTY.Name = "BillQTY";
-            // 
-            // StockQTY
-            // 
-            this.StockQTY.DataPropertyName = "StockQTY";
-            this.StockQTY.HeaderText = "StockQTY";
-            this.StockQTY.Name = "StockQTY";
-            this.StockQTY.Visible = false;
-            // 
-            // Adj_Amount
-            // 
-            this.Adj_Amount.DataPropertyName = "Adj_Amount";
-            this.Adj_Amount.HeaderText = "Adj_Amount";
-            this.Adj_Amount.Name = "Adj_Amount";
-            this.Adj_Amount.Visible = false;
-            // 
-            // ColorID
-            // 
-            this.ColorID.DataPropertyName = "ColorID";
-            this.ColorID.HeaderText = "ColorID";
-            this.ColorID.Name = "ColorID";
-            this.ColorID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ColorID.Visible = false;
-            // 
-            // Color
-            // 
-            this.Color.DataPropertyName = "Color";
-            this.Color.HeaderText = "Color";
-            this.Color.Name = "Color";
-            // 
-            // Size
-            // 
-            this.Size.DataPropertyName = "Size";
-            this.Size.HeaderText = "Size";
-            this.Size.Name = "Size";
-            // 
-            // SizeID
-            // 
-            this.SizeID.DataPropertyName = "SizeID";
-            this.SizeID.HeaderText = "SizeID";
-            this.SizeID.Name = "SizeID";
-            this.SizeID.Visible = false;
-            // 
-            // Total
-            // 
-            this.Total.DataPropertyName = "Total";
-            this.Total.HeaderText = "Total";
-            this.Total.Name = "Total";
-            this.Total.ReadOnly = true;
-            // 
-            // ColDelete
-            // 
-            this.ColDelete.DataPropertyName = "Delete";
-            this.ColDelete.HeaderText = "Delete";
-            this.ColDelete.Name = "ColDelete";
             // 
             // frmStoreTransfer
             // 

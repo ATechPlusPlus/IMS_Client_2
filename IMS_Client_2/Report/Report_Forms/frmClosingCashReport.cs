@@ -24,7 +24,7 @@ namespace IMS_Client_2.Report.Report_Forms
         public DataTable dtCreditDetails = new DataTable();
         public DataTable dtExpanses = new DataTable();
 
-        public string ShopName, ShopAddress, CashierNo, CashNumber, TotalCash, TotalCredit, GrandToatl,TotalExpenses,PettyCash;
+        public string ShopName, ShopAddress, CashierNo, CashNumber, TotalCash, TotalCredit, GrandToatl,TotalExpenses,PettyCash,PettyCashBeforeExp;
         public bool IsDirectPrint = false;
 
         private void frmClosingCashReport_Load(object sender, EventArgs e)
@@ -78,7 +78,7 @@ namespace IMS_Client_2.Report.Report_Forms
             // creating the parameter with the extact name as in the report.
             ReportParameter param1 = new ReportParameter("ShopeName", ShopName, true);
             ReportParameter param2 = new ReportParameter("Address", ShopAddress, true);
-            ReportParameter param3 = new ReportParameter("Date", DateTime.Now.Date.ToString("yyyy-MM-dd"), true);
+            ReportParameter param3 = new ReportParameter("Date", DateTime.Now.Date.ToShortDateString(), true);
             ReportParameter param4 = new ReportParameter("Time", DateTime.Now.ToShortTimeString(), true);
             ReportParameter param5 = new ReportParameter("CasheirNo", CashierNo, true);
             ReportParameter param6 = new ReportParameter("CashNo", CashNumber, true);
@@ -87,7 +87,8 @@ namespace IMS_Client_2.Report.Report_Forms
             ReportParameter param8 = new ReportParameter("GrandCashValue", GrandToatl, true);
 
             ReportParameter param11 = new ReportParameter("PettyCash", PettyCash, true);
-            ReportParameter param12 = new ReportParameter("TotalExpenses", TotalExpenses, true);
+            ReportParameter param12 = new ReportParameter("TotalExpenses", TotalExpenses, true); 
+            ReportParameter param13 = new ReportParameter("PettyCashBeforeExp", PettyCashBeforeExp, true);
 
 
             // adding the parameter in the report dynamically
@@ -102,7 +103,7 @@ namespace IMS_Client_2.Report.Report_Forms
             reportViewer1.LocalReport.SetParameters(param9);
             reportViewer1.LocalReport.SetParameters(param11);
             reportViewer1.LocalReport.SetParameters(param12);
-
+            reportViewer1.LocalReport.SetParameters(param13);
 
 
             reportViewer1.LocalReport.DataSources.Add(rds);

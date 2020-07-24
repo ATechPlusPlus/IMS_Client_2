@@ -65,7 +65,7 @@
             this.lblPettyCash.AutoSize = true;
             this.lblPettyCash.BackColor = System.Drawing.Color.Transparent;
             this.lblPettyCash.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPettyCash.Location = new System.Drawing.Point(27, 51);
+            this.lblPettyCash.Location = new System.Drawing.Point(27, 54);
             this.lblPettyCash.Name = "lblPettyCash";
             this.lblPettyCash.Size = new System.Drawing.Size(130, 17);
             this.lblPettyCash.TabIndex = 281;
@@ -79,6 +79,9 @@
             this.txtPettyCash.Name = "txtPettyCash";
             this.txtPettyCash.Size = new System.Drawing.Size(206, 25);
             this.txtPettyCash.TabIndex = 0;
+            this.txtPettyCash.Enter += new System.EventHandler(this.txtPettyCash_Enter);
+            this.txtPettyCash.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPettyCash_KeyPress);
+            this.txtPettyCash.Leave += new System.EventHandler(this.txtPettyCash_Leave);
             // 
             // panel1
             // 
@@ -90,7 +93,7 @@
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 274);
+            this.panel1.Location = new System.Drawing.Point(0, 284);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(497, 40);
             this.panel1.TabIndex = 285;
@@ -158,7 +161,7 @@
             this.lblTotalRecords.AutoSize = true;
             this.lblTotalRecords.BackColor = System.Drawing.Color.Transparent;
             this.lblTotalRecords.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalRecords.Location = new System.Drawing.Point(5, 251);
+            this.lblTotalRecords.Location = new System.Drawing.Point(5, 258);
             this.lblTotalRecords.Name = "lblTotalRecords";
             this.lblTotalRecords.Size = new System.Drawing.Size(121, 17);
             this.lblTotalRecords.TabIndex = 287;
@@ -169,12 +172,12 @@
             this.grpGridview.BackColor = System.Drawing.Color.Transparent;
             this.grpGridview.Controls.Add(this.dataGridView1);
             this.grpGridview.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpGridview.Location = new System.Drawing.Point(8, 82);
+            this.grpGridview.Location = new System.Drawing.Point(8, 88);
             this.grpGridview.Name = "grpGridview";
             this.grpGridview.Size = new System.Drawing.Size(489, 164);
             this.grpGridview.TabIndex = 286;
             this.grpGridview.TabStop = false;
-            this.grpGridview.Text = "List of Brands";
+            this.grpGridview.Text = "List of Petty Cash Loaded";
             // 
             // dataGridView1
             // 
@@ -220,7 +223,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(497, 314);
+            this.ClientSize = new System.Drawing.Size(497, 324);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.lblTotalRecords);
             this.Controls.Add(this.grpGridview);

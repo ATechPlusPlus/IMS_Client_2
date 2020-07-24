@@ -226,11 +226,13 @@
             // rdSearchByStore
             // 
             this.rdSearchByStore.AutoSize = true;
+            this.rdSearchByStore.Checked = true;
             this.rdSearchByStore.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdSearchByStore.Location = new System.Drawing.Point(17, 27);
             this.rdSearchByStore.Name = "rdSearchByStore";
             this.rdSearchByStore.Size = new System.Drawing.Size(125, 21);
             this.rdSearchByStore.TabIndex = 197;
+            this.rdSearchByStore.TabStop = true;
             this.rdSearchByStore.Text = "By Store/Shope :";
             this.rdSearchByStore.UseVisualStyleBackColor = true;
             this.rdSearchByStore.CheckedChanged += new System.EventHandler(this.rdSearchByStore_CheckedChanged);
@@ -238,13 +240,11 @@
             // rdShowAll
             // 
             this.rdShowAll.AutoSize = true;
-            this.rdShowAll.Checked = true;
             this.rdShowAll.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdShowAll.Location = new System.Drawing.Point(656, 74);
             this.rdShowAll.Name = "rdShowAll";
             this.rdShowAll.Size = new System.Drawing.Size(79, 21);
             this.rdShowAll.TabIndex = 106;
-            this.rdShowAll.TabStop = true;
             this.rdShowAll.Text = "Show All";
             this.rdShowAll.UseVisualStyleBackColor = true;
             this.rdShowAll.CheckedChanged += new System.EventHandler(this.rdShowAll_CheckedChanged);

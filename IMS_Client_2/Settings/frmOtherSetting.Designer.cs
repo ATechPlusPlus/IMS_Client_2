@@ -101,7 +101,7 @@
             this.btnStorePopup.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnStorePopup.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnStorePopup.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStorePopup.Location = new System.Drawing.Point(363, 82);
+            this.btnStorePopup.Location = new System.Drawing.Point(363, 131);
             this.btnStorePopup.Name = "btnStorePopup";
             this.btnStorePopup.Size = new System.Drawing.Size(27, 27);
             this.btnStorePopup.TabIndex = 2;

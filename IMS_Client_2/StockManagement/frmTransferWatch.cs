@@ -123,6 +123,7 @@ namespace IMS_Client_2.StockManagement
                 {
                     dgvTransferWatch.Columns.Remove("Sr.No.");
                 }
+                //dgvTransferWatch.DataSource = null;
             }
             else
             {
@@ -173,7 +174,10 @@ namespace IMS_Client_2.StockManagement
 
         private void cmbBillStatus_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            SearchByBillStatus();
+            if (cmbBillStatus.SelectedIndex >= 0)
+            {
+                SearchByBillStatus();
+            }
         }
 
         private void dtpFromDate_ValueChanged(object sender, EventArgs e)

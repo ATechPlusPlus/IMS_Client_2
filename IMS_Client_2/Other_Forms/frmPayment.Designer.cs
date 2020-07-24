@@ -211,6 +211,9 @@
             this.txtAmount.Size = new System.Drawing.Size(129, 25);
             this.txtAmount.TabIndex = 257;
             this.txtAmount.Text = "0";
+            this.txtAmount.Enter += new System.EventHandler(this.txtPaymentAutoID_Enter);
+            this.txtAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAmount_KeyPress);
+            this.txtAmount.Leave += new System.EventHandler(this.txtPaymentAutoID_Leave);
             // 
             // label2
             // 
