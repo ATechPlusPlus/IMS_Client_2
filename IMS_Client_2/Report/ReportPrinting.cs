@@ -42,7 +42,7 @@ namespace IMS_Client_2.Report
               @"<DeviceInfo>
                 <OutputFormat>EMF</OutputFormat>
                 <PageWidth>3.14in</PageWidth>
-                <PageHeight>4.00in</PageHeight>
+                <PageHeight>11.00in</PageHeight>
                 <MarginTop>0inc</MarginTop>
                 <MarginLeft>0in</MarginLeft>
                 <MarginRight>0in</MarginRight>

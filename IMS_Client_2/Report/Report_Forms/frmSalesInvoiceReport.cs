@@ -163,6 +163,7 @@ namespace IMS_Client_2.Report
                 reportPrinting.Export(this.reportViewer1.LocalReport);
 
                 PrinterSettings printerSetting = new PrinterSettings();
+             
                 if (clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.InvoicePrinter).Trim().Length == 0)
                 {
                     bool b = clsUtility.ShowQuestionMessage("Printer Not Configured for Invoice. Do you want to print on default printer?", clsUtility.strProjectTitle);
