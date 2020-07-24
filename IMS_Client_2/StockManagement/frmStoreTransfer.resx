@@ -439,10 +439,10 @@
   </metadata>
   <data name="panel1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAIAAACjcKk8AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACusAAArrAYKLDVoAAABzSURBVEhL7cvBCgEBAAbhef+XcVAOLkrtpi0KRVvaA5JI
-        wmFTNPsMfkem7zr4Rf/5w35yfr2N0T6NcW+NcX0Y43QzxuFijN3ZGM3RGPXeGKutMRaNMaYbY1S1Mcq1
-        McZLY4zmxhjOjDGojNGfGKNXGCrsAAgTjvMItAaEAAAAAElFTkSuQmCC
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAIAAACjcKk8AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAK
+        6wAACusBgosNWgAAAHNJREFUSEvty8EKAQEABuF5/5dxUA4uSu2mLQpFW9oDkkjCYVM0+wx+R6bvOvhF
+        //nDfnJ+vY3RPo1xb41xfRjjdDPG4WKM3dkYzdEY9d4Yq60xFo0xphtjVLUxyrUxxktjjObGGM6MMaiM
+        0Z8Yo1cYKuwACBOO8wi0BoQAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -1141,10 +1141,10 @@
   </data>
   <data name="$this.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAIAAACjcKk8AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACusAAArrAYKLDVoAAABzSURBVEhL7cvBCgEBAAbhef+XcVAOLkrtpi0KRVvaA5JI
-        wmFTNPsMfkem7zr4Rf/5w35yfr2N0T6NcW+NcX0Y43QzxuFijN3ZGM3RGPXeGKutMRaNMaYbY1S1Mcq1
-        McZLY4zmxhjOjDGojNGfGKNXGCrsAAgTjvMItAaEAAAAAElFTkSuQmCC
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAIAAACjcKk8AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAK
+        6wAACusBgosNWgAAAHNJREFUSEvty8EKAQEABuF5/5dxUA4uSu2mLQpFW9oDkkjCYVM0+wx+R6bvOvhF
+        //nDfnJ+vY3RPo1xb41xfRjjdDPG4WKM3dkYzdEY9d4Yq60xFo0xphtjVLUxyrUxxktjjObGGM6MMaiM
+        0Z8Yo1cYKuwACBOO8wi0BoQAAAAASUVORK5CYII=
 </value>
   </data>
 </root>

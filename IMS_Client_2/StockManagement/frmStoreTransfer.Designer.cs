@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStoreTransfer));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.lblCategoryName = new System.Windows.Forms.Label();
@@ -43,19 +43,6 @@
             this.txtBarCode = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dgvProductDetails = new System.Windows.Forms.DataGridView();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtTotalQTY = new System.Windows.Forms.TextBox();
-            this.txtValue = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btncancel = new System.Windows.Forms.Button();
-            this.btnSaveData = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.picProduct = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.lblBillStatus = new System.Windows.Forms.Label();
             this.ProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BarcodeNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,6 +56,20 @@
             this.SizeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColDelete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtTotalQTY = new System.Windows.Forms.TextBox();
+            this.txtValue = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btncancel = new System.Windows.Forms.Button();
+            this.btnSaveData = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.picProduct = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lblBillStatus = new System.Windows.Forms.Label();
+            this.btnPrint = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).BeginInit();
             this.panel1.SuspendLayout();
@@ -225,14 +226,14 @@
             this.SizeID,
             this.Total,
             this.ColDelete});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProductDetails.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProductDetails.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvProductDetails.Location = new System.Drawing.Point(12, 149);
             this.dgvProductDetails.Name = "dgvProductDetails";
             this.dgvProductDetails.Size = new System.Drawing.Size(776, 268);
@@ -242,6 +243,94 @@
             this.dgvProductDetails.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellEndEdit);
             this.dgvProductDetails.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvProductDetails_DataBindingComplete);
             this.dgvProductDetails.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvProductDetails_KeyDown);
+            // 
+            // ProductID
+            // 
+            this.ProductID.DataPropertyName = "ProductID";
+            this.ProductID.HeaderText = "ProductID";
+            this.ProductID.Name = "ProductID";
+            this.ProductID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ProductName
+            // 
+            this.ProductName.DataPropertyName = "ProductName";
+            this.ProductName.HeaderText = "ProductName";
+            this.ProductName.Name = "ProductName";
+            this.ProductName.ReadOnly = true;
+            this.ProductName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // BarcodeNo
+            // 
+            this.BarcodeNo.DataPropertyName = "BarcodeNo";
+            this.BarcodeNo.HeaderText = "BarcodeNo";
+            this.BarcodeNo.Name = "BarcodeNo";
+            // 
+            // Rate
+            // 
+            this.Rate.DataPropertyName = "Rate";
+            this.Rate.HeaderText = "Rate";
+            this.Rate.Name = "Rate";
+            this.Rate.ReadOnly = true;
+            // 
+            // BillQTY
+            // 
+            this.BillQTY.DataPropertyName = "BillQTY";
+            this.BillQTY.HeaderText = "QTY";
+            this.BillQTY.Name = "BillQTY";
+            // 
+            // StockQTY
+            // 
+            this.StockQTY.DataPropertyName = "StockQTY";
+            this.StockQTY.HeaderText = "StockQTY";
+            this.StockQTY.Name = "StockQTY";
+            this.StockQTY.Visible = false;
+            // 
+            // Adj_Amount
+            // 
+            this.Adj_Amount.DataPropertyName = "Adj_Amount";
+            this.Adj_Amount.HeaderText = "Adj_Amount";
+            this.Adj_Amount.Name = "Adj_Amount";
+            this.Adj_Amount.Visible = false;
+            // 
+            // ColorID
+            // 
+            this.ColorID.DataPropertyName = "ColorID";
+            this.ColorID.HeaderText = "ColorID";
+            this.ColorID.Name = "ColorID";
+            this.ColorID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ColorID.Visible = false;
+            // 
+            // Color
+            // 
+            this.Color.DataPropertyName = "Color";
+            this.Color.HeaderText = "Color";
+            this.Color.Name = "Color";
+            // 
+            // Size
+            // 
+            this.Size.DataPropertyName = "Size";
+            this.Size.HeaderText = "Size";
+            this.Size.Name = "Size";
+            // 
+            // SizeID
+            // 
+            this.SizeID.DataPropertyName = "SizeID";
+            this.SizeID.HeaderText = "SizeID";
+            this.SizeID.Name = "SizeID";
+            this.SizeID.Visible = false;
+            // 
+            // Total
+            // 
+            this.Total.DataPropertyName = "Total";
+            this.Total.HeaderText = "Total";
+            this.Total.Name = "Total";
+            this.Total.ReadOnly = true;
+            // 
+            // ColDelete
+            // 
+            this.ColDelete.DataPropertyName = "Delete";
+            this.ColDelete.HeaderText = "Delete";
+            this.ColDelete.Name = "ColDelete";
             // 
             // label5
             // 
@@ -294,6 +383,7 @@
             this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Controls.Add(this.btnPrint);
             this.panel1.Controls.Add(this.btncancel);
             this.panel1.Controls.Add(this.btnSaveData);
             this.panel1.Controls.Add(this.btnSave);
@@ -407,93 +497,21 @@
             this.lblBillStatus.TabIndex = 260;
             this.lblBillStatus.Text = "Not Posted";
             // 
-            // ProductID
+            // btnPrint
             // 
-            this.ProductID.DataPropertyName = "ProductID";
-            this.ProductID.HeaderText = "ProductID";
-            this.ProductID.Name = "ProductID";
-            this.ProductID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // ProductName
-            // 
-            this.ProductName.DataPropertyName = "ProductName";
-            this.ProductName.HeaderText = "ProductName";
-            this.ProductName.Name = "ProductName";
-            this.ProductName.ReadOnly = true;
-            this.ProductName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // BarcodeNo
-            // 
-            this.BarcodeNo.DataPropertyName = "BarcodeNo";
-            this.BarcodeNo.HeaderText = "BarcodeNo";
-            this.BarcodeNo.Name = "BarcodeNo";
-            // 
-            // Rate
-            // 
-            this.Rate.DataPropertyName = "Rate";
-            this.Rate.HeaderText = "Rate";
-            this.Rate.Name = "Rate";
-            this.Rate.ReadOnly = true;
-            // 
-            // BillQTY
-            // 
-            this.BillQTY.DataPropertyName = "BillQTY";
-            this.BillQTY.HeaderText = "QTY";
-            this.BillQTY.Name = "BillQTY";
-            // 
-            // StockQTY
-            // 
-            this.StockQTY.DataPropertyName = "StockQTY";
-            this.StockQTY.HeaderText = "StockQTY";
-            this.StockQTY.Name = "StockQTY";
-            this.StockQTY.Visible = false;
-            // 
-            // Adj_Amount
-            // 
-            this.Adj_Amount.DataPropertyName = "Adj_Amount";
-            this.Adj_Amount.HeaderText = "Adj_Amount";
-            this.Adj_Amount.Name = "Adj_Amount";
-            this.Adj_Amount.Visible = false;
-            // 
-            // ColorID
-            // 
-            this.ColorID.DataPropertyName = "ColorID";
-            this.ColorID.HeaderText = "ColorID";
-            this.ColorID.Name = "ColorID";
-            this.ColorID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ColorID.Visible = false;
-            // 
-            // Color
-            // 
-            this.Color.DataPropertyName = "Color";
-            this.Color.HeaderText = "Color";
-            this.Color.Name = "Color";
-            // 
-            // Size
-            // 
-            this.Size.DataPropertyName = "Size";
-            this.Size.HeaderText = "Size";
-            this.Size.Name = "Size";
-            // 
-            // SizeID
-            // 
-            this.SizeID.DataPropertyName = "SizeID";
-            this.SizeID.HeaderText = "SizeID";
-            this.SizeID.Name = "SizeID";
-            this.SizeID.Visible = false;
-            // 
-            // Total
-            // 
-            this.Total.DataPropertyName = "Total";
-            this.Total.HeaderText = "Total";
-            this.Total.Name = "Total";
-            this.Total.ReadOnly = true;
-            // 
-            // ColDelete
-            // 
-            this.ColDelete.DataPropertyName = "Delete";
-            this.ColDelete.HeaderText = "Delete";
-            this.ColDelete.Name = "ColDelete";
+            this.btnPrint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnPrint.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPrint.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrint.Location = new System.Drawing.Point(548, 10);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(76, 25);
+            this.btnPrint.TabIndex = 252;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            this.btnPrint.MouseEnter += new System.EventHandler(this.btnAdd_MouseEnter);
+            this.btnPrint.MouseLeave += new System.EventHandler(this.btnAdd_MouseLeave);
             // 
             // frmStoreTransfer
             // 
@@ -583,5 +601,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SizeID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
         private System.Windows.Forms.DataGridViewButtonColumn ColDelete;
+        private System.Windows.Forms.Button btnPrint;
     }
 }
