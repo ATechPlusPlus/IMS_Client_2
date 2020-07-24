@@ -404,6 +404,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ds_SalesInvoiceReport.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Report\RDLC_DataSets\IMS_Report_Dataset.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IMS_Report_Dataset.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Report\ReportPrinting.cs" />
     <Compile Include="Report\Report_Forms\frmClosingCashReport.cs">
       <SubType>Form</SubType>
@@ -768,6 +773,17 @@
     </None>
     <None Include="Report\RDLC_DataSets\ds_SalesInvoiceReport.xss">
       <DependentUpon>ds_SalesInvoiceReport.xsd</DependentUpon>
+    </None>
+    <None Include="Report\RDLC_DataSets\IMS_Report_Dataset.xsc">
+      <DependentUpon>IMS_Report_Dataset.xsd</DependentUpon>
+    </None>
+    <None Include="Report\RDLC_DataSets\IMS_Report_Dataset.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>IMS_Report_Dataset.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Report\RDLC_DataSets\IMS_Report_Dataset.xss">
+      <DependentUpon>IMS_Report_Dataset.xsd</DependentUpon>
     </None>
     <None Include="Resources\b_click.png" />
   </ItemGroup>

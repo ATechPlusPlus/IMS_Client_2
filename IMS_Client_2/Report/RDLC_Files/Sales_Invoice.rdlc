@@ -304,7 +304,7 @@
                     <Value>=First(Fields!InvoiceDate.Value, "ds_InvoiceHeader")</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
-                      <Format>M/d/yyyy</Format>
+                      <Format>dd-MMM-yy</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -477,7 +477,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>1.80083in</Top>
+            <Top>1.80084in</Top>
             <Left>0.125in</Left>
             <Height>0.25in</Height>
             <Width>0.66555in</Width>
@@ -509,7 +509,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>empName</rd:DefaultName>
-            <Top>1.78694in</Top>
+            <Top>1.78695in</Top>
             <Left>0.8125in</Left>
             <Height>0.25in</Height>
             <Width>1.61218in</Width>
@@ -543,8 +543,8 @@
             <rd:DefaultName>CustName</rd:DefaultName>
             <Top>2.10639in</Top>
             <Left>0.8125in</Left>
-            <Height>0.42834in</Height>
-            <Width>0.96229in</Width>
+            <Height>0.25in</Height>
+            <Width>1.61218in</Width>
             <ZIndex>12</ZIndex>
             <Style>
               <Border>
@@ -605,8 +605,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox16</rd:DefaultName>
-            <Top>2.10639in</Top>
-            <Left>1.73438in</Left>
+            <Top>2.38417in</Top>
+            <Left>0.09834in</Left>
             <Height>0.25in</Height>
             <Width>0.49084in</Width>
             <ZIndex>14</ZIndex>
@@ -637,10 +637,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>CustomerMobile</rd:DefaultName>
-            <Top>2.11806in</Top>
-            <Left>2.23833in</Left>
+            <Top>2.42583in</Top>
+            <Left>0.82639in</Left>
             <Height>0.25in</Height>
-            <Width>0.82266in</Width>
+            <Width>1.59829in</Width>
             <ZIndex>15</ZIndex>
             <Style>
               <Border>
@@ -653,7 +653,7 @@
             </Style>
           </Textbox>
           <Line Name="Line2">
-            <Top>2.5625in</Top>
+            <Top>2.6875in</Top>
             <Left>0.015in</Left>
             <Height>0in</Height>
             <Width>3.04599in</Width>
@@ -997,7 +997,7 @@
             </TablixRowHierarchy>
             <DataSetName>ds_SalesDetails</DataSetName>
             <Top>2.75694in</Top>
-            <Left>0.125in</Left>
+            <Left>0.04562in</Left>
             <Height>0.5in</Height>
             <Width>2.96844in</Width>
             <ZIndex>17</ZIndex>
@@ -1084,7 +1084,7 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.63631in</Width>
+                  <Width>0.64889in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -1269,7 +1269,7 @@
                     </GroupExpressions>
                   </Group>
                   <TablixHeader>
-                    <Size>0.91383in</Size>
+                    <Size>0.92641in</Size>
                     <CellContents>
                       <Textbox Name="Textbox25">
                         <CanGrow>true</CanGrow>
@@ -1304,7 +1304,7 @@
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>0.91383in</Size>
+                    <Size>0.92641in</Size>
                     <CellContents>
                       <Textbox Name="Textbox27">
                         <CanGrow>true</CanGrow>
@@ -1342,9 +1342,9 @@
             </TablixRowHierarchy>
             <DataSetName>ds_InvoiceHeader</DataSetName>
             <Top>3.39583in</Top>
-            <Left>1.51085in</Left>
+            <Left>1.40388in</Left>
             <Height>1in</Height>
-            <Width>1.55014in</Width>
+            <Width>1.5753in</Width>
             <ZIndex>18</ZIndex>
             <Style>
               <Border>
@@ -1402,7 +1402,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>NetAmount</rd:DefaultName>
-            <Top>4.72916in</Top>
+            <Top>4.71527in</Top>
             <Left>0.09834in</Left>
             <Height>0.32292in</Height>
             <Width>2.93599in</Width>
@@ -1665,7 +1665,7 @@
             </TablixRowHierarchy>
             <DataSetName>ds_Payment</DataSetName>
             <Top>3.39583in</Top>
-            <Left>0.125in</Left>
+            <Left>0.04562in</Left>
             <Height>0.5in</Height>
             <Width>1.33873in</Width>
             <ZIndex>24</ZIndex>
@@ -1696,7 +1696,7 @@
           </Border>
         </Style>
       </Page>
- 
+   
   <ReportParameters>
     <ReportParameter Name="CompanyName">
       <DataType>String</DataType>
