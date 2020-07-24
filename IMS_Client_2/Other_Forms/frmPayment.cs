@@ -18,23 +18,23 @@ namespace IMS_Client_2.Other_Forms
         }
 
         public static string KNET_Number { get; set; }
-      
+
         public static string VisaNumber { get; set; }
-        
+
         public static string MasterCarNumber { get; set; }
 
 
         public static decimal KNET_Amount { get; set; }
         public static decimal MasterCardAmount { get; set; }
         public static decimal VisaAmount { get; set; }
-        
+
         public static decimal CashAmount { get; set; }
 
         public static List<string> lstPaymnetType = new List<string>();
 
         Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
         Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
-        
+
         clsUtility ObjUtil = new clsUtility();
 
         private void LoadAmount()
@@ -72,16 +72,16 @@ namespace IMS_Client_2.Other_Forms
             VisaNumber = "";
             MasterCarNumber = "";
         }
-       
+
         private void button1_Click(object sender, EventArgs e)
         {
-            if (txtAmount.Text.Trim().Length==0 || txtPaymentAutoID.Text.Trim().Length==0)
+            if (txtAmount.Text.Trim().Length == 0 || txtPaymentAutoID.Text.Trim().Length == 0)
             {
                 clsUtility.ShowInfoMessage("Please Enter Number and Amount.", clsUtility.strProjectTitle);
                 return;
             }
 
-            if (txtAmount.Text=="0" || txtAmount.Text.Trim().Length==0 )
+            if (txtAmount.Text == "0" || txtAmount.Text.Trim().Length == 0)
             {
                 txtPaymentAutoID.Clear();
                 txtAmount.Text = "0";
@@ -194,6 +194,15 @@ namespace IMS_Client_2.Other_Forms
         public static decimal GetTotalCash()
         {
             return Convert.ToDecimal(CashAmount);
+        }
+
+        private void txtAmount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = ObjUtil.IsDecimal(txtAmount, e);
+            if (e.Handled == true)
+            {
+                clsUtility.ShowInfoMessage("Enter Only Number...", clsUtility.strProjectTitle);
+            }
         }
     }
 }

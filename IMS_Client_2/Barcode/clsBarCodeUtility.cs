@@ -11,8 +11,6 @@ namespace IMS_Client_2.Barcode
 {
     class clsBarCodeUtility
     {
-       
-
        public  enum PrinterType
         {
            BarCodePrinter,
@@ -24,24 +22,20 @@ namespace IMS_Client_2.Barcode
             string printerName = "";
             if (printerType==PrinterType.BarCodePrinter)
             {
-                DataTable dtPrinter = ObjCon.ExecuteSelectStatement("select * from [tblPrinterSetting] where machineName='" + Environment.MachineName + "' ");
+                DataTable dtPrinter = ObjCon.ExecuteSelectStatement("SELECT * FROM [tblPrinterSetting] WITH(NOLOCK) WHERE machineName='" + Environment.MachineName + "' ");
                 if (dtPrinter.Rows.Count > 0)
                 {
                     printerName = dtPrinter.Rows[0]["BarCodePrinter"].ToString();
                 }
-
             }
             else if (printerType==PrinterType.InvoicePrinter)
             {
-                DataTable dtPrinter = ObjCon.ExecuteSelectStatement("select * from [tblPrinterSetting] where machineName='" + Environment.MachineName + "' ");
+                DataTable dtPrinter = ObjCon.ExecuteSelectStatement("SELECT * FROM [tblPrinterSetting] WITH(NOLOCK) WHERE machineName='" + Environment.MachineName + "' ");
                 if (dtPrinter.Rows.Count > 0)
                 {
                     printerName = dtPrinter.Rows[0]["InvoicePrinter"].ToString();
                 }
-
             }
-           
-
             return printerName;
         }
 
@@ -59,7 +53,6 @@ namespace IMS_Client_2.Barcode
             Bitmap bitmap = barcodeWriter.Write(strValue);
 
             return bitmap;
-
         }
 
         public static string ReadBarCode(string strFilepath)

@@ -283,6 +283,7 @@ namespace IMS_Client_2.Masters
 
         private void txtCashBand_KeyPress(object sender, KeyPressEventArgs e)
         {
+            TextBox txt = (TextBox)sender;
             e.Handled = ObjUtil.IsDecimal(txtCashBand, e);
             if (e.Handled == true)
             {

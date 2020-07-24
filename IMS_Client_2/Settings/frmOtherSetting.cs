@@ -273,6 +273,13 @@ namespace IMS_Client_2.Settings
 
         private void btnStorePopup_Click(object sender, EventArgs e)
         {
+            //if (clsFormRights.HasFormRight(clsFormRights.Forms.Store_Master) || clsUtility.IsAdmin)
+            //{
+            //}
+            //else
+            //{
+            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            //}
             Masters.Store_Master Obj = new Masters.Store_Master();
             Obj.ShowDialog();
             LoadStore();
@@ -295,7 +302,7 @@ namespace IMS_Client_2.Settings
         }
         private void BindPrinterDetails()
         {
-            DataTable dtPrinter = ObjCon.ExecuteSelectStatement("SELECT * FROM " + clsUtility.DBName + ".dbo.[tblPrinterSetting] WHERE MachineName = '" + txtMachineName.Text + "'");
+            DataTable dtPrinter = ObjCon.ExecuteSelectStatement("SELECT * FROM " + clsUtility.DBName + ".dbo.[tblPrinterSetting] WITH(NOLOCK) WHERE MachineName = '" + txtMachineName.Text + "'");
             if (ObjUtil.ValidateTable(dtPrinter))
             {
                 cmbBarcodPrinter.SelectedItem = dtPrinter.Rows[0]["BarCodePrinter"].ToString();
@@ -310,7 +317,7 @@ namespace IMS_Client_2.Settings
                 ObjCon.SetColumnData("MachineName", SqlDbType.NVarChar, Environment.MachineName);
                 ObjCon.SetColumnData("BarCodePrinter", SqlDbType.NVarChar, cmbBarcodPrinter.SelectedItem.ToString());
                 ObjCon.SetColumnData("InvoicePrinter", SqlDbType.NVarChar, cmbInvoicePrinter.SelectedItem.ToString());
-                ObjCon.SetColumnData("CreateBy", SqlDbType.Int, clsUtility.LoginID);
+                ObjCon.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
                 ObjCon.InsertData(clsUtility.DBName + ".dbo.tblPrinterSetting", false);
             }
             else
@@ -329,7 +336,6 @@ namespace IMS_Client_2.Settings
         {
             cmbInvoicePrinter.SelectedIndex = -1;
             cmbBarcodPrinter.SelectedIndex = -1;
-
         }
     }
 }

@@ -348,12 +348,12 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 11.25F);
-            this.label2.Location = new System.Drawing.Point(57, 29);
+            this.label2.Location = new System.Drawing.Point(43, 29);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(130, 17);
+            this.label2.Size = new System.Drawing.Size(149, 17);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Petty Cash BAL  =  ";
+            this.label2.Text = "Petty Cash Balance  =  ";
             // 
             // frmCloseShifWindow
             // 

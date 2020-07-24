@@ -238,6 +238,7 @@ namespace IMS_Client_2.StockManagement
             FillColorData();
             FillStoreData();
             LoadData();
+            cmbShop.SelectedValue = frmHome.Home_StoreID;
             rdShowAll.Checked = true;
         }
         private void LoadData()
@@ -245,7 +246,7 @@ namespace IMS_Client_2.StockManagement
             //DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Material_Details 0,0");
 
             ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, DBNull.Value, clsConnection_DAL.ParamType.Input);
-            ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, DBNull.Value, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, cmbShop.SelectedValue, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("BarcodeNo", SqlDbType.BigInt, DBNull.Value, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, DBNull.Value, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, DBNull.Value, clsConnection_DAL.ParamType.Input);
@@ -430,8 +431,6 @@ namespace IMS_Client_2.StockManagement
 
         private void printBarcodeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-
             DataGridViewSelectedRowCollection dgvRows = dgvProductDetails.SelectedRows;
             if (dgvProductDetails.SelectedRows != null && dgvProductDetails.SelectedRows.Count > 0)
             {
@@ -443,7 +442,6 @@ namespace IMS_Client_2.StockManagement
             {
                 clsUtility.ShowInfoMessage("Please select record.", clsUtility.strProjectTitle);
             }
-
         }
 
         private void txtSearchByStyleNo_TextChanged(object sender, EventArgs e)

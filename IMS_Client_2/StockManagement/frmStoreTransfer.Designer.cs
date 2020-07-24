@@ -337,7 +337,7 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(568, 463);
+            this.label5.Location = new System.Drawing.Point(570, 463);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(78, 17);
             this.label5.TabIndex = 204;
@@ -349,7 +349,7 @@
             this.txtTotalQTY.BackColor = System.Drawing.Color.White;
             this.txtTotalQTY.Enabled = false;
             this.txtTotalQTY.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalQTY.Location = new System.Drawing.Point(652, 460);
+            this.txtTotalQTY.Location = new System.Drawing.Point(654, 460);
             this.txtTotalQTY.Name = "txtTotalQTY";
             this.txtTotalQTY.ReadOnly = true;
             this.txtTotalQTY.Size = new System.Drawing.Size(134, 25);
