@@ -235,5 +235,22 @@ namespace IMS_Client_2.Sales
             string condition = " Convert(date,InvoiceDate) between Convert(Date,'" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "') and Convert(date,'" + dtpToDate.Value.ToString("yyyy-MM-dd") + "')";
             LoadData(condition);
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (dgvProductDetails.SelectedRows.Count==0)
+            {
+                clsUtility.ShowInfoMessage("Select a bill from the given list.", clsUtility.strProjectTitle);
+                return;
+
+            }
+
+            string InvoiceID = dgvProductDetails.SelectedRows[0].Cells["id"].Value.ToString();
+            Report.frmSalesInvoiceReport frmSalesInvoice = new Report.frmSalesInvoiceReport();
+            frmSalesInvoice.InvoiceID = Convert.ToInt32(InvoiceID);
+            frmSalesInvoice.IsDirectPrint = false;
+            frmSalesInvoice.Show();
+
+        }
     }
 }

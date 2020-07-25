@@ -47,6 +47,7 @@
             this.dgvProductDetails = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
             this.lblCOunt = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).BeginInit();
@@ -279,6 +280,19 @@
             this.lblCOunt.TabIndex = 206;
             this.lblCOunt.Text = "NA";
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.linkLabel1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel1.Location = new System.Drawing.Point(905, 222);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(66, 17);
+            this.linkLabel1.TabIndex = 207;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "View Bill";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // Sales_Bill_Details
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -286,6 +300,7 @@
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(984, 555);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.lblCOunt);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dgvProductDetails);
@@ -328,5 +343,6 @@
         private System.Windows.Forms.TextBox txtEmpID;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblCOunt;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

@@ -58,13 +58,17 @@ namespace IMS_Client_2.Report
             cmbStore.ValueMember = "StoreID";
             cmbStore.SelectedIndex = -1;
         }
-
+        Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
+        Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
         private void frmPettyCashExpReport_Load(object sender, EventArgs e)
         {
             FillStoreData();
             LoadData();
 
             cmbStore.SelectedValue = frmHome.Home_StoreID;
+
+            btnPrint.BackgroundImage = B_Leave;
+            btnClose.BackgroundImage = B_Leave;
         }
 
         private void dgvPettyCashExp_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -76,7 +80,17 @@ namespace IMS_Client_2.Report
             dgvPettyCashExp.Columns["StoreID"].Visible = false;
             dgvPettyCashExp.Columns["CreatedBy"].Visible = false;
         }
+        private void btnSave_MouseEnter(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            btn.BackgroundImage = B_Enter;
+        }
 
+        private void btnSave_MouseLeave(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            btn.BackgroundImage = B_Leave;
+        }
         private void rdByDate_CheckedChanged(object sender, EventArgs e)
         {
             if (rdByDate.Checked)
@@ -182,6 +196,47 @@ namespace IMS_Client_2.Report
         private void dtpToDate_ValueChanged(object sender, EventArgs e)
         {
             SearchByDate();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            string strFilterBY = "";
+            string strFilterCondition = "";
+
+            if (rdByDate.Checked)
+            {
+                strFilterBY = "Date";
+                strFilterCondition = "From Date : " + dtpFromDate.Value.ToShortDateString() + " To Date : " + dtpToDate.Value.ToShortDateString();
+            }
+            else if (rdByStore.Checked)
+            {
+                strFilterBY = "Store/Shop";
+                strFilterCondition = cmbStore.Text;
+
+            }
+            else if (rdSearchByAll.Checked)
+            {
+
+                strFilterBY = "All";
+                strFilterCondition = "All";
+            }
+
+            Report.Report_Forms.frmPettyCashReport frmPettyCashReport = new Report_Forms.frmPettyCashReport();
+
+            frmPettyCashReport.strCondtion = strFilterCondition;
+            frmPettyCashReport.strFilterBy = strFilterBY;
+            frmPettyCashReport.dtPettyCashDetails =(DataTable) dgvPettyCashExp.DataSource;
+
+            frmPettyCashReport.strPettyCashBalance = txtPettyCashBAL.Text;
+            frmPettyCashReport.strTotalPettyCashAmt = txtTotalPettyCash.Text;
+            frmPettyCashReport.strToTotalPettyCashExpAmt = txtTotalExpenses.Text;
+
+            frmPettyCashReport.Show();
         }
     }
 }
