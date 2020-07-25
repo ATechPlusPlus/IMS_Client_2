@@ -412,28 +412,28 @@
             // MaterialDetails_ToolStrip
             // 
             this.MaterialDetails_ToolStrip.Name = "MaterialDetails_ToolStrip";
-            this.MaterialDetails_ToolStrip.Size = new System.Drawing.Size(177, 24);
+            this.MaterialDetails_ToolStrip.Size = new System.Drawing.Size(180, 24);
             this.MaterialDetails_ToolStrip.Text = " Material Details";
             this.MaterialDetails_ToolStrip.Click += new System.EventHandler(this.MaterialDetails_ToolStrip_Click);
             // 
             // stockTransferToolStripMenuItem
             // 
             this.stockTransferToolStripMenuItem.Name = "stockTransferToolStripMenuItem";
-            this.stockTransferToolStripMenuItem.Size = new System.Drawing.Size(177, 24);
+            this.stockTransferToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.stockTransferToolStripMenuItem.Text = "Store Transfer";
             this.stockTransferToolStripMenuItem.Click += new System.EventHandler(this.stockTransferToolStripMenuItem_Click);
             // 
             // brachReceiveToolStripMenuItem
             // 
             this.brachReceiveToolStripMenuItem.Name = "brachReceiveToolStripMenuItem";
-            this.brachReceiveToolStripMenuItem.Size = new System.Drawing.Size(177, 24);
+            this.brachReceiveToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.brachReceiveToolStripMenuItem.Text = "Branch Receive";
             this.brachReceiveToolStripMenuItem.Click += new System.EventHandler(this.brachReceiveToolStripMenuItem_Click);
             // 
             // transferWatchToolStripMenuItem
             // 
             this.transferWatchToolStripMenuItem.Name = "transferWatchToolStripMenuItem";
-            this.transferWatchToolStripMenuItem.Size = new System.Drawing.Size(177, 24);
+            this.transferWatchToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.transferWatchToolStripMenuItem.Text = "Transfer Watch";
             this.transferWatchToolStripMenuItem.Click += new System.EventHandler(this.transferWatchToolStripMenuItem_Click);
             // 
@@ -444,9 +444,8 @@
             this.pettyCashExpReportToolStripMenuItem,
             this.miniSalesReportToolStripMenuItem});
             this.reportsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("reportsToolStripMenuItem.Image")));
-            this.reportsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
-            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(101, 36);
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(89, 36);
             this.reportsToolStripMenuItem.Text = "Reports";
             this.reportsToolStripMenuItem.ToolTipText = "Reports";
             // 
@@ -475,9 +474,8 @@
             // otherArtsToolStripMenuItem
             // 
             this.otherArtsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("otherArtsToolStripMenuItem.Image")));
-            this.otherArtsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.otherArtsToolStripMenuItem.Name = "otherArtsToolStripMenuItem";
-            this.otherArtsToolStripMenuItem.Size = new System.Drawing.Size(155, 36);
+            this.otherArtsToolStripMenuItem.Size = new System.Drawing.Size(143, 36);
             this.otherArtsToolStripMenuItem.Text = " Backup/Restore";
             this.otherArtsToolStripMenuItem.ToolTipText = "Other Parts";
             this.otherArtsToolStripMenuItem.Click += new System.EventHandler(this.otherArtsToolStripMenuItem_Click);
@@ -519,9 +517,8 @@
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("helpToolStripMenuItem.Image")));
-            this.helpToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(82, 36);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(70, 36);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // statusStrip1
@@ -549,7 +546,7 @@
             // lblVersion
             // 
             this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(71, 17);
+            this.lblVersion.Size = new System.Drawing.Size(1097, 17);
             this.lblVersion.Spring = true;
             this.lblVersion.Text = "Version : ";
             // 
