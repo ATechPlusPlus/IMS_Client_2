@@ -28,7 +28,20 @@ namespace IMS_Client_2.Other_Forms
 
         private void frmDashBoard_Load(object sender, EventArgs e)
         {
-            LoadShop();
+            DataTable dtDashBoard = ObjCon.ExecuteSelectStatement("select * from [IMS_Client_2].[dbo].[tblDashBoard]");
+            if (dtDashBoard.Rows.Count == 0)
+            {
+                frmDashBoardSettings frmDashBoardSettings = new frmDashBoardSettings();
+                frmDashBoardSettings.ShowDialog();
+                LoadShop();
+
+            }
+            else
+            {
+                LoadShop();
+
+            }
+              
         }
 
         private void panel3_Paint(object sender, PaintEventArgs e)
@@ -244,18 +257,38 @@ namespace IMS_Client_2.Other_Forms
                 lblHeaderTotalRate.Text = TotalHeaderRate.ToString();
             
             }
+            else
+            {
+                frmDashBoardSettings frmDashBoardSettings = new frmDashBoardSettings();
+                frmDashBoardSettings.ShowDialog();
+                this.Close();
+
+            }
 
           
         }
         clsUtility ObjUtil = new clsUtility();
         private void Dgv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            DataGridView dgv = (DataGridView)sender;
+            try
+            {
+                DataGridView dgv = (DataGridView)sender;
 
-            ObjUtil.SetDataGridProperty(dgv, DataGridViewAutoSizeColumnsMode.Fill);
-            dgv.RowHeadersVisible = false;
-            dgv.AllowUserToAddRows = false;
-            
+                ObjUtil.SetDataGridProperty(dgv, DataGridViewAutoSizeColumnsMode.Fill);
+                dgv.RowHeadersVisible = false;
+                dgv.AllowUserToAddRows = false;
+                dgv.Columns[0].ReadOnly = true;
+                dgv.Columns[1].ReadOnly = true;
+                dgv.Columns[2].ReadOnly = true;
+            }
+            catch (Exception)
+            {
+
+               
+            }
+           
+
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
