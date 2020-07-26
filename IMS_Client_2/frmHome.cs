@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -123,6 +124,47 @@ namespace IMS_Client_2
                 }
             }
         }
+        private void CreateBardCodeFolder()
+        {
+            try
+            {
+                string folderPath = Application.StartupPath + "//BarCodeImg";
+
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+
+            }
+           
+
+        }
+        private void DeleteBarCodeFiles()
+        {
+            try
+            {
+                string folderPath = Application.StartupPath + "//BarCodeImg";
+                if (Directory.Exists(folderPath))
+                {
+                    string[] strFiles = Directory.GetFiles(folderPath);
+
+                    for (int i = 0; i < strFiles.Length; i++)
+                    {
+                        File.Delete(strFiles[i]);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+               
+            }
+           
+        }
         private void frmHome_Load(object sender, EventArgs e)
         {
             try
@@ -148,6 +190,8 @@ namespace IMS_Client_2
                 DisplayRegistrationInfo();
                 GetDefaultShop();
                 LoadCashStatus();
+                CreateBardCodeFolder();
+                DeleteBarCodeFiles();
             }
             catch { }
         }
@@ -781,6 +825,12 @@ namespace IMS_Client_2
         {
             StockManagement.frmStockDetails Obj = new StockManagement.frmStockDetails();
             Obj.Show();
+        }
+
+        private void dashboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Other_Forms.frmDashBoard frmDashBoard = new Other_Forms.frmDashBoard();
+            frmDashBoard.Show();
         }
     }
 }

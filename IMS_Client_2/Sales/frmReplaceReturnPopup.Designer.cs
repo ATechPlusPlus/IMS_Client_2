@@ -57,6 +57,7 @@
             this.txtOldInvoiceNumber.Name = "txtOldInvoiceNumber";
             this.txtOldInvoiceNumber.Size = new System.Drawing.Size(171, 25);
             this.txtOldInvoiceNumber.TabIndex = 194;
+            this.txtOldInvoiceNumber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtOldInvoiceNumber_KeyDown);
             // 
             // btnOk
             // 

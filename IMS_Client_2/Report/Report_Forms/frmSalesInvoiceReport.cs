@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using CoreApp;
 using System.Drawing.Printing;
 using IMS_Client_2.Barcode;
+using System.IO;
 
 namespace IMS_Client_2.Report
 {
@@ -88,6 +89,23 @@ namespace IMS_Client_2.Report
 
             DataTable dtSalesHeader_Footer = ObjCon.ExecuteSelectStatement(strQueryHeader_Footer);
 
+
+            Bitmap bmpBarCode= Barcode.clsBarCodeUtility.GenerateBarCode(dtSalesHeader_Footer.Rows[0]["InvoiceNumber"].ToString());
+            string imgPath = "";
+            if (bmpBarCode!=null)
+            {
+                imgPath = Application.StartupPath + "//BarCodeImg//" + dtSalesHeader_Footer.Rows[0]["InvoiceNumber"].ToString() + ".jpeg";
+
+               
+                if(!File.Exists(imgPath))
+                {
+                    bmpBarCode.Save(imgPath);
+
+                }
+
+              
+            }
+
             reportViewer1.LocalReport.DataSources.Clear();
 
             ReportDataSource rds = new ReportDataSource("ds_SalesDetails", dtSalesDetails);
@@ -135,18 +153,22 @@ namespace IMS_Client_2.Report
             catch (Exception)
             {
             }
-
+            reportViewer1.LocalReport.EnableExternalImages = true;
             // creating the parameter with the extact name as in the report.
             ReportParameter param1 = new ReportParameter("CompanyName", strcomName, true);
             ReportParameter param2 = new ReportParameter("CompanyAddress", strAddress, true);
             ReportParameter param3 = new ReportParameter("Note", footerNoteDefault, true);
             ReportParameter param4 = new ReportParameter("NetAmount", NetAmt, true);
+            ReportParameter param5 = new ReportParameter("BarCodeImage", imgPath, true);
+
+         
 
             // adding the parameter in the report dynamically
             reportViewer1.LocalReport.SetParameters(param1);
             reportViewer1.LocalReport.SetParameters(param2);
             reportViewer1.LocalReport.SetParameters(param3);
             reportViewer1.LocalReport.SetParameters(param4);
+            reportViewer1.LocalReport.SetParameters(param5);
 
             reportViewer1.LocalReport.DataSources.Add(rds);
             reportViewer1.LocalReport.DataSources.Add(rds2);
@@ -179,8 +201,12 @@ namespace IMS_Client_2.Report
                     printerSetting.PrinterName = clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.InvoicePrinter);
                     reportPrinting.Print(printerSetting);
                 }
+
                 this.Close();
             }
+
+            
+
         }
     }
 }

@@ -35,8 +35,7 @@ namespace IMS_Client_2.Sales
             Button btn = (Button)sender;
             btn.BackgroundImage = B_Leave;
         }
-
-        private void btnPrint_Click(object sender, EventArgs e)
+        private void ShowReplaceWindow()
         {
             if (txtOldInvoiceNumber.Text.Trim().Length == 0)
             {
@@ -59,6 +58,18 @@ namespace IMS_Client_2.Sales
                 sales_Invoice.OldInvoiceID = dataTable.Rows[0]["ID"].ToString();
                 sales_Invoice.Show();
                 this.Close();
+            }
+        }
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            ShowReplaceWindow();
+        }
+
+        private void txtOldInvoiceNumber_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData==Keys.Enter)
+            {
+                ShowReplaceWindow();
             }
         }
     }

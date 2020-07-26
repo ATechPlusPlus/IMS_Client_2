@@ -696,5 +696,10 @@ namespace IMS_Client_2.StockManagement
 
             }
         }
+
+        private void cmdFrom_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadToStore();
+        }
     }
 }

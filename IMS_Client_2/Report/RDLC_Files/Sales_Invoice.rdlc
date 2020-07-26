@@ -172,6 +172,7 @@
             </Paragraphs>
             <rd:DefaultName>CompanyName</rd:DefaultName>
             <Top>0.03in</Top>
+            <Left>0.01097in</Left>
             <Height>0.25in</Height>
             <Width>2.84349in</Width>
             <Style>
@@ -204,7 +205,7 @@
             </Paragraphs>
             <rd:DefaultName>CompanyAddress</rd:DefaultName>
             <Top>0.59944in</Top>
-            <Left>0.015in</Left>
+            <Left>0.02597in</Left>
             <Height>0.40972in</Height>
             <Width>2.82849in</Width>
             <ZIndex>1</ZIndex>
@@ -220,6 +221,7 @@
           </Textbox>
           <Line Name="Line1">
             <Top>1.07861in</Top>
+            <Left>0.01097in</Left>
             <Height>0in</Height>
             <Width>2.85417in</Width>
             <ZIndex>2</ZIndex>
@@ -249,6 +251,7 @@
             </Paragraphs>
             <rd:DefaultName>StoreName</rd:DefaultName>
             <Top>0.34944in</Top>
+            <Left>0.01097in</Left>
             <Height>0.25in</Height>
             <Width>2.84349in</Width>
             <ZIndex>3</ZIndex>
@@ -280,7 +283,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
             <Top>1.14806in</Top>
-            <Left>0.125in</Left>
+            <Left>0.13597in</Left>
             <Height>0.19445in</Height>
             <Width>0.65431in</Width>
             <ZIndex>4</ZIndex>
@@ -315,7 +318,7 @@
             </Paragraphs>
             <rd:DefaultName>InvoiceDate</rd:DefaultName>
             <Top>1.13417in</Top>
-            <Left>0.84876in</Left>
+            <Left>0.85973in</Left>
             <Height>0.22222in</Height>
             <Width>1in</Width>
             <ZIndex>5</ZIndex>
@@ -347,7 +350,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
             <Top>1.14806in</Top>
-            <Left>1.85938in</Left>
+            <Left>1.87035in</Left>
             <Height>0.19445in</Height>
             <Width>0.45833in</Width>
             <ZIndex>6</ZIndex>
@@ -382,7 +385,7 @@
             </Paragraphs>
             <rd:DefaultName>InvoiceDate1</rd:DefaultName>
             <Top>1.14806in</Top>
-            <Left>2.28151in</Left>
+            <Left>2.29248in</Left>
             <Height>0.22222in</Height>
             <Width>0.57266in</Width>
             <ZIndex>7</ZIndex>
@@ -414,7 +417,7 @@
             </Paragraphs>
             <rd:DefaultName>InvoiceNumber</rd:DefaultName>
             <Top>1.37028in</Top>
-            <Left>0.85305in</Left>
+            <Left>0.86402in</Left>
             <Height>0.20833in</Height>
             <Width>2.00112in</Width>
             <ZIndex>8</ZIndex>
@@ -446,7 +449,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
             <Top>1.37028in</Top>
-            <Left>0.125in</Left>
+            <Left>0.13597in</Left>
             <Height>0.20833in</Height>
             <Width>0.76972in</Width>
             <ZIndex>9</ZIndex>
@@ -480,7 +483,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
             <Top>1.60639in</Top>
-            <Left>0.12765in</Left>
+            <Left>0.13862in</Left>
             <Height>0.19948in</Height>
             <Width>0.66555in</Width>
             <ZIndex>10</ZIndex>
@@ -512,7 +515,7 @@
             </Paragraphs>
             <rd:DefaultName>empName</rd:DefaultName>
             <Top>1.60639in</Top>
-            <Left>0.85305in</Left>
+            <Left>0.86402in</Left>
             <Height>0.1997in</Height>
             <Width>2.00112in</Width>
             <ZIndex>11</ZIndex>
@@ -544,7 +547,7 @@
             </Paragraphs>
             <rd:DefaultName>CustName</rd:DefaultName>
             <Top>1.82832in</Top>
-            <Left>0.84876in</Left>
+            <Left>0.85973in</Left>
             <Height>0.22222in</Height>
             <Width>2.00112in</Width>
             <ZIndex>12</ZIndex>
@@ -576,7 +579,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox16</rd:DefaultName>
             <Top>1.82832in</Top>
-            <Left>0.12765in</Left>
+            <Left>0.13862in</Left>
             <Height>0.20834in</Height>
             <Width>0.67944in</Width>
             <ZIndex>13</ZIndex>
@@ -608,7 +611,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox16</rd:DefaultName>
             <Top>2.0642in</Top>
-            <Left>0.125in</Left>
+            <Left>0.13597in</Left>
             <Height>0.23633in</Height>
             <Width>0.60542in</Width>
             <ZIndex>14</ZIndex>
@@ -640,7 +643,7 @@
             </Paragraphs>
             <rd:DefaultName>CustomerMobile</rd:DefaultName>
             <Top>2.06442in</Top>
-            <Left>0.84237in</Left>
+            <Left>0.85334in</Left>
             <Height>0.23611in</Height>
             <Width>2.00112in</Width>
             <ZIndex>15</ZIndex>
@@ -656,7 +659,7 @@
           </Textbox>
           <Line Name="Line2">
             <Top>2.35609in</Top>
-            <Left>0.05126in</Left>
+            <Left>0.06223in</Left>
             <Height>0in</Height>
             <Width>2.80291in</Width>
             <ZIndex>16</ZIndex>
@@ -999,7 +1002,7 @@
             </TablixRowHierarchy>
             <DataSetName>ds_SalesDetails</DataSetName>
             <Top>2.45887in</Top>
-            <Left>0.04562in</Left>
+            <Left>0.05659in</Left>
             <Height>0.5in</Height>
             <Width>2.85152in</Width>
             <ZIndex>17</ZIndex>
@@ -1344,7 +1347,7 @@
             </TablixRowHierarchy>
             <DataSetName>ds_InvoiceHeader</DataSetName>
             <Top>3.00053in</Top>
-            <Left>1.41777in</Left>
+            <Left>1.42874in</Left>
             <Height>1in</Height>
             <Width>1.47938in</Width>
             <ZIndex>18</ZIndex>
@@ -1373,7 +1376,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox20</rd:DefaultName>
             <Top>4.07259in</Top>
-            <Left>0.05126in</Left>
+            <Left>0.06223in</Left>
             <Height>0.25in</Height>
             <Width>0.93778in</Width>
             <ZIndex>19</ZIndex>
@@ -1405,7 +1408,7 @@
             </Paragraphs>
             <rd:DefaultName>NetAmount</rd:DefaultName>
             <Top>4.37814in</Top>
-            <Left>0.04318in</Left>
+            <Left>0.05415in</Left>
             <Height>0.32292in</Height>
             <Width>2.80031in</Width>
             <ZIndex>20</ZIndex>
@@ -1421,7 +1424,7 @@
           </Textbox>
           <Line Name="Line3">
             <Top>4.78251in</Top>
-            <Left>0.015in</Left>
+            <Left>0.02597in</Left>
             <Height>0in</Height>
             <Width>2.83917in</Width>
             <ZIndex>21</ZIndex>
@@ -1449,8 +1452,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox51</rd:DefaultName>
-            <Top>4.94918in</Top>
-            <Left>0.015in</Left>
+            <Top>5.33925in</Top>
+            <Left>0.05659in</Left>
             <Height>0.25in</Height>
             <Width>0.42708in</Width>
             <ZIndex>22</ZIndex>
@@ -1481,9 +1484,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Note</rd:DefaultName>
-            <Top>4.94918in</Top>
-            <Left>0.4575in</Left>
-            <Height>0.36635in</Height>
+            <Top>5.36702in</Top>
+            <Left>0.46373in</Left>
+            <Height>0.51218in</Height>
             <Width>2.38599in</Width>
             <ZIndex>23</ZIndex>
             <Style>
@@ -1667,7 +1670,7 @@
             </TablixRowHierarchy>
             <DataSetName>ds_Payment</DataSetName>
             <Top>2.98664in</Top>
-            <Left>0.05126in</Left>
+            <Left>0.06223in</Left>
             <Height>0.5in</Height>
             <Width>1.33873in</Width>
             <ZIndex>24</ZIndex>
@@ -1677,8 +1680,36 @@
               </Border>
             </Style>
           </Tablix>
+          <Image Name="imgBarCode">
+            <Source>External</Source>
+            <Value>="file:" &amp; Parameters!BarCodeImage.Value</Value>
+            <MIMEType>image/jpeg</MIMEType>
+            <Sizing>Fit</Sizing>
+            <Top>4.85195in</Top>
+            <Left>0.6134in</Left>
+            <Height>0.40396in</Height>
+            <Width>1.67321in</Width>
+            <ZIndex>25</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Line Name="Line4">
+            <Top>5.29758in</Top>
+            <Left>0.02597in</Left>
+            <Height>0in</Height>
+            <Width>2.83917in</Width>
+            <ZIndex>26</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
         </ReportItems>
-        <Height>5.69792in</Height>
+        <Height>6.16542in</Height>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1686,7 +1717,7 @@
           </Border>
         </Style>
       </Body>
-      <Width>2.96724in</Width>
+      <Width>2.90884in</Width>
       <Page>
         <PageWidth>3.14in</PageWidth>
         <InteractiveHeight>11in</InteractiveHeight>
@@ -1723,7 +1754,27 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="BarCodeImage">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
+  <EmbeddedImages>
+    <EmbeddedImage Name="download">
+      <MIMEType>image/jpeg</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>c9786fa8-8616-46f7-86f2-faaeda12d24d</rd:ReportID>

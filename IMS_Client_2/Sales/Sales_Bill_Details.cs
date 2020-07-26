@@ -250,7 +250,7 @@ namespace IMS_Client_2.Sales
             frmSalesInvoice.InvoiceID = Convert.ToInt32(InvoiceID);
             frmSalesInvoice.IsDirectPrint = false;
             frmSalesInvoice.Show();
-
+            
         }
     }
 }
