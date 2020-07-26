@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTransferCheck));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -39,12 +40,8 @@
             this.dgvProductDetails = new System.Windows.Forms.DataGridView();
             this.txtBarCode = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtReceiveBillNo = new System.Windows.Forms.TextBox();
             this.picProduct = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnlGreen = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.pnlRed = new System.Windows.Forms.Panel();
@@ -60,16 +57,18 @@
             this.label10 = new System.Windows.Forms.Label();
             this.pnlViolet = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.DeleteVioletToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picProduct)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlGreen.SuspendLayout();
             this.pnlRed.SuspendLayout();
             this.pnlOrange.SuspendLayout();
             this.panel5.SuspendLayout();
             this.pnlViolet.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -144,6 +143,7 @@
             this.dgvProductDetails.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProductDetails.BackgroundColor = System.Drawing.Color.White;
             this.dgvProductDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProductDetails.ContextMenuStrip = this.contextMenuStrip1;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -181,28 +181,6 @@
             this.label4.TabIndex = 212;
             this.label4.Text = "BarCode :";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(600, 48);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(112, 17);
-            this.label3.TabIndex = 213;
-            this.label3.Text = "Recieve Bill No. :";
-            this.label3.Visible = false;
-            // 
-            // txtReceiveBillNo
-            // 
-            this.txtReceiveBillNo.BackColor = System.Drawing.Color.White;
-            this.txtReceiveBillNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtReceiveBillNo.Location = new System.Drawing.Point(718, 48);
-            this.txtReceiveBillNo.Name = "txtReceiveBillNo";
-            this.txtReceiveBillNo.Size = new System.Drawing.Size(99, 25);
-            this.txtReceiveBillNo.TabIndex = 214;
-            this.txtReceiveBillNo.Visible = false;
-            // 
             // picProduct
             // 
             this.picProduct.BackColor = System.Drawing.Color.Transparent;
@@ -227,32 +205,6 @@
             this.groupBox1.TabIndex = 258;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Item Image ";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label7.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(817, 73);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(49, 17);
-            this.label7.TabIndex = 261;
-            this.label7.Text = "Search";
-            this.label7.Visible = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(820, 48);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(28, 22);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 260;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Visible = false;
             // 
             // pnlGreen
             // 
@@ -427,6 +379,21 @@
             this.label11.TabIndex = 263;
             this.label11.Text = "Violet for Not Exist Items";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DeleteVioletToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // DeleteVioletToolStripMenuItem
+            // 
+            this.DeleteVioletToolStripMenuItem.Name = "DeleteVioletToolStripMenuItem";
+            this.DeleteVioletToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.DeleteVioletToolStripMenuItem.Text = "Delete Violet Items";
+            this.DeleteVioletToolStripMenuItem.Click += new System.EventHandler(this.DeleteVioletToolStripMenuItem_Click);
+            // 
             // frmTransferCheck
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -443,11 +410,7 @@
             this.Controls.Add(this.pnlOrange);
             this.Controls.Add(this.pnlRed);
             this.Controls.Add(this.pnlGreen);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.txtReceiveBillNo);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.txtBarCode);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dgvProductDetails);
@@ -468,7 +431,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picProduct)).EndInit();
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnlGreen.ResumeLayout(false);
             this.pnlGreen.PerformLayout();
             this.pnlRed.ResumeLayout(false);
@@ -478,6 +440,7 @@
             this.panel5.ResumeLayout(false);
             this.pnlViolet.ResumeLayout(false);
             this.pnlViolet.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -494,12 +457,8 @@
         private System.Windows.Forms.DataGridView dgvProductDetails;
         private System.Windows.Forms.TextBox txtBarCode;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtReceiveBillNo;
         private System.Windows.Forms.PictureBox picProduct;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel pnlGreen;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel pnlRed;
@@ -515,5 +474,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel pnlViolet;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem DeleteVioletToolStripMenuItem;
     }
 }

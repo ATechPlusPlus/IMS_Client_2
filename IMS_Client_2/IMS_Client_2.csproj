@@ -489,6 +489,12 @@
     <Compile Include="SplashWindow.designer.cs">
       <DependentUpon>SplashWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="StockManagement\frmStockDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManagement\frmStockDetails.Designer.cs">
+      <DependentUpon>frmStockDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="StockManagement\frmTransferCheck.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -685,6 +691,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SplashWindow.resx">
       <DependentUpon>SplashWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockManagement\frmStockDetails.resx">
+      <DependentUpon>frmStockDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StockManagement\frmTransferCheck.resx">
       <DependentUpon>frmTransferCheck.cs</DependentUpon>

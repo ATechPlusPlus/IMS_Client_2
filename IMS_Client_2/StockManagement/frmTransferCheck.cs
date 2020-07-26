@@ -48,7 +48,7 @@ namespace IMS_Client_2.StockManagement
                 if (ObjUtil.ValidateTable(dtStoreTransfer))
                 {
                     dgvProductDetails.DataSource = dtStoreTransfer;
-                    txtDate.Text = Convert.ToDateTime(dtStoreTransfer.Rows[0]["BillDate"]).ToString("yyyy-MM-dd");
+                    txtDate.Text = Convert.ToDateTime(dtStoreTransfer.Rows[0]["BillDate"]).ToShortDateString();
                     txtTotalQTY.Text = dtStoreTransfer.Rows[0]["TotalQTY"].ToString();
                     txtBillNo.Text = dtStoreTransfer.Rows[0]["BillNo"].ToString();
 
@@ -81,7 +81,7 @@ namespace IMS_Client_2.StockManagement
                     {
                         drow[0]["CellColor"] = "Green";
                     }
-                    else if(pBillQty < pTotal)
+                    else if (pBillQty < pTotal && drow[0]["CellColor"].ToString() != "Violet")
                     {
                         drow[0]["CellColor"] = "Orange";
                     }
@@ -103,6 +103,8 @@ namespace IMS_Client_2.StockManagement
                         if (ObjUtil.ValidateTable(dt))
                         {
                             DataRow row = dtStoreTransfer.NewRow();
+                            row["TransferItemID"] = dt.Rows[0]["TransferItemID"];
+                            row["StoreBillDetailsID"] = dt.Rows[0]["StoreBillDetailsID"];
                             row["Barcode"] = dt.Rows[0]["Barcode"];
                             row["CellColor"] = dt.Rows[0]["CellColor"];
                             row["ModelNo"] = dt.Rows[0]["ModelNo"];
@@ -112,6 +114,9 @@ namespace IMS_Client_2.StockManagement
                             row["Item"] = dt.Rows[0]["Item"];
                             row["Color"] = dt.Rows[0]["Color"];
                             row["Size"] = dt.Rows[0]["Size"];
+                            row["Total"] = dt.Rows[0]["Total"];
+                            row["ColorID"] = dt.Rows[0]["ColorID"];
+                            row["SizeID"] = dt.Rows[0]["SizeID"];
                             dtStoreTransfer.Rows.Add(row);
                             dtStoreTransfer.AcceptChanges();
                             dgvProductDetails.DataSource = dtStoreTransfer;
@@ -154,6 +159,8 @@ namespace IMS_Client_2.StockManagement
             dgvProductDetails.Columns["TotalQTY"].Visible = false;
             dgvProductDetails.Columns["Total"].Visible = false;
             dgvProductDetails.Columns["CellColor"].Visible = false;
+            dgvProductDetails.Columns["ColorID"].Visible = false;
+            dgvProductDetails.Columns["SizeID"].Visible = false;
 
             for (int i = 0; i < dgvProductDetails.Rows.Count; i++)
             {
@@ -235,21 +242,38 @@ namespace IMS_Client_2.StockManagement
         {
             if (ValidateEnterQTY())
             {
-                int a = 0;
-                DataRow[] drow = dtStoreTransfer.Select("BillQTY=0");
-                if (drow.Length > 0)
-                {
-                    drow[0].Delete();
-                    dtStoreTransfer.AcceptChanges();
-                }
+                bool b = false;
+                //int a = 0;
+                //DataRow[] drow = dtStoreTransfer.Select("BillQTY=0");
+                //if (drow.Length > 0)
+                //{
+                //    drow[0].Delete();
+                //    dtStoreTransfer.AcceptChanges();
+                //}
                 for (int i = 0; i < dtStoreTransfer.Rows.Count; i++)
                 {
-                    ObjDAL.UpdateColumnData("EnterQTY", SqlDbType.Int, dtStoreTransfer.Rows[i]["EnterQTY"]);
-                    ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID);
-                    ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
-                    a = ObjDAL.UpdateData(clsUtility.DBName + ".dbo.tblStoreTransferItemDetails", "TransferItemID=" + dtStoreTransfer.Rows[i]["TransferItemID"]);
+                    ObjDAL.SetStoreProcedureData("TransferItemID", SqlDbType.Int, dtStoreTransfer.Rows[i]["TransferItemID"], clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("StoreBillDetailsID", SqlDbType.Int, dtStoreTransfer.Rows[i]["StoreBillDetailsID"], clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, dtStoreTransfer.Rows[i]["ProductID"], clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("Barcode", SqlDbType.NVarChar, dtStoreTransfer.Rows[i]["Barcode"], clsConnection_DAL.ParamType.Input);
+                    //ObjDAL.SetStoreProcedureData("Rate", SqlDbType.Decimal, dtStoreTransfer.Rows[i]["Rate"], clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("BillQTY", SqlDbType.Int, dtStoreTransfer.Rows[i]["BillQTY"], clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("EnterQTY", SqlDbType.Int, dtStoreTransfer.Rows[i]["EnterQTY"], clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, dtStoreTransfer.Rows[i]["ColorID"], clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("SizeID", SqlDbType.Int, dtStoreTransfer.Rows[i]["SizeID"], clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("Total", SqlDbType.Decimal, dtStoreTransfer.Rows[i]["Total"], clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("CellColor", SqlDbType.VarChar, dtStoreTransfer.Rows[i]["CellColor"], clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
+
+                    b = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_Insert_StoreTransferItemDetails_Voilet");
+
+                    //ObjDAL.UpdateColumnData("EnterQTY", SqlDbType.Int, dtStoreTransfer.Rows[i]["EnterQTY"]);
+                    //ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID);
+                    //ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
+                    //a = ObjDAL.UpdateData(clsUtility.DBName + ".dbo.tblStoreTransferItemDetails", "TransferItemID=" + dtStoreTransfer.Rows[i]["TransferItemID"]);
                 }
-                if (a > 0)
+                if (b)
                 {
                     clsUtility.ShowInfoMessage("Entered QTY details Updated.", clsUtility.strProjectTitle);
                     this.Close();
@@ -295,6 +319,41 @@ namespace IMS_Client_2.StockManagement
             catch (Exception ex)
             {
                 clsUtility.ShowInfoMessage(ex.ToString(), clsUtility.strProjectTitle);
+            }
+        }
+
+        private void DeleteVioletToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //if (clsFormRights.HasFormRight(clsFormRights.Forms.frmTransferCheck,clsFormRights.Operation.Delete) || clsUtility.IsAdmin)
+            //{
+            //}
+            //else
+            //{
+            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            //}
+
+            if (dgvProductDetails.SelectedRows != null && dgvProductDetails.SelectedRows.Count > 0)
+            {
+                dgvProductDetails.Rows.RemoveAt(dgvProductDetails.SelectedRows[0].Index);
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("Select Barcode to delete Violet", clsUtility.strProjectTitle);
+            }
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            if (dgvProductDetails.SelectedRows != null && dgvProductDetails.SelectedRows.Count > 0)
+            {
+                if (dgvProductDetails.SelectedRows[0].Cells["CellColor"].Value.ToString() == "Violet")
+                {
+                    contextMenuStrip1.Items[0].Enabled = true;
+                }
+                else
+                {
+                    contextMenuStrip1.Items[0].Enabled = false;
+                }
             }
         }
     }

@@ -88,7 +88,7 @@ namespace IMS_Client_2
             object ob = ObjDAL.ExecuteScalar("SELECT CONVERT(date,RegDate) RegDate FROM " + clsUtility.DBName + ".[dbo].[RegistrationDetails] WITH(NOLOCK) where PcName='" + Environment.MachineName + "'");
             if (ob != null)
             {
-                lblRegistrationDate.Text = Convert.ToDateTime(ob).ToString("yyyy-MM-dd");
+                lblRegistrationDate.Text = Convert.ToDateTime(ob).ToShortDateString();
             }
             else
             {
@@ -130,9 +130,9 @@ namespace IMS_Client_2
                 btnOpenCash.BackgroundImage = B_Leave;
 
                 clsUtility.DBName = "IMS_Client_2";
-              //  clsUtility.LoginID = 5;
+                //clsUtility.LoginID = 5;
                 //clsUtility.IsAdmin = false;
-               // clsUtility.IsAdmin = true;
+                //clsUtility.IsAdmin = true;
                 clsUtility.strProjectTitle = "IMS";
                 if (clsUtility.LoginID > 0)
                 {
@@ -766,9 +766,21 @@ namespace IMS_Client_2
 
         private void miniSalesReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            //if (clsFormRights.HasFormRight(clsFormRights.Forms.tblMiniSalesReport) || clsUtility.IsAdmin)
+            //{
+            //}
+            //else
+            //{
+            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            //}
             Report.Report_Forms.tblMiniSalesReport frmminiSalesReport = new Report.Report_Forms.tblMiniSalesReport();
             frmminiSalesReport.Show();
+        }
+
+        private void stockDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StockManagement.frmStockDetails Obj = new StockManagement.frmStockDetails();
+            Obj.Show();
         }
     }
 }

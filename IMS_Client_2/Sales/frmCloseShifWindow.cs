@@ -125,7 +125,8 @@ namespace IMS_Client_2.Sales
                     dtCash = null;
                     dtExpenses = null;
                     dgvCloseCash.DataSource = null;
-                    btnOpenCash.Enabled = false;
+                    //btnOpenCash.Enabled = false;
+                    btnOpenCash.Enabled = true;
                     btnCloseCash.Enabled = false;
                     btnPreview.Enabled = false;
                     btnPrint.Enabled = false;
@@ -189,8 +190,14 @@ namespace IMS_Client_2.Sales
             }
             else if (listView1.Items[1].Selected)
             {
-                dgvCloseCash.Columns["CreditClosingID"].Visible = false;
-                dgvCloseCash.Columns["MasterCashClosingID"].Visible = false;
+                if (dgvCloseCash.Columns.Contains("CreditClosingID"))
+                {
+                    dgvCloseCash.Columns["CreditClosingID"].Visible = false;
+                }
+                if (dgvCloseCash.Columns.Contains("MasterCashClosingID"))
+                {
+                    dgvCloseCash.Columns["MasterCashClosingID"].Visible = false;
+                }
             }
             else if (listView1.Items[2].Selected)
             {
@@ -567,9 +574,7 @@ namespace IMS_Client_2.Sales
             frmClosingCashReport.IsDirectPrint = Direct;
             frmClosingCashReport.dtCreditDetails = dtCredit;
             frmClosingCashReport.PettyCash = lblPettyCashBAL.Text;
-
-            frmClosingCashReport.PettyCashBeforeExp = Convert.ToDecimal(lblPettyCashBAL.Text + TotalExpenses).ToString();
-
+            frmClosingCashReport.PettyCashBeforeExp = Convert.ToString(Convert.ToDecimal(lblPettyCashBAL.Text) + Convert.ToDecimal(TotalExpenses));
             frmClosingCashReport.dtExpanses = this.dtExpenses;
             frmClosingCashReport.TotalExpenses = TotalExpenses;
 
