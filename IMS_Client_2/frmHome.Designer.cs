@@ -63,6 +63,7 @@
             this.replaceReturnItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SalesBillDetails_ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.closeCashToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dashboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.MaterialDetails_ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.stockTransferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -116,6 +117,7 @@
             this.toolStripMenuItem4,
             this.aboutToolStripMenuItem,
             this.hardwarePartsToolStripMenuItem,
+            this.dashboardToolStripMenuItem,
             this.toolStripMenuItem1,
             this.reportsToolStripMenuItem,
             this.otherArtsToolStripMenuItem,
@@ -396,6 +398,14 @@
             this.closeCashToolStripMenuItem.Text = "Close Cash";
             this.closeCashToolStripMenuItem.Click += new System.EventHandler(this.closeCashToolStripMenuItem_Click);
             // 
+            // dashboardToolStripMenuItem
+            // 
+            this.dashboardToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("dashboardToolStripMenuItem.Image")));
+            this.dashboardToolStripMenuItem.Name = "dashboardToolStripMenuItem";
+            this.dashboardToolStripMenuItem.Size = new System.Drawing.Size(108, 36);
+            this.dashboardToolStripMenuItem.Text = "Dashboard";
+            this.dashboardToolStripMenuItem.Click += new System.EventHandler(this.dashboardToolStripMenuItem_Click);
+            // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -412,28 +422,28 @@
             // MaterialDetails_ToolStrip
             // 
             this.MaterialDetails_ToolStrip.Name = "MaterialDetails_ToolStrip";
-            this.MaterialDetails_ToolStrip.Size = new System.Drawing.Size(180, 24);
+            this.MaterialDetails_ToolStrip.Size = new System.Drawing.Size(177, 24);
             this.MaterialDetails_ToolStrip.Text = " Material Details";
             this.MaterialDetails_ToolStrip.Click += new System.EventHandler(this.MaterialDetails_ToolStrip_Click);
             // 
             // stockTransferToolStripMenuItem
             // 
             this.stockTransferToolStripMenuItem.Name = "stockTransferToolStripMenuItem";
-            this.stockTransferToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.stockTransferToolStripMenuItem.Size = new System.Drawing.Size(177, 24);
             this.stockTransferToolStripMenuItem.Text = "Store Transfer";
             this.stockTransferToolStripMenuItem.Click += new System.EventHandler(this.stockTransferToolStripMenuItem_Click);
             // 
             // brachReceiveToolStripMenuItem
             // 
             this.brachReceiveToolStripMenuItem.Name = "brachReceiveToolStripMenuItem";
-            this.brachReceiveToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.brachReceiveToolStripMenuItem.Size = new System.Drawing.Size(177, 24);
             this.brachReceiveToolStripMenuItem.Text = "Branch Receive";
             this.brachReceiveToolStripMenuItem.Click += new System.EventHandler(this.brachReceiveToolStripMenuItem_Click);
             // 
             // transferWatchToolStripMenuItem
             // 
             this.transferWatchToolStripMenuItem.Name = "transferWatchToolStripMenuItem";
-            this.transferWatchToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.transferWatchToolStripMenuItem.Size = new System.Drawing.Size(177, 24);
             this.transferWatchToolStripMenuItem.Text = "Transfer Watch";
             this.transferWatchToolStripMenuItem.Click += new System.EventHandler(this.transferWatchToolStripMenuItem_Click);
             // 
@@ -855,5 +865,6 @@
         private System.Windows.Forms.ToolStripMenuItem loadPettyCashToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pettyCashExpReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem miniSalesReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dashboardToolStripMenuItem;
     }
 }

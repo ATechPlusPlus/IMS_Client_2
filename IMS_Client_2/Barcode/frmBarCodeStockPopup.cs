@@ -54,7 +54,9 @@ namespace IMS_Client_2.Barcode
         }
         CoreApp.clsConnection_DAL ObjCon = new CoreApp.clsConnection_DAL(true);
         CoreApp.clsUtility ObjUtil = new CoreApp.clsUtility();
-      public  DataGridViewSelectedRowCollection dgvRows;
+      
+        public  DataGridViewSelectedRowCollection dgvRows;
+        
         string _Current_BarCodeNumber = "";
         private string GetBarcodeNumber()
         {
@@ -420,6 +422,8 @@ namespace IMS_Client_2.Barcode
                         }
                     
                 }
+                this.Focus();
+                this.BringToFront();
                 clsUtility.ShowInfoMessage("Operation completed !", clsUtility.strProjectTitle);
             }
             else if (radQTY.Checked)

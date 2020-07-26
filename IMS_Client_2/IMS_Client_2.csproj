@@ -187,6 +187,9 @@
     <Compile Include="Barcode\uRectangle.designer.cs">
       <DependentUpon>uRectangle.cs</DependentUpon>
     </Compile>
+    <Compile Include="SPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="clsForm.cs" />
     <Compile Include="frmHome.cs">
       <SubType>Form</SubType>
@@ -289,6 +292,18 @@
     </Compile>
     <Compile Include="Other_Forms\frmCashBoxOpenPopUp.Designer.cs">
       <DependentUpon>frmCashBoxOpenPopUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Other_Forms\frmDashBoard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other_Forms\frmDashBoard.Designer.cs">
+      <DependentUpon>frmDashBoard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Other_Forms\frmDashBoardSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other_Forms\frmDashBoardSettings.Designer.cs">
+      <DependentUpon>frmDashBoardSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="Other_Forms\frmDiscountLogin.cs">
       <SubType>Form</SubType>
@@ -607,6 +622,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Other_Forms\frmCashBoxOpenPopUp.resx">
       <DependentUpon>frmCashBoxOpenPopUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other_Forms\frmDashBoard.resx">
+      <DependentUpon>frmDashBoard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other_Forms\frmDashBoardSettings.resx">
+      <DependentUpon>frmDashBoardSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Other_Forms\frmDiscountLogin.resx">
       <DependentUpon>frmDiscountLogin.cs</DependentUpon>
