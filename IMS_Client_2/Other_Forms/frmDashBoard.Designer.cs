@@ -31,10 +31,11 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDashBoard));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lblActiveStatus = new System.Windows.Forms.Label();
-            this.lblHeaderTotalRate = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.lblHeaderQTY = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblHeaderTotalRate = new System.Windows.Forms.Label();
+            this.lblActiveStatus = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.sPanel1 = new IMS_Client_2.SPanel();
             this.label8 = new System.Windows.Forms.Label();
@@ -43,13 +44,12 @@
             this.label5 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.sPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -67,29 +67,31 @@
             this.panel1.Size = new System.Drawing.Size(1212, 37);
             this.panel1.TabIndex = 0;
             // 
-            // lblActiveStatus
+            // lblHeaderQTY
             // 
-            this.lblActiveStatus.AutoSize = true;
-            this.lblActiveStatus.BackColor = System.Drawing.Color.Transparent;
-            this.lblActiveStatus.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblActiveStatus.ForeColor = System.Drawing.Color.White;
-            this.lblActiveStatus.Location = new System.Drawing.Point(3, 9);
-            this.lblActiveStatus.Name = "lblActiveStatus";
-            this.lblActiveStatus.Size = new System.Drawing.Size(110, 22);
-            this.lblActiveStatus.TabIndex = 196;
-            this.lblActiveStatus.Text = "Total Sales :";
+            this.lblHeaderQTY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblHeaderQTY.AutoSize = true;
+            this.lblHeaderQTY.BackColor = System.Drawing.Color.Transparent;
+            this.lblHeaderQTY.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHeaderQTY.ForeColor = System.Drawing.Color.White;
+            this.lblHeaderQTY.Location = new System.Drawing.Point(1102, 9);
+            this.lblHeaderQTY.Name = "lblHeaderQTY";
+            this.lblHeaderQTY.Size = new System.Drawing.Size(37, 22);
+            this.lblHeaderQTY.TabIndex = 199;
+            this.lblHeaderQTY.Text = "NA";
             // 
-            // lblHeaderTotalRate
+            // pictureBox1
             // 
-            this.lblHeaderTotalRate.AutoSize = true;
-            this.lblHeaderTotalRate.BackColor = System.Drawing.Color.Transparent;
-            this.lblHeaderTotalRate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHeaderTotalRate.ForeColor = System.Drawing.Color.White;
-            this.lblHeaderTotalRate.Location = new System.Drawing.Point(119, 9);
-            this.lblHeaderTotalRate.Name = "lblHeaderTotalRate";
-            this.lblHeaderTotalRate.Size = new System.Drawing.Size(37, 22);
-            this.lblHeaderTotalRate.TabIndex = 197;
-            this.lblHeaderTotalRate.Text = "NA";
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox1.Location = new System.Drawing.Point(1174, 6);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(26, 25);
+            this.pictureBox1.TabIndex = 206;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // label2
             // 
@@ -104,18 +106,29 @@
             this.label2.TabIndex = 198;
             this.label2.Text = "Total QTY :";
             // 
-            // lblHeaderQTY
+            // lblHeaderTotalRate
             // 
-            this.lblHeaderQTY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblHeaderQTY.AutoSize = true;
-            this.lblHeaderQTY.BackColor = System.Drawing.Color.Transparent;
-            this.lblHeaderQTY.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHeaderQTY.ForeColor = System.Drawing.Color.White;
-            this.lblHeaderQTY.Location = new System.Drawing.Point(1102, 9);
-            this.lblHeaderQTY.Name = "lblHeaderQTY";
-            this.lblHeaderQTY.Size = new System.Drawing.Size(37, 22);
-            this.lblHeaderQTY.TabIndex = 199;
-            this.lblHeaderQTY.Text = "NA";
+            this.lblHeaderTotalRate.AutoSize = true;
+            this.lblHeaderTotalRate.BackColor = System.Drawing.Color.Transparent;
+            this.lblHeaderTotalRate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHeaderTotalRate.ForeColor = System.Drawing.Color.White;
+            this.lblHeaderTotalRate.Location = new System.Drawing.Point(119, 9);
+            this.lblHeaderTotalRate.Name = "lblHeaderTotalRate";
+            this.lblHeaderTotalRate.Size = new System.Drawing.Size(37, 22);
+            this.lblHeaderTotalRate.TabIndex = 197;
+            this.lblHeaderTotalRate.Text = "NA";
+            // 
+            // lblActiveStatus
+            // 
+            this.lblActiveStatus.AutoSize = true;
+            this.lblActiveStatus.BackColor = System.Drawing.Color.Transparent;
+            this.lblActiveStatus.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblActiveStatus.ForeColor = System.Drawing.Color.White;
+            this.lblActiveStatus.Location = new System.Drawing.Point(3, 9);
+            this.lblActiveStatus.Name = "lblActiveStatus";
+            this.lblActiveStatus.Size = new System.Drawing.Size(110, 22);
+            this.lblActiveStatus.TabIndex = 196;
+            this.lblActiveStatus.Text = "Total Sales :";
             // 
             // flowLayoutPanel1
             // 
@@ -214,19 +227,6 @@
             this.label4.Text = "Shop Name";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Location = new System.Drawing.Point(1174, 6);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(26, 25);
-            this.pictureBox1.TabIndex = 206;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
@@ -245,14 +245,16 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dashboard";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmDashBoard_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmDashBoard_FormClosed);
             this.Load += new System.EventHandler(this.frmDashBoard_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.sPanel1.ResumeLayout(false);
             this.sPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

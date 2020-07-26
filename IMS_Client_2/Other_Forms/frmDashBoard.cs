@@ -296,6 +296,16 @@ namespace IMS_Client_2.Other_Forms
             LoadShop();
         }
 
+        private void frmDashBoard_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
+
+        private void frmDashBoard_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            timer1.Stop();
+        }
+
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             frmDashBoardSettings settings = new frmDashBoardSettings();
