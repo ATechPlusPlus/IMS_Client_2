@@ -29,6 +29,8 @@ namespace IMS_Client_2.StockManagement
             btnSave.BackgroundImage = B_Leave;
             btnSaveData.BackgroundImage = B_Leave;
 
+            btnPrint.BackgroundImage= B_Leave;
+
             LoadFromStore();
             LoadToStore();
             BindDefaultFromStore();
@@ -116,11 +118,15 @@ namespace IMS_Client_2.StockManagement
 
             return InvoiceNumber;
         }
-        private void TransferStock()
+        private string TransferStock()
         {
+            string _BillNumber = "";
+
             if (Bill_ID.Trim().Length == 0)
             {
-                ObjCon.SetColumnData("BillNo", SqlDbType.NVarChar, GenerateBillNumber());
+                _BillNumber = GenerateBillNumber();
+
+                ObjCon.SetColumnData("BillNo", SqlDbType.NVarChar, _BillNumber);
                 ObjCon.SetColumnData("FromStore", SqlDbType.Int, cmdFrom.SelectedValue);
                 ObjCon.SetColumnData("ToStore", SqlDbType.Int, cmdTo.SelectedValue);
                 ObjCon.SetColumnData("BillStatus", SqlDbType.NVarChar, lblBillStatus.Text);
@@ -156,11 +162,12 @@ namespace IMS_Client_2.StockManagement
                         ObjCon.InsertData(clsUtility.DBName + ".dbo.tblStoreTransferItemDetails", false);
                     }
                     clsUtility.ShowInfoMessage("Item has been transferd to selected store.", clsUtility.strProjectTitle);
-                    ClearAll();
+                  
                 }
             }
             else
             {
+                _BillNumber = txtInvoiceNumber.Text;
                 ObjCon.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
                 ObjCon.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID);
                 ObjCon.UpdateData(clsUtility.DBName + ".dbo.tblStoreTransferBillDetails", "StoreTransferID='" + Bill_ID + "'");
@@ -199,8 +206,10 @@ namespace IMS_Client_2.StockManagement
                 ObjCon.UpdateData(clsUtility.DBName + ".dbo.tblStoreTransferBillDetails", "StoreTransferID='" + Bill_ID + "'");
 
                 clsUtility.ShowInfoMessage("Item has been transferd to selected store.", clsUtility.strProjectTitle);
-                ClearAll();
+               
             }
+
+            return _BillNumber;
         }
 
         DataTable dtItemDetails = new DataTable();
@@ -398,11 +407,10 @@ namespace IMS_Client_2.StockManagement
             ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill, System.Drawing.Color.White);
             dgvProductDetails.ClearSelection();
 
-            if (txtInvoiceNumber.Text.Trim().Length == 0)
-            {
+           
                 dgvProductDetails.RowsDefaultCellStyle.SelectionBackColor = System.Drawing.Color.White;
                 dgvProductDetails.RowsDefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
-            }
+            
         }
 
         private void dgvProductDetails_KeyDown(object sender, KeyEventArgs e)
@@ -423,13 +431,14 @@ namespace IMS_Client_2.StockManagement
 
         private void dgvProductDetails_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            decimal QTY = 0;
             //dgvProductDetails.Columns[e.ColumnIndex].Name == "Rate" ||
             if (dgvProductDetails.Columns[e.ColumnIndex].Name == "BillQTY")
             {
                 string pID = dgvProductDetails.Rows[e.RowIndex].Cells["ProductID"].Value.ToString();
                 string sizeid = dgvProductDetails.Rows[e.RowIndex].Cells["SizeID"].Value.ToString();
                 string colorid = dgvProductDetails.Rows[e.RowIndex].Cells["ColorID"].Value.ToString();
-                decimal QTY = Convert.ToDecimal(dgvProductDetails.Rows[e.RowIndex].Cells["BillQTY"].Value);
+                 QTY = Convert.ToDecimal(dgvProductDetails.Rows[e.RowIndex].Cells["BillQTY"].Value);
 
                 decimal Rate = Convert.ToDecimal(dgvProductDetails.Rows[e.RowIndex].Cells["Rate"].Value);
                 decimal Total = QTY * Rate;
@@ -437,6 +446,15 @@ namespace IMS_Client_2.StockManagement
 
                 dgvProductDetails.Rows[e.RowIndex].Cells["Total"].Value = Total.ToString();
                 CalculateGrandTotal();
+            }
+
+            int StockQTY = Convert.ToInt32(dgvProductDetails.Rows[e.RowIndex].Cells["StockQTY"].Value);
+       
+            if (QTY <= StockQTY)
+            {
+                dgvProductDetails.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.White;
+                dgvProductDetails.Rows[e.RowIndex].DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+                
             }
         }
 
@@ -538,6 +556,7 @@ namespace IMS_Client_2.StockManagement
                 else if (Sales.frmQTYValidation.QTYConfirmation == 1)
                 {
                     TransferStock();
+                    ClearAll();
                 }
             }
         }
@@ -622,6 +641,59 @@ namespace IMS_Client_2.StockManagement
             else
             {
                 dgvProductDetails.Columns["StockQTY"].Visible = true;
+            }
+        }
+       
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            if (cmdTo.SelectedIndex == -1)
+            {
+                clsUtility.ShowInfoMessage("Please select To Shop.", clsUtility.strProjectTitle);
+                return;
+            }
+
+            if (dgvProductDetails.Rows.Count == 0)
+            {
+                clsUtility.ShowInfoMessage("Please Enter Items.", clsUtility.strProjectTitle);
+                return;
+            }
+            if (lblBillStatus.Text == "Posted")
+            {
+                clsUtility.ShowInfoMessage("The Bill Status is Posted. you can not make any changes.", clsUtility.strProjectTitle);
+                return;
+            }
+            if (IsValidateQTY())
+            {
+                Sales.frmQTYValidation frmQTYValidation = new Sales.frmQTYValidation();
+                frmQTYValidation.TotalQTY = Convert.ToInt32(txtTotalQTY.Text);
+                frmQTYValidation.ShowDialog();
+                if (Sales.frmQTYValidation.QTYConfirmation == -1)
+                {
+                    // Exit the bill -Dead bill
+                    this.Close();
+                }
+                else if (Sales.frmQTYValidation.QTYConfirmation == 1)
+                {
+                   string BillNo= TransferStock();
+
+                    Report.Report_Forms.frmStoreTransferReport frmStoreTransferReport = new Report.Report_Forms.frmStoreTransferReport();
+                    frmStoreTransferReport.strFromStore = cmdFrom.Text.ToString();
+                    frmStoreTransferReport.strToStore = cmdTo.Text.ToString();
+
+                    frmStoreTransferReport.dtStoreTransferDetails = this.dtItemDetails;
+                    frmStoreTransferReport.strTotalQTY = txtTotalQTY.Text;
+                    frmStoreTransferReport.strTotalRate = txtValue.Text;
+                    frmStoreTransferReport.strBillDate = dtpSalesDate.Value.ToShortDateString();
+                    frmStoreTransferReport.strBillNo = BillNo;
+
+                    frmStoreTransferReport.ShowDialog();
+
+                    ClearAll();
+                }
+
+
+               
+
             }
         }
     }

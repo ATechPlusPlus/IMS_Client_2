@@ -47,9 +47,13 @@
             this.txtTotalExpenses = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtTotalPettyCash = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPettyCashExp)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -266,13 +270,59 @@
             this.txtTotalPettyCash.Size = new System.Drawing.Size(125, 25);
             this.txtTotalPettyCash.TabIndex = 277;
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel1.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Controls.Add(this.btnPrint);
+            this.panel1.Controls.Add(this.btnClose);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 447);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(969, 40);
+            this.panel1.TabIndex = 286;
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnPrint.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPrint.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrint.Location = new System.Drawing.Point(801, 8);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(76, 25);
+            this.btnPrint.TabIndex = 247;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            this.btnPrint.MouseEnter += new System.EventHandler(this.btnSave_MouseEnter);
+            this.btnPrint.MouseLeave += new System.EventHandler(this.btnSave_MouseLeave);
+            // 
+            // btnClose
+            // 
+            this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnClose.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Location = new System.Drawing.Point(883, 8);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(71, 25);
+            this.btnClose.TabIndex = 248;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.button2_Click);
+            this.btnClose.MouseEnter += new System.EventHandler(this.btnSave_MouseEnter);
+            this.btnClose.MouseLeave += new System.EventHandler(this.btnSave_MouseLeave);
+            // 
             // frmPettyCashExpReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(969, 450);
+            this.ClientSize = new System.Drawing.Size(969, 487);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.txtPettyCashBAL);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label2);
@@ -294,6 +344,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPettyCashExp)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -318,5 +369,8 @@
         private System.Windows.Forms.TextBox txtTotalExpenses;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtTotalPettyCash;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.Button btnClose;
     }
 }

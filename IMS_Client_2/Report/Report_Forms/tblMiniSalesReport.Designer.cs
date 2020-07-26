@@ -31,6 +31,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmbGenerate = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnGenerateReport = new System.Windows.Forms.Button();
             this.txtEmpID = new System.Windows.Forms.TextBox();
@@ -40,8 +42,6 @@
             this.dtpFromDate = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbShop = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cmbGenerate = new System.Windows.Forms.ComboBox();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -91,6 +91,33 @@
             this.groupBox1.TabIndex = 114;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Report Filter";
+            // 
+            // cmbGenerate
+            // 
+            this.cmbGenerate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbGenerate.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGenerate.FormattingEnabled = true;
+            this.cmbGenerate.Items.AddRange(new object[] {
+            "Employee ( Sales Man)",
+            "Color",
+            "Item ( Product)",
+            "Invoice/Bill No",
+            "Category (Department)"});
+            this.cmbGenerate.Location = new System.Drawing.Point(18, 192);
+            this.cmbGenerate.Name = "cmbGenerate";
+            this.cmbGenerate.Size = new System.Drawing.Size(251, 27);
+            this.cmbGenerate.TabIndex = 254;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(16, 172);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 17);
+            this.label1.TabIndex = 253;
+            this.label1.Text = "Specification :";
             // 
             // btnClear
             // 
@@ -198,32 +225,6 @@
             this.cmbShop.Name = "cmbShop";
             this.cmbShop.Size = new System.Drawing.Size(251, 27);
             this.cmbShop.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(16, 172);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 17);
-            this.label1.TabIndex = 253;
-            this.label1.Text = "Specification :";
-            // 
-            // cmbGenerate
-            // 
-            this.cmbGenerate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGenerate.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbGenerate.FormattingEnabled = true;
-            this.cmbGenerate.Items.AddRange(new object[] {
-            "Employee ( Sales Man)",
-            "Color",
-            "Item ( Product)",
-            "Invoice/Bill No"});
-            this.cmbGenerate.Location = new System.Drawing.Point(18, 192);
-            this.cmbGenerate.Name = "cmbGenerate";
-            this.cmbGenerate.Size = new System.Drawing.Size(251, 27);
-            this.cmbGenerate.TabIndex = 254;
             // 
             // tblMiniSalesReport
             // 

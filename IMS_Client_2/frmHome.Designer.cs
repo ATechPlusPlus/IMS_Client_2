@@ -446,9 +446,8 @@
             this.pettyCashExpReportToolStripMenuItem,
             this.miniSalesReportToolStripMenuItem});
             this.reportsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("reportsToolStripMenuItem.Image")));
-            this.reportsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
-            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(101, 36);
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(89, 36);
             this.reportsToolStripMenuItem.Text = "Reports";
             this.reportsToolStripMenuItem.ToolTipText = "Reports";
             // 
@@ -477,9 +476,8 @@
             // otherArtsToolStripMenuItem
             // 
             this.otherArtsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("otherArtsToolStripMenuItem.Image")));
-            this.otherArtsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.otherArtsToolStripMenuItem.Name = "otherArtsToolStripMenuItem";
-            this.otherArtsToolStripMenuItem.Size = new System.Drawing.Size(155, 36);
+            this.otherArtsToolStripMenuItem.Size = new System.Drawing.Size(143, 36);
             this.otherArtsToolStripMenuItem.Text = " Backup/Restore";
             this.otherArtsToolStripMenuItem.ToolTipText = "Other Parts";
             this.otherArtsToolStripMenuItem.Click += new System.EventHandler(this.otherArtsToolStripMenuItem_Click);
@@ -521,9 +519,8 @@
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("helpToolStripMenuItem.Image")));
-            this.helpToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(82, 36);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(70, 36);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // statusStrip1

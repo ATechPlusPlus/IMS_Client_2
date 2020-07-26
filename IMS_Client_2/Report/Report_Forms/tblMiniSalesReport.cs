@@ -111,6 +111,16 @@ namespace IMS_Client_2.Report.Report_Forms
 
                 strGenericColumn = "Invoice No";
             }
+            else if (cmbGenerate.SelectedIndex == 4) // Category Department
+            {
+                reportQuery = " SELECT   (select CategoryName from CategoryMaster where CategoryID=v2.CategoryID )  as GenericColumn, SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
+                              " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
+                               " ON v1.id = v2.InvoiceID " +
+                               " where v1.ShopeID = " + cmbShop.SelectedValue + " AND v1.InvoiceDate between '" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "' AND '" + dtpToDate.Value.ToString("yyyy-MM-dd") + "' " +
+                               " Group by  v2.CategoryID";
+
+                strGenericColumn = "Invoice No";
+            }
 
 
 
