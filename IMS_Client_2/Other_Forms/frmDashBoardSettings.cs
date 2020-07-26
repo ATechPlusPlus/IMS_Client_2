@@ -1,5 +1,4 @@
-﻿using CoreApp;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using CoreApp;
 
 namespace IMS_Client_2.Other_Forms
 {
@@ -16,10 +16,13 @@ namespace IMS_Client_2.Other_Forms
         {
             InitializeComponent();
         }
-        clsConnection_DAL ObjCon = new clsConnection_DAL(true);
+
+        clsConnection_DAL ObjDAL = new clsConnection_DAL(true);
         clsUtility ObjUtil = new clsUtility();
+
         Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
         Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
+
         private void frmDashBoardSettings_Load(object sender, EventArgs e)
         {
             btnAdd.BackgroundImage = B_Leave;
@@ -30,7 +33,7 @@ namespace IMS_Client_2.Other_Forms
         private void LoadShop()
         {
             DataTable dt = null;
-            dt = ObjCon.GetDataCol(clsUtility.DBName + ".dbo.StoreMaster", "StoreID,StoreName,Place,case StoreCategory when 0 then 'Normal' when 1 then'WearHouse' end as Category ", "StoreName");
+            dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.StoreMaster", "StoreID,StoreName,Place,case StoreCategory when 0 then 'Normal' when 1 then'WearHouse' end as Category ", "StoreName");
 
             if (ObjUtil.ValidateTable(dt))
             {
@@ -88,7 +91,7 @@ namespace IMS_Client_2.Other_Forms
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (cmbGenerate.SelectedIndex==-1)
+            if (cmbGenerate.SelectedIndex == -1)
             {
                 clsUtility.ShowInfoMessage("Please select the specification.", clsUtility.strProjectTitle);
                 return;
@@ -98,7 +101,6 @@ namespace IMS_Client_2.Other_Forms
             {
                 CoreApp.clsUtility.ShowInfoMessage("Please select shop.", clsUtility.strProjectTitle);
                 return;
-
             }
 
             StringBuilder bs = new StringBuilder();
@@ -110,23 +112,19 @@ namespace IMS_Client_2.Other_Forms
                     string storeID = dgvShopeDetails.Rows[i].Cells["StoreID"].Value.ToString();
                     bs.Append(storeID);
                     bs.Append(",");
-
-
                 }
-
             }
 
-         string StoreID=  bs.ToString().Remove(bs.ToString().Length - 1, 1);
+            string StoreID = bs.ToString().Remove(bs.ToString().Length - 1, 1);
 
-            ObjCon.ExecuteNonQuery("Delete IMS_Client_2.dbo.tblDashBoard ");
+            ObjDAL.ExecuteNonQuery("Delete " + clsUtility.DBName + ".dbo.tblDashBoard ");
 
-       
-            ObjCon.SetColumnData("Shopes", SqlDbType.NVarChar, StoreID);
-            ObjCon.SetColumnData("FromDate", SqlDbType.Date,dtpFromDate.Value.ToString("yyyy-MM-dd"));
-            ObjCon.SetColumnData("ToDate", SqlDbType.Date, dtpToDate.Value.ToString("yyyy-MM-dd"));
-            ObjCon.SetColumnData("Specification", SqlDbType.Int,cmbGenerate.SelectedIndex);
-            ObjCon.SetColumnData("RefreshRate", SqlDbType.Int,Convert.ToInt32(numericUpDown1.Value));
-            ObjCon.InsertData("IMS_Client_2.dbo.tblDashBoard", false);
+            ObjDAL.SetColumnData("Shopes", SqlDbType.NVarChar, StoreID);
+            ObjDAL.SetColumnData("FromDate", SqlDbType.Date, dtpFromDate.Value.ToString("yyyy-MM-dd"));
+            ObjDAL.SetColumnData("ToDate", SqlDbType.Date, dtpToDate.Value.ToString("yyyy-MM-dd"));
+            ObjDAL.SetColumnData("Specification", SqlDbType.Int, cmbGenerate.SelectedIndex);
+            ObjDAL.SetColumnData("RefreshRate", SqlDbType.Int, Convert.ToInt32(numericUpDown1.Value));
+            ObjDAL.InsertData("" + clsUtility.DBName + ".dbo.tblDashBoard", false);
 
             clsUtility.ShowInfoMessage("Dashboard settings has been saved.", clsUtility.strProjectTitle);
             this.Close();
@@ -151,7 +149,6 @@ namespace IMS_Client_2.Other_Forms
 
                 }
                 dgvShopeDetails.EndEdit();
-
             }
         }
     }

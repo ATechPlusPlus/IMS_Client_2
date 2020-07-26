@@ -61,7 +61,7 @@ namespace IMS_Client_2
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                Application.Run(new SplashWindow());
-              // Application.Run(new frmHome());
+              //Application.Run(new frmHome());
             }
         }
     }

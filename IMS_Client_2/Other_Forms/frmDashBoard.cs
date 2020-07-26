@@ -1,6 +1,4 @@
-﻿
-using CoreApp;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using CoreApp;
 
 namespace IMS_Client_2.Other_Forms
 {
@@ -19,66 +18,54 @@ namespace IMS_Client_2.Other_Forms
         {
             InitializeComponent();
         }
-      
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-          
 
-        }
+        clsConnection_DAL ObjDAL = new clsConnection_DAL(true);
+        clsUtility ObjUtil = new clsUtility();
+
+        decimal TotalHeaderRate, TotalHeaderQTY;
 
         private void frmDashBoard_Load(object sender, EventArgs e)
         {
-            DataTable dtDashBoard = ObjCon.ExecuteSelectStatement("select * from [IMS_Client_2].[dbo].[tblDashBoard]");
+            DataTable dtDashBoard = ObjDAL.ExecuteSelectStatement("select 1 from " + clsUtility.DBName + ".[dbo].[tblDashBoard] WITH(NOLOCK)");
             if (dtDashBoard.Rows.Count == 0)
             {
                 frmDashBoardSettings frmDashBoardSettings = new frmDashBoardSettings();
                 frmDashBoardSettings.ShowDialog();
                 LoadShop();
-
             }
             else
             {
                 LoadShop();
-
             }
-              
         }
 
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-           
-        }
 
         private string GetShopeName(string shopID)
         {
             string strShope = "NA";
-           DataTable dt= ObjCon.ExecuteSelectStatement("select StoreName from [IMS_Client_2].[dbo].[StoreMaster] where StoreID=" + shopID);
-            if (dt.Rows.Count>0)
+            DataTable dt = ObjDAL.ExecuteSelectStatement("select StoreName from " + clsUtility.DBName + ".[dbo].[StoreMaster] WITH(NOLOCK) where StoreID=" + shopID);
+            if (ObjUtil.ValidateTable(dt))
             {
-                strShope= dt.Rows[0][0].ToString();
+                strShope = dt.Rows[0][0].ToString();
             }
             return strShope;
         }
-        decimal TotalHeaderRate, TotalHeaderQTY;
 
-        CoreApp.clsConnection_DAL ObjCon = new CoreApp.clsConnection_DAL(true);
         private void LoadShop()
         {
             TotalHeaderRate = 0;
             TotalHeaderQTY = 0;
 
             flowLayoutPanel1.Controls.Clear();
-           DataTable dtDashBoard=  ObjCon.ExecuteSelectStatement("select * from [IMS_Client_2].[dbo].[tblDashBoard]");
-            if (dtDashBoard.Rows.Count>0)
+            DataTable dtDashBoard = ObjDAL.ExecuteSelectStatement("select * from " + clsUtility.DBName + ".[dbo].[tblDashBoard] WITH(NOLOCK)");
+            if (dtDashBoard.Rows.Count > 0)
             {
-              
-              
-                string [] strShops=   dtDashBoard.Rows[0]["Shopes"].ToString().Split(',');
+                string[] strShops = dtDashBoard.Rows[0]["Shopes"].ToString().Split(',');
                 int index = Convert.ToInt32(dtDashBoard.Rows[0]["Specification"]);
 
                 DateTime fromDate = Convert.ToDateTime(dtDashBoard.Rows[0]["FromDate"]);
                 DateTime toDate = Convert.ToDateTime(dtDashBoard.Rows[0]["ToDate"]);
-                int TimerInterval = Convert.ToInt32(dtDashBoard.Rows[0]["RefreshRate"])*1000;
+                int TimerInterval = Convert.ToInt32(dtDashBoard.Rows[0]["RefreshRate"]) * 1000;
 
                 timer1.Interval = TimerInterval;
                 timer1.Enabled = true;
@@ -169,18 +156,16 @@ namespace IMS_Client_2.Other_Forms
 
 
                     }
-
-
                     string TotalQTYValue = "0";
                     string TotalRateValue = "0";
 
-                 DataTable dtQTY_Rate=   ObjCon.ExecuteSelectStatement(TotalQTY_Rate);
-                    if (dtQTY_Rate.Rows.Count>0)
+                    DataTable dtQTY_Rate = ObjDAL.ExecuteSelectStatement(TotalQTY_Rate);
+                    if (ObjUtil.ValidateTable(dtQTY_Rate))
                     {
                         TotalQTYValue = dtQTY_Rate.Rows[0]["TotalQTY"].ToString();
                         TotalRateValue = dtQTY_Rate.Rows[0]["TotalRate"].ToString();
 
-                        if (TotalQTYValue.Trim().Length==0)
+                        if (TotalQTYValue.Trim().Length == 0)
                         {
                             TotalQTYValue = "0";
                         }
@@ -238,36 +223,30 @@ namespace IMS_Client_2.Other_Forms
 
 
                     DataGridView dgv = new DataGridView();
-                    dgv.DataSource = ObjCon.ExecuteSelectStatement(reportQuery);
+                    dgv.DataSource = ObjDAL.ExecuteSelectStatement(reportQuery);
                     dgv.DataBindingComplete += Dgv_DataBindingComplete;
                     dgv.Location = dataGridView1.Location;
                     dgv.Size = dataGridView1.Size;
                     dgv.AllowUserToDeleteRows = false;
-                
+
                     sPanel.Controls.Add(dgv);
 
                     flowLayoutPanel1.Controls.Add(sPanel);
 
                     TotalHeaderRate = TotalHeaderRate + Convert.ToDecimal(TotalRateValue);
-                    TotalHeaderQTY= TotalHeaderQTY+ Convert.ToDecimal(TotalQTYValue);
+                    TotalHeaderQTY = TotalHeaderQTY + Convert.ToDecimal(TotalQTYValue);
                 }
-
-
                 lblHeaderQTY.Text = TotalHeaderQTY.ToString();
                 lblHeaderTotalRate.Text = TotalHeaderRate.ToString();
-            
             }
             else
             {
                 frmDashBoardSettings frmDashBoardSettings = new frmDashBoardSettings();
                 frmDashBoardSettings.ShowDialog();
                 this.Close();
-
             }
-
-          
         }
-        clsUtility ObjUtil = new clsUtility();
+
         private void Dgv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             try
@@ -283,22 +262,12 @@ namespace IMS_Client_2.Other_Forms
             }
             catch (Exception)
             {
-
-               
             }
-           
-
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             LoadShop();
-        }
-
-        private void frmDashBoard_FormClosed(object sender, FormClosedEventArgs e)
-        {
-
         }
 
         private void frmDashBoard_FormClosing(object sender, FormClosingEventArgs e)

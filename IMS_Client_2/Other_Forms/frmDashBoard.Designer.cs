@@ -246,7 +246,6 @@
             this.Text = "Dashboard";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmDashBoard_FormClosing);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmDashBoard_FormClosed);
             this.Load += new System.EventHandler(this.frmDashBoard_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
