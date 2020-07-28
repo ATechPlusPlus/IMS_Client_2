@@ -201,6 +201,7 @@ namespace IMS_Client_2.Purchase
                                         if (ObjUtil.ValidateTable(dt))
                                         {
                                             SubProductID = Convert.ToInt32(dt.Rows[0][1]);
+                                            _SubProductID = SubProductID;
                                         }
                                     }
                                 }
@@ -213,12 +214,9 @@ namespace IMS_Client_2.Purchase
                                 ObjDAL.SetColumnData("SupplierID", SqlDbType.Int, cmbSupplier.SelectedValue);
                                 ObjDAL.SetColumnData("BillDate", SqlDbType.Date, dtpBillDate.Value.ToString("yyyy-MM-dd"));
                                 ObjDAL.SetColumnData("Rate", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["Rate"].ToString());
-
-                                ObjDAL.SetColumnData("SubProductID", SqlDbType.Int, SubProductID);
-
+                                ObjDAL.SetColumnData("SubProductID", SqlDbType.Int, _SubProductID);
                                 _QTY = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["QTY"]);
                                 ObjDAL.SetColumnData("QTY", SqlDbType.Int, _QTY);
-
                                 ObjDAL.SetColumnData("Sales_Price", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["EndUser"].ToString());
                                 ObjDAL.SetColumnData("AddedRatio", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["AddedRatio"].ToString());
                                 ObjDAL.SetColumnData("SuppossedPrice", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["SuppossedPrice"].ToString());
@@ -688,10 +686,24 @@ namespace IMS_Client_2.Purchase
                         else
                         {
                             SubProductID = Convert.ToInt32(dtModelNo.Rows[0]["SubProductID"]);
+                            if (SubProductID > 0)
+                            {
+                                bool msg = clsUtility.ShowQuestionMessage("ModelNo. " + txtStyleNo.Text.Trim() + " is already exists for Item " + txtProductName.Text + "\n Do you want to replace it?", clsUtility.strProjectTitle);
+                                if (msg)
+                                {
+                                    return false;
+                                }
+                                else
+                                {
+                                    clsUtility.ShowInfoMessage("Enter New Model No. for Item " + txtProductName.Text, clsUtility.strProjectTitle);
+                                    return true;
+                                }
+                            }
                             return false;
                         }
                     }
                 }
+                ObjDAL.ResetData();
             }
             else if (dRow.Length > 0)
             {
