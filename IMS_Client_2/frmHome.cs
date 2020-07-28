@@ -137,11 +137,8 @@ namespace IMS_Client_2
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
-
+                clsUtility.ShowInfoMessage(ex.ToString(), clsUtility.strProjectTitle);
             }
-           
-
         }
         private void DeleteBarCodeFiles()
         {
@@ -161,9 +158,8 @@ namespace IMS_Client_2
             catch (Exception)
             {
 
-               
             }
-           
+
         }
         private void frmHome_Load(object sender, EventArgs e)
         {
@@ -172,9 +168,9 @@ namespace IMS_Client_2
                 btnOpenCash.BackgroundImage = B_Leave;
 
                 clsUtility.DBName = "IMS_Client_2";
-                //clsUtility.LoginID = 5;
+                clsUtility.LoginID = 5;
                 //clsUtility.IsAdmin = false;
-               //clsUtility.IsAdmin = true;
+                clsUtility.IsAdmin = true;
                 clsUtility.strProjectTitle = "IMS";
                 if (clsUtility.LoginID > 0)
                 {
@@ -823,12 +819,26 @@ namespace IMS_Client_2
 
         private void stockDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //if (clsFormRights.HasFormRight(clsFormRights.Forms.tblMiniSalesReport) || clsUtility.IsAdmin)
+            //{
+            //}
+            //else
+            //{
+            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            //}
             StockManagement.frmStockDetails Obj = new StockManagement.frmStockDetails();
             Obj.Show();
         }
 
         private void dashboardToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //if (clsFormRights.HasFormRight(clsFormRights.Forms.tblMiniSalesReport) || clsUtility.IsAdmin)
+            //{
+            //}
+            //else
+            //{
+            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            //}
             Other_Forms.frmDashBoard frmDashBoard = new Other_Forms.frmDashBoard();
             frmDashBoard.Show();
         }

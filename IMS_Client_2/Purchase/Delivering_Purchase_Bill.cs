@@ -27,7 +27,7 @@ namespace IMS_Client_2.Purchase
         int ID = 0;
         int flag = 0;
         int pPurchaseInvoiceID = 0;
-        int ProductID = 0;
+        int ProductID = 0, SubProductID = 0;
         int OldSize = 0;
         string OldColorName = string.Empty;
 
@@ -66,6 +66,8 @@ namespace IMS_Client_2.Purchase
             cmbStore.DisplayMember = "StoreName";
             cmbStore.ValueMember = "StoreID";
             cmbStore.SelectedIndex = -1;
+
+            cmbStore.Enabled = false;
         }
         private void FillCategoryData()
         {
@@ -84,8 +86,6 @@ namespace IMS_Client_2.Purchase
             btnDelete.BackgroundImage = B_Leave;
             btnCancel.BackgroundImage = B_Leave;
             btnSearch.BackgroundImage = B_Leave;
-
-            //clsUtility.IsAdmin = true;//removed
 
             ObjUtil.RegisterCommandButtons(btnAdd, btnSave, btnEdit, btnUpdate, btnDelete, btnCancel);
             ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.Beginning);
@@ -138,37 +138,6 @@ namespace IMS_Client_2.Purchase
             LoadData();
         }
 
-        private void listBoxModelNo_KeyDown(object sender, KeyEventArgs e)
-        {
-            DataRow[] dRow = dtPurchaseInvoice.Select("ModelNo= '" + listBoxStyleNo.SelectedItem + "'");
-            if (dRow.Length > 0)
-            {
-                //cmbSizeType.Enabled = true;
-                pPurchaseInvoiceID = Convert.ToInt32(dRow[0]["PurchaseInvoiceID"]);
-                ID = Convert.ToInt32(dRow[0]["DeliveryPurchaseID1"]);
-                ProductID = Convert.ToInt32(dRow[0]["ProductID"]);
-                cmbBrand.SelectedValue = dRow[0]["BrandID"];
-                cmbCountry.SelectedValue = dRow[0]["CountryID"];
-                cmbCategory.SelectedValue = dRow[0]["CategoryID"];
-                txtItemName.Text = dRow[0]["ProductName"].ToString();
-                txtTotalQTYBill.Text = dRow[0]["QTY"].ToString();
-
-                cmbSizeType.SelectedValue = dRow[0]["SizeTypeID"].ToString();
-                if (cmbSizeType.SelectedValue != null)
-                {
-                    FillColorSizeGrid();
-                }
-                cmbStore.SelectedValue = dRow[0]["StoreID"].ToString();
-                Load_Color_SizeData();
-                if (ObjUtil.ValidateTable((DataTable)dgvQtycolor.DataSource))
-                {
-                    CalcTotalColorQTY();
-                }
-            }
-            else
-                cmbSizeType.Enabled = false;
-        }
-
         private void dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             ObjUtil.SetRowNumber(dataGridView1);
@@ -217,6 +186,16 @@ namespace IMS_Client_2.Purchase
         }
         private void listBoxModelNo_MouseClick(object sender, MouseEventArgs e)
         {
+            GetSelectedListBoxModelNo();
+        }
+
+        private void listBoxModelNo_KeyDown(object sender, KeyEventArgs e)
+        {
+            GetSelectedListBoxModelNo();
+        }
+
+        private void GetSelectedListBoxModelNo()
+        {
             DataRow[] dRow = dtPurchaseInvoice.Select("ModelNo= '" + listBoxStyleNo.SelectedItem + "'");
             if (dRow.Length > 0)
             {
@@ -224,6 +203,7 @@ namespace IMS_Client_2.Purchase
                 pPurchaseInvoiceID = Convert.ToInt32(dRow[0]["PurchaseInvoiceID"]);
                 ID = Convert.ToInt32(dRow[0]["DeliveryPurchaseID1"]);
                 ProductID = Convert.ToInt32(dRow[0]["ProductID"]);
+                SubProductID = Convert.ToInt32(dRow[0]["SubProductID"]);
                 cmbBrand.SelectedValue = dRow[0]["BrandID"];
                 cmbCountry.SelectedValue = dRow[0]["CountryID"];
                 cmbCategory.SelectedValue = dRow[0]["CategoryID"];
@@ -235,7 +215,7 @@ namespace IMS_Client_2.Purchase
                 {
                     FillColorSizeGrid();
                 }
-                if (dRow[0]["StoreID"] != DBNull.Value)
+                if (dRow[0]["StoreID"] != DBNull.Value && dRow[0]["StoreID"].ToString() != "0")
                 {
                     cmbStore.SelectedValue = dRow[0]["StoreID"].ToString();
                 }
@@ -539,6 +519,7 @@ namespace IMS_Client_2.Purchase
             ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterNew);
             grpPurchaseBillDetail.Enabled = true;
             txtSupplierBillNo.Focus();
+            cmbStore.SelectedValue = frmHome.Home_StoreID;
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -554,6 +535,7 @@ namespace IMS_Client_2.Purchase
                         ObjDAL.SetColumnData("SizeTypeID", SqlDbType.Int, cmbSizeType.SelectedValue);
                         ObjDAL.SetColumnData("ModelNo", SqlDbType.NVarChar, listBoxStyleNo.SelectedItem);
                         ObjDAL.SetColumnData("ProductID", SqlDbType.Int, ProductID);
+                        ObjDAL.SetColumnData("SubProductID", SqlDbType.Int, SubProductID);
                         ObjDAL.SetColumnData("StoreID", SqlDbType.Int, cmbStore.SelectedValue);
                         ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
                         DeliveryPurchaseBillID = ObjDAL.InsertData(clsUtility.DBName + ".dbo.DeliveryPurchaseBill1", true);
@@ -777,21 +759,14 @@ namespace IMS_Client_2.Purchase
         {
             if (!ObjUtil.IsControlTextEmpty(txtPurchaseInvoiceID))
             {
-                //dtPurchaseInvoice = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".[dbo].[Get_Delivering_PurchaseInvoice_BillDetails] " + txtPurchaseInvoiceID.Text + ",1");
-
                 DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".[dbo].[Get_Delivering_PurchaseInvoice_BillDetails] " + txtPurchaseInvoiceID.Text + ",1");
                 if (ObjUtil.ValidateTable(dt))
                 {
-                    //dtPurchaseInvoice = dt;
-                    //dataGridView1.DataSource = dtPurchaseInvoice;
                     dataGridView1.DataSource = null;
                     dataGridView1.DataSource = dt;
                 }
                 else
                 {
-                    //clsUtility.ShowInfoMessage("Purchase Invoice Bill is already done OR not available for Bill No. " + txtSupplierBillNo.Text, clsUtility.strProjectTitle);
-                    //grpPurchaseBillDetail.Enabled = false;
-                    //txtTotalQTY.Text = "0";
                     dataGridView1.DataSource = null;
                 }
             }
@@ -854,7 +829,7 @@ namespace IMS_Client_2.Purchase
                 txtSupplierBillNo.Focus();
 
                 dgvQtycolor.Enabled = false;
-                cmbStore.Enabled = true;
+                //cmbStore.Enabled = true;
                 LoadData();
                 LoadModelData();
             }
