@@ -610,8 +610,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox16</rd:DefaultName>
-            <Top>2.0642in</Top>
-            <Left>0.13597in</Left>
+            <Top>2.07516in</Top>
+            <Left>0.13862in</Left>
             <Height>0.23633in</Height>
             <Width>0.60542in</Width>
             <ZIndex>14</ZIndex>
@@ -1375,8 +1375,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox20</rd:DefaultName>
-            <Top>4.07259in</Top>
-            <Left>0.06223in</Left>
+            <Top>4.0587in</Top>
+            <Left>0.13862in</Left>
             <Height>0.25in</Height>
             <Width>0.93778in</Width>
             <ZIndex>19</ZIndex>
@@ -1408,9 +1408,9 @@
             </Paragraphs>
             <rd:DefaultName>NetAmount</rd:DefaultName>
             <Top>4.37814in</Top>
-            <Left>0.05415in</Left>
+            <Left>0.13862in</Left>
             <Height>0.32292in</Height>
-            <Width>2.80031in</Width>
+            <Width>2.71584in</Width>
             <ZIndex>20</ZIndex>
             <Style>
               <Border>
@@ -1452,8 +1452,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox51</rd:DefaultName>
-            <Top>5.33925in</Top>
-            <Left>0.05659in</Left>
+            <Top>5.35021in</Top>
+            <Left>0.13862in</Left>
             <Height>0.25in</Height>
             <Width>0.42708in</Width>
             <ZIndex>22</ZIndex>
@@ -1503,10 +1503,10 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.72805in</Width>
+                  <Width>0.68986in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.61068in</Width>
+                  <Width>0.57249in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -1670,9 +1670,9 @@
             </TablixRowHierarchy>
             <DataSetName>ds_Payment</DataSetName>
             <Top>2.98664in</Top>
-            <Left>0.06223in</Left>
+            <Left>0.13862in</Left>
             <Height>0.5in</Height>
-            <Width>1.33873in</Width>
+            <Width>1.26234in</Width>
             <ZIndex>24</ZIndex>
             <Style>
               <Border>
