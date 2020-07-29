@@ -789,6 +789,7 @@
             this.cmbAddRatio.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbAddRatio.FormattingEnabled = true;
             this.cmbAddRatio.Items.AddRange(new object[] {
+            "100",
             "200",
             "300"});
             this.cmbAddRatio.Location = new System.Drawing.Point(810, 61);

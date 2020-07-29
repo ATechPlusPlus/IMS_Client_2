@@ -205,7 +205,17 @@ namespace IMS_Client_2.Purchase
                                         }
                                     }
                                 }
-
+                                else if (_SubProductID > 0 && b == false)
+                                {
+                                    ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, _ProductID, clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, dtPurchaseInvoiceBill.Rows[i]["ModelNo"].ToString(), clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("BrandID", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["BrandID"].ToString(), clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, _SubProductID, clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("EndUser", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["EndUser"].ToString(), clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
+                                    b = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_Update_ProductWiseModelNo");
+                                }
                                 ObjDAL.SetColumnData("PurchaseInvoiceID", SqlDbType.Int, PurchaseInvoiceID);
                                 //ObjDAL.SetColumnData("SupplierBillNo", SqlDbType.NVarChar, txtSupplierBillNo.Text.Trim());
                                 ObjDAL.SetColumnData("ProductID", SqlDbType.Int, _ProductID);
@@ -688,7 +698,14 @@ namespace IMS_Client_2.Purchase
                             SubProductID = Convert.ToInt32(dtModelNo.Rows[0]["SubProductID"]);
                             if (SubProductID > 0)
                             {
-                                bool msg = clsUtility.ShowQuestionMessage("ModelNo. " + txtStyleNo.Text.Trim() + " is already exists for Item " + txtProductName.Text + "\n Do you want to replace it?", clsUtility.strProjectTitle);
+                                decimal EndUser = Convert.ToDecimal(dtModelNo.Rows[0]["EndUser"]);
+                                decimal UserEndUser = Convert.ToDecimal(txtSalesPrice.Text);
+                                string EndUserpricechange = string.Empty;
+                                if (EndUser != UserEndUser)
+                                {
+                                    EndUserpricechange = "\n Entered Sales Price is different from previous Entered";
+                                }
+                                bool msg = clsUtility.ShowQuestionMessage("ModelNo. " + txtStyleNo.Text.Trim() + " is already exists for Item " + txtProductName.Text + "" + EndUserpricechange + "\n Do you want to Update it?", clsUtility.strProjectTitle);
                                 if (msg)
                                 {
                                     return false;
@@ -707,7 +724,7 @@ namespace IMS_Client_2.Purchase
             }
             else if (dRow.Length > 0)
             {
-                clsUtility.ShowInfoMessage("ModelNo. " + txtStyleNo.Text.Trim() + " is already exists for Item " + dRow[0]["ProductName"] + "", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("ModelNo. " + txtStyleNo.Text.Trim() + " is already exists for Item " + dRow[0]["ProductName"] + " in List", clsUtility.strProjectTitle);
                 return true;
             }
             return false;
@@ -967,11 +984,11 @@ namespace IMS_Client_2.Purchase
                     //dataGridView1.Rows[e.RowIndex].ErrorText = "QTY must be a Positive integer";
                     clsUtility.ShowInfoMessage("Enter Only Numbers..", clsUtility.strProjectTitle);
                 }
-                else if (Convert.ToInt32(e.FormattedValue) < 200 || Convert.ToInt32(e.FormattedValue) > 300)
+                else if (Convert.ToInt32(e.FormattedValue) < 100 || Convert.ToInt32(e.FormattedValue) > 300)
                 {
                     e.Cancel = true;
                     //dataGridView1.Rows[e.RowIndex].ErrorText = "QTY must be a Positive integer";
-                    clsUtility.ShowInfoMessage("Enter Ratio between 200 to 300..", clsUtility.strProjectTitle);
+                    clsUtility.ShowInfoMessage("Enter Ratio between 100 to 300..", clsUtility.strProjectTitle);
                 }
             }
         }
@@ -1003,7 +1020,7 @@ namespace IMS_Client_2.Purchase
                 double LocalCost = Math.Round((Total / QTY) * pCurrencyRate, 2);
 
                 double AddRatio = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["AddedRatio"].Value) * 0.01;
-                dataGridView1.Rows[e.RowIndex].Cells["SuppossedPrice"].Value = LocalCost + (LocalCost * AddRatio);
+                dataGridView1.Rows[e.RowIndex].Cells["SuppossedPrice"].Value = Math.Round(LocalCost + (LocalCost * AddRatio), 2).ToString();
 
                 dataGridView1.Rows[e.RowIndex].Cells["Total"].Value = Math.Round(Total, 2).ToString();
                 CalculateSubTotal();
@@ -1014,7 +1031,7 @@ namespace IMS_Client_2.Purchase
         {
             if (cmbSupplier.SelectedValue != null)
             {
-                object Rate = ObjDAL.ExecuteScalar("SELECT CurrencyRate FROM " + clsUtility.DBName + ".[dbo].[CurrencyRateSetting] WITH(NOLOCK) WHERE CountryID=(SELECT CountryID FROM " + clsUtility.DBName + ".[dbo].SupplierMaster WITH(NOLOCK) WHERE SupplierID=" + cmbSupplier.SelectedValue + ")");
+                object Rate = ObjDAL.ExecuteScalar("SELECT TOP 1 CurrencyRate FROM " + clsUtility.DBName + ".[dbo].[CurrencyRateSetting] WITH(NOLOCK) WHERE CountryID=(SELECT CountryID FROM " + clsUtility.DBName + ".[dbo].SupplierMaster WITH(NOLOCK) WHERE SupplierID=" + cmbSupplier.SelectedValue + ")");
                 pCurrencyRate = Convert.ToDouble(Rate);
             }
         }

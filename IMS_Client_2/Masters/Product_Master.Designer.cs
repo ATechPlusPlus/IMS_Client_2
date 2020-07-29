@@ -36,6 +36,8 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.grpProduct = new System.Windows.Forms.GroupBox();
+            this.txtProductArabicName = new System.Windows.Forms.TextBox();
+            this.lblProductArabicName = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -62,10 +64,6 @@
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.PicProductMaster = new System.Windows.Forms.PictureBox();
             this.btnImport = new System.Windows.Forms.Button();
-            this.lblProductArabicName = new System.Windows.Forms.Label();
-            this.txtProductArabicName = new System.Windows.Forms.TextBox();
-            this.lblSalesPrice = new System.Windows.Forms.Label();
-            this.txtSalesPrice = new System.Windows.Forms.TextBox();
             this.grpProduct.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.grpGridview.SuspendLayout();
@@ -174,8 +172,6 @@
             // grpProduct
             // 
             this.grpProduct.BackColor = System.Drawing.Color.Transparent;
-            this.grpProduct.Controls.Add(this.lblSalesPrice);
-            this.grpProduct.Controls.Add(this.txtSalesPrice);
             this.grpProduct.Controls.Add(this.txtProductArabicName);
             this.grpProduct.Controls.Add(this.lblProductArabicName);
             this.grpProduct.Controls.Add(this.label3);
@@ -197,13 +193,36 @@
             this.grpProduct.TabStop = false;
             this.grpProduct.Text = "Item Details";
             // 
+            // txtProductArabicName
+            // 
+            this.txtProductArabicName.BackColor = System.Drawing.Color.White;
+            this.txtProductArabicName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtProductArabicName.Location = new System.Drawing.Point(502, 27);
+            this.txtProductArabicName.MaxLength = 200;
+            this.txtProductArabicName.Name = "txtProductArabicName";
+            this.txtProductArabicName.Size = new System.Drawing.Size(193, 25);
+            this.txtProductArabicName.TabIndex = 289;
+            this.txtProductArabicName.Enter += new System.EventHandler(this.txtProductName_Enter);
+            this.txtProductArabicName.Leave += new System.EventHandler(this.txtProductName_Leave);
+            // 
+            // lblProductArabicName
+            // 
+            this.lblProductArabicName.AutoSize = true;
+            this.lblProductArabicName.BackColor = System.Drawing.Color.Transparent;
+            this.lblProductArabicName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProductArabicName.Location = new System.Drawing.Point(374, 27);
+            this.lblProductArabicName.Name = "lblProductArabicName";
+            this.lblProductArabicName.Size = new System.Drawing.Size(125, 17);
+            this.lblProductArabicName.TabIndex = 288;
+            this.lblProductArabicName.Text = "Item Arabic Name :";
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 11.25F);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label3.Location = new System.Drawing.Point(320, 137);
+            this.label3.Location = new System.Drawing.Point(697, 89);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(15, 17);
             this.label3.TabIndex = 287;
@@ -215,7 +234,7 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 11.25F);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label1.Location = new System.Drawing.Point(320, 80);
+            this.label1.Location = new System.Drawing.Point(320, 89);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(15, 17);
             this.label1.TabIndex = 2;
@@ -241,7 +260,7 @@
             this.btnCategoryPopup.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCategoryPopup.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCategoryPopup.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCategoryPopup.Location = new System.Drawing.Point(338, 80);
+            this.btnCategoryPopup.Location = new System.Drawing.Point(338, 89);
             this.btnCategoryPopup.Name = "btnCategoryPopup";
             this.btnCategoryPopup.Size = new System.Drawing.Size(27, 27);
             this.btnCategoryPopup.TabIndex = 2;
@@ -253,7 +272,7 @@
             this.cmbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCategory.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCategory.FormattingEnabled = true;
-            this.cmbCategory.Location = new System.Drawing.Point(111, 80);
+            this.cmbCategory.Location = new System.Drawing.Point(111, 89);
             this.cmbCategory.Name = "cmbCategory";
             this.cmbCategory.Size = new System.Drawing.Size(206, 27);
             this.cmbCategory.TabIndex = 1;
@@ -263,7 +282,7 @@
             this.lblCategory.AutoSize = true;
             this.lblCategory.BackColor = System.Drawing.Color.Transparent;
             this.lblCategory.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCategory.Location = new System.Drawing.Point(14, 80);
+            this.lblCategory.Location = new System.Drawing.Point(26, 89);
             this.lblCategory.Name = "lblCategory";
             this.lblCategory.Size = new System.Drawing.Size(69, 17);
             this.lblCategory.TabIndex = 195;
@@ -285,7 +304,7 @@
             this.lblActiveStatus.AutoSize = true;
             this.lblActiveStatus.BackColor = System.Drawing.Color.Transparent;
             this.lblActiveStatus.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblActiveStatus.Location = new System.Drawing.Point(14, 137);
+            this.lblActiveStatus.Location = new System.Drawing.Point(402, 89);
             this.lblActiveStatus.Name = "lblActiveStatus";
             this.lblActiveStatus.Size = new System.Drawing.Size(94, 17);
             this.lblActiveStatus.TabIndex = 189;
@@ -313,9 +332,9 @@
             this.cmbActiveStatus.Items.AddRange(new object[] {
             "Active",
             "InActive"});
-            this.cmbActiveStatus.Location = new System.Drawing.Point(111, 135);
+            this.cmbActiveStatus.Location = new System.Drawing.Point(502, 87);
             this.cmbActiveStatus.Name = "cmbActiveStatus";
-            this.cmbActiveStatus.Size = new System.Drawing.Size(206, 27);
+            this.cmbActiveStatus.Size = new System.Drawing.Size(193, 27);
             this.cmbActiveStatus.TabIndex = 3;
             // 
             // groupBox1
@@ -529,53 +548,6 @@
             this.btnImport.MouseEnter += new System.EventHandler(this.btnAdd_MouseEnter);
             this.btnImport.MouseLeave += new System.EventHandler(this.btnAdd_MouseLeave);
             // 
-            // lblProductArabicName
-            // 
-            this.lblProductArabicName.AutoSize = true;
-            this.lblProductArabicName.BackColor = System.Drawing.Color.Transparent;
-            this.lblProductArabicName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProductArabicName.Location = new System.Drawing.Point(374, 27);
-            this.lblProductArabicName.Name = "lblProductArabicName";
-            this.lblProductArabicName.Size = new System.Drawing.Size(125, 17);
-            this.lblProductArabicName.TabIndex = 288;
-            this.lblProductArabicName.Text = "Item Arabic Name :";
-            // 
-            // txtProductArabicName
-            // 
-            this.txtProductArabicName.BackColor = System.Drawing.Color.White;
-            this.txtProductArabicName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtProductArabicName.Location = new System.Drawing.Point(502, 27);
-            this.txtProductArabicName.MaxLength = 200;
-            this.txtProductArabicName.Name = "txtProductArabicName";
-            this.txtProductArabicName.Size = new System.Drawing.Size(206, 25);
-            this.txtProductArabicName.TabIndex = 289;
-            this.txtProductArabicName.Enter += new System.EventHandler(this.txtProductName_Enter);
-            this.txtProductArabicName.Leave += new System.EventHandler(this.txtProductName_Leave);
-            // 
-            // lblSalesPrice
-            // 
-            this.lblSalesPrice.AutoSize = true;
-            this.lblSalesPrice.BackColor = System.Drawing.Color.Transparent;
-            this.lblSalesPrice.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSalesPrice.Location = new System.Drawing.Point(386, 80);
-            this.lblSalesPrice.Name = "lblSalesPrice";
-            this.lblSalesPrice.Size = new System.Drawing.Size(67, 17);
-            this.lblSalesPrice.TabIndex = 291;
-            this.lblSalesPrice.Text = "EndUser :";
-            // 
-            // txtSalesPrice
-            // 
-            this.txtSalesPrice.BackColor = System.Drawing.Color.White;
-            this.txtSalesPrice.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSalesPrice.Location = new System.Drawing.Point(502, 79);
-            this.txtSalesPrice.MaxLength = 20;
-            this.txtSalesPrice.Name = "txtSalesPrice";
-            this.txtSalesPrice.Size = new System.Drawing.Size(206, 25);
-            this.txtSalesPrice.TabIndex = 290;
-            this.txtSalesPrice.Enter += new System.EventHandler(this.txtProductName_Enter);
-            this.txtSalesPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSalesPrice_KeyPress);
-            this.txtSalesPrice.Leave += new System.EventHandler(this.txtProductName_Leave);
-            // 
             // Product_Master
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -655,7 +627,5 @@
         private System.Windows.Forms.ComboBox cmbSearchByCategory;
         private System.Windows.Forms.TextBox txtProductArabicName;
         private System.Windows.Forms.Label lblProductArabicName;
-        private System.Windows.Forms.Label lblSalesPrice;
-        private System.Windows.Forms.TextBox txtSalesPrice;
     }
 }
