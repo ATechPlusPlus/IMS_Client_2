@@ -39,10 +39,9 @@ namespace IMS_Client_2.Barcode
         {
             btnPrintManualBarcode.BackgroundImage = B_Leave;
             btnPrintBarcode.BackgroundImage = B_Leave;
-
-            strCompanyName = GetStoreName();
-
             btnSearch.BackgroundImage = B_Leave;
+            
+            strCompanyName = GetCompanyName();
 
             txtPurchaseInvoice.Focus();
         }
@@ -91,7 +90,7 @@ namespace IMS_Client_2.Barcode
         {
             string strBarCodeSettings = null;
             DataTable dataTable = ObjCon.ExecuteSelectStatement("SELECT BarCodeSetting FROM " + clsUtility.DBName + ".dbo.tblBarCodeSettings WITH(NOLOCK)");
-            if (dataTable != null && dataTable.Rows.Count > 0)
+            if (ObjUtil.ValidateTable(dataTable))
             {
                 if (dataTable.Rows[0]["BarCodeSetting"] != DBNull.Value)
                 {
@@ -100,7 +99,7 @@ namespace IMS_Client_2.Barcode
             }
             return strBarCodeSettings;
         }
-        private string GetStoreName()
+        private string GetCompanyName()
         {
             return Convert.ToString(ObjCon.ExecuteScalar("SELECT CompanyName FROM " + clsUtility.DBName + ".dbo.CompanyMaster WITH(NOLOCK)"));
         }
@@ -134,24 +133,17 @@ namespace IMS_Client_2.Barcode
                     {
                         if (selectedRow.Cells["Rate"].Value != DBNull.Value)
                         {
-
-
                             objLable.Text = "KD " + Convert.ToDecimal(selectedRow.Cells["Rate"].Value).ToString("F");
                         }
-
                     }
                     else
                     {
                         objLable.Text = string.Empty;
                     }
-
                 }
                 catch (Exception)
                 {
-
-
                 }
-
             }
             else if (objLable.Tag.ToString().Trim() == "BarcodeNo")
             {
@@ -159,19 +151,16 @@ namespace IMS_Client_2.Barcode
             }
             else if (objLable.Tag.ToString().Trim() == "Category")
             {
-
                 string pID = selectedRow.Cells["ColProductID"].Value.ToString();
 
-                string str = "  select  (  select top(1)   CategoryName from [IMS_Client_2].[dbo].[CategoryMaster] where CategoryID=p1.CategoryID) as CategoryName " +
-                            "from [IMS_Client_2].[dbo].[ProductMaster] as p1 where p1.ProductID = " + pID;
+                string str = "  select  ( select top(1) CategoryName from " + clsUtility.DBName + ".[dbo].[CategoryMaster] WITH(NOLOCK) where CategoryID=p1.CategoryID) as CategoryName " +
+                            "from " + clsUtility.DBName + ".[dbo].[ProductMaster] as p1 where p1.ProductID = " + pID;
 
                 object cat = ObjCon.ExecuteScalar(str);
                 if (cat != null)
                 {
                     objLable.Text = cat.ToString();
-
                 }
-
             }
         }
         private void LoadTemplate(DataGridViewRow _Row)
@@ -434,7 +423,6 @@ namespace IMS_Client_2.Barcode
                 this.BringToFront();
                 RefreshData();
             }
-
         }
         private void Doc_PrintPage(object sender, PrintPageEventArgs e)
         {
@@ -782,7 +770,6 @@ namespace IMS_Client_2.Barcode
             }
             catch (Exception)
             {
-
             }
         }
 
@@ -815,7 +802,6 @@ namespace IMS_Client_2.Barcode
             }
             chkAll.Visible = true;
             chkAll.Checked = false;
-
         }
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -823,23 +809,21 @@ namespace IMS_Client_2.Barcode
         }
         private void UpdateProductBardCodeImageNo(string productID, string ImageNumber)
         {
-            DataTable dtProductID = ObjCon.ExecuteSelectStatement("select Photo   FROM [IMS_Client_2].[dbo].[ProductMaster] where ProductID=" + productID);
+            DataTable dtProductID = ObjCon.ExecuteSelectStatement("select Photo FROM " + clsUtility.DBName + ".[dbo].[ProductMaster] where ProductID=" + productID);
             if (dtProductID.Rows.Count > 0)
             {
                 if (dtProductID.Rows[0]["Photo"] == DBNull.Value)
                 {
-                    string sqlUpdate = "update[IMS_Client_2].[dbo].[ProductMaster] " +
+                    string sqlUpdate = "update " + clsUtility.DBName + ".[dbo].[ProductMaster] " +
                                         " set Photo = '" + ImageNumber + "' where ProductID=" + productID;
 
                     ObjCon.ExecuteNonQuery(sqlUpdate);
                 }
-
             }
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmBarCode, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
                 if (numericUpDown1.Value <= 0)
@@ -857,7 +841,6 @@ namespace IMS_Client_2.Barcode
                     {
                         return;
                     }
-
                 }
                 printerSetting.PrinterName = clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.BarCodePrinter);
 
@@ -928,9 +911,6 @@ namespace IMS_Client_2.Barcode
                 this.Activate();
                 RefreshData();
             }
-
-
-
         }
     }
 }

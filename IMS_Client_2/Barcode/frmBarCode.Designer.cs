@@ -345,6 +345,11 @@
             // 
             this.numericUpDown1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numericUpDown1.Location = new System.Drawing.Point(663, 52);
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(71, 25);
             this.numericUpDown1.TabIndex = 230;

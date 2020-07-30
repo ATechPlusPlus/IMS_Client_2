@@ -544,8 +544,17 @@ namespace IMS_Client_2.Purchase
                             int DeliveryPurchaseBillID2 = DataSavedDeliveryPurchaseBill2(DeliveryPurchaseBillID);
                             int DeliveryPurchaseBillID3 = DataSavedDeliveryPurchaseBill3(DeliveryPurchaseBillID, DeliveryPurchaseBillID2);
                             //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave, clsUtility.IsAdmin);
-                            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave);
-                            clsUtility.ShowInfoMessage(clsUtility.MsgDataSaved, clsUtility.strProjectTitle);
+                            if (DeliveryPurchaseBillID2 > 0 && DeliveryPurchaseBillID3 > 0)
+                            {
+                                ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave);
+                                clsUtility.ShowInfoMessage(clsUtility.MsgDataSaved, clsUtility.strProjectTitle);
+                            }
+                            else
+                            {
+                                ObjDAL.SetStoreProcedureData("PurchaseInvoiceID", SqlDbType.Int, pPurchaseInvoiceID, clsConnection_DAL.ParamType.Input);
+                                ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_Delete_Delivering_PurchaseBill");
+                                clsUtility.ShowInfoMessage(clsUtility.MsgDatanotSaved, clsUtility.strProjectTitle);
+                            }
                             LoadData(); // Added
                             LoadModelData();
                             Clear_ColorSize();
@@ -558,13 +567,12 @@ namespace IMS_Client_2.Purchase
                         else
                         {
                             clsUtility.ShowInfoMessage(clsUtility.MsgDatanotSaved, clsUtility.strProjectTitle);
-                            ObjDAL.ResetData();
                         }
+                        ObjDAL.ResetData();
                     }
                     else
                     {
                         clsUtility.ShowErrorMessage("Purchase Invoice '" + txtSupplierBillNo.Text + "' is already exist..", clsUtility.strProjectTitle);
-                        ObjDAL.ResetData();
                         txtSupplierBillNo.Focus();
                     }
                 }
@@ -626,13 +634,12 @@ namespace IMS_Client_2.Purchase
                         else
                         {
                             clsUtility.ShowInfoMessage(clsUtility.MsgDatanotSaved, clsUtility.strProjectTitle);
-                            ObjDAL.ResetData();
                         }
+                        ObjDAL.ResetData();
                     }
                     else
                     {
                         clsUtility.ShowErrorMessage("Purchase Invoice '" + txtSupplierBillNo.Text + "' is already exist..", clsUtility.strProjectTitle);
-                        ObjDAL.ResetData();
                         txtSupplierBillNo.Focus();
                     }
                 }
@@ -666,11 +673,11 @@ namespace IMS_Client_2.Purchase
                         }
                         //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
                         ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
+                        ObjDAL.ResetData();
                     }
                     else
                     {
                         clsUtility.ShowInfoMessage("Style No. '" + listBoxStyleNo.SelectedItem + "' is not deleted", clsUtility.strProjectTitle);
-                        ObjDAL.ResetData();
                     }
                 }
             }

@@ -28,7 +28,6 @@ namespace IMS_Client_2.Masters
         {
             txtProductName.Clear();
             txtProductArabicName.Clear();
-            txtSalesPrice.Clear();
             cmbCategory.SelectedIndex = -1;
             cmbActiveStatus.SelectedIndex = -1;
             txtProductName.Focus();
@@ -133,11 +132,8 @@ namespace IMS_Client_2.Masters
                 {
                     if (DuplicateUser(0))
                     {
-                        decimal SalesPrice = txtSalesPrice.Text==string.Empty?0:Convert.ToDecimal(txtSalesPrice.Text);
-
                         ObjDAL.SetColumnData("ProductName", SqlDbType.NVarChar, txtProductName.Text.Trim());
                         ObjDAL.SetColumnData("ProductArabicName", SqlDbType.NVarChar, txtProductArabicName.Text.Trim());
-                        ObjDAL.SetColumnData("Rate", SqlDbType.Decimal, SalesPrice);
                         ObjDAL.SetColumnData("CategoryID", SqlDbType.Int, cmbCategory.SelectedValue);
                         ObjDAL.SetColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
                         ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
@@ -199,11 +195,8 @@ namespace IMS_Client_2.Masters
                 {
                     if (DuplicateUser(ID))
                     {
-                        decimal SalesPrice = txtSalesPrice.Text == string.Empty ? 0 : Convert.ToDecimal(txtSalesPrice.Text);
-
                         ObjDAL.UpdateColumnData("ProductName", SqlDbType.NVarChar, txtProductName.Text.Trim());
                         ObjDAL.UpdateColumnData("ProductArabicName", SqlDbType.NVarChar, txtProductArabicName.Text.Trim());
-                        ObjDAL.UpdateColumnData("Rate", SqlDbType.Decimal, SalesPrice);
                         ObjDAL.UpdateColumnData("CategoryID", SqlDbType.Int, cmbCategory.SelectedValue);
                         ObjDAL.UpdateColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
                         ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
@@ -306,7 +299,6 @@ namespace IMS_Client_2.Masters
                     ID = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ProductID"].Value);
                     txtProductName.Text = dataGridView1.SelectedRows[0].Cells["ItemName"].Value.ToString();
                     txtProductArabicName.Text = dataGridView1.SelectedRows[0].Cells["Arabic Name"].Value.ToString();
-                    txtSalesPrice.Text = dataGridView1.SelectedRows[0].Cells["EndUser"].Value.ToString();
                     cmbCategory.SelectedValue = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["CategoryID"].Value);
                     cmbActiveStatus.SelectedItem = dataGridView1.SelectedRows[0].Cells["ActiveStatus"].Value.ToString();
                     if (dataGridView1.SelectedRows[0].Cells["Photo"].Value != DBNull.Value)
@@ -550,16 +542,6 @@ namespace IMS_Client_2.Masters
                 cmbSearchByCategory.Enabled = false;
                 cmbSearchByCategory.SelectedIndex = -1;
                 rdShowAll.Checked = true;
-            }
-        }
-
-        private void txtSalesPrice_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = ObjUtil.IsDecimal(txtSalesPrice,e);
-            if (e.Handled == true)
-            {
-                clsUtility.ShowInfoMessage("Enter Only Numbers...", clsUtility.strProjectTitle);
-                txtSalesPrice.Focus();
             }
         }
     }

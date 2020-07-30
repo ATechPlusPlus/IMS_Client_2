@@ -25,6 +25,7 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("BarcodeNo", SqlDbType.BigInt, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
 
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_Material_NewDetails");
             if (ds != null && ds.Tables.Count > 0)
@@ -72,6 +73,7 @@ namespace IMS_Client_2.StockManagement
             //ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.ColumnHeader);
             ObjUtil.SetDataGridProperty(dgvStockDetails, DataGridViewAutoSizeColumnsMode.DisplayedCells);
             dgvStockDetails.Columns["ProductID"].Visible = false;
+            dgvStockDetails.Columns["Photo"].Visible = false;
         }
 
         private void rdSearchByBarCode_CheckedChanged(object sender, EventArgs e)
@@ -127,6 +129,7 @@ namespace IMS_Client_2.StockManagement
                 cmbColor.SelectedIndex = -1;
                 txtSearchByProductName.Clear();
                 txtSearchByBarcode.Clear();
+                txtSearchByStyleNo.Clear();
             }
         }
 
@@ -202,6 +205,7 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, txtProductID.Text.Trim(), clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("BarcodeNo", SqlDbType.BigInt, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_Material_NewDetails");
             if (ds != null && ds.Tables.Count > 0)
             {
@@ -232,6 +236,7 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("BarcodeNo", SqlDbType.BigInt, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, cmbColor.SelectedValue, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_Material_NewDetails");
             if (ds != null && ds.Tables.Count > 0)
             {
@@ -262,6 +267,7 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("BarcodeNo", SqlDbType.BigInt, txtSearchByBarcode.Text.Trim(), clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_Material_NewDetails");
             if (ds != null && ds.Tables.Count > 0)
             {
@@ -341,6 +347,112 @@ namespace IMS_Client_2.StockManagement
                 {
                     clsUtility.ShowInfoMessage("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
                 }
+            }
+        }
+
+        private void txtSearchByStyleNo_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtSearchByStyleNo.Text.Length > 0)
+                {
+                    ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, txtSearchByStyleNo.Text.Trim(), clsConnection_DAL.ParamType.Input);
+                    DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_StyleNo_Popup");
+                    if (ds != null && ds.Tables.Count > 0)
+                    {
+                        DataTable dt = ds.Tables[0];
+                        if (ObjUtil.ValidateTable(dt))
+                        {
+                            ObjUtil.SetControlData(txtSearchByStyleNo, "StyleNo");
+                            ObjUtil.ShowDataPopup(dt, txtSearchByStyleNo, this, groupBox1);
+
+                            if (ObjUtil.GetDataPopup() != null && ObjUtil.GetDataPopup().DataSource != null)
+                            {
+                                ObjUtil.GetDataPopup().AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+                                if (ObjUtil.GetDataPopup().ColumnCount > 0)
+                                {
+                                    ObjUtil.SetDataPopupSize(180, 0);
+                                }
+                            }
+                            ObjUtil.GetDataPopup().CellClick += frmStockDetails_SearchByStyleNo_CellClick;
+                            ObjUtil.GetDataPopup().KeyDown += frmStockDetails_SearchByStyleNo_KeyDown;
+                        }
+                        else
+                        {
+                            ObjUtil.CloseAutoExtender();
+                        }
+                    }
+                    else
+                    {
+                        ObjUtil.CloseAutoExtender();
+                    }
+                }
+                else
+                {
+                    ObjUtil.CloseAutoExtender();
+                }
+            }
+            catch (Exception ex)
+            {
+                clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
+            }
+        }
+        private void frmStockDetails_SearchByStyleNo_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView dgv = (DataGridView)sender;
+            if (dgv.DataSource != null)
+            {
+                txtSearchByStyleNo.SelectionStart = txtSearchByStyleNo.MaxLength;
+                txtSearchByStyleNo.Focus();
+                SearchByStyleNo();
+            }
+        }
+
+        private void frmStockDetails_SearchByStyleNo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                txtSearchByStyleNo.SelectionStart = txtSearchByStyleNo.MaxLength;
+                txtSearchByStyleNo.Focus();
+                SearchByStyleNo();
+            }
+        }
+
+        private void SearchByStyleNo()
+        {
+            ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("BarcodeNo", SqlDbType.BigInt, 0, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, txtSearchByStyleNo.Text.Trim(), clsConnection_DAL.ParamType.Input);
+            
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_Material_NewDetails");
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                DataTable dt = ds.Tables[0];
+                if (ObjUtil.ValidateTable(dt))
+                {
+                    dgvStockDetails.DataSource = dt;
+                }
+                else
+                {
+                    dgvStockDetails.DataSource = null;
+                }
+            }
+            ObjDAL.ResetData();
+        }
+
+        private void rdSearchByStyleNo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdSearchByStyleNo.Checked)
+            {
+                txtSearchByStyleNo.Enabled = true;
+                txtSearchByStyleNo.Focus();
+            }
+            else
+            {
+                txtSearchByStyleNo.Enabled = false;
+                txtSearchByStyleNo.Clear();
             }
         }
     }
