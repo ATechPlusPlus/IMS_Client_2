@@ -50,9 +50,7 @@ namespace IMS_Client_2
         {
             base.OnPaint(e);
             ExtendedDraw(e);
-            //DrawBorder(e.Graphics);
-
-          
+            //DrawBorder(e.Graphics); 
         }
 
         private void ExtendedDraw(PaintEventArgs e)
