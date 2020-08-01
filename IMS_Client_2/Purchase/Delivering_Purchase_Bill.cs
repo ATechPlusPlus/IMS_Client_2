@@ -123,7 +123,7 @@ namespace IMS_Client_2.Purchase
         }
         private void txtSupplierBillNo_Leave(object sender, EventArgs e)
         {
-            ObjUtil.SetTextHighlightColor(sender, Color.White);
+            ObjUtil.SetTextHighlightColor(sender, System.Drawing.Color.White);
         }
         private void btnSearch_Click(object sender, EventArgs e)
         {
@@ -207,7 +207,7 @@ namespace IMS_Client_2.Purchase
                 cmbBrand.SelectedValue = dRow[0]["BrandID"];
                 cmbCountry.SelectedValue = dRow[0]["CountryID"];
                 cmbCategory.SelectedValue = dRow[0]["CategoryID"];
-                txtItemName.Text = dRow[0]["ProductName"].ToString();
+                txtItemName.Text = dRow[0]["ItemName"].ToString();
                 txtTotalQTYBill.Text = dRow[0]["QTY"].ToString();
 
                 cmbSizeType.SelectedValue = dRow[0]["SizeTypeID"].ToString();
@@ -312,6 +312,7 @@ namespace IMS_Client_2.Purchase
             listBoxStyleNo.ClearSelected();
         }
 
+      
         private void FillColorSizeGrid()
         {
             dtSize = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.SizeMaster", "SizeID,Size,SizeTypeID", "ISNULL(ActiveStatus,1) = 1 AND SizeTypeID = " + cmbSizeType.SelectedValue, null);
