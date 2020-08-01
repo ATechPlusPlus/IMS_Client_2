@@ -109,6 +109,7 @@ namespace IMS_Client_2.StockManagement
                             row["CellColor"] = dt.Rows[0]["CellColor"];
                             row["ModelNo"] = dt.Rows[0]["ModelNo"];
                             row["ProductID"] = dt.Rows[0]["ProductID"];
+                            row["SubProductID"] = dt.Rows[0]["SubProductID"];
                             row["BillQTY"] = 0;
                             row["EnterQTY"] = 1;
                             row["Item"] = dt.Rows[0]["Item"];
@@ -154,6 +155,7 @@ namespace IMS_Client_2.StockManagement
             dgvProductDetails.Columns["TransferItemID"].Visible = false;
             dgvProductDetails.Columns["StoreBillDetailsID"].Visible = false;
             dgvProductDetails.Columns["ProductID"].Visible = false;
+            dgvProductDetails.Columns["SubProductID"].Visible = false;
             dgvProductDetails.Columns["BillDate"].Visible = false;
             dgvProductDetails.Columns["BillNo"].Visible = false;
             dgvProductDetails.Columns["TotalQTY"].Visible = false;
@@ -255,6 +257,7 @@ namespace IMS_Client_2.StockManagement
                     ObjDAL.SetStoreProcedureData("TransferItemID", SqlDbType.Int, dtStoreTransfer.Rows[i]["TransferItemID"], clsConnection_DAL.ParamType.Input);
                     ObjDAL.SetStoreProcedureData("StoreBillDetailsID", SqlDbType.Int, dtStoreTransfer.Rows[i]["StoreBillDetailsID"], clsConnection_DAL.ParamType.Input);
                     ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, dtStoreTransfer.Rows[i]["ProductID"], clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, dtStoreTransfer.Rows[i]["SubProductID"], clsConnection_DAL.ParamType.Input);
                     ObjDAL.SetStoreProcedureData("Barcode", SqlDbType.NVarChar, dtStoreTransfer.Rows[i]["Barcode"], clsConnection_DAL.ParamType.Input);
                     //ObjDAL.SetStoreProcedureData("Rate", SqlDbType.Decimal, dtStoreTransfer.Rows[i]["Rate"], clsConnection_DAL.ParamType.Input);
                     ObjDAL.SetStoreProcedureData("BillQTY", SqlDbType.Int, dtStoreTransfer.Rows[i]["BillQTY"], clsConnection_DAL.ParamType.Input);

@@ -1009,21 +1009,28 @@ namespace IMS_Client_2.Purchase
 
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (dataGridView1.Columns[e.ColumnIndex].Name == "Rate" ||
-                dataGridView1.Columns[e.ColumnIndex].Name == "QTY" || dataGridView1.Columns[e.ColumnIndex].Name == "AddedRatio")
+            try
             {
-                int QTY = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["QTY"].Value);
-                double Rate = Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells["Rate"].Value);
-                double Total = QTY * Rate;
+                if (dataGridView1.Columns[e.ColumnIndex].Name == "Rate" ||
+                    dataGridView1.Columns[e.ColumnIndex].Name == "QTY" || dataGridView1.Columns[e.ColumnIndex].Name == "AddedRatio")
+                {
+                    int QTY = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["QTY"].Value);
+                    double Rate = Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells["Rate"].Value);
+                    double Total = QTY * Rate;
 
-                //double LocalCost = Math.Round(LocalBillValue / Convert.ToInt32(txtTotalQTYBill.Text), 2);
-                double LocalCost = Math.Round((Total / QTY) * pCurrencyRate, 2);
+                    //double LocalCost = Math.Round(LocalBillValue / Convert.ToInt32(txtTotalQTYBill.Text), 2);
+                    double LocalCost = Math.Round((Total / QTY) * pCurrencyRate, 2);
 
-                double AddRatio = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["AddedRatio"].Value) * 0.01;
-                dataGridView1.Rows[e.RowIndex].Cells["SuppossedPrice"].Value = Math.Round(LocalCost + (LocalCost * AddRatio), 2).ToString();
+                    double AddRatio = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["AddedRatio"].Value) * 0.01;
+                    dataGridView1.Rows[e.RowIndex].Cells["SuppossedPrice"].Value = Math.Round(LocalCost + (LocalCost * AddRatio), 2).ToString();
 
-                dataGridView1.Rows[e.RowIndex].Cells["Total"].Value = Math.Round(Total, 2).ToString();
-                CalculateSubTotal();
+                    dataGridView1.Rows[e.RowIndex].Cells["Total"].Value = Math.Round(Total, 2).ToString();
+                    CalculateSubTotal();
+                }
+            }
+            catch (Exception ex)
+            {
+                clsUtility.ShowInfoMessage(ex.Message, clsUtility.strProjectTitle);
             }
         }
 
