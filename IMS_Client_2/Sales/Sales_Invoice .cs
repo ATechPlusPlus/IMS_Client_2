@@ -866,6 +866,7 @@ namespace IMS_Client_2.Sales
                 clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
             }
         }
+      
         private int DoNewSales()
         {
             dgvProductDetails.EndEdit();
