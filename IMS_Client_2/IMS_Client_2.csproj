@@ -519,6 +519,12 @@
     <Compile Include="SplashWindow.designer.cs">
       <DependentUpon>SplashWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="StockManagement\frmItemWiseModelNo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManagement\frmItemWiseModelNo.Designer.cs">
+      <DependentUpon>frmItemWiseModelNo.cs</DependentUpon>
+    </Compile>
     <Compile Include="StockManagement\frmStockDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -734,6 +740,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SplashWindow.resx">
       <DependentUpon>SplashWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockManagement\frmItemWiseModelNo.resx">
+      <DependentUpon>frmItemWiseModelNo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StockManagement\frmStockDetails.resx">
       <DependentUpon>frmStockDetails.cs</DependentUpon>

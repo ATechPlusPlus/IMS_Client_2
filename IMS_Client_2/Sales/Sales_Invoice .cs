@@ -89,6 +89,9 @@ namespace IMS_Client_2.Sales
             dtItemDetails.Columns.Add("Adj_Amount");
             dtItemDetails.Columns.Add("Total");
             dtItemDetails.Columns.Add("Delete");
+            dtItemDetails.Columns.Add("SubProductID");
+
+            
 
             dtReplcaeItemDetails.Columns.Add("ProductID");
             dtReplcaeItemDetails.Columns.Add("ProductName");
@@ -101,9 +104,10 @@ namespace IMS_Client_2.Sales
             dtReplcaeItemDetails.Columns.Add("Rate");
             dtReplcaeItemDetails.Columns.Add("Total");
             dtReplcaeItemDetails.Columns.Add("Delete");
+            dtReplcaeItemDetails.Columns.Add("SubProductID");
         }
         private void AddRowToItemDetails(string productID, string name, string qty, string rate, string total,
-            string BarCode, string SizeID, string Size, string ColorID, string Color)
+            string BarCode, string SizeID, string Size, string ColorID, string Color, string subProductID)
         {
             DataRow dRow = dtItemDetails.NewRow();
             dRow["ProductID"] = productID;
@@ -117,6 +121,7 @@ namespace IMS_Client_2.Sales
             dRow["SizeID"] = SizeID;
             dRow["Size"] = Size;
             dRow["BarcodeNo"] = BarCode;
+            dRow["SubProductID"] = subProductID;
 
             if (radNewItem.Checked && IsReplaceReturnMode)
             {
@@ -144,7 +149,7 @@ namespace IMS_Client_2.Sales
             }
         }
         private void AddRowToReplaceItemDetails(string productID, string name, string qty, string rate, string total,
-       string BarCode, string SizeID, string Size, string ColorID, string Color)
+       string BarCode, string SizeID, string Size, string ColorID, string Color, string SubProductID)
         {
             DataRow dRow = dtReplcaeItemDetails.NewRow();
             dRow["ProductID"] = productID;
@@ -158,7 +163,9 @@ namespace IMS_Client_2.Sales
             dRow["SizeID"] = SizeID;
             dRow["Size"] = Size;
             dRow["BarcodeNo"] = BarCode;
+            dRow["SubProductID"] = SubProductID;
 
+            
             dtReplcaeItemDetails.Rows.Add(dRow);
             dtReplcaeItemDetails.AcceptChanges();
 
@@ -434,48 +441,7 @@ namespace IMS_Client_2.Sales
             }
         }
 
-        private void Sales_Invoice_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyData == Keys.Enter)
-            {
-                if (cboEntryMode.SelectedIndex == 1)
-                {
-                    DataTable dtSelectedProductDetails = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.GetProductDetails_By_Color_Size " + cmbShop.SelectedValue.ToString() + "," + txtSizeID.Text + "," + txtColorID.Text);
 
-                    string PID = dtSelectedProductDetails.Rows[0]["ProductID"].ToString();
-                    string ColorID = dtSelectedProductDetails.Rows[0]["ColorID"].ToString();
-                    string SizeID = dtSelectedProductDetails.Rows[0]["SizeID"].ToString();
-                    string pName = dtSelectedProductDetails.Rows[0]["ProductName"].ToString();
-                    string Rate = dtSelectedProductDetails.Rows[0]["Rate"].ToString();
-
-                    string COlorName = dtSelectedProductDetails.Rows[0]["ColorName"].ToString();
-                    string Size = dtSelectedProductDetails.Rows[0]["Size"].ToString();
-                    string _barCode = dtSelectedProductDetails.Rows[0]["BarcodeNo"].ToString();
-
-                    GetItemDetailsBy_Non_BarCode(PID, pName, Rate, _barCode, SizeID, Size, ColorID, COlorName);
-                }
-                else
-                {
-                }
-            }
-        }
-
-        private void Sales_Invoice_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            DataTable dtSelectedProductDetails = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.GetProductDetails_By_Color_Size " + cmbShop.SelectedValue.ToString() + "," + txtSizeID.Text + "," + txtColorID.Text);
-
-            string PID = dtSelectedProductDetails.Rows[0]["ProductID"].ToString();
-            string ColorID = dtSelectedProductDetails.Rows[0]["ColorID"].ToString();
-            string SizeID = dtSelectedProductDetails.Rows[0]["SizeID"].ToString();
-            string pName = dtSelectedProductDetails.Rows[0]["ProductName"].ToString();
-            string Rate = dtSelectedProductDetails.Rows[0]["Rate"].ToString();
-
-            string COlorName = dtSelectedProductDetails.Rows[0]["ColorName"].ToString();
-            string Size = dtSelectedProductDetails.Rows[0]["Size"].ToString();
-            string _barCode = dtSelectedProductDetails.Rows[0]["BarcodeNo"].ToString();
-
-            GetItemDetailsBy_Non_BarCode(PID, pName, Rate, _barCode, SizeID, Size, ColorID, COlorName);
-        }
         private bool CheckProductQTY(string _BarCoeNumber, decimal CurQTY)
         {
             string strSQL = "SELECT QTY FROM  " + clsUtility.DBName + ".[dbo].[ProductStockColorSizeMaster] WITH(NOLOCK) WHERE BarcodeNo=" + _BarCoeNumber + " AND StoreID=" + cmbShop.SelectedValue.ToString();
@@ -542,6 +508,7 @@ namespace IMS_Client_2.Sales
                 string ColorID = dt.Rows[0]["ColorID"].ToString();
                 string ColorName = dt.Rows[0]["ColorName"].ToString();
                 decimal total = Convert.ToDecimal(rate) * Convert.ToDecimal(qty);
+                string subProductID= dt.Rows[0]["SubProductID"].ToString();
 
                 if (CheckProductQTY(barCode, Convert.ToDecimal(qty)))
                 {
@@ -553,7 +520,7 @@ namespace IMS_Client_2.Sales
                     }
                     else
                     {
-                        AddRowToItemDetails(pID, name, qty, rate, total.ToString(), barCode, SizeID, Size, ColorID, ColorName);
+                        AddRowToItemDetails(pID, name, qty, rate, total.ToString(), barCode, SizeID, Size, ColorID, ColorName, subProductID);
                         picProduct.Image = GetProductPhoto(Convert.ToInt32(pID));
 
                     }
@@ -592,7 +559,7 @@ namespace IMS_Client_2.Sales
                 }
                 else
                 {
-                    AddRowToItemDetails(pID, name, qty, rate, total.ToString(), barCode, SizeID, Size, ColorID, ColorName);
+                    AddRowToItemDetails(pID, name, qty, rate, total.ToString(), barCode, SizeID, Size, ColorID, ColorName,"");
                     picProduct.Image = GetProductPhoto(Convert.ToInt32(pID));
                 }
                 txtProductID.Clear();
@@ -615,6 +582,7 @@ namespace IMS_Client_2.Sales
             dgvProductDetails.Columns["ProductID"].Visible = false;
             dgvProductDetails.Columns["ColoriD"].Visible = false;
             dgvProductDetails.Columns["SizeiD"].Visible = false;
+            dgvProductDetails.Columns["SubProductID"].Visible = false;
             if (IsReplaceReturnMode)
             {
                 dgvProductDetails.Columns["OIRate"].Visible = true;
@@ -789,7 +757,7 @@ namespace IMS_Client_2.Sales
             txtColorID.Clear();
             txtSizeID.Clear();
         }
-        private bool SalesValidation()
+        private bool SalesValidation(bool isSave)
         {
             if (txtCustomerID.Text.Trim().Length == 0)
             {
@@ -803,20 +771,27 @@ namespace IMS_Client_2.Sales
                 txtSalesMan.Focus();
                 return false;
             }
-
-            if (txtGrandTotal.Text.Trim().Length != 0)
+            // if only saving the dataa
+            if (isSave==false)
             {
-                if (Convert.ToDecimal(txtGrandTotal.Text) <= 0)
+                if (txtGrandTotal.Text.Trim().Length != 0)
                 {
-                    clsUtility.ShowInfoMessage("You can not print invoice for negative grand total.", clsUtility.strProjectTitle);
+                    if (Convert.ToDecimal(txtGrandTotal.Text) <= 0)
+                    {
+                        clsUtility.ShowInfoMessage("You can not print invoice for negative grand total.", clsUtility.strProjectTitle);
+                        return false;
+                    }
+                }
+            }
+            if (isSave==false)
+            {
+                if (!ValidateGrandTotal())
+                {
+                    clsUtility.ShowInfoMessage("Cash and Credit amount must be equal to Grand Total.", clsUtility.strProjectTitle);
                     return false;
                 }
             }
-            if (!ValidateGrandTotal())
-            {
-                clsUtility.ShowInfoMessage("Cash and Credit amount must be equal to Grand Total.", clsUtility.strProjectTitle);
-                return false;
-            }
+           
             return true;
         }
         private void InsertPayment(int SalesInvoiceID)
@@ -866,6 +841,7 @@ namespace IMS_Client_2.Sales
                 clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
             }
         }
+      
         private int DoNewSales()
         {
             dgvProductDetails.EndEdit();
@@ -903,6 +879,9 @@ namespace IMS_Client_2.Sales
                 string Rate = dgvProductDetails.Rows[i].Cells["Rate"].Value.ToString();
                 string ColorID = dgvProductDetails.Rows[i].Cells["ColorID"].Value.ToString();
                 string SizeID = dgvProductDetails.Rows[i].Cells["SizeID"].Value.ToString();
+                string subProductID= dgvProductDetails.Rows[i].Cells["SubProductID"].Value.ToString();
+                string BarCode= dgvProductDetails.Rows[i].Cells["BarCodeNo"].Value.ToString();
+
 
                 ObjDAL.SetColumnData("InvoiceID", SqlDbType.Int, InvoiceID);
                 ObjDAL.SetColumnData("ProductID", SqlDbType.Int, ProductID);
@@ -912,10 +891,13 @@ namespace IMS_Client_2.Sales
                 ObjDAL.SetColumnData("ColorID", SqlDbType.Int, ColorID);
                 ObjDAL.SetColumnData("SizeID", SqlDbType.Int, SizeID);
 
+                ObjDAL.SetColumnData("SubProductID", SqlDbType.Int, subProductID);
+                ObjDAL.SetColumnData("BarCode", SqlDbType.NVarChar, BarCode);
+
                 ObjDAL.InsertData(clsUtility.DBName + ".dbo.SalesDetails", false);
 
                 ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster " +
-                                        "SET QTY=QTY-" + QTY + " WHERE ProductID=" + ProductID + " AND StoreID=" + cmbShop.SelectedValue.ToString() + " AND ColorID=" + ColorID + " AND SizeID=" + SizeID);
+                                        "SET QTY=QTY-" + QTY + " WHERE ProductID=" + ProductID + " AND StoreID=" + cmbShop.SelectedValue.ToString() + " AND ColorID=" + ColorID + " AND SizeID=" + SizeID+" AND SubProductID="+subProductID);
             }
             if (Convert.ToDecimal(txtGrandTotal.Text) >= 0)
             {
@@ -960,6 +942,8 @@ namespace IMS_Client_2.Sales
                 string ColorID = dgvReplaceReturn.Rows[i].Cells["RepalceColorID"].Value.ToString();
                 string SizeID = dgvReplaceReturn.Rows[i].Cells["RepalceSizeID"].Value.ToString();
                 string barcodeNumber = dgvReplaceReturn.Rows[i].Cells["ReplaceBarcode"].Value.ToString();
+                string SubProductID= dgvReplaceReturn.Rows[i].Cells["SubProductID"].Value.ToString();
+
 
                 ObjDAL.SetColumnData("OldInvoiceID", SqlDbType.Int, OldInvoiceID);
                 ObjDAL.SetColumnData("ProductID", SqlDbType.Int, ProductID);
@@ -969,12 +953,13 @@ namespace IMS_Client_2.Sales
                 ObjDAL.SetColumnData("SizeID", SqlDbType.Int, SizeID);
                 ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
                 ObjDAL.SetColumnData("BarCode", SqlDbType.NVarChar, barcodeNumber);
+                ObjDAL.SetColumnData("SubProductID", SqlDbType.Int, SubProductID);
 
                 ObjDAL.InsertData(clsUtility.DBName + ".dbo.tblReplaceReturn", false);
 
                 // add the QTY as we are getting back the stock
                 ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster " +
-                                        "SET QTY=QTY+" + QTY + " WHERE ProductID=" + ProductID + " AND StoreID=" + cmbShop.SelectedValue.ToString() + " AND ColorID=" + ColorID + " AND SizeID=" + SizeID);
+                                        "SET QTY=QTY+" + QTY + " WHERE ProductID=" + ProductID + " AND StoreID=" + cmbShop.SelectedValue.ToString() + " AND ColorID=" + ColorID + " AND SizeID=" + SizeID+ " AND SubProductID="+SubProductID);
             }
 
             //Cash Return Entry
@@ -1014,7 +999,7 @@ namespace IMS_Client_2.Sales
                         return;
                     }
                 }
-                if (SalesValidation())
+                if (SalesValidation(button.Name == "btnSaveData"))
                 {
                     int NewInvoiceID = 0;
 
@@ -1119,13 +1104,12 @@ namespace IMS_Client_2.Sales
         private void GetDataFromSales(string barcode)
         {
 
-            string strQ = "SELECT * FROM (SELECT InvoiceID, ProductID, " +
-                        " (SELECT ProductName FROM ProductMaster WHERE ProductID = s1.ProductID) AS ProductName, " +
-                        " QTY, Rate, ColorID, " +
-                        " (SELECT ColorName FROM ColorMaster WHERE ColorID = s1.ColorID) AS Color, " +
-                        " (SELECT Size FROM SizeMaster WHERE SizeID = s1.SizeID) AS Size,SizeID, " +
-                        "'" + barcode + "' AS BarCode FROM SalesDetails s1" +
-                        " WHERE InvoiceID = " + OldInvoiceID + " ) AS tb WHERE BarCode = '" + barcode + "'";
+            string strQ = "select s1.InvoiceID,p1.ProductName,s1.ProductID,s1.subproductID,s1.QTY,s1.Rate,s1.ColorID,s1.SizeID,s1.BarCode,c1.ColorName as Color,sm.Size from SalesDetails s1 "+
+                        " join ProductMaster  p1 on s1.ProductID = p1.ProductID "+
+                        " join ColorMaster c1 on s1.ColorID = c1.ColorID"+
+                        " join SizeMaster sm on s1.SizeID = sm.SizeID"+
+                        " where s1.BarCode = '"+ barcode + "'";
+
 
             DataTable dtSalesDetails = ObjDAL.ExecuteSelectStatement(strQ);
             if (ObjUtil.ValidateTable(dtSalesDetails))
@@ -1141,8 +1125,10 @@ namespace IMS_Client_2.Sales
                     string Size = dtSalesDetails.Rows[0]["Size"].ToString();
                     string ColorID = dtSalesDetails.Rows[0]["ColorID"].ToString();
                     string ColorName = dtSalesDetails.Rows[0]["Color"].ToString();
-                    decimal total = Convert.ToDecimal(rate) * Convert.ToDecimal(qty);
+                    string SubProductID = dtSalesDetails.Rows[0]["SubProductID"].ToString();
 
+                    decimal total = Convert.ToDecimal(rate) * Convert.ToDecimal(qty);
+                   
                     // if Item already there in the grid, then just increase the QTY
                     if (IsReplaceItemExist(barCode))
                     {
@@ -1151,7 +1137,7 @@ namespace IMS_Client_2.Sales
                     }
                     else
                     {
-                        AddRowToReplaceItemDetails(pID, name, qty, rate, total.ToString(), barCode, SizeID, Size, ColorID, ColorName);
+                        AddRowToReplaceItemDetails(pID, name, qty, rate, total.ToString(), barCode, SizeID, Size, ColorID, ColorName, SubProductID);
                         picProduct.Image = GetProductPhoto(Convert.ToInt32(pID));
 
                     }
@@ -1334,14 +1320,14 @@ namespace IMS_Client_2.Sales
             {
                 return;
             }
-            if (dgvReplaceReturn.Columns[e.ColumnIndex].Name == "ColDelete")
+            if (dgvReplaceReturn.Columns[e.ColumnIndex].Name == "ColReplaceDelete")
             {
                 DialogResult d = MessageBox.Show("Are you sure want to delete ? ", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (d == DialogResult.Yes)
                 {
                     dgvReplaceReturn.Rows.RemoveAt(e.RowIndex);
                     dgvReplaceReturn.EndEdit();
-                    // CalculateGrandTotal();
+                     CalculateGrandTotal();
                 }
             }
             else
@@ -1424,6 +1410,11 @@ namespace IMS_Client_2.Sales
         {
             txtOldBillAmount.Enabled = true;
             txtOldBillAmount.ReadOnly = false;
+        }
+
+        private void dgvReplaceReturn_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            dgvReplaceReturn.Columns["SubProductID"].Visible = false;
         }
     }
 }

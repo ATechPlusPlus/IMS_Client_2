@@ -70,6 +70,8 @@
             this.brachReceiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transferWatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stockDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SalesReport_ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.pettyCashExpReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -414,7 +416,9 @@
             this.stockTransferToolStripMenuItem,
             this.brachReceiveToolStripMenuItem,
             this.transferWatchToolStripMenuItem,
-            this.stockDetailsToolStripMenuItem});
+            this.stockDetailsToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.viewToolStripMenuItem});
             this.toolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1.Image")));
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(135, 36);
@@ -424,37 +428,49 @@
             // MaterialDetails_ToolStrip
             // 
             this.MaterialDetails_ToolStrip.Name = "MaterialDetails_ToolStrip";
-            this.MaterialDetails_ToolStrip.Size = new System.Drawing.Size(177, 24);
+            this.MaterialDetails_ToolStrip.Size = new System.Drawing.Size(229, 24);
             this.MaterialDetails_ToolStrip.Text = " Material Details";
             this.MaterialDetails_ToolStrip.Click += new System.EventHandler(this.MaterialDetails_ToolStrip_Click);
             // 
             // stockTransferToolStripMenuItem
             // 
             this.stockTransferToolStripMenuItem.Name = "stockTransferToolStripMenuItem";
-            this.stockTransferToolStripMenuItem.Size = new System.Drawing.Size(177, 24);
+            this.stockTransferToolStripMenuItem.Size = new System.Drawing.Size(229, 24);
             this.stockTransferToolStripMenuItem.Text = "Store Transfer";
             this.stockTransferToolStripMenuItem.Click += new System.EventHandler(this.stockTransferToolStripMenuItem_Click);
             // 
             // brachReceiveToolStripMenuItem
             // 
             this.brachReceiveToolStripMenuItem.Name = "brachReceiveToolStripMenuItem";
-            this.brachReceiveToolStripMenuItem.Size = new System.Drawing.Size(177, 24);
+            this.brachReceiveToolStripMenuItem.Size = new System.Drawing.Size(229, 24);
             this.brachReceiveToolStripMenuItem.Text = "Branch Receive";
             this.brachReceiveToolStripMenuItem.Click += new System.EventHandler(this.brachReceiveToolStripMenuItem_Click);
             // 
             // transferWatchToolStripMenuItem
             // 
             this.transferWatchToolStripMenuItem.Name = "transferWatchToolStripMenuItem";
-            this.transferWatchToolStripMenuItem.Size = new System.Drawing.Size(177, 24);
+            this.transferWatchToolStripMenuItem.Size = new System.Drawing.Size(229, 24);
             this.transferWatchToolStripMenuItem.Text = "Transfer Watch";
             this.transferWatchToolStripMenuItem.Click += new System.EventHandler(this.transferWatchToolStripMenuItem_Click);
             // 
             // stockDetailsToolStripMenuItem
             // 
             this.stockDetailsToolStripMenuItem.Name = "stockDetailsToolStripMenuItem";
-            this.stockDetailsToolStripMenuItem.Size = new System.Drawing.Size(177, 24);
+            this.stockDetailsToolStripMenuItem.Size = new System.Drawing.Size(229, 24);
             this.stockDetailsToolStripMenuItem.Text = "Stock Details";
             this.stockDetailsToolStripMenuItem.Click += new System.EventHandler(this.stockDetailsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(226, 6);
+            // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(229, 24);
+            this.viewToolStripMenuItem.Text = "View Item Model Details";
+            this.viewToolStripMenuItem.Click += new System.EventHandler(this.viewToolStripMenuItem_Click);
             // 
             // reportsToolStripMenuItem
             // 
@@ -876,5 +892,7 @@
         private System.Windows.Forms.ToolStripMenuItem miniSalesReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stockDetailsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dashboardToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
     }
 }

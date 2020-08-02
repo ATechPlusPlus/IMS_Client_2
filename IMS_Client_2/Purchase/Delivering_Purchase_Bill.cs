@@ -123,7 +123,7 @@ namespace IMS_Client_2.Purchase
         }
         private void txtSupplierBillNo_Leave(object sender, EventArgs e)
         {
-            ObjUtil.SetTextHighlightColor(sender, Color.White);
+            ObjUtil.SetTextHighlightColor(sender, System.Drawing.Color.White);
         }
         private void btnSearch_Click(object sender, EventArgs e)
         {
@@ -316,6 +316,7 @@ namespace IMS_Client_2.Purchase
             listBoxStyleNo.ClearSelected();
         }
 
+      
         private void FillColorSizeGrid()
         {
             if (cmbSizeType.SelectedValue != null)

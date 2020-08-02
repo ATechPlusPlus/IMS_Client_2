@@ -168,7 +168,7 @@ namespace IMS_Client_2
                 btnOpenCash.BackgroundImage = B_Leave;
 
                 clsUtility.DBName = "IMS_Client_2";
-                clsUtility.LoginID = 5;
+               // clsUtility.LoginID = 5;
                 //clsUtility.IsAdmin = false;
                 clsUtility.IsAdmin = true;
                 clsUtility.strProjectTitle = "IMS";
@@ -841,6 +841,12 @@ namespace IMS_Client_2
             //}
             Other_Forms.frmDashBoard frmDashBoard = new Other_Forms.frmDashBoard();
             frmDashBoard.Show();
+        }
+
+        private void viewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StockManagement.frmItemWiseModelNo frmItemWiseModelNo = new StockManagement.frmItemWiseModelNo();
+            frmItemWiseModelNo.Show();
         }
     }
 }
