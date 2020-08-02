@@ -1030,7 +1030,7 @@ namespace IMS_Client_2.Purchase
             }
             catch (Exception ex)
             {
-                clsUtility.ShowInfoMessage(ex.Message, clsUtility.strProjectTitle);
+                //clsUtility.ShowInfoMessage(ex.Message, clsUtility.strProjectTitle);
             }
         }
 

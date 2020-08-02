@@ -209,7 +209,7 @@ namespace IMS_Client_2.Purchase
                     cmbBrand.SelectedValue = dRow[0]["BrandID"];
                     cmbCountry.SelectedValue = dRow[0]["CountryID"];
                     cmbCategory.SelectedValue = dRow[0]["CategoryID"];
-                    txtItemName.Text = dRow[0]["ProductName"].ToString();
+                    txtItemName.Text = dRow[0]["ItemName"].ToString();
                     txtTotalQTYBill.Text = dRow[0]["QTY"].ToString();
 
                     cmbSizeType.SelectedValue = dRow[0]["SizeTypeID"].ToString();
