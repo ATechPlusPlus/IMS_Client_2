@@ -123,7 +123,7 @@ namespace IMS_Client_2.Purchase
 
         private void LoadData()
         {
-            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID,SupplierBillNo,SupplierID,ShipmentNo,BillDate,BillValue,TotalQTY,Discount,ForeignExp,GrandTotal,LocalValue,LocalExp,LocalBillValue,IsInvoiceDone", "BillDate");
+            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID,SupplierBillNo,SupplierID,ShipmentNo,BillDate,BillValue,TotalQTY,Discount,ForeignExp,GrandTotal,LocalValue,LocalExp,LocalBillValue,IsInvoiceDone", "BillDate DESC");
 
             if (ObjUtil.ValidateTable(dt))
             {
@@ -537,7 +537,7 @@ namespace IMS_Client_2.Purchase
                 LoadData();
                 return;
             }
-            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID,SupplierBillNo,SupplierID,ShipmentNo,BillDate,BillValue,TotalQTY,Discount,ForeignExp,GrandTotal,LocalValue,LocalExp,LocalBillValue,IsInvoiceDone", "ShipmentNo LIKE '%" + txtSearchByShipmentNo.Text + "%'", "BillDate");
+            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID,SupplierBillNo,SupplierID,ShipmentNo,BillDate,BillValue,TotalQTY,Discount,ForeignExp,GrandTotal,LocalValue,LocalExp,LocalBillValue,IsInvoiceDone", "ShipmentNo LIKE '%" + txtSearchByShipmentNo.Text + "%'", "BillDate DESC");
             if (ObjUtil.ValidateTable(dt))
             {
                 dataGridView1.DataSource = dt;
@@ -733,7 +733,7 @@ namespace IMS_Client_2.Purchase
                 LoadData();
                 return;
             }
-            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID,SupplierBillNo,SupplierID,ShipmentNo,BillDate,BillValue,TotalQTY,Discount,ForeignExp,GrandTotal,LocalValue,LocalExp,LocalBillValue,IsInvoiceDone", "SupplierBillNo LIKE '%" + txtSearchByBillNo.Text + "%'", "BillDate");
+            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID,SupplierBillNo,SupplierID,ShipmentNo,BillDate,BillValue,TotalQTY,Discount,ForeignExp,GrandTotal,LocalValue,LocalExp,LocalBillValue,IsInvoiceDone", "SupplierBillNo LIKE '%" + txtSearchByBillNo.Text + "%'", "BillDate DESC");
             if (ObjUtil.ValidateTable(dt))
             {
                 dataGridView1.DataSource = dt;

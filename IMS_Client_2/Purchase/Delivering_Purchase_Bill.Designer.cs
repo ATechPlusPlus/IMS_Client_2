@@ -194,11 +194,12 @@
             // 
             // listBoxStyleNo
             // 
+            this.listBoxStyleNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.listBoxStyleNo.FormattingEnabled = true;
             this.listBoxStyleNo.ItemHeight = 17;
             this.listBoxStyleNo.Location = new System.Drawing.Point(118, 29);
             this.listBoxStyleNo.Name = "listBoxStyleNo";
-            this.listBoxStyleNo.Size = new System.Drawing.Size(206, 55);
+            this.listBoxStyleNo.Size = new System.Drawing.Size(206, 53);
             this.listBoxStyleNo.TabIndex = 0;
             this.listBoxStyleNo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBoxModelNo_MouseClick);
             this.listBoxStyleNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBoxModelNo_KeyDown);
