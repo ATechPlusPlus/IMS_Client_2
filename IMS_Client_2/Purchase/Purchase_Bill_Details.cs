@@ -898,7 +898,7 @@ namespace IMS_Client_2.Purchase
             e.Handled = ObjUtil.IsNumeric(e);
             if (e.Handled)
             {
-                clsUtility.ShowInfoMessage("Enter Only Number...", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("Enter Only Number for QTY...", clsUtility.strProjectTitle);
             }
         }
 
@@ -907,7 +907,7 @@ namespace IMS_Client_2.Purchase
             e.Handled = ObjUtil.IsDecimal(txtRate, e);
             if (e.Handled)
             {
-                clsUtility.ShowInfoMessage("Enter Only Number...", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("Enter Only Number for Rate...", clsUtility.strProjectTitle);
             }
         }
 
@@ -916,7 +916,7 @@ namespace IMS_Client_2.Purchase
             e.Handled = ObjUtil.IsDecimal(txtSalesPrice, e);
             if (e.Handled)
             {
-                clsUtility.ShowInfoMessage("Enter Only Number...", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("Enter Only Number Sales Price...", clsUtility.strProjectTitle);
                 txtSalesPrice.Focus();
             }
         }
