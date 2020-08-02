@@ -44,7 +44,6 @@ namespace IMS_Client_2.StockManagement
             dgvProductDetails.Columns["ProductID"].Visible = false;
             dgvProductDetails.Columns["StoreID"].Visible = false;
             dgvProductDetails.Columns["BrandID"].Visible = false;
-
         }
     }
 }
