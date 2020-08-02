@@ -196,37 +196,41 @@ namespace IMS_Client_2.Purchase
 
         private void GetSelectedListBoxModelNo()
         {
-            DataRow[] dRow = dtPurchaseInvoice.Select("ModelNo= '" + listBoxStyleNo.SelectedItem + "'");
-            if (dRow.Length > 0)
+            try
             {
-                //cmbSizeType.Enabled = true;
-                pPurchaseInvoiceID = Convert.ToInt32(dRow[0]["PurchaseInvoiceID"]);
-                ID = Convert.ToInt32(dRow[0]["DeliveryPurchaseID1"]);
-                ProductID = Convert.ToInt32(dRow[0]["ProductID"]);
-                SubProductID = Convert.ToInt32(dRow[0]["SubProductID"]);
-                cmbBrand.SelectedValue = dRow[0]["BrandID"];
-                cmbCountry.SelectedValue = dRow[0]["CountryID"];
-                cmbCategory.SelectedValue = dRow[0]["CategoryID"];
-                txtItemName.Text = dRow[0]["ProductName"].ToString();
-                txtTotalQTYBill.Text = dRow[0]["QTY"].ToString();
+                DataRow[] dRow = dtPurchaseInvoice.Select("ModelNo= '" + listBoxStyleNo.SelectedItem + "'");
+                if (dRow.Length > 0)
+                {
+                    //cmbSizeType.Enabled = true;
+                    pPurchaseInvoiceID = Convert.ToInt32(dRow[0]["PurchaseInvoiceID"]);
+                    ID = Convert.ToInt32(dRow[0]["DeliveryPurchaseID1"]);
+                    ProductID = Convert.ToInt32(dRow[0]["ProductID"]);
+                    SubProductID = Convert.ToInt32(dRow[0]["SubProductID"]);
+                    cmbBrand.SelectedValue = dRow[0]["BrandID"];
+                    cmbCountry.SelectedValue = dRow[0]["CountryID"];
+                    cmbCategory.SelectedValue = dRow[0]["CategoryID"];
+                    txtItemName.Text = dRow[0]["ProductName"].ToString();
+                    txtTotalQTYBill.Text = dRow[0]["QTY"].ToString();
 
-                cmbSizeType.SelectedValue = dRow[0]["SizeTypeID"].ToString();
-                if (cmbSizeType.SelectedValue != null)
-                {
-                    FillColorSizeGrid();
+                    cmbSizeType.SelectedValue = dRow[0]["SizeTypeID"].ToString();
+                    if (cmbSizeType.SelectedValue != null)
+                    {
+                        FillColorSizeGrid();
+                    }
+                    if (dRow[0]["StoreID"] != DBNull.Value && dRow[0]["StoreID"].ToString() != "0")
+                    {
+                        cmbStore.SelectedValue = dRow[0]["StoreID"].ToString();
+                    }
+                    Load_Color_SizeData();
+                    if (ObjUtil.ValidateTable((DataTable)dgvQtycolor.DataSource))
+                    {
+                        CalcTotalColorQTY();
+                    }
                 }
-                if (dRow[0]["StoreID"] != DBNull.Value && dRow[0]["StoreID"].ToString() != "0")
-                {
-                    cmbStore.SelectedValue = dRow[0]["StoreID"].ToString();
-                }
-                Load_Color_SizeData();
-                if (ObjUtil.ValidateTable((DataTable)dgvQtycolor.DataSource))
-                {
-                    CalcTotalColorQTY();
-                }
+                else
+                    cmbSizeType.Enabled = false;
             }
-            else
-                cmbSizeType.Enabled = false;
+            catch { }
         }
         private void dgvQtycolor_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
@@ -314,24 +318,31 @@ namespace IMS_Client_2.Purchase
 
         private void FillColorSizeGrid()
         {
-            dtSize = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.SizeMaster", "SizeID,Size,SizeTypeID", "ISNULL(ActiveStatus,1) = 1 AND SizeTypeID = " + cmbSizeType.SelectedValue, null);
-            if (ObjUtil.ValidateTable(dtSize))
+            if (cmbSizeType.SelectedValue != null)
             {
-                InitItemTable();
-                dgvQtycolor.Enabled = true;
-                for (int i = 0; i < dtSize.Rows.Count; i++)
+                dtSize = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.SizeMaster", "SizeID,Size,SizeTypeID", "ISNULL(ActiveStatus,1) = 1 AND SizeTypeID = " + cmbSizeType.SelectedValue, null);
+                if (ObjUtil.ValidateTable(dtSize))
                 {
-                    dtPurchaseQTYColor.Columns.Add(dtSize.Rows[i]["Size"].ToString());
+                    InitItemTable();
+                    dgvQtycolor.Enabled = true;
+                    for (int i = 0; i < dtSize.Rows.Count; i++)
+                    {
+                        dtPurchaseQTYColor.Columns.Add(dtSize.Rows[i]["Size"].ToString());
+                    }
+                    dtPurchaseQTYColor.Columns.Add("Total", typeof(int));
+                    if (dtPurchaseQTYColor.Rows.Count <= 0)
+                    {
+                        DataRow dRow = dtPurchaseQTYColor.NewRow();
+                        dtPurchaseQTYColor.Rows.Add(dRow);
+                    }
+                    dtPurchaseQTYColor.AcceptChanges();
+                    dgvQtycolor.DataSource = dtPurchaseQTYColor;
+                    //Load_Color_SizeData();
                 }
-                dtPurchaseQTYColor.Columns.Add("Total", typeof(int));
-                if (dtPurchaseQTYColor.Rows.Count <= 0)
-                {
-                    DataRow dRow = dtPurchaseQTYColor.NewRow();
-                    dtPurchaseQTYColor.Rows.Add(dRow);
-                }
-                dtPurchaseQTYColor.AcceptChanges();
-                dgvQtycolor.DataSource = dtPurchaseQTYColor;
-                //Load_Color_SizeData();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("Please Select Size Type..",clsUtility.strProjectTitle);
             }
         }
         private bool Validateform()
