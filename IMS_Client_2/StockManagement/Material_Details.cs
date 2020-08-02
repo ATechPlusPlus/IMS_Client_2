@@ -324,42 +324,7 @@ namespace IMS_Client_2.StockManagement
             }
         }
 
-        private void GetProductImage(string ProductID)
-        {
-            string ImageID = "";
-            DataTable dtPhotoNumber = ObjDAL.ExecuteSelectStatement("SELECT Photo FROM " + clsUtility.DBName + ".[dbo].[ProductMaster] WITH(NOLOCK) WHERE ProductID=" + ProductID + "");
-            if (ObjUtil.ValidateTable(dtPhotoNumber))
-            {
-                ImageID = dtPhotoNumber.Rows[0]["Photo"].ToString();
-            }
-            else
-            {
-                PicItem.Image = null;
-            }
-            DataTable dtImagePath = ObjDAL.ExecuteSelectStatement(" SELECT ImagePath, Extension FROM " + clsUtility.DBName + ".dbo.DefaultStoreSetting WITH(NOLOCK) WHERE MachineName='" + Environment.MachineName + "'");
-            if (ObjUtil.ValidateTable(dtImagePath))
-            {
-                if (dtImagePath.Rows[0]["ImagePath"] != DBNull.Value)
-                {
-                    string ImgPath = dtImagePath.Rows[0]["ImagePath"].ToString();
-                    string extension = dtImagePath.Rows[0]["Extension"].ToString();
-
-                    string imgFile = ImgPath + "//" + ImageID + extension;
-                    if (File.Exists(imgFile))
-                    {
-                        PicItem.Image = Image.FromFile(imgFile);
-                    }
-                    else
-                    {
-                        PicItem.Image = null;
-                    }
-                }
-                else
-                {
-                    clsUtility.ShowInfoMessage("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
-                }
-            }
-        }
+       
 
         private void dgvProductDetails_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
@@ -425,7 +390,7 @@ namespace IMS_Client_2.StockManagement
 
             if (dgvProductDetails.SelectedRows.Count > 0)
             {
-                GetProductImage(dgvProductDetails.SelectedRows[0].Cells["ProductID"].Value.ToString());
+               // GetProductImage(dgvProductDetails.SelectedRows[0].Cells["ProductID"].Value.ToString());
             }
         }
 

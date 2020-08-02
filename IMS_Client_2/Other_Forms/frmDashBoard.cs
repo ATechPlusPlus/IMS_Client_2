@@ -156,6 +156,22 @@ namespace IMS_Client_2.Other_Forms
 
 
                     }
+                    else if (index == 5) // Model No
+                    {
+                        reportQuery = " SELECT  v2.ModelNo, SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
+                                      " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
+                                       " ON v1.id = v2.InvoiceID " +
+                                       " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
+                                       " Group by  v2.ModelNo";
+
+                        TotalQTY_Rate = "  select SUM(QTY) as TotalQTY,SUM(Rate) as TotalRate from (  SELECT   v2.ModelNo, SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
+                                                             " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
+                                                              " ON v1.id = v2.InvoiceID " +
+                                                              " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
+                                                              " Group by  v2.ModelNo ) as tb";
+
+
+                    }
                     string TotalQTYValue = "0";
                     string TotalRateValue = "0";
 

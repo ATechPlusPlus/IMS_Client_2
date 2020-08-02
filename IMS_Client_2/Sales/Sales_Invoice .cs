@@ -387,10 +387,10 @@ namespace IMS_Client_2.Sales
             {
             }
         }
-        private Image GetProductPhoto(int ProductID)
+        private Image GetProductPhoto(int SubProductID)
         {
             Image imgProduct = null;
-            DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT Photo FROM " + clsUtility.DBName + ".dbo.ProductMaster WHERE ProductID=" + ProductID);
+            DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT Photo FROM " + clsUtility.DBName + ".dbo.tblProductWiseModelNo WHERE SubProductID=" + SubProductID);
             if (ObjUtil.ValidateTable(dt))
             {
                 if (dt.Rows[0]["Photo"] != DBNull.Value)
@@ -516,12 +516,12 @@ namespace IMS_Client_2.Sales
                     if (IsItemExist(barCode))
                     {
                         UpdateQTYByOne(barCode.ToString(), Convert.ToDecimal(rate));
-                        picProduct.Image = GetProductPhoto(Convert.ToInt32(pID));
+                        picProduct.Image = GetProductPhoto(Convert.ToInt32(subProductID));
                     }
                     else
                     {
                         AddRowToItemDetails(pID, name, qty, rate, total.ToString(), barCode, SizeID, Size, ColorID, ColorName, subProductID);
-                        picProduct.Image = GetProductPhoto(Convert.ToInt32(pID));
+                        picProduct.Image = GetProductPhoto(Convert.ToInt32(subProductID));
 
                     }
                     txtProductID.Clear();
@@ -544,37 +544,7 @@ namespace IMS_Client_2.Sales
             }
         }
 
-        private void GetItemDetailsBy_Non_BarCode(string pID, string name, string rate, string barCode, string SizeID, string Size, string ColorID, string ColorName)
-        {
-            string qty = "1";
-            decimal total = Convert.ToDecimal(rate) * Convert.ToDecimal(qty);
-
-            if (CheckProductQTY_Non_BarCode(pID, SizeID, ColorID, Convert.ToDecimal(qty)))
-            {
-                // if Item already there in the grid, then just increase the QTY
-                if (IsItemExist_NonBarCode(pID, ColorID, SizeID))
-                {
-                    UpdateQTYByOne_NonBarCode(pID, ColorID, SizeID, Convert.ToDecimal(rate));
-                    picProduct.Image = GetProductPhoto(Convert.ToInt32(pID));
-                }
-                else
-                {
-                    AddRowToItemDetails(pID, name, qty, rate, total.ToString(), barCode, SizeID, Size, ColorID, ColorName,"");
-                    picProduct.Image = GetProductPhoto(Convert.ToInt32(pID));
-                }
-                txtProductID.Clear();
-                txtBarCode.Clear();
-                txtColorID.Clear();
-                txtSizeID.Clear();
-                CalculateGrandTotal();
-                dgvProductDetails.ClearSelection();
-                txtBarCode.Focus();
-            }
-            else
-            {
-                clsUtility.ShowInfoMessage("No QTY avaiable for the Product : " + txtBarCode.Text, clsUtility.strProjectTitle);
-            }
-        }
+        
         private void dgvProductDetails_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             ObjUtil.SetRowNumber(dgvProductDetails);
@@ -709,12 +679,13 @@ namespace IMS_Client_2.Sales
                     dgvProductDetails.Rows.RemoveAt(e.RowIndex);
                     dgvProductDetails.EndEdit();
                     CalculateGrandTotal();
+                    picProduct.Image = null;
                 }
             }
             else
             {
-                int _PID = Convert.ToInt32(dgvProductDetails.Rows[e.RowIndex].Cells["ProductID"].Value);
-                picProduct.Image = GetProductPhoto(Convert.ToInt32(_PID));
+                int SubID = Convert.ToInt32(dgvProductDetails.Rows[e.RowIndex].Cells["SubProductID"].Value);
+                picProduct.Image = GetProductPhoto(Convert.ToInt32(SubID));
             }
         }
 
@@ -1133,12 +1104,12 @@ namespace IMS_Client_2.Sales
                     if (IsReplaceItemExist(barCode))
                     {
                         UpdateReplaceQTYByOne(barCode.ToString(), Convert.ToDecimal(rate));
-                        picProduct.Image = GetProductPhoto(Convert.ToInt32(pID));
+                        picProduct.Image = GetProductPhoto(Convert.ToInt32(SubProductID));
                     }
                     else
                     {
                         AddRowToReplaceItemDetails(pID, name, qty, rate, total.ToString(), barCode, SizeID, Size, ColorID, ColorName, SubProductID);
-                        picProduct.Image = GetProductPhoto(Convert.ToInt32(pID));
+                        picProduct.Image = GetProductPhoto(Convert.ToInt32(SubProductID));
 
                     }
                     txtProductID.Clear();
@@ -1328,12 +1299,13 @@ namespace IMS_Client_2.Sales
                     dgvReplaceReturn.Rows.RemoveAt(e.RowIndex);
                     dgvReplaceReturn.EndEdit();
                      CalculateGrandTotal();
+                    picProduct.Image = null;
                 }
             }
             else
             {
-                int _PID = Convert.ToInt32(dgvReplaceReturn.Rows[e.RowIndex].Cells[0].Value);
-                picProduct.Image = GetProductPhoto(Convert.ToInt32(_PID));
+                int _SubPID = Convert.ToInt32(dgvReplaceReturn.Rows[e.RowIndex].Cells["SubProductID"].Value);
+                picProduct.Image = GetProductPhoto(Convert.ToInt32(_SubPID));
             }
         }
 
