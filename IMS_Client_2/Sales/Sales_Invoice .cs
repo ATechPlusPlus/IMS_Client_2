@@ -743,25 +743,32 @@ namespace IMS_Client_2.Sales
                 return false;
             }
             // if only saving the dataa
-            if (isSave==false)
+            // as per salman, -ve should be printed.
+            //if (isSave==false)
+            //{
+            //    if (txtGrandTotal.Text.Trim().Length != 0)
+            //    {
+            //        if (Convert.ToDecimal(txtGrandTotal.Text) <= 0)
+            //        {
+            //            clsUtility.ShowInfoMessage("You can not print invoice for negative grand total.", clsUtility.strProjectTitle);
+            //            return false;
+            //        }
+            //    }
+            //}
+            if (!IsReplaceReturnMode)  // check this only in new mode. dont check if replace
             {
-                if (txtGrandTotal.Text.Trim().Length != 0)
+              
+                if (isSave == false)
                 {
-                    if (Convert.ToDecimal(txtGrandTotal.Text) <= 0)
+
+                    if (!ValidateGrandTotal())
                     {
-                        clsUtility.ShowInfoMessage("You can not print invoice for negative grand total.", clsUtility.strProjectTitle);
+                        clsUtility.ShowInfoMessage("Cash and Credit amount must be equal to Grand Total.", clsUtility.strProjectTitle);
                         return false;
                     }
                 }
             }
-            if (isSave==false)
-            {
-                if (!ValidateGrandTotal())
-                {
-                    clsUtility.ShowInfoMessage("Cash and Credit amount must be equal to Grand Total.", clsUtility.strProjectTitle);
-                    return false;
-                }
-            }
+            
            
             return true;
         }
