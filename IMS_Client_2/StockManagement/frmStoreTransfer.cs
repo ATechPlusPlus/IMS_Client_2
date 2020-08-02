@@ -147,10 +147,10 @@ namespace IMS_Client_2.StockManagement
                         string ColorID = dgvProductDetails.Rows[i].Cells["ColorID"].Value.ToString();
                         string SizeID = dgvProductDetails.Rows[i].Cells["SizeID"].Value.ToString();
                         string BarcodeNo = dgvProductDetails.Rows[i].Cells["BarcodeNo"].Value.ToString();
-                        string SubProductID = dgvProductDetails.Rows[i].Cells["BarcodeNo"].Value.ToString();
+                        string SubProductID = dgvProductDetails.Rows[i].Cells["SubProductID"].Value.ToString();
 
                         ObjCon.SetColumnData("StoreBillDetailsID", SqlDbType.Int, TransferID);
-
+                        
                         ObjCon.SetColumnData("ProductID", SqlDbType.Int, ProductID);
                         ObjCon.SetColumnData("Barcode", SqlDbType.NVarChar, BarcodeNo);
                         ObjCon.SetColumnData("SubProductID", SqlDbType.Int, SubProductID);
@@ -188,7 +188,7 @@ namespace IMS_Client_2.StockManagement
                     string ColorID = dgvProductDetails.Rows[i].Cells["ColorID"].Value.ToString();
                     string SizeID = dgvProductDetails.Rows[i].Cells["SizeID"].Value.ToString();
                     string BarcodeNo = dgvProductDetails.Rows[i].Cells["BarcodeNo"].Value.ToString();
-                    string SubProductID = dgvProductDetails.Rows[i].Cells["BarcodeNo"].Value.ToString();
+                    string SubProductID = dgvProductDetails.Rows[i].Cells["SubProductID"].Value.ToString();
                     ObjCon.SetColumnData("StoreBillDetailsID", SqlDbType.Int, Bill_ID);
 
                     ObjCon.SetColumnData("ProductID", SqlDbType.Int, ProductID);
@@ -585,6 +585,8 @@ namespace IMS_Client_2.StockManagement
             //    return;
             //}
             SearchBill();
+            cmdFrom.Enabled = false;
+            cmdTo.Enabled = false;
         }
         string Bill_ID = "";
         private void SearchBill()
@@ -604,11 +606,22 @@ namespace IMS_Client_2.StockManagement
                     lblBillStatus.Text = dtDetails.Rows[0]["BillStatus"].ToString();
                     dtpSalesDate.Value = Convert.ToDateTime(dtDetails.Rows[0]["BillDate"]);
 
-                    string strItemQuery = "select ProductID,(select ProductName from ProductMaster where ProductID=ts.ProductID) as ProductName, BillQTY,Rate,Total,Barcode,SizeID," +
-                                          " (select Size from SizeMaster where SizeID = ts.SizeID) as Size,ColorID," +
-                                          " (select ColorName from ColorMaster where ColorID = ts.ColorID) as ColorName," +
-                                           "(select QTY from ProductStockColorSizeMaster where StoreID = " + cmdFrom.SelectedValue + " and BarcodeNo = ts.Barcode) as StockQTY" +
-                                          " from tblStoreTransferItemDetails ts where StoreBillDetailsID = " + Bill_ID;
+                    //string strItemQuery = "select ProductID,(select ProductName from ProductMaster where ProductID=ts.ProductID) as ProductName, BillQTY,Rate,Total,Barcode,SizeID," +
+                    //                      " (select Size from SizeMaster where SizeID = ts.SizeID) as Size,ColorID," +
+                    //                      " (select ColorName from ColorMaster where ColorID = ts.ColorID) as ColorName," +
+                    //                       "(select QTY from ProductStockColorSizeMaster where StoreID = " + cmdFrom.SelectedValue + " and BarcodeNo = ts.Barcode) as StockQTY" +
+                    //                      " from tblStoreTransferItemDetails ts where StoreBillDetailsID = " + Bill_ID;
+
+
+                    string strItemQuery = "select sti.ProductID, ps.ProductName, sti.BillQTY,sti.Rate,sti.Total,sti.Barcode,sti.SizeID,sm.Size, sti.ColorID, col.ColorName,psm.QTY as StockQTY, psm.SubProductID from tblStoreTransferItemDetails sti join " +
+                                        " ProductMaster ps on sti.ProductID = ps.ProductID " +
+                                        " join ColorMaster as col on sti.ColorID = col.ColorID " +
+                                        " join SizeMaster as sm on sti.SizeID = sm.SizeID " +
+                                        " join ProductStockColorSizeMaster psm on sti.Barcode = psm.BarcodeNo " +
+                                        " where psm.StoreID = "+ cmdFrom.SelectedValue + " and psm.BarcodeNo = sti.Barcode " +
+                                        " AND sti.StoreBillDetailsID =  "+ Bill_ID;
+
+
 
                     DataTable dtOldBill = ObjCon.ExecuteSelectStatement(strItemQuery);
                     if (ObjUtil.ValidateTable(dtOldBill))
@@ -628,8 +641,9 @@ namespace IMS_Client_2.StockManagement
                             string ColorName = dtOldBill.Rows[i]["ColorName"].ToString();
                             string total = dtOldBill.Rows[i]["Total"].ToString();
                             string StockQTY = dtOldBill.Rows[i]["StockQTY"].ToString();
+                            string SubProductID = dtOldBill.Rows[i]["SubProductID"].ToString();
 
-                            AddRowToItemDetails(pID, name, qty, rate, total.ToString(), barCode, SizeID, Size, ColorID, ColorName, StockQTY,"");
+                            AddRowToItemDetails(pID, name, qty, rate, total.ToString(), barCode, SizeID, Size, ColorID, ColorName, StockQTY, SubProductID);
                         }
                         CalculateGrandTotal();
                     }
