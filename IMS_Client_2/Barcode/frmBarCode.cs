@@ -945,7 +945,7 @@ namespace IMS_Client_2.Barcode
 
                         for (int Q = 0; Q < numericUpDown1.Value; Q++)
                         {
-                            doc.Print();
+                       //     doc.Print();
                         }
                     }
                 }

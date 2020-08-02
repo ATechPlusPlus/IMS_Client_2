@@ -147,18 +147,20 @@ namespace IMS_Client_2.StockManagement
                         string ColorID = dgvProductDetails.Rows[i].Cells["ColorID"].Value.ToString();
                         string SizeID = dgvProductDetails.Rows[i].Cells["SizeID"].Value.ToString();
                         string BarcodeNo = dgvProductDetails.Rows[i].Cells["BarcodeNo"].Value.ToString();
+                        string SubProductID = dgvProductDetails.Rows[i].Cells["BarcodeNo"].Value.ToString();
 
                         ObjCon.SetColumnData("StoreBillDetailsID", SqlDbType.Int, TransferID);
 
                         ObjCon.SetColumnData("ProductID", SqlDbType.Int, ProductID);
                         ObjCon.SetColumnData("Barcode", SqlDbType.NVarChar, BarcodeNo);
+                        ObjCon.SetColumnData("SubProductID", SqlDbType.Int, SubProductID);
                         ObjCon.SetColumnData("Rate", SqlDbType.Decimal, Rate);
                         ObjCon.SetColumnData("BillQTY", SqlDbType.Int, QTY);
                         ObjCon.SetColumnData("ColorID", SqlDbType.Int, ColorID);
                         ObjCon.SetColumnData("SizeID", SqlDbType.Int, SizeID);
                         ObjCon.SetColumnData("Total", SqlDbType.Decimal, Total);
                         ObjCon.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
-
+                        
                         ObjCon.InsertData(clsUtility.DBName + ".dbo.tblStoreTransferItemDetails", false);
                     }
                     clsUtility.ShowInfoMessage("Item has been transferd to selected store.", clsUtility.strProjectTitle);
@@ -186,11 +188,12 @@ namespace IMS_Client_2.StockManagement
                     string ColorID = dgvProductDetails.Rows[i].Cells["ColorID"].Value.ToString();
                     string SizeID = dgvProductDetails.Rows[i].Cells["SizeID"].Value.ToString();
                     string BarcodeNo = dgvProductDetails.Rows[i].Cells["BarcodeNo"].Value.ToString();
-
+                    string SubProductID = dgvProductDetails.Rows[i].Cells["BarcodeNo"].Value.ToString();
                     ObjCon.SetColumnData("StoreBillDetailsID", SqlDbType.Int, Bill_ID);
 
                     ObjCon.SetColumnData("ProductID", SqlDbType.Int, ProductID);
                     ObjCon.SetColumnData("Barcode", SqlDbType.NVarChar, BarcodeNo);
+                    ObjCon.SetColumnData("SubProductID", SqlDbType.Int, SubProductID);
                     ObjCon.SetColumnData("Rate", SqlDbType.Decimal, Rate);
                     ObjCon.SetColumnData("BillQTY", SqlDbType.Int, QTY);
                     ObjCon.SetColumnData("ColorID", SqlDbType.Int, ColorID);
@@ -241,6 +244,8 @@ namespace IMS_Client_2.StockManagement
             dtItemDetails.Columns.Add("Adj_Amount");
             dtItemDetails.Columns.Add("Total");
             dtItemDetails.Columns.Add("Delete");
+            dtItemDetails.Columns.Add("SubProductID");
+            
         }
         private void UpdateQTYByOne(string barCode, decimal rate)
         {
@@ -293,7 +298,7 @@ namespace IMS_Client_2.StockManagement
         }
 
         private void AddRowToItemDetails(string productID, string name, string qty, string rate, string total,
-           string BarCode, string SizeID, string Size, string ColorID, string Color, string stockQTY)
+           string BarCode, string SizeID, string Size, string ColorID, string Color, string stockQTY, string SubProductID)
         {
             DataRow dRow = dtItemDetails.NewRow();
             dRow["ProductID"] = productID;
@@ -308,7 +313,8 @@ namespace IMS_Client_2.StockManagement
             dRow["SizeID"] = SizeID;
             dRow["Size"] = Size;
             dRow["BarcodeNo"] = BarCode;
-
+            dRow["SubProductID"] = SubProductID;
+            
             dtItemDetails.Rows.Add(dRow);
             dtItemDetails.AcceptChanges();
 
@@ -331,6 +337,7 @@ namespace IMS_Client_2.StockManagement
                 string ColorID = dt.Rows[0]["ColorID"].ToString();
                 string ColorName = dt.Rows[0]["ColorName"].ToString();
                 decimal total = Convert.ToDecimal(rate) * Convert.ToDecimal(qty);
+                string SubProductID= dt.Rows[0]["SubProductID"].ToString();
 
                 // if Item already there in the grid, then just increase the QTY
                 if (IsItemExist(barCode))
@@ -340,7 +347,7 @@ namespace IMS_Client_2.StockManagement
                 }
                 else
                 {
-                    AddRowToItemDetails(pID, name, qty, rate, total.ToString(), barCode, SizeID, Size, ColorID, ColorName, stockQTY);
+                    AddRowToItemDetails(pID, name, qty, rate, total.ToString(), barCode, SizeID, Size, ColorID, ColorName, stockQTY, SubProductID);
                     picProduct.Image = GetProductPhoto(Convert.ToInt32(pID));
                 }
 
@@ -404,9 +411,11 @@ namespace IMS_Client_2.StockManagement
             dgvProductDetails.Columns["SizeiD"].Visible = false;
             dgvProductDetails.Columns["OIRate"].Visible = false;
             dgvProductDetails.Columns["Adj_Amount"].Visible = false;
+            dgvProductDetails.Columns["SubProductID"].Visible = false;
+            
             ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill, System.Drawing.Color.White);
             dgvProductDetails.ClearSelection();
-
+            
            
                 dgvProductDetails.RowsDefaultCellStyle.SelectionBackColor = System.Drawing.Color.White;
                 dgvProductDetails.RowsDefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
@@ -620,7 +629,7 @@ namespace IMS_Client_2.StockManagement
                             string total = dtOldBill.Rows[i]["Total"].ToString();
                             string StockQTY = dtOldBill.Rows[i]["StockQTY"].ToString();
 
-                            AddRowToItemDetails(pID, name, qty, rate, total.ToString(), barCode, SizeID, Size, ColorID, ColorName, StockQTY);
+                            AddRowToItemDetails(pID, name, qty, rate, total.ToString(), barCode, SizeID, Size, ColorID, ColorName, StockQTY,"");
                         }
                         CalculateGrandTotal();
                     }
