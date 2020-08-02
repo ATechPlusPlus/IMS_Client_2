@@ -101,6 +101,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.branchesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -412,6 +413,7 @@
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.branchesToolStripMenuItem,
             this.MaterialDetails_ToolStrip,
             this.stockTransferToolStripMenuItem,
             this.brachReceiveToolStripMenuItem,
@@ -430,6 +432,7 @@
             this.MaterialDetails_ToolStrip.Name = "MaterialDetails_ToolStrip";
             this.MaterialDetails_ToolStrip.Size = new System.Drawing.Size(229, 24);
             this.MaterialDetails_ToolStrip.Text = " Material Details";
+            this.MaterialDetails_ToolStrip.Visible = false;
             this.MaterialDetails_ToolStrip.Click += new System.EventHandler(this.MaterialDetails_ToolStrip_Click);
             // 
             // stockTransferToolStripMenuItem
@@ -780,6 +783,13 @@
             this.label9.TabIndex = 28;
             this.label9.Text = "Today\'s Cash Box";
             // 
+            // branchesToolStripMenuItem
+            // 
+            this.branchesToolStripMenuItem.Name = "branchesToolStripMenuItem";
+            this.branchesToolStripMenuItem.Size = new System.Drawing.Size(229, 24);
+            this.branchesToolStripMenuItem.Text = "Branches Shorting Sales";
+            this.branchesToolStripMenuItem.Click += new System.EventHandler(this.branchesToolStripMenuItem_Click);
+            // 
             // frmHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -894,5 +904,6 @@
         private System.Windows.Forms.ToolStripMenuItem dashboardToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem branchesToolStripMenuItem;
     }
 }

@@ -168,9 +168,9 @@ namespace IMS_Client_2
                 btnOpenCash.BackgroundImage = B_Leave;
 
                 clsUtility.DBName = "IMS_Client_2";
-                clsUtility.LoginID = 1;
+                //clsUtility.LoginID = 5;
                 //clsUtility.IsAdmin = false;
-                clsUtility.IsAdmin = true;
+                //clsUtility.IsAdmin = true;
                 clsUtility.strProjectTitle = "IMS";
                 if (clsUtility.LoginID > 0)
                 {
@@ -845,8 +845,28 @@ namespace IMS_Client_2
 
         private void viewToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //if (clsFormRights.HasFormRight(clsFormRights.Forms.frmItemWiseModelNo) || clsUtility.IsAdmin)
+            //{
+            //}
+            //else
+            //{
+            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            //}
             StockManagement.frmItemWiseModelNo frmItemWiseModelNo = new StockManagement.frmItemWiseModelNo();
             frmItemWiseModelNo.Show();
+        }
+
+        private void branchesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //if (clsFormRights.HasFormRight(clsFormRights.Forms.frmBranchSaleShorting) || clsUtility.IsAdmin)
+            //{
+            //}
+            //else
+            //{
+            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            //}
+            StockManagement.frmBranchSaleShorting Obj = new StockManagement.frmBranchSaleShorting();
+            Obj.Show();
         }
     }
 }
