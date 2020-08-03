@@ -278,9 +278,15 @@ namespace IMS_Client_2.Purchase
                     }
                 }
             }
+            catch (InvalidOperationException)
+            {
+            }
+            catch (IndexOutOfRangeException)
+            {
+            }
             catch (Exception ex)
             {
-                //clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
+                clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
             }
         }
 

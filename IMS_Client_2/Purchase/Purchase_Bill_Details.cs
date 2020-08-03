@@ -1028,9 +1028,13 @@ namespace IMS_Client_2.Purchase
                     CalculateSubTotal();
                 }
             }
-            catch (Exception ex)
+            catch(InvalidOperationException)
             {
                 //clsUtility.ShowInfoMessage(ex.Message, clsUtility.strProjectTitle);
+            }
+            catch (Exception ex)
+            {
+                clsUtility.ShowInfoMessage(ex.Message, clsUtility.strProjectTitle);
             }
         }
 

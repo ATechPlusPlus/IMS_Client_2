@@ -42,6 +42,8 @@
             frmStockDetails = 43,
             frmPettyCashExpReport = 44,
             tblMiniSalesReport = 45,
+            frmPurchaseDetails=46,
+            frmReceivedBranchTransfer=47,
             frmDatabaseMaintenance = 7///commented
         }
         public enum Operation
