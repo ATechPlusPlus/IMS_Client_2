@@ -186,7 +186,6 @@ namespace IMS_Client_2.Masters
                         ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
                         if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.StoreMaster", "StoreID = " + ID + "") > 0)
                         {
-                            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate, clsUtility.IsAdmin);
                             ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate);
                             clsUtility.ShowInfoMessage("'" + txtStoreName.Text + "' Store is Updated", clsUtility.strProjectTitle);
                             LoadData();
@@ -226,7 +225,6 @@ namespace IMS_Client_2.Masters
                         ClearAll();
                         LoadData();
                         grpStore.Enabled = false;
-                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
                         ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
                     }
                     else
@@ -353,10 +351,7 @@ namespace IMS_Client_2.Masters
             btnDelete.BackgroundImage = B_Leave;
             btnCancel.BackgroundImage = B_Leave;
 
-            //clsUtility.IsAdmin = true;//removed
-
             ObjUtil.RegisterCommandButtons(btnAdd, btnSave, btnEdit, btnUpdate, btnDelete, btnCancel);
-            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.Beginning, clsUtility.IsAdmin);
             ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.Beginning);
 
             LoadData();

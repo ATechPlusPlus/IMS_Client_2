@@ -117,9 +117,9 @@
             this.radioButton1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton1.Location = new System.Drawing.Point(21, 78);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(125, 21);
+            this.radioButton1.Size = new System.Drawing.Size(118, 21);
             this.radioButton1.TabIndex = 236;
-            this.radioButton1.Text = "By Store/Shope :";
+            this.radioButton1.Text = "By Store/Shop :";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // textBox1
@@ -148,9 +148,9 @@
             this.rdSearchByBarCode.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdSearchByBarCode.Location = new System.Drawing.Point(378, 24);
             this.rdSearchByBarCode.Name = "rdSearchByBarCode";
-            this.rdSearchByBarCode.Size = new System.Drawing.Size(91, 21);
+            this.rdSearchByBarCode.Size = new System.Drawing.Size(109, 21);
             this.rdSearchByBarCode.TabIndex = 230;
-            this.rdSearchByBarCode.Text = "By Model :";
+            this.rdSearchByBarCode.Text = "By ModelNo :";
             this.rdSearchByBarCode.UseVisualStyleBackColor = true;
             // 
             // rdSearchByStore
@@ -159,9 +159,9 @@
             this.rdSearchByStore.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdSearchByStore.Location = new System.Drawing.Point(17, 27);
             this.rdSearchByStore.Name = "rdSearchByStore";
-            this.rdSearchByStore.Size = new System.Drawing.Size(140, 21);
+            this.rdSearchByStore.Size = new System.Drawing.Size(121, 21);
             this.rdSearchByStore.TabIndex = 197;
-            this.rdSearchByStore.Text = "By Product Name :";
+            this.rdSearchByStore.Text = "By Item Name :";
             this.rdSearchByStore.UseVisualStyleBackColor = true;
             // 
             // rdShowAll

@@ -101,7 +101,6 @@ namespace IMS_Client_2.Purchase
         {
             ObjUtil.SetRowNumber(dataGridView1);
             ObjUtil.SetDataGridProperty(dataGridView1, DataGridViewAutoSizeColumnsMode.ColumnHeader);
-            //ObjUtil.SetDataGridProperty(dataGridView1, DataGridViewAutoSizeColumnsMode.Fill);
             dataGridView1.Columns["ProductID"].Visible = false;
             dataGridView1.Columns["Photo"].Visible = false;
             dataGridView1.Columns["SupplierID"].Visible = false;

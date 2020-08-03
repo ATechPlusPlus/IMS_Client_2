@@ -213,7 +213,7 @@ namespace IMS_Client_2.Masters
                 DialogResult d = MessageBox.Show("Are you sure want to delete '" + txtCustomerName.Text + "' Customer ", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (d == DialogResult.Yes)
                 {
-                    if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.CustomerMaster", "Name='" + txtCustomerName.Text.Trim() + "'") > 0)
+                    if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.CustomerMaster", "CustomerID = " + ID + "") > 0)
                     {
                         clsUtility.ShowInfoMessage("'" + txtCustomerName.Text + "' Customer is deleted  ", clsUtility.strProjectTitle);
                         ClearAll();
@@ -264,7 +264,6 @@ namespace IMS_Client_2.Masters
             {
                 try
                 {
-                    //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterGridClick, clsUtility.IsAdmin);
                     ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterGridClick);
                     ID = Convert.ToInt32(dgvCustomerMaster.SelectedRows[0].Cells["CustomerID"].Value);
                     txtCustomerName.Text = dgvCustomerMaster.SelectedRows[0].Cells["Name"].Value.ToString();

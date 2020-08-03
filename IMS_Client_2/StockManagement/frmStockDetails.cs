@@ -75,7 +75,6 @@ namespace IMS_Client_2.StockManagement
 
         private void frmStockDetails_Load(object sender, EventArgs e)
         {
-            //LoadData();
             FillColorData();
             FillCategoryData();
         }
@@ -83,7 +82,6 @@ namespace IMS_Client_2.StockManagement
         private void dgvStockDetails_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             ObjUtil.SetRowNumber(dgvStockDetails);
-            //ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.ColumnHeader);
             ObjUtil.SetDataGridProperty(dgvStockDetails, DataGridViewAutoSizeColumnsMode.DisplayedCells);
             if (dgvStockDetails.Columns.Contains("ProductID"))
             {
@@ -223,8 +221,6 @@ namespace IMS_Client_2.StockManagement
 
         private void SearchByProductID()
         {
-            //DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Material_Details " + txtProductID.Text + ",NULL");
-
             ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, txtProductID.Text.Trim(), clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("BarcodeNo", SqlDbType.BigInt, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
@@ -255,8 +251,6 @@ namespace IMS_Client_2.StockManagement
 
         private void SearchByColorID()
         {
-            //DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Material_Details " + txtProductID.Text + ",NULL");
-
             ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("BarcodeNo", SqlDbType.BigInt, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, cmbColor.SelectedValue, clsConnection_DAL.ParamType.Input);
@@ -287,8 +281,6 @@ namespace IMS_Client_2.StockManagement
 
         private void SearchByBarCodeNo()
         {
-            //DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Material_Details " + txtProductID.Text + ",NULL");
-
             ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("BarcodeNo", SqlDbType.BigInt, txtSearchByBarcode.Text.Trim(), clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
@@ -470,8 +462,6 @@ namespace IMS_Client_2.StockManagement
 
         private void SearchByCategoryID()
         {
-            //DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Material_Details " + txtProductID.Text + ",NULL");
-
             ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("BarcodeNo", SqlDbType.BigInt, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);

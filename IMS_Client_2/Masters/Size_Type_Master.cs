@@ -80,10 +80,9 @@ namespace IMS_Client_2.Masters
 
         private void LoadData()
         {
-            ObjUtil.SetDataGridProperty(dgvSizeTypeMaster, DataGridViewAutoSizeColumnsMode.Fill);
             DataTable dt = null;
             dt = ObjDAL.ExecuteSelectStatement("SELECT sm.SizeTypeID,sm.SizeTypeName,cm.CategoryID,cm.CategoryName" +
-                    ", (CASE WHEN sm.ActiveStatus = 1 THEN 'Active' WHEN sm.ActiveStatus = 0 THEN 'InActive' END) " + "ActiveStatus FROM SizeTypeMaster sm " +
+                    ", (CASE sm.ActiveStatus WHEN 1 THEN 'Active' WHEN 0 THEN 'InActive' END) " + "ActiveStatus FROM SizeTypeMaster sm " +
                     " LEFT JOIN CategoryMaster cm ON sm.CategoryID = cm.CategoryID");
 
             if (ObjUtil.ValidateTable(dt))
@@ -163,7 +162,6 @@ namespace IMS_Client_2.Masters
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Size_Type_Master, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
             {
-                //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
                 ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit);
                 grpSizeTypeDetails.Enabled = true;
                 txtSizeTypeName.Focus();
@@ -280,7 +278,6 @@ namespace IMS_Client_2.Masters
                 try
                 {
                     ID = Convert.ToInt32(dgvSizeTypeMaster.SelectedRows[0].Cells["SizeTypeID"].Value);
-                    //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterGridClick, clsUtility.IsAdmin);
                     ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterGridClick);
 
                     txtSizeTypeName.Text = dgvSizeTypeMaster.SelectedRows[0].Cells["SizeTypeName"].Value.ToString();
@@ -312,10 +309,7 @@ namespace IMS_Client_2.Masters
             btnDelete.BackgroundImage = B_Leave;
             btnCancel.BackgroundImage = B_Leave;
 
-            //clsUtility.IsAdmin = true;//removed
-
             ObjUtil.RegisterCommandButtons(btnAdd, btnSave, btnEdit, btnUpdate, btnDelete, btnCancel);
-            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.Beginning, clsUtility.IsAdmin);
             ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.Beginning);
 
             LoadData();
@@ -366,7 +360,7 @@ namespace IMS_Client_2.Masters
                 LoadData();
                 return;
             }
-            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.SizeTypeMaster", "SizeTypeID,SizeTypeName,CategoryID,(CASE WHEN ActiveStatus =1 THEN 'Active' WHEN ActiveStatus =0 THEN 'InActive' END) ActiveStatus", "SizeTypeName LIKE '%" + txtSearchBySizeType.Text + "%'", "SizeTypeName");
+            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.SizeTypeMaster", "SizeTypeID,SizeTypeName,CategoryID,(CASE ActiveStatus WHEN 1 THEN 'Active' WHEN 0 THEN 'InActive' END) ActiveStatus", "SizeTypeName LIKE '%" + txtSearchBySizeType.Text + "%'", "SizeTypeName");
             if (ObjUtil.ValidateTable(dt))
             {
                 dgvSizeTypeMaster.DataSource = dt;

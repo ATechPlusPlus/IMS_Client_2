@@ -139,7 +139,7 @@ namespace IMS_Client_2.Masters
                         ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
                         if (PicProductMaster.Image != null)
                         {
-                          //  ObjDAL.SetColumnData("Photo", SqlDbType.VarBinary, ObjUtil.GetImageBytes(PicProductMaster.Image));
+                            //  ObjDAL.SetColumnData("Photo", SqlDbType.VarBinary, ObjUtil.GetImageBytes(PicProductMaster.Image));
                         }
                         if (ObjDAL.InsertData(clsUtility.DBName + ".dbo.ProductMaster", true) > 0)
                         {
@@ -243,7 +243,7 @@ namespace IMS_Client_2.Masters
                 DialogResult d = MessageBox.Show("Are you sure want to delete '" + txtProductName.Text + "' Product ", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (d == DialogResult.Yes)
                 {
-                    if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.ProductMaster", "ProductName='" + txtProductName.Text.Trim() + "'") > 0)
+                    if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.ProductMaster", "ProductID = " + ID + "") > 0)
                     {
                         clsUtility.ShowInfoMessage("'" + txtProductName.Text + "' Product is deleted  ", clsUtility.strProjectTitle);
                         ClearAll();
@@ -512,7 +512,6 @@ namespace IMS_Client_2.Masters
 
         private void cmbSearchByCategory_SelectionChangeCommitted(object sender, EventArgs e)
         {
-
             if (cmbSearchByCategory.SelectedIndex == -1)
             {
                 LoadData();
@@ -522,10 +521,17 @@ namespace IMS_Client_2.Masters
             ObjDAL.SetStoreProcedureData("ProductName", SqlDbType.NVarChar, DBNull.Value, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("CategoryId", SqlDbType.Int, cmbSearchByCategory.SelectedValue, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_Product_Master");
-            DataTable dt = ds.Tables[0];
-            if (ObjUtil.ValidateTable(dt))
+            if (ds != null && ds.Tables.Count > 0)
             {
-                dataGridView1.DataSource = dt;
+                DataTable dt = ds.Tables[0];
+                if (ObjUtil.ValidateTable(dt))
+                {
+                    dataGridView1.DataSource = dt;
+                }
+                else
+                {
+                    dataGridView1.DataSource = null;
+                }
             }
             else
             {

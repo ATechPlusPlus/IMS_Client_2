@@ -26,12 +26,12 @@ namespace IMS_Client_2.StockManagement
         private void LoadItemModelDetails()
         {
             string strSql = "  select md.SubProductID,md.ProductID, pm.ProductName, md.ModelNo,bm.BrandName, sm.storeName,md.BrandID,md.StoreID,md.Photo " +
-                          " FROM "+clsUtility.DBName+".[dbo].[tblProductWiseModelNo] md join "+ clsUtility.DBName + ".dbo.ProductMaster pm " +
+                          " FROM " + clsUtility.DBName + ".[dbo].[tblProductWiseModelNo] md join " + clsUtility.DBName + ".dbo.ProductMaster pm " +
                           " on md.ProductID = pm.ProductID join BrandMaster bm on bm.BrandID = md.BrandID join " +
                                 clsUtility.DBName + ".dbo.StoreMaster sm on sm.storeID = md.storeID";
 
-         DataTable dtItemModel=   ObjDAL.ExecuteSelectStatement(strSql);
-            if (dtItemModel.Rows.Count>0)
+            DataTable dtItemModel = ObjDAL.ExecuteSelectStatement(strSql);
+            if (ObjUtil.ValidateTable(dtItemModel))
             {
                 dgvProductDetails.DataSource = dtItemModel;
             }

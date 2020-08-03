@@ -206,7 +206,7 @@ namespace IMS_Client_2.Masters
                 DialogResult d = MessageBox.Show("Are you sure want to delete '" + txtCategoryName.Text + "' Category ", clsUtility.strProjectTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (d == DialogResult.Yes)
                 {
-                    if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.CategoryMaster", "CategoryName='" + txtCategoryName.Text.Trim() + "'") > 0)
+                    if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.CategoryMaster", "CategoryID=" + ID + "") > 0)
                     {
                         clsUtility.ShowInfoMessage("'" + txtCategoryName.Text + "' Category is deleted  ", clsUtility.strProjectTitle);
                         ClearAll();
@@ -259,7 +259,6 @@ namespace IMS_Client_2.Masters
                 {
                     ID = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["CategoryID"].Value);
                     ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterGridClick);
-                    //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterGridClick, clsUtility.IsAdmin);
 
                     txtCategoryName.Text = dataGridView1.SelectedRows[0].Cells["CategoryName"].Value.ToString();
                     txtCategoryDescription.Text = dataGridView1.SelectedRows[0].Cells["CategoryDescription"].Value.ToString();
@@ -306,11 +305,8 @@ namespace IMS_Client_2.Masters
             btnDelete.BackgroundImage = B_Leave;
             btnCancel.BackgroundImage = B_Leave;
 
-            //clsUtility.IsAdmin = true;//removed
-
             ObjUtil.RegisterCommandButtons(btnAdd, btnSave, btnEdit, btnUpdate, btnDelete, btnCancel);
             ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.Beginning);
-            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.Beginning, clsUtility.IsAdmin);
 
             LoadData();
         }
