@@ -75,18 +75,25 @@ namespace IMS_Client_2.Masters
 
         private void LoadData()
         {
-            ObjUtil.SetDataGridProperty(dgvColorMaster, DataGridViewAutoSizeColumnsMode.Fill);
-            DataTable dt = null;
-            dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.ColorMaster", "ColorID,ColorName,(CASE WHEN ActiveStatus =1 THEN 'Active' WHEN ActiveStatus =0 THEN 'InActive' END) ActiveStatus", "ColorName");
-
-            if (ObjUtil.ValidateTable(dt))
+            ObjDAL.SetStoreProcedureData("ColorName", SqlDbType.NVarChar, 0, clsConnection_DAL.ParamType.Input);
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_Color_Master");
+            if (ds != null && ds.Tables.Count > 0)
             {
-                dgvColorMaster.DataSource = dt;
+                DataTable dt = ds.Tables[0];
+                if (ObjUtil.ValidateTable(dt))
+                {
+                    dgvColorMaster.DataSource = dt;
+                }
+                else
+                {
+                    dgvColorMaster.DataSource = null;
+                }
             }
             else
             {
                 dgvColorMaster.DataSource = null;
             }
+            ObjDAL.ResetData();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -269,7 +276,7 @@ namespace IMS_Client_2.Masters
                 catch { }
             }
         }
-
+        clsThreadTask thr = new clsThreadTask();
         private void Color_Master_Load(object sender, EventArgs e)
         {
             btnAdd.BackgroundImage = B_Leave;
@@ -279,11 +286,12 @@ namespace IMS_Client_2.Masters
             btnDelete.BackgroundImage = B_Leave;
             btnCancel.BackgroundImage = B_Leave;
 
-            //clsUtility.IsAdmin = true;//removed
-
             ObjUtil.RegisterCommandButtons(btnAdd, btnSave, btnEdit, btnUpdate, btnDelete, btnCancel);
-            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.Beginning, clsUtility.IsAdmin);
             ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.Beginning);
+
+            dgvColorMaster.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+            //Most time consumption enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+            dgvColorMaster.RowHeadersVisible = false; // set it to false if not needed
 
             LoadData();
 
@@ -335,15 +343,25 @@ namespace IMS_Client_2.Masters
                 return;
             }
 
-            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.ColorMaster", "ColorID,ColorName,(CASE WHEN ActiveStatus =1 THEN 'Active' WHEN ActiveStatus =0 THEN 'InActive' END) ActiveStatus", "ColorName LIKE '%" + txtSearchByColor.Text + "%'", "ColorName");
-            if (ObjUtil.ValidateTable(dt))
+            ObjDAL.SetStoreProcedureData("ColorName", SqlDbType.NVarChar, txtSearchByColor.Text.Trim(), clsConnection_DAL.ParamType.Input);
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_Color_Master");
+            if (ds != null && ds.Tables.Count > 0)
             {
-                dgvColorMaster.DataSource = dt;
+                DataTable dt = ds.Tables[0];
+                if (ObjUtil.ValidateTable(dt))
+                {
+                    dgvColorMaster.DataSource = dt;
+                }
+                else
+                {
+                    dgvColorMaster.DataSource = null;
+                }
             }
             else
             {
                 dgvColorMaster.DataSource = null;
             }
+            ObjDAL.ResetData();
         }
 
         private void dgvColorMaster_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)

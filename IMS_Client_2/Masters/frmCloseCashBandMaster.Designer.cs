@@ -227,6 +227,7 @@
             this.txtCashBand.Margin = new System.Windows.Forms.Padding(2);
             this.txtCashBand.MaxLength = 10;
             this.txtCashBand.Name = "txtCashBand";
+            this.txtCashBand.ShortcutsEnabled = false;
             this.txtCashBand.Size = new System.Drawing.Size(240, 25);
             this.txtCashBand.TabIndex = 0;
             this.txtCashBand.Enter += new System.EventHandler(this.txtCashBand_Enter);

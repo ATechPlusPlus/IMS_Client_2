@@ -141,6 +141,10 @@ namespace IMS_Client_2.StockManagement
         {
             if (rdShowAll.Checked)
             {
+                dgvStockDetails.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+                //Most time consumption enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+                dgvStockDetails.RowHeadersVisible = false; // set it to false if not needed
+
                 LoadData();
             }
             else

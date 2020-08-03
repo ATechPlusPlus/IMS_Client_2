@@ -77,6 +77,10 @@ namespace IMS_Client_2.StockManagement
         }
         private void frmTransferWatch_Load(object sender, EventArgs e)
         {
+            dgvTransferWatch.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+            //Most time consumption enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+            dgvTransferWatch.RowHeadersVisible = false; // set it to false if not needed
+
             LoadData();
         }
 

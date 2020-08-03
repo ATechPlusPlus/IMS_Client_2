@@ -419,8 +419,6 @@ namespace IMS_Client_2.Masters
 
         private void Supplier_Details_Load(object sender, EventArgs e)
         {
-            //clsUtility.IsAdmin = true;//removed
-
             btnAdd.BackgroundImage = B_Leave;
             btnSave.BackgroundImage = B_Leave;
             btnEdit.BackgroundImage = B_Leave;
@@ -429,10 +427,14 @@ namespace IMS_Client_2.Masters
             btnCancel.BackgroundImage = B_Leave;
 
             ObjUtil.RegisterCommandButtons(btnAdd, btnSave, btnEdit, btnUpdate, btnDelete, btnCancel);
-            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.Beginning, clsUtility.IsAdmin);
             ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.Beginning);
 
+            dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+            //Most time consumption enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+            dataGridView1.RowHeadersVisible = false; // set it to false if not needed
+
             LoadData();
+
             FillCountryData();
         }
 

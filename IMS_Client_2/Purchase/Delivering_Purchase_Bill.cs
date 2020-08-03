@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -234,45 +235,52 @@ namespace IMS_Client_2.Purchase
         }
         private void dgvQtycolor_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            int pTotalEnteredQTY = 0;
-            if (e.ColumnIndex == 0 && dgvQtycolor.Rows[e.RowIndex].Cells["Color"].Value.ToString() != string.Empty)
+            try
             {
-                int a = ObjDAL.CountRecords(clsUtility.DBName + ".dbo.ColorMaster", "ColorName = '" + dgvQtycolor.Rows[e.RowIndex].Cells["Color"].Value + "' AND ISNULL(ActiveStatus,1) = 1");
-                if (a <= 0)
+                int pTotalEnteredQTY = 0;
+                if (e.ColumnIndex == 0 && dgvQtycolor.Rows[e.RowIndex].Cells["Color"].Value.ToString() != string.Empty)
                 {
-                    flag = 1;
-                    clsUtility.ShowInfoMessage("Color Name " + dgvQtycolor.Rows[e.RowIndex].Cells["Color"].Value + " is not present in Color Master", clsUtility.strProjectTitle);
-                    dgvQtycolor.Rows[e.RowIndex].Cells["Color"].Value = OldColorName;
+                    int a = ObjDAL.CountRecords(clsUtility.DBName + ".dbo.ColorMaster", "ColorName = '" + dgvQtycolor.Rows[e.RowIndex].Cells["Color"].Value + "' AND ISNULL(ActiveStatus,1) = 1");
+                    if (a <= 0)
+                    {
+                        flag = 1;
+                        clsUtility.ShowInfoMessage("Color Name " + dgvQtycolor.Rows[e.RowIndex].Cells["Color"].Value + " is not present in Color Master", clsUtility.strProjectTitle);
+                        dgvQtycolor.Rows[e.RowIndex].Cells["Color"].Value = OldColorName;
+                    }
+                    else
+                    {
+                        int ColorID = ObjDAL.ExecuteScalarInt("SELECT ColorID FROM " + clsUtility.DBName + ".dbo.ColorMaster WITH(NOLOCK) WHERE ColorName = '" + dgvQtycolor.Rows[e.RowIndex].Cells["Color"].Value + "' AND ISNULL(ActiveStatus,1) = 1");
+                        dtPurchaseQTYColor.Rows[e.RowIndex]["ColorID"] = ColorID;
+                        flag = 0;
+                    }
                 }
                 else
                 {
-                    int ColorID = ObjDAL.ExecuteScalarInt("SELECT ColorID FROM " + clsUtility.DBName + ".dbo.ColorMaster WITH(NOLOCK) WHERE ColorName = '" + dgvQtycolor.Rows[e.RowIndex].Cells["Color"].Value + "' AND ISNULL(ActiveStatus,1) = 1");
-                    dtPurchaseQTYColor.Rows[e.RowIndex]["ColorID"] = ColorID;
-                    flag = 0;
+                    for (int i = 3; i < dtPurchaseQTYColor.Columns.Count - 1; i++)
+                    {
+                        pTotalEnteredQTY += dtPurchaseQTYColor.Rows[e.RowIndex][i] != DBNull.Value ?
+                            Convert.ToInt32(dtPurchaseQTYColor.Rows[e.RowIndex][i]) : 0;
+                    }
+                    dgvQtycolor.Rows[e.RowIndex].Cells["Total"].Value = pTotalEnteredQTY;
+                    txtTotalQTYEntered.Text = pTotalEnteredQTY.ToString();
+                    CalcTotalColorQTY();
+                    if (Convert.ToInt32(txtTotalQTYEntered.Text) > Convert.ToInt32(txtTotalQTYBill.Text))
+                    {
+                        clsUtility.ShowInfoMessage("Entered QTY can't be greater then QTY Bill", clsUtility.strProjectTitle);
+                        //dgvQtycolor.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = OldSize;
+                    }
+                    if (e.RowIndex + 1 == dgvQtycolor.Rows.Count)
+                    {
+                        DataRow Row = dtPurchaseQTYColor.NewRow();
+                        dtPurchaseQTYColor.Rows.Add(Row);
+                        dtPurchaseQTYColor.AcceptChanges();
+                        dgvQtycolor.DataSource = dtPurchaseQTYColor;
+                    }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                for (int i = 3; i < dtPurchaseQTYColor.Columns.Count - 1; i++)
-                {
-                    pTotalEnteredQTY += dtPurchaseQTYColor.Rows[e.RowIndex][i] != DBNull.Value ?
-                        Convert.ToInt32(dtPurchaseQTYColor.Rows[e.RowIndex][i]) : 0;
-                }
-                dgvQtycolor.Rows[e.RowIndex].Cells["Total"].Value = pTotalEnteredQTY;
-                txtTotalQTYEntered.Text = pTotalEnteredQTY.ToString();
-                CalcTotalColorQTY();
-                if (Convert.ToInt32(txtTotalQTYEntered.Text) > Convert.ToInt32(txtTotalQTYBill.Text))
-                {
-                    clsUtility.ShowInfoMessage("Entered QTY can't be greater then QTY Bill", clsUtility.strProjectTitle);
-                    //dgvQtycolor.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = OldSize;
-                }
-                if (e.RowIndex + 1 == dgvQtycolor.Rows.Count)
-                {
-                    DataRow Row = dtPurchaseQTYColor.NewRow();
-                    dtPurchaseQTYColor.Rows.Add(Row);
-                    dtPurchaseQTYColor.AcceptChanges();
-                    dgvQtycolor.DataSource = dtPurchaseQTYColor;
-                }
+                //clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
             }
         }
 
@@ -316,7 +324,7 @@ namespace IMS_Client_2.Purchase
             listBoxStyleNo.ClearSelected();
         }
 
-      
+
         private void FillColorSizeGrid()
         {
             if (cmbSizeType.SelectedValue != null)
@@ -343,7 +351,7 @@ namespace IMS_Client_2.Purchase
             }
             else
             {
-                clsUtility.ShowInfoMessage("Please Select Size Type..",clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("Please Select Size Type..", clsUtility.strProjectTitle);
             }
         }
         private bool Validateform()
