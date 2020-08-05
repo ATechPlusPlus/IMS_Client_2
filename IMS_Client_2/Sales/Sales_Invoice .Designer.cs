@@ -108,6 +108,10 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dgvReplaceReturn = new System.Windows.Forms.DataGridView();
+            this.radNewItem = new System.Windows.Forms.RadioButton();
+            this.radReplace = new System.Windows.Forms.RadioButton();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lblTitle = new System.Windows.Forms.Label();
             this.ReplaceProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ReplaceProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ReplaceBarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -118,11 +122,7 @@
             this.ReplaceSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RepalceSizeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColReplaceTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewButtonColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.radNewItem = new System.Windows.Forms.RadioButton();
-            this.radReplace = new System.Windows.Forms.RadioButton();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.lblTitle = new System.Windows.Forms.Label();
+            this.ColReplaceDelete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -1041,7 +1041,7 @@
             this.ReplaceSize,
             this.RepalceSizeID,
             this.ColReplaceTotal,
-            this.dataGridViewButtonColumn1});
+            this.ColReplaceDelete});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1058,6 +1058,50 @@
             this.dgvReplaceReturn.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvReplaceReturn_CellBeginEdit);
             this.dgvReplaceReturn.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReplaceReturn_CellClick);
             this.dgvReplaceReturn.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReplaceReturn_CellEndEdit);
+            this.dgvReplaceReturn.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvReplaceReturn_DataBindingComplete);
+            // 
+            // radNewItem
+            // 
+            this.radNewItem.AutoSize = true;
+            this.radNewItem.BackColor = System.Drawing.Color.Transparent;
+            this.radNewItem.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radNewItem.Location = new System.Drawing.Point(123, 109);
+            this.radNewItem.Name = "radNewItem";
+            this.radNewItem.Size = new System.Drawing.Size(86, 21);
+            this.radNewItem.TabIndex = 256;
+            this.radNewItem.Text = "New Item";
+            this.radNewItem.UseVisualStyleBackColor = false;
+            this.radNewItem.CheckedChanged += new System.EventHandler(this.radNewItem_CheckedChanged);
+            // 
+            // radReplace
+            // 
+            this.radReplace.AutoSize = true;
+            this.radReplace.BackColor = System.Drawing.Color.Transparent;
+            this.radReplace.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radReplace.Location = new System.Drawing.Point(212, 109);
+            this.radReplace.Name = "radReplace";
+            this.radReplace.Size = new System.Drawing.Size(118, 21);
+            this.radReplace.TabIndex = 257;
+            this.radReplace.Text = "Replace/Return";
+            this.radReplace.UseVisualStyleBackColor = false;
+            this.radReplace.CheckedChanged += new System.EventHandler(this.radReplace_CheckedChanged);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 10;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.BackColor = System.Drawing.SystemColors.Control;
+            this.lblTitle.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Location = new System.Drawing.Point(394, 139);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(92, 17);
+            this.lblTitle.TabIndex = 258;
+            this.lblTitle.Text = "Total Items :";
             // 
             // ReplaceProductID
             // 
@@ -1124,54 +1168,11 @@
             this.ColReplaceTotal.Name = "ColReplaceTotal";
             this.ColReplaceTotal.ReadOnly = true;
             // 
-            // dataGridViewButtonColumn1
+            // ColReplaceDelete
             // 
-            this.dataGridViewButtonColumn1.DataPropertyName = "Delete";
-            this.dataGridViewButtonColumn1.HeaderText = "Delete";
-            this.dataGridViewButtonColumn1.Name = "dataGridViewButtonColumn1";
-            // 
-            // radNewItem
-            // 
-            this.radNewItem.AutoSize = true;
-            this.radNewItem.BackColor = System.Drawing.Color.Transparent;
-            this.radNewItem.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radNewItem.Location = new System.Drawing.Point(123, 109);
-            this.radNewItem.Name = "radNewItem";
-            this.radNewItem.Size = new System.Drawing.Size(86, 21);
-            this.radNewItem.TabIndex = 256;
-            this.radNewItem.Text = "New Item";
-            this.radNewItem.UseVisualStyleBackColor = false;
-            this.radNewItem.CheckedChanged += new System.EventHandler(this.radNewItem_CheckedChanged);
-            // 
-            // radReplace
-            // 
-            this.radReplace.AutoSize = true;
-            this.radReplace.BackColor = System.Drawing.Color.Transparent;
-            this.radReplace.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radReplace.Location = new System.Drawing.Point(212, 109);
-            this.radReplace.Name = "radReplace";
-            this.radReplace.Size = new System.Drawing.Size(118, 21);
-            this.radReplace.TabIndex = 257;
-            this.radReplace.Text = "Replace/Return";
-            this.radReplace.UseVisualStyleBackColor = false;
-            this.radReplace.CheckedChanged += new System.EventHandler(this.radReplace_CheckedChanged);
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 10;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.BackColor = System.Drawing.SystemColors.Control;
-            this.lblTitle.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(394, 139);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(92, 17);
-            this.lblTitle.TabIndex = 258;
-            this.lblTitle.Text = "Total Items :";
+            this.ColReplaceDelete.DataPropertyName = "Delete";
+            this.ColReplaceDelete.HeaderText = "Delete";
+            this.ColReplaceDelete.Name = "ColReplaceDelete";
             // 
             // Sales_Invoice
             // 
@@ -1329,6 +1330,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ReplaceSize;
         private System.Windows.Forms.DataGridViewTextBoxColumn RepalceSizeID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColReplaceTotal;
-        private System.Windows.Forms.DataGridViewButtonColumn dataGridViewButtonColumn1;
+        private System.Windows.Forms.DataGridViewButtonColumn ColReplaceDelete;
     }
 }

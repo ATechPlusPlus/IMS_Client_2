@@ -35,6 +35,10 @@
             this.dgvStockDetails = new System.Windows.Forms.DataGridView();
             this.PicItem = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rdSearchByCategory = new System.Windows.Forms.RadioButton();
+            this.cmbCategory = new System.Windows.Forms.ComboBox();
+            this.txtSearchByStyleNo = new System.Windows.Forms.TextBox();
+            this.rdSearchByStyleNo = new System.Windows.Forms.RadioButton();
             this.txtSearchByBarcode = new System.Windows.Forms.TextBox();
             this.cmbColor = new System.Windows.Forms.ComboBox();
             this.rdSearchByColor = new System.Windows.Forms.RadioButton();
@@ -42,8 +46,6 @@
             this.txtSearchByProductName = new System.Windows.Forms.TextBox();
             this.rdSearchByItem = new System.Windows.Forms.RadioButton();
             this.rdShowAll = new System.Windows.Forms.RadioButton();
-            this.txtSearchByStyleNo = new System.Windows.Forms.TextBox();
-            this.rdSearchByStyleNo = new System.Windows.Forms.RadioButton();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicItem)).BeginInit();
@@ -90,12 +92,11 @@
             this.dgvStockDetails.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvStockDetails.BackgroundColor = System.Drawing.Color.White;
             this.dgvStockDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvStockDetails.Location = new System.Drawing.Point(8, 179);
+            this.dgvStockDetails.Location = new System.Drawing.Point(8, 178);
             this.dgvStockDetails.Name = "dgvStockDetails";
             this.dgvStockDetails.ReadOnly = true;
-            this.dgvStockDetails.Size = new System.Drawing.Size(1105, 271);
+            this.dgvStockDetails.Size = new System.Drawing.Size(1105, 272);
             this.dgvStockDetails.TabIndex = 208;
-            this.dgvStockDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStockDetails_CellClick);
             this.dgvStockDetails.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvStockDetails_DataBindingComplete);
             // 
             // PicItem
@@ -113,6 +114,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.rdSearchByCategory);
+            this.groupBox1.Controls.Add(this.cmbCategory);
             this.groupBox1.Controls.Add(this.txtSearchByStyleNo);
             this.groupBox1.Controls.Add(this.rdSearchByStyleNo);
             this.groupBox1.Controls.Add(this.txtSearchByBarcode);
@@ -125,17 +128,64 @@
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(8, 46);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(942, 119);
+            this.groupBox1.Size = new System.Drawing.Size(952, 119);
             this.groupBox1.TabIndex = 232;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
+            // 
+            // rdSearchByCategory
+            // 
+            this.rdSearchByCategory.AutoSize = true;
+            this.rdSearchByCategory.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdSearchByCategory.Location = new System.Drawing.Point(645, 28);
+            this.rdSearchByCategory.Name = "rdSearchByCategory";
+            this.rdSearchByCategory.Size = new System.Drawing.Size(108, 21);
+            this.rdSearchByCategory.TabIndex = 239;
+            this.rdSearchByCategory.Text = "By Category :";
+            this.rdSearchByCategory.UseVisualStyleBackColor = true;
+            this.rdSearchByCategory.CheckedChanged += new System.EventHandler(this.rdSearchByCategory_CheckedChanged);
+            // 
+            // cmbCategory
+            // 
+            this.cmbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCategory.Enabled = false;
+            this.cmbCategory.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbCategory.FormattingEnabled = true;
+            this.cmbCategory.Location = new System.Drawing.Point(762, 26);
+            this.cmbCategory.Name = "cmbCategory";
+            this.cmbCategory.Size = new System.Drawing.Size(181, 27);
+            this.cmbCategory.TabIndex = 238;
+            this.cmbCategory.SelectionChangeCommitted += new System.EventHandler(this.cmbCategory_SelectionChangeCommitted);
+            // 
+            // txtSearchByStyleNo
+            // 
+            this.txtSearchByStyleNo.BackColor = System.Drawing.Color.White;
+            this.txtSearchByStyleNo.Enabled = false;
+            this.txtSearchByStyleNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearchByStyleNo.Location = new System.Drawing.Point(443, 27);
+            this.txtSearchByStyleNo.Name = "txtSearchByStyleNo";
+            this.txtSearchByStyleNo.Size = new System.Drawing.Size(181, 25);
+            this.txtSearchByStyleNo.TabIndex = 236;
+            this.txtSearchByStyleNo.TextChanged += new System.EventHandler(this.txtSearchByStyleNo_TextChanged);
+            // 
+            // rdSearchByStyleNo
+            // 
+            this.rdSearchByStyleNo.AutoSize = true;
+            this.rdSearchByStyleNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdSearchByStyleNo.Location = new System.Drawing.Point(336, 28);
+            this.rdSearchByStyleNo.Name = "rdSearchByStyleNo";
+            this.rdSearchByStyleNo.Size = new System.Drawing.Size(105, 21);
+            this.rdSearchByStyleNo.TabIndex = 235;
+            this.rdSearchByStyleNo.Text = "By Style No :";
+            this.rdSearchByStyleNo.UseVisualStyleBackColor = true;
+            this.rdSearchByStyleNo.CheckedChanged += new System.EventHandler(this.rdSearchByStyleNo_CheckedChanged);
             // 
             // txtSearchByBarcode
             // 
             this.txtSearchByBarcode.BackColor = System.Drawing.Color.White;
             this.txtSearchByBarcode.Enabled = false;
             this.txtSearchByBarcode.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearchByBarcode.Location = new System.Drawing.Point(133, 28);
+            this.txtSearchByBarcode.Location = new System.Drawing.Point(127, 74);
             this.txtSearchByBarcode.Name = "txtSearchByBarcode";
             this.txtSearchByBarcode.Size = new System.Drawing.Size(181, 25);
             this.txtSearchByBarcode.TabIndex = 234;
@@ -147,7 +197,7 @@
             this.cmbColor.Enabled = false;
             this.cmbColor.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbColor.FormattingEnabled = true;
-            this.cmbColor.Location = new System.Drawing.Point(133, 71);
+            this.cmbColor.Location = new System.Drawing.Point(443, 73);
             this.cmbColor.Name = "cmbColor";
             this.cmbColor.Size = new System.Drawing.Size(181, 27);
             this.cmbColor.TabIndex = 233;
@@ -157,7 +207,7 @@
             // 
             this.rdSearchByColor.AutoSize = true;
             this.rdSearchByColor.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdSearchByColor.Location = new System.Drawing.Point(15, 74);
+            this.rdSearchByColor.Location = new System.Drawing.Point(336, 76);
             this.rdSearchByColor.Name = "rdSearchByColor";
             this.rdSearchByColor.Size = new System.Drawing.Size(86, 21);
             this.rdSearchByColor.TabIndex = 232;
@@ -169,7 +219,7 @@
             // 
             this.rdSearchByBarCode.AutoSize = true;
             this.rdSearchByBarCode.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdSearchByBarCode.Location = new System.Drawing.Point(15, 28);
+            this.rdSearchByBarCode.Location = new System.Drawing.Point(15, 76);
             this.rdSearchByBarCode.Name = "rdSearchByBarCode";
             this.rdSearchByBarCode.Size = new System.Drawing.Size(107, 21);
             this.rdSearchByBarCode.TabIndex = 230;
@@ -182,7 +232,7 @@
             this.txtSearchByProductName.BackColor = System.Drawing.Color.White;
             this.txtSearchByProductName.Enabled = false;
             this.txtSearchByProductName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearchByProductName.Location = new System.Drawing.Point(431, 28);
+            this.txtSearchByProductName.Location = new System.Drawing.Point(127, 27);
             this.txtSearchByProductName.Name = "txtSearchByProductName";
             this.txtSearchByProductName.Size = new System.Drawing.Size(181, 25);
             this.txtSearchByProductName.TabIndex = 229;
@@ -192,7 +242,7 @@
             // 
             this.rdSearchByItem.AutoSize = true;
             this.rdSearchByItem.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdSearchByItem.Location = new System.Drawing.Point(341, 28);
+            this.rdSearchByItem.Location = new System.Drawing.Point(15, 28);
             this.rdSearchByItem.Name = "rdSearchByItem";
             this.rdSearchByItem.Size = new System.Drawing.Size(81, 21);
             this.rdSearchByItem.TabIndex = 199;
@@ -204,36 +254,13 @@
             // 
             this.rdShowAll.AutoSize = true;
             this.rdShowAll.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdShowAll.Location = new System.Drawing.Point(341, 74);
+            this.rdShowAll.Location = new System.Drawing.Point(645, 74);
             this.rdShowAll.Name = "rdShowAll";
             this.rdShowAll.Size = new System.Drawing.Size(79, 21);
             this.rdShowAll.TabIndex = 106;
             this.rdShowAll.Text = "Show All";
             this.rdShowAll.UseVisualStyleBackColor = true;
             this.rdShowAll.CheckedChanged += new System.EventHandler(this.rdShowAll_CheckedChanged);
-            // 
-            // txtSearchByStyleNo
-            // 
-            this.txtSearchByStyleNo.BackColor = System.Drawing.Color.White;
-            this.txtSearchByStyleNo.Enabled = false;
-            this.txtSearchByStyleNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearchByStyleNo.Location = new System.Drawing.Point(745, 28);
-            this.txtSearchByStyleNo.Name = "txtSearchByStyleNo";
-            this.txtSearchByStyleNo.Size = new System.Drawing.Size(181, 25);
-            this.txtSearchByStyleNo.TabIndex = 236;
-            this.txtSearchByStyleNo.TextChanged += new System.EventHandler(this.txtSearchByStyleNo_TextChanged);
-            // 
-            // rdSearchByStyleNo
-            // 
-            this.rdSearchByStyleNo.AutoSize = true;
-            this.rdSearchByStyleNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdSearchByStyleNo.Location = new System.Drawing.Point(636, 28);
-            this.rdSearchByStyleNo.Name = "rdSearchByStyleNo";
-            this.rdSearchByStyleNo.Size = new System.Drawing.Size(105, 21);
-            this.rdSearchByStyleNo.TabIndex = 235;
-            this.rdSearchByStyleNo.Text = "By Style No :";
-            this.rdSearchByStyleNo.UseVisualStyleBackColor = true;
-            this.rdSearchByStyleNo.CheckedChanged += new System.EventHandler(this.rdSearchByStyleNo_CheckedChanged);
             // 
             // frmStockDetails
             // 
@@ -280,5 +307,7 @@
         private System.Windows.Forms.TextBox txtProductID;
         private System.Windows.Forms.TextBox txtSearchByStyleNo;
         private System.Windows.Forms.RadioButton rdSearchByStyleNo;
+        private System.Windows.Forms.ComboBox cmbCategory;
+        private System.Windows.Forms.RadioButton rdSearchByCategory;
     }
 }

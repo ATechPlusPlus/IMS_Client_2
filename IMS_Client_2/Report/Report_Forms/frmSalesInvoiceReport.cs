@@ -185,7 +185,7 @@ namespace IMS_Client_2.Report
                 reportPrinting.Export(this.reportViewer1.LocalReport);
 
                 PrinterSettings printerSetting = new PrinterSettings();
-                printerSetting.DefaultPageSettings.PaperSize = new PaperSize("IMS_Paper", 80, 297);
+             //  printerSetting.DefaultPageSettings.PaperSize = new PaperSize("IMS_Paper", 80, 297);
 
 
                 if (clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.InvoicePrinter).Trim().Length == 0)

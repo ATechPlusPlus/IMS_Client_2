@@ -168,9 +168,9 @@ namespace IMS_Client_2
                 btnOpenCash.BackgroundImage = B_Leave;
 
                 clsUtility.DBName = "IMS_Client_2";
-                clsUtility.LoginID = 5;
+                //clsUtility.LoginID = 1;
                 //clsUtility.IsAdmin = false;
-                clsUtility.IsAdmin = true;
+                //clsUtility.IsAdmin = true;
                 clsUtility.strProjectTitle = "IMS";
                 if (clsUtility.LoginID > 0)
                 {
@@ -593,21 +593,29 @@ namespace IMS_Client_2
 
         private void userRightsManagementToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (clsFormRights.HasFormRight(clsFormRights.Forms.frmUserRights) || clsUtility.IsAdmin)
-            //{
-            //}
-            //else
-            //{
-            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
-            //}
-            frmUserRights frmUserRights = new frmUserRights();
-            frmUserRights.ShowDialog();
+            if (clsUtility.IsAdmin)
+            {
+                frmUserRights frmUserRights = new frmUserRights();
+                frmUserRights.ShowDialog();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
 
         private void purchaseDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Purchase.frmPurchaseDetails obj = new Purchase.frmPurchaseDetails();
-            obj.Show();
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmPurchaseDetails) || clsUtility.IsAdmin)
+            {
+                Purchase.frmPurchaseDetails obj = new Purchase.frmPurchaseDetails();
+                obj.Show();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
+
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -700,41 +708,41 @@ namespace IMS_Client_2
 
         private void storeRightsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (clsFormRights.HasFormRight(clsFormRights.Forms.frmStoreRights) || clsUtility.IsAdmin)
-            //{
-            //}
-            //else
-            //{
-            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
-            //}
-            Other_Forms.frmStoreRights frmStoreRights = new Other_Forms.frmStoreRights();
-            frmStoreRights.ShowDialog();
+            if (clsUtility.IsAdmin)
+            {
+                Other_Forms.frmStoreRights frmStoreRights = new Other_Forms.frmStoreRights();
+                frmStoreRights.ShowDialog();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
 
         private void stockTransferToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (clsFormRights.HasFormRight(clsFormRights.Forms.frmStoreTransfer) || clsUtility.IsAdmin)
-            //{
-            //}
-            //else
-            //{
-            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
-            //}
-            StockManagement.frmStoreTransfer frmStoreTransfer = new StockManagement.frmStoreTransfer();
-            frmStoreTransfer.Show();
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmStoreTransfer) || clsUtility.IsAdmin)
+            {
+                StockManagement.frmStoreTransfer frmStoreTransfer = new StockManagement.frmStoreTransfer();
+                frmStoreTransfer.Show();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
 
         private void brachReceiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (clsFormRights.HasFormRight(clsFormRights.Forms.frmReceivedBranchTransfer) || clsUtility.IsAdmin)
-            //{
-            //}
-            //else
-            //{
-            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
-            //}
-            StockManagement.frmReceivedBranchTransfer frmReceived = new StockManagement.frmReceivedBranchTransfer();
-            frmReceived.Show();
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmReceivedBranchTransfer) || clsUtility.IsAdmin)
+            {
+                StockManagement.frmReceivedBranchTransfer frmReceived = new StockManagement.frmReceivedBranchTransfer();
+                frmReceived.Show();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
 
         private void closeCashBandMasterToolStripMenuItem_Click(object sender, EventArgs e)
@@ -767,67 +775,67 @@ namespace IMS_Client_2
 
         private void transferWatchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (clsFormRights.HasFormRight(clsFormRights.Forms.frmTransferWatch) || clsUtility.IsAdmin)
-            //{
-            //}
-            //else
-            //{
-            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
-            //}
-            StockManagement.frmTransferWatch Obj = new StockManagement.frmTransferWatch();
-            Obj.Show();
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmTransferWatch) || clsUtility.IsAdmin)
+            {
+                StockManagement.frmTransferWatch Obj = new StockManagement.frmTransferWatch();
+                Obj.ShowDialog();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
 
         private void loadPettyCashToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (clsFormRights.HasFormRight(clsFormRights.Forms.frmPettyCash) || clsUtility.IsAdmin)
-            //{
-            //}
-            //else
-            //{
-            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
-            //}
-            Other_Forms.frmPettyCash Obj = new Other_Forms.frmPettyCash();
-            Obj.Show();
+            if (clsUtility.IsAdmin)
+            {
+                Other_Forms.frmPettyCash Obj = new Other_Forms.frmPettyCash();
+                Obj.Show();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
 
         private void pettyCashExpReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (clsFormRights.HasFormRight(clsFormRights.Forms.frmPettyCashExpReport) || clsUtility.IsAdmin)
-            //{
-            //}
-            //else
-            //{
-            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
-            //}
-            Report.frmPettyCashExpReport Obj = new Report.frmPettyCashExpReport();
-            Obj.ShowDialog();
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmPettyCashExpReport) || clsUtility.IsAdmin)
+            {
+                Report.frmPettyCashExpReport Obj = new Report.frmPettyCashExpReport();
+                Obj.ShowDialog();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
 
         private void miniSalesReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (clsFormRights.HasFormRight(clsFormRights.Forms.tblMiniSalesReport) || clsUtility.IsAdmin)
-            //{
-            //}
-            //else
-            //{
-            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
-            //}
-            Report.Report_Forms.tblMiniSalesReport frmminiSalesReport = new Report.Report_Forms.tblMiniSalesReport();
-            frmminiSalesReport.Show();
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.tblMiniSalesReport) || clsUtility.IsAdmin)
+            {
+                Report.Report_Forms.tblMiniSalesReport frmminiSalesReport = new Report.Report_Forms.tblMiniSalesReport();
+                frmminiSalesReport.Show();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
 
         private void stockDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (clsFormRights.HasFormRight(clsFormRights.Forms.tblMiniSalesReport) || clsUtility.IsAdmin)
-            //{
-            //}
-            //else
-            //{
-            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
-            //}
-            StockManagement.frmStockDetails Obj = new StockManagement.frmStockDetails();
-            Obj.Show();
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmStockDetails) || clsUtility.IsAdmin)
+            {
+                StockManagement.frmStockDetails Obj = new StockManagement.frmStockDetails();
+                Obj.Show();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
 
         private void dashboardToolStripMenuItem_Click(object sender, EventArgs e)
@@ -841,6 +849,32 @@ namespace IMS_Client_2
             //}
             Other_Forms.frmDashBoard frmDashBoard = new Other_Forms.frmDashBoard();
             frmDashBoard.Show();
+        }
+
+        private void viewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmItemWiseModelNo) || clsUtility.IsAdmin)
+            {
+                StockManagement.frmItemWiseModelNo frmItemWiseModelNo = new StockManagement.frmItemWiseModelNo();
+                frmItemWiseModelNo.Show();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
+        }
+
+        private void branchesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmBranchSaleShorting) || clsUtility.IsAdmin)
+            {
+                StockManagement.frmBranchSaleShorting Obj = new StockManagement.frmBranchSaleShorting();
+                Obj.Show();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
     }
 }

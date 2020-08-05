@@ -32,7 +32,18 @@
             frmBarCodeDesigner = 33,
             frmCloseCashBandMaster = 34,
             frmCloseShifWindow = 35,
-            Import_ProductData=36,
+            Import_ProductData = 36,
+            frmBranchSaleShorting = 37,
+            frmItemWiseModelNo = 38,
+            frmStoreTransfer = 39,
+            frmTransferCheck = 40,
+            frmTransferWatch = 41,
+            frmTransferWatch_Items = 42,
+            frmStockDetails = 43,
+            frmPettyCashExpReport = 44,
+            tblMiniSalesReport = 45,
+            frmPurchaseDetails=46,
+            frmReceivedBranchTransfer=47,
             frmDatabaseMaintenance = 7///commented
         }
         public enum Operation

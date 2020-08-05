@@ -87,9 +87,8 @@ namespace IMS_Client_2.Masters
 
         private void LoadData()
         {
-            DataTable dt = null;
-            dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.StoreMaster", "StoreID,StoreName,Tel,Place,Fax,(CASE WHEN ActiveStatus =1 THEN 'Active' WHEN ActiveStatus =0 THEN 'InActive' END) ActiveStatus,StoreCategory ", "StoreName");
-
+            DataTable dt = null; 
+            dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.StoreMaster", "StoreID,StoreName,Tel,Place,Fax,(CASE ActiveStatus WHEN 1 THEN 'Active' WHEN 0 THEN 'InActive' END) ActiveStatus,(CASE StoreCategory WHEN 0 THEN 'Normal Store' WHEN 1 THEN 'Wearhouse' END) StoreCategory,StoreCategory [StoreCategoryID] ", "StoreName");
             if (ObjUtil.ValidateTable(dt))
             {
                 dataGridView1.DataSource = dt;
@@ -137,15 +136,14 @@ namespace IMS_Client_2.Masters
                         else
                         {
                             clsUtility.ShowInfoMessage("Store : '" + txtStoreName.Text + "' is not Saved Successfully..", clsUtility.strProjectTitle);
-                            ObjDAL.ResetData();
                         }
                     }
                     else
                     {
                         clsUtility.ShowErrorMessage("Store : '" + txtStoreName.Text + "' is already exist..", clsUtility.strProjectTitle);
-                        ObjDAL.ResetData();
                         txtStoreName.Focus();
                     }
+                    ObjDAL.ResetData();
                 }
             }
             else
@@ -188,13 +186,11 @@ namespace IMS_Client_2.Masters
                         ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
                         if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.StoreMaster", "StoreID = " + ID + "") > 0)
                         {
-                            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate, clsUtility.IsAdmin);
                             ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate);
                             clsUtility.ShowInfoMessage("'" + txtStoreName.Text + "' Store is Updated", clsUtility.strProjectTitle);
                             LoadData();
                             ClearAll();
                             grpStore.Enabled = false;
-                            ObjDAL.ResetData();
                         }
                         else
                         {
@@ -206,8 +202,8 @@ namespace IMS_Client_2.Masters
                     {
                         clsUtility.ShowErrorMessage("'" + txtStoreName.Text + "' Store is already exist..", clsUtility.strProjectTitle);
                         txtStoreName.Focus();
-                        ObjDAL.ResetData();
                     }
+                    ObjDAL.ResetData();
                 }
             }
             else
@@ -229,7 +225,6 @@ namespace IMS_Client_2.Masters
                         ClearAll();
                         LoadData();
                         grpStore.Enabled = false;
-                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
                         ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
                     }
                     else
@@ -284,7 +279,7 @@ namespace IMS_Client_2.Masters
                     txtFax.Text = dataGridView1.SelectedRows[0].Cells["Fax"].Value.ToString();
                     txtPlace.Text = dataGridView1.SelectedRows[0].Cells["Place"].Value.ToString();
                     cmbActiveStatus.SelectedItem = dataGridView1.SelectedRows[0].Cells["ActiveStatus"].Value.ToString();
-                    cmbStoreCat.SelectedIndex = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["StoreCategory"].Value);
+                    cmbStoreCat.SelectedIndex = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["StoreCategoryID"].Value);
 
                     grpStore.Enabled = false;
                     txtStoreName.Focus();
@@ -356,10 +351,7 @@ namespace IMS_Client_2.Masters
             btnDelete.BackgroundImage = B_Leave;
             btnCancel.BackgroundImage = B_Leave;
 
-            //clsUtility.IsAdmin = true;//removed
-
             ObjUtil.RegisterCommandButtons(btnAdd, btnSave, btnEdit, btnUpdate, btnDelete, btnCancel);
-            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.Beginning, clsUtility.IsAdmin);
             ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.Beginning);
 
             LoadData();
@@ -410,7 +402,7 @@ namespace IMS_Client_2.Masters
                 return;
             }
             DataTable dt = null;
-            dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.StoreMaster", "StoreID, StoreName, Tel, Fax, Place, (CASE WHEN ActiveStatus =1 THEN 'Active' WHEN ActiveStatus =0 THEN 'InActive' END) ActiveStatus ", "StoreName LIKE '%" + txtSearchByStoreName.Text + "%'", "StoreName");
+            dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.StoreMaster", "StoreID, StoreName, Tel, Fax, Place, (CASE ActiveStatus WHEN 1 THEN 'Active' WHEN 0 THEN 'InActive' END) ActiveStatus,(CASE StoreCategory WHEN 0 THEN 'Normal Store' WHEN 1 THEN 'Wearhouse' END) StoreCategory,StoreCategory [StoreCategoryID] ", "StoreName LIKE '%" + txtSearchByStoreName.Text + "%'", "StoreName");
 
             if (ObjUtil.ValidateTable(dt))
             {
@@ -427,6 +419,7 @@ namespace IMS_Client_2.Masters
             ObjUtil.SetRowNumber(dataGridView1);
             ObjUtil.SetDataGridProperty(dataGridView1, DataGridViewAutoSizeColumnsMode.Fill);
             dataGridView1.Columns["StoreID"].Visible = false;
+            dataGridView1.Columns["StoreCategoryID"].Visible = false;
             lblTotalRecords.Text = "Total Records : " + dataGridView1.Rows.Count;
         }
 

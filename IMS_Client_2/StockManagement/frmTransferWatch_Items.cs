@@ -41,7 +41,6 @@ namespace IMS_Client_2.StockManagement
 
                     txtTotalBillQTY.Text = dt.Rows[0]["TotalQTY"].ToString();
                     txtTotalEnterQTY.Text = dt.Rows[0]["ReceivedTotalQTY"].ToString();
-
                 }
                 else
                 {
@@ -68,7 +67,6 @@ namespace IMS_Client_2.StockManagement
             dgvTransferWatch.Columns["TotalQTY"].Visible = false;
             dgvTransferWatch.Columns["Total"].Visible = false;
             dgvTransferWatch.Columns["CellColor"].Visible = false;
-            //dgvTransferWatch.Columns["StoreName"].Visible = false;
             dgvTransferWatch.Columns["ReceivedTotalQTY"].Visible = false;
             dgvTransferWatch.Columns["ReceiveBillNo"].Visible = false;
             dgvTransferWatch.Columns["ReceiveBillDate"].Visible = false;
@@ -92,7 +90,6 @@ namespace IMS_Client_2.StockManagement
 
             dgvTransferWatch.RowsDefaultCellStyle.SelectionBackColor = Color.Transparent;
             dgvTransferWatch.RowsDefaultCellStyle.SelectionForeColor = Color.Transparent;
-            //dgvTransferWatch.SelectionMode = DataGridViewSelectionMode.CellSelect;
         }
     }
 }

@@ -109,6 +109,7 @@ namespace IMS_Client_2.StockManagement
                             row["CellColor"] = dt.Rows[0]["CellColor"];
                             row["ModelNo"] = dt.Rows[0]["ModelNo"];
                             row["ProductID"] = dt.Rows[0]["ProductID"];
+                            row["SubProductID"] = dt.Rows[0]["SubProductID"];
                             row["BillQTY"] = 0;
                             row["EnterQTY"] = 1;
                             row["Item"] = dt.Rows[0]["Item"];
@@ -154,6 +155,7 @@ namespace IMS_Client_2.StockManagement
             dgvProductDetails.Columns["TransferItemID"].Visible = false;
             dgvProductDetails.Columns["StoreBillDetailsID"].Visible = false;
             dgvProductDetails.Columns["ProductID"].Visible = false;
+            dgvProductDetails.Columns["SubProductID"].Visible = false;
             dgvProductDetails.Columns["BillDate"].Visible = false;
             dgvProductDetails.Columns["BillNo"].Visible = false;
             dgvProductDetails.Columns["TotalQTY"].Visible = false;
@@ -182,11 +184,8 @@ namespace IMS_Client_2.StockManagement
                 }
             }
             dgvProductDetails.ClearSelection();
-            //dgvProductDetails.RowsDefaultCellStyle.SelectionBackColor = Color.White;
-            //dgvProductDetails.RowsDefaultCellStyle.SelectionForeColor = Color.Black;
             dgvProductDetails.RowsDefaultCellStyle.SelectionBackColor = Color.Transparent;
             dgvProductDetails.RowsDefaultCellStyle.SelectionForeColor = Color.Transparent;
-            //1dgvProductDetails.SelectionMode = DataGridViewSelectionMode.CellSelect;
         }
 
         private Image GetProductPhoto(int ProductID)
@@ -243,20 +242,13 @@ namespace IMS_Client_2.StockManagement
             if (ValidateEnterQTY())
             {
                 bool b = false;
-                //int a = 0;
-                //DataRow[] drow = dtStoreTransfer.Select("BillQTY=0");
-                //if (drow.Length > 0)
-                //{
-                //    drow[0].Delete();
-                //    dtStoreTransfer.AcceptChanges();
-                //}
                 for (int i = 0; i < dtStoreTransfer.Rows.Count; i++)
                 {
                     ObjDAL.SetStoreProcedureData("TransferItemID", SqlDbType.Int, dtStoreTransfer.Rows[i]["TransferItemID"], clsConnection_DAL.ParamType.Input);
                     ObjDAL.SetStoreProcedureData("StoreBillDetailsID", SqlDbType.Int, dtStoreTransfer.Rows[i]["StoreBillDetailsID"], clsConnection_DAL.ParamType.Input);
                     ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, dtStoreTransfer.Rows[i]["ProductID"], clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, dtStoreTransfer.Rows[i]["SubProductID"], clsConnection_DAL.ParamType.Input);
                     ObjDAL.SetStoreProcedureData("Barcode", SqlDbType.NVarChar, dtStoreTransfer.Rows[i]["Barcode"], clsConnection_DAL.ParamType.Input);
-                    //ObjDAL.SetStoreProcedureData("Rate", SqlDbType.Decimal, dtStoreTransfer.Rows[i]["Rate"], clsConnection_DAL.ParamType.Input);
                     ObjDAL.SetStoreProcedureData("BillQTY", SqlDbType.Int, dtStoreTransfer.Rows[i]["BillQTY"], clsConnection_DAL.ParamType.Input);
                     ObjDAL.SetStoreProcedureData("EnterQTY", SqlDbType.Int, dtStoreTransfer.Rows[i]["EnterQTY"], clsConnection_DAL.ParamType.Input);
                     ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, dtStoreTransfer.Rows[i]["ColorID"], clsConnection_DAL.ParamType.Input);
@@ -267,11 +259,6 @@ namespace IMS_Client_2.StockManagement
                     ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
 
                     b = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_Insert_StoreTransferItemDetails_Voilet");
-
-                    //ObjDAL.UpdateColumnData("EnterQTY", SqlDbType.Int, dtStoreTransfer.Rows[i]["EnterQTY"]);
-                    //ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID);
-                    //ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
-                    //a = ObjDAL.UpdateData(clsUtility.DBName + ".dbo.tblStoreTransferItemDetails", "TransferItemID=" + dtStoreTransfer.Rows[i]["TransferItemID"]);
                 }
                 if (b)
                 {
@@ -324,21 +311,20 @@ namespace IMS_Client_2.StockManagement
 
         private void DeleteVioletToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (clsFormRights.HasFormRight(clsFormRights.Forms.frmTransferCheck,clsFormRights.Operation.Delete) || clsUtility.IsAdmin)
-            //{
-            //}
-            //else
-            //{
-            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
-            //}
-
-            if (dgvProductDetails.SelectedRows != null && dgvProductDetails.SelectedRows.Count > 0)
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmTransferCheck, clsFormRights.Operation.Delete) || clsUtility.IsAdmin)
             {
-                dgvProductDetails.Rows.RemoveAt(dgvProductDetails.SelectedRows[0].Index);
+                if (dgvProductDetails.SelectedRows != null && dgvProductDetails.SelectedRows.Count > 0)
+                {
+                    dgvProductDetails.Rows.RemoveAt(dgvProductDetails.SelectedRows[0].Index);
+                }
+                else
+                {
+                    clsUtility.ShowInfoMessage("Select Barcode to delete Violet", clsUtility.strProjectTitle);
+                }
             }
             else
             {
-                clsUtility.ShowInfoMessage("Select Barcode to delete Violet", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 

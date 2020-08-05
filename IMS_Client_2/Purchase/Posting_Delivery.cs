@@ -20,9 +20,6 @@ namespace IMS_Client_2.Purchase
         clsUtility ObjUtil = new clsUtility();
         clsConnection_DAL ObjDAL = new clsConnection_DAL(true);
 
-        int ID = 0;
-        //int ProductID = 0;
-
         Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
         Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
 
@@ -68,8 +65,6 @@ namespace IMS_Client_2.Purchase
                     bool b = clsUtility.ShowQuestionMessage("Are you sure want to post for " + txtSupplierBillNo.Text + " ?", clsUtility.strProjectTitle);
                     if (b)
                     {
-                        //string para = txtPurchaseInvoiceID.Text + "," + cmbStore.SelectedValue + "," + txtTotalQTY.Text + "," + cmbEntryType.SelectedIndex + ",'" + txtSupplierBillNo.Text + "'," + clsUtility.LoginID;
-                        //DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Insert_PurchaseInvoice_BulkPrint_Color_Size " + para);
                         ObjDAL.SetStoreProcedureData("PurchaseInvoiceID", SqlDbType.Int, txtPurchaseInvoiceID.Text, clsConnection_DAL.ParamType.Input);
                         ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, cmbStore.SelectedValue, clsConnection_DAL.ParamType.Input);
                         ObjDAL.SetStoreProcedureData("TotalQTY", SqlDbType.Int, txtTotalQTY.Text, clsConnection_DAL.ParamType.Input);
@@ -137,7 +132,7 @@ namespace IMS_Client_2.Purchase
         private void Posting_Delivery_Load(object sender, EventArgs e)
         {
             btnPost.BackgroundImage = B_Leave;
-            btnCancel.BackgroundImage = B_Leave;
+            btnClear.BackgroundImage = B_Leave;
 
             FillStoreData();
         }
@@ -221,7 +216,6 @@ namespace IMS_Client_2.Purchase
                 DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Posting_Delivery_QTY " + txtPurchaseInvoiceID.Text);
                 if (ObjUtil.ValidateTable(dt))
                 {
-                    //ProductID = Convert.ToInt32(dt.Rows[0]["ProductID"]);
                     cmbStore.SelectedValue = dt.Rows[0]["StoreID"].ToString();
                     txtTotalQTY.Text = dt.Rows[0]["Total"].ToString();
                 }

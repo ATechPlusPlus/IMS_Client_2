@@ -102,7 +102,8 @@
             "Color",
             "Item ( Product)",
             "Invoice/Bill No",
-            "Category (Department)"});
+            "Category (Department)",
+            "Model No"});
             this.cmbGenerate.Location = new System.Drawing.Point(18, 192);
             this.cmbGenerate.Name = "cmbGenerate";
             this.cmbGenerate.Size = new System.Drawing.Size(251, 27);

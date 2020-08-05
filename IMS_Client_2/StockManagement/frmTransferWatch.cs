@@ -25,9 +25,7 @@ namespace IMS_Client_2.StockManagement
 
         private void dgvTransferWatch_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-
             ObjUtil.SetDataGridProperty(dgvTransferWatch, DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            //ObjUtil.SetDataGridProperty(dgvTransferWatch, DataGridViewAutoSizeColumnsMode.Fill);
 
             dgvTransferWatch.Columns["StoreTransferID"].Visible = false;
             dgvTransferWatch.Columns["CreatedBy"].Visible = false;
@@ -77,6 +75,10 @@ namespace IMS_Client_2.StockManagement
         }
         private void frmTransferWatch_Load(object sender, EventArgs e)
         {
+            dgvTransferWatch.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+            //Most time consumption enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+            dgvTransferWatch.RowHeadersVisible = false; // set it to false if not needed
+
             LoadData();
         }
 
@@ -123,7 +125,6 @@ namespace IMS_Client_2.StockManagement
                 {
                     dgvTransferWatch.Columns.Remove("Sr.No.");
                 }
-                //dgvTransferWatch.DataSource = null;
             }
             else
             {
@@ -198,18 +199,17 @@ namespace IMS_Client_2.StockManagement
             }
             if (dgvTransferWatch.Columns[e.ColumnIndex].Name == "ColView")
             {
-                StockManagement.frmTransferWatch_Items Obj = new frmTransferWatch_Items();
-                Obj.pStoreBillDetailsID = dgvTransferWatch.SelectedRows[0].Cells["StoreTransferID"].Value == DBNull.Value ? 0 : Convert.ToInt32(dgvTransferWatch.SelectedRows[0].Cells["StoreTransferID"].Value);
-                Obj.ShowDialog();
-                //if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Invoice) || clsUtility.IsAdmin)
-                //{
-                //    StockManagement.frmTransferWatch_Items Obj = new frmTransferWatch_Items();
-                //    Obj.Show();
-                //}
-                //else
-                //{
-                //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
-                //}
+                
+                if (clsFormRights.HasFormRight(clsFormRights.Forms.frmTransferWatch_Items) || clsUtility.IsAdmin)
+                {
+                    StockManagement.frmTransferWatch_Items Obj = new frmTransferWatch_Items();
+                    Obj.pStoreBillDetailsID = dgvTransferWatch.SelectedRows[0].Cells["StoreTransferID"].Value == DBNull.Value ? 0 : Convert.ToInt32(dgvTransferWatch.SelectedRows[0].Cells["StoreTransferID"].Value);
+                    Obj.ShowDialog();
+                }
+                else
+                {
+                    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                }
             }
         }
 

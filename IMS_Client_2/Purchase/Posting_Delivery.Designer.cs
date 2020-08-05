@@ -33,7 +33,7 @@
             this.lblSupplier = new System.Windows.Forms.Label();
             this.lblSupplierBillNo = new System.Windows.Forms.Label();
             this.txtSupplierBillNo = new System.Windows.Forms.TextBox();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
             this.btnPost = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -95,21 +95,21 @@
             this.txtSupplierBillNo.Enter += new System.EventHandler(this.txtSupplierBillNo_Enter);
             this.txtSupplierBillNo.Leave += new System.EventHandler(this.txtSupplierBillNo_Leave);
             // 
-            // btnCancel
+            // btnClear
             // 
-            this.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCancel.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(276, 278);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(71, 25);
-            this.btnCancel.TabIndex = 5;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            this.btnCancel.MouseEnter += new System.EventHandler(this.btnPost_MouseEnter);
-            this.btnCancel.MouseLeave += new System.EventHandler(this.btnPost_MouseLeave);
+            this.btnClear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnClear.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClear.Location = new System.Drawing.Point(276, 278);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(71, 25);
+            this.btnClear.TabIndex = 5;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnClear.MouseEnter += new System.EventHandler(this.btnPost_MouseEnter);
+            this.btnClear.MouseLeave += new System.EventHandler(this.btnPost_MouseLeave);
             // 
             // btnPost
             // 
@@ -257,7 +257,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtTotalQTY);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnPost);
             this.Controls.Add(this.cmbEntryType);
             this.Controls.Add(this.lblSupplier);
@@ -286,7 +286,7 @@
         private System.Windows.Forms.Label lblSupplier;
         private System.Windows.Forms.Label lblSupplierBillNo;
         private System.Windows.Forms.TextBox txtSupplierBillNo;
-        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnPost;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;

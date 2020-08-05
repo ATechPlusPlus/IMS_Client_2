@@ -63,6 +63,11 @@ namespace IMS_Client_2.Report
         private void frmPettyCashExpReport_Load(object sender, EventArgs e)
         {
             FillStoreData();
+
+            dgvPettyCashExp.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+            //Most time consumption enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+            dgvPettyCashExp.RowHeadersVisible = false; // set it to false if not needed
+
             LoadData();
 
             cmbStore.SelectedValue = frmHome.Home_StoreID;

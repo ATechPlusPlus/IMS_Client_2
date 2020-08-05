@@ -123,7 +123,7 @@ namespace IMS_Client_2.Purchase
 
         private void LoadData()
         {
-            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID,SupplierBillNo,SupplierID,ShipmentNo,BillDate,BillValue,TotalQTY,Discount,ForeignExp,GrandTotal,LocalValue,LocalExp,LocalBillValue,IsInvoiceDone", "BillDate");
+            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID,SupplierBillNo,SupplierID,ShipmentNo,BillDate,BillValue,TotalQTY,Discount,ForeignExp,GrandTotal,LocalValue,LocalExp,LocalBillValue,IsInvoiceDone", "BillDate DESC");
 
             if (ObjUtil.ValidateTable(dt))
             {
@@ -174,7 +174,6 @@ namespace IMS_Client_2.Purchase
         private void btnAdd_Click(object sender, EventArgs e)
         {
             ClearAll();
-            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterNew, clsUtility.IsAdmin);
             ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterNew);
             grpPurchaseInvoice.Enabled = true;
             grpForeignCurrency.Enabled = true;
@@ -207,7 +206,6 @@ namespace IMS_Client_2.Purchase
                         ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
                         if (ObjDAL.InsertData(clsUtility.DBName + ".dbo.PurchaseInvoice", true) > 0)
                         {
-                            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave, clsUtility.IsAdmin);
                             ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave);
                             clsUtility.ShowInfoMessage("Purchase Invoice for '" + cmbSupplier.Text + "' is Saved Successfully..", clsUtility.strProjectTitle);
                             ClearAll();
@@ -239,7 +237,6 @@ namespace IMS_Client_2.Purchase
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Purchase_Invoice, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
             {
-                //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
                 ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit);
                 grpPurchaseInvoice.Enabled = true;
                 txtSupplierBillNo.Focus();
@@ -281,7 +278,6 @@ namespace IMS_Client_2.Purchase
 
                         if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID = " + ID + "") > 0)
                         {
-                            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate, clsUtility.IsAdmin);
                             ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate);
 
                             clsUtility.ShowInfoMessage("Purchase Invoice for '" + cmbSupplier.Text + "' is Updated", clsUtility.strProjectTitle);
@@ -323,14 +319,12 @@ namespace IMS_Client_2.Purchase
                     {
                         ObjDAL.SetStoreProcedureData("PurchaseInvoiceID", SqlDbType.Int, ID, clsConnection_DAL.ParamType.Input);
                         DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Delete_PurchaseInvoice");
-                        //if (ObjDAL.DeleteData(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID=" + ID + "") > 0)
                         if (ObjUtil.ValidateTable(ds.Tables[0]))
                         {
                             clsUtility.ShowInfoMessage("Supplier Bill No. '" + txtSupplierBillNo.Text + "' is deleted", clsUtility.strProjectTitle);
                             ClearAll();
                             LoadData();
                             grpPurchaseInvoice.Enabled = false;
-                            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
                             ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
                         }
                         else
@@ -359,7 +353,6 @@ namespace IMS_Client_2.Purchase
             {
                 ClearAll();
                 LoadData();
-                //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterCancel, clsUtility.IsAdmin);
                 ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterCancel);
                 grpPurchaseInvoice.Enabled = false;
             }
@@ -381,7 +374,6 @@ namespace IMS_Client_2.Purchase
             {
                 try
                 {
-                    //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterGridClick, clsUtility.IsAdmin);
                     ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterGridClick);
                     ID = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["PurchaseInvoiceID"].Value);
                     IsInvoiceDone = Convert.ToBoolean(dataGridView1.SelectedRows[0].Cells["IsInvoiceDone"].Value);
@@ -479,13 +471,15 @@ namespace IMS_Client_2.Purchase
             btnDelete.BackgroundImage = B_Leave;
             btnCancel.BackgroundImage = B_Leave;
 
-            //clsUtility.IsAdmin = true;//removed
-
             ObjUtil.RegisterCommandButtons(btnAdd, btnSave, btnEdit, btnUpdate, btnDelete, btnCancel);
             ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.Beginning);
-            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.Beginning, clsUtility.IsAdmin);
+
+            dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+            //Most time consumption enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+            dataGridView1.RowHeadersVisible = false; // set it to false if not needed
 
             LoadData();
+
             FillSupplierData();
             FillCountryData();
             dtpBillDate.MaxDate = DateTime.Now;
@@ -537,7 +531,7 @@ namespace IMS_Client_2.Purchase
                 LoadData();
                 return;
             }
-            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID,SupplierBillNo,SupplierID,ShipmentNo,BillDate,BillValue,TotalQTY,Discount,ForeignExp,GrandTotal,LocalValue,LocalExp,LocalBillValue,IsInvoiceDone", "ShipmentNo LIKE '%" + txtSearchByShipmentNo.Text + "%'", "BillDate");
+            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID,SupplierBillNo,SupplierID,ShipmentNo,BillDate,BillValue,TotalQTY,Discount,ForeignExp,GrandTotal,LocalValue,LocalExp,LocalBillValue,IsInvoiceDone", "ShipmentNo LIKE '%" + txtSearchByShipmentNo.Text + "%'", "BillDate DESC");
             if (ObjUtil.ValidateTable(dt))
             {
                 dataGridView1.DataSource = dt;
@@ -552,7 +546,6 @@ namespace IMS_Client_2.Purchase
         {
             ObjUtil.SetRowNumber(dataGridView1);
             ObjUtil.SetDataGridProperty(dataGridView1, DataGridViewAutoSizeColumnsMode.ColumnHeader);
-            //ObjUtil.SetDataGridProperty(dataGridView1, DataGridViewAutoSizeColumnsMode.Fill);
             dataGridView1.Columns["PurchaseInvoiceID"].Visible = false;
             dataGridView1.Columns["IsInvoiceDone"].Visible = false;
             dataGridView1.Columns["SupplierID"].Visible = false;
@@ -641,28 +634,12 @@ namespace IMS_Client_2.Purchase
 
         private void btnSupplierPopup_Click(object sender, EventArgs e)
         {
-            //int a = 0;
-            //if (cmbSupplier.SelectedIndex >= 0)
-            //{
-            //    a = Convert.ToInt32(cmbSupplier.SelectedValue);
-            //}
+            
             Masters.Supplier_Details Obj = new Masters.Supplier_Details();
             Obj.ShowDialog();
             FillSupplierData();
-            //if (a > 0)
-            //{
-            //    cmbSupplier.SelectedValue = a;
-            //}
-            //int CountryID = 0;
-            //if (cmbCountry.SelectedIndex >= 0)
-            //{
-            //    CountryID = Convert.ToInt32(cmbCountry.SelectedValue);
-            //}
+            
             FillCountryData();
-            //if (CountryID > 0)
-            //{
-            //    cmbCountry.SelectedValue = CountryID;
-            //}
         }
 
         private void txtCurrencyRate_TextChanged(object sender, EventArgs e)
@@ -733,7 +710,7 @@ namespace IMS_Client_2.Purchase
                 LoadData();
                 return;
             }
-            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID,SupplierBillNo,SupplierID,ShipmentNo,BillDate,BillValue,TotalQTY,Discount,ForeignExp,GrandTotal,LocalValue,LocalExp,LocalBillValue,IsInvoiceDone", "SupplierBillNo LIKE '%" + txtSearchByBillNo.Text + "%'", "BillDate");
+            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID,SupplierBillNo,SupplierID,ShipmentNo,BillDate,BillValue,TotalQTY,Discount,ForeignExp,GrandTotal,LocalValue,LocalExp,LocalBillValue,IsInvoiceDone", "SupplierBillNo LIKE '%" + txtSearchByBillNo.Text + "%'", "BillDate DESC");
             if (ObjUtil.ValidateTable(dt))
             {
                 dataGridView1.DataSource = dt;

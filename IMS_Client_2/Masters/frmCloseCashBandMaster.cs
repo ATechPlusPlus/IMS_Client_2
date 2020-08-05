@@ -73,10 +73,17 @@ namespace IMS_Client_2.Masters
         private void LoadData()
         {
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_CashBand_Master");
-            DataTable dt = ds.Tables[0];
-            if (ObjUtil.ValidateTable(dt))
+            if (ds != null && ds.Tables.Count > 0)
             {
-                dgvCashBand.DataSource = dt;
+                DataTable dt = ds.Tables[0];
+                if (ObjUtil.ValidateTable(dt))
+                {
+                    dgvCashBand.DataSource = dt;
+                }
+                else
+                {
+                    dgvCashBand.DataSource = null;
+                }
             }
             else
             {
