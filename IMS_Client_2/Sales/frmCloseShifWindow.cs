@@ -455,31 +455,31 @@ namespace IMS_Client_2.Sales
 
         private void dgvCloseCash_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (listView1.Items[0].Selected)
-            {
-                double CashBand = dgvCloseCash.Rows[e.RowIndex].Cells["CashBand"].Value == DBNull.Value ? 0 : Convert.ToDouble(dgvCloseCash.Rows[e.RowIndex].Cells["CashBand"].Value);
-                int Count = dgvCloseCash.Rows[e.RowIndex].Cells["Count"].Value == DBNull.Value ? 0 : Convert.ToInt32(dgvCloseCash.Rows[e.RowIndex].Cells["Count"].Value);
-                dgvCloseCash.Rows[e.RowIndex].Cells["Value"].Value = Math.Round(CashBand * Count, 3);
+            //if (listView1.Items[0].Selected)
+            //{
+            //    double CashBand = dgvCloseCash.Rows[e.RowIndex].Cells["CashBand"].Value == DBNull.Value ? 0 : Convert.ToDouble(dgvCloseCash.Rows[e.RowIndex].Cells["CashBand"].Value);
+            //    int Count = dgvCloseCash.Rows[e.RowIndex].Cells["Count"].Value == DBNull.Value ? 0 : Convert.ToInt32(dgvCloseCash.Rows[e.RowIndex].Cells["Count"].Value);
+            //    dgvCloseCash.Rows[e.RowIndex].Cells["Value"].Value = Math.Round(CashBand * Count, 3);
 
-                CalcTotalCashBand();
-            }
-            else if (listView1.Items[2].Selected)
-            {
-                if (ObjUtil.ValidateTable(dtExpenses))
-                {
-                    dtExpenses.Rows[e.RowIndex]["MasterCashClosingID"] = pMasterCashClosingID;
-                    dtExpenses.Rows[e.RowIndex]["PettyCashExpID"] = 0;
-                    if (e.RowIndex + 1 == dgvCloseCash.Rows.Count)
-                    {
-                        DataRow Row = dtExpenses.NewRow();
-                        Row["ExpensesAmt"] = 0;
-                        dtExpenses.Rows.Add(Row);
-                    }
-                    dtExpenses.AcceptChanges();
-                    dgvCloseCash.DataSource = dtExpenses;
-                }
-                CalcTotalPettyCashExp();
-            }
+            //    CalcTotalCashBand();
+            //}
+            //else if (listView1.Items[2].Selected)
+            //{
+            //    if (ObjUtil.ValidateTable(dtExpenses))
+            //    {
+            //        dtExpenses.Rows[e.RowIndex]["MasterCashClosingID"] = pMasterCashClosingID;
+            //        dtExpenses.Rows[e.RowIndex]["PettyCashExpID"] = 0;
+            //        if (e.RowIndex + 1 == dgvCloseCash.Rows.Count)
+            //        {
+            //            DataRow Row = dtExpenses.NewRow();
+            //            Row["ExpensesAmt"] = 0;
+            //            dtExpenses.Rows.Add(Row);
+            //        }
+            //        dtExpenses.AcceptChanges();
+            //        dgvCloseCash.DataSource = dtExpenses;
+            //    }
+            //    CalcTotalPettyCashExp();
+            //}
         }
 
         private void dgvCloseCash_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
@@ -608,6 +608,35 @@ namespace IMS_Client_2.Sales
                 return dt.Rows[0][0].ToString();
             }
             return "0";
+        }
+
+        private void dgvCloseCash_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (listView1.Items[0].Selected)
+            {
+                double CashBand = dgvCloseCash.Rows[e.RowIndex].Cells["CashBand"].Value == DBNull.Value ? 0 : Convert.ToDouble(dgvCloseCash.Rows[e.RowIndex].Cells["CashBand"].Value);
+                int Count = dgvCloseCash.Rows[e.RowIndex].Cells["Count"].Value == DBNull.Value ? 0 : Convert.ToInt32(dgvCloseCash.Rows[e.RowIndex].Cells["Count"].Value);
+                dgvCloseCash.Rows[e.RowIndex].Cells["Value"].Value = Math.Round(CashBand * Count, 3);
+
+                CalcTotalCashBand();
+            }
+            else if (listView1.Items[2].Selected)
+            {
+                if (ObjUtil.ValidateTable(dtExpenses))
+                {
+                    dtExpenses.Rows[e.RowIndex]["MasterCashClosingID"] = pMasterCashClosingID;
+                    dtExpenses.Rows[e.RowIndex]["PettyCashExpID"] = 0;
+                    if (e.RowIndex + 1 == dgvCloseCash.Rows.Count)
+                    {
+                        DataRow Row = dtExpenses.NewRow();
+                        Row["ExpensesAmt"] = 0;
+                        dtExpenses.Rows.Add(Row);
+                    }
+                    dtExpenses.AcceptChanges();
+                    dgvCloseCash.DataSource = dtExpenses;
+                }
+                CalcTotalPettyCashExp();
+            }
         }
 
         private void btnPrint_Click(object sender, EventArgs e)

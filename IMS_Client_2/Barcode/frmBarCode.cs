@@ -74,6 +74,7 @@ namespace IMS_Client_2.Barcode
 
             dgvProductDetails.Columns["ProductStockID"].Visible = false;
             dgvProductDetails.Columns["StoreID"].Visible = false;
+            dgvProductDetails.Columns["SubProductID"].Visible = false;
         }
 
         private void AddNewPage()

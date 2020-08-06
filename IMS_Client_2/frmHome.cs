@@ -39,7 +39,6 @@ namespace IMS_Client_2
             int pStoreID = Home_StoreID;
             DataTable dtCashMaster = ObjDAL.ExecuteSelectStatement("SELECT TOP 1 * FROM " + clsUtility.DBName + ".[dbo].[tblMasterCashClosing] WITH(NOLOCK) WHERE StoreID=" + pStoreID + " ORDER BY CashBoxDate DESC");
 
-            //DataTable dtCashMaster = ObjDAL.ExecuteSelectStatement("SELECT * FROM " + clsUtility.DBName + ".[dbo].[tblMasterCashClosing] WITH(NOLOCK) WHERE CashBOxDate=CONVERT(DATE,GETDATE()) AND StoreID=" + pStoreID);
             if (ObjUtil.ValidateTable(dtCashMaster))
             {
                 Home_MasterCashClosingID = Convert.ToInt32(dtCashMaster.Rows[0]["MasterCashClosingID"]);
@@ -109,6 +108,7 @@ namespace IMS_Client_2
 
         private void GetDefaultShop()
         {
+            ObjDAL.SetStoreProcedureData("MachineName", SqlDbType.NChar, Environment.MachineName, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".[dbo].SPR_GetDefaultShopName");
             if (ds != null && ds.Tables.Count > 0)
             {

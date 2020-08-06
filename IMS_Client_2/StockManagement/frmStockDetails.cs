@@ -82,10 +82,14 @@ namespace IMS_Client_2.StockManagement
         private void dgvStockDetails_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             ObjUtil.SetRowNumber(dgvStockDetails);
-            ObjUtil.SetDataGridProperty(dgvStockDetails, DataGridViewAutoSizeColumnsMode.DisplayedCells);
+            ObjUtil.SetDataGridProperty(dgvStockDetails, DataGridViewAutoSizeColumnsMode.Fill);
             if (dgvStockDetails.Columns.Contains("ProductID"))
             {
                 dgvStockDetails.Columns["ProductID"].Visible = false;
+            }
+            if (dgvStockDetails.Columns.Contains("SubProductID"))
+            {
+                dgvStockDetails.Columns["SubProductID"].Visible = false;
             }
             if (dgvStockDetails.Columns.Contains("Photo"))
             {
@@ -163,7 +167,7 @@ namespace IMS_Client_2.StockManagement
                     DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_ProductDetails_Popup '" + txtSearchByProductName.Text + "'");
                     if (ObjUtil.ValidateTable(dt))
                     {
-                        ObjUtil.SetControlData(txtSearchByProductName, "ProductName");
+                        ObjUtil.SetControlData(txtSearchByProductName, "ItemName");
                         ObjUtil.SetControlData(txtProductID, "ProductID");
                         ObjUtil.ShowDataPopup(dt, txtSearchByProductName, this, groupBox1);
 
@@ -325,47 +329,60 @@ namespace IMS_Client_2.StockManagement
 
         private void dgvStockDetails_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgvStockDetails.SelectedRows.Count > 0)
+            //if (dgvStockDetails.SelectedRows.Count > 0)
+            //{
+            //    GetProductImage(dgvStockDetails.SelectedRows[0].Cells["ProductID"].Value.ToString());
+            //}
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
             {
-                GetProductImage(dgvStockDetails.SelectedRows[0].Cells["ProductID"].Value.ToString());
+                return;
             }
-        }
-
-        private void GetProductImage(string ProductID)
-        {
-            string ImageID = "";
-            DataTable dtPhotoNumber = ObjDAL.ExecuteSelectStatement("SELECT Photo FROM " + clsUtility.DBName + ".[dbo].[ProductMaster] WITH(NOLOCK) WHERE ProductID=" + ProductID + "");
-            if (ObjUtil.ValidateTable(dtPhotoNumber))
+            if (e.RowIndex != dgvStockDetails.Rows.Count - 1)
             {
-                ImageID = dtPhotoNumber.Rows[0]["Photo"].ToString();
+                int pSubProductID = Convert.ToInt32(dgvStockDetails.SelectedRows[0].Cells["SubProductID"].Value);
+                PicItem.Image = GetProductPhoto(pSubProductID);
             }
             else
             {
                 PicItem.Image = null;
             }
-            DataTable dtImagePath = ObjDAL.ExecuteSelectStatement(" SELECT ImagePath, Extension FROM " + clsUtility.DBName + ".dbo.DefaultStoreSetting WITH(NOLOCK) WHERE MachineName='" + Environment.MachineName + "'");
-            if (ObjUtil.ValidateTable(dtImagePath))
-            {
-                if (dtImagePath.Rows[0]["ImagePath"] != DBNull.Value)
-                {
-                    string ImgPath = dtImagePath.Rows[0]["ImagePath"].ToString();
-                    string extension = dtImagePath.Rows[0]["Extension"].ToString();
+        }
 
-                    string imgFile = ImgPath + "//" + ImageID + extension;
-                    if (System.IO.File.Exists(imgFile))
-                    {
-                        PicItem.Image = Image.FromFile(imgFile);
-                    }
-                    else
-                    {
-                        PicItem.Image = null;
-                    }
-                }
-                else
-                {
-                    clsUtility.ShowInfoMessage("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
-                }
-            }
+        private void GetProductImage(string ProductID)
+        {
+            //string ImageID = "";
+            //DataTable dtPhotoNumber = ObjDAL.ExecuteSelectStatement("SELECT Photo FROM " + clsUtility.DBName + ".[dbo].[ProductMaster] WITH(NOLOCK) WHERE ProductID=" + ProductID + "");
+            //if (ObjUtil.ValidateTable(dtPhotoNumber))
+            //{
+            //    ImageID = dtPhotoNumber.Rows[0]["Photo"].ToString();
+            //}
+            //else
+            //{
+            //    PicItem.Image = null;
+            //}
+            //DataTable dtImagePath = ObjDAL.ExecuteSelectStatement(" SELECT ImagePath, Extension FROM " + clsUtility.DBName + ".dbo.DefaultStoreSetting WITH(NOLOCK) WHERE MachineName='" + Environment.MachineName + "'");
+            //if (ObjUtil.ValidateTable(dtImagePath))
+            //{
+            //    if (dtImagePath.Rows[0]["ImagePath"] != DBNull.Value)
+            //    {
+            //        string ImgPath = dtImagePath.Rows[0]["ImagePath"].ToString();
+            //        string extension = dtImagePath.Rows[0]["Extension"].ToString();
+
+            //        string imgFile = ImgPath + "//" + ImageID + extension;
+            //        if (System.IO.File.Exists(imgFile))
+            //        {
+            //            PicItem.Image = Image.FromFile(imgFile);
+            //        }
+            //        else
+            //        {
+            //            PicItem.Image = null;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        clsUtility.ShowInfoMessage("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
+            //    }
+            //}
         }
 
         private void txtSearchByStyleNo_TextChanged(object sender, EventArgs e)
@@ -521,6 +538,54 @@ namespace IMS_Client_2.StockManagement
         private void cmbCategory_SelectionChangeCommitted(object sender, EventArgs e)
         {
             SearchByCategoryID();
+        }
+
+        private void dgvStockDetails_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private Image GetProductPhoto(int SubProductID)
+        {
+            Image imgProduct = null;
+            ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, SubProductID, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_ProductPhoto");
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                DataTable dt = ds.Tables[0];
+                if (ObjUtil.ValidateTable(dt))
+                {
+                    if (Convert.ToInt32(dt.Rows[0]["Flag"]) == 1)
+                    {
+                        string img = dt.Rows[0]["ImgName"].ToString();
+                        if (System.IO.File.Exists(img))
+                        {
+                            imgProduct = Image.FromFile(img);
+                        }
+                        else
+                        {
+                            imgProduct = IMS_Client_2.Properties.Resources.NoImage;
+                        }
+                    }
+                    else
+                    {
+                        imgProduct = IMS_Client_2.Properties.Resources.NoImage;
+                        //clsUtility.ShowInfoMessage("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
+                    }
+                }
+            }
+            return imgProduct;
+        }
+
+        private void txtSearchByProductName_Enter(object sender, EventArgs e)
+        {
+            ObjUtil.SetTextHighlightColor(sender);
+        }
+
+        private void txtSearchByProductName_Leave(object sender, EventArgs e)
+        {
+            ObjUtil.SetTextHighlightColor(sender, Color.White);
         }
     }
 }

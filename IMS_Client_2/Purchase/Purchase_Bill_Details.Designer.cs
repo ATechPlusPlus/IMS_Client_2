@@ -32,7 +32,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.grpPurchaseBillDetail = new System.Windows.Forms.GroupBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -127,7 +126,6 @@
             // grpPurchaseBillDetail
             // 
             this.grpPurchaseBillDetail.BackColor = System.Drawing.Color.Transparent;
-            this.grpPurchaseBillDetail.Controls.Add(this.label9);
             this.grpPurchaseBillDetail.Controls.Add(this.label8);
             this.grpPurchaseBillDetail.Controls.Add(this.label7);
             this.grpPurchaseBillDetail.Controls.Add(this.label6);
@@ -156,18 +154,6 @@
             this.grpPurchaseBillDetail.TabIndex = 6;
             this.grpPurchaseBillDetail.TabStop = false;
             this.grpPurchaseBillDetail.Text = "Item Details";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.Color.Transparent;
-            this.label9.Font = new System.Drawing.Font("Times New Roman", 11.25F);
-            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label9.Location = new System.Drawing.Point(691, 118);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(15, 17);
-            this.label9.TabIndex = 296;
-            this.label9.Text = "*";
             // 
             // label8
             // 
@@ -512,8 +498,8 @@
             this.dataGridView1.Size = new System.Drawing.Size(930, 209);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             this.dataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView1_CellValidating);
+            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.dataGridView1.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView1_ColumnAdded);
             this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
             // 
@@ -957,7 +943,6 @@
         private System.Windows.Forms.TextBox txtNewRate;
         private System.Windows.Forms.TextBox txtPurchaseInvoiceID;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;

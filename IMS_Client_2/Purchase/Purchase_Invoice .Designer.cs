@@ -237,7 +237,7 @@
             // 
             this.rdSearchByBillNo.AutoSize = true;
             this.rdSearchByBillNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdSearchByBillNo.Location = new System.Drawing.Point(9, 21);
+            this.rdSearchByBillNo.Location = new System.Drawing.Point(32, 18);
             this.rdSearchByBillNo.Name = "rdSearchByBillNo";
             this.rdSearchByBillNo.Size = new System.Drawing.Size(95, 21);
             this.rdSearchByBillNo.TabIndex = 3;
@@ -250,7 +250,7 @@
             this.txtSearchByBillNo.BackColor = System.Drawing.Color.White;
             this.txtSearchByBillNo.Enabled = false;
             this.txtSearchByBillNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearchByBillNo.Location = new System.Drawing.Point(104, 19);
+            this.txtSearchByBillNo.Location = new System.Drawing.Point(156, 15);
             this.txtSearchByBillNo.Name = "txtSearchByBillNo";
             this.txtSearchByBillNo.Size = new System.Drawing.Size(183, 25);
             this.txtSearchByBillNo.TabIndex = 4;
@@ -263,7 +263,7 @@
             this.rdShowAll.AutoSize = true;
             this.rdShowAll.Checked = true;
             this.rdShowAll.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdShowAll.Location = new System.Drawing.Point(679, 19);
+            this.rdShowAll.Location = new System.Drawing.Point(699, 18);
             this.rdShowAll.Name = "rdShowAll";
             this.rdShowAll.Size = new System.Drawing.Size(79, 21);
             this.rdShowAll.TabIndex = 2;
@@ -276,7 +276,7 @@
             // 
             this.rdSearchByShipment.AutoSize = true;
             this.rdSearchByShipment.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdSearchByShipment.Location = new System.Drawing.Point(327, 20);
+            this.rdSearchByShipment.Location = new System.Drawing.Point(363, 18);
             this.rdSearchByShipment.Name = "rdSearchByShipment";
             this.rdSearchByShipment.Size = new System.Drawing.Size(130, 21);
             this.rdSearchByShipment.TabIndex = 0;
@@ -289,7 +289,7 @@
             this.txtSearchByShipmentNo.BackColor = System.Drawing.Color.White;
             this.txtSearchByShipmentNo.Enabled = false;
             this.txtSearchByShipmentNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearchByShipmentNo.Location = new System.Drawing.Point(457, 18);
+            this.txtSearchByShipmentNo.Location = new System.Drawing.Point(497, 15);
             this.txtSearchByShipmentNo.Name = "txtSearchByShipmentNo";
             this.txtSearchByShipmentNo.Size = new System.Drawing.Size(183, 25);
             this.txtSearchByShipmentNo.TabIndex = 1;
@@ -587,7 +587,7 @@
             this.grpCurrencyRate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpCurrencyRate.Location = new System.Drawing.Point(20, 203);
             this.grpCurrencyRate.Name = "grpCurrencyRate";
-            this.grpCurrencyRate.Size = new System.Drawing.Size(729, 51);
+            this.grpCurrencyRate.Size = new System.Drawing.Size(738, 51);
             this.grpCurrencyRate.TabIndex = 1;
             this.grpCurrencyRate.TabStop = false;
             this.grpCurrencyRate.Text = "Currency";
@@ -601,7 +601,7 @@
             this.btnCurrencyRatePopup.Enabled = false;
             this.btnCurrencyRatePopup.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCurrencyRatePopup.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCurrencyRatePopup.Location = new System.Drawing.Point(697, 18);
+            this.btnCurrencyRatePopup.Location = new System.Drawing.Point(703, 18);
             this.btnCurrencyRatePopup.Margin = new System.Windows.Forms.Padding(2);
             this.btnCurrencyRatePopup.Name = "btnCurrencyRatePopup";
             this.btnCurrencyRatePopup.Size = new System.Drawing.Size(27, 27);
@@ -626,7 +626,7 @@
             this.cmbCountry.Enabled = false;
             this.cmbCountry.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCountry.FormattingEnabled = true;
-            this.cmbCountry.Location = new System.Drawing.Point(128, 17);
+            this.cmbCountry.Location = new System.Drawing.Point(125, 15);
             this.cmbCountry.Name = "cmbCountry";
             this.cmbCountry.Size = new System.Drawing.Size(206, 27);
             this.cmbCountry.Sorted = true;
@@ -637,7 +637,7 @@
             // 
             this.txtCurrencyRate.BackColor = System.Drawing.Color.White;
             this.txtCurrencyRate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCurrencyRate.Location = new System.Drawing.Point(486, 19);
+            this.txtCurrencyRate.Location = new System.Drawing.Point(492, 17);
             this.txtCurrencyRate.Name = "txtCurrencyRate";
             this.txtCurrencyRate.ReadOnly = true;
             this.txtCurrencyRate.Size = new System.Drawing.Size(206, 25);

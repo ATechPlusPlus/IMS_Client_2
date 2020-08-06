@@ -42,7 +42,7 @@ namespace IMS_Client_2.StockManagement
                     DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_ProductDetails_Popup '" + txtSearchByProductName.Text + "'");
                     if (ObjUtil.ValidateTable(dt))
                     {
-                        ObjUtil.SetControlData(txtSearchByProductName, "ProductName");
+                        ObjUtil.SetControlData(txtSearchByProductName, "ItemName");
                         ObjUtil.SetControlData(txtProductID, "ProductID");
                         ObjUtil.ShowDataPopup(dt, txtSearchByProductName, this, groupBox1);
 

@@ -22,6 +22,7 @@ namespace IMS_Client_2.Purchase
 
         int ID = 0;
         bool IsInvoiceDone = false;
+        DateTime dtDate = DateTime.Now;
 
         Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
         Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
@@ -43,6 +44,8 @@ namespace IMS_Client_2.Purchase
 
             cmbSupplier.SelectedIndex = -1;
             cmbCountry.SelectedIndex = -1;
+
+            dtpBillDate.Value = dtDate;
 
             txtSupplierBillNo.Focus();
 
@@ -123,11 +126,20 @@ namespace IMS_Client_2.Purchase
 
         private void LoadData()
         {
-            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID,SupplierBillNo,SupplierID,ShipmentNo,BillDate,BillValue,TotalQTY,Discount,ForeignExp,GrandTotal,LocalValue,LocalExp,LocalBillValue,IsInvoiceDone", "BillDate DESC");
-
-            if (ObjUtil.ValidateTable(dt))
+            ObjDAL.SetStoreProcedureData("SupplierBillNo", SqlDbType.VarChar, '0', clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ShipmentNo", SqlDbType.VarChar, '0', clsConnection_DAL.ParamType.Input);
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_PurchaseInvoice");
+            if (ds != null && ds.Tables.Count > 0)
             {
-                dataGridView1.DataSource = dt;
+                DataTable dt = ds.Tables[0];
+                if (ObjUtil.ValidateTable(dt))
+                {
+                    dataGridView1.DataSource = dt;
+                }
+                else
+                {
+                    dataGridView1.DataSource = null;
+                }
             }
             else
             {
@@ -482,7 +494,9 @@ namespace IMS_Client_2.Purchase
 
             FillSupplierData();
             FillCountryData();
-            dtpBillDate.MaxDate = DateTime.Now;
+
+            dtDate = DateTime.Now;
+            dtpBillDate.MaxDate = dtDate;
         }
 
         private void btnAdd_MouseEnter(object sender, EventArgs e)
@@ -531,14 +545,20 @@ namespace IMS_Client_2.Purchase
                 LoadData();
                 return;
             }
-            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID,SupplierBillNo,SupplierID,ShipmentNo,BillDate,BillValue,TotalQTY,Discount,ForeignExp,GrandTotal,LocalValue,LocalExp,LocalBillValue,IsInvoiceDone", "ShipmentNo LIKE '%" + txtSearchByShipmentNo.Text + "%'", "BillDate DESC");
-            if (ObjUtil.ValidateTable(dt))
+            ObjDAL.SetStoreProcedureData("SupplierBillNo", SqlDbType.VarChar, '0', clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ShipmentNo", SqlDbType.VarChar, txtSearchByShipmentNo.Text.Trim(), clsConnection_DAL.ParamType.Input);
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_PurchaseInvoice");
+            if (ds != null && ds.Tables.Count > 0)
             {
-                dataGridView1.DataSource = dt;
-            }
-            else
-            {
-                dataGridView1.DataSource = null;
+                DataTable dt = ds.Tables[0];
+                if (ObjUtil.ValidateTable(dt))
+                {
+                    dataGridView1.DataSource = dt;
+                }
+                else
+                {
+                    dataGridView1.DataSource = null;
+                }
             }
         }
 
@@ -573,12 +593,12 @@ namespace IMS_Client_2.Purchase
                 ForeignExp = txtForeignExp.Text.Length > 0 ? Convert.ToDecimal(txtForeignExp.Text) : 0;
                 ForeignDiscount = txtForeignDiscount.Text.Length > 0 ? Convert.ToDecimal(txtForeignDiscount.Text) : 0;
 
-                LocalExp = txtLocalExp.Text.Length > 0 ? Convert.ToDecimal(txtLocalExp.Text) : 0;
-                LocalValue = (BillValue * CurrencyRate);
-                txtLocalValue.Text = Math.Round(LocalValue, 2).ToString();
-
                 ForeignNetValue = BillValue - (BillValue * ForeignDiscount * 0.01M) + ForeignExp;
                 txtNetValue.Text = Math.Round(ForeignNetValue, 2).ToString();
+
+                LocalExp = txtLocalExp.Text.Length > 0 ? Convert.ToDecimal(txtLocalExp.Text) : 0;
+                LocalValue = (ForeignNetValue * CurrencyRate);
+                txtLocalValue.Text = Math.Round(LocalValue, 2).ToString();
 
                 LocalBillValue = Math.Round((ForeignNetValue * CurrencyRate) + LocalExp, 2);
                 txtLocalBillValue.Text = Math.Round(LocalBillValue, 2).ToString();
@@ -602,7 +622,7 @@ namespace IMS_Client_2.Purchase
                 txtCurrencyRate.Text = Convert.ToDecimal(ob).ToString();
                 if (ob == null)
                 {
-                    clsUtility.ShowInfoMessage("Currency Rate is defined for Country " + cmbCountry.Text, clsUtility.strProjectTitle);
+                    clsUtility.ShowInfoMessage("Currency Rate is not defined for Country " + cmbCountry.Text, clsUtility.strProjectTitle);
                     btnCurrencyRatePopup.Enabled = true;
                 }
                 else
@@ -634,11 +654,11 @@ namespace IMS_Client_2.Purchase
 
         private void btnSupplierPopup_Click(object sender, EventArgs e)
         {
-            
+
             Masters.Supplier_Details Obj = new Masters.Supplier_Details();
             Obj.ShowDialog();
             FillSupplierData();
-            
+
             FillCountryData();
         }
 
@@ -710,14 +730,20 @@ namespace IMS_Client_2.Purchase
                 LoadData();
                 return;
             }
-            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.PurchaseInvoice", "PurchaseInvoiceID,SupplierBillNo,SupplierID,ShipmentNo,BillDate,BillValue,TotalQTY,Discount,ForeignExp,GrandTotal,LocalValue,LocalExp,LocalBillValue,IsInvoiceDone", "SupplierBillNo LIKE '%" + txtSearchByBillNo.Text + "%'", "BillDate DESC");
-            if (ObjUtil.ValidateTable(dt))
+            ObjDAL.SetStoreProcedureData("SupplierBillNo", SqlDbType.VarChar, txtSearchByBillNo.Text.Trim(), clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ShipmentNo", SqlDbType.VarChar, '0', clsConnection_DAL.ParamType.Input);
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_PurchaseInvoice");
+            if (ds != null && ds.Tables.Count > 0)
             {
-                dataGridView1.DataSource = dt;
-            }
-            else
-            {
-                dataGridView1.DataSource = null;
+                DataTable dt = ds.Tables[0];
+                if (ObjUtil.ValidateTable(dt))
+                {
+                    dataGridView1.DataSource = dt;
+                }
+                else
+                {
+                    dataGridView1.DataSource = null;
+                }
             }
         }
 

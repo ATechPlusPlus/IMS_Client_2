@@ -117,7 +117,6 @@ namespace IMS_Client_2.Masters
         private void btnAdd_Click(object sender, EventArgs e)
         {
             ClearAll();
-            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterNew, clsUtility.IsAdmin);
             ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterNew);
             grpProduct.Enabled = true;
             grpPhoto.Enabled = true;
@@ -137,13 +136,9 @@ namespace IMS_Client_2.Masters
                         ObjDAL.SetColumnData("CategoryID", SqlDbType.Int, cmbCategory.SelectedValue);
                         ObjDAL.SetColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
                         ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
-                        if (PicProductMaster.Image != null)
-                        {
-                            //  ObjDAL.SetColumnData("Photo", SqlDbType.VarBinary, ObjUtil.GetImageBytes(PicProductMaster.Image));
-                        }
+
                         if (ObjDAL.InsertData(clsUtility.DBName + ".dbo.ProductMaster", true) > 0)
                         {
-                            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave, clsUtility.IsAdmin);
                             ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave);
                             clsUtility.ShowInfoMessage("Product Name : '" + txtProductName.Text + "' is Saved Successfully..", clsUtility.strProjectTitle);
                             ClearAll();
@@ -174,7 +169,6 @@ namespace IMS_Client_2.Masters
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Product_Master, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
             {
-                //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
                 ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit);
                 grpProduct.Enabled = true;
                 grpPhoto.Enabled = true;
@@ -201,13 +195,9 @@ namespace IMS_Client_2.Masters
                         ObjDAL.UpdateColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
                         ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
                         ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
-                        //if (PicProductMaster.Image != null)
-                        //{
-                        //    ObjDAL.UpdateColumnData("Photo", SqlDbType.VarBinary, ObjUtil.GetImageBytes(PicProductMaster.Image));
-                        //}
+
                         if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.ProductMaster", "ProductID = " + ID + "") > 0)
                         {
-                            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate, clsUtility.IsAdmin);
                             ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate);
 
                             clsUtility.ShowInfoMessage("'" + txtProductName.Text + "' Product is Updated", clsUtility.strProjectTitle);
@@ -249,7 +239,6 @@ namespace IMS_Client_2.Masters
                         ClearAll();
                         LoadData();
                         grpProduct.Enabled = false;
-                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
                         ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
                     }
                     else
@@ -272,7 +261,6 @@ namespace IMS_Client_2.Masters
             {
                 ClearAll();
                 LoadData();
-                //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterCancel, clsUtility.IsAdmin);
                 ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterCancel);
                 grpProduct.Enabled = false;
             }
@@ -294,22 +282,14 @@ namespace IMS_Client_2.Masters
             {
                 try
                 {
-                    //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterGridClick, clsUtility.IsAdmin);
                     ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterGridClick);
                     ID = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ProductID"].Value);
                     txtProductName.Text = dataGridView1.SelectedRows[0].Cells["ItemName"].Value.ToString();
                     txtProductArabicName.Text = dataGridView1.SelectedRows[0].Cells["Arabic Name"].Value.ToString();
                     cmbCategory.SelectedValue = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["CategoryID"].Value);
                     cmbActiveStatus.SelectedItem = dataGridView1.SelectedRows[0].Cells["ActiveStatus"].Value.ToString();
-                    if (dataGridView1.SelectedRows[0].Cells["Photo"].Value != DBNull.Value)
-                    {
-                        GetProductImage(dataGridView1.SelectedRows[0].Cells["Photo"].Value.ToString());
-                    }
-                    else
-                    {
-                        PicProductMaster.Image = null;
-                    }
 
+                    PicProductMaster.Image = GetProductPhoto(ID);
                     grpProduct.Enabled = false;
                     txtProductName.Focus();
                 }
@@ -377,7 +357,6 @@ namespace IMS_Client_2.Masters
             {
                 txtSearchByProduct.Enabled = false;
                 txtSearchByProduct.Clear();
-                rdShowAll.Checked = true;
             }
         }
 
@@ -400,10 +379,20 @@ namespace IMS_Client_2.Masters
                 LoadData();
                 return;
             }
-            DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Product_Master '" + txtSearchByProduct.Text.Trim() + "'");
-            if (ObjUtil.ValidateTable(dt))
+            ObjDAL.SetStoreProcedureData("ProductName", SqlDbType.NVarChar, txtSearchByProduct.Text.Trim(), clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("CategoryId", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_Product_Master");
+            if (ds != null && ds.Tables.Count > 0)
             {
-                dataGridView1.DataSource = dt;
+                DataTable dt = ds.Tables[0];
+                if (ObjUtil.ValidateTable(dt))
+                {
+                    dataGridView1.DataSource = dt;
+                }
+                else
+                {
+                    dataGridView1.DataSource = null;
+                }
             }
             else
             {
@@ -483,31 +472,37 @@ namespace IMS_Client_2.Masters
             //}
         }
 
-        private void GetProductImage(string ImageID)
+        private Image GetProductPhoto(int SubProductID)
         {
-            DataTable dtImagePath = ObjDAL.ExecuteSelectStatement("SELECT ImagePath, Extension FROM " + clsUtility.DBName + ".dbo.DefaultStoreSetting WITH(NOLOCK) WHERE MachineName='" + Environment.MachineName + "'");
-            if (ObjUtil.ValidateTable(dtImagePath))
+            Image imgProduct = null;
+            ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, SubProductID, clsConnection_DAL.ParamType.Input);
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_ProductPhoto");
+            if (ds != null && ds.Tables.Count > 0)
             {
-                if (dtImagePath.Rows[0]["ImagePath"] != DBNull.Value)
+                DataTable dt = ds.Tables[0];
+                if (ObjUtil.ValidateTable(dt))
                 {
-                    string ImgPath = dtImagePath.Rows[0]["ImagePath"].ToString();
-                    string extension = dtImagePath.Rows[0]["Extension"].ToString();
-
-                    string imgFile = ImgPath + "//" + ImageID + extension;
-                    if (File.Exists(imgFile))
+                    if (Convert.ToInt32(dt.Rows[0]["Flag"]) == 1)
                     {
-                        PicProductMaster.Image = Image.FromFile(imgFile);
+                        string img = dt.Rows[0]["ImgName"].ToString();
+                        if (System.IO.File.Exists(img))
+                        {
+                            imgProduct = Image.FromFile(img);
+                        }
+                        else
+                        {
+                            imgProduct = IMS_Client_2.Properties.Resources.NoImage;
+                        }
                     }
                     else
                     {
-                        PicProductMaster.Image = null;
+                        imgProduct = IMS_Client_2.Properties.Resources.NoImage;
+                        //clsUtility.ShowInfoMessage("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
                     }
                 }
-                else
-                {
-                    clsUtility.ShowInfoMessage("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
-                }
             }
+            return imgProduct;
         }
 
         private void cmbSearchByCategory_SelectionChangeCommitted(object sender, EventArgs e)
@@ -518,7 +513,7 @@ namespace IMS_Client_2.Masters
                 return;
             }
             //DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Product_Master '" + cmbSearchByCategory.SelectedValue + "'");
-            ObjDAL.SetStoreProcedureData("ProductName", SqlDbType.NVarChar, DBNull.Value, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ProductName", SqlDbType.NVarChar, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("CategoryId", SqlDbType.Int, cmbSearchByCategory.SelectedValue, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_Product_Master");
             if (ds != null && ds.Tables.Count > 0)

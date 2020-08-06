@@ -188,7 +188,7 @@
             this.grpProduct.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpProduct.Location = new System.Drawing.Point(19, 96);
             this.grpProduct.Name = "grpProduct";
-            this.grpProduct.Size = new System.Drawing.Size(714, 196);
+            this.grpProduct.Size = new System.Drawing.Size(714, 117);
             this.grpProduct.TabIndex = 0;
             this.grpProduct.TabStop = false;
             this.grpProduct.Text = "Item Details";
@@ -222,7 +222,7 @@
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 11.25F);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label3.Location = new System.Drawing.Point(697, 89);
+            this.label3.Location = new System.Drawing.Point(697, 73);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(15, 17);
             this.label3.TabIndex = 287;
@@ -234,7 +234,7 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 11.25F);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label1.Location = new System.Drawing.Point(320, 89);
+            this.label1.Location = new System.Drawing.Point(320, 73);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(15, 17);
             this.label1.TabIndex = 2;
@@ -260,7 +260,7 @@
             this.btnCategoryPopup.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCategoryPopup.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCategoryPopup.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCategoryPopup.Location = new System.Drawing.Point(338, 89);
+            this.btnCategoryPopup.Location = new System.Drawing.Point(338, 73);
             this.btnCategoryPopup.Name = "btnCategoryPopup";
             this.btnCategoryPopup.Size = new System.Drawing.Size(27, 27);
             this.btnCategoryPopup.TabIndex = 2;
@@ -272,7 +272,7 @@
             this.cmbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCategory.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCategory.FormattingEnabled = true;
-            this.cmbCategory.Location = new System.Drawing.Point(111, 89);
+            this.cmbCategory.Location = new System.Drawing.Point(111, 73);
             this.cmbCategory.Name = "cmbCategory";
             this.cmbCategory.Size = new System.Drawing.Size(206, 27);
             this.cmbCategory.TabIndex = 1;
@@ -282,7 +282,7 @@
             this.lblCategory.AutoSize = true;
             this.lblCategory.BackColor = System.Drawing.Color.Transparent;
             this.lblCategory.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCategory.Location = new System.Drawing.Point(26, 89);
+            this.lblCategory.Location = new System.Drawing.Point(26, 73);
             this.lblCategory.Name = "lblCategory";
             this.lblCategory.Size = new System.Drawing.Size(69, 17);
             this.lblCategory.TabIndex = 195;
@@ -304,7 +304,7 @@
             this.lblActiveStatus.AutoSize = true;
             this.lblActiveStatus.BackColor = System.Drawing.Color.Transparent;
             this.lblActiveStatus.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblActiveStatus.Location = new System.Drawing.Point(402, 89);
+            this.lblActiveStatus.Location = new System.Drawing.Point(402, 73);
             this.lblActiveStatus.Name = "lblActiveStatus";
             this.lblActiveStatus.Size = new System.Drawing.Size(94, 17);
             this.lblActiveStatus.TabIndex = 189;
@@ -332,7 +332,7 @@
             this.cmbActiveStatus.Items.AddRange(new object[] {
             "Active",
             "InActive"});
-            this.cmbActiveStatus.Location = new System.Drawing.Point(502, 87);
+            this.cmbActiveStatus.Location = new System.Drawing.Point(502, 71);
             this.cmbActiveStatus.Name = "cmbActiveStatus";
             this.cmbActiveStatus.Size = new System.Drawing.Size(193, 27);
             this.cmbActiveStatus.TabIndex = 3;
@@ -346,9 +346,9 @@
             this.groupBox1.Controls.Add(this.rdSearchByProduct);
             this.groupBox1.Controls.Add(this.txtSearchByProduct);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(19, 298);
+            this.groupBox1.Location = new System.Drawing.Point(19, 234);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(939, 51);
+            this.groupBox1.Size = new System.Drawing.Size(778, 58);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
@@ -357,7 +357,7 @@
             // 
             this.rdSearchByCategory.AutoSize = true;
             this.rdSearchByCategory.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdSearchByCategory.Location = new System.Drawing.Point(423, 23);
+            this.rdSearchByCategory.Location = new System.Drawing.Point(364, 23);
             this.rdSearchByCategory.Name = "rdSearchByCategory";
             this.rdSearchByCategory.Size = new System.Drawing.Size(108, 21);
             this.rdSearchByCategory.TabIndex = 11;
@@ -371,7 +371,7 @@
             this.cmbSearchByCategory.Enabled = false;
             this.cmbSearchByCategory.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbSearchByCategory.FormattingEnabled = true;
-            this.cmbSearchByCategory.Location = new System.Drawing.Point(547, 20);
+            this.cmbSearchByCategory.Location = new System.Drawing.Point(476, 20);
             this.cmbSearchByCategory.Name = "cmbSearchByCategory";
             this.cmbSearchByCategory.Size = new System.Drawing.Size(206, 27);
             this.cmbSearchByCategory.TabIndex = 12;
@@ -382,7 +382,7 @@
             this.rdShowAll.AutoSize = true;
             this.rdShowAll.Checked = true;
             this.rdShowAll.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdShowAll.Location = new System.Drawing.Point(843, 19);
+            this.rdShowAll.Location = new System.Drawing.Point(692, 23);
             this.rdShowAll.Name = "rdShowAll";
             this.rdShowAll.Size = new System.Drawing.Size(79, 21);
             this.rdShowAll.TabIndex = 13;
@@ -408,7 +408,7 @@
             this.txtSearchByProduct.BackColor = System.Drawing.Color.White;
             this.txtSearchByProduct.Enabled = false;
             this.txtSearchByProduct.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearchByProduct.Location = new System.Drawing.Point(159, 19);
+            this.txtSearchByProduct.Location = new System.Drawing.Point(138, 19);
             this.txtSearchByProduct.MaxLength = 100;
             this.txtSearchByProduct.Name = "txtSearchByProduct";
             this.txtSearchByProduct.Size = new System.Drawing.Size(206, 25);
@@ -423,9 +423,9 @@
             this.grpGridview.BackColor = System.Drawing.Color.Transparent;
             this.grpGridview.Controls.Add(this.dataGridView1);
             this.grpGridview.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpGridview.Location = new System.Drawing.Point(20, 362);
+            this.grpGridview.Location = new System.Drawing.Point(20, 298);
             this.grpGridview.Name = "grpGridview";
-            this.grpGridview.Size = new System.Drawing.Size(938, 175);
+            this.grpGridview.Size = new System.Drawing.Size(1000, 239);
             this.grpGridview.TabIndex = 213;
             this.grpGridview.TabStop = false;
             this.grpGridview.Text = "List of Items";
@@ -440,7 +440,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dataGridView1.Size = new System.Drawing.Size(915, 145);
+            this.dataGridView1.Size = new System.Drawing.Size(977, 209);
             this.dataGridView1.TabIndex = 214;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
@@ -453,7 +453,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(985, 40);
+            this.panel2.Size = new System.Drawing.Size(1026, 40);
             this.panel2.TabIndex = 216;
             // 
             // label12
@@ -487,7 +487,7 @@
             this.grpPhoto.Controls.Add(this.PicProductMaster);
             this.grpPhoto.Enabled = false;
             this.grpPhoto.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpPhoto.Location = new System.Drawing.Point(739, 55);
+            this.grpPhoto.Location = new System.Drawing.Point(801, 55);
             this.grpPhoto.Name = "grpPhoto";
             this.grpPhoto.Size = new System.Drawing.Size(219, 237);
             this.grpPhoto.TabIndex = 14;
@@ -525,9 +525,9 @@
             // PicProductMaster
             // 
             this.PicProductMaster.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PicProductMaster.Location = new System.Drawing.Point(11, 25);
+            this.PicProductMaster.Location = new System.Drawing.Point(11, 24);
             this.PicProductMaster.Name = "PicProductMaster";
-            this.PicProductMaster.Size = new System.Drawing.Size(191, 179);
+            this.PicProductMaster.Size = new System.Drawing.Size(202, 180);
             this.PicProductMaster.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PicProductMaster.TabIndex = 209;
             this.PicProductMaster.TabStop = false;
@@ -554,7 +554,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(985, 569);
+            this.ClientSize = new System.Drawing.Size(1026, 569);
             this.Controls.Add(this.btnImport);
             this.Controls.Add(this.grpPhoto);
             this.Controls.Add(this.lblTotalRecords);
@@ -573,7 +573,7 @@
             this.Name = "Product_Master";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Product Master";
+            this.Text = "Item Master";
             this.Load += new System.EventHandler(this.Product_Master_Load);
             this.grpProduct.ResumeLayout(false);
             this.grpProduct.PerformLayout();
