@@ -146,7 +146,7 @@
             this.btnStorePopup.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnStorePopup.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnStorePopup.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStorePopup.Location = new System.Drawing.Point(483, 208);
+            this.btnStorePopup.Location = new System.Drawing.Point(480, 141);
             this.btnStorePopup.Margin = new System.Windows.Forms.Padding(4);
             this.btnStorePopup.Name = "btnStorePopup";
             this.btnStorePopup.Size = new System.Drawing.Size(36, 33);
@@ -172,18 +172,19 @@
             this.cmbStoreName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStoreName.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbStoreName.FormattingEnabled = true;
-            this.cmbStoreName.Location = new System.Drawing.Point(201, 209);
+            this.cmbStoreName.Location = new System.Drawing.Point(200, 142);
             this.cmbStoreName.Margin = new System.Windows.Forms.Padding(4);
             this.cmbStoreName.Name = "cmbStoreName";
             this.cmbStoreName.Size = new System.Drawing.Size(273, 30);
             this.cmbStoreName.TabIndex = 3;
+            this.cmbStoreName.SelectionChangeCommitted += new System.EventHandler(this.cmbStoreName_SelectionChangeCommitted);
             // 
             // lblSelectStore
             // 
             this.lblSelectStore.AutoSize = true;
             this.lblSelectStore.BackColor = System.Drawing.Color.Transparent;
             this.lblSelectStore.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSelectStore.Location = new System.Drawing.Point(18, 216);
+            this.lblSelectStore.Location = new System.Drawing.Point(18, 149);
             this.lblSelectStore.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSelectStore.Name = "lblSelectStore";
             this.lblSelectStore.Size = new System.Drawing.Size(109, 21);
@@ -198,19 +199,19 @@
             this.cmbStoreCategory.Items.AddRange(new object[] {
             "Normal Store",
             "Warehouse"});
-            this.cmbStoreCategory.Location = new System.Drawing.Point(201, 148);
+            this.cmbStoreCategory.Location = new System.Drawing.Point(200, 198);
             this.cmbStoreCategory.Margin = new System.Windows.Forms.Padding(4);
             this.cmbStoreCategory.Name = "cmbStoreCategory";
             this.cmbStoreCategory.Size = new System.Drawing.Size(273, 30);
             this.cmbStoreCategory.TabIndex = 1;
-            this.cmbStoreCategory.SelectionChangeCommitted += new System.EventHandler(this.cmbStoreCategory_SelectionChangeCommitted);
+            //this.cmbStoreCategory.SelectionChangeCommitted += new System.EventHandler(this.cmbStoreCategory_SelectionChangeCommitted);
             // 
             // lblStoreCategory
             // 
             this.lblStoreCategory.AutoSize = true;
             this.lblStoreCategory.BackColor = System.Drawing.Color.Transparent;
             this.lblStoreCategory.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStoreCategory.Location = new System.Drawing.Point(18, 153);
+            this.lblStoreCategory.Location = new System.Drawing.Point(18, 203);
             this.lblStoreCategory.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStoreCategory.Name = "lblStoreCategory";
             this.lblStoreCategory.Size = new System.Drawing.Size(132, 21);
@@ -235,7 +236,7 @@
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCancel.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(828, 13);
+            this.btnCancel.Location = new System.Drawing.Point(825, 13);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(95, 31);
@@ -252,7 +253,7 @@
             this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAdd.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(208, 13);
+            this.btnAdd.Location = new System.Drawing.Point(220, 13);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(95, 31);
@@ -430,7 +431,7 @@
             this.btnUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnUpdate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.Location = new System.Drawing.Point(580, 13);
+            this.btnUpdate.Location = new System.Drawing.Point(583, 13);
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(95, 31);
@@ -464,7 +465,7 @@
             this.btnEdit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnEdit.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEdit.Location = new System.Drawing.Point(456, 13);
+            this.btnEdit.Location = new System.Drawing.Point(462, 13);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(4);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(95, 31);
@@ -481,7 +482,7 @@
             this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSave.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(332, 13);
+            this.btnSave.Location = new System.Drawing.Point(341, 13);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(95, 31);
