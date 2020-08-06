@@ -33,8 +33,8 @@ namespace IMS_Client_2.Sales
         {
             FillStoreData();
             rdSearchByShop.Checked = true;
-            cmbShop.SelectedValue = frmHome.Home_StoreID;
             cmbShop.Enabled = true;
+            cmbShop.SelectedValue = frmHome.Home_StoreID;
 
             dtpToDate.MaxDate = DateTime.Now;
             dtpFromDate.MaxDate= DateTime.Now;

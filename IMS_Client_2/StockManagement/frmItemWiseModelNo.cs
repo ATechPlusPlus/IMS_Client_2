@@ -22,10 +22,10 @@ namespace IMS_Client_2.StockManagement
         private void frmItemWiseModelNo_Load(object sender, EventArgs e)
         {
             FillStoreData();
-            cmbShop.SelectedValue = frmHome.Home_StoreID;
             SearchByStoreID();
             rdSearchByShop.Checked = true;
             cmbShop.Enabled = true;
+            cmbShop.SelectedValue = frmHome.Home_StoreID;
 
             groupBox1.Focus();
         }
