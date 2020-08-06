@@ -32,11 +32,15 @@ namespace IMS_Client_2.Sales
         private void Sales_Bill_Details_Load(object sender, EventArgs e)
         {
             FillStoreData();
+            rdSearchByShop.Checked = true;
+            cmbShop.SelectedValue = frmHome.Home_StoreID;
+            cmbShop.Enabled = true;
+
             dtpToDate.MaxDate = DateTime.Now;
             dtpFromDate.MaxDate= DateTime.Now;
-            radByDate.Checked = true;
-            string condition = " Convert(date,InvoiceDate) between Convert(Date,'" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "') and Convert(date,'" + dtpToDate.Value.ToString("yyyy-MM-dd") + "')";
-            LoadData(condition);
+            //radByDate.Checked = true;
+            //string condition = " Convert(date,InvoiceDate) between Convert(Date,'" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "') and Convert(date,'" + dtpToDate.Value.ToString("yyyy-MM-dd") + "')";
+            //LoadData(condition);
         }
 
         private void LoadData(string strCondition)
@@ -207,7 +211,7 @@ namespace IMS_Client_2.Sales
 
         private void radByShope_CheckedChanged(object sender, EventArgs e)
         {
-            if (radByShope.Checked)
+            if (rdSearchByShop.Checked)
             {
                 txtInvoiceNumber.Enabled = false;
                 dtpFromDate.Enabled = false;
@@ -216,6 +220,11 @@ namespace IMS_Client_2.Sales
                 txtSalesMan.Enabled = false;
                 txtSalesMan.Clear();
                 cmbShop.Focus();
+            }
+            else
+            {
+                cmbShop.Enabled = false;
+                cmbShop.SelectedIndex = -1;
             }
         }
 

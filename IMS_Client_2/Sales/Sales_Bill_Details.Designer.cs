@@ -42,7 +42,7 @@
             this.txtInvoiceNumber = new System.Windows.Forms.TextBox();
             this.radByDate = new System.Windows.Forms.RadioButton();
             this.cmbShop = new System.Windows.Forms.ComboBox();
-            this.radByShope = new System.Windows.Forms.RadioButton();
+            this.rdSearchByShop = new System.Windows.Forms.RadioButton();
             this.rdShowAll = new System.Windows.Forms.RadioButton();
             this.dgvProductDetails = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
@@ -89,7 +89,7 @@
             this.groupBox1.Controls.Add(this.txtInvoiceNumber);
             this.groupBox1.Controls.Add(this.radByDate);
             this.groupBox1.Controls.Add(this.cmbShop);
-            this.groupBox1.Controls.Add(this.radByShope);
+            this.groupBox1.Controls.Add(this.rdSearchByShop);
             this.groupBox1.Controls.Add(this.rdShowAll);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 56);
@@ -218,28 +218,28 @@
             this.cmbShop.TabIndex = 3;
             this.cmbShop.SelectionChangeCommitted += new System.EventHandler(this.cmbShop_SelectionChangeCommitted);
             // 
-            // radByShope
+            // rdSearchByShop
             // 
-            this.radByShope.AutoSize = true;
-            this.radByShope.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radByShope.Location = new System.Drawing.Point(427, 26);
-            this.radByShope.Name = "radByShope";
-            this.radByShope.Size = new System.Drawing.Size(83, 21);
-            this.radByShope.TabIndex = 2;
-            this.radByShope.Text = "By Shop :";
-            this.radByShope.UseVisualStyleBackColor = true;
-            this.radByShope.CheckedChanged += new System.EventHandler(this.radByShope_CheckedChanged);
+            this.rdSearchByShop.AutoSize = true;
+            this.rdSearchByShop.Checked = true;
+            this.rdSearchByShop.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdSearchByShop.Location = new System.Drawing.Point(427, 26);
+            this.rdSearchByShop.Name = "rdSearchByShop";
+            this.rdSearchByShop.Size = new System.Drawing.Size(83, 21);
+            this.rdSearchByShop.TabIndex = 2;
+            this.rdSearchByShop.TabStop = true;
+            this.rdSearchByShop.Text = "By Shop :";
+            this.rdSearchByShop.UseVisualStyleBackColor = true;
+            this.rdSearchByShop.CheckedChanged += new System.EventHandler(this.radByShope_CheckedChanged);
             // 
             // rdShowAll
             // 
             this.rdShowAll.AutoSize = true;
-            this.rdShowAll.Checked = true;
             this.rdShowAll.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdShowAll.Location = new System.Drawing.Point(804, 25);
             this.rdShowAll.Name = "rdShowAll";
             this.rdShowAll.Size = new System.Drawing.Size(79, 21);
             this.rdShowAll.TabIndex = 4;
-            this.rdShowAll.TabStop = true;
             this.rdShowAll.Text = "Show All";
             this.rdShowAll.UseVisualStyleBackColor = true;
             this.rdShowAll.CheckedChanged += new System.EventHandler(this.rdShowAll_CheckedChanged);
@@ -330,7 +330,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton rdShowAll;
         private System.Windows.Forms.RadioButton radByDate;
-        private System.Windows.Forms.RadioButton radByShope;
+        private System.Windows.Forms.RadioButton rdSearchByShop;
         private System.Windows.Forms.DateTimePicker dtpFromDate;
         private System.Windows.Forms.ComboBox cmbShop;
         private System.Windows.Forms.RadioButton radByInvoice;

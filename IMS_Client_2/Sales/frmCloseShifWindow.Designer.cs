@@ -207,6 +207,7 @@
             this.dgvCloseCash.TabIndex = 122;
             this.dgvCloseCash.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCloseCash_CellEndEdit);
             this.dgvCloseCash.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvCloseCash_CellValidating);
+            this.dgvCloseCash.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCloseCash_CellValueChanged);
             this.dgvCloseCash.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvCloseCash_ColumnAdded);
             this.dgvCloseCash.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvCloseCash_DataBindingComplete);
             // 

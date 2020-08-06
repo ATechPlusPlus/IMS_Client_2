@@ -38,6 +38,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtBillNo = new System.Windows.Forms.TextBox();
             this.dgvProductDetails = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.DeleteVioletToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.txtBarCode = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.picProduct = new System.Windows.Forms.PictureBox();
@@ -49,7 +51,7 @@
             this.pnlOrange = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.btncancel = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
             this.btnSaveData = new System.Windows.Forms.Button();
             this.txtValue = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -57,10 +59,9 @@
             this.label10 = new System.Windows.Forms.Label();
             this.pnlViolet = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.DeleteVioletToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picProduct)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.pnlGreen.SuspendLayout();
@@ -68,7 +69,6 @@
             this.pnlOrange.SuspendLayout();
             this.panel5.SuspendLayout();
             this.pnlViolet.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -159,6 +159,21 @@
             this.dgvProductDetails.TabIndex = 210;
             this.dgvProductDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellClick);
             this.dgvProductDetails.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvProductDetails_DataBindingComplete);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DeleteVioletToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 26);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // DeleteVioletToolStripMenuItem
+            // 
+            this.DeleteVioletToolStripMenuItem.Name = "DeleteVioletToolStripMenuItem";
+            this.DeleteVioletToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.DeleteVioletToolStripMenuItem.Text = "Delete Violet Items";
+            this.DeleteVioletToolStripMenuItem.Click += new System.EventHandler(this.DeleteVioletToolStripMenuItem_Click);
             // 
             // txtBarCode
             // 
@@ -274,7 +289,7 @@
             this.panel5.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel5.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.panel5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel5.Controls.Add(this.btncancel);
+            this.panel5.Controls.Add(this.btnClear);
             this.panel5.Controls.Add(this.btnSaveData);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel5.Location = new System.Drawing.Point(0, 479);
@@ -282,21 +297,21 @@
             this.panel5.Size = new System.Drawing.Size(914, 40);
             this.panel5.TabIndex = 266;
             // 
-            // btncancel
+            // btnClear
             // 
-            this.btncancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btncancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btncancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btncancel.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btncancel.Location = new System.Drawing.Point(826, 12);
-            this.btncancel.Name = "btncancel";
-            this.btncancel.Size = new System.Drawing.Size(76, 25);
-            this.btncancel.TabIndex = 251;
-            this.btncancel.Text = "Cancel";
-            this.btncancel.UseVisualStyleBackColor = true;
-            this.btncancel.Click += new System.EventHandler(this.btncancel_Click);
-            this.btncancel.MouseEnter += new System.EventHandler(this.btnSaveData_MouseEnter);
-            this.btncancel.MouseLeave += new System.EventHandler(this.btnSaveData_MouseLeave);
+            this.btnClear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnClear.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClear.Location = new System.Drawing.Point(826, 12);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(76, 25);
+            this.btnClear.TabIndex = 251;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btncancel_Click);
+            this.btnClear.MouseEnter += new System.EventHandler(this.btnSaveData_MouseEnter);
+            this.btnClear.MouseLeave += new System.EventHandler(this.btnSaveData_MouseLeave);
             // 
             // btnSaveData
             // 
@@ -379,21 +394,6 @@
             this.label11.TabIndex = 263;
             this.label11.Text = "Violet for Not Exist Items";
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.DeleteVioletToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
-            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
-            // 
-            // DeleteVioletToolStripMenuItem
-            // 
-            this.DeleteVioletToolStripMenuItem.Name = "DeleteVioletToolStripMenuItem";
-            this.DeleteVioletToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.DeleteVioletToolStripMenuItem.Text = "Delete Violet Items";
-            this.DeleteVioletToolStripMenuItem.Click += new System.EventHandler(this.DeleteVioletToolStripMenuItem_Click);
-            // 
             // frmTransferCheck
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -429,6 +429,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picProduct)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.pnlGreen.ResumeLayout(false);
@@ -440,7 +441,6 @@
             this.panel5.ResumeLayout(false);
             this.pnlViolet.ResumeLayout(false);
             this.pnlViolet.PerformLayout();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -466,7 +466,7 @@
         private System.Windows.Forms.Panel pnlOrange;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Button btncancel;
+        private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnSaveData;
         public System.Windows.Forms.TextBox txtValue;
         private System.Windows.Forms.Label label9;

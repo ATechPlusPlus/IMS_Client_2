@@ -20,6 +20,8 @@ namespace IMS_Client_2.StockManagement
         clsUtility ObjUtil = new clsUtility();
         clsConnection_DAL ObjDAL = new clsConnection_DAL(true);
 
+        DateTime dtDate = DateTime.Now;
+
         Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
         Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
 
@@ -63,12 +65,9 @@ namespace IMS_Client_2.StockManagement
         private void GetSelectedItemStockDetails()
         {
             ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, dgvBranchStockDetails.SelectedRows[0].Cells["ProductID"].Value, clsConnection_DAL.ParamType.Input);
-
             ObjDAL.SetStoreProcedureData("BarcodeNo", SqlDbType.BigInt, dgvBranchStockDetails.SelectedRows[0].Cells["BarcodeNo"].Value, clsConnection_DAL.ParamType.Input);
-
             ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, dgvBranchStockDetails.SelectedRows[0].Cells["ModelNo"].Value, clsConnection_DAL.ParamType.Input);
-
             ObjDAL.SetStoreProcedureData("CategoryID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_Material_NewDetails");
             if (ds != null && ds.Tables.Count > 0)
@@ -115,8 +114,8 @@ namespace IMS_Client_2.StockManagement
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            dtpFromDate.Value = DateTime.Now;
-            dtpToDate.Value = DateTime.Now;
+            dtpFromDate.Value = dtDate;
+            dtpToDate.Value = dtDate;
             cmbToStore.SelectedIndex = -1;
 
             dgvBranchStockDetails.DataSource = null;

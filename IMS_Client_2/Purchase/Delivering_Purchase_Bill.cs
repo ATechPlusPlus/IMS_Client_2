@@ -147,6 +147,7 @@ namespace IMS_Client_2.Purchase
             dataGridView1.Columns["PurchaseInvoiceID"].Visible = false;
             dataGridView1.Columns["DeliveryPurchaseID1"].Visible = false;
             dataGridView1.Columns["ProductID"].Visible = false;
+            dataGridView1.Columns["SubProductID"].Visible = false;
             dataGridView1.Columns["BrandID"].Visible = false;
             dataGridView1.Columns["SupplierID"].Visible = false;
             dataGridView1.Columns["CategoryID"].Visible = false;
