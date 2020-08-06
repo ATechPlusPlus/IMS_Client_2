@@ -892,6 +892,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="InventorySoftware.ico" />
+    <None Include="Resources\NoImage.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

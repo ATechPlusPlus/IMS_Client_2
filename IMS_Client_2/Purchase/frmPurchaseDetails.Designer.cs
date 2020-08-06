@@ -36,17 +36,17 @@
             this.btnViewDetails = new System.Windows.Forms.Button();
             this.txtPurchaseInvoiceID = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dgvPurchaseInvoice = new System.Windows.Forms.DataGridView();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvPurchaseInvoiceDetail = new System.Windows.Forms.DataGridView();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dgvPurchaseItem = new System.Windows.Forms.DataGridView();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPurchaseInvoice)).BeginInit();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPurchaseInvoiceDetail)).BeginInit();
+            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPurchaseItem)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,7 +101,7 @@
             this.btnViewDetails.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnViewDetails.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnViewDetails.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewDetails.Location = new System.Drawing.Point(338, 58);
+            this.btnViewDetails.Location = new System.Drawing.Point(338, 59);
             this.btnViewDetails.Name = "btnViewDetails";
             this.btnViewDetails.Size = new System.Drawing.Size(93, 25);
             this.btnViewDetails.TabIndex = 248;
@@ -132,30 +132,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "PurchaseInvoice";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox2.Controls.Add(this.dgvPurchaseInvoiceDetail);
-            this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(12, 225);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(993, 103);
-            this.groupBox2.TabIndex = 252;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Purchase Invoice Details";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox3.Controls.Add(this.dgvPurchaseItem);
-            this.groupBox3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(12, 349);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(993, 233);
-            this.groupBox3.TabIndex = 253;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Purchase Item Details";
-            // 
             // dgvPurchaseInvoice
             // 
             this.dgvPurchaseInvoice.AllowUserToAddRows = false;
@@ -170,6 +146,18 @@
             this.dgvPurchaseInvoice.TabIndex = 266;
             this.dgvPurchaseInvoice.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvPurchaseInvoice_DataBindingComplete);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox2.Controls.Add(this.dgvPurchaseInvoiceDetail);
+            this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(12, 225);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(993, 103);
+            this.groupBox2.TabIndex = 252;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Purchase Invoice Details";
+            // 
             // dgvPurchaseInvoiceDetail
             // 
             this.dgvPurchaseInvoiceDetail.AllowUserToAddRows = false;
@@ -183,6 +171,18 @@
             this.dgvPurchaseInvoiceDetail.Size = new System.Drawing.Size(978, 82);
             this.dgvPurchaseInvoiceDetail.TabIndex = 267;
             this.dgvPurchaseInvoiceDetail.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvPurchaseInvoiceDetail_DataBindingComplete);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox3.Controls.Add(this.dgvPurchaseItem);
+            this.groupBox3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.Location = new System.Drawing.Point(12, 349);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(993, 233);
+            this.groupBox3.TabIndex = 253;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Purchase Item Details";
             // 
             // dgvPurchaseItem
             // 
@@ -222,10 +222,10 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPurchaseInvoice)).EndInit();
+            this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPurchaseInvoiceDetail)).EndInit();
+            this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPurchaseItem)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

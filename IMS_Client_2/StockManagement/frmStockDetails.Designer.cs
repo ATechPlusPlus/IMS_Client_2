@@ -61,7 +61,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1129, 40);
+            this.panel2.Size = new System.Drawing.Size(1196, 40);
             this.panel2.TabIndex = 114;
             // 
             // txtProductID
@@ -92,11 +92,12 @@
             this.dgvStockDetails.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvStockDetails.BackgroundColor = System.Drawing.Color.White;
             this.dgvStockDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvStockDetails.Location = new System.Drawing.Point(8, 178);
+            this.dgvStockDetails.Location = new System.Drawing.Point(8, 238);
             this.dgvStockDetails.Name = "dgvStockDetails";
             this.dgvStockDetails.ReadOnly = true;
-            this.dgvStockDetails.Size = new System.Drawing.Size(1105, 272);
+            this.dgvStockDetails.Size = new System.Drawing.Size(1176, 317);
             this.dgvStockDetails.TabIndex = 208;
+            this.dgvStockDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStockDetails_CellClick);
             this.dgvStockDetails.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvStockDetails_DataBindingComplete);
             // 
             // PicItem
@@ -104,9 +105,9 @@
             this.PicItem.BackColor = System.Drawing.Color.Transparent;
             this.PicItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PicItem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PicItem.Location = new System.Drawing.Point(966, 52);
+            this.PicItem.Location = new System.Drawing.Point(966, 47);
             this.PicItem.Name = "PicItem";
-            this.PicItem.Size = new System.Drawing.Size(147, 120);
+            this.PicItem.Size = new System.Drawing.Size(218, 185);
             this.PicItem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PicItem.TabIndex = 233;
             this.PicItem.TabStop = false;
@@ -126,7 +127,7 @@
             this.groupBox1.Controls.Add(this.rdSearchByItem);
             this.groupBox1.Controls.Add(this.rdShowAll);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(8, 46);
+            this.groupBox1.Location = new System.Drawing.Point(8, 64);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(952, 119);
             this.groupBox1.TabIndex = 232;
@@ -167,6 +168,8 @@
             this.txtSearchByStyleNo.Size = new System.Drawing.Size(181, 25);
             this.txtSearchByStyleNo.TabIndex = 236;
             this.txtSearchByStyleNo.TextChanged += new System.EventHandler(this.txtSearchByStyleNo_TextChanged);
+            this.txtSearchByStyleNo.Enter += new System.EventHandler(this.txtSearchByProductName_Enter);
+            this.txtSearchByStyleNo.Leave += new System.EventHandler(this.txtSearchByProductName_Leave);
             // 
             // rdSearchByStyleNo
             // 
@@ -189,7 +192,9 @@
             this.txtSearchByBarcode.Name = "txtSearchByBarcode";
             this.txtSearchByBarcode.Size = new System.Drawing.Size(181, 25);
             this.txtSearchByBarcode.TabIndex = 234;
+            this.txtSearchByBarcode.Enter += new System.EventHandler(this.txtSearchByProductName_Enter);
             this.txtSearchByBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearchByBarcode_KeyDown);
+            this.txtSearchByBarcode.Leave += new System.EventHandler(this.txtSearchByProductName_Leave);
             // 
             // cmbColor
             // 
@@ -237,6 +242,8 @@
             this.txtSearchByProductName.Size = new System.Drawing.Size(181, 25);
             this.txtSearchByProductName.TabIndex = 229;
             this.txtSearchByProductName.TextChanged += new System.EventHandler(this.txtSearchByProductName_TextChanged);
+            this.txtSearchByProductName.Enter += new System.EventHandler(this.txtSearchByProductName_Enter);
+            this.txtSearchByProductName.Leave += new System.EventHandler(this.txtSearchByProductName_Leave);
             // 
             // rdSearchByItem
             // 
@@ -268,7 +275,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1129, 464);
+            this.ClientSize = new System.Drawing.Size(1196, 563);
             this.Controls.Add(this.PicItem);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvStockDetails);

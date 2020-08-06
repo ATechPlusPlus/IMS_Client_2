@@ -31,7 +31,7 @@ namespace IMS_Client_2.StockManagement
         private void frmTransferCheck_Load(object sender, EventArgs e)
         {
             btnSaveData.BackgroundImage = B_Leave;
-            btncancel.BackgroundImage = B_Leave;
+            btnClear.BackgroundImage = B_Leave;
 
             txtBarCode.Focus();
             pnlViolet.BackColor = Color.Violet;
@@ -89,6 +89,8 @@ namespace IMS_Client_2.StockManagement
                     dtStoreTransfer.AcceptChanges();
                     dgvProductDetails.DataSource = dtStoreTransfer;
 
+                    picProduct.Image = GetProductPhoto(Convert.ToInt32(drow[0]["SubProductID"]));
+
                     txtBarCode.Clear();
                     txtBarCode.Focus();
                 }
@@ -121,6 +123,8 @@ namespace IMS_Client_2.StockManagement
                             dtStoreTransfer.Rows.Add(row);
                             dtStoreTransfer.AcceptChanges();
                             dgvProductDetails.DataSource = dtStoreTransfer;
+
+                            picProduct.Image = GetProductPhoto(Convert.ToInt32(dt.Rows[0]["SubProductID"]));
 
                             txtBarCode.Clear();
                             txtBarCode.Focus();
@@ -188,36 +192,33 @@ namespace IMS_Client_2.StockManagement
             dgvProductDetails.RowsDefaultCellStyle.SelectionForeColor = Color.Transparent;
         }
 
-        private Image GetProductPhoto(int ProductID)
+        private Image GetProductPhoto(int SubProductID)
         {
             Image imgProduct = null;
-            DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT Photo FROM " + clsUtility.DBName + ".dbo.ProductMaster WITH(NOLOCK) WHERE ProductID=" + ProductID);
-            if (ObjUtil.ValidateTable(dt))
+            ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, SubProductID, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_ProductPhoto");
+            if (ds != null && ds.Tables.Count > 0)
             {
-                if (dt.Rows[0]["Photo"] != DBNull.Value)
+                DataTable dt = ds.Tables[0];
+                if (ObjUtil.ValidateTable(dt))
                 {
-                    DataTable dtImagePath = ObjDAL.ExecuteSelectStatement("  SELECT ImagePath, Extension FROM " + clsUtility.DBName + ".dbo.DefaultStoreSetting WITH(NOLOCK) WHERE MachineName='" + Environment.MachineName + "'");
-                    if (ObjUtil.ValidateTable(dtImagePath))
+                    if (Convert.ToInt32(dt.Rows[0]["Flag"]) == 1)
                     {
-                        if (dtImagePath.Rows[0]["ImagePath"] != DBNull.Value)
+                        string img = dt.Rows[0]["ImgName"].ToString();
+                        if (System.IO.File.Exists(img))
                         {
-                            string ImgPath = dtImagePath.Rows[0]["ImagePath"].ToString();
-                            string extension = dtImagePath.Rows[0]["Extension"].ToString();
-
-                            string imgFile = ImgPath + "//" + dt.Rows[0]["Photo"].ToString() + extension;
-                            if (File.Exists(imgFile))
-                            {
-                                imgProduct = Image.FromFile(imgFile);
-                            }
-                            else
-                            {
-                                imgProduct = null;
-                            }
+                            imgProduct = Image.FromFile(img);
                         }
                         else
                         {
-                            clsUtility.ShowInfoMessage("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
+                            imgProduct = IMS_Client_2.Properties.Resources.NoImage;
                         }
+                    }
+                    else
+                    {
+                        imgProduct = IMS_Client_2.Properties.Resources.NoImage;
+                        //clsUtility.ShowInfoMessage("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
                     }
                 }
             }
@@ -248,6 +249,7 @@ namespace IMS_Client_2.StockManagement
                     ObjDAL.SetStoreProcedureData("StoreBillDetailsID", SqlDbType.Int, dtStoreTransfer.Rows[i]["StoreBillDetailsID"], clsConnection_DAL.ParamType.Input);
                     ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, dtStoreTransfer.Rows[i]["ProductID"], clsConnection_DAL.ParamType.Input);
                     ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, dtStoreTransfer.Rows[i]["SubProductID"], clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, dtStoreTransfer.Rows[i]["StyleNo"], clsConnection_DAL.ParamType.Input);
                     ObjDAL.SetStoreProcedureData("Barcode", SqlDbType.NVarChar, dtStoreTransfer.Rows[i]["Barcode"], clsConnection_DAL.ParamType.Input);
                     ObjDAL.SetStoreProcedureData("BillQTY", SqlDbType.Int, dtStoreTransfer.Rows[i]["BillQTY"], clsConnection_DAL.ParamType.Input);
                     ObjDAL.SetStoreProcedureData("EnterQTY", SqlDbType.Int, dtStoreTransfer.Rows[i]["EnterQTY"], clsConnection_DAL.ParamType.Input);
@@ -283,11 +285,18 @@ namespace IMS_Client_2.StockManagement
             {
                 for (int i = 0; i < dtStoreTransfer.Rows.Count; i++)
                 {
+                    if (Convert.ToInt32(dtStoreTransfer.Rows[i]["BillQTY"]) == 0)
+                    {
+                        dtStoreTransfer.Rows[i]["EnterQTY"] = 1;
+                        continue;
+                    }
                     dtStoreTransfer.Rows[i]["EnterQTY"] = 0;
                     dtStoreTransfer.Rows[i]["CellColor"] = "Red";
                 }
                 dtStoreTransfer.AcceptChanges();
                 dgvProductDetails.DataSource = dtStoreTransfer;
+
+                txtBarCode.Focus();
             }
         }
 
@@ -299,9 +308,8 @@ namespace IMS_Client_2.StockManagement
                 {
                     return;
                 }
-
-                int ProductID = Convert.ToInt32(dgvProductDetails.SelectedRows[0].Cells["ProductID"].Value);
-                picProduct.Image = GetProductPhoto(ProductID);
+                int pSubProductID = Convert.ToInt32(dgvProductDetails.SelectedRows[0].Cells["SubProductID"].Value);
+                picProduct.Image = GetProductPhoto(pSubProductID);
             }
             catch (Exception ex)
             {
@@ -315,7 +323,12 @@ namespace IMS_Client_2.StockManagement
             {
                 if (dgvProductDetails.SelectedRows != null && dgvProductDetails.SelectedRows.Count > 0)
                 {
-                    dgvProductDetails.Rows.RemoveAt(dgvProductDetails.SelectedRows[0].Index);
+                    DataTable dt = (DataTable)dgvProductDetails.DataSource;
+                    dt.Rows[dgvProductDetails.SelectedRows[0].Index].Delete();
+                    dt.AcceptChanges();
+                    //dgvProductDetails.Rows.RemoveAt(dgvProductDetails.SelectedRows[0].Index);
+                    //dgvProductDetails.EndEdit();
+                    dgvProductDetails.DataSource = dt;
                 }
                 else
                 {
