@@ -52,7 +52,7 @@ namespace IMS_Client_2.Settings
             LoadPrinter();
             BindPrinterDetails();
             LoadData();
-
+            ClearAll();
             groupBox1.Enabled = false;
         }
         private void LoadPrinter()
@@ -98,8 +98,37 @@ namespace IMS_Client_2.Settings
                 cmbStoreName.Focus();
                 return false;
             }
+
+
+            if (IsDataExist())
+            {
+                clsUtility.ShowInfoMessage("Machine name is already mapped to this Store.", clsUtility.strProjectTitle);
+                return false;
+            }
             return true;
         }
+
+      private bool IsDataExist()
+        {
+            bool result = false;
+
+
+            int count=ObjCon.ExecuteScalarInt("select count(*) from [dbo].[tblPC_Store_Mapping] where  MachineName='" + cmbSelectPC.Text.ToString()+"' and SM_StoreID="+cmbStoreName.SelectedValue.ToString() +" AND SM_StoreID<>"+ ID);
+
+            if (count>0)
+            {
+                result = true;
+            }
+            else
+            {
+                result = false;
+            }
+
+
+
+            return result;
+        }
+
         private void Load_PC_Store_Mapping()
         {
             DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT RegistrationID, PcName FROM " + clsUtility.DBName + ".[dbo].[RegistrationDetails] WITH(NOLOCK)");
@@ -199,32 +228,6 @@ namespace IMS_Client_2.Settings
         {
             Button btn = (Button)sender;
             btn.BackgroundImage = B_Leave;
-        }
-
-        private void cmbStoreCategory_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            if (cmbStoreCategory.SelectedIndex == 0) // Normal store
-            {
-                DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT StoreID, StoreName FROM " + clsUtility.DBName + ".[dbo].[StoreMaster] WITH(NOLOCK) WHERE ISNULL(StoreCategory,0) = 0");
-                if (ObjUtil.ValidateTable(dt))
-                {
-                    cmbStoreName.DataSource = dt;
-                    cmbStoreName.DisplayMember = "StoreName";
-                    cmbStoreName.ValueMember = "StoreID";
-                    cmbStoreName.SelectedIndex = -1;
-                }
-            }
-            else if (cmbStoreCategory.SelectedIndex == 1) // Warehouse
-            {
-                DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT StoreID, StoreName FROM " + clsUtility.DBName + ".[dbo].[StoreMaster] WITH(NOLOCK) WHERE StoreCategory = 1");
-                if (ObjUtil.ValidateTable(dt))
-                {
-                    cmbStoreName.DataSource = dt;
-                    cmbStoreName.DisplayMember = "StoreName";
-                    cmbStoreName.ValueMember = "StoreID";
-                    cmbStoreName.SelectedIndex = -1;
-                }
-            }
         }
 
         private void LoadData()
@@ -431,8 +434,8 @@ namespace IMS_Client_2.Settings
             ObjUtil.SetRowNumber(dataGridView1);
             ObjUtil.SetDataGridProperty(dataGridView1, DataGridViewAutoSizeColumnsMode.Fill);
             dataGridView1.Columns["PC_Store_ID"].Visible = false;
-            dataGridView1.Columns["StoreID"].Visible = false;
-            //dataGridView1.Columns["StoreID"].Visible = false;
+            dataGridView1.Columns["StoreID"].Visible = false; 
+            dataGridView1.Columns["StoreCategoryID"].Visible = false;
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -484,13 +487,34 @@ namespace IMS_Client_2.Settings
                     ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterGridClick);
                     ID = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["PC_Store_ID"].Value);
                     cmbSelectPC.Text = dataGridView1.SelectedRows[0].Cells["MachineName"].Value.ToString();
-                    cmbStoreCategory.SelectedItem = dataGridView1.SelectedRows[0].Cells["StoreCategory"].Value.ToString();
+                    //cmbStoreCategory.SelectedIndex = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["StoreCategoryID"].Value);
                     cmbStoreName.SelectedValue = dataGridView1.SelectedRows[0].Cells["StoreID"].Value.ToString();
+                    cmbStoreCategory.SelectedIndex = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["StoreCategoryID"].Value);
 
                     groupBox1.Enabled = false;
                     cmbSelectPC.Focus();
                 }
-                catch { }
+                catch(Exception ex) 
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void cmbStoreName_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (cmbStoreName.SelectedIndex != -1)
+            {
+
+                string stroreID=cmbStoreName.SelectedValue.ToString(); ;
+
+                string str = "Select StoreCategory from StoreMaster where StoreID=" + stroreID;
+
+
+                int _stID=ObjCon.ExecuteScalarInt(str);
+
+                cmbStoreCategory.SelectedIndex = _stID;
+                
             }
         }
     }
