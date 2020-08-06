@@ -379,10 +379,20 @@ namespace IMS_Client_2.Masters
                 LoadData();
                 return;
             }
-            DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Product_Master '" + txtSearchByProduct.Text.Trim() + "'");
-            if (ObjUtil.ValidateTable(dt))
+            ObjDAL.SetStoreProcedureData("ProductName", SqlDbType.NVarChar, txtSearchByProduct.Text.Trim(), clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("CategoryId", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_Product_Master");
+            if (ds != null && ds.Tables.Count > 0)
             {
-                dataGridView1.DataSource = dt;
+                DataTable dt = ds.Tables[0];
+                if (ObjUtil.ValidateTable(dt))
+                {
+                    dataGridView1.DataSource = dt;
+                }
+                else
+                {
+                    dataGridView1.DataSource = null;
+                }
             }
             else
             {
@@ -503,7 +513,7 @@ namespace IMS_Client_2.Masters
                 return;
             }
             //DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Product_Master '" + cmbSearchByCategory.SelectedValue + "'");
-            ObjDAL.SetStoreProcedureData("ProductName", SqlDbType.NVarChar, DBNull.Value, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ProductName", SqlDbType.NVarChar, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("CategoryId", SqlDbType.Int, cmbSearchByCategory.SelectedValue, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_Product_Master");
             if (ds != null && ds.Tables.Count > 0)
