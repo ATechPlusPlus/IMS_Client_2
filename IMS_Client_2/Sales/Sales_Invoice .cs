@@ -358,10 +358,10 @@ namespace IMS_Client_2.Sales
         {
             try
             {
-                DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT Empid,Name FROM " + clsUtility.DBName + ".dbo.employeeDetails WITH(NOLOCK) WHERE [Name] Like '" + txtSalesMan.Text + "%'");
+                DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT Empid,EmployeeCode FROM " + clsUtility.DBName + ".dbo.employeeDetails WITH(NOLOCK) WHERE [Name] Like '" + txtSalesMan.Text + "%'");
                 if (ObjUtil.ValidateTable(dt))
                 {
-                    ObjUtil.SetControlData(txtSalesMan, "Name");
+                    ObjUtil.SetControlData(txtSalesMan, "EmployeeCode");
                     ObjUtil.SetControlData(txtEmpID, "Empid");
                     ObjUtil.ShowDataPopup(dt, txtSalesMan, this, this);
                     if (ObjUtil.GetDataPopup() != null && ObjUtil.GetDataPopup().DataSource != null)
