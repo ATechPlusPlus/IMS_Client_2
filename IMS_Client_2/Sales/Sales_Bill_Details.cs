@@ -33,11 +33,13 @@ namespace IMS_Client_2.Sales
         {
             FillStoreData();
             rdSearchByShop.Checked = true;
-            cmbShop.SelectedValue = frmHome.Home_StoreID;
+            
             cmbShop.Enabled = true;
+            cmbShop.SelectedValue = frmHome.Home_StoreID;
+            cmbShop_SelectionChangeCommitted(sender, e);
 
             dtpToDate.MaxDate = DateTime.Now;
-            dtpFromDate.MaxDate= DateTime.Now;
+            dtpFromDate.MaxDate = DateTime.Now;
             //radByDate.Checked = true;
             //string condition = " Convert(date,InvoiceDate) between Convert(Date,'" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "') and Convert(date,'" + dtpToDate.Value.ToString("yyyy-MM-dd") + "')";
             //LoadData(condition);
@@ -45,7 +47,7 @@ namespace IMS_Client_2.Sales
 
         private void LoadData(string strCondition)
         {
-            if (strCondition==string.Empty)
+            if (strCondition == string.Empty)
             {
                 string strQ = "select * from  " + clsUtility.DBName + ".dbo.View_SalesBillDetails";
                 dgvProductDetails.DataSource = ObjDAL.ExecuteSelectStatement(strQ);
@@ -125,11 +127,11 @@ namespace IMS_Client_2.Sales
 
         private void txtInvoiceNumber_TextChanged(object sender, EventArgs e)
         {
-            if (txtInvoiceNumber.Text.Trim().Length==0)
+            if (txtInvoiceNumber.Text.Trim().Length == 0)
             {
                 return;
             }
-            string strCondition = " InvoiceNumber='"+txtInvoiceNumber.Text+"'";
+            string strCondition = " InvoiceNumber='" + txtInvoiceNumber.Text + "'";
             LoadData(strCondition);
         }
 
@@ -151,7 +153,7 @@ namespace IMS_Client_2.Sales
         {
             try
             {
-                if (txtSalesMan.Text.Trim().Length==0)
+                if (txtSalesMan.Text.Trim().Length == 0)
                 {
                     return;
                 }
@@ -236,7 +238,7 @@ namespace IMS_Client_2.Sales
 
         private void dtpFromDate_ValueChanged(object sender, EventArgs e)
         {
-            if (dtpFromDate.Value.Date>dtpToDate.Value.Date)
+            if (dtpFromDate.Value.Date > dtpToDate.Value.Date)
             {
                 clsUtility.ShowInfoMessage("From date can not be greater then To Date.", clsUtility.strProjectTitle);
                 return;
@@ -247,7 +249,7 @@ namespace IMS_Client_2.Sales
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (dgvProductDetails.SelectedRows.Count==0)
+            if (dgvProductDetails.SelectedRows.Count == 0)
             {
                 clsUtility.ShowInfoMessage("Select a bill from the given list.", clsUtility.strProjectTitle);
                 return;
@@ -259,7 +261,7 @@ namespace IMS_Client_2.Sales
             frmSalesInvoice.InvoiceID = Convert.ToInt32(InvoiceID);
             frmSalesInvoice.IsDirectPrint = false;
             frmSalesInvoice.Show();
-            
+
         }
     }
 }

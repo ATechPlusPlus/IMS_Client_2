@@ -88,7 +88,7 @@ namespace IMS_Client_2.Masters
         private void LoadData()
         {
             DataTable dt = null; 
-            dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.StoreMaster", "StoreID,StoreName,Tel,Place,Fax,(CASE ActiveStatus WHEN 1 THEN 'Active' WHEN 0 THEN 'InActive' END) ActiveStatus,(CASE StoreCategory WHEN 0 THEN 'Normal Store' WHEN 1 THEN 'Wearhouse' END) StoreCategory,StoreCategory [StoreCategoryID] ", "StoreName");
+            dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.StoreMaster", "StoreID,StoreName,Tel,Place,Fax,(CASE ActiveStatus WHEN 1 THEN 'Active' WHEN 0 THEN 'InActive' END) ActiveStatus,(CASE StoreCategory WHEN 0 THEN 'Normal Store' WHEN 1 THEN 'Warehouse' END) StoreCategory,StoreCategory [StoreCategoryID] ", "StoreName");
             if (ObjUtil.ValidateTable(dt))
             {
                 dataGridView1.DataSource = dt;
@@ -183,7 +183,7 @@ namespace IMS_Client_2.Masters
                         ObjDAL.UpdateColumnData("StoreCategory", SqlDbType.Int, cmbStoreCat.SelectedIndex);
                         ObjDAL.UpdateColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
                         ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
-                        ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
+                        ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                         if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.StoreMaster", "StoreID = " + ID + "") > 0)
                         {
                             ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate);
@@ -380,7 +380,6 @@ namespace IMS_Client_2.Masters
             {
                 rdSearchByStoreName.Enabled = false;
                 txtSearchByStoreName.Clear();
-                rdShowAll.Checked = true;
             }
         }
 
@@ -402,7 +401,7 @@ namespace IMS_Client_2.Masters
                 return;
             }
             DataTable dt = null;
-            dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.StoreMaster", "StoreID, StoreName, Tel, Fax, Place, (CASE ActiveStatus WHEN 1 THEN 'Active' WHEN 0 THEN 'InActive' END) ActiveStatus,(CASE StoreCategory WHEN 0 THEN 'Normal Store' WHEN 1 THEN 'Wearhouse' END) StoreCategory,StoreCategory [StoreCategoryID] ", "StoreName LIKE '%" + txtSearchByStoreName.Text + "%'", "StoreName");
+            dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.StoreMaster", "StoreID, StoreName, Tel, Fax, Place, (CASE ActiveStatus WHEN 1 THEN 'Active' WHEN 0 THEN 'InActive' END) ActiveStatus,(CASE StoreCategory WHEN 0 THEN 'Normal Store' WHEN 1 THEN 'Warehouse' END) StoreCategory,StoreCategory [StoreCategoryID] ", "StoreName LIKE '%" + txtSearchByStoreName.Text + "%'", "StoreName");
 
             if (ObjUtil.ValidateTable(dt))
             {

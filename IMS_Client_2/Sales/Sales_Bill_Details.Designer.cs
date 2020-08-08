@@ -214,7 +214,7 @@
             "InActive"});
             this.cmbShop.Location = new System.Drawing.Point(523, 23);
             this.cmbShop.Name = "cmbShop";
-            this.cmbShop.Size = new System.Drawing.Size(168, 27);
+            this.cmbShop.Size = new System.Drawing.Size(207, 27);
             this.cmbShop.TabIndex = 3;
             this.cmbShop.SelectionChangeCommitted += new System.EventHandler(this.cmbShop_SelectionChangeCommitted);
             // 

@@ -36,7 +36,6 @@ namespace IMS_Client_2.Masters
 
         private void Employee_Details_Load(object sender, EventArgs e)
         {
-            //clsUtility.IsAdmin = true;
             dtpDOB.ShowCheckBox = true;
             dtpDOB.Checked = false;
 
@@ -48,7 +47,6 @@ namespace IMS_Client_2.Masters
             btnCancel.BackgroundImage = B_Leave;
 
             ObjUtil.RegisterCommandButtons(btnAdd, btnSave, btnEdit, btnUpdate, btnDelete, btnCancel);
-            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.Beginning, clsUtility.IsAdmin);
             ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.Beginning);
             FillStoreDetails();
             LoadData();
@@ -67,7 +65,6 @@ namespace IMS_Client_2.Masters
         private void btnAdd_Click(object sender, EventArgs e)
         {
             ClearAll();
-            //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterNew, clsUtility.IsAdmin);
             ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterNew);
             grpEmployee.Enabled = true;
             txtEmployeeCode.Focus();
@@ -233,7 +230,6 @@ namespace IMS_Client_2.Masters
 
             if (EmployeeID > 0)
             {
-                //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave, clsUtility.IsAdmin);
                 ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave);
                 clsUtility.ShowInfoMessage("Employee has been added Successfully.", clsUtility.strProjectTitle);
 
@@ -254,7 +250,7 @@ namespace IMS_Client_2.Masters
 
         private void LoadData()
         {
-            string q = "SELECT e1.EmpID,EmployeeCode,Name,ShopID,(CASE WHEN e1.Gender =1 THEN 'Male' WHEN e1.Gender =0 THEN 'Female' END) Gender,DOB,[Address],Photo, s1.StoreName FROM " + clsUtility.DBName + ".dbo.EmployeeDetails e1 JOIN " + clsUtility.DBName + ".dbo.StoreMaster s1" +
+            string q = "SELECT e1.EmpID,EmployeeCode,Name,ShopID,(CASE e1.Gender WHEN 1 THEN 'Male' WHEN 0 THEN 'Female' END) Gender,DOB,[Address],Photo, s1.StoreName FROM " + clsUtility.DBName + ".dbo.EmployeeDetails e1 JOIN " + clsUtility.DBName + ".dbo.StoreMaster s1" +
               " ON e1.ShopID=s1.StoreID ORDER BY EmpID DESC";
             DataTable dataTable = ObjDAL.ExecuteSelectStatement(q);
             if (ObjUtil.ValidateTable(dataTable))
@@ -301,7 +297,6 @@ namespace IMS_Client_2.Masters
             {
                 ClearAll();
                 LoadData();
-                //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterCancel, clsUtility.IsAdmin);
                 ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterCancel);
                 grpEmployee.Enabled = false;
             }
@@ -324,7 +319,6 @@ namespace IMS_Client_2.Masters
                 try
                 {
                     ClearAll();
-                    //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterGridClick, clsUtility.IsAdmin);
                     ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterGridClick);
                     EmployeeID = Convert.ToInt32(dgvEmployee.SelectedRows[0].Cells["EmpID"].Value);
                     txtEmployeeCode.Text = dgvEmployee.SelectedRows[0].Cells["EmployeeCode"].Value.ToString();
@@ -334,18 +328,11 @@ namespace IMS_Client_2.Masters
                     if (dgvEmployee.SelectedRows[0].Cells["Gender"].Value != DBNull.Value && dgvEmployee.SelectedRows[0].Cells["Gender"].Value.ToString() == "Male")
                     {
                         radMale.Checked = true;
-                        //radFemale.Checked = false;
                     }
                     else if (dgvEmployee.SelectedRows[0].Cells["Gender"].Value != DBNull.Value && dgvEmployee.SelectedRows[0].Cells["Gender"].Value.ToString() == "Female")
                     {
                         radFemale.Checked = true;
-                        //radMale.Checked = false;
                     }
-                    //else
-                    //{
-                    //    radMale.Checked = false;
-                    //    radFemale.Checked = false;
-                    //}
 
                     if (dgvEmployee.SelectedRows[0].Cells["DOB"].Value != DBNull.Value)
                     {
@@ -373,7 +360,6 @@ namespace IMS_Client_2.Masters
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Employee_Details, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
             {
-                //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit, clsUtility.IsAdmin);
                 ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterEdit);
                 grpEmployee.Enabled = true;
                 txtEmployeeCode.Focus();
@@ -420,7 +406,6 @@ namespace IMS_Client_2.Masters
                 ObjDAL.UpdateColumnData("DOB", SqlDbType.DateTime, DBNull.Value);
             }
 
-
             ObjDAL.UpdateColumnData("Address", SqlDbType.NVarChar, txtAdd.Text.Trim());
 
             if (PicEmployee.Image != null)
@@ -429,11 +414,10 @@ namespace IMS_Client_2.Masters
             }
 
             ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
-            ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
+            ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
 
             if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.EmployeeDetails", "EMPID = " + EmployeeID + "") > 0)
             {
-                //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate, clsUtility.IsAdmin);
                 ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate);
                 clsUtility.ShowInfoMessage("Employee Record has been updated.", clsUtility.strProjectTitle);
 
@@ -492,7 +476,6 @@ namespace IMS_Client_2.Masters
                         ClearAll();
                         LoadData();
                         grpEmployee.Enabled = false;
-                        //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete, clsUtility.IsAdmin);
                         ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterDelete);
                     }
                     else
@@ -520,17 +503,24 @@ namespace IMS_Client_2.Masters
 
         private void btnStorePopup_Click(object sender, EventArgs e)
         {
-            int a = 0;
-            if (cmbShop.SelectedIndex >= 0)
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.Store_Master) || clsUtility.IsAdmin)
             {
-                a = Convert.ToInt32(cmbShop.SelectedValue);
+                int a = 0;
+                if (cmbShop.SelectedIndex >= 0)
+                {
+                    a = Convert.ToInt32(cmbShop.SelectedValue);
+                }
+                Masters.Store_Master Obj = new Store_Master();
+                Obj.ShowDialog();
+                FillStoreDetails();
+                if (a > 0)
+                {
+                    cmbShop.SelectedValue = a;
+                }
             }
-            Masters.Store_Master Obj = new Store_Master();
-            Obj.ShowDialog();
-            FillStoreDetails();
-            if (a > 0)
+            else
             {
-                cmbShop.SelectedValue = a;
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 

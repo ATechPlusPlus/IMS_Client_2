@@ -28,6 +28,7 @@ namespace IMS_Client_2.Barcode
         //Size newSize;
 
         string strTemplate;
+        string _exportDatafile = "";
         const int DRAG_HANDLE_SIZE = 7;
         //int mouseX, mouseY;
         bool Dragging = false;
@@ -38,7 +39,7 @@ namespace IMS_Client_2.Barcode
             //ControlPaint.DrawBorder(e.Graphics, obj.ClientRectangle, Color.Black, ButtonBorderStyle.Dashed);
             //base.OnPaint(e);
         }
-        
+
         private void SaveBarCodeSettings(string BarCodeData)
         {
             int count = ObjCon.CountRecords(clsUtility.DBName + ".dbo.tblBarCodeSettings");
@@ -49,14 +50,11 @@ namespace IMS_Client_2.Barcode
             }
             else
             {
-
-               int r= ObjCon.ExecuteNonQuery("Update " + clsUtility.DBName + ".dbo.tblBarCodeSettings set BarCodeSetting='" + BarCodeData + "'");
-              
+                int r = ObjCon.ExecuteNonQuery("Update " + clsUtility.DBName + ".dbo.tblBarCodeSettings set BarCodeSetting='" + BarCodeData + "'");
             }
         }
         private void GetBarCodeSettingFromFile()
         {
-
         }
         private string GetBarCodeSettings()
         {
@@ -394,8 +392,7 @@ namespace IMS_Client_2.Barcode
         }
         private void newPageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
-                if (obj == null)
+            if (obj == null)
             {
                 AddNewPage();
             }
@@ -505,7 +502,6 @@ namespace IMS_Client_2.Barcode
 
         private void exportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
         }
 
         private void WriteToLog(string s)
@@ -518,16 +514,16 @@ namespace IMS_Client_2.Barcode
             if (IsFromFile)
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog();
-                if (openFileDialog.ShowDialog()==DialogResult.OK)
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    strBarCodeSettingValue= File.ReadAllText(openFileDialog.FileName);
+                    strBarCodeSettingValue = File.ReadAllText(openFileDialog.FileName);
                 }
             }
             else
             {
-                 strBarCodeSettingValue = GetBarCodeSettings();
+                strBarCodeSettingValue = GetBarCodeSettings();
             }
-      
+
             if (strBarCodeSettingValue != null)
             {
                 string[] strfiles = strBarCodeSettingValue.Split('\n');
@@ -579,12 +575,9 @@ namespace IMS_Client_2.Barcode
                                         // int to enum
                                         objLable.TextAlign = (ContentAlignment)Convert.ToInt32(strInfo[15]);
                                     }
-                                    catch 
+                                    catch
                                     {
-
-                                      
                                     }
-                                   
 
                                     objLable.MouseEnter += new EventHandler(obj.control_MouseEnter);
                                     objLable.MouseLeave += new EventHandler(obj.control_MouseLeave);
@@ -595,10 +588,8 @@ namespace IMS_Client_2.Barcode
                                     objLable.DoubleClick += obj.ctrl_DoubleClick;
                                     objLable.ContextMenuStrip = contextMenuStrip1;
                                     objLable.Click += new EventHandler(obj.ctrl_Click);
-
                                     objLable.MouseLeave += new EventHandler(obj.control_MouseLeave);
                                     obj.Controls.Add(objLable);
-
                                 }
                                 else if (strInfo[0] == "VerticalLabel")
                                 {
@@ -708,7 +699,6 @@ namespace IMS_Client_2.Barcode
                                     objRec.DoubleClick += obj.ctrl_DoubleClick;
                                     objRec.ContextMenuStrip = contextMenuStrip1;
                                     objRec.Click += new EventHandler(obj.ctrl_Click);
-
                                     objRec.MouseLeave += new EventHandler(obj.control_MouseLeave);
                                     obj.Controls.Add(objRec);
                                 }
@@ -740,7 +730,6 @@ namespace IMS_Client_2.Barcode
                                     objLable.DoubleClick += obj.ctrl_DoubleClick;
                                     objLable.ContextMenuStrip = contextMenuStrip1;
                                     objLable.Click += new EventHandler(obj.ctrl_Click);
-
                                     objLable.MouseLeave += new EventHandler(obj.control_MouseLeave);
                                     obj.Controls.Add(objLable);
                                 }
@@ -748,8 +737,7 @@ namespace IMS_Client_2.Barcode
                         }
                         this.Focus();
                         this.Activate();
-
-                      //  clsUtility.ShowInfoMessage("Template Loaded Successfully.", "Designer Tool");
+                        //  clsUtility.ShowInfoMessage("Template Loaded Successfully.", "Designer Tool");
                     }
                 }
             }
@@ -758,7 +746,7 @@ namespace IMS_Client_2.Barcode
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmBarCodeDesigner, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
-                if (obj==null)
+                if (obj == null)
                 {
                     clsUtility.ShowInfoMessage("Please design your barcode.", clsUtility.strProjectTitle);
                     return;
@@ -797,7 +785,7 @@ namespace IMS_Client_2.Barcode
                     int textAlightment = 0;
                     if (obj.Controls[i].GetType() == typeof(Label))
                     {
-                        textAlightment =(int)((Label)(obj.Controls[i])).TextAlign;
+                        textAlightment = (int)((Label)(obj.Controls[i])).TextAlign;
                     }
 
                     if (obj.Controls[i].GetType() == typeof(uRectangle))
@@ -808,13 +796,11 @@ namespace IMS_Client_2.Barcode
                         borderColor = rc.BorderColor.ToArgb();
                     }
 
-                    WriteToLog(type + "@" + b + "@" + family + "@" + arbg + "@" + fsize + "@" + w + "@" + h + "@" + x + "@" + y + "@" + text + "@" + backColor + "@" + RecBorderStyle + "@" + borderStyle + "@" + borderColor + "@" + strtag+"@"+ textAlightment);
+                    WriteToLog(type + "@" + b + "@" + family + "@" + arbg + "@" + fsize + "@" + w + "@" + h + "@" + x + "@" + y + "@" + text + "@" + backColor + "@" + RecBorderStyle + "@" + borderStyle + "@" + borderColor + "@" + strtag + "@" + textAlightment);
                 }
                 SaveBarCodeSettings(strTemplate);
                 clsUtility.ShowInfoMessage("Barcode Template has been saved.", CoreApp.clsUtility.strProjectTitle);
-                
             }
-
         }
 
         private void loadTemplateToolStripMenuItem_Click(object sender, EventArgs e)
@@ -844,13 +830,12 @@ namespace IMS_Client_2.Barcode
 
         private void clearToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (obj!=null)
+            if (obj != null)
             {
                 obj.Controls.Clear();
                 strTemplate = "";
-
             }
-           
+
         }
 
         private void toolStripMenuItem1_Click_1(object sender, EventArgs e)
@@ -868,9 +853,6 @@ namespace IMS_Client_2.Barcode
                     clsUtility.ShowInfoMessage("Barcode setting deleted.", clsUtility.strProjectTitle);
                 }
             }
-
-
-           
         }
 
         private void cmbProperty_SelectionChangeCommitted(object sender, EventArgs e)
@@ -911,9 +893,8 @@ namespace IMS_Client_2.Barcode
                     }
                 }
             }
-
         }
-        string _exportDatafile = "";
+
         private void exportAsFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmBarCodeDesigner, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
@@ -964,10 +945,9 @@ namespace IMS_Client_2.Barcode
                     StreamWriter sw = new StreamWriter(Obj.FileName);
                     sw.WriteLine(strTemplate);
                     sw.Close();
-                    MessageBox.Show("Template Saved Successfully.", "Designer Tool");
+                    clsUtility.ShowInfoMessage("Template Saved Successfully.", "Designer Tool");
                 }
             }
-            
         }
 
         private void importTemplateToolStripMenuItem_Click(object sender, EventArgs e)

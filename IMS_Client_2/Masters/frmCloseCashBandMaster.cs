@@ -167,7 +167,7 @@ namespace IMS_Client_2.Masters
                         ObjDAL.UpdateColumnData("CashBand", SqlDbType.Decimal, txtCashBand.Text.Trim());
                         ObjDAL.UpdateColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
                         ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
-                        ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
+                        ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
 
                         if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.tblCloseCashBandMaster", "CashBandID = " + ID) > 0)
                         {

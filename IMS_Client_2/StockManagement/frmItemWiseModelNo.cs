@@ -22,10 +22,11 @@ namespace IMS_Client_2.StockManagement
         private void frmItemWiseModelNo_Load(object sender, EventArgs e)
         {
             FillStoreData();
+
             cmbShop.SelectedValue = frmHome.Home_StoreID;
-            SearchByStoreID();
             rdSearchByShop.Checked = true;
             cmbShop.Enabled = true;
+            SearchByStoreID();
 
             groupBox1.Focus();
         }
@@ -47,6 +48,10 @@ namespace IMS_Client_2.StockManagement
                 {
                     dgvProductDetails.DataSource = null;
                 }
+            }
+            else
+            {
+                dgvProductDetails.DataSource = null;
             }
         }
 
@@ -100,6 +105,10 @@ namespace IMS_Client_2.StockManagement
                     dgvProductDetails.DataSource = null;
                 }
             }
+            else
+            {
+                dgvProductDetails.DataSource = null;
+            }
         }
 
         private void SearchByModelNo()
@@ -119,6 +128,10 @@ namespace IMS_Client_2.StockManagement
                 {
                     dgvProductDetails.DataSource = null;
                 }
+            }
+            else
+            {
+                dgvProductDetails.DataSource = null;
             }
         }
 
@@ -150,6 +163,15 @@ namespace IMS_Client_2.StockManagement
         {
             try
             {
+                if (txtSearchByProductName.Text.Length == 0)
+                {
+                    dgvProductDetails.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+                    //Most time consumption enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+                    dgvProductDetails.RowHeadersVisible = false; // set it to false if not needed
+
+                    LoadItemModelDetails();
+                    return;
+                }
                 if (txtSearchByProductName.Text.Length > 0)
                 {
                     DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_ProductDetails_Popup '" + txtSearchByProductName.Text + "'");

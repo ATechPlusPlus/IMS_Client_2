@@ -124,7 +124,7 @@
             this.cmbShop.FormattingEnabled = true;
             this.cmbShop.Location = new System.Drawing.Point(125, 75);
             this.cmbShop.Name = "cmbShop";
-            this.cmbShop.Size = new System.Drawing.Size(181, 27);
+            this.cmbShop.Size = new System.Drawing.Size(196, 27);
             this.cmbShop.TabIndex = 237;
             this.cmbShop.SelectionChangeCommitted += new System.EventHandler(this.cmbShop_SelectionChangeCommitted);
             // 
@@ -149,7 +149,7 @@
             this.txtSearchByProductName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSearchByProductName.Location = new System.Drawing.Point(125, 23);
             this.txtSearchByProductName.Name = "txtSearchByProductName";
-            this.txtSearchByProductName.Size = new System.Drawing.Size(181, 25);
+            this.txtSearchByProductName.Size = new System.Drawing.Size(196, 25);
             this.txtSearchByProductName.TabIndex = 235;
             this.txtSearchByProductName.TextChanged += new System.EventHandler(this.txtSearchByProductName_TextChanged);
             this.txtSearchByProductName.Enter += new System.EventHandler(this.txtSearchByProductName_Enter);
@@ -162,7 +162,7 @@
             this.txtSearchByStyleNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSearchByStyleNo.Location = new System.Drawing.Point(480, 23);
             this.txtSearchByStyleNo.Name = "txtSearchByStyleNo";
-            this.txtSearchByStyleNo.Size = new System.Drawing.Size(181, 25);
+            this.txtSearchByStyleNo.Size = new System.Drawing.Size(196, 25);
             this.txtSearchByStyleNo.TabIndex = 234;
             this.txtSearchByStyleNo.TextChanged += new System.EventHandler(this.txtSearchByStyleNo_TextChanged);
             this.txtSearchByStyleNo.Enter += new System.EventHandler(this.txtSearchByProductName_Enter);
