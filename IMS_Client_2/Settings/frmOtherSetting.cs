@@ -67,7 +67,7 @@ namespace IMS_Client_2.Settings
 
         private void LoadStore()
         {
-            DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT StoreID, StoreName FROM " + clsUtility.DBName + ".[dbo].[StoreMaster] WITH(NOLOCK) ");
+            DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT StoreID, StoreName FROM " + clsUtility.DBName + ".[dbo].[StoreMaster] WITH(NOLOCK) WHERE ISNULL(ActiveStatus,1)=1");
             if (ObjUtil.ValidateTable(dt))
             {
                 cmbStoreName.DataSource = dt;
@@ -113,7 +113,8 @@ namespace IMS_Client_2.Settings
             //bool result = false;
             //int count = ObjDAL.ExecuteScalarInt("SELECT COUNT(1) FROM " + clsUtility.DBName + ".[dbo].[tblPC_Store_Mapping] WHERE  MachineName='" + cmbSelectPC.Text.ToString() + "' AND StoreID=" + cmbStoreName.SelectedValue.ToString() + " AND StoreID <>" + ID);
 
-            int count = ObjDAL.CountRecords(clsUtility.DBName + ".[dbo].[tblPC_Store_Mapping]", "MachineName='" + cmbSelectPC.Text.ToString() + "' AND StoreID=" + cmbStoreName.SelectedValue.ToString() + " AND PC_Store_ID <>" + ID);
+            int count = ObjDAL.CountRecords(clsUtility.DBName + ".[dbo].[tblPC_Store_Mapping]", "MachineName='" + cmbSelectPC.Text.ToString() + "' " +
+                "AND PC_Store_ID <>" + ID);
 
             if (count > 0)
             {
@@ -139,14 +140,16 @@ namespace IMS_Client_2.Settings
 
         private void BindStoreSettingData()
         {
-            DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT * FROM " + clsUtility.DBName + ".[dbo].[DefaultStoreSetting] WITH(NOLOCK) WHERE MachineName='" + Environment.MachineName + "'");
+            //DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT * FROM " + clsUtility.DBName + ".[dbo].[DefaultStoreSetting] WITH(NOLOCK) WHERE MachineName='" + Environment.MachineName + "'");
+
+            DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT TOP 1 * FROM " + clsUtility.DBName + ".[dbo].[DefaultStoreSetting] WITH(NOLOCK)");
             if (ObjUtil.ValidateTable(dt))
             {
                 lblmsg.Visible = false;
-                cmbStoreName.SelectedValue = dt.Rows[0]["StoreID"].ToString();
+                //cmbStoreName.SelectedValue = dt.Rows[0]["StoreID"].ToString();
 
                 //we are binding store category by index value.
-                cmbStoreCategory.SelectedIndex = Convert.ToInt32(dt.Rows[0]["StoreCategory"]);
+                //cmbStoreCategory.SelectedIndex = Convert.ToInt32(dt.Rows[0]["StoreCategory"]);
 
                 if (dt.Rows[0]["InvoiceFooterNote"] != DBNull.Value)
                 {
@@ -206,6 +209,7 @@ namespace IMS_Client_2.Settings
             cmbSelectPC.SelectedIndex = -1;
             cmbStoreCategory.SelectedIndex = -1;
             cmbStoreName.SelectedIndex = -1;
+            ID = 0;
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -260,10 +264,22 @@ namespace IMS_Client_2.Settings
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmOtherSetting, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
-                DataTable dtFooterNote = ObjDAL.ExecuteSelectStatement("SELECT * FROM " + clsUtility.DBName + ".[dbo].[DefaultStoreSetting] WITH(NOLOCK)");
-                if (ObjUtil.ValidateTable(dtFooterNote)) // if data found for the PC thenupdate
+                //DataTable dtFooterNote = ObjDAL.ExecuteSelectStatement("SELECT COUNT(1) FROM " + clsUtility.DBName + ".[dbo].[DefaultStoreSetting] WITH(NOLOCK)");
+
+                int a = ObjDAL.CountRecords(clsUtility.DBName + ".[dbo].[DefaultStoreSetting]");
+                if (a > 0) // if data found for the PC thenupdate
                 {
-                    ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.DefaultStoreSetting SET InvoiceFooterNote =N'" + txtFooterNote.Text + "', UserArabicNumbers='" + chkArabicPrice.Checked.ToString() + "', ImagePath='" + txtImagePath.Text + "', Extension='" + GetExtension() + "'");
+                    //ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.DefaultStoreSetting SET InvoiceFooterNote =N'" + txtFooterNote.Text + "', UserArabicNumbers='" + chkArabicPrice.Checked.ToString() + "', ImagePath='" + txtImagePath.Text + "', Extension='" + GetExtension() + "'");
+
+                    ObjDAL.UpdateColumnData("InvoiceFooterNote", SqlDbType.NVarChar, "N" + txtFooterNote.Text);
+                    ObjDAL.UpdateColumnData("UserArabicNumbers", SqlDbType.Bit, chkArabicPrice.Checked);
+                    ObjDAL.UpdateColumnData("ImagePath", SqlDbType.NVarChar, txtImagePath.Text);
+                    ObjDAL.UpdateColumnData("Extension", SqlDbType.NVarChar, GetExtension());
+                    ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID);
+                    ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+
+                    ObjDAL.UpdateData(clsUtility.DBName + ".dbo.DefaultStoreSetting", "1=1");
+
                     clsUtility.ShowInfoMessage("Settings has been updated.", clsUtility.strProjectTitle);
                 }
                 else
@@ -273,6 +289,7 @@ namespace IMS_Client_2.Settings
                     ObjDAL.SetColumnData("UserArabicNumbers", SqlDbType.Bit, chkArabicPrice.Checked);
                     ObjDAL.SetColumnData("ImagePath", SqlDbType.NVarChar, txtImagePath.Text);
                     ObjDAL.SetColumnData("Extension", SqlDbType.NVarChar, GetExtension());
+                    ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
 
                     int r = ObjDAL.InsertData(clsUtility.DBName + ".[dbo].[DefaultStoreSetting]", false);
                     if (r > 0)
@@ -308,19 +325,21 @@ namespace IMS_Client_2.Settings
         {
             if (cmbBarcodPrinter.SelectedIndex == -1)
             {
-                clsUtility.ShowInfoMessage("Please select your printer.", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("Please select your BarCode Printer.", clsUtility.strProjectTitle);
+                cmbBarcodPrinter.Focus();
                 return;
             }
             else if (cmbInvoicePrinter.SelectedIndex == -1)
             {
-                clsUtility.ShowInfoMessage("Please select your function.", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("Please select your Invoice Printer.", clsUtility.strProjectTitle);
+                cmbInvoicePrinter.Focus();
                 return;
             }
             SavePrinterSetting();
         }
         private void BindPrinterDetails()
         {
-            DataTable dtPrinter = ObjDAL.ExecuteSelectStatement("SELECT * FROM " + clsUtility.DBName + ".dbo.[tblPrinterSetting] WITH(NOLOCK) WHERE MachineName = '" + txtMachineName.Text + "'");
+            DataTable dtPrinter = ObjDAL.ExecuteSelectStatement("SELECT BarCodePrinter, InvoicePrinter FROM " + clsUtility.DBName + ".dbo.[tblPrinterSetting] WITH(NOLOCK) WHERE MachineName = '" + txtMachineName.Text + "'");
             if (ObjUtil.ValidateTable(dtPrinter))
             {
                 cmbBarcodPrinter.SelectedItem = dtPrinter.Rows[0]["BarCodePrinter"].ToString();
@@ -343,7 +362,7 @@ namespace IMS_Client_2.Settings
                 //ObjCon.UpdateColumnData("MachineName", SqlDbType.NVarChar, Environment.MachineName);
                 ObjDAL.UpdateColumnData("BarCodePrinter", SqlDbType.NVarChar, cmbBarcodPrinter.SelectedItem.ToString());
                 ObjDAL.UpdateColumnData("InvoicePrinter", SqlDbType.NVarChar, cmbInvoicePrinter.SelectedItem.ToString());
-                ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
+                ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID);
                 ObjDAL.UpdateData(clsUtility.DBName + ".dbo.tblPrinterSetting", "MachineName='" + Environment.MachineName + "'");
             }
@@ -365,6 +384,7 @@ namespace IMS_Client_2.Settings
                     ObjDAL.SetColumnData("StoreID", SqlDbType.Int, cmbStoreName.SelectedValue);
                     ObjDAL.SetColumnData("MachineName", SqlDbType.NVarChar, cmbSelectPC.Text);
                     ObjDAL.SetColumnData("StoreCategory", SqlDbType.Int, cmbStoreCategory.SelectedIndex);
+                    ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
 
                     int r = ObjDAL.InsertData(clsUtility.DBName + ".[dbo].[tblPC_Store_Mapping]", false);
                     if (r > 0)
@@ -407,19 +427,21 @@ namespace IMS_Client_2.Settings
                     ObjDAL.UpdateColumnData("MachineName", SqlDbType.NVarChar, cmbSelectPC.Text);
                     ObjDAL.UpdateColumnData("StoreID", SqlDbType.Int, cmbStoreName.SelectedValue);
                     ObjDAL.UpdateColumnData("StoreCategory", SqlDbType.Int, cmbStoreCategory.SelectedIndex);
+                    ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID);
+                    ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
 
                     if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.tblPC_Store_Mapping", "PC_Store_ID = " + ID) > 0)
                     {
                         ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate);
 
-                        clsUtility.ShowInfoMessage("'" + lblPCName.Text + "' Data has been Updated", clsUtility.strProjectTitle);
+                        clsUtility.ShowInfoMessage("'" + cmbSelectPC.Text + "' Data has been Updated", clsUtility.strProjectTitle);
                         LoadData();
                         ClearAll();
                         groupBox1.Enabled = false;
                     }
                     else
                     {
-                        clsUtility.ShowErrorMessage("'" + lblPCName.Text + "' Data has not been Updated", clsUtility.strProjectTitle);
+                        clsUtility.ShowErrorMessage("'" + cmbSelectPC.Text + "' Data has not been Updated", clsUtility.strProjectTitle);
                     }
                 }
             }

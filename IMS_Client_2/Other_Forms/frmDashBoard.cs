@@ -26,19 +26,25 @@ namespace IMS_Client_2.Other_Forms
 
         private void frmDashBoard_Load(object sender, EventArgs e)
         {
-            DataTable dtDashBoard = ObjDAL.ExecuteSelectStatement("select 1 from " + clsUtility.DBName + ".[dbo].[tblDashBoard] WITH(NOLOCK)");
+            DataTable dtDashBoard = ObjDAL.ExecuteSelectStatement("SELECT COUNT(1) FROM " + clsUtility.DBName + ".[dbo].[tblDashBoard] WITH(NOLOCK)");
             if (dtDashBoard.Rows.Count == 0)
             {
-                frmDashBoardSettings frmDashBoardSettings = new frmDashBoardSettings();
-                frmDashBoardSettings.ShowDialog();
-                LoadShop();
+                if (clsFormRights.HasFormRight(clsFormRights.Forms.frmDashBoardSettings) || clsUtility.IsAdmin)
+                {
+                    frmDashBoardSettings frmDashBoardSettings = new frmDashBoardSettings();
+                    frmDashBoardSettings.ShowDialog();
+                    LoadShop();
+                }
+                else
+                {
+                    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                }
             }
             else
             {
                 LoadShop();
             }
         }
-
 
         private string GetShopeName(string shopID)
         {
@@ -57,7 +63,7 @@ namespace IMS_Client_2.Other_Forms
             TotalHeaderQTY = 0;
 
             flowLayoutPanel1.Controls.Clear();
-            DataTable dtDashBoard = ObjDAL.ExecuteSelectStatement("select * from " + clsUtility.DBName + ".[dbo].[tblDashBoard] WITH(NOLOCK)");
+            DataTable dtDashBoard = ObjDAL.ExecuteSelectStatement("SELECT * FROM " + clsUtility.DBName + ".[dbo].[tblDashBoard] WITH(NOLOCK)");
             if (dtDashBoard.Rows.Count > 0)
             {
                 string[] strShops = dtDashBoard.Rows[0]["Shopes"].ToString().Split(',');

@@ -175,7 +175,7 @@ namespace IMS_Client_2.Masters
                         ObjDAL.UpdateColumnData("PhoneNo", SqlDbType.NVarChar, txtCustomerPhoneNo.Text.Trim());
                         ObjDAL.UpdateColumnData("ActiveStatus", SqlDbType.Bit, cmbCustomerActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
                         ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
-                        ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
+                        ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
 
                         if (ObjDAL.UpdateData(clsUtility.DBName + ".dbo.CustomerMaster", "CustomerID = " + ID + "") > 0)
                         {

@@ -205,7 +205,6 @@
             this.dgvCloseCash.RowTemplate.Height = 24;
             this.dgvCloseCash.Size = new System.Drawing.Size(353, 297);
             this.dgvCloseCash.TabIndex = 122;
-            this.dgvCloseCash.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCloseCash_CellEndEdit);
             this.dgvCloseCash.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvCloseCash_CellValidating);
             this.dgvCloseCash.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCloseCash_CellValueChanged);
             this.dgvCloseCash.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvCloseCash_ColumnAdded);
@@ -295,9 +294,6 @@
             this.cmbShop.Enabled = false;
             this.cmbShop.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbShop.FormattingEnabled = true;
-            this.cmbShop.Items.AddRange(new object[] {
-            "Active",
-            "InActive"});
             this.cmbShop.Location = new System.Drawing.Point(15, 75);
             this.cmbShop.Margin = new System.Windows.Forms.Padding(2);
             this.cmbShop.Name = "cmbShop";

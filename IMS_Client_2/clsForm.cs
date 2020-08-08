@@ -44,6 +44,9 @@
             tblMiniSalesReport = 45,
             frmPurchaseDetails=46,
             frmReceivedBranchTransfer=47,
+            frmDashBoardSettings=48,
+            frmDashBoard=49,
+
             frmDatabaseMaintenance = 7///commented
         }
         public enum Operation

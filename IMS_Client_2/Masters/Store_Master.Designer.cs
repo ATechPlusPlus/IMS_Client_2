@@ -185,7 +185,7 @@
             this.cmbStoreCat.FormattingEnabled = true;
             this.cmbStoreCat.Items.AddRange(new object[] {
             "Normal Store",
-            "Wearhouse"});
+            "Warehouse"});
             this.cmbStoreCat.Location = new System.Drawing.Point(123, 110);
             this.cmbStoreCat.Name = "cmbStoreCat";
             this.cmbStoreCat.Size = new System.Drawing.Size(207, 27);

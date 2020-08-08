@@ -157,10 +157,9 @@ namespace IMS_Client_2
             }
             catch (Exception)
             {
-
             }
-
         }
+
         private void frmHome_Load(object sender, EventArgs e)
         {
             try
@@ -210,7 +209,7 @@ namespace IMS_Client_2
                 bool b = clsUtility.ShowQuestionMessage("Are you sure, you want to Exit?", clsUtility.strProjectTitle);
                 if (b)
                 {
-                    ObjDAL.UpdateColumnData("LogOutTime", SqlDbType.DateTime, DateTime.Now);
+                    ObjDAL.UpdateColumnData("LogOutTime", SqlDbType.DateTime, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                     ObjDAL.UpdateData(clsUtility.DBName + ".dbo.Login_History", "Login_History_ID = " + Login_History_ID);
                     IsLogOut = true;
                     Application.Exit();
@@ -226,7 +225,7 @@ namespace IMS_Client_2
         {
             if (clsUtility.ShowQuestionMessage("Are you sure to Logout?", clsUtility.strProjectTitle))
             {
-                ObjDAL.UpdateColumnData("LogOutTime", SqlDbType.DateTime, DateTime.Now);
+                ObjDAL.UpdateColumnData("LogOutTime", SqlDbType.DateTime, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 ObjDAL.UpdateData(clsUtility.DBName + ".dbo.Login_History", "Login_History_ID = " + Login_History_ID);
                 frmLogin Obj = new frmLogin();
                 Obj.BringToFront();
@@ -426,6 +425,7 @@ namespace IMS_Client_2
                 frmOtherSetting frmOtherSetting = new frmOtherSetting();
                 frmOtherSetting.ShowDialog();
                 GetDefaultShop();
+                LoadCashStatus();
             }
             else
             {
@@ -840,7 +840,7 @@ namespace IMS_Client_2
 
         private void dashboardToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (clsFormRights.HasFormRight(clsFormRights.Forms.tblMiniSalesReport) || clsUtility.IsAdmin)
+            //if (clsFormRights.HasFormRight(clsFormRights.Forms.frmDashBoard) || clsUtility.IsAdmin)
             //{
             //}
             //else
