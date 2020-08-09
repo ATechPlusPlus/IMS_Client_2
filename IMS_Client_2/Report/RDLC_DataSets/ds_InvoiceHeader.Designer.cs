@@ -303,6 +303,10 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             
             private global::System.Data.DataColumn columnCustomerMobile;
             
+            private global::System.Data.DataColumn columnCashTendered;
+            
+            private global::System.Data.DataColumn columnChange;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public tblInvoiceHeader_FooterDataTable() {
@@ -434,6 +438,22 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn CashTenderedColumn {
+                get {
+                    return this.columnCashTendered;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ChangeColumn {
+                get {
+                    return this.columnChange;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -469,7 +489,7 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public tblInvoiceHeader_FooterRow AddtblInvoiceHeader_FooterRow(string InvoiceNumber, string InvoiceDate, string CustName, string empName, string StoreName, string SubTotal, string Discount, string Tax, string GrandTotal, string PaymentMode, string PaymentAutoID, string CustomerMobile) {
+            public tblInvoiceHeader_FooterRow AddtblInvoiceHeader_FooterRow(string InvoiceNumber, string InvoiceDate, string CustName, string empName, string StoreName, string SubTotal, string Discount, string Tax, string GrandTotal, string PaymentMode, string PaymentAutoID, string CustomerMobile, string CashTendered, string Change) {
                 tblInvoiceHeader_FooterRow rowtblInvoiceHeader_FooterRow = ((tblInvoiceHeader_FooterRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         InvoiceNumber,
@@ -483,7 +503,9 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
                         GrandTotal,
                         PaymentMode,
                         PaymentAutoID,
-                        CustomerMobile};
+                        CustomerMobile,
+                        CashTendered,
+                        Change};
                 rowtblInvoiceHeader_FooterRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowtblInvoiceHeader_FooterRow);
                 return rowtblInvoiceHeader_FooterRow;
@@ -518,6 +540,8 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
                 this.columnPaymentMode = base.Columns["PaymentMode"];
                 this.columnPaymentAutoID = base.Columns["PaymentAutoID"];
                 this.columnCustomerMobile = base.Columns["CustomerMobile"];
+                this.columnCashTendered = base.Columns["CashTendered"];
+                this.columnChange = base.Columns["Change"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -547,6 +571,10 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
                 base.Columns.Add(this.columnPaymentAutoID);
                 this.columnCustomerMobile = new global::System.Data.DataColumn("CustomerMobile", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCustomerMobile);
+                this.columnCashTendered = new global::System.Data.DataColumn("CashTendered", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCashTendered);
+                this.columnChange = new global::System.Data.DataColumn("Change", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnChange);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -884,6 +912,39 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string CashTendered {
+                get {
+                    try {
+                        return ((string)(this[this.tabletblInvoiceHeader_Footer.CashTenderedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CashTendered\' in table \'tblInvoiceHeader_Footer\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tabletblInvoiceHeader_Footer.CashTenderedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Change {
+                get {
+                    try {
+                        return ((string)(this[this.tabletblInvoiceHeader_Footer.ChangeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Change\' in table \'tblInvoiceHeader_Footer\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblInvoiceHeader_Footer.ChangeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsInvoiceNumberNull() {
                 return this.IsNull(this.tabletblInvoiceHeader_Footer.InvoiceNumberColumn);
             }
@@ -1024,6 +1085,30 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetCustomerMobileNull() {
                 this[this.tabletblInvoiceHeader_Footer.CustomerMobileColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsCashTenderedNull() {
+                return this.IsNull(this.tabletblInvoiceHeader_Footer.CashTenderedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetCashTenderedNull() {
+                this[this.tabletblInvoiceHeader_Footer.CashTenderedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsChangeNull() {
+                return this.IsNull(this.tabletblInvoiceHeader_Footer.ChangeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetChangeNull() {
+                this[this.tabletblInvoiceHeader_Footer.ChangeColumn] = global::System.Convert.DBNull;
             }
         }
         

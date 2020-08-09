@@ -65,6 +65,7 @@
             this.closeCashToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dashboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.branchesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MaterialDetails_ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.stockTransferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.brachReceiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -101,7 +102,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.branchesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -133,6 +133,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(1289, 42);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // userCreationToolStripMenuItem
             // 
@@ -377,7 +378,8 @@
             // SalesInvoice_ToolStrip
             // 
             this.SalesInvoice_ToolStrip.Name = "SalesInvoice_ToolStrip";
-            this.SalesInvoice_ToolStrip.Size = new System.Drawing.Size(212, 24);
+            this.SalesInvoice_ToolStrip.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.SalesInvoice_ToolStrip.Size = new System.Drawing.Size(218, 24);
             this.SalesInvoice_ToolStrip.Text = "New Sales Invoice";
             this.SalesInvoice_ToolStrip.Click += new System.EventHandler(this.SalesInvoice_ToolStrip_Click);
             // 
@@ -386,6 +388,7 @@
             this.replaceReturnItemsToolStripMenuItem.Name = "replaceReturnItemsToolStripMenuItem";
             this.replaceReturnItemsToolStripMenuItem.Size = new System.Drawing.Size(212, 24);
             this.replaceReturnItemsToolStripMenuItem.Text = "Replace/ Return Items";
+            this.replaceReturnItemsToolStripMenuItem.Visible = false;
             this.replaceReturnItemsToolStripMenuItem.Click += new System.EventHandler(this.replaceReturnItemsToolStripMenuItem_Click);
             // 
             // SalesBillDetails_ToolStrip
@@ -426,6 +429,13 @@
             this.toolStripMenuItem1.Size = new System.Drawing.Size(135, 36);
             this.toolStripMenuItem1.Text = "Stock Manager";
             this.toolStripMenuItem1.ToolTipText = "Print Invoice";
+            // 
+            // branchesToolStripMenuItem
+            // 
+            this.branchesToolStripMenuItem.Name = "branchesToolStripMenuItem";
+            this.branchesToolStripMenuItem.Size = new System.Drawing.Size(229, 24);
+            this.branchesToolStripMenuItem.Text = "Branches Shorting Sales";
+            this.branchesToolStripMenuItem.Click += new System.EventHandler(this.branchesToolStripMenuItem_Click);
             // 
             // MaterialDetails_ToolStrip
             // 
@@ -782,13 +792,6 @@
             this.label9.Size = new System.Drawing.Size(130, 19);
             this.label9.TabIndex = 28;
             this.label9.Text = "Today\'s Cash Box";
-            // 
-            // branchesToolStripMenuItem
-            // 
-            this.branchesToolStripMenuItem.Name = "branchesToolStripMenuItem";
-            this.branchesToolStripMenuItem.Size = new System.Drawing.Size(229, 24);
-            this.branchesToolStripMenuItem.Text = "Branches Shorting Sales";
-            this.branchesToolStripMenuItem.Click += new System.EventHandler(this.branchesToolStripMenuItem_Click);
             // 
             // frmHome
             // 

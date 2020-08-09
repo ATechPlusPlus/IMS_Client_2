@@ -112,7 +112,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
             <Top>0.3425in</Top>
-            <Left>0.0925in</Left>
+            <Left>0.17632in</Left>
             <Height>0.25in</Height>
             <Width>0.98214in</Width>
             <ZIndex>1</ZIndex>
@@ -146,7 +146,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
             <Top>0.60458in</Top>
-            <Left>0.0925in</Left>
+            <Left>0.17632in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
             <ZIndex>2</ZIndex>
@@ -180,7 +180,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox4</rd:DefaultName>
             <Top>0.3425in</Top>
-            <Left>5.03in</Left>
+            <Left>5.11382in</Left>
             <Height>0.25in</Height>
             <Width>0.73611in</Width>
             <ZIndex>3</ZIndex>
@@ -214,7 +214,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox4</rd:DefaultName>
             <Top>0.60458in</Top>
-            <Left>5.04042in</Left>
+            <Left>5.12424in</Left>
             <Height>0.25in</Height>
             <Width>0.78869in</Width>
             <ZIndex>4</ZIndex>
@@ -229,8 +229,8 @@
             </Style>
           </Textbox>
           <Line Name="Line1">
-            <Top>0.95361in</Top>
-            <Left>0.0925in</Left>
+            <Top>1.17236in</Top>
+            <Left>0.2284in</Left>
             <Height>0in</Height>
             <Width>7.31248in</Width>
             <ZIndex>5</ZIndex>
@@ -804,8 +804,8 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>ds_StoreTransfer</DataSetName>
-            <Top>0.99875in</Top>
-            <Left>0.0925in</Left>
+            <Top>1.22792in</Top>
+            <Left>0.17632in</Left>
             <Height>0.5in</Height>
             <Width>7.36456in</Width>
             <ZIndex>6</ZIndex>
@@ -834,8 +834,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox15</rd:DefaultName>
-            <Top>1.76264in</Top>
-            <Left>5.23137in</Left>
+            <Top>1.95014in</Top>
+            <Left>5.31519in</Left>
             <Height>0.25in</Height>
             <Width>1.09375in</Width>
             <ZIndex>7</ZIndex>
@@ -868,8 +868,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox15</rd:DefaultName>
-            <Top>2.08208in</Top>
-            <Left>5.23137in</Left>
+            <Top>2.26958in</Top>
+            <Left>5.31519in</Left>
             <Height>0.25in</Height>
             <Width>1.09375in</Width>
             <ZIndex>8</ZIndex>
@@ -903,7 +903,7 @@
             </Paragraphs>
             <rd:DefaultName>parmFromStore</rd:DefaultName>
             <Top>0.3425in</Top>
-            <Left>1.1302in</Left>
+            <Left>1.21402in</Left>
             <Height>0.25in</Height>
             <Width>2.15625in</Width>
             <ZIndex>9</ZIndex>
@@ -937,7 +937,7 @@
             </Paragraphs>
             <rd:DefaultName>ParmToStore</rd:DefaultName>
             <Top>0.60458in</Top>
-            <Left>1.14458in</Left>
+            <Left>1.21799in</Left>
             <Height>0.25in</Height>
             <Width>2.14187in</Width>
             <ZIndex>10</ZIndex>
@@ -971,7 +971,7 @@
             </Paragraphs>
             <rd:DefaultName>ParmBillNo</rd:DefaultName>
             <Top>0.3425in</Top>
-            <Left>5.88466in</Left>
+            <Left>5.96848in</Left>
             <Height>0.25in</Height>
             <Width>1.55206in</Width>
             <ZIndex>11</ZIndex>
@@ -1006,7 +1006,7 @@
             </Paragraphs>
             <rd:DefaultName>parmBillDate</rd:DefaultName>
             <Top>0.60458in</Top>
-            <Left>5.88466in</Left>
+            <Left>5.96848in</Left>
             <Height>0.25in</Height>
             <Width>1.55851in</Width>
             <ZIndex>12</ZIndex>
@@ -1039,8 +1039,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>ParmTotalQTY</rd:DefaultName>
-            <Top>2.08208in</Top>
-            <Left>6.40498in</Left>
+            <Top>2.26958in</Top>
+            <Left>6.4888in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
             <ZIndex>13</ZIndex>
@@ -1073,11 +1073,78 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>ParmTotalAmount</rd:DefaultName>
-            <Top>1.76264in</Top>
-            <Left>6.40498in</Left>
+            <Top>1.95014in</Top>
+            <Left>6.4888in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
             <ZIndex>14</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox9">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Employee :</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>0.89625in</Top>
+            <Left>0.17632in</Left>
+            <Height>0.25in</Height>
+            <Width>1in</Width>
+            <ZIndex>15</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="ParmEmployee">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!ParmEmployee.Value</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>ParmEmployee</rd:DefaultName>
+            <Top>0.89625in</Top>
+            <Left>1.23188in</Left>
+            <Height>0.25in</Height>
+            <Width>2.13839in</Width>
+            <ZIndex>16</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1092,7 +1159,7 @@
         <Height>3.47917in</Height>
         <Style />
       </Body>
-      <Width>7.56125in</Width>
+      <Width>7.69712in</Width>
       <Page>
         <Style>
           <Border>
@@ -1133,6 +1200,12 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="ParmTotalAmount">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ParmEmployee">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>

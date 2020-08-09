@@ -58,6 +58,7 @@ namespace IMS_Client_2.Other_Forms
             {
                 txtAmount.Text = CashAmount.ToString();
                 txtPaymentAutoID.Text = "00000000";
+                txtAmount.Focus();
             }
         }
         public static void ResetData()
@@ -156,6 +157,9 @@ namespace IMS_Client_2.Other_Forms
             btnCancel.BackgroundImage = B_Leave;
 
             LoadAmount();
+
+            this.Focus();
+
         }
         private void btnAdd_MouseEnter(object sender, EventArgs e)
         {
@@ -202,6 +206,28 @@ namespace IMS_Client_2.Other_Forms
             if (e.Handled == true)
             {
                 clsUtility.ShowInfoMessage("Enter Only Number...", clsUtility.strProjectTitle);
+            }
+        }
+
+        private void frmPayment_Activated(object sender, EventArgs e)
+        {
+
+            if (lblPaymentMode.Text == "K Net")
+            {
+               
+            }
+            else if (lblPaymentMode.Text == "Visa")
+            {
+               
+            }
+            else if (lblPaymentMode.Text == "Master Card")
+            {
+              
+            }
+            else if (lblPaymentMode.Text == "Cash")
+            {
+
+                txtAmount.Focus();
             }
         }
     }

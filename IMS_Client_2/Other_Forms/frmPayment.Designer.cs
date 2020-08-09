@@ -124,7 +124,7 @@
             this.txtPaymentAutoID.Location = new System.Drawing.Point(151, 218);
             this.txtPaymentAutoID.Name = "txtPaymentAutoID";
             this.txtPaymentAutoID.Size = new System.Drawing.Size(163, 25);
-            this.txtPaymentAutoID.TabIndex = 222;
+            this.txtPaymentAutoID.TabIndex = 1;
             this.txtPaymentAutoID.Enter += new System.EventHandler(this.txtPaymentAutoID_Enter);
             this.txtPaymentAutoID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPaymentAutoID_KeyPress);
             this.txtPaymentAutoID.Leave += new System.EventHandler(this.txtPaymentAutoID_Leave);
@@ -153,7 +153,7 @@
             this.btnOK.Location = new System.Drawing.Point(232, 8);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(76, 25);
-            this.btnOK.TabIndex = 249;
+            this.btnOK.TabIndex = 3;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.button1_Click);
@@ -169,7 +169,7 @@
             this.btnCancel.Location = new System.Drawing.Point(314, 8);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(71, 25);
-            this.btnCancel.TabIndex = 250;
+            this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Close";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.button2_Click);
@@ -209,7 +209,7 @@
             this.txtAmount.Location = new System.Drawing.Point(151, 258);
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(129, 25);
-            this.txtAmount.TabIndex = 257;
+            this.txtAmount.TabIndex = 2;
             this.txtAmount.Text = "0";
             this.txtAmount.Enter += new System.EventHandler(this.txtPaymentAutoID_Enter);
             this.txtAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAmount_KeyPress);
@@ -262,6 +262,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Payment";
+            this.Activated += new System.EventHandler(this.frmPayment_Activated);
             this.Load += new System.EventHandler(this.frmPayment_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();

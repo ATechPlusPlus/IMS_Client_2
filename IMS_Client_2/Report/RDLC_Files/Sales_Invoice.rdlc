@@ -72,10 +72,18 @@
           <DataField>CustomerMobile</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="CashTendered">
+          <DataField>CashTendered</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Change">
+          <DataField>Change</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>ds_InvoiceHeader</rd:DataSetName>
-        <rd:SchemaPath>E:\Professional Projects\IMS_Client_2\IMS_Client_2\Report\RDLC_DataSets\ds_InvoiceHeader.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\ABDUL MATEEN\Source\Repos\khan89aamir\IMS_Client_2\IMS_Client_2\Report\RDLC_DataSets\ds_InvoiceHeader.xsd</rd:SchemaPath>
         <rd:TableName>tblInvoiceHeader_Footer</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -1060,7 +1068,7 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>Discount(%) :</Value>
+                                <Value>Discount :</Value>
                                 <Style>
                                   <FontFamily>times New Roman</FontFamily>
                                   <FontWeight>Bold</FontWeight>
@@ -1089,7 +1097,7 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.57944in</Width>
+                  <Width>0.65878in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -1149,7 +1157,7 @@
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>#,0.00;(#,0.00)</Format>
+                                    <Format>#,0.00</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1160,6 +1168,82 @@
                           </Paragraphs>
                           <rd:DefaultName>GrandTotal</rd:DefaultName>
                           <ZIndex>18</ZIndex>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="CashTendered">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!CashTendered.Value</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>CashTendered</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Change">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Change.Value</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Change</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -1274,7 +1358,7 @@
                     </GroupExpressions>
                   </Group>
                   <TablixHeader>
-                    <Size>0.89994in</Size>
+                    <Size>0.97928in</Size>
                     <CellContents>
                       <Textbox Name="Textbox25">
                         <CanGrow>true</CanGrow>
@@ -1309,7 +1393,7 @@
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>0.89994in</Size>
+                    <Size>0.97928in</Size>
                     <CellContents>
                       <Textbox Name="Textbox27">
                         <CanGrow>true</CanGrow>
@@ -1343,13 +1427,83 @@
                   </TablixHeader>
                   <KeepWithGroup>Before</KeepWithGroup>
                 </TablixMember>
+                <TablixMember>
+                  <TablixHeader>
+                    <Size>0.97928in</Size>
+                    <CellContents>
+                      <Textbox Name="Textbox2">
+                        <CanGrow>true</CanGrow>
+                        <KeepTogether>true</KeepTogether>
+                        <Paragraphs>
+                          <Paragraph>
+                            <TextRuns>
+                              <TextRun>
+                                <Value>Cash Tendered</Value>
+                                <Style>
+                                  <FontFamily>times New Roman</FontFamily>
+                                  <FontWeight>Bold</FontWeight>
+                                </Style>
+                              </TextRun>
+                            </TextRuns>
+                            <Style />
+                          </Paragraph>
+                        </Paragraphs>
+                        <rd:DefaultName>Textbox2</rd:DefaultName>
+                        <Style>
+                          <Border>
+                            <Style>None</Style>
+                          </Border>
+                          <PaddingLeft>2pt</PaddingLeft>
+                          <PaddingTop>2pt</PaddingTop>
+                          <PaddingBottom>2pt</PaddingBottom>
+                        </Style>
+                      </Textbox>
+                    </CellContents>
+                  </TablixHeader>
+                  <KeepWithGroup>Before</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <TablixHeader>
+                    <Size>0.97928in</Size>
+                    <CellContents>
+                      <Textbox Name="Textbox5">
+                        <CanGrow>true</CanGrow>
+                        <KeepTogether>true</KeepTogether>
+                        <Paragraphs>
+                          <Paragraph>
+                            <TextRuns>
+                              <TextRun>
+                                <Value>Change :</Value>
+                                <Style>
+                                  <FontFamily>times New Roman</FontFamily>
+                                  <FontWeight>Bold</FontWeight>
+                                </Style>
+                              </TextRun>
+                            </TextRuns>
+                            <Style />
+                          </Paragraph>
+                        </Paragraphs>
+                        <rd:DefaultName>Textbox5</rd:DefaultName>
+                        <Style>
+                          <Border>
+                            <Style>None</Style>
+                          </Border>
+                          <PaddingLeft>2pt</PaddingLeft>
+                          <PaddingTop>2pt</PaddingTop>
+                          <PaddingBottom>2pt</PaddingBottom>
+                        </Style>
+                      </Textbox>
+                    </CellContents>
+                  </TablixHeader>
+                  <KeepWithGroup>Before</KeepWithGroup>
+                </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>ds_InvoiceHeader</DataSetName>
             <Top>3.00053in</Top>
-            <Left>1.42874in</Left>
-            <Height>1in</Height>
-            <Width>1.47938in</Width>
+            <Left>1.27006in</Left>
+            <Height>1.5in</Height>
+            <Width>1.63806in</Width>
             <ZIndex>18</ZIndex>
             <Style>
               <Border>
@@ -1375,7 +1529,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox20</rd:DefaultName>
-            <Top>4.0587in</Top>
+            <Top>4.25053in</Top>
             <Left>0.13862in</Left>
             <Height>0.25in</Height>
             <Width>0.93778in</Width>
@@ -1407,8 +1561,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>NetAmount</rd:DefaultName>
-            <Top>4.37814in</Top>
-            <Left>0.13862in</Left>
+            <Top>4.50314in</Top>
+            <Left>0.1493in</Left>
             <Height>0.32292in</Height>
             <Width>2.71584in</Width>
             <ZIndex>20</ZIndex>
@@ -1423,8 +1577,7 @@
             </Style>
           </Textbox>
           <Line Name="Line3">
-            <Top>4.78251in</Top>
-            <Left>0.02597in</Left>
+            <Top>4.88162in</Top>
             <Height>0in</Height>
             <Width>2.83917in</Width>
             <ZIndex>21</ZIndex>
@@ -1452,8 +1605,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox51</rd:DefaultName>
-            <Top>5.35021in</Top>
-            <Left>0.13862in</Left>
+            <Top>5.48002in</Top>
+            <Left>0.05659in</Left>
             <Height>0.25in</Height>
             <Width>0.42708in</Width>
             <ZIndex>22</ZIndex>
@@ -1484,7 +1637,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Note</rd:DefaultName>
-            <Top>5.36702in</Top>
+            <Top>5.46613in</Top>
             <Left>0.46373in</Left>
             <Height>0.51218in</Height>
             <Width>2.38599in</Width>
@@ -1503,10 +1656,10 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.68986in</Width>
+                  <Width>0.65166in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.57249in</Width>
+                  <Width>0.49176in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -1529,7 +1682,9 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox1</rd:DefaultName>
@@ -1555,14 +1710,16 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Amount</Value>
+                                  <Value>AMT</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox3</rd:DefaultName>
@@ -1599,7 +1756,9 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>PaymentType</rd:DefaultName>
@@ -1631,7 +1790,9 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Amount</rd:DefaultName>
@@ -1672,7 +1833,7 @@
             <Top>2.98664in</Top>
             <Left>0.13862in</Left>
             <Height>0.5in</Height>
-            <Width>1.26234in</Width>
+            <Width>1.14342in</Width>
             <ZIndex>24</ZIndex>
             <Style>
               <Border>
@@ -1685,7 +1846,7 @@
             <Value>="file:" &amp; Parameters!BarCodeImage.Value</Value>
             <MIMEType>image/jpeg</MIMEType>
             <Sizing>Fit</Sizing>
-            <Top>4.85195in</Top>
+            <Top>4.93717in</Top>
             <Left>0.6134in</Left>
             <Height>0.40396in</Height>
             <Width>1.67321in</Width>
@@ -1697,8 +1858,8 @@
             </Style>
           </Image>
           <Line Name="Line4">
-            <Top>5.29758in</Top>
-            <Left>0.02597in</Left>
+            <Top>5.41058in</Top>
+            <Left>0.01055in</Left>
             <Height>0in</Height>
             <Width>2.83917in</Width>
             <ZIndex>26</ZIndex>
@@ -1709,7 +1870,7 @@
             </Style>
           </Line>
         </ReportItems>
-        <Height>6.16542in</Height>
+        <Height>6.08in</Height>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1755,6 +1916,18 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="BarCodeImage">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ParmCashtendered">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="parmChange">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>

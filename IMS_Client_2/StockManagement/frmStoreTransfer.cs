@@ -638,7 +638,21 @@ namespace IMS_Client_2.StockManagement
                 dgvProductDetails.Columns["StockQTY"].Visible = true;
             }
         }
+        private string GetLoginEmployee()
+        {
+            string emp = "NA";
+            string str = "  select e1.Name from EmployeeDetails e1 join  " +
+                         " UserManagement u1 on e1.EmpID = u1.EmployeeID" +
+                         " where u1.UserID = " + clsUtility.LoginID;
 
+            object strEmployeName=ObjDAL.ExecuteScalar(str);
+            if (strEmployeName!=null)
+            {
+                emp = strEmployeName.ToString();
+            }
+
+            return emp;
+        }
         private void btnPrint_Click(object sender, EventArgs e)
         {
             if (cmdTo.SelectedIndex == -1)
@@ -680,6 +694,8 @@ namespace IMS_Client_2.StockManagement
                     frmStoreTransferReport.strTotalRate = txtValue.Text;
                     frmStoreTransferReport.strBillDate = dtpSalesDate.Value.ToShortDateString();
                     frmStoreTransferReport.strBillNo = BillNo;
+
+                    frmStoreTransferReport.strEmployeeName = GetLoginEmployee();
                     frmStoreTransferReport.ShowDialog();
 
                     ClearAll();
