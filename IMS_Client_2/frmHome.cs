@@ -876,5 +876,18 @@ namespace IMS_Client_2
                 clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
+
+        private void barCodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (clsUtility.IsAdmin)
+            {
+                Barcode.frmManuallyBarCode Obj = new Barcode.frmManuallyBarCode();
+                Obj.Show();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
+        }
     }
 }

@@ -35,6 +35,7 @@
             this.lblSupplier = new System.Windows.Forms.Label();
             this.cmbStore = new System.Windows.Forms.ComboBox();
             this.grpPurchaseBillDetail = new System.Windows.Forms.GroupBox();
+            this.cmbListBox = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtItemName = new System.Windows.Forms.TextBox();
             this.listBoxStyleNo = new System.Windows.Forms.ListBox();
@@ -148,6 +149,7 @@
             // grpPurchaseBillDetail
             // 
             this.grpPurchaseBillDetail.BackColor = System.Drawing.Color.Transparent;
+            this.grpPurchaseBillDetail.Controls.Add(this.cmbListBox);
             this.grpPurchaseBillDetail.Controls.Add(this.label5);
             this.grpPurchaseBillDetail.Controls.Add(this.txtItemName);
             this.grpPurchaseBillDetail.Controls.Add(this.listBoxStyleNo);
@@ -167,6 +169,20 @@
             this.grpPurchaseBillDetail.TabIndex = 3;
             this.grpPurchaseBillDetail.TabStop = false;
             this.grpPurchaseBillDetail.Text = "Item Details";
+            // 
+            // cmbListBox
+            // 
+            this.cmbListBox.DropDownHeight = 506;
+            this.cmbListBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbListBox.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbListBox.FormattingEnabled = true;
+            this.cmbListBox.IntegralHeight = false;
+            this.cmbListBox.ItemHeight = 19;
+            this.cmbListBox.Location = new System.Drawing.Point(118, 29);
+            this.cmbListBox.Name = "cmbListBox";
+            this.cmbListBox.Size = new System.Drawing.Size(206, 27);
+            this.cmbListBox.TabIndex = 295;
+            this.cmbListBox.SelectionChangeCommitted += new System.EventHandler(this.cmbListBox_SelectionChangeCommitted);
             // 
             // label5
             // 
@@ -197,10 +213,11 @@
             this.listBoxStyleNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.listBoxStyleNo.FormattingEnabled = true;
             this.listBoxStyleNo.ItemHeight = 17;
-            this.listBoxStyleNo.Location = new System.Drawing.Point(118, 29);
+            this.listBoxStyleNo.Location = new System.Drawing.Point(345, 108);
             this.listBoxStyleNo.Name = "listBoxStyleNo";
-            this.listBoxStyleNo.Size = new System.Drawing.Size(206, 53);
+            this.listBoxStyleNo.Size = new System.Drawing.Size(59, 19);
             this.listBoxStyleNo.TabIndex = 0;
+            this.listBoxStyleNo.Visible = false;
             this.listBoxStyleNo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBoxModelNo_MouseClick);
             this.listBoxStyleNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBoxModelNo_KeyDown);
             // 
@@ -743,5 +760,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cmbListBox;
     }
 }

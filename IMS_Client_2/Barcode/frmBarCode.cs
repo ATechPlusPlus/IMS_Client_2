@@ -134,7 +134,8 @@ namespace IMS_Client_2.Barcode
                     {
                         if (selectedRow.Cells["Rate"].Value != DBNull.Value)
                         {
-                            objLable.Text = "KD " + Convert.ToDecimal(selectedRow.Cells["Rate"].Value).ToString("F");
+                            //objLable.Text = "KD " + Convert.ToDecimal(selectedRow.Cells["Rate"].Value).ToString("F");
+                            objLable.Text = "KD " + Convert.ToDecimal(selectedRow.Cells["Rate"].Value).ToString();
                         }
                     }
                     else
@@ -374,67 +375,68 @@ namespace IMS_Client_2.Barcode
                 printerSetting.PrinterName = clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.BarCodePrinter);
 
 
-               
+
                 PrintDialog pd = new PrintDialog();
                 PrintDocument doc = new PrintDocument();
                 doc.PrinterSettings = printerSetting;
                 doc.PrintPage += Doc_PrintPage;
                 pd.Document = doc;
-              
-                    for (int i = 0; i < dgvProductDetails.Rows.Count; i++)
+
+                for (int i = 0; i < dgvProductDetails.Rows.Count; i++)
+                {
+                    if (dgvProductDetails.Rows[i].Cells["colCHeck"].Value != DBNull.Value && Convert.ToBoolean(dgvProductDetails.Rows[i].Cells["colCHeck"].Value))
                     {
-                        if (dgvProductDetails.Rows[i].Cells["colCHeck"].Value != DBNull.Value && Convert.ToBoolean(dgvProductDetails.Rows[i].Cells["colCHeck"].Value))
+                        _PrintRowData = dgvProductDetails.Rows[i];
+                        _Current_BarCodeNumber = dgvProductDetails.Rows[0].Cells["BarcodeNo"].Value.ToString();
+                        //int PID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ColProductID"].Value);
+                        //int SubProductID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["SubProductID"].Value);
+
+                        int QTY = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ColQTY"].Value);
+
+                        //int SizeID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["SizeID"].Value);
+                        //int ColorID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ColColorID"].Value);
+
+                        //// check if barcode number exist
+                        //DataTable dtBarCodeNumber = ObjCon.ExecuteSelectStatement("select BarcodeNo FROM  " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster WITH(NOLOCK) WHERE ProductID=" + PID + " AND SubProductID=" + SubProductID + " AND ColorID=" + ColorID + " AND SizeID=" + SizeID);
+                        //if (ObjUtil.ValidateTable(dtBarCodeNumber))
+                        //{
+                        //    if (dtBarCodeNumber.Rows[0]["BarcodeNo"] != DBNull.Value && dtBarCodeNumber.Rows[0]["BarcodeNo"].ToString().Length >= 0)
+                        //    {
+                        //        _Current_BarCodeNumber = dtBarCodeNumber.Rows[0]["BarcodeNo"].ToString();
+                        //    }
+                        //    else
+                        //    {
+                        //        _Current_BarCodeNumber = GetBarcodeNumber();
+
+                        //        // update the bar code in  ProductStockColorSizeMaster ( main stock table)
+                        //        string strUpdat = "UPDATE  " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster SET BarcodeNo='" + _Current_BarCodeNumber + "' WHERE ProductID=" + PID + " AND SubProductID=" + SubProductID + " AND ColorID=" + ColorID + " AND SizeID=" + SizeID;
+
+                        //        ObjCon.ExecuteNonQuery(strUpdat);
+
+                        //        // update the bar code in [ProductStockMaster]
+                        //        string strUpdate2 = "UPDATE " + clsUtility.DBName + ".[dbo].[ProductStockMaster] SET BarcodeNo='" + _Current_BarCodeNumber + "' WHERE ProductID=" + PID + " AND SubProductID=" + SubProductID + " AND PurchaseInvoiceID=" + CurrentPurchaseInvoiceID +
+                        //     " AND SizeID=" + SizeID + " AND ColorID=" + ColorID;
+                        //        ObjCon.ExecuteNonQuery(strUpdate2);
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    _Current_BarCodeNumber = GetBarcodeNumber();
+
+                        //    string strUpdat = "UPDATE  " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster " +
+                        //        " SET BarcodeNo='" + _Current_BarCodeNumber + "' WHERE ProductID=" + PID + " AND SubProductID=" + SubProductID + " ColorID=" + ColorID + " AND SizeID=" + SizeID;
+                        //    ObjCon.ExecuteNonQuery(strUpdat);
+                        //}
+                        //UpdateProductBardCodeImageNo(PID.ToString(), _Current_BarCodeNumber);
+                        //UpdateSubProductBardCodeImageNo(PID.ToString(), SubProductID.ToString(), _Current_BarCodeNumber);
+                        for (int Q = 0; Q < QTY; Q++)
                         {
-                            _PrintRowData = dgvProductDetails.Rows[i];
-
-                            int PID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ColProductID"].Value);
-                            int SubProductID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["SubProductID"].Value);
-
-                            int QTY = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ColQTY"].Value);
-
-                            int SizeID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["SizeID"].Value);
-                            int ColorID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ColColorID"].Value);
-
-                            // check if barcode number exist
-                            DataTable dtBarCodeNumber = ObjCon.ExecuteSelectStatement("select BarcodeNo FROM  " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster WITH(NOLOCK) WHERE ProductID=" + PID + " AND SubProductID="+ SubProductID +" AND ColorID=" + ColorID + " AND SizeID=" + SizeID);
-                            if (ObjUtil.ValidateTable(dtBarCodeNumber))
-                            {
-                                if (dtBarCodeNumber.Rows[0]["BarcodeNo"] != DBNull.Value && dtBarCodeNumber.Rows[0]["BarcodeNo"].ToString().Length >= 0)
-                                {
-                                    _Current_BarCodeNumber = dtBarCodeNumber.Rows[0]["BarcodeNo"].ToString();
-                                }
-                                else
-                                {
-                                    _Current_BarCodeNumber = GetBarcodeNumber();
-
-                                    // update the bar code in  ProductStockColorSizeMaster ( main stock table)
-                                    string strUpdat = "UPDATE  " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster SET BarcodeNo='" + _Current_BarCodeNumber + "' WHERE ProductID=" + PID + " AND SubProductID="+ SubProductID + " AND ColorID=" + ColorID + " AND SizeID=" + SizeID;
-
-                                    ObjCon.ExecuteNonQuery(strUpdat);
-
-                                    // update the bar code in [ProductStockMaster]
-                                    string strUpdate2 = "UPDATE " + clsUtility.DBName + ".[dbo].[ProductStockMaster] SET BarcodeNo='" + _Current_BarCodeNumber + "' WHERE ProductID=" + PID + " AND SubProductID="+ SubProductID + " AND PurchaseInvoiceID=" + CurrentPurchaseInvoiceID +
-                                 " AND SizeID=" + SizeID + " AND ColorID=" + ColorID;
-                                    ObjCon.ExecuteNonQuery(strUpdate2);
-                                }
-                            }
-                            else
-                            {
-                                _Current_BarCodeNumber = GetBarcodeNumber();
-
-                                string strUpdat = "UPDATE  " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster " +
-                                    " SET BarcodeNo='" + _Current_BarCodeNumber + "' WHERE ProductID=" + PID + " AND SubProductID="+ SubProductID +" ColorID=" + ColorID + " AND SizeID=" + SizeID;
-                                ObjCon.ExecuteNonQuery(strUpdat);
-                            }
-                            UpdateProductBardCodeImageNo(PID.ToString(), _Current_BarCodeNumber);
-                         UpdateSubProductBardCodeImageNo(PID.ToString(), SubProductID.ToString(), _Current_BarCodeNumber);
-                            for (int Q = 0; Q < QTY; Q++)
-                            {
-                                doc.Print();
-                            }
+                            doc.Print();
                         }
+                        UpdateProductStockMasterStatus(QTY, Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ProductStockID"].Value));
                     }
-                
+                }
+
                 this.Focus();
                 this.Activate();
                 clsUtility.ShowInfoMessage("Operation completed !", clsUtility.strProjectTitle);
@@ -442,6 +444,11 @@ namespace IMS_Client_2.Barcode
                 this.BringToFront();
                 RefreshData();
             }
+        }
+
+        private void UpdateProductStockMasterStatus(int QTY, int ProductStockID)
+        {
+            int a = ObjCon.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.ProductStockMaster SET PrintCount+=" + QTY + ",UpdatedOn=GETDATE(),UpdatedBy=" + clsUtility.LoginID + " WHERE ProductStockID=" + ProductStockID);
         }
         private void Doc_PrintPage(object sender, PrintPageEventArgs e)
         {
@@ -466,7 +473,7 @@ namespace IMS_Client_2.Barcode
 
                     if (strfiles.Length > 0)
                     {
-                     //  string ProductID = _PrintRowData.Cells["ColProductID"].Value.ToString();
+                        //  string ProductID = _PrintRowData.Cells["ColProductID"].Value.ToString();
                         //obj.Controls.Clear();
                         //    obj.Refresh();
                         AddNewPage();
@@ -717,6 +724,60 @@ namespace IMS_Client_2.Barcode
             //DataTable dtPurchaseInvDetails = ObjCon.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_BulkPrint_Color_Size '" + txtPurchaseID.Text + "'");
             ObjCon.SetStoreProcedureData("PurchaseInvoiceID", SqlDbType.Int, txtPurchaseID.Text, clsConnection_DAL.ParamType.Input);
             ObjCon.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
+            ObjCon.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, "0", clsConnection_DAL.ParamType.Input);
+            ObjCon.SetStoreProcedureData("PrintStaus", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            DataSet ds = ObjCon.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_PurchaseInvoice_BulkPrint_Color_Size");
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                DataTable dtPurchaseInvDetails = ds.Tables[0];
+                if (ObjUtil.ValidateTable(dtPurchaseInvDetails))
+                {
+                    dgvProductDetails.DataSource = dtPurchaseInvDetails;
+                    CurrentPurchaseInvoiceID = txtPurchaseID.Text;
+                    //txtPurchaseID.Text = "";
+                }
+                else
+                {
+                    dgvProductDetails.DataSource = dtPurchaseInvDetails;
+                    chkAll.Visible = false;
+                    CurrentPurchaseInvoiceID = "";
+                    //txtPurchaseID.Clear();
+                    clsUtility.ShowInfoMessage("No purchase invoice found for the given purhcase number.", clsUtility.strProjectTitle);
+                    cmbListBox.DataSource = null;
+                }
+                if (ds.Tables.Count >= 1)
+                {
+                    DataTable dtStyleNo = ds.Tables[1];
+                    if (ObjUtil.ValidateTable(dtStyleNo))
+                    {
+                        cmbListBox.DataSource = dtStyleNo;
+                        cmbListBox.DisplayMember = "ModelNo";
+                        cmbListBox.ValueMember = "ModelNo";
+                        cmbListBox.SelectedIndex = -1;
+                    }
+                }
+                if (ds.Tables.Count >= 2)
+                {
+                    DataTable dtProductPrint = ds.Tables[2];
+                    if (ObjUtil.ValidateTable(dtProductPrint))
+                    {
+                        dataGridView1.DataSource = dtProductPrint;
+                    }
+                    else
+                    {
+                        dataGridView1.DataSource = null;
+                    }
+                }
+            }
+            chkAll.Visible = true;
+        }
+
+        private void SearchByStyleNo()
+        {
+            ObjCon.SetStoreProcedureData("PurchaseInvoiceID", SqlDbType.Int, txtPurchaseID.Text, clsConnection_DAL.ParamType.Input);
+            ObjCon.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
+            ObjCon.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, cmbListBox.Text, clsConnection_DAL.ParamType.Input);
+            ObjCon.SetStoreProcedureData("PrintStaus", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjCon.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_PurchaseInvoice_BulkPrint_Color_Size");
             if (ds != null && ds.Tables.Count > 0)
             {
@@ -736,7 +797,6 @@ namespace IMS_Client_2.Barcode
                     clsUtility.ShowInfoMessage("No purchase invoice found for the given purhcase number.", clsUtility.strProjectTitle);
                 }
             }
-            chkAll.Visible = true;
         }
 
         private void chkAll_CheckedChanged(object sender, EventArgs e)
@@ -765,7 +825,8 @@ namespace IMS_Client_2.Barcode
             {
                 if (txtPurchaseInvoice.TextLength > 0)
                 {
-                    DataTable dt = ObjCon.ExecuteSelectStatement("EXEC  " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_Popup '" + txtPurchaseInvoice.Text + "', 1");
+                    //DataTable dt = ObjCon.ExecuteSelectStatement("EXEC  " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_Popup '" + txtPurchaseInvoice.Text + "', 1");
+                    DataTable dt = ObjCon.ExecuteSelectStatement("EXEC  " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_Popup '" + txtPurchaseInvoice.Text + "', 0");
                     if (ObjUtil.ValidateTable(dt))
                     {
                         ObjUtil.SetControlData(txtPurchaseInvoice, "SupplierBillNo");
@@ -803,12 +864,14 @@ namespace IMS_Client_2.Barcode
         {
             if (e.KeyData == Keys.Enter)
             {
+                rdShowAll.Checked = false;
                 LoadData();
             }
         }
 
         private void FrmBarCode_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            rdShowAll.Checked = false;
             LoadData();
         }
 
@@ -836,8 +899,8 @@ namespace IMS_Client_2.Barcode
         }
         private void UpdateProductBardCodeImageNo(string productID, string ImageNumber)
         {
-            DataTable dtProductID = ObjCon.ExecuteSelectStatement("select Photo FROM " + clsUtility.DBName + ".[dbo].[ProductMaster] where ProductID=" + productID);
-            if (dtProductID.Rows.Count > 0)
+            DataTable dtProductID = ObjCon.ExecuteSelectStatement("select Photo FROM " + clsUtility.DBName + ".[dbo].[ProductMaster] WITH(NOLOCK) where ProductID=" + productID);
+            if (ObjUtil.ValidateTable(dtProductID))
             {
                 if (dtProductID.Rows[0]["Photo"] == DBNull.Value)
                 {
@@ -850,13 +913,13 @@ namespace IMS_Client_2.Barcode
         }
         private void UpdateSubProductBardCodeImageNo(string productID, string SubProductID, string ImageNumber)
         {
-            DataTable dtProductID = ObjCon.ExecuteSelectStatement("select Photo FROM " + clsUtility.DBName + ".[dbo].[tblProductWiseModelNo] where ProductID=" + productID+ " AND SubProductID="+SubProductID);
-            if (dtProductID.Rows.Count > 0)
+            DataTable dtProductID = ObjCon.ExecuteSelectStatement("select Photo FROM " + clsUtility.DBName + ".[dbo].[tblProductWiseModelNo] WITH(NOLOCK) where ProductID=" + productID + " AND SubProductID=" + SubProductID);
+            if (ObjUtil.ValidateTable(dtProductID))
             {
                 if (dtProductID.Rows[0]["Photo"] == DBNull.Value)
                 {
                     string sqlUpdate = "update " + clsUtility.DBName + ".[dbo].[tblProductWiseModelNo] " +
-                                        " set Photo = '" + ImageNumber + "' where ProductID=" + productID+ " AND SubProductID="+SubProductID;
+                                        " set Photo = '" + ImageNumber + "' where ProductID=" + productID + " AND SubProductID=" + SubProductID;
 
                     ObjCon.ExecuteNonQuery(sqlUpdate);
                 }
@@ -896,58 +959,60 @@ namespace IMS_Client_2.Barcode
                     if (dgvProductDetails.Rows[i].Cells["colCHeck"].Value != DBNull.Value && Convert.ToBoolean(dgvProductDetails.Rows[i].Cells["colCHeck"].Value))
                     {
                         _PrintRowData = dgvProductDetails.Rows[i];
+                        _Current_BarCodeNumber = dgvProductDetails.Rows[i].Cells["BarcodeNo"].Value.ToString();
 
-                        int PID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ColProductID"].Value);
-                        int SubProductID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["SubProductID"].Value);
+                        //int PID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ColProductID"].Value);
+                        //int SubProductID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["SubProductID"].Value);
 
-                        int QTY = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ColQTY"].Value);
+                        //int QTY = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ColQTY"].Value);
 
-                        int SizeID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["SizeID"].Value);
-                        int ColorID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ColColorID"].Value);
+                        //int SizeID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["SizeID"].Value);
+                        //int ColorID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ColColorID"].Value);
 
                         // check if barcode number exist
-                        DataTable dtBarCodeNumber = ObjCon.ExecuteSelectStatement("SELECT BarcodeNo FROM  " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster WITH(NOLOCK) WHERE ProductID=" + PID + " AND SubProductID="+SubProductID+" AND ColorID=" + ColorID + " AND SizeID=" + SizeID);
-                        if (ObjUtil.ValidateTable(dtBarCodeNumber))
-                        {
-                            if (dtBarCodeNumber.Rows[0]["BarcodeNo"] != DBNull.Value && dtBarCodeNumber.Rows[0]["BarcodeNo"].ToString().Length >= 0)
-                            {
-                                _Current_BarCodeNumber = dtBarCodeNumber.Rows[0]["BarcodeNo"].ToString();
+                        //DataTable dtBarCodeNumber = ObjCon.ExecuteSelectStatement("SELECT BarcodeNo FROM  " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster WITH(NOLOCK) WHERE ProductID=" + PID + " AND SubProductID=" + SubProductID + " AND ColorID=" + ColorID + " AND SizeID=" + SizeID);
+                        //if (ObjUtil.ValidateTable(dtBarCodeNumber))
+                        //{
+                        //    if (dtBarCodeNumber.Rows[0]["BarcodeNo"] != DBNull.Value && dtBarCodeNumber.Rows[0]["BarcodeNo"].ToString().Length >= 0)
+                        //    {
+                        //        _Current_BarCodeNumber = dtBarCodeNumber.Rows[0]["BarcodeNo"].ToString();
 
-                                // update the bar code in [ProductStockMaster]
-                                string strUpdate2 = "UPDATE " + clsUtility.DBName + ".[dbo].[ProductStockMaster] SET BarcodeNo='" + _Current_BarCodeNumber + "' WHERE ProductID=" + PID + " AND SubProductID="+SubProductID+" AND PurchaseInvoiceID=" + CurrentPurchaseInvoiceID +
-                             " AND SizeID=" + SizeID + " AND ColorID=" + ColorID;
-                                ObjCon.ExecuteNonQuery(strUpdate2);
-                            }
-                            else
-                            {
-                                _Current_BarCodeNumber = GetBarcodeNumber();
+                        //        // update the bar code in [ProductStockMaster]
+                        //        string strUpdate2 = "UPDATE " + clsUtility.DBName + ".[dbo].[ProductStockMaster] SET BarcodeNo='" + _Current_BarCodeNumber + "' WHERE ProductID=" + PID + " AND SubProductID=" + SubProductID + " AND PurchaseInvoiceID=" + CurrentPurchaseInvoiceID +
+                        //     " AND SizeID=" + SizeID + " AND ColorID=" + ColorID;
+                        //        ObjCon.ExecuteNonQuery(strUpdate2);
+                        //    }
+                        //    else
+                        //    {
+                        //        _Current_BarCodeNumber = GetBarcodeNumber();
 
-                                // update the bar code in  ProductStockColorSizeMaster ( main stock table)
-                                string strUpdat = "UPDATE  " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster SET BarcodeNo='" + _Current_BarCodeNumber + "' WHERE ProductID=" + PID + " AND SubProductID="+SubProductID+" AND ColorID=" + ColorID + " AND SizeID=" + SizeID;
+                        //        // update the bar code in  ProductStockColorSizeMaster ( main stock table)
+                        //        string strUpdat = "UPDATE  " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster SET BarcodeNo='" + _Current_BarCodeNumber + "' WHERE ProductID=" + PID + " AND SubProductID=" + SubProductID + " AND ColorID=" + ColorID + " AND SizeID=" + SizeID;
 
-                                ObjCon.ExecuteNonQuery(strUpdat);
+                        //        ObjCon.ExecuteNonQuery(strUpdat);
 
-                                // update the bar code in [ProductStockMaster]
-                                string strUpdate2 = "UPDATE " + clsUtility.DBName + ".[dbo].[ProductStockMaster] SET BarcodeNo='" + _Current_BarCodeNumber + "' WHERE ProductID=" + PID + " AND SubProductID="+SubProductID+" AND PurchaseInvoiceID=" + CurrentPurchaseInvoiceID +
-                             " AND SizeID=" + SizeID + " AND ColorID=" + ColorID;
-                                ObjCon.ExecuteNonQuery(strUpdate2);
-                            }
-                        }
-                        else
-                        {
-                            _Current_BarCodeNumber = GetBarcodeNumber();
+                        //        // update the bar code in [ProductStockMaster]
+                        //        string strUpdate2 = "UPDATE " + clsUtility.DBName + ".[dbo].[ProductStockMaster] SET BarcodeNo='" + _Current_BarCodeNumber + "' WHERE ProductID=" + PID + " AND SubProductID=" + SubProductID + " AND PurchaseInvoiceID=" + CurrentPurchaseInvoiceID +
+                        //     " AND SizeID=" + SizeID + " AND ColorID=" + ColorID;
+                        //        ObjCon.ExecuteNonQuery(strUpdate2);
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    _Current_BarCodeNumber = GetBarcodeNumber();
 
-                            string strUpdat = "UPDATE  " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster " +
-                                " SET BarcodeNo='" + _Current_BarCodeNumber + "' WHERE ProductID=" + PID + " AND SubProductID="+SubProductID+" AND ColorID=" + ColorID + " AND SizeID=" + SizeID;
-                            ObjCon.ExecuteNonQuery(strUpdat);
-                        }
-                        UpdateProductBardCodeImageNo(PID.ToString(), _Current_BarCodeNumber);
-                        UpdateSubProductBardCodeImageNo(PID.ToString(), SubProductID.ToString(), _Current_BarCodeNumber);
+                        //    string strUpdat = "UPDATE  " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster " +
+                        //        " SET BarcodeNo='" + _Current_BarCodeNumber + "' WHERE ProductID=" + PID + " AND SubProductID=" + SubProductID + " AND ColorID=" + ColorID + " AND SizeID=" + SizeID;
+                        //    ObjCon.ExecuteNonQuery(strUpdat);
+                        //}
+                        //UpdateProductBardCodeImageNo(PID.ToString(), _Current_BarCodeNumber);
+                        //UpdateSubProductBardCodeImageNo(PID.ToString(), SubProductID.ToString(), _Current_BarCodeNumber);
 
                         for (int Q = 0; Q < numericUpDown1.Value; Q++)
                         {
-                           doc.Print();
+                            doc.Print();
                         }
+                        UpdateProductStockMasterStatus(Convert.ToInt32(numericUpDown1.Value),Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ProductStockID"].Value));
                     }
                 }
                 this.Focus();
@@ -961,6 +1026,40 @@ namespace IMS_Client_2.Barcode
         private void frmBarCode_Activated(object sender, EventArgs e)
         {
             txtPurchaseInvoice.Focus();
+        }
+
+        private void cmbListBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            rdShowAll.Checked = false;
+            SearchByStyleNo();
+        }
+
+        private void dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            ObjUtil.SetRowNumber(dataGridView1);
+            ObjUtil.SetDataGridProperty(dataGridView1, DataGridViewAutoSizeColumnsMode.Fill);
+
+            dataGridView1.Columns["ProductStockID"].Visible = false;
+            dataGridView1.Columns["StoreID"].Visible = false;
+            dataGridView1.Columns["SubProductID"].Visible = false;
+
+            dataGridView1.Columns["PurchaseInvoiceID"].Visible = false;
+            dataGridView1.Columns["ProductID"].Visible = false;
+            dataGridView1.Columns["ColorID"].Visible = false;
+            dataGridView1.Columns["SizeID"].Visible = false;
+
+        }
+
+        private void rdShowAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdShowAll.Checked)
+            {
+                if (txtPurchaseInvoice.TextLength > 0)
+                {
+                    cmbListBox.SelectedIndex = -1;
+                    LoadData();
+                }
+            }
         }
     }
 }

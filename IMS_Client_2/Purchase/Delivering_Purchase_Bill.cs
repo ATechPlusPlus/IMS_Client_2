@@ -163,7 +163,9 @@ namespace IMS_Client_2.Purchase
 
         private void Load_Color_SizeData()
         {
-            dtPurchaseQTYColor = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".[dbo].[Get_PurchaseInvoice_Color_Size] '" + txtSupplierBillNo.Text + "', '" + listBoxStyleNo.SelectedItem + "'");
+            //dtPurchaseQTYColor = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".[dbo].[Get_PurchaseInvoice_Color_Size] '" + txtSupplierBillNo.Text + "', '" + listBoxStyleNo.SelectedItem + "'");
+
+            dtPurchaseQTYColor = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".[dbo].[Get_PurchaseInvoice_Color_Size] '" + txtSupplierBillNo.Text + "', '" + cmbListBox.Text + "'");
             if (ObjUtil.ValidateTable(dtPurchaseQTYColor))
             {
                 ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterGridClick);
@@ -427,16 +429,22 @@ namespace IMS_Client_2.Purchase
         }
         private bool DuplicateUser(int i)
         {
-            string listbox = listBoxStyleNo.SelectedItem.ToString();
+            //string listbox = listBoxStyleNo.SelectedItem.ToString();
             int a = 0;
             if (i == 0)
             {
-                a = ObjDAL.CountRecords(clsUtility.DBName + ".dbo.DeliveryPurchaseBill1", "SizeTypeID=" + cmbSizeType.SelectedValue + " AND SupplierBillNo='" + txtSupplierBillNo.Text + "' AND ModelNo='" + listBoxStyleNo.SelectedItem + "'");
+                //a = ObjDAL.CountRecords(clsUtility.DBName + ".dbo.DeliveryPurchaseBill1", "SizeTypeID=" + cmbSizeType.SelectedValue + " AND SupplierBillNo='" + txtSupplierBillNo.Text + "' AND ModelNo='" + listBoxStyleNo.SelectedItem + "'");
+
+                a = ObjDAL.CountRecords(clsUtility.DBName + ".dbo.DeliveryPurchaseBill1", "SizeTypeID=" + cmbSizeType.SelectedValue + " AND SupplierBillNo='" + txtSupplierBillNo.Text + "' AND ModelNo='" + cmbListBox.Text + "'");
+
             }
             else
             {
+                //a = ObjDAL.CountRecords(clsUtility.DBName + ".dbo.DeliveryPurchaseBill1", "SizeTypeID=" + cmbSizeType.SelectedValue + " AND SupplierBillNo='" + txtSupplierBillNo.Text + "'" +
+                //    "AND ModelNo='" + listBoxStyleNo.SelectedItem + "' AND DeliveryPurchaseID1 !=" + i);
+
                 a = ObjDAL.CountRecords(clsUtility.DBName + ".dbo.DeliveryPurchaseBill1", "SizeTypeID=" + cmbSizeType.SelectedValue + " AND SupplierBillNo='" + txtSupplierBillNo.Text + "'" +
-                    "AND ModelNo='" + listBoxStyleNo.SelectedItem + "' AND DeliveryPurchaseID1 !=" + i);
+                    "AND ModelNo='" + cmbListBox.Text + "' AND DeliveryPurchaseID1 !=" + i);
             }
             if (a > 0)
             {
@@ -547,7 +555,8 @@ namespace IMS_Client_2.Purchase
                         ObjDAL.SetColumnData("PurchaseInvoiceID", SqlDbType.Int, pPurchaseInvoiceID);
                         ObjDAL.SetColumnData("SupplierBillNo", SqlDbType.NVarChar, txtSupplierBillNo.Text.Trim());
                         ObjDAL.SetColumnData("SizeTypeID", SqlDbType.Int, cmbSizeType.SelectedValue);
-                        ObjDAL.SetColumnData("ModelNo", SqlDbType.NVarChar, listBoxStyleNo.SelectedItem);
+                        ObjDAL.SetColumnData("ModelNo", SqlDbType.NVarChar, cmbListBox.Text);
+                        //ObjDAL.SetColumnData("ModelNo", SqlDbType.NVarChar, listBoxStyleNo.SelectedItem);
                         ObjDAL.SetColumnData("ProductID", SqlDbType.Int, ProductID);
                         ObjDAL.SetColumnData("SubProductID", SqlDbType.Int, SubProductID);
                         ObjDAL.SetColumnData("StoreID", SqlDbType.Int, cmbStore.SelectedValue);
@@ -755,6 +764,7 @@ namespace IMS_Client_2.Purchase
                     {
                         listBoxStyleNo.Items.Add(dtPurchaseInvoice.Rows[i]["ModelNo"].ToString());
                     }
+                    LoadModelListCMB();
                     grpPurchaseBillDetail.Enabled = true;
                     object qty = dtPurchaseInvoice.Compute("SUM(QTY)", null);
                     txtTotalQTY.Text = qty.ToString();
@@ -789,6 +799,15 @@ namespace IMS_Client_2.Purchase
             }
 
         }
+
+        private void LoadModelListCMB()
+        {
+            cmbListBox.DataSource = dtPurchaseInvoice;
+            cmbListBox.DisplayMember = "ModelNo";
+            cmbListBox.ValueMember = "ModelNo";
+            cmbListBox.SelectedIndex = -1;
+        }
+
         private void txtSupplierBillNo_TextChanged(object sender, EventArgs e)
         {
             try
@@ -901,6 +920,50 @@ namespace IMS_Client_2.Purchase
                 cmbSizeType.SelectedValue = a;
             }
         }
+
+        private void GetSelectedCMBModelNo()
+        {
+            try
+            {
+                DataRow[] dRow = dtPurchaseInvoice.Select("ModelNo= '" + cmbListBox.Text + "'");
+                if (dRow.Length > 0)
+                {
+                    pPurchaseInvoiceID = Convert.ToInt32(dRow[0]["PurchaseInvoiceID"]);
+                    ID = Convert.ToInt32(dRow[0]["DeliveryPurchaseID1"]);
+                    ProductID = Convert.ToInt32(dRow[0]["ProductID"]);
+                    SubProductID = Convert.ToInt32(dRow[0]["SubProductID"]);
+                    cmbBrand.SelectedValue = dRow[0]["BrandID"];
+                    cmbCountry.SelectedValue = dRow[0]["CountryID"];
+                    cmbCategory.SelectedValue = dRow[0]["CategoryID"];
+                    txtItemName.Text = dRow[0]["ItemName"].ToString();
+                    txtTotalQTYBill.Text = dRow[0]["QTY"].ToString();
+
+                    cmbSizeType.SelectedValue = dRow[0]["SizeTypeID"].ToString();
+                    if (cmbSizeType.SelectedValue != null)
+                    {
+                        FillColorSizeGrid();
+                    }
+                    if (dRow[0]["StoreID"] != DBNull.Value && dRow[0]["StoreID"].ToString() != "0")
+                    {
+                        cmbStore.SelectedValue = dRow[0]["StoreID"].ToString();
+                    }
+                    Load_Color_SizeData();
+                    if (ObjUtil.ValidateTable((DataTable)dgvQtycolor.DataSource))
+                    {
+                        CalcTotalColorQTY();
+                    }
+                }
+                else
+                    cmbSizeType.Enabled = false;
+            }
+            catch { }
+        }
+
+        private void cmbListBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            GetSelectedCMBModelNo();
+        }
+
         private void dgvQtycolor_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             if (e.ColumnIndex >= 3 && e.FormattedValue.ToString() != "")

@@ -65,6 +65,7 @@
             this.closeCashToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dashboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.branchesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MaterialDetails_ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.stockTransferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.brachReceiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -101,7 +102,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.branchesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.barCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -340,7 +341,8 @@
             // 
             this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.BarcodeStripMenuItem,
-            this.barCodePrintingToolStripMenuItem});
+            this.barCodePrintingToolStripMenuItem,
+            this.barCodeToolStripMenuItem});
             this.aboutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("aboutToolStripMenuItem.Image")));
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(101, 36);
@@ -426,6 +428,13 @@
             this.toolStripMenuItem1.Size = new System.Drawing.Size(135, 36);
             this.toolStripMenuItem1.Text = "Stock Manager";
             this.toolStripMenuItem1.ToolTipText = "Print Invoice";
+            // 
+            // branchesToolStripMenuItem
+            // 
+            this.branchesToolStripMenuItem.Name = "branchesToolStripMenuItem";
+            this.branchesToolStripMenuItem.Size = new System.Drawing.Size(229, 24);
+            this.branchesToolStripMenuItem.Text = "Branches Shorting Sales";
+            this.branchesToolStripMenuItem.Click += new System.EventHandler(this.branchesToolStripMenuItem_Click);
             // 
             // MaterialDetails_ToolStrip
             // 
@@ -783,12 +792,12 @@
             this.label9.TabIndex = 28;
             this.label9.Text = "Today\'s Cash Box";
             // 
-            // branchesToolStripMenuItem
+            // barCodeToolStripMenuItem
             // 
-            this.branchesToolStripMenuItem.Name = "branchesToolStripMenuItem";
-            this.branchesToolStripMenuItem.Size = new System.Drawing.Size(229, 24);
-            this.branchesToolStripMenuItem.Text = "Branches Shorting Sales";
-            this.branchesToolStripMenuItem.Click += new System.EventHandler(this.branchesToolStripMenuItem_Click);
+            this.barCodeToolStripMenuItem.Name = "barCodeToolStripMenuItem";
+            this.barCodeToolStripMenuItem.Size = new System.Drawing.Size(229, 24);
+            this.barCodeToolStripMenuItem.Text = "Bar Code Manually Print";
+            this.barCodeToolStripMenuItem.Click += new System.EventHandler(this.barCodeToolStripMenuItem_Click);
             // 
             // frmHome
             // 
@@ -905,5 +914,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem branchesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem barCodeToolStripMenuItem;
     }
 }

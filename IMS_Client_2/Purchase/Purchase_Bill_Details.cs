@@ -163,6 +163,20 @@ namespace IMS_Client_2.Purchase
 
             cmbBrand.SelectedIndex = -1;
         }
+
+        private bool ValidatePurchaseBill(DataTable dt)
+        {
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                if (dt.Rows[i]["EndUser"].ToString() == "" || dt.Rows[i]["EndUser"].ToString() == "0.00")
+                {
+                    clsUtility.ShowInfoMessage("Enter Valid EndUser price for " + dt.Rows[i]["ProductName"], clsUtility.strProjectTitle);
+                    return false;
+                }
+            }
+            return true;
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (Convert.ToInt32(txtDiffQty.Text) >= 0 && Convert.ToDouble(txtDiffValue.Text) >= 0)
@@ -175,110 +189,113 @@ namespace IMS_Client_2.Purchase
                     for (int i = 0; i < dtPurchaseInvoiceBill.Rows.Count; i++)
                     {
                         _ID = 0; _SubProductID = 0;
-                        int PurchaseInvoiceDetailsID = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["PurchaseInvoiceDetailsID"]);
-                        if (PurchaseInvoiceDetailsID == 0)
+                        if (ValidatePurchaseBill(dtPurchaseInvoiceBill))
                         {
-                            if (clsFormRights.HasFormRight(clsFormRights.Forms.Purchase_Bill_Details, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
+                            int PurchaseInvoiceDetailsID = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["PurchaseInvoiceDetailsID"]);
+                            if (PurchaseInvoiceDetailsID == 0)
                             {
-                                _ProductID = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["ProductID"]);
-                                _SubProductID = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["SubProductID"]);
-                                if (_SubProductID == 0)
+                                if (clsFormRights.HasFormRight(clsFormRights.Forms.Purchase_Bill_Details, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
                                 {
-                                    //Insert SubProductID
-                                    ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, _ProductID, clsConnection_DAL.ParamType.Input);
-                                    ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, dtPurchaseInvoiceBill.Rows[i]["ModelNo"].ToString(), clsConnection_DAL.ParamType.Input);
-                                    ObjDAL.SetStoreProcedureData("BrandID", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["BrandID"].ToString(), clsConnection_DAL.ParamType.Input);
-                                    ObjDAL.SetStoreProcedureData("EndUser", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["EndUser"].ToString(), clsConnection_DAL.ParamType.Input);
-                                    ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
-                                    ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, _SubProductID, clsConnection_DAL.ParamType.Output);
-
-                                    b = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_Insert_ProductWiseModelNo");
-                                    if (b)
+                                    _ProductID = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["ProductID"]);
+                                    _SubProductID = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["SubProductID"]);
+                                    if (_SubProductID == 0)
                                     {
-                                        DataTable dt = ObjDAL.GetOutputParmData();
-                                        if (ObjUtil.ValidateTable(dt))
+                                        //Insert SubProductID
+                                        ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, _ProductID, clsConnection_DAL.ParamType.Input);
+                                        ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, dtPurchaseInvoiceBill.Rows[i]["ModelNo"].ToString(), clsConnection_DAL.ParamType.Input);
+                                        ObjDAL.SetStoreProcedureData("BrandID", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["BrandID"].ToString(), clsConnection_DAL.ParamType.Input);
+                                        ObjDAL.SetStoreProcedureData("EndUser", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["EndUser"].ToString(), clsConnection_DAL.ParamType.Input);
+                                        ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
+                                        ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, _SubProductID, clsConnection_DAL.ParamType.Output);
+
+                                        b = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_Insert_ProductWiseModelNo");
+                                        if (b)
                                         {
-                                            SubProductID = Convert.ToInt32(dt.Rows[0][1]);
-                                            _SubProductID = SubProductID;
+                                            DataTable dt = ObjDAL.GetOutputParmData();
+                                            if (ObjUtil.ValidateTable(dt))
+                                            {
+                                                SubProductID = Convert.ToInt32(dt.Rows[0][1]);
+                                                _SubProductID = SubProductID;
+                                            }
                                         }
                                     }
+                                    else if (_SubProductID > 0 && b == false)
+                                    {
+                                        //Update SubProductID
+                                        ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, _ProductID, clsConnection_DAL.ParamType.Input);
+                                        ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, dtPurchaseInvoiceBill.Rows[i]["ModelNo"].ToString(), clsConnection_DAL.ParamType.Input);
+                                        ObjDAL.SetStoreProcedureData("BrandID", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["BrandID"].ToString(), clsConnection_DAL.ParamType.Input);
+                                        ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
+                                        ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, _SubProductID, clsConnection_DAL.ParamType.Input);
+                                        ObjDAL.SetStoreProcedureData("EndUser", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["EndUser"].ToString(), clsConnection_DAL.ParamType.Input);
+                                        ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
+                                        b = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_Update_ProductWiseModelNo");
+                                    }
+                                    //Insert Purchase bill
+                                    ObjDAL.SetColumnData("PurchaseInvoiceID", SqlDbType.Int, PurchaseInvoiceID);
+                                    ObjDAL.SetColumnData("ProductID", SqlDbType.Int, _ProductID);
+                                    ObjDAL.SetColumnData("ModelNo", SqlDbType.NVarChar, dtPurchaseInvoiceBill.Rows[i]["ModelNo"].ToString());
+                                    ObjDAL.SetColumnData("BrandID", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["BrandID"].ToString());
+                                    ObjDAL.SetColumnData("SupplierID", SqlDbType.Int, cmbSupplier.SelectedValue);
+                                    ObjDAL.SetColumnData("BillDate", SqlDbType.Date, dtpBillDate.Value.ToString("yyyy-MM-dd"));
+                                    ObjDAL.SetColumnData("Rate", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["Rate"].ToString());
+                                    ObjDAL.SetColumnData("SubProductID", SqlDbType.Int, _SubProductID);
+                                    _QTY = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["QTY"]);
+                                    ObjDAL.SetColumnData("QTY", SqlDbType.Int, _QTY);
+                                    ObjDAL.SetColumnData("Sales_Price", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["EndUser"].ToString());
+                                    ObjDAL.SetColumnData("AddedRatio", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["AddedRatio"].ToString());
+                                    ObjDAL.SetColumnData("SuppossedPrice", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["SuppossedPrice"].ToString());
+                                    ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
+                                    _ID = ObjDAL.InsertData(clsUtility.DBName + ".dbo.PurchaseInvoiceDetails", true);
                                 }
-                                else if (_SubProductID > 0 && b == false)
+                                else
                                 {
-                                    //Update SubProductID
-                                    ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, _ProductID, clsConnection_DAL.ParamType.Input);
-                                    ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, dtPurchaseInvoiceBill.Rows[i]["ModelNo"].ToString(), clsConnection_DAL.ParamType.Input);
-                                    ObjDAL.SetStoreProcedureData("BrandID", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["BrandID"].ToString(), clsConnection_DAL.ParamType.Input);
-                                    ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
-                                    ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, _SubProductID, clsConnection_DAL.ParamType.Input);
-                                    ObjDAL.SetStoreProcedureData("EndUser", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["EndUser"].ToString(), clsConnection_DAL.ParamType.Input);
-                                    ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
-                                    b = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_Update_ProductWiseModelNo");
+                                    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                                    dataGridView1.DataSource = dtPurchaseInvoice;
+                                    return;
                                 }
-                                //Insert Purchase bill
-                                ObjDAL.SetColumnData("PurchaseInvoiceID", SqlDbType.Int, PurchaseInvoiceID);
-                                ObjDAL.SetColumnData("ProductID", SqlDbType.Int, _ProductID);
-                                ObjDAL.SetColumnData("ModelNo", SqlDbType.NVarChar, dtPurchaseInvoiceBill.Rows[i]["ModelNo"].ToString());
-                                ObjDAL.SetColumnData("BrandID", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["BrandID"].ToString());
-                                ObjDAL.SetColumnData("SupplierID", SqlDbType.Int, cmbSupplier.SelectedValue);
-                                ObjDAL.SetColumnData("BillDate", SqlDbType.Date, dtpBillDate.Value.ToString("yyyy-MM-dd"));
-                                ObjDAL.SetColumnData("Rate", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["Rate"].ToString());
-                                ObjDAL.SetColumnData("SubProductID", SqlDbType.Int, _SubProductID);
-                                _QTY = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["QTY"]);
-                                ObjDAL.SetColumnData("QTY", SqlDbType.Int, _QTY);
-                                ObjDAL.SetColumnData("Sales_Price", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["EndUser"].ToString());
-                                ObjDAL.SetColumnData("AddedRatio", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["AddedRatio"].ToString());
-                                ObjDAL.SetColumnData("SuppossedPrice", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["SuppossedPrice"].ToString());
-                                ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
-                                _ID = ObjDAL.InsertData(clsUtility.DBName + ".dbo.PurchaseInvoiceDetails", true);
                             }
                             else
                             {
-                                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
-                                dataGridView1.DataSource = dtPurchaseInvoice;
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            //Update  Purchase bill
-                            if (clsFormRights.HasFormRight(clsFormRights.Forms.Purchase_Bill_Details, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
-                            {
-                                _ProductID = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["ProductID"]);
-                                _SubProductID = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["SubProductID"]);
-                                if (_SubProductID > 0)
+                                //Update  Purchase bill
+                                if (clsFormRights.HasFormRight(clsFormRights.Forms.Purchase_Bill_Details, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
                                 {
-                                    //Update  SubProductID
-                                    ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, _ProductID, clsConnection_DAL.ParamType.Input);
-                                    ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, dtPurchaseInvoiceBill.Rows[i]["ModelNo"].ToString(), clsConnection_DAL.ParamType.Input);
-                                    ObjDAL.SetStoreProcedureData("BrandID", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["BrandID"].ToString(), clsConnection_DAL.ParamType.Input);
-                                    ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
-                                    ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, _SubProductID, clsConnection_DAL.ParamType.Input);
-                                    ObjDAL.SetStoreProcedureData("EndUser", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["EndUser"].ToString(), clsConnection_DAL.ParamType.Input);
-                                    ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
-                                    b = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_Update_ProductWiseModelNo");
-                                }
-                                //ObjDAL.UpdateColumnData("ProductID", SqlDbType.Int, _ProductID);
-                                //ObjDAL.UpdateColumnData("SubProductID", SqlDbType.Int, Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["SubProductID"]));
-                                //ObjDAL.UpdateColumnData("ModelNo", SqlDbType.NVarChar, dtPurchaseInvoiceBill.Rows[i]["ModelNo"].ToString());
-                                //ObjDAL.UpdateColumnData("BrandID", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["BrandID"].ToString());
+                                    _ProductID = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["ProductID"]);
+                                    _SubProductID = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["SubProductID"]);
+                                    if (_SubProductID > 0)
+                                    {
+                                        //Update  SubProductID
+                                        ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, _ProductID, clsConnection_DAL.ParamType.Input);
+                                        ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, dtPurchaseInvoiceBill.Rows[i]["ModelNo"].ToString(), clsConnection_DAL.ParamType.Input);
+                                        ObjDAL.SetStoreProcedureData("BrandID", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["BrandID"].ToString(), clsConnection_DAL.ParamType.Input);
+                                        ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
+                                        ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, _SubProductID, clsConnection_DAL.ParamType.Input);
+                                        ObjDAL.SetStoreProcedureData("EndUser", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["EndUser"].ToString(), clsConnection_DAL.ParamType.Input);
+                                        ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
+                                        b = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_Update_ProductWiseModelNo");
+                                    }
+                                    //ObjDAL.UpdateColumnData("ProductID", SqlDbType.Int, _ProductID);
+                                    //ObjDAL.UpdateColumnData("SubProductID", SqlDbType.Int, Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["SubProductID"]));
+                                    //ObjDAL.UpdateColumnData("ModelNo", SqlDbType.NVarChar, dtPurchaseInvoiceBill.Rows[i]["ModelNo"].ToString());
+                                    //ObjDAL.UpdateColumnData("BrandID", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["BrandID"].ToString());
 
-                                ObjDAL.UpdateColumnData("SupplierID", SqlDbType.Int, cmbSupplier.SelectedValue);
-                                ObjDAL.UpdateColumnData("BillDate", SqlDbType.Date, dtpBillDate.Value.ToString("yyyy-MM-dd"));
-                                ObjDAL.UpdateColumnData("QTY", SqlDbType.Int, Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["QTY"]));
-                                ObjDAL.UpdateColumnData("Rate", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["Rate"].ToString());
-                                ObjDAL.UpdateColumnData("Sales_Price", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["EndUser"].ToString());
-                                ObjDAL.UpdateColumnData("AddedRatio", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["AddedRatio"].ToString());
-                                ObjDAL.UpdateColumnData("SuppossedPrice", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["SuppossedPrice"].ToString());
-                                ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
-                                ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                                _ID = ObjDAL.UpdateData(clsUtility.DBName + ".dbo.PurchaseInvoiceDetails", "PurchaseInvoiceDetailsID = " + PurchaseInvoiceDetailsID + "");
-                            }
-                            else
-                            {
-                                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
-                                dataGridView1.DataSource = dtPurchaseInvoice;
-                                return;
+                                    ObjDAL.UpdateColumnData("SupplierID", SqlDbType.Int, cmbSupplier.SelectedValue);
+                                    ObjDAL.UpdateColumnData("BillDate", SqlDbType.Date, dtpBillDate.Value.ToString("yyyy-MM-dd"));
+                                    ObjDAL.UpdateColumnData("QTY", SqlDbType.Int, Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["QTY"]));
+                                    ObjDAL.UpdateColumnData("Rate", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["Rate"].ToString());
+                                    ObjDAL.UpdateColumnData("Sales_Price", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["EndUser"].ToString());
+                                    ObjDAL.UpdateColumnData("AddedRatio", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["AddedRatio"].ToString());
+                                    ObjDAL.UpdateColumnData("SuppossedPrice", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["SuppossedPrice"].ToString());
+                                    ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
+                                    ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                                    _ID = ObjDAL.UpdateData(clsUtility.DBName + ".dbo.PurchaseInvoiceDetails", "PurchaseInvoiceDetailsID = " + PurchaseInvoiceDetailsID + "");
+                                }
+                                else
+                                {
+                                    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                                    dataGridView1.DataSource = dtPurchaseInvoice;
+                                    return;
+                                }
                             }
                         }
                     }
@@ -948,7 +965,7 @@ namespace IMS_Client_2.Purchase
 
         private void dataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            if (e.ColumnIndex == 7 && e.FormattedValue.ToString() != "")
+            if (e.ColumnIndex == 8 && e.FormattedValue.ToString() != "")
             {
                 e.Cancel = false;
                 dataGridView1.Rows[e.RowIndex].ErrorText = "";
@@ -959,7 +976,7 @@ namespace IMS_Client_2.Purchase
                 {
                     e.Cancel = true;
                     //dataGridView1.Rows[e.RowIndex].ErrorText = "QTY must be a Positive integer";
-                    clsUtility.ShowInfoMessage("Enter Only Numbers..", clsUtility.strProjectTitle);
+                    clsUtility.ShowInfoMessage("Enter Only Number for QTY..", clsUtility.strProjectTitle);
                 }
                 #region Numeric validation from CoreApp
                 //e.Cancel = ObjUtil.IsNumeric(e.FormattedValue.ToString());
@@ -985,7 +1002,7 @@ namespace IMS_Client_2.Purchase
                 {
                     e.Cancel = true;
                     //dataGridView1.Rows[e.RowIndex].ErrorText = "QTY must be a Positive integer";
-                    clsUtility.ShowInfoMessage("Enter Only Numbers..", clsUtility.strProjectTitle);
+                    clsUtility.ShowInfoMessage("Enter Only Number for Added Ratio..", clsUtility.strProjectTitle);
                 }
                 else if (Convert.ToInt32(e.FormattedValue) < 100 || Convert.ToInt32(e.FormattedValue) > 300)
                 {
@@ -994,6 +1011,20 @@ namespace IMS_Client_2.Purchase
                     clsUtility.ShowInfoMessage("Enter Ratio between 100 to 300..", clsUtility.strProjectTitle);
                 }
             }
+        }
+
+        private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            //e.Control.KeyPress += Control_KeyPress;
+        }
+
+        private void Control_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //string k = e.KeyChar.ToString();
+            //TextBox txt = (TextBox)sender;
+            //e.Handled = ObjUtil.IsDecimal(txt, e);
+
+            //throw new NotImplementedException();
         }
 
         private void Purchase_Bill_Details_Supplier_KeyDown(object sender, KeyEventArgs e)
