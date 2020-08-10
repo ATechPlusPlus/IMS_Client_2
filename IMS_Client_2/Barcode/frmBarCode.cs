@@ -22,10 +22,10 @@ namespace IMS_Client_2.Barcode
         {
             InitializeComponent();
         }
-        clsConnection_DAL ObjCon = new clsConnection_DAL(true);
+        clsConnection_DAL ObjDAL = new clsConnection_DAL(true);
         clsUtility ObjUtil = new clsUtility();
 
-      //  Form1 obj;
+        //Form1 obj;
 
         string strCompanyName = "";
         string CurrentPurchaseInvoiceID = "";
@@ -97,14 +97,12 @@ namespace IMS_Client_2.Barcode
             //catch (Exception ex)
             //{
             //    MessageBox.Show(ex.ToString());
-
             //}
-           
         }
         private string GetBarCodeSettings()
         {
             string strBarCodeSettings = null;
-            DataTable dataTable = ObjCon.ExecuteSelectStatement("SELECT BarCodeSetting FROM " + clsUtility.DBName + ".dbo.tblBarCodeSettings WITH(NOLOCK)");
+            DataTable dataTable = ObjDAL.ExecuteSelectStatement("SELECT BarCodeSetting FROM " + clsUtility.DBName + ".dbo.tblBarCodeSettings WITH(NOLOCK)");
             if (ObjUtil.ValidateTable(dataTable))
             {
                 if (dataTable.Rows[0]["BarCodeSetting"] != DBNull.Value)
@@ -116,7 +114,7 @@ namespace IMS_Client_2.Barcode
         }
         private string GetCompanyName()
         {
-            return Convert.ToString(ObjCon.ExecuteScalar("SELECT CompanyName FROM " + clsUtility.DBName + ".dbo.CompanyMaster WITH(NOLOCK)"));
+            return Convert.ToString(ObjDAL.ExecuteScalar("SELECT CompanyName FROM " + clsUtility.DBName + ".dbo.CompanyMaster WITH(NOLOCK)"));
         }
         private void SetBarCodeValues(Control objLable, DataGridViewRow selectedRow)
         {
@@ -169,7 +167,7 @@ namespace IMS_Client_2.Barcode
                 {
                     objLable.Location = new Point(objLable.Location.X, objLable.Location.Y + 23);
                 }
-               
+
             }
             else if (objLable.Tag.ToString().Trim() == "Category")
             {
@@ -178,19 +176,19 @@ namespace IMS_Client_2.Barcode
                 string str = "  select  ( select top(1) CategoryName from " + clsUtility.DBName + ".[dbo].[CategoryMaster] WITH(NOLOCK) where CategoryID=p1.CategoryID) as CategoryName " +
                             "from " + clsUtility.DBName + ".[dbo].[ProductMaster] as p1 where p1.ProductID = " + pID;
 
-                object cat = ObjCon.ExecuteScalar(str);
+                object cat = ObjDAL.ExecuteScalar(str);
                 if (cat != null)
                 {
                     objLable.Text = cat.ToString();
                 }
             }
         }
-   
+
 
         private string GetBarcodeNumber()
         {
             //SequenceInvoice : this is a sequance object created in SQL ( this is not a table)
-            int LastID = ObjCon.ExecuteScalarInt("SELECT NEXT VALUE FOR " + clsUtility.DBName + ".[dbo].Barcode_Sequance");
+            int LastID = ObjDAL.ExecuteScalarInt("SELECT NEXT VALUE FOR " + clsUtility.DBName + ".[dbo].Barcode_Sequance");
             return LastID.ToString();
         }
 
@@ -213,10 +211,7 @@ namespace IMS_Client_2.Barcode
                         return;
                     }
                 }
-
                 printerSetting.PrinterName = clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.BarCodePrinter);
-
-
 
                 PrintDialog pd = new PrintDialog();
                 PrintDocument doc = new PrintDocument();
@@ -230,14 +225,13 @@ namespace IMS_Client_2.Barcode
                     {
                         _PrintRowData = dgvProductDetails.Rows[i];
                         _Current_BarCodeNumber = dgvProductDetails.Rows[0].Cells["BarcodeNo"].Value.ToString();
-                        //int PID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ColProductID"].Value);
-                        //int SubProductID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["SubProductID"].Value);
-
                         int QTY = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ColQTY"].Value);
 
+                        #region Manaually BarCode generate
+                        //int PID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ColProductID"].Value);
+                        //int SubProductID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["SubProductID"].Value);
                         //int SizeID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["SizeID"].Value);
                         //int ColorID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ColColorID"].Value);
-
                         //// check if barcode number exist
                         //DataTable dtBarCodeNumber = ObjCon.ExecuteSelectStatement("select BarcodeNo FROM  " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster WITH(NOLOCK) WHERE ProductID=" + PID + " AND SubProductID=" + SubProductID + " AND ColorID=" + ColorID + " AND SizeID=" + SizeID);
                         //if (ObjUtil.ValidateTable(dtBarCodeNumber))
@@ -271,6 +265,8 @@ namespace IMS_Client_2.Barcode
                         //}
                         //UpdateProductBardCodeImageNo(PID.ToString(), _Current_BarCodeNumber);
                         //UpdateSubProductBardCodeImageNo(PID.ToString(), SubProductID.ToString(), _Current_BarCodeNumber);
+                        #endregion
+
                         for (int Q = 0; Q < QTY; Q++)
                         {
                             doc.Print();
@@ -283,20 +279,14 @@ namespace IMS_Client_2.Barcode
                 this.Activate();
                 clsUtility.ShowInfoMessage("Operation completed !", clsUtility.strProjectTitle);
                 this.Focus();
-
-
-
                 this.BringToFront();
                 RefreshData();
-
-               
-               
             }
         }
 
         private void UpdateProductStockMasterStatus(int QTY, int ProductStockID)
         {
-            int a = ObjCon.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.ProductStockMaster SET PrintCount+=" + QTY + ",UpdatedOn=GETDATE(),UpdatedBy=" + clsUtility.LoginID + " WHERE ProductStockID=" + ProductStockID);
+            int a = ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.ProductStockMaster SET PrintCount+=" + QTY + ",UpdatedOn=GETDATE(),UpdatedBy=" + clsUtility.LoginID + " WHERE ProductStockID=" + ProductStockID);
         }
         private void Doc_PrintPage(object sender, PrintPageEventArgs e)
         {
@@ -326,7 +316,7 @@ namespace IMS_Client_2.Barcode
                             //  string ProductID = _PrintRowData.Cells["ColProductID"].Value.ToString();
                             //obj.Controls.Clear();
                             //    obj.Refresh();
-                           // AddNewPage();
+                            // AddNewPage();
 
                             if (strfiles.Length > 0)
                             {
@@ -334,10 +324,10 @@ namespace IMS_Client_2.Barcode
                                 {
                                     string[] strInfo = strfiles[i].Split('@');
 
-                                     if (i == 0)
+                                    if (i == 0)
                                     {
                                         // set the back color and size of the page.
-                                       // obj.BackColor = Color.FromArgb(Convert.ToInt32(strInfo[0]));
+                                        // obj.BackColor = Color.FromArgb(Convert.ToInt32(strInfo[0]));
                                         //obj.Size = new Size(Convert.ToInt32(strInfo[1]), Convert.ToInt32(strInfo[2]));
                                     }
                                     else
@@ -361,17 +351,13 @@ namespace IMS_Client_2.Barcode
                                             objLable.BackColor = Color.Green;
                                             objLable.BackColor = Color.FromArgb(Convert.ToInt32(strInfo[10]));
                                             objLable.Tag = strInfo[14];
-
-
                                             try
                                             {
                                                 // int to enum
                                                 objLable.TextAlign = (ContentAlignment)Convert.ToInt32(strInfo[15]);
-                                             }
+                                            }
                                             catch
                                             {
-
-
                                             }
                                             SetBarCodeValues(objLable, _PrintRowData);
 
@@ -385,7 +371,6 @@ namespace IMS_Client_2.Barcode
                                             string caption3 = string.Format(objLable.Text);
                                             if (objLable.TextAlign == ContentAlignment.MiddleCenter)
                                             {
-
                                                 // get the location of that control respective to bardcode panel
                                                 RectangleF drawRect = objLable.ClientRectangle;
                                                 drawRect.X = objLable.Location.X;
@@ -418,20 +403,17 @@ namespace IMS_Client_2.Barcode
                                             {
                                                 objLable.Font = new Font(strInfo[2], float.Parse(strInfo[4]), FontStyle.Regular);
                                             }
-
                                             objLable.ForeColor = Color.FromArgb(Convert.ToInt32(strInfo[3]));
                                             objLable.Size = new Size(Convert.ToInt32(strInfo[5]), Convert.ToInt32(strInfo[6]));
                                             objLable.Location = new Point(Convert.ToInt32(strInfo[7]), Convert.ToInt32(strInfo[8]));
                                             objLable.Text = strInfo[9];
-
                                             objLable.BackColor = Color.FromArgb(Convert.ToInt32(strInfo[10]));
                                             objLable.Tag = strInfo[14];
 
                                             SetBarCodeValues(objLable, _PrintRowData);
 
-                                            
                                             //obj.Controls.Add(objLable);
-                                           // obj.Refresh();
+                                            // obj.Refresh();
 
                                             string captionText = objLable.Text;
                                             Size preferredSize = g.MeasureString(objLable.Text, objLable.Font).ToSize();
@@ -446,23 +428,19 @@ namespace IMS_Client_2.Barcode
                                         else if (strInfo[0] == "PictureBox")
                                         {
                                             PictureBox objPicBox = new PictureBox();
-
                                             objPicBox.Size = new Size(Convert.ToInt32(strInfo[5]), Convert.ToInt32(strInfo[6]));
                                             objPicBox.Location = new Point(Convert.ToInt32(strInfo[7]), Convert.ToInt32(strInfo[8]));
                                             objPicBox.BorderStyle = BorderStyle.FixedSingle;
-
                                             objPicBox.Image = Barcode.clsBarCodeUtility.GenerateBarCode(_Current_BarCodeNumber);
                                             objPicBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                                           // objPicBox.MouseLeave += new EventHandler(obj.control_MouseLeave);
+                                            // objPicBox.MouseLeave += new EventHandler(obj.control_MouseLeave);
                                             //obj.Controls.Add(objPicBox);
 
                                             // this code is specific to MD :
-                                            if(!chkPrintRate.Checked)
+                                            if (!chkPrintRate.Checked)
                                             {
                                                 objPicBox.Height = objPicBox.Height + 15;
-
                                             }
-
                                             g.DrawImage(objPicBox.Image, objPicBox.Location.X, objPicBox.Location.Y, objPicBox.Width, objPicBox.Height);
 
                                         }
@@ -510,7 +488,7 @@ namespace IMS_Client_2.Barcode
                                             }
                                             objRec.BorderColor = Color.FromArgb(Convert.ToInt32(strInfo[13].Trim()));
 
-                                           
+
                                         }
                                         else if (strInfo[0] == "Line")
                                         {
@@ -542,15 +520,12 @@ namespace IMS_Client_2.Barcode
             }
             catch (System.ComponentModel.Win32Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                clsUtility.ShowErrorMessage(ex.ToString());
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
-
+                clsUtility.ShowErrorMessage(ex.ToString());
             }
-
-
         }
         private void DrawRotatedTextAt(Graphics gr, float angle,
         string txt, int x, int y, Font the_font, Brush the_brush)
@@ -580,11 +555,11 @@ namespace IMS_Client_2.Barcode
         private void LoadData()
         {
             //DataTable dtPurchaseInvDetails = ObjCon.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_BulkPrint_Color_Size '" + txtPurchaseID.Text + "'");
-            ObjCon.SetStoreProcedureData("PurchaseInvoiceID", SqlDbType.Int, txtPurchaseID.Text, clsConnection_DAL.ParamType.Input);
-            ObjCon.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
-            ObjCon.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, "0", clsConnection_DAL.ParamType.Input);
-            ObjCon.SetStoreProcedureData("PrintStaus", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
-            DataSet ds = ObjCon.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_PurchaseInvoice_BulkPrint_Color_Size");
+            ObjDAL.SetStoreProcedureData("PurchaseInvoiceID", SqlDbType.Int, txtPurchaseID.Text, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, "0", clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("PrintStaus", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_PurchaseInvoice_BulkPrint_Color_Size");
             if (ObjUtil.ValidateDataSet(ds))
             {
                 DataTable dtPurchaseInvDetails = ds.Tables[0];
@@ -632,11 +607,11 @@ namespace IMS_Client_2.Barcode
 
         private void SearchByStyleNo()
         {
-            ObjCon.SetStoreProcedureData("PurchaseInvoiceID", SqlDbType.Int, txtPurchaseID.Text, clsConnection_DAL.ParamType.Input);
-            ObjCon.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
-            ObjCon.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, cmbListBox.Text, clsConnection_DAL.ParamType.Input);
-            ObjCon.SetStoreProcedureData("PrintStaus", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
-            DataSet ds = ObjCon.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_PurchaseInvoice_BulkPrint_Color_Size");
+            ObjDAL.SetStoreProcedureData("PurchaseInvoiceID", SqlDbType.Int, txtPurchaseID.Text, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, cmbListBox.Text, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("PrintStaus", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_PurchaseInvoice_BulkPrint_Color_Size");
             if (ds != null && ds.Tables.Count > 0)
             {
                 DataTable dtPurchaseInvDetails = ds.Tables[0];
@@ -684,7 +659,7 @@ namespace IMS_Client_2.Barcode
                 if (txtPurchaseInvoice.TextLength > 0)
                 {
                     //DataTable dt = ObjCon.ExecuteSelectStatement("EXEC  " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_Popup '" + txtPurchaseInvoice.Text + "', 1");
-                    DataTable dt = ObjCon.ExecuteSelectStatement("EXEC  " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_Popup '" + txtPurchaseInvoice.Text + "', 2");
+                    DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC  " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_Popup '" + txtPurchaseInvoice.Text + "', 2");
                     if (ObjUtil.ValidateTable(dt))
                     {
                         ObjUtil.SetControlData(txtPurchaseInvoice, "SupplierBillNo");
@@ -757,7 +732,7 @@ namespace IMS_Client_2.Barcode
         }
         private void UpdateProductBardCodeImageNo(string productID, string ImageNumber)
         {
-            DataTable dtProductID = ObjCon.ExecuteSelectStatement("select Photo FROM " + clsUtility.DBName + ".[dbo].[ProductMaster] WITH(NOLOCK) where ProductID=" + productID);
+            DataTable dtProductID = ObjDAL.ExecuteSelectStatement("select Photo FROM " + clsUtility.DBName + ".[dbo].[ProductMaster] WITH(NOLOCK) where ProductID=" + productID);
             if (ObjUtil.ValidateTable(dtProductID))
             {
                 if (dtProductID.Rows[0]["Photo"] == DBNull.Value)
@@ -765,13 +740,13 @@ namespace IMS_Client_2.Barcode
                     string sqlUpdate = "update " + clsUtility.DBName + ".[dbo].[ProductMaster] " +
                                         " set Photo = '" + ImageNumber + "' where ProductID=" + productID;
 
-                    ObjCon.ExecuteNonQuery(sqlUpdate);
+                    ObjDAL.ExecuteNonQuery(sqlUpdate);
                 }
             }
         }
         private void UpdateSubProductBardCodeImageNo(string productID, string SubProductID, string ImageNumber)
         {
-            DataTable dtProductID = ObjCon.ExecuteSelectStatement("select Photo FROM " + clsUtility.DBName + ".[dbo].[tblProductWiseModelNo] WITH(NOLOCK) where ProductID=" + productID + " AND SubProductID=" + SubProductID);
+            DataTable dtProductID = ObjDAL.ExecuteSelectStatement("select Photo FROM " + clsUtility.DBName + ".[dbo].[tblProductWiseModelNo] WITH(NOLOCK) where ProductID=" + productID + " AND SubProductID=" + SubProductID);
             if (ObjUtil.ValidateTable(dtProductID))
             {
                 if (dtProductID.Rows[0]["Photo"] == DBNull.Value)
@@ -779,7 +754,7 @@ namespace IMS_Client_2.Barcode
                     string sqlUpdate = "update " + clsUtility.DBName + ".[dbo].[tblProductWiseModelNo] " +
                                         " set Photo = '" + ImageNumber + "' where ProductID=" + productID + " AND SubProductID=" + SubProductID;
 
-                    ObjCon.ExecuteNonQuery(sqlUpdate);
+                    ObjDAL.ExecuteNonQuery(sqlUpdate);
                 }
             }
         }
@@ -819,6 +794,7 @@ namespace IMS_Client_2.Barcode
                         _PrintRowData = dgvProductDetails.Rows[i];
                         _Current_BarCodeNumber = dgvProductDetails.Rows[i].Cells["BarcodeNo"].Value.ToString();
 
+                        #region Manaually BarCode generate
                         //int PID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ColProductID"].Value);
                         //int SubProductID = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["SubProductID"].Value);
 
@@ -865,6 +841,7 @@ namespace IMS_Client_2.Barcode
                         //}
                         //UpdateProductBardCodeImageNo(PID.ToString(), _Current_BarCodeNumber);
                         //UpdateSubProductBardCodeImageNo(PID.ToString(), SubProductID.ToString(), _Current_BarCodeNumber);
+                        #endregion
 
                         for (int Q = 0; Q < numericUpDown1.Value; Q++)
                         {
@@ -886,11 +863,9 @@ namespace IMS_Client_2.Barcode
                 //        obj.Dispose();
                 //        obj = null;
                 //    }
-                   
                 //}
                 //catch (Exception ex)
                 //{
-
                 //    MessageBox.Show("While disposing : " + ex.Message);
                 //}
             }
@@ -920,7 +895,6 @@ namespace IMS_Client_2.Barcode
             dataGridView1.Columns["ProductID"].Visible = false;
             dataGridView1.Columns["ColorID"].Visible = false;
             dataGridView1.Columns["SizeID"].Visible = false;
-
         }
 
         private void rdShowAll_CheckedChanged(object sender, EventArgs e)
@@ -943,7 +917,7 @@ namespace IMS_Client_2.Barcode
                 DataTable dtBarCodePrint = (DataTable)dataGridView1.DataSource;
                 if (ObjUtil.ValidateTable(dtBarCode) || ObjUtil.ValidateTable(dtBarCodePrint))
                 {
-                    int a = ObjCon.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.ProductStockMaster SET PrintCount = 0 WHERE PurchaseInvoiceID = " + txtPurchaseID.Text + " AND StoreID = " + frmHome.Home_StoreID);
+                    int a = ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.ProductStockMaster SET PrintCount = 0 WHERE PurchaseInvoiceID = " + txtPurchaseID.Text + " AND StoreID = " + frmHome.Home_StoreID);
                     if (a > 0)
                     {
                         clsUtility.ShowInfoMessage("BarCode Print Count is reset for Supplier Bill NO. " + txtPurchaseInvoice.Text.Trim());

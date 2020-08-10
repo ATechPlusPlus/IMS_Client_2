@@ -582,7 +582,6 @@
             this.txtGrandTotal.Size = new System.Drawing.Size(140, 25);
             this.txtGrandTotal.TabIndex = 210;
             this.txtGrandTotal.Text = "0";
-            this.txtGrandTotal.TextChanged += new System.EventHandler(this.txtGrandTotal_TextChanged);
             this.txtGrandTotal.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtGrandTotal_KeyDown);
             // 
             // label9

@@ -18,6 +18,7 @@ namespace IMS_Client_2.Barcode
         }
         clsConnection_DAL ObjCon = new clsConnection_DAL(true);
         clsUtility ObjUtil = new clsUtility();
+
         Form1 obj;
         Control pageControl;
         Point DragStart = Point.Empty;
@@ -53,9 +54,7 @@ namespace IMS_Client_2.Barcode
                 int r = ObjCon.ExecuteNonQuery("Update " + clsUtility.DBName + ".dbo.tblBarCodeSettings set BarCodeSetting='" + BarCodeData + "'");
             }
         }
-        private void GetBarCodeSettingFromFile()
-        {
-        }
+
         private string GetBarCodeSettings()
         {
             string strBarCodeSettings = null;
@@ -102,10 +101,6 @@ namespace IMS_Client_2.Barcode
             ReRegisterAll();
             obj.ClearSelectedControl();
             propertyGrid1.SelectedObject = obj;
-        }
-        public void RemoveMouseMoveEvent()
-        {
-            obj.MouseMove -= new MouseEventHandler(control_MouseMove);
         }
 
         public void UnRegisterAll(Object tgctr = null)
@@ -318,7 +313,6 @@ namespace IMS_Client_2.Barcode
         private void frmHome_Load(object sender, EventArgs e)
         {
             isLoad = true;
-
             LoadTemplate(false);
         }
 
@@ -349,13 +343,10 @@ namespace IMS_Client_2.Barcode
             else
             {
                 obj.Size = new Size((int)numericUpDown1.Value, (int)numericUpDown2.Value);
-
                 this.Refresh();
                 Dragging = false;
                 pageControl.Capture = false;
-
                 DrawControlBorder(pageControl);
-
                 pageControl.Invalidate();
             }
         }
@@ -488,16 +479,6 @@ namespace IMS_Client_2.Barcode
         private void pictureBoxToolStripMenuItem_Click(object sender, EventArgs e)
         {
             obj.AddPictureBox(contextMenuStrip1, propertyGrid1);
-        }
-
-        private void lineToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            obj.AddLine(contextMenuStrip1, propertyGrid1);
-        }
-
-        private void buttonToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            obj.AddButton(contextMenuStrip1, propertyGrid1);
         }
 
         private void exportToolStripMenuItem_Click(object sender, EventArgs e)
@@ -737,7 +718,7 @@ namespace IMS_Client_2.Barcode
                         }
                         this.Focus();
                         this.Activate();
-                        //  clsUtility.ShowInfoMessage("Template Loaded Successfully.", "Designer Tool");
+                        //clsUtility.ShowInfoMessage("Template Loaded Successfully.", "Designer Tool");
                     }
                 }
             }
@@ -835,7 +816,6 @@ namespace IMS_Client_2.Barcode
                 obj.Controls.Clear();
                 strTemplate = "";
             }
-
         }
 
         private void toolStripMenuItem1_Click_1(object sender, EventArgs e)
@@ -872,7 +852,6 @@ namespace IMS_Client_2.Barcode
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmBarCodeDesigner, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
-
                 int Width = obj.Size.Width;
                 int Height = obj.Size.Height;
 
