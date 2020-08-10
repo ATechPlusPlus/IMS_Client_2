@@ -106,7 +106,7 @@ namespace IMS_Client_2.Barcode
             {
                 dataGridView1.DataSource = null;
                 //txtPurchaseID.Clear();
-                clsUtility.ShowInfoMessage("No purchase invoice found for the given purhcase number.", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("No purchase invoice found for the given purhcase number.");
             }
         }
 
@@ -117,7 +117,7 @@ namespace IMS_Client_2.Barcode
             ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, cmbListBox.Text, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("PrintStaus", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_PurchaseInvoice_BulkPrint_Color_Size");
-            if (ds != null && ds.Tables.Count > 0)
+            if (ObjUtil.ValidateDataSet(ds))
             {
                 DataTable dtPurchaseInvDetails = ds.Tables[0];
                 if (ObjUtil.ValidateTable(dtPurchaseInvDetails))
@@ -129,7 +129,7 @@ namespace IMS_Client_2.Barcode
                 {
                     dataGridView1.DataSource = dtPurchaseInvDetails;
                     //txtPurchaseID.Clear();
-                    clsUtility.ShowInfoMessage("No purchase invoice found for the given purhcase number.", clsUtility.strProjectTitle);
+                    clsUtility.ShowInfoMessage("No purchase invoice found for the given purhcase number.");
                 }
             }
             ObjDAL.ResetData();
@@ -144,12 +144,12 @@ namespace IMS_Client_2.Barcode
                 ObjDAL.SetStoreProcedureData("SupplierBillNo", SqlDbType.NVarChar, txtPurchaseInvoice.Text.Trim(), clsConnection_DAL.ParamType.Input);
                 ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
                 DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_PurchaseInvoice_Barcode_Generated");
-                if (ds != null && ds.Tables.Count > 0)
+                if (ObjUtil.ValidateDataSet(ds))
                 {
                     DataTable dtPurchaseInvDetails = ds.Tables[0];
                     if (ObjUtil.ValidateTable(dtPurchaseInvDetails))
                     {
-                        clsUtility.ShowInfoMessage(dtPurchaseInvDetails.Rows[0]["Msg"].ToString(), clsUtility.strProjectTitle);
+                        clsUtility.ShowInfoMessage(dtPurchaseInvDetails.Rows[0]["Msg"].ToString());
 
                         LoadData();
                     }
@@ -158,7 +158,7 @@ namespace IMS_Client_2.Barcode
             }
             else
             {
-                clsUtility.ShowInfoMessage("Enter INvoice Number..", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("Enter Invoice Number..");
                 txtPurchaseInvoice.Focus();
             }
         }

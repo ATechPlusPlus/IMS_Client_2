@@ -965,66 +965,81 @@ namespace IMS_Client_2.Purchase
 
         private void dataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            if (e.ColumnIndex == 8 && e.FormattedValue.ToString() != "")
+            int column = dataGridView1.CurrentCell.ColumnIndex;
+            string headerText = dataGridView1.Columns[column].HeaderText;
+            if (headerText == "AddedRatio" && (Convert.ToInt32(e.FormattedValue) < 100 || Convert.ToInt32(e.FormattedValue) > 300))
             {
-                e.Cancel = false;
-                dataGridView1.Rows[e.RowIndex].ErrorText = "";
-                int newInteger = 0;
-                if (dataGridView1.Rows[e.RowIndex].IsNewRow) { return; }
-                if (!int.TryParse(e.FormattedValue.ToString(),
-                    out newInteger) || newInteger < 0)
-                {
-                    e.Cancel = true;
-                    //dataGridView1.Rows[e.RowIndex].ErrorText = "QTY must be a Positive integer";
-                    clsUtility.ShowInfoMessage("Enter Only Number for QTY..", clsUtility.strProjectTitle);
-                }
-                #region Numeric validation from CoreApp
-                //e.Cancel = ObjUtil.IsNumeric(e.FormattedValue.ToString());
-                //if (e.Cancel == false)
-                //{
-                //    clsUtility.ShowInfoMessage("Enter Only Numbers..", clsUtility.strProjectTitle);
-                //    e.Cancel = true;
-                //}
-                //else
-                //{
-                //    e.Cancel = false;
-                //}
-                #endregion
+                clsUtility.ShowInfoMessage("Enter Ratio between 100 to 300..");
+                return;
             }
-            else if (e.ColumnIndex == 11 && e.FormattedValue.ToString() != "")
+            if (headerText == "Rate" && e.FormattedValue == DBNull.Value)
             {
-                e.Cancel = false;
-                dataGridView1.Rows[e.RowIndex].ErrorText = "";
-                int newInteger = 0;
-                if (dataGridView1.Rows[e.RowIndex].IsNewRow) { return; }
-                if (!int.TryParse(e.FormattedValue.ToString(),
-                    out newInteger) || newInteger < 0)
-                {
-                    e.Cancel = true;
-                    //dataGridView1.Rows[e.RowIndex].ErrorText = "QTY must be a Positive integer";
-                    clsUtility.ShowInfoMessage("Enter Only Number for Added Ratio..", clsUtility.strProjectTitle);
-                }
-                else if (Convert.ToInt32(e.FormattedValue) < 100 || Convert.ToInt32(e.FormattedValue) > 300)
-                {
-                    e.Cancel = true;
-                    //dataGridView1.Rows[e.RowIndex].ErrorText = "QTY must be a Positive integer";
-                    clsUtility.ShowInfoMessage("Enter Ratio between 100 to 300..", clsUtility.strProjectTitle);
-                }
+                clsUtility.ShowInfoMessage("Enter Valid Rate..");
+                return;
             }
+            //if (e.ColumnIndex == 8 && e.FormattedValue.ToString() != "")
+            //{
+            //    e.Cancel = false;
+            //    dataGridView1.Rows[e.RowIndex].ErrorText = "";
+            //    int newInteger = 0;
+            //    if (dataGridView1.Rows[e.RowIndex].IsNewRow) { return; }
+            //    if (!int.TryParse(e.FormattedValue.ToString(),
+            //        out newInteger) || newInteger < 0)
+            //    {
+            //        e.Cancel = true;
+            //        //dataGridView1.Rows[e.RowIndex].ErrorText = "QTY must be a Positive integer";
+            //        clsUtility.ShowInfoMessage("Enter Only Number for QTY..", clsUtility.strProjectTitle);
+            //    }
+            //}
+            //else if (e.ColumnIndex == 11 && e.FormattedValue.ToString() != "")
+            //{
+            //    e.Cancel = false;
+            //    dataGridView1.Rows[e.RowIndex].ErrorText = "";
+            //    int newInteger = 0;
+            //    if (dataGridView1.Rows[e.RowIndex].IsNewRow) { return; }
+            //    if (!int.TryParse(e.FormattedValue.ToString(),
+            //        out newInteger) || newInteger < 0)
+            //    {
+            //        e.Cancel = true;
+            //        //dataGridView1.Rows[e.RowIndex].ErrorText = "QTY must be a Positive integer";
+            //        clsUtility.ShowInfoMessage("Enter Only Number for Added Ratio..", clsUtility.strProjectTitle);
+            //    }
+            //    else if (Convert.ToInt32(e.FormattedValue) < 100 || Convert.ToInt32(e.FormattedValue) > 300)
+            //    {
+            //        e.Cancel = true;
+            //        //dataGridView1.Rows[e.RowIndex].ErrorText = "QTY must be a Positive integer";
+            //        clsUtility.ShowInfoMessage("Enter Ratio between 100 to 300..", clsUtility.strProjectTitle);
+            //    }
+            //}
         }
 
         private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            //e.Control.KeyPress += Control_KeyPress;
+            int column = dataGridView1.CurrentCell.ColumnIndex;
+            string headerText = dataGridView1.Columns[column].HeaderText;
+
+            if (headerText == "Rate" || headerText == "EndUser")
+            {
+                e.Control.KeyPress += Decimal_Control_KeyPress;
+            }
+            else if (headerText == "QTY" || headerText == "AddedRatio")
+            {
+                e.Control.KeyPress += Int_Control_KeyPress;
+            }
         }
 
-        private void Control_KeyPress(object sender, KeyPressEventArgs e)
+        private void Int_Control_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //string k = e.KeyChar.ToString();
-            //TextBox txt = (TextBox)sender;
-            //e.Handled = ObjUtil.IsDecimal(txt, e);
+            string k = e.KeyChar.ToString();
+            TextBox txt = (TextBox)sender;
+            e.Handled = ObjUtil.IsNumeric(e);
+        }
 
-            //throw new NotImplementedException();
+        private void Decimal_Control_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string k = e.KeyChar.ToString();
+            TextBox txt = (TextBox)sender;
+            e.Handled = ObjUtil.IsDecimal(txt, e);
         }
 
         private void Purchase_Bill_Details_Supplier_KeyDown(object sender, KeyEventArgs e)
