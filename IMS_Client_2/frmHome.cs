@@ -889,5 +889,15 @@ namespace IMS_Client_2
                 clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
+
+        private void f1CashToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SalesInvoice_ToolStrip_Click(null, null);
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }

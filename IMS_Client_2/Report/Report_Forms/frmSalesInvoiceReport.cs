@@ -74,14 +74,14 @@ namespace IMS_Client_2.Report
 
             if (IsArabicEnabled())
             {
-                strQueryHeader_Footer = "SELECT s1.InvoiceNumber,s1.InvoiceDate, c1.Name AS CustName,e1.Name AS empName,st1.StoreName AS StoreName," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.SubTotal) as SubTotal," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.Discount) as Discount," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.Tax) as Tax," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.GrandTotal) as GrandTotal,s1.PaymentMode,s1.PaymentAutoID,c1.PhoneNo AS CustomerMobile FROM " + clsUtility.DBName + ".dbo.SalesInvoiceDetails s1 left JOIN " +
+                strQueryHeader_Footer = "SELECT s1.InvoiceNumber,s1.InvoiceDate, c1.Name AS CustName,e1.Name AS empName,st1.StoreName AS StoreName," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.SubTotal) as SubTotal," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.Discount) as Discount," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.Tax) as Tax," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.GrandTotal) as GrandTotal,s1.PaymentMode,s1.PaymentAutoID,c1.PhoneNo AS CustomerMobile,s1.CashTendered, s1.Change FROM " + clsUtility.DBName + ".dbo.SalesInvoiceDetails s1 left JOIN " +
                                          " " + clsUtility.DBName + ".dbo.EmployeeDetails e1 ON s1.SalesMan = e1.EmpID left JOIN" +
                                          " " + clsUtility.DBName + ".[dbo].[CustomerMaster] c1 ON s1.CustomerID = c1.CustomerID left join" +
                                          " " + clsUtility.DBName + ".dbo.StoreMaster st1 ON st1.StoreID = s1.ShopeID WHERE s1.Id=" + InvoiceID;
             }
             else
             {
-                strQueryHeader_Footer = "SELECT s1.InvoiceNumber,s1.InvoiceDate, c1.Name AS CustName,e1.Name AS empName,st1.StoreName AS StoreName,s1.SubTotal,s1.Discount,s1.Tax,s1.GrandTotal,s1.PaymentMode,s1.PaymentAutoID,c1.PhoneNo AS CustomerMobile FROM " + clsUtility.DBName + ".dbo.SalesInvoiceDetails s1 left JOIN " +
+                strQueryHeader_Footer = "SELECT s1.InvoiceNumber,s1.InvoiceDate, c1.Name AS CustName,e1.Name AS empName,st1.StoreName AS StoreName,s1.SubTotal,s1.Discount,s1.Tax,s1.GrandTotal,s1.PaymentMode,s1.PaymentAutoID,c1.PhoneNo AS CustomerMobile,s1.CashTendered,s1.Change FROM " + clsUtility.DBName + ".dbo.SalesInvoiceDetails s1 left JOIN " +
                                                          " " + clsUtility.DBName + ".dbo.EmployeeDetails e1 ON s1.SalesMan = e1.EmpID left JOIN" +
                                                          " " + clsUtility.DBName + ".[dbo].[CustomerMaster] c1 ON s1.CustomerID = c1.CustomerID left join" +
                                                          " " + clsUtility.DBName + ".dbo.StoreMaster st1 ON st1.StoreID = s1.ShopeID WHERE s1.Id=" + InvoiceID;
@@ -147,7 +147,15 @@ namespace IMS_Client_2.Report
                 DataTable dtNetAmount = ObjCon.ExecuteSelectStatement("select SUM(Amount) from " + clsUtility.DBName + ".dbo.[tblSalesPayment] WITH(NOLOCK) where SalesInvoiceID=" + InvoiceID);
                 if (dtNetAmount.Rows.Count > 0)
                 {
-                    NetAmt = new Sales.NumberToEnglish().changeCurrencyToWords(dtNetAmount.Rows[0][0].ToString());
+                    if (Convert.ToDecimal(dtNetAmount.Rows[0][0].ToString())==0)
+                    {
+                        NetAmt = "Zero";
+                    }
+                    else
+                    {
+                        NetAmt = new Sales.NumberToEnglish().changeCurrencyToWords(dtNetAmount.Rows[0][0].ToString());
+                    }
+                   
                 }
             }
             catch (Exception)

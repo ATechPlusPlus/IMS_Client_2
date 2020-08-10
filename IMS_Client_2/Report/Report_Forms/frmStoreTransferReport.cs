@@ -1,4 +1,5 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using CoreApp;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,12 +18,14 @@ namespace IMS_Client_2.Report.Report_Forms
             InitializeComponent();
         }
         public DataTable dtStoreTransferDetails;
-        public string strFromStore, strToStore, strTotalQTY, strTotalRate, strBillDate, strBillNo;
+        public string strFromStore, strToStore, strTotalQTY, strTotalRate, strBillDate, strBillNo,strEmployeeName;
 
         private void frmStoreTransferReport_Load(object sender, EventArgs e)
         {
             GenerateReport();
         }
+
+      
         private void GenerateReport()
         {
             try
@@ -38,8 +41,9 @@ namespace IMS_Client_2.Report.Report_Forms
                 ReportParameter param4 = new ReportParameter("parmBillDate", strBillDate, true);
                 ReportParameter param5 = new ReportParameter("ParmTotalQTY", strTotalQTY, true);
                 ReportParameter param6 = new ReportParameter("ParmTotalAmount", strTotalRate, true);
+                ReportParameter param7 = new ReportParameter("ParmEmployee", strEmployeeName, true);
 
-
+                
 
                 // adding the parameter in the report dynamically
                 reportViewer1.LocalReport.SetParameters(param1);
@@ -48,6 +52,7 @@ namespace IMS_Client_2.Report.Report_Forms
                 reportViewer1.LocalReport.SetParameters(param4);
                 reportViewer1.LocalReport.SetParameters(param5);
                 reportViewer1.LocalReport.SetParameters(param6);
+                reportViewer1.LocalReport.SetParameters(param7);
 
                 reportViewer1.LocalReport.DataSources.Clear();
                 reportViewer1.LocalReport.DataSources.Add(rds);

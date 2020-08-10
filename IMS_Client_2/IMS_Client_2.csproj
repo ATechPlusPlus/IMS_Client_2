@@ -901,6 +901,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="InventorySoftware.ico" />
+    <None Include="Resources\news.png" />
+    <None Include="Resources\Sales-Return.png" />
     <None Include="Resources\NoImage.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

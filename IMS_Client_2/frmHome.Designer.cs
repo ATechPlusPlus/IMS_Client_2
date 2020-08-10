@@ -134,6 +134,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(1289, 42);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // userCreationToolStripMenuItem
             // 
@@ -379,7 +380,8 @@
             // SalesInvoice_ToolStrip
             // 
             this.SalesInvoice_ToolStrip.Name = "SalesInvoice_ToolStrip";
-            this.SalesInvoice_ToolStrip.Size = new System.Drawing.Size(212, 24);
+            this.SalesInvoice_ToolStrip.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.SalesInvoice_ToolStrip.Size = new System.Drawing.Size(218, 24);
             this.SalesInvoice_ToolStrip.Text = "New Sales Invoice";
             this.SalesInvoice_ToolStrip.Click += new System.EventHandler(this.SalesInvoice_ToolStrip_Click);
             // 
@@ -388,6 +390,7 @@
             this.replaceReturnItemsToolStripMenuItem.Name = "replaceReturnItemsToolStripMenuItem";
             this.replaceReturnItemsToolStripMenuItem.Size = new System.Drawing.Size(212, 24);
             this.replaceReturnItemsToolStripMenuItem.Text = "Replace/ Return Items";
+            this.replaceReturnItemsToolStripMenuItem.Visible = false;
             this.replaceReturnItemsToolStripMenuItem.Click += new System.EventHandler(this.replaceReturnItemsToolStripMenuItem_Click);
             // 
             // SalesBillDetails_ToolStrip
