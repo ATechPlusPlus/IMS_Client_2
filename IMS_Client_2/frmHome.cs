@@ -167,9 +167,9 @@ namespace IMS_Client_2
                 btnOpenCash.BackgroundImage = B_Leave;
 
                 clsUtility.DBName = "IMS_Client_2";
-                //clsUtility.LoginID = 1;
+                clsUtility.LoginID = 1;
                 //clsUtility.IsAdmin = false;
-                //clsUtility.IsAdmin = true;
+                clsUtility.IsAdmin = true;
                 clsUtility.strProjectTitle = "IMS";
                 if (clsUtility.LoginID > 0)
                 {

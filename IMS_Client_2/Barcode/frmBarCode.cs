@@ -40,6 +40,7 @@ namespace IMS_Client_2.Barcode
             btnPrintManualBarcode.BackgroundImage = B_Leave;
             btnPrintBarcode.BackgroundImage = B_Leave;
             btnSearch.BackgroundImage = B_Leave;
+            btnResetPrint.BackgroundImage = B_Leave;
 
             strCompanyName = GetCompanyName();
 
@@ -82,7 +83,7 @@ namespace IMS_Client_2.Barcode
             try
             {
                 obj = new Form1();
-               // obj.Show();
+                // obj.Show();
                 obj.TopLevel = false;
                 obj.Text = "New Page";
                 obj.Location = new Point(0, 0);
@@ -98,7 +99,7 @@ namespace IMS_Client_2.Barcode
                 MessageBox.Show(ex.ToString());
 
             }
-           
+
         }
         private string GetBarCodeSettings()
         {
@@ -455,7 +456,7 @@ namespace IMS_Client_2.Barcode
                 clsUtility.ShowInfoMessage("Operation completed !", clsUtility.strProjectTitle);
                 this.Focus();
 
-               
+
 
                 this.BringToFront();
                 RefreshData();
@@ -471,9 +472,9 @@ namespace IMS_Client_2.Barcode
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show("While disposing : "+ex.Message);
+                    MessageBox.Show("While disposing : " + ex.Message);
                 }
-               
+
             }
         }
 
@@ -736,8 +737,8 @@ namespace IMS_Client_2.Barcode
                 MessageBox.Show(ex.ToString());
 
             }
-            
-           
+
+
         }
         private void DrawRotatedTextAt(Graphics gr, float angle,
         string txt, int x, int y, Font the_font, Brush the_brush)
@@ -772,7 +773,7 @@ namespace IMS_Client_2.Barcode
             ObjCon.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, "0", clsConnection_DAL.ParamType.Input);
             ObjCon.SetStoreProcedureData("PrintStaus", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjCon.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_PurchaseInvoice_BulkPrint_Color_Size");
-            if (ds != null && ds.Tables.Count > 0)
+            if (ObjUtil.ValidateDataSet(ds))
             {
                 DataTable dtPurchaseInvDetails = ds.Tables[0];
                 if (ObjUtil.ValidateTable(dtPurchaseInvDetails))
@@ -1057,7 +1058,7 @@ namespace IMS_Client_2.Barcode
                         {
                             doc.Print();
                         }
-                        UpdateProductStockMasterStatus(Convert.ToInt32(numericUpDown1.Value),Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ProductStockID"].Value));
+                        UpdateProductStockMasterStatus(Convert.ToInt32(numericUpDown1.Value), Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ProductStockID"].Value));
                     }
                 }
                 this.Focus();
@@ -1068,12 +1069,12 @@ namespace IMS_Client_2.Barcode
 
                 try
                 {
-                    if (obj!=null)
+                    if (obj != null)
                     {
                         obj.Dispose();
                         obj = null;
                     }
-                   
+
                 }
                 catch (Exception ex)
                 {
@@ -1119,6 +1120,29 @@ namespace IMS_Client_2.Barcode
                     cmbListBox.SelectedIndex = -1;
                     LoadData();
                 }
+            }
+        }
+
+        private void btnResetPrint_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataTable dtBarCode = (DataTable)dgvProductDetails.DataSource;
+                DataTable dtBarCodePrint = (DataTable)dataGridView1.DataSource;
+                if (ObjUtil.ValidateTable(dtBarCode) || ObjUtil.ValidateTable(dtBarCodePrint))
+                {
+                    int a = ObjCon.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.ProductStockMaster SET PrintCount = 0 WHERE PurchaseInvoiceID = " + txtPurchaseID.Text + " AND StoreID = " + frmHome.Home_StoreID);
+                    if (a > 0)
+                    {
+                        clsUtility.ShowInfoMessage("BarCode Print Count is reset for Supplier Bill NO. " + txtPurchaseInvoice.Text.Trim());
+                    }
+                    else
+                        clsUtility.ShowInfoMessage("Unable to reset BarCode Print Count for Supplier Bill NO. " + txtPurchaseInvoice.Text.Trim());
+                }
+            }
+            catch (Exception ex)
+            {
+                clsUtility.ShowErrorMessage(ex.ToString());
             }
         }
     }

@@ -344,20 +344,20 @@
             this.dgvQtycolor.AllowUserToDeleteRows = false;
             this.dgvQtycolor.AllowUserToResizeColumns = false;
             this.dgvQtycolor.AllowUserToResizeRows = false;
-            this.dgvQtycolor.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvQtycolor.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvQtycolor.BackgroundColor = System.Drawing.Color.White;
             this.dgvQtycolor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvQtycolor.Location = new System.Drawing.Point(7, 312);
+            this.dgvQtycolor.Location = new System.Drawing.Point(4, 312);
             this.dgvQtycolor.Name = "dgvQtycolor";
             this.dgvQtycolor.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dgvQtycolor.Size = new System.Drawing.Size(959, 147);
+            this.dgvQtycolor.Size = new System.Drawing.Size(971, 147);
             this.dgvQtycolor.TabIndex = 258;
-            this.dgvQtycolor.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvQtycolor_CellBeginEdit);
             this.dgvQtycolor.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQtycolor_CellClick);
             this.dgvQtycolor.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQtycolor_CellEndEdit);
             this.dgvQtycolor.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvQtycolor_CellValidating);
             this.dgvQtycolor.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvQtycolor_ColumnAdded);
             this.dgvQtycolor.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvQtycolor_DataBindingComplete);
+            this.dgvQtycolor.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvQtycolor_EditingControlShowing);
             // 
             // btnUpdate
             // 
@@ -529,11 +529,11 @@
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(7, 504);
+            this.dataGridView1.Location = new System.Drawing.Point(4, 504);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dataGridView1.Size = new System.Drawing.Size(959, 147);
+            this.dataGridView1.Size = new System.Drawing.Size(971, 147);
             this.dataGridView1.TabIndex = 271;
             this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
             // 
