@@ -167,9 +167,9 @@ namespace IMS_Client_2
                 btnOpenCash.BackgroundImage = B_Leave;
 
                 clsUtility.DBName = "IMS_Client_2";
-                clsUtility.LoginID = 1;
+                //clsUtility.LoginID = 1;
                 //clsUtility.IsAdmin = false;
-                clsUtility.IsAdmin = true;
+                //clsUtility.IsAdmin = true;
                 clsUtility.strProjectTitle = "IMS";
                 if (clsUtility.LoginID > 0)
                 {
@@ -239,8 +239,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Category_Master) || clsUtility.IsAdmin)
             {
-                Masters.Category_Master Obj = new Masters.Category_Master();
-                Obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Masters.Category_Master));
+                if (!b)
+                {
+                    Masters.Category_Master Obj = new Masters.Category_Master();
+                    Obj.Show();
+                }
             }
             else
             {
@@ -252,8 +256,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Store_Master) || clsUtility.IsAdmin)
             {
-                Masters.Store_Master Obj = new Masters.Store_Master();
-                Obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Masters.Store_Master));
+                if (!b)
+                {
+                    Masters.Store_Master Obj = new Masters.Store_Master();
+                    Obj.Show();
+                }
             }
             else
             {
@@ -265,8 +273,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Supplier_Details) || clsUtility.IsAdmin)
             {
-                Masters.Supplier_Details Obj = new Masters.Supplier_Details();
-                Obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Masters.Supplier_Details));
+                if (!b)
+                {
+                    Masters.Supplier_Details Obj = new Masters.Supplier_Details();
+                    Obj.Show();
+                }
             }
             else
             {
@@ -278,8 +290,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Employee_Details) || clsUtility.IsAdmin)
             {
-                Masters.Employee_Details Obj = new Masters.Employee_Details();
-                Obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Masters.Employee_Details));
+                if (!b)
+                {
+                    Masters.Employee_Details Obj = new Masters.Employee_Details();
+                    Obj.Show();
+                }
             }
             else
             {
@@ -291,8 +307,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Purchase_Invoice) || clsUtility.IsAdmin)
             {
-                Purchase.Purchase_Invoice Obj = new Purchase.Purchase_Invoice();
-                Obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Purchase.Purchase_Invoice));
+                if (!b)
+                {
+                    Purchase.Purchase_Invoice Obj = new Purchase.Purchase_Invoice();
+                    Obj.Show();
+                }
             }
             else
             {
@@ -304,8 +324,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Purchase_Bill_Details) || clsUtility.IsAdmin)
             {
-                Purchase.Purchase_Bill_Details Obj = new Purchase.Purchase_Bill_Details();
-                Obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Purchase.Purchase_Bill_Details));
+                if (!b)
+                {
+                    Purchase.Purchase_Bill_Details Obj = new Purchase.Purchase_Bill_Details();
+                    Obj.Show();
+                }
             }
             else
             {
@@ -321,8 +345,12 @@ namespace IMS_Client_2
                 {
                     if (!IsForceCloseCash)
                     {
-                        Sales.Sales_Invoice Obj = new Sales.Sales_Invoice();
-                        Obj.Show();
+                        bool b = ObjUtil.IsAlreadyOpen(typeof(Sales.Sales_Invoice));
+                        if (!b)
+                        {
+                            Sales.Sales_Invoice Obj = new Sales.Sales_Invoice();
+                            Obj.Show();
+                        }
                     }
                     else
                     {
@@ -344,8 +372,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Bill_Details) || clsUtility.IsAdmin)
             {
-                Sales.Sales_Bill_Details Obj = new Sales.Sales_Bill_Details();
-                Obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Sales.Sales_Bill_Details));
+                if (!b)
+                {
+                    Sales.Sales_Bill_Details Obj = new Sales.Sales_Bill_Details();
+                    Obj.Show();
+                }
             }
             else
             {
@@ -357,8 +389,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Material_Details) || clsUtility.IsAdmin)
             {
-                StockManagement.Material_Details Obj = new StockManagement.Material_Details();
-                Obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(StockManagement.Material_Details));
+                if (!b)
+                {
+                    StockManagement.Material_Details Obj = new StockManagement.Material_Details();
+                    Obj.Show();
+                }
             }
             else
             {
@@ -370,8 +406,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Currency_Value_Settings) || clsUtility.IsAdmin)
             {
-                Settings.Currency_Value_Settings Obj = new Settings.Currency_Value_Settings();
-                Obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Settings.Currency_Value_Settings));
+                if (!b)
+                {
+                    Settings.Currency_Value_Settings Obj = new Settings.Currency_Value_Settings();
+                    Obj.Show();
+                }
             }
             else
             {
@@ -383,8 +423,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Country_Master) || clsUtility.IsAdmin)
             {
-                Masters.Country_Master Obj = new Masters.Country_Master();
-                Obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Masters.Country_Master));
+                if (!b)
+                {
+                    Masters.Country_Master Obj = new Masters.Country_Master();
+                    Obj.Show();
+                }
             }
             else
             {
@@ -396,8 +440,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Brand_Master) || clsUtility.IsAdmin)
             {
-                Masters.Brand_Master Obj = new Masters.Brand_Master();
-                Obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Masters.Brand_Master));
+                if (!b)
+                {
+                    Masters.Brand_Master Obj = new Masters.Brand_Master();
+                    Obj.Show();
+                }
             }
             else
             {
@@ -409,8 +457,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Product_Master) || clsUtility.IsAdmin)
             {
-                Masters.Product_Master Obj = new Masters.Product_Master();
-                Obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Masters.Product_Master));
+                if (!b)
+                {
+                    Masters.Product_Master Obj = new Masters.Product_Master();
+                    Obj.Show();
+                }
             }
             else
             {
@@ -437,8 +489,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Customer_Master) || clsUtility.IsAdmin)
             {
-                Masters.Customer_Master Obj = new Masters.Customer_Master();
-                Obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Masters.Customer_Master));
+                if (!b)
+                {
+                    Masters.Customer_Master Obj = new Masters.Customer_Master();
+                    Obj.Show();
+                }
             }
             else
             {
@@ -450,8 +506,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Color_Master) || clsUtility.IsAdmin)
             {
-                Masters.Color_Master Obj = new Masters.Color_Master();
-                Obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Masters.Color_Master));
+                if (!b)
+                {
+                    Masters.Color_Master Obj = new Masters.Color_Master();
+                    Obj.Show();
+                }
             }
             else
             {
@@ -463,8 +523,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Size_Type_Master) || clsUtility.IsAdmin)
             {
-                Masters.Size_Type_Master Obj = new Masters.Size_Type_Master();
-                Obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Masters.Size_Type_Master));
+                if (!b)
+                {
+                    Masters.Size_Type_Master Obj = new Masters.Size_Type_Master();
+                    Obj.Show();
+                }
             }
             else
             {
@@ -476,8 +540,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Delivering_Purchase_Bill) || clsUtility.IsAdmin)
             {
-                Purchase.Delivering_Purchase_Bill Obj = new Purchase.Delivering_Purchase_Bill();
-                Obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Purchase.Delivering_Purchase_Bill));
+                if (!b)
+                {
+                    Purchase.Delivering_Purchase_Bill Obj = new Purchase.Delivering_Purchase_Bill();
+                    Obj.Show();
+                }
             }
             else
             {
@@ -489,8 +557,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Size_Master) || clsUtility.IsAdmin)
             {
-                Masters.Size_Master Obj = new Masters.Size_Master();
-                Obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Masters.Size_Master));
+                if (!b)
+                {
+                    Masters.Size_Master Obj = new Masters.Size_Master();
+                    Obj.Show();
+                }
             }
             else
             {
@@ -502,8 +574,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Invoice) || clsUtility.IsAdmin)
             {
-                Report.frmSalesInvoiceReport frmSalesInvoice = new Report.frmSalesInvoiceReport();
-                frmSalesInvoice.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Report.frmSalesInvoiceReport));
+                if (!b)
+                {
+                    Report.frmSalesInvoiceReport frmSalesInvoice = new Report.frmSalesInvoiceReport();
+                    frmSalesInvoice.Show();
+                }
             }
             else
             {
@@ -515,8 +591,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmBarCodeDesigner) || clsUtility.IsAdmin)
             {
-                Barcode.frmBarCodeDesigner frmBarCode = new IMS_Client_2.Barcode.frmBarCodeDesigner();
-                frmBarCode.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Barcode.frmBarCodeDesigner));
+                if (!b)
+                {
+                    Barcode.frmBarCodeDesigner frmBarCode = new IMS_Client_2.Barcode.frmBarCodeDesigner();
+                    frmBarCode.Show();
+                }
             }
             else
             {
@@ -528,8 +608,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmBarCode) || clsUtility.IsAdmin)
             {
-                Barcode.frmBarCode frmBarCode = new Barcode.frmBarCode();
-                frmBarCode.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Barcode.frmBarCode));
+                if (!b)
+                {
+                    Barcode.frmBarCode frmBarCode = new Barcode.frmBarCode();
+                    frmBarCode.Show();
+                }
             }
             else
             {
@@ -541,8 +625,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Posting_Delivery) || clsUtility.IsAdmin)
             {
-                Purchase.Posting_Delivery obj = new Purchase.Posting_Delivery();
-                obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Purchase.Posting_Delivery));
+                if (!b)
+                {
+                    Purchase.Posting_Delivery obj = new Purchase.Posting_Delivery();
+                    obj.Show();
+                }
             }
             else
             {
@@ -554,8 +642,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmDiffPurchaseReceived) || clsUtility.IsAdmin)
             {
-                Purchase.frmDiffPurchaseReceived Obj = new Purchase.frmDiffPurchaseReceived();
-                Obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Purchase.frmDiffPurchaseReceived));
+                if (!b)
+                {
+                    Purchase.frmDiffPurchaseReceived Obj = new Purchase.frmDiffPurchaseReceived();
+                    Obj.Show();
+                }
             }
             else
             {
@@ -567,8 +659,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmSalesReport) || clsUtility.IsAdmin)
             {
-                Report.frmSalesReport frmSalesReport = new Report.frmSalesReport();
-                frmSalesReport.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Report.frmSalesReport));
+                if (!b)
+                {
+                    Report.frmSalesReport frmSalesReport = new Report.frmSalesReport();
+                    frmSalesReport.Show();
+                }
             }
             else
             {
@@ -578,17 +674,24 @@ namespace IMS_Client_2
 
         private void userCreationToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if (!ObjUserManag.IsHandleCreated)
+            //if (!ObjUserManag.IsHandleCreated)
+            //{
+            //    ObjUserManag = null;
+            //    ObjUserManag = new UserManagement.frmUserManagement();
+            //    ObjUserManag.LoginStatus(clsUtility.LoginID, clsUtility.IsAdmin);
+            //    ObjUserManag.Show();
+            //    ObjUserManag.BringToFront();
+            //}
+            //ObjUserManag.LoginStatus(clsUtility.LoginID, clsUtility.IsAdmin);
+            //ObjUserManag.Show();
+            //ObjUserManag.BringToFront();
+
+            bool b = ObjUtil.IsAlreadyOpen(typeof(UserManagement.frmUserManagement));
+            if (!b)
             {
-                ObjUserManag = null;
-                ObjUserManag = new UserManagement.frmUserManagement();
-                ObjUserManag.LoginStatus(clsUtility.LoginID, clsUtility.IsAdmin);
+                UserManagement.frmUserManagement ObjUserManag = new UserManagement.frmUserManagement();
                 ObjUserManag.Show();
-                ObjUserManag.BringToFront();
             }
-            ObjUserManag.LoginStatus(clsUtility.LoginID, clsUtility.IsAdmin);
-            ObjUserManag.Show();
-            ObjUserManag.BringToFront();
         }
 
         private void userRightsManagementToolStripMenuItem_Click(object sender, EventArgs e)
@@ -608,8 +711,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmPurchaseDetails) || clsUtility.IsAdmin)
             {
-                Purchase.frmPurchaseDetails obj = new Purchase.frmPurchaseDetails();
-                obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Purchase.frmPurchaseDetails));
+                if (!b)
+                {
+                    Purchase.frmPurchaseDetails obj = new Purchase.frmPurchaseDetails();
+                    obj.Show();
+                }
             }
             else
             {
@@ -723,8 +830,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmStoreTransfer) || clsUtility.IsAdmin)
             {
-                StockManagement.frmStoreTransfer frmStoreTransfer = new StockManagement.frmStoreTransfer();
-                frmStoreTransfer.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(StockManagement.frmStoreTransfer));
+                if (!b)
+                {
+                    StockManagement.frmStoreTransfer frmStoreTransfer = new StockManagement.frmStoreTransfer();
+                    frmStoreTransfer.Show();
+                }
             }
             else
             {
@@ -736,8 +847,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmReceivedBranchTransfer) || clsUtility.IsAdmin)
             {
-                StockManagement.frmReceivedBranchTransfer frmReceived = new StockManagement.frmReceivedBranchTransfer();
-                frmReceived.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(StockManagement.frmReceivedBranchTransfer));
+                if (!b)
+                {
+                    StockManagement.frmReceivedBranchTransfer frmReceived = new StockManagement.frmReceivedBranchTransfer();
+                    frmReceived.Show();
+                }
             }
             else
             {
@@ -749,8 +864,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmCloseCashBandMaster) || clsUtility.IsAdmin)
             {
-                Masters.frmCloseCashBandMaster Obj = new Masters.frmCloseCashBandMaster();
-                Obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Masters.frmCloseCashBandMaster));
+                if (!b)
+                {
+                    Masters.frmCloseCashBandMaster Obj = new Masters.frmCloseCashBandMaster();
+                    Obj.Show();
+                }
             }
             else
             {
@@ -790,8 +909,12 @@ namespace IMS_Client_2
         {
             if (clsUtility.IsAdmin)
             {
-                Other_Forms.frmPettyCash Obj = new Other_Forms.frmPettyCash();
-                Obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Other_Forms.frmPettyCash));
+                if (!b)
+                {
+                    Other_Forms.frmPettyCash Obj = new Other_Forms.frmPettyCash();
+                    Obj.Show();
+                }
             }
             else
             {
@@ -816,8 +939,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.tblMiniSalesReport) || clsUtility.IsAdmin)
             {
-                Report.Report_Forms.tblMiniSalesReport frmminiSalesReport = new Report.Report_Forms.tblMiniSalesReport();
-                frmminiSalesReport.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Report.Report_Forms.tblMiniSalesReport));
+                if (!b)
+                {
+                    Report.Report_Forms.tblMiniSalesReport frmminiSalesReport = new Report.Report_Forms.tblMiniSalesReport();
+                    frmminiSalesReport.Show();
+                }
             }
             else
             {
@@ -829,8 +956,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmStockDetails) || clsUtility.IsAdmin)
             {
-                StockManagement.frmStockDetails Obj = new StockManagement.frmStockDetails();
-                Obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(StockManagement.frmStockDetails));
+                if (!b)
+                {
+                    StockManagement.frmStockDetails Obj = new StockManagement.frmStockDetails();
+                    Obj.Show();
+                }
             }
             else
             {
@@ -840,23 +971,31 @@ namespace IMS_Client_2
 
         private void dashboardToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (clsFormRights.HasFormRight(clsFormRights.Forms.frmDashBoard) || clsUtility.IsAdmin)
-            //{
-            //}
-            //else
-            //{
-            //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
-            //}
-            Other_Forms.frmDashBoard frmDashBoard = new Other_Forms.frmDashBoard();
-            frmDashBoard.Show();
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmDashBoard) || clsUtility.IsAdmin)
+            {
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Other_Forms.frmDashBoard));
+                if (!b)
+                {
+                    Other_Forms.frmDashBoard frmDashBoard = new Other_Forms.frmDashBoard();
+                    frmDashBoard.Show();
+                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
 
         private void viewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmItemWiseModelNo) || clsUtility.IsAdmin)
             {
-                StockManagement.frmItemWiseModelNo frmItemWiseModelNo = new StockManagement.frmItemWiseModelNo();
-                frmItemWiseModelNo.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(StockManagement.frmItemWiseModelNo));
+                if (!b)
+                {
+                    StockManagement.frmItemWiseModelNo frmItemWiseModelNo = new StockManagement.frmItemWiseModelNo();
+                    frmItemWiseModelNo.Show();
+                }
             }
             else
             {
@@ -868,8 +1007,12 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmBranchSaleShorting) || clsUtility.IsAdmin)
             {
-                StockManagement.frmBranchSaleShorting Obj = new StockManagement.frmBranchSaleShorting();
-                Obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(StockManagement.frmBranchSaleShorting));
+                if (!b)
+                {
+                    StockManagement.frmBranchSaleShorting Obj = new StockManagement.frmBranchSaleShorting();
+                    Obj.Show();
+                }
             }
             else
             {
@@ -881,8 +1024,12 @@ namespace IMS_Client_2
         {
             if (clsUtility.IsAdmin)
             {
-                Barcode.frmManuallyBarCode Obj = new Barcode.frmManuallyBarCode();
-                Obj.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Barcode.frmManuallyBarCode));
+                if (!b)
+                {
+                    Barcode.frmManuallyBarCode Obj = new Barcode.frmManuallyBarCode();
+                    Obj.Show();
+                }
             }
             else
             {
@@ -893,11 +1040,6 @@ namespace IMS_Client_2
         private void f1CashToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SalesInvoice_ToolStrip_Click(null, null);
-        }
-
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
         }
     }
 }
