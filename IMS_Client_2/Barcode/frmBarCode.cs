@@ -25,7 +25,7 @@ namespace IMS_Client_2.Barcode
         clsConnection_DAL ObjCon = new clsConnection_DAL(true);
         clsUtility ObjUtil = new clsUtility();
 
-        Form1 obj;
+      //  Form1 obj;
 
         string strCompanyName = "";
         string CurrentPurchaseInvoiceID = "";
@@ -79,25 +79,25 @@ namespace IMS_Client_2.Barcode
 
         private void AddNewPage()
         {
-            try
-            {
-                obj = new Form1();
-               // obj.Show();
-                obj.TopLevel = false;
-                obj.Text = "New Page";
-                obj.Location = new Point(0, 0);
-                obj.Size = new System.Drawing.Size(300, 120);
-                obj.Invalidate();
-            }
-            catch (System.ComponentModel.Win32Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
+            //try
+            //{
+            //    obj = new Form1();
+            //   // obj.Show();
+            //    obj.TopLevel = false;
+            //    obj.Text = "New Page";
+            //    obj.Location = new Point(0, 0);
+            //    obj.Size = new System.Drawing.Size(300, 120);
+            //    obj.Invalidate();
+            //}
+            //catch (System.ComponentModel.Win32Exception ex)
+            //{
+            //    MessageBox.Show(ex.ToString());
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.ToString());
 
-            }
+            //}
            
         }
         private string GetBarCodeSettings()
@@ -163,6 +163,12 @@ namespace IMS_Client_2.Barcode
             else if (objLable.Tag.ToString().Trim() == "BarcodeNo")
             {
                 objLable.Text = _Current_BarCodeNumber;
+                // only for MD
+                if (!chkPrintRate.Checked)
+                {
+                    objLable.Location = new Point(objLable.Location.X, objLable.Location.Y + 23);
+                }
+               
             }
             else if (objLable.Tag.ToString().Trim() == "Category")
             {
@@ -178,185 +184,7 @@ namespace IMS_Client_2.Barcode
                 }
             }
         }
-        private void LoadTemplate(DataGridViewRow _Row)
-        {
-            string strBarCodeSettingValue = GetBarCodeSettings();
-            if (strBarCodeSettingValue != null)
-            {
-                string[] strfiles = strBarCodeSettingValue.Split('\n');
-
-                if (strfiles.Length > 0)
-                {
-                    string ProductID = _Row.Cells["ColProductID"].Value.ToString();
-                    //obj.Controls.Clear();
-                    //    obj.Refresh();
-                    AddNewPage();
-
-                    if (strfiles.Length > 0)
-                    {
-                        for (int i = 0; i < strfiles.Length; i++)
-                        {
-                            string[] strInfo = strfiles[i].Split('@');
-
-                            if (i == 0)
-                            {
-                                obj.BackColor = Color.FromArgb(Convert.ToInt32(strInfo[0]));
-                                obj.Size = new Size(Convert.ToInt32(strInfo[1]), Convert.ToInt32(strInfo[2]));
-                            }
-                            else
-                            { //Type-IsBold-Family-argb(int)-fsize(float)-w-h-x-y-text-backColor(int)-RecBorderStyle-borderStyle-borderColor
-                                if (strInfo[0] == "Label")
-                                {
-                                    Label objLable = new Label();
-                                    if (strInfo[1] == "True")
-                                    {
-                                        objLable.Font = new Font(strInfo[2], float.Parse(strInfo[4]), FontStyle.Bold);
-                                    }
-                                    else
-                                    {
-                                        objLable.Font = new Font(strInfo[2], float.Parse(strInfo[4]), FontStyle.Regular);
-                                    }
-
-                                    objLable.ForeColor = Color.FromArgb(Convert.ToInt32(strInfo[3]));
-                                    objLable.Size = new Size(Convert.ToInt32(strInfo[5]), Convert.ToInt32(strInfo[6]));
-                                    objLable.Location = new Point(Convert.ToInt32(strInfo[7]), Convert.ToInt32(strInfo[8]));
-                                    objLable.Text = strInfo[9];
-
-                                    objLable.BackColor = Color.FromArgb(Convert.ToInt32(strInfo[10]));
-                                    objLable.Tag = strInfo[14];
-
-                                    SetBarCodeValues(objLable, _Row);
-
-                                    obj.Controls.Add(objLable);
-                                    obj.Refresh();
-                                }
-                                else if (strInfo[0] == "VerticalLabel")
-                                {
-                                    VerticalLabel objLable = new VerticalLabel();
-                                    if (strInfo[1] == "True")
-                                    {
-                                        objLable.Font = new Font(strInfo[2], float.Parse(strInfo[4]), FontStyle.Bold);
-                                    }
-                                    else
-                                    {
-                                        objLable.Font = new Font(strInfo[2], float.Parse(strInfo[4]), FontStyle.Regular);
-                                    }
-
-                                    objLable.ForeColor = Color.FromArgb(Convert.ToInt32(strInfo[3]));
-                                    objLable.Size = new Size(Convert.ToInt32(strInfo[5]), Convert.ToInt32(strInfo[6]));
-                                    objLable.Location = new Point(Convert.ToInt32(strInfo[7]), Convert.ToInt32(strInfo[8]));
-                                    objLable.Text = strInfo[9];
-
-                                    objLable.BackColor = Color.FromArgb(Convert.ToInt32(strInfo[10]));
-                                    objLable.Tag = strInfo[14];
-
-                                    SetBarCodeValues(objLable, _Row);
-
-                                    objLable.MouseLeave += new EventHandler(obj.control_MouseLeave);
-                                    obj.Controls.Add(objLable);
-                                    obj.Refresh();
-                                }
-                                else if (strInfo[0] == "PictureBox")
-                                {
-                                    PictureBox objPicBox = new PictureBox();
-
-                                    objPicBox.Size = new Size(Convert.ToInt32(strInfo[5]), Convert.ToInt32(strInfo[6]));
-                                    objPicBox.Location = new Point(Convert.ToInt32(strInfo[7]), Convert.ToInt32(strInfo[8]));
-                                    objPicBox.BorderStyle = BorderStyle.FixedSingle;
-
-                                    string barValue = "Product_" + ProductID;
-
-                                    objPicBox.Image = Barcode.clsBarCodeUtility.GenerateBarCode(_Current_BarCodeNumber);
-                                    objPicBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                                    objPicBox.MouseLeave += new EventHandler(obj.control_MouseLeave);
-                                    obj.Controls.Add(objPicBox);
-                                }
-                                else if (strInfo[0] == "uRectangle")
-                                {
-                                    uRectangle objRec = new uRectangle();
-                                    objRec.Size = new Size(Convert.ToInt32(strInfo[5]), Convert.ToInt32(strInfo[6]));
-                                    objRec.Location = new Point(Convert.ToInt32(strInfo[7]), Convert.ToInt32(strInfo[8]));
-
-                                    objRec.BackColor = Color.FromArgb(Convert.ToInt32(strInfo[10]));
-
-                                    switch (strInfo[11].Trim())
-                                    {
-                                        case "None":
-                                            objRec.RectangleBorderStyle = ButtonBorderStyle.None;
-                                            break;
-                                        case "Dotted":
-                                            objRec.RectangleBorderStyle = ButtonBorderStyle.Dotted;
-                                            break;
-                                        case "Dashed":
-                                            objRec.RectangleBorderStyle = ButtonBorderStyle.Dashed;
-                                            break;
-                                        case "Solid":
-                                            objRec.RectangleBorderStyle = ButtonBorderStyle.Solid;
-                                            break;
-                                        case "Inset":
-                                            objRec.RectangleBorderStyle = ButtonBorderStyle.Inset;
-                                            break;
-                                        case "Outset":
-                                            objRec.RectangleBorderStyle = ButtonBorderStyle.Outset;
-                                            break;
-                                    }
-
-                                    switch (strInfo[12].Trim())
-                                    {
-                                        case "None":
-                                            objRec.BorderStyle = BorderStyle.Fixed3D;
-                                            break;
-                                        case "FixedSingle":
-                                            objRec.BorderStyle = BorderStyle.FixedSingle;
-                                            break;
-                                        case "Fixed3D":
-                                            objRec.BorderStyle = BorderStyle.Fixed3D;
-                                            break;
-                                    }
-                                    objRec.BorderColor = Color.FromArgb(Convert.ToInt32(strInfo[13].Trim()));
-
-                                    objRec.MouseEnter += new EventHandler(obj.control_MouseEnter);
-                                    objRec.MouseLeave += new EventHandler(obj.control_MouseLeave);
-                                    objRec.MouseDown += new MouseEventHandler(obj.control_MouseDown);
-                                    objRec.MouseMove += new MouseEventHandler(obj.control_MouseMove);
-                                    objRec.MouseUp += new MouseEventHandler(obj.control_MouseUp);
-                                    objRec.Click += obj.ctrl_Click;
-                                    objRec.DoubleClick += obj.ctrl_DoubleClick;
-
-                                    objRec.Click += new EventHandler(obj.ctrl_Click);
-
-                                    objRec.MouseLeave += new EventHandler(obj.control_MouseLeave);
-                                    obj.Controls.Add(objRec);
-                                    obj.Refresh();
-                                }
-                                else if (strInfo[0] == "Line")
-                                {
-                                    Line objLable = new Line();
-                                    if (strInfo[1] == "True")
-                                    {
-                                        objLable.Font = new Font(strInfo[2], float.Parse(strInfo[4]), FontStyle.Bold);
-                                    }
-                                    else
-                                    {
-                                        objLable.Font = new Font(strInfo[2], float.Parse(strInfo[4]), FontStyle.Regular);
-                                    }
-
-                                    objLable.ForeColor = Color.FromArgb(Convert.ToInt32(strInfo[3]));
-                                    objLable.Size = new Size(Convert.ToInt32(strInfo[5]), Convert.ToInt32(strInfo[6]));
-                                    objLable.Location = new Point(Convert.ToInt32(strInfo[7]), Convert.ToInt32(strInfo[8]));
-                                    objLable.Text = strInfo[9];
-
-                                    objLable.BackColor = Color.FromArgb(Convert.ToInt32(strInfo[10]));
-                                    obj.Controls.Add(objLable);
-                                    obj.Refresh();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            obj.Refresh();
-        }
+   
 
         private string GetBarcodeNumber()
         {
@@ -460,19 +288,7 @@ namespace IMS_Client_2.Barcode
                 this.BringToFront();
                 RefreshData();
 
-                try
-                {
-                    if (obj != null)
-                    {
-                        obj.Dispose();
-                        obj = null;
-                    }
-                }
-                catch (Exception ex)
-                {
-
-                    MessageBox.Show("While disposing : "+ex.Message);
-                }
+               
                
             }
         }
@@ -509,7 +325,7 @@ namespace IMS_Client_2.Barcode
                             //  string ProductID = _PrintRowData.Cells["ColProductID"].Value.ToString();
                             //obj.Controls.Clear();
                             //    obj.Refresh();
-                            AddNewPage();
+                           // AddNewPage();
 
                             if (strfiles.Length > 0)
                             {
@@ -517,10 +333,11 @@ namespace IMS_Client_2.Barcode
                                 {
                                     string[] strInfo = strfiles[i].Split('@');
 
-                                    if (i == 0)
+                                     if (i == 0)
                                     {
-                                        obj.BackColor = Color.FromArgb(Convert.ToInt32(strInfo[0]));
-                                        obj.Size = new Size(Convert.ToInt32(strInfo[1]), Convert.ToInt32(strInfo[2]));
+                                        // set the back color and size of the page.
+                                       // obj.BackColor = Color.FromArgb(Convert.ToInt32(strInfo[0]));
+                                        //obj.Size = new Size(Convert.ToInt32(strInfo[1]), Convert.ToInt32(strInfo[2]));
                                     }
                                     else
                                     { //Type-IsBold-Family-argb(int)-fsize(float)-w-h-x-y-text-backColor(int)-RecBorderStyle-borderStyle-borderColor
@@ -549,7 +366,7 @@ namespace IMS_Client_2.Barcode
                                             {
                                                 // int to enum
                                                 objLable.TextAlign = (ContentAlignment)Convert.ToInt32(strInfo[15]);
-                                            }
+                                             }
                                             catch
                                             {
 
@@ -557,8 +374,8 @@ namespace IMS_Client_2.Barcode
                                             }
                                             SetBarCodeValues(objLable, _PrintRowData);
 
-                                            obj.Controls.Add(objLable);
-                                            obj.Refresh();
+                                            //obj.Controls.Add(objLable);
+                                            //obj.Refresh();
 
                                             StringFormat sf = new StringFormat();
                                             sf.LineAlignment = StringAlignment.Center;
@@ -611,9 +428,9 @@ namespace IMS_Client_2.Barcode
 
                                             SetBarCodeValues(objLable, _PrintRowData);
 
-                                            objLable.MouseLeave += new EventHandler(obj.control_MouseLeave);
-                                            obj.Controls.Add(objLable);
-                                            obj.Refresh();
+                                            
+                                            //obj.Controls.Add(objLable);
+                                           // obj.Refresh();
 
                                             string captionText = objLable.Text;
                                             Size preferredSize = g.MeasureString(objLable.Text, objLable.Font).ToSize();
@@ -635,8 +452,15 @@ namespace IMS_Client_2.Barcode
 
                                             objPicBox.Image = Barcode.clsBarCodeUtility.GenerateBarCode(_Current_BarCodeNumber);
                                             objPicBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                                            objPicBox.MouseLeave += new EventHandler(obj.control_MouseLeave);
-                                            obj.Controls.Add(objPicBox);
+                                           // objPicBox.MouseLeave += new EventHandler(obj.control_MouseLeave);
+                                            //obj.Controls.Add(objPicBox);
+
+                                            // this code is specific to MD :
+                                            if(!chkPrintRate.Checked)
+                                            {
+                                                objPicBox.Height = objPicBox.Height + 15;
+
+                                            }
 
                                             g.DrawImage(objPicBox.Image, objPicBox.Location.X, objPicBox.Location.Y, objPicBox.Width, objPicBox.Height);
 
@@ -685,19 +509,7 @@ namespace IMS_Client_2.Barcode
                                             }
                                             objRec.BorderColor = Color.FromArgb(Convert.ToInt32(strInfo[13].Trim()));
 
-                                            objRec.MouseEnter += new EventHandler(obj.control_MouseEnter);
-                                            objRec.MouseLeave += new EventHandler(obj.control_MouseLeave);
-                                            objRec.MouseDown += new MouseEventHandler(obj.control_MouseDown);
-                                            objRec.MouseMove += new MouseEventHandler(obj.control_MouseMove);
-                                            objRec.MouseUp += new MouseEventHandler(obj.control_MouseUp);
-                                            objRec.Click += obj.ctrl_Click;
-                                            objRec.DoubleClick += obj.ctrl_DoubleClick;
-
-                                            objRec.Click += new EventHandler(obj.ctrl_Click);
-
-                                            objRec.MouseLeave += new EventHandler(obj.control_MouseLeave);
-                                            obj.Controls.Add(objRec);
-                                            obj.Refresh();
+                                           
                                         }
                                         else if (strInfo[0] == "Line")
                                         {
@@ -717,8 +529,8 @@ namespace IMS_Client_2.Barcode
                                             objLable.Text = strInfo[9];
 
                                             objLable.BackColor = Color.FromArgb(Convert.ToInt32(strInfo[10]));
-                                            obj.Controls.Add(objLable);
-                                            obj.Refresh();
+                                            //obj.Controls.Add(objLable);
+                                            //obj.Refresh();
                                         }
                                     }
                                 }
@@ -1066,20 +878,20 @@ namespace IMS_Client_2.Barcode
                 this.Activate();
                 RefreshData();
 
-                try
-                {
-                    if (obj!=null)
-                    {
-                        obj.Dispose();
-                        obj = null;
-                    }
+                //try
+                //{
+                //    if (obj!=null)
+                //    {
+                //        obj.Dispose();
+                //        obj = null;
+                //    }
                    
-                }
-                catch (Exception ex)
-                {
+                //}
+                //catch (Exception ex)
+                //{
 
-                    MessageBox.Show("While disposing : " + ex.Message);
-                }
+                //    MessageBox.Show("While disposing : " + ex.Message);
+                //}
             }
         }
 
