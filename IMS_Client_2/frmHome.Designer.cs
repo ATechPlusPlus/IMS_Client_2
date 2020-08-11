@@ -58,6 +58,8 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BarcodeStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.barCodePrintingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.barCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quickBarcodePrintToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hardwarePartsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SalesInvoice_ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.replaceReturnItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,7 +104,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.barCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -342,7 +343,8 @@
             this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.BarcodeStripMenuItem,
             this.barCodePrintingToolStripMenuItem,
-            this.barCodeToolStripMenuItem});
+            this.barCodeToolStripMenuItem,
+            this.quickBarcodePrintToolStripMenuItem});
             this.aboutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("aboutToolStripMenuItem.Image")));
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(101, 36);
@@ -352,16 +354,30 @@
             // BarcodeStripMenuItem
             // 
             this.BarcodeStripMenuItem.Name = "BarcodeStripMenuItem";
-            this.BarcodeStripMenuItem.Size = new System.Drawing.Size(195, 24);
+            this.BarcodeStripMenuItem.Size = new System.Drawing.Size(229, 24);
             this.BarcodeStripMenuItem.Text = "Bar Code Designer";
             this.BarcodeStripMenuItem.Click += new System.EventHandler(this.BarcodeStripMenuItem_Click);
             // 
             // barCodePrintingToolStripMenuItem
             // 
             this.barCodePrintingToolStripMenuItem.Name = "barCodePrintingToolStripMenuItem";
-            this.barCodePrintingToolStripMenuItem.Size = new System.Drawing.Size(195, 24);
+            this.barCodePrintingToolStripMenuItem.Size = new System.Drawing.Size(229, 24);
             this.barCodePrintingToolStripMenuItem.Text = "Bar Code Printing";
             this.barCodePrintingToolStripMenuItem.Click += new System.EventHandler(this.barCodePrintingToolStripMenuItem_Click);
+            // 
+            // barCodeToolStripMenuItem
+            // 
+            this.barCodeToolStripMenuItem.Name = "barCodeToolStripMenuItem";
+            this.barCodeToolStripMenuItem.Size = new System.Drawing.Size(229, 24);
+            this.barCodeToolStripMenuItem.Text = "Bar Code Manually Print";
+            this.barCodeToolStripMenuItem.Click += new System.EventHandler(this.barCodeToolStripMenuItem_Click);
+            // 
+            // quickBarcodePrintToolStripMenuItem
+            // 
+            this.quickBarcodePrintToolStripMenuItem.Name = "quickBarcodePrintToolStripMenuItem";
+            this.quickBarcodePrintToolStripMenuItem.Size = new System.Drawing.Size(229, 24);
+            this.quickBarcodePrintToolStripMenuItem.Text = "Quick Barcode Print";
+            this.quickBarcodePrintToolStripMenuItem.Click += new System.EventHandler(this.quickBarcodePrintToolStripMenuItem_Click);
             // 
             // hardwarePartsToolStripMenuItem
             // 
@@ -387,7 +403,7 @@
             // replaceReturnItemsToolStripMenuItem
             // 
             this.replaceReturnItemsToolStripMenuItem.Name = "replaceReturnItemsToolStripMenuItem";
-            this.replaceReturnItemsToolStripMenuItem.Size = new System.Drawing.Size(212, 24);
+            this.replaceReturnItemsToolStripMenuItem.Size = new System.Drawing.Size(218, 24);
             this.replaceReturnItemsToolStripMenuItem.Text = "Replace/ Return Items";
             this.replaceReturnItemsToolStripMenuItem.Visible = false;
             this.replaceReturnItemsToolStripMenuItem.Click += new System.EventHandler(this.replaceReturnItemsToolStripMenuItem_Click);
@@ -395,14 +411,14 @@
             // SalesBillDetails_ToolStrip
             // 
             this.SalesBillDetails_ToolStrip.Name = "SalesBillDetails_ToolStrip";
-            this.SalesBillDetails_ToolStrip.Size = new System.Drawing.Size(212, 24);
+            this.SalesBillDetails_ToolStrip.Size = new System.Drawing.Size(218, 24);
             this.SalesBillDetails_ToolStrip.Text = "Sales Bill Details";
             this.SalesBillDetails_ToolStrip.Click += new System.EventHandler(this.SalesBillDetails_ToolStrip_Click);
             // 
             // closeCashToolStripMenuItem
             // 
             this.closeCashToolStripMenuItem.Name = "closeCashToolStripMenuItem";
-            this.closeCashToolStripMenuItem.Size = new System.Drawing.Size(212, 24);
+            this.closeCashToolStripMenuItem.Size = new System.Drawing.Size(218, 24);
             this.closeCashToolStripMenuItem.Text = "Close Cash";
             this.closeCashToolStripMenuItem.Click += new System.EventHandler(this.closeCashToolStripMenuItem_Click);
             // 
@@ -794,13 +810,6 @@
             this.label9.TabIndex = 28;
             this.label9.Text = "Today\'s Cash Box";
             // 
-            // barCodeToolStripMenuItem
-            // 
-            this.barCodeToolStripMenuItem.Name = "barCodeToolStripMenuItem";
-            this.barCodeToolStripMenuItem.Size = new System.Drawing.Size(229, 24);
-            this.barCodeToolStripMenuItem.Text = "Bar Code Manually Print";
-            this.barCodeToolStripMenuItem.Click += new System.EventHandler(this.barCodeToolStripMenuItem_Click);
-            // 
             // frmHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -917,5 +926,6 @@
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem branchesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem barCodeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem quickBarcodePrintToolStripMenuItem;
     }
 }

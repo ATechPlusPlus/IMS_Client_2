@@ -181,6 +181,12 @@
     <Compile Include="Barcode\frmManuallyBarCode.Designer.cs">
       <DependentUpon>frmManuallyBarCode.cs</DependentUpon>
     </Compile>
+    <Compile Include="Barcode\frmQuickBarCodePrint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Barcode\frmQuickBarCodePrint.Designer.cs">
+      <DependentUpon>frmQuickBarCodePrint.cs</DependentUpon>
+    </Compile>
     <Compile Include="Barcode\LineControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -594,6 +600,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Barcode\frmManuallyBarCode.resx">
       <DependentUpon>frmManuallyBarCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Barcode\frmQuickBarCodePrint.resx">
+      <DependentUpon>frmQuickBarCodePrint.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Barcode\uRectangle.resx">
       <DependentUpon>uRectangle.cs</DependentUpon>

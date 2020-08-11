@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CoreApp;
+using IMS_Client_2.Barcode;
 using IMS_Client_2.Settings;
 
 namespace IMS_Client_2
@@ -167,9 +168,9 @@ namespace IMS_Client_2
                 btnOpenCash.BackgroundImage = B_Leave;
 
                 clsUtility.DBName = "IMS_Client_2";
-                //clsUtility.LoginID = 1;
+                clsUtility.LoginID = 1;
                 //clsUtility.IsAdmin = false;
-                //clsUtility.IsAdmin = true;
+               clsUtility.IsAdmin = true;
                 clsUtility.strProjectTitle = "IMS";
                 if (clsUtility.LoginID > 0)
                 {
@@ -1040,6 +1041,12 @@ namespace IMS_Client_2
         private void f1CashToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SalesInvoice_ToolStrip_Click(null, null);
+        }
+
+        private void quickBarcodePrintToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmQuickBarCodePrint frmQuickBarCodePrint = new frmQuickBarCodePrint();
+            frmQuickBarCodePrint.Show();
         }
     }
 }
