@@ -106,7 +106,7 @@
             this.lblSupplier.AutoSize = true;
             this.lblSupplier.BackColor = System.Drawing.Color.Transparent;
             this.lblSupplier.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSupplier.Location = new System.Drawing.Point(387, 29);
+            this.lblSupplier.Location = new System.Drawing.Point(407, 29);
             this.lblSupplier.Name = "lblSupplier";
             this.lblSupplier.Size = new System.Drawing.Size(62, 17);
             this.lblSupplier.TabIndex = 249;
@@ -131,7 +131,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(387, 65);
+            this.label4.Location = new System.Drawing.Point(407, 65);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(76, 17);
             this.label4.TabIndex = 262;
@@ -292,9 +292,9 @@
             this.PicProductImg.BackColor = System.Drawing.Color.Transparent;
             this.PicProductImg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PicProductImg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PicProductImg.Location = new System.Drawing.Point(852, 46);
+            this.PicProductImg.Location = new System.Drawing.Point(842, 46);
             this.PicProductImg.Name = "PicProductImg";
-            this.PicProductImg.Size = new System.Drawing.Size(146, 131);
+            this.PicProductImg.Size = new System.Drawing.Size(156, 131);
             this.PicProductImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PicProductImg.TabIndex = 276;
             this.PicProductImg.TabStop = false;

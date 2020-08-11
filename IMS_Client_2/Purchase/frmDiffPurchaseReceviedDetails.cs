@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.IO;
 using CoreApp;
 
 namespace IMS_Client_2.Purchase
@@ -50,22 +49,23 @@ namespace IMS_Client_2.Purchase
             {
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    if (i == 0)
-                    {
-                        TotalBillQTY = dt.Rows[0]["TotalQTY"] != DBNull.Value ? Convert.ToInt32(dt.Rows[i]["TotalQTY"]) : 0;
-                        continue;
-                    }
                     TotalReceivedQTY += dt.Rows[i]["Receive QTY"] != DBNull.Value ? Convert.ToInt32(dt.Rows[i]["Receive QTY"]) : 0;
                     TotalDiffQTY += dt.Rows[i]["Diff QTY"] != DBNull.Value ? Convert.ToInt32(dt.Rows[i]["Diff QTY"]) : 0;
                     TotalDiffValue += dt.Rows[i]["Diff QTY"] != DBNull.Value ? Convert.ToDouble(dt.Rows[i]["Diff Value"]) : 0;
+
+                    if (i == 0)
+                    {
+                        TotalBillQTY = dt.Rows[i]["TotalQTY"] != DBNull.Value ? Convert.ToInt32(dt.Rows[i]["TotalQTY"]) : 0;
+                        continue;
+                    }
                 }
                 cmbSupplier.SelectedValue = Convert.ToInt32(dt.Rows[0]["SupplierID"]);
                 txtTotalBillQTY.Text = TotalBillQTY.ToString();
                 txtTotalQTYReceived.Text = TotalReceivedQTY.ToString();
-                
+
                 //txtTotalDiffQTY.Text = TotalDiffQTY.ToString();
-                txtTotalDiffQTY.Text = (TotalReceivedQTY- TotalBillQTY).ToString();
-                
+                txtTotalDiffQTY.Text = (TotalReceivedQTY - TotalBillQTY).ToString();
+
                 txtTotalDiffValue.Text = TotalDiffValue.ToString();
 
                 txtSupplierBillNo.Text = dt.Rows[0]["SupplierBillNo"].ToString();
@@ -111,48 +111,60 @@ namespace IMS_Client_2.Purchase
         {
             ObjUtil.SetRowNumber(dataGridView1);
             ObjUtil.SetDataGridProperty(dataGridView1, DataGridViewAutoSizeColumnsMode.ColumnHeader);
+            dataGridView1.Columns["SubProductID"].Visible = false;
             dataGridView1.Columns["ProductID"].Visible = false;
             dataGridView1.Columns["Photo"].Visible = false;
             dataGridView1.Columns["SupplierID"].Visible = false;
             dataGridView1.Columns["CountryID"].Visible = false;
         }
 
-        private void GetProductImage(string ImageID)
+        private Image GetProductPhoto(int SubProductID)
         {
-            DataTable dtImagePath = ObjDAL.ExecuteSelectStatement("SELECT ImagePath, Extension FROM " + clsUtility.DBName + ".dbo.DefaultStoreSetting WITH(NOLOCK) WHERE MachineName='" + Environment.MachineName + "'");
-            if (ObjUtil.ValidateTable(dtImagePath))
+            Image imgProduct = null;
+            ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, SubProductID, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_ProductPhoto");
+            if (ds != null && ds.Tables.Count > 0)
             {
-                if (dtImagePath.Rows[0]["ImagePath"] != DBNull.Value)
+                DataTable dt = ds.Tables[0];
+                if (ObjUtil.ValidateTable(dt))
                 {
-                    string ImgPath = dtImagePath.Rows[0]["ImagePath"].ToString();
-                    string extension = dtImagePath.Rows[0]["Extension"].ToString();
-
-                    string imgFile = ImgPath + "//" + ImageID + extension;
-                    if (File.Exists(imgFile))
+                    if (Convert.ToInt32(dt.Rows[0]["Flag"]) == 1)
                     {
-                        PicProductImg.Image = Image.FromFile(imgFile);
+                        string img = dt.Rows[0]["ImgName"].ToString();
+                        if (System.IO.File.Exists(img))
+                        {
+                            imgProduct = Image.FromFile(img);
+                        }
+                        else
+                        {
+                            imgProduct = IMS_Client_2.Properties.Resources.NoImage;
+                        }
                     }
                     else
                     {
-                        PicProductImg.Image = null;
+                        imgProduct = IMS_Client_2.Properties.Resources.NoImage;
+                        //clsUtility.ShowInfoMessage("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
                     }
                 }
-                else
-                {
-                    clsUtility.ShowInfoMessage("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
-                }
             }
+            return imgProduct;
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dataGridView1.SelectedRows[0].Cells["Photo"].Value != DBNull.Value)
+            try
             {
-                GetProductImage(dataGridView1.SelectedRows[0].Cells["Photo"].Value.ToString());
+                if (e.RowIndex == -1 || e.ColumnIndex == -1)
+                {
+                    return;
+                }
+                int pSubProductID = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["SubProductID"].Value);
+                PicProductImg.Image = GetProductPhoto(pSubProductID);
             }
-            else
+            catch (Exception ex)
             {
-                PicProductImg.Image = null;
+                clsUtility.ShowInfoMessage(ex.ToString(), clsUtility.strProjectTitle);
             }
         }
     }

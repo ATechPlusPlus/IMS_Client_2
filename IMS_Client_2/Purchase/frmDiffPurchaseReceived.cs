@@ -149,7 +149,7 @@ namespace IMS_Client_2.Purchase
         private void frmDiffPurchaseReceived_Load(object sender, EventArgs e)
         {
             btnViewDetails.BackgroundImage = B_Leave;
-            btnCancel.BackgroundImage = B_Leave;
+            btnClear.BackgroundImage = B_Leave;
 
             txtSupplierBillNo.Focus();
         }
@@ -180,7 +180,7 @@ namespace IMS_Client_2.Purchase
             {
                 Purchase.frmDiffPurchaseReceviedDetails Obj = new frmDiffPurchaseReceviedDetails();
                 Obj.PurchaseInvoiceID = txtPurchaseInvoiceID.Text.Length > 0 ? Convert.ToInt32(this.txtPurchaseInvoiceID.Text) : 0;
-                Obj.Show();
+                Obj.ShowDialog();
             }
             else
             {

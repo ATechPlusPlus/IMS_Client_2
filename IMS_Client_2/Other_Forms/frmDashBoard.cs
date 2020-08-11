@@ -64,7 +64,7 @@ namespace IMS_Client_2.Other_Forms
 
             flowLayoutPanel1.Controls.Clear();
             DataTable dtDashBoard = ObjDAL.ExecuteSelectStatement("SELECT * FROM " + clsUtility.DBName + ".[dbo].[tblDashBoard] WITH(NOLOCK)");
-            if (dtDashBoard.Rows.Count > 0)
+            if (ObjUtil.ValidateTable(dtDashBoard))
             {
                 string[] strShops = dtDashBoard.Rows[0]["Shopes"].ToString().Split(',');
                 int index = Convert.ToInt32(dtDashBoard.Rows[0]["Specification"]);
