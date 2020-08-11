@@ -28,7 +28,7 @@ namespace IMS_Client_2.Report
 
         private bool IsArabicEnabled()
         {
-            int count = ObjCon.ExecuteScalarInt("SELECT COUNT(1) FROM " + clsUtility.DBName + ".[dbo].[DefaultStoreSetting] WITH(NOLOCK) where UserArabicNumbers=1 and MachineName='" + Environment.MachineName + "'");
+            int count = ObjCon.ExecuteScalarInt("SELECT COUNT(1) FROM " + clsUtility.DBName + ".[dbo].[DefaultStoreSetting] WITH(NOLOCK) where ISNULL(UserArabicNumbers,0)=1 and MachineName='" + Environment.MachineName + "'");
             if (count > 0)
             {
                 return true;
@@ -51,8 +51,7 @@ namespace IMS_Client_2.Report
              "" + clsUtility.DBName + ".dbo.fun_ToArabicNum((s1.Qty*s1.Rate)) AS Total,ps.barcodeNo as BarNumber FROM " + clsUtility.DBName + ".[dbo].[SalesDetails] s1 JOIN " + clsUtility.DBName + ".dbo.ProductMaster p1 " +
             " ON s1.ProductID = p1.ProductID " +
             "  JOIN " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster ps" +
-            "  ON s1.ProductID = ps.ProductID AND ps.colorID=s1.ColorID AND ps.SizeID=s1.SizeID " +
-            " WHERE s1.InvoiceID = " + InvoiceID;
+            "  ON s1.SubProductID=ps.SubProductID AND s1.ProductID = ps.ProductID AND ps.colorID=s1.ColorID AND ps.SizeID=s1.SizeID AND ps.StoreID=" + frmHome.Home_StoreID + " WHERE s1.InvoiceID = " + InvoiceID;
 
                 PaymentQuery = " select PaymentType," + clsUtility.DBName + ".dbo.fun_ToArabicNum(Amount) as Amount from " + clsUtility.DBName + ".dbo.[tblSalesPayment]  where SalesInvoiceID=" + InvoiceID;
             }
@@ -63,8 +62,7 @@ namespace IMS_Client_2.Report
                 "(s1.Qty*s1.Rate) AS Total,ps.barcodeNo as BarNumber FROM " + clsUtility.DBName + ".[dbo].[SalesDetails] s1 JOIN " + clsUtility.DBName + ".dbo.ProductMaster p1 " +
                " ON s1.ProductID = p1.ProductID " +
                "  JOIN " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster ps" +
-               "  ON s1.ProductID = ps.ProductID AND ps.colorID=s1.ColorID AND ps.SizeID=s1.SizeID " +
-               " WHERE s1.InvoiceID = " + InvoiceID;
+               "  ON s1.SubProductID=ps.SubProductID AND s1.ProductID = ps.ProductID AND s1.ColorID=ps.ColorID AND s1.SizeID=ps.SizeID AND ps.StoreID=" + frmHome.Home_StoreID + " WHERE s1.InvoiceID = " + InvoiceID;
 
                 PaymentQuery = "select PaymentTYpe,Amount from " + clsUtility.DBName + ".dbo.[tblSalesPayment] WITH(NOLOCK)  where SalesInvoiceID=" + InvoiceID;
             }
@@ -89,23 +87,17 @@ namespace IMS_Client_2.Report
 
             DataTable dtSalesHeader_Footer = ObjCon.ExecuteSelectStatement(strQueryHeader_Footer);
 
-
-            Bitmap bmpBarCode= Barcode.clsBarCodeUtility.GenerateBarCode(dtSalesHeader_Footer.Rows[0]["InvoiceNumber"].ToString());
+            Bitmap bmpBarCode = Barcode.clsBarCodeUtility.GenerateBarCode(dtSalesHeader_Footer.Rows[0]["InvoiceNumber"].ToString());
             string imgPath = "";
-            if (bmpBarCode!=null)
+            if (bmpBarCode != null)
             {
                 imgPath = Application.StartupPath + "//BarCodeImg//" + dtSalesHeader_Footer.Rows[0]["InvoiceNumber"].ToString() + ".jpeg";
 
-               
-                if(!File.Exists(imgPath))
+                if (!File.Exists(imgPath))
                 {
                     bmpBarCode.Save(imgPath);
-
                 }
-
-              
             }
-
             reportViewer1.LocalReport.DataSources.Clear();
 
             ReportDataSource rds = new ReportDataSource("ds_SalesDetails", dtSalesDetails);
@@ -145,9 +137,9 @@ namespace IMS_Client_2.Report
             try
             {
                 DataTable dtNetAmount = ObjCon.ExecuteSelectStatement("select SUM(Amount) from " + clsUtility.DBName + ".dbo.[tblSalesPayment] WITH(NOLOCK) where SalesInvoiceID=" + InvoiceID);
-                if (dtNetAmount.Rows.Count > 0)
+                if (dtNetAmount!=null && dtNetAmount.Rows.Count > 0)
                 {
-                    if (Convert.ToDecimal(dtNetAmount.Rows[0][0].ToString())==0)
+                    if (Convert.ToDecimal(dtNetAmount.Rows[0][0].ToString()) == 0)
                     {
                         NetAmt = "Zero";
                     }
@@ -155,7 +147,6 @@ namespace IMS_Client_2.Report
                     {
                         NetAmt = new Sales.NumberToEnglish().changeCurrencyToWords(dtNetAmount.Rows[0][0].ToString());
                     }
-                   
                 }
             }
             catch (Exception)
@@ -168,8 +159,6 @@ namespace IMS_Client_2.Report
             ReportParameter param3 = new ReportParameter("Note", footerNoteDefault, true);
             ReportParameter param4 = new ReportParameter("NetAmount", NetAmt, true);
             ReportParameter param5 = new ReportParameter("BarCodeImage", imgPath, true);
-
-         
 
             // adding the parameter in the report dynamically
             reportViewer1.LocalReport.SetParameters(param1);
@@ -193,8 +182,7 @@ namespace IMS_Client_2.Report
                 reportPrinting.Export(this.reportViewer1.LocalReport);
 
                 PrinterSettings printerSetting = new PrinterSettings();
-             //  printerSetting.DefaultPageSettings.PaperSize = new PaperSize("IMS_Paper", 80, 297);
-
+                //  printerSetting.DefaultPageSettings.PaperSize = new PaperSize("IMS_Paper", 80, 297);
 
                 if (clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.InvoicePrinter).Trim().Length == 0)
                 {
@@ -209,12 +197,8 @@ namespace IMS_Client_2.Report
                     printerSetting.PrinterName = clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.InvoicePrinter);
                     reportPrinting.Print(printerSetting);
                 }
-
                 this.Close();
             }
-
-            
-
         }
     }
 }

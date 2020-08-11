@@ -330,7 +330,6 @@ namespace IMS_Client_2.Masters
             {
                 txtSearchByCustomer.Enabled = false;
                 txtSearchByCustomer.Clear();
-                rdShowAllOfCustomer.Checked = true;
             }
 
         }
@@ -393,7 +392,6 @@ namespace IMS_Client_2.Masters
             {
                 txtSearchByMobileNo.Enabled = false;
                 txtSearchByMobileNo.Clear();
-                rdShowAllOfCustomer.Checked = true;
             }
         }
 

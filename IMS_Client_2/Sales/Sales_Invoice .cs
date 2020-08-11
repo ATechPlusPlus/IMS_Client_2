@@ -289,7 +289,7 @@ namespace IMS_Client_2.Sales
                             ObjUtil.SetDataPopupSize(200, 0);
                         }
                     }
-                    if (ObjUtil.GetDataPopup()!=null)
+                    if (ObjUtil.GetDataPopup() != null)
                     {
                         ObjUtil.GetDataPopup().CellClick += Sales_Invoice_CellClick1;
                         ObjUtil.GetDataPopup().KeyDown += Sales_Invoice_KeyDown1;
@@ -328,36 +328,68 @@ namespace IMS_Client_2.Sales
         private Image GetProductPhoto(int SubProductID)
         {
             Image imgProduct = null;
-            DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT Photo FROM " + clsUtility.DBName + ".dbo.tblProductWiseModelNo WHERE SubProductID=" + SubProductID);
-            if (ObjUtil.ValidateTable(dt))
-            {
-                if (dt.Rows[0]["Photo"] != DBNull.Value)
-                {
-                    DataTable dtImagePath = ObjDAL.ExecuteSelectStatement("  SELECT ImagePath, Extension FROM " + clsUtility.DBName + ".dbo.DefaultStoreSetting WITH(NOLOCK) ");
-                    if (ObjUtil.ValidateTable(dtImagePath))
-                    {
-                        if (dtImagePath.Rows[0]["ImagePath"] != DBNull.Value)
-                        {
-                            string ImgPath = dtImagePath.Rows[0]["ImagePath"].ToString();
-                            string extension = dtImagePath.Rows[0]["Extension"].ToString();
 
-                            string imgFile = ImgPath + "//" + dt.Rows[0]["Photo"].ToString() + extension;
-                            if (File.Exists(imgFile))
-                            {
-                                imgProduct = Image.FromFile(imgFile);
-                            }
-                            else
-                            {
-                                imgProduct = null;
-                            }
+            ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, SubProductID, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_ProductPhoto");
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                DataTable dt = ds.Tables[0];
+                if (ObjUtil.ValidateTable(dt))
+                {
+                    if (Convert.ToInt32(dt.Rows[0]["Flag"]) == 1)
+                    {
+                        string img = dt.Rows[0]["ImgName"].ToString();
+                        if (System.IO.File.Exists(img))
+                        {
+                            imgProduct = Image.FromFile(img);
                         }
                         else
                         {
-                            clsUtility.ShowInfoMessage("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
+                            imgProduct = IMS_Client_2.Properties.Resources.NoImage;
                         }
+                    }
+                    else
+                    {
+                        imgProduct = IMS_Client_2.Properties.Resources.NoImage;
+                        //clsUtility.ShowInfoMessage("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
                     }
                 }
             }
+
+            #region OLD Code
+            //DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT Photo FROM " + clsUtility.DBName + ".dbo.tblProductWiseModelNo WHERE SubProductID=" + SubProductID);
+            //if (ObjUtil.ValidateTable(dt))
+            //{
+            //    if (dt.Rows[0]["Photo"] != DBNull.Value)
+            //    {
+            //        DataTable dtImagePath = ObjDAL.ExecuteSelectStatement("  SELECT ImagePath, Extension FROM " + clsUtility.DBName + ".dbo.DefaultStoreSetting WITH(NOLOCK) ");
+            //        if (ObjUtil.ValidateTable(dtImagePath))
+            //        {
+            //            if (dtImagePath.Rows[0]["ImagePath"] != DBNull.Value)
+            //            {
+            //                string ImgPath = dtImagePath.Rows[0]["ImagePath"].ToString();
+            //                string extension = dtImagePath.Rows[0]["Extension"].ToString();
+
+            //                string imgFile = ImgPath + "//" + dt.Rows[0]["Photo"].ToString() + extension;
+            //                if (File.Exists(imgFile))
+            //                {
+            //                    imgProduct = Image.FromFile(imgFile);
+            //                }
+            //                else
+            //                {
+            //                    imgProduct = null;
+            //                }
+            //            }
+            //            else
+            //            {
+            //                clsUtility.ShowInfoMessage("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
+            //            }
+            //        }
+            //    }
+            //}
+            #endregion
+
             return imgProduct;
         }
 
@@ -521,9 +553,9 @@ namespace IMS_Client_2.Sales
                 string sizeid = dgvProductDetails.Rows[e.RowIndex].Cells["SizeID"].Value.ToString();
                 string colorid = dgvProductDetails.Rows[e.RowIndex].Cells["ColorID"].Value.ToString();
                 decimal QTY = Convert.ToDecimal(dgvProductDetails.Rows[e.RowIndex].Cells["QTY"].Value);
-                if (QTY < 0)
+                if (QTY <= 0)
                 {
-                    clsUtility.ShowInfoMessage("The QTY can not be negative. Default 1 QTY will be set.", clsUtility.strProjectTitle);
+                    clsUtility.ShowInfoMessage("The QTY can not be 0 OR negative. Default 1 QTY will be set.", clsUtility.strProjectTitle);
                     dgvProductDetails.Rows[e.RowIndex].Cells["QTY"].Value = "1";
                     QTY = 1;
                 }
@@ -653,7 +685,7 @@ namespace IMS_Client_2.Sales
             dtItemDetails.Clear();
 
             txtProductID.Clear();
-            txtEmpID.Clear();
+            //txtEmpID.Clear();
 
             txtInvoiceNumber.Clear();
             txtBarCode.Clear();
@@ -668,7 +700,7 @@ namespace IMS_Client_2.Sales
             picProduct.Image = null;
             BindStoreDetails();
 
-            txtSalesMan.Clear();
+            //txtSalesMan.Clear();
             txtColorID.Clear();
             txtSizeID.Clear();
 
@@ -1026,7 +1058,6 @@ namespace IMS_Client_2.Sales
 
         private void BindSalesManDetails()
         {
-           
             string str = " select e1.Name,e1.EmpID,e1.EmployeeCode from EmployeeDetails e1 join  " +
                          " UserManagement u1 on e1.EmpID = u1.EmployeeID" +
                          " where u1.UserID = " + clsUtility.LoginID;
@@ -1036,9 +1067,7 @@ namespace IMS_Client_2.Sales
             {
                 isSalesManbind = true;
                 txtEmpID.Text = dtEmployeeDetails.Rows[0]["EmpID"].ToString();
-               
-                txtSalesMan.Text= dtEmployeeDetails.Rows[0]["EmployeeCode"].ToString();
-
+                txtSalesMan.Text = dtEmployeeDetails.Rows[0]["EmployeeCode"].ToString();
                 txtSalesMan.Enabled = false;
             }
         }
@@ -1098,7 +1127,7 @@ namespace IMS_Client_2.Sales
                 {
                     string pID = dtSalesDetails.Rows[0]["ProductID"].ToString();
                     string name = dtSalesDetails.Rows[0]["ProductName"].ToString();
-                    
+
                     string rate = "-" + dtSalesDetails.Rows[0]["Rate"].ToString();
                     string barCode = dtSalesDetails.Rows[0]["Barcode"].ToString();
                     string qty = "1";
@@ -1174,12 +1203,12 @@ namespace IMS_Client_2.Sales
                                 ObjUtil.SetDataPopupSize(300, 0);
                             }
                         }
-                        if (ObjUtil.GetDataPopup()!=null)
+                        if (ObjUtil.GetDataPopup() != null)
                         {
                             ObjUtil.GetDataPopup().CellClick += Sales_Invoice_CellClick;
                             ObjUtil.GetDataPopup().KeyDown += Sales_Invoice_KeyDown;
                         }
-                       
+
                     }
                     else
                     {
@@ -1239,7 +1268,7 @@ namespace IMS_Client_2.Sales
             txtCashTendered.Text = Other_Forms.frmPayment.GetTotalCash().ToString();
             txtGrandTotal.Focus();
 
-            CalculateChnage();
+            CalculateChange();
         }
         private void picKnet_Click(object sender, EventArgs e)
         {
@@ -1268,9 +1297,9 @@ namespace IMS_Client_2.Sales
 
             txtGrandTotal.Focus();
 
-            CalculateChnage();
+            CalculateChange();
         }
-        private void CalculateChnage()
+        private void CalculateChange()
         {
             decimal GrandTotal = Convert.ToDecimal(txtGrandTotal.Text);
             decimal TotalAmountGiven = Convert.ToDecimal(txtCashTendered.Text) + Convert.ToDecimal(txtCredit.Text);
@@ -1305,7 +1334,7 @@ namespace IMS_Client_2.Sales
 
             txtGrandTotal.Focus();
 
-            CalculateChnage();
+            CalculateChange();
         }
         private void PicMaster_Click(object sender, EventArgs e)
         {
@@ -1334,7 +1363,7 @@ namespace IMS_Client_2.Sales
 
             txtGrandTotal.Focus();
 
-            CalculateChnage();
+            CalculateChange();
         }
 
         private void lblActiveStatus_Click(object sender, EventArgs e)
@@ -1590,6 +1619,49 @@ namespace IMS_Client_2.Sales
             if (e.KeyData == Keys.Enter)
             {
                 btnAdd_Click_1(btnPrint, null);
+            }
+        }
+
+        private void dgvProductDetails_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            dgvProductDetails.Columns[e.Column.Index].ReadOnly = true;
+            if (dgvProductDetails.Columns.Contains("QTY"))
+            {
+                dgvProductDetails.Columns["QTY"].ReadOnly = false;
+            }
+        }
+
+        private void dgvProductDetails_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            int column = dgvProductDetails.CurrentCell.ColumnIndex;
+            string headerText = dgvProductDetails.Columns[column].HeaderText;
+
+            if (headerText == "QTY")
+            {
+                e.Control.KeyPress += Int_Control_KeyPress;
+            }
+        }
+
+        private void Int_Control_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //string k = e.KeyChar.ToString();
+            //TextBox txt = (TextBox)sender;
+            e.Handled = ObjUtil.IsNumeric(e);
+        }
+
+        private void dgvProductDetails_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            e.Cancel = false;
+            int column = dgvProductDetails.CurrentCell.ColumnIndex;
+            string headerText = dgvProductDetails.Columns[column].HeaderText;
+            if (headerText == "QTY")
+            {
+                if (e.FormattedValue == DBNull.Value || e.FormattedValue.ToString() == "")
+                {
+                    clsUtility.ShowInfoMessage("Enter QTY..");
+                    e.Cancel = true;
+                }
+                return;
             }
         }
     }

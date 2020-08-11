@@ -138,11 +138,13 @@ namespace IMS_Client_2.StockManagement
         private void dgvProductDetails_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             ObjUtil.SetRowNumber(dgvProductDetails);
-            ObjUtil.SetDataGridProperty(dgvProductDetails);
+            ObjUtil.SetDataGridProperty(dgvProductDetails,DataGridViewAutoSizeColumnsMode.Fill);
             dgvProductDetails.Columns["SubProductID"].Visible = false;
             dgvProductDetails.Columns["ProductID"].Visible = false;
             dgvProductDetails.Columns["StoreID"].Visible = false;
             dgvProductDetails.Columns["BrandID"].Visible = false;
+
+            lblTotalRecord.Text = "Total Records : " + dgvProductDetails.Rows.Count;
         }
 
         private void rdSearchByProductName_CheckedChanged(object sender, EventArgs e)
@@ -407,6 +409,83 @@ namespace IMS_Client_2.StockManagement
         private void txtSearchByProductName_Leave(object sender, EventArgs e)
         {
             ObjUtil.SetTextHighlightColor(sender, Color.White);
+        }
+
+        private void dgvProductDetails_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            dgvProductDetails.Columns[e.Column.Index].ReadOnly = true;
+            if (dgvProductDetails.Columns.Contains("EndUser"))
+            {
+                dgvProductDetails.Columns["EndUser"].ReadOnly = false;
+            }
+        }
+
+        private void dgvProductDetails_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            e.Cancel = false;
+            int column = dgvProductDetails.CurrentCell.ColumnIndex;
+            string headerText = dgvProductDetails.Columns[column].HeaderText;
+
+            if (headerText == "EndUser")
+            {
+                if (e.FormattedValue == DBNull.Value || e.FormattedValue.ToString() == "")
+                {
+                    clsUtility.ShowInfoMessage("Enter EndUser Price..");
+                    e.Cancel = true;
+                }
+                else if (Convert.ToDecimal(e.FormattedValue) == 0)
+                {
+                    clsUtility.ShowInfoMessage("Enter Valid EndUser Price..");
+                    e.Cancel = true;
+                }
+                return;
+            }
+        }
+
+        private void dgvProductDetails_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                if (dgvProductDetails.Columns[e.ColumnIndex].Name == "EndUser")
+                {
+                    try
+                    {
+                        int SubProductID = Convert.ToInt32(dgvProductDetails.Rows[e.RowIndex].Cells["SubProductID"].Value);
+                        decimal Rate = Convert.ToDecimal(dgvProductDetails.Rows[e.RowIndex].Cells["EndUser"].Value);
+                        int a = ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".[dbo].[tblProductWiseModelNo] SET EndUser=" + Rate + " WHERE SubProductID=" + SubProductID);
+                        if (a > 0)
+                        {
+                            clsUtility.ShowInfoMessage("EndUser Price is Updated..");
+                        }
+                        else
+                        {
+                            clsUtility.ShowInfoMessage("Unable to Update EndUser Price..");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        clsUtility.ShowErrorMessage(ex.ToString());
+                    }
+                }
+            }
+        }
+
+        private void dgvProductDetails_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            int column = dgvProductDetails.CurrentCell.ColumnIndex;
+            string headerText = dgvProductDetails.Columns[column].HeaderText;
+
+            if (headerText == "EndUser")
+            {
+                e.Control.KeyPress += Decimal_Control_KeyPress;
+            }
+        }
+
+        private void Decimal_Control_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //string k = e.KeyChar.ToString();
+            TextBox txt = (TextBox)sender;
+            e.Handled = ObjUtil.IsDecimal(txt, e);
         }
     }
 }

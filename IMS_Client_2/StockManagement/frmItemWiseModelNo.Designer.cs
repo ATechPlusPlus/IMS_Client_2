@@ -42,6 +42,7 @@
             this.rdSearchByProductName = new System.Windows.Forms.RadioButton();
             this.rdShowAll = new System.Windows.Forms.RadioButton();
             this.PicItem = new System.Windows.Forms.PictureBox();
+            this.lblTotalRecord = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -92,11 +93,14 @@
             this.dgvProductDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProductDetails.Location = new System.Drawing.Point(12, 222);
             this.dgvProductDetails.Name = "dgvProductDetails";
-            this.dgvProductDetails.ReadOnly = true;
             this.dgvProductDetails.Size = new System.Drawing.Size(863, 343);
             this.dgvProductDetails.TabIndex = 208;
             this.dgvProductDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellClick);
+            this.dgvProductDetails.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvProductDetails_CellValidating);
+            this.dgvProductDetails.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellValueChanged);
+            this.dgvProductDetails.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvProductDetails_ColumnAdded);
             this.dgvProductDetails.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvProductDetails_DataBindingComplete);
+            this.dgvProductDetails.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvProductDetails_EditingControlShowing);
             // 
             // groupBox1
             // 
@@ -216,6 +220,17 @@
             this.PicItem.TabIndex = 234;
             this.PicItem.TabStop = false;
             // 
+            // lblTotalRecord
+            // 
+            this.lblTotalRecord.AutoSize = true;
+            this.lblTotalRecord.BackColor = System.Drawing.Color.Transparent;
+            this.lblTotalRecord.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalRecord.Location = new System.Drawing.Point(29, 190);
+            this.lblTotalRecord.Name = "lblTotalRecord";
+            this.lblTotalRecord.Size = new System.Drawing.Size(91, 17);
+            this.lblTotalRecord.TabIndex = 257;
+            this.lblTotalRecord.Text = "Total Record :";
+            // 
             // frmItemWiseModelNo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -223,6 +238,7 @@
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(887, 574);
+            this.Controls.Add(this.lblTotalRecord);
             this.Controls.Add(this.PicItem);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvProductDetails);
@@ -241,6 +257,7 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PicItem)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -259,5 +276,6 @@
         private System.Windows.Forms.RadioButton rdSearchByShop;
         private System.Windows.Forms.TextBox txtProductID;
         private System.Windows.Forms.PictureBox PicItem;
+        private System.Windows.Forms.Label lblTotalRecord;
     }
 }
