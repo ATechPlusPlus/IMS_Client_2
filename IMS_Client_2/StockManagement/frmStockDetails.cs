@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using CoreApp;
+using IMS_Client_2.Barcode;
+using IMS_Client_2.Sales;
 
 namespace IMS_Client_2.StockManagement
 {
@@ -586,6 +588,22 @@ namespace IMS_Client_2.StockManagement
         private void txtSearchByProductName_Leave(object sender, EventArgs e)
         {
             ObjUtil.SetTextHighlightColor(sender, Color.White);
+        }
+
+        private void printBarcodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvStockDetails.SelectedRows.Count>0)
+            {
+               string BarcodeNo = dgvStockDetails.SelectedRows[0].Cells["BarcodeNo"].Value.ToString();
+                frmQuickBarCodePrint frmQuickBarCodePrint = new frmQuickBarCodePrint();
+                frmQuickBarCodePrint.txtBarcodenumber.Text = BarcodeNo;
+               
+                frmQuickBarCodePrint.ShowDialog();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("Please select your record.");
+            }
         }
     }
 }

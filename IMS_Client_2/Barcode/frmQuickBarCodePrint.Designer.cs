@@ -346,9 +346,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtBarcodenumber;
         private System.Windows.Forms.CheckBox chkPrintRate;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button btnPrintManualBarcode;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvProductDetails;
@@ -365,5 +363,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn BarcodeNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn SizeID;
         private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseInvoiceID;
+        public System.Windows.Forms.TextBox txtBarcodenumber;
+        public System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStockDetails));
             this.panel2 = new System.Windows.Forms.Panel();
             this.txtProductID = new System.Windows.Forms.TextBox();
@@ -46,10 +47,13 @@
             this.txtSearchByProductName = new System.Windows.Forms.TextBox();
             this.rdSearchByItem = new System.Windows.Forms.RadioButton();
             this.rdShowAll = new System.Windows.Forms.RadioButton();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.printBarcodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicItem)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -92,6 +96,7 @@
             this.dgvStockDetails.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvStockDetails.BackgroundColor = System.Drawing.Color.White;
             this.dgvStockDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvStockDetails.ContextMenuStrip = this.contextMenuStrip1;
             this.dgvStockDetails.Location = new System.Drawing.Point(8, 238);
             this.dgvStockDetails.Name = "dgvStockDetails";
             this.dgvStockDetails.ReadOnly = true;
@@ -269,6 +274,21 @@
             this.rdShowAll.UseVisualStyleBackColor = true;
             this.rdShowAll.CheckedChanged += new System.EventHandler(this.rdShowAll_CheckedChanged);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.printBarcodeToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(146, 26);
+            // 
+            // printBarcodeToolStripMenuItem
+            // 
+            this.printBarcodeToolStripMenuItem.Image = global::IMS_Client_2.Properties.Resources.barCode;
+            this.printBarcodeToolStripMenuItem.Name = "printBarcodeToolStripMenuItem";
+            this.printBarcodeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.printBarcodeToolStripMenuItem.Text = "Print Barcode";
+            this.printBarcodeToolStripMenuItem.Click += new System.EventHandler(this.printBarcodeToolStripMenuItem_Click);
+            // 
             // frmStockDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -293,6 +313,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PicItem)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -316,5 +337,7 @@
         private System.Windows.Forms.RadioButton rdSearchByStyleNo;
         private System.Windows.Forms.ComboBox cmbCategory;
         private System.Windows.Forms.RadioButton rdSearchByCategory;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem printBarcodeToolStripMenuItem;
     }
 }
