@@ -36,6 +36,11 @@ namespace IMS_Client_2.Sales
             
             cmbShop.Enabled = true;
             cmbShop.SelectedValue = frmHome.Home_StoreID;
+
+            dgvProductDetails.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+            //Most time consumption enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+            dgvProductDetails.RowHeadersVisible = false; // set it to false if not needed
+
             cmbShop_SelectionChangeCommitted(sender, e);
 
             dtpToDate.MaxDate = DateTime.Now;
@@ -79,6 +84,11 @@ namespace IMS_Client_2.Sales
             {
                 txtInvoiceNumber.Clear();
                 txtSalesMan.Clear();
+
+                dgvProductDetails.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+                //Most time consumption enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+                dgvProductDetails.RowHeadersVisible = false; // set it to false if not needed
+
                 LoadData(string.Empty);
             }
         }

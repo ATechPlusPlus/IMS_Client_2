@@ -30,18 +30,20 @@ namespace IMS_Client_2.Purchase
                 txtSupplierBillNo.Focus();
                 return;
             }
+            dgvPurchaseItem.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+            //Most time consumption enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+            dgvPurchaseItem.RowHeadersVisible = false; // set it to false if not needed
 
-            ObjDAL.SetStoreProcedureData("BillNo", SqlDbType.NVarChar, txtPurchaseInvoiceID.Text,  clsConnection_DAL.ParamType.Input);
-          DataSet ds=  ObjDAL.ExecuteStoreProcedure_Get("sp_DetailPurchaseInvoiceReport");
-
-            if (ds.Tables.Count>0)
+            ObjDAL.SetStoreProcedureData("BillNo", SqlDbType.NVarChar, txtPurchaseInvoiceID.Text, clsConnection_DAL.ParamType.Input);
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get("sp_DetailPurchaseInvoiceReport");
+            if (ObjUtil.ValidateDataSet(ds))
             {
                 dgvPurchaseInvoice.DataSource = ds.Tables[0];
-                if (ds.Tables.Count>1)
+                if (ds.Tables.Count > 1)
                 {
                     dgvPurchaseInvoiceDetail.DataSource = ds.Tables[1];
                 }
-                if (ds.Tables.Count>2)
+                if (ds.Tables.Count > 2)
                 {
                     dgvPurchaseItem.DataSource = ds.Tables[2];
                 }

@@ -198,10 +198,12 @@
             // 
             // cmbColor
             // 
+            this.cmbColor.DropDownHeight = 506;
             this.cmbColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbColor.Enabled = false;
             this.cmbColor.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbColor.FormattingEnabled = true;
+            this.cmbColor.IntegralHeight = false;
             this.cmbColor.Location = new System.Drawing.Point(443, 73);
             this.cmbColor.Name = "cmbColor";
             this.cmbColor.Size = new System.Drawing.Size(181, 27);
