@@ -562,6 +562,7 @@ namespace IMS_Client_2.Barcode
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_PurchaseInvoice_BulkPrint_Color_Size");
             if (ObjUtil.ValidateDataSet(ds))
             {
+                btnResetPrint.Enabled = true;
                 DataTable dtPurchaseInvDetails = ds.Tables[0];
                 if (ObjUtil.ValidateTable(dtPurchaseInvDetails))
                 {
@@ -601,6 +602,10 @@ namespace IMS_Client_2.Barcode
                         dataGridView1.DataSource = null;
                     }
                 }
+            }
+            else
+            {
+                btnResetPrint.Enabled = false;
             }
             chkAll.Visible = true;
         }
@@ -921,6 +926,7 @@ namespace IMS_Client_2.Barcode
                     if (a > 0)
                     {
                         clsUtility.ShowInfoMessage("BarCode Print Count is reset for Supplier Bill NO. " + txtPurchaseInvoice.Text.Trim());
+                        LoadData();
                     }
                     else
                         clsUtility.ShowInfoMessage("Unable to reset BarCode Print Count for Supplier Bill NO. " + txtPurchaseInvoice.Text.Trim());

@@ -50,16 +50,22 @@ namespace IMS_Client_2.Purchase
             {
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    TotalBillQTY += dt.Rows[i]["Bill QTY"] != DBNull.Value ? Convert.ToInt32(dt.Rows[i]["Bill QTY"]) : 0;
+                    if (i == 0)
+                    {
+                        TotalBillQTY = dt.Rows[0]["TotalQTY"] != DBNull.Value ? Convert.ToInt32(dt.Rows[i]["TotalQTY"]) : 0;
+                        continue;
+                    }
                     TotalReceivedQTY += dt.Rows[i]["Receive QTY"] != DBNull.Value ? Convert.ToInt32(dt.Rows[i]["Receive QTY"]) : 0;
-
                     TotalDiffQTY += dt.Rows[i]["Diff QTY"] != DBNull.Value ? Convert.ToInt32(dt.Rows[i]["Diff QTY"]) : 0;
                     TotalDiffValue += dt.Rows[i]["Diff QTY"] != DBNull.Value ? Convert.ToDouble(dt.Rows[i]["Diff Value"]) : 0;
                 }
                 cmbSupplier.SelectedValue = Convert.ToInt32(dt.Rows[0]["SupplierID"]);
                 txtTotalBillQTY.Text = TotalBillQTY.ToString();
                 txtTotalQTYReceived.Text = TotalReceivedQTY.ToString();
-                txtTotalDiffQTY.Text = TotalDiffQTY.ToString();
+                
+                //txtTotalDiffQTY.Text = TotalDiffQTY.ToString();
+                txtTotalDiffQTY.Text = (TotalReceivedQTY- TotalBillQTY).ToString();
+                
                 txtTotalDiffValue.Text = TotalDiffValue.ToString();
 
                 txtSupplierBillNo.Text = dt.Rows[0]["SupplierBillNo"].ToString();
@@ -83,6 +89,10 @@ namespace IMS_Client_2.Purchase
 
         private void frmDiffPurchaseReceviedDetails_Load(object sender, EventArgs e)
         {
+            dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+            //Most time consumption enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+            dataGridView1.RowHeadersVisible = false; // set it to false if not needed
+
             FillSupplierData();
             LoadData();
         }
