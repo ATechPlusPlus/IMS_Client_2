@@ -72,9 +72,9 @@
             this.panel1.Controls.Add(this.label12);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(837, 55);
+            this.panel1.Size = new System.Drawing.Size(628, 45);
             this.panel1.TabIndex = 0;
             // 
             // label12
@@ -83,10 +83,9 @@
             this.label12.BackColor = System.Drawing.Color.Transparent;
             this.label12.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(17, 11);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Location = new System.Drawing.Point(13, 9);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(192, 26);
+            this.label12.Size = new System.Drawing.Size(154, 22);
             this.label12.TabIndex = 83;
             this.label12.Text = "Customer Master";
             // 
@@ -96,10 +95,9 @@
             this.btnUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnUpdate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.Location = new System.Drawing.Point(419, 73);
-            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4);
+            this.btnUpdate.Location = new System.Drawing.Point(314, 59);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(95, 31);
+            this.btnUpdate.Size = new System.Drawing.Size(71, 25);
             this.btnUpdate.TabIndex = 5;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -113,10 +111,9 @@
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCancel.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(637, 73);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCancel.Location = new System.Drawing.Point(478, 59);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(95, 31);
+            this.btnCancel.Size = new System.Drawing.Size(71, 25);
             this.btnCancel.TabIndex = 7;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -130,10 +127,9 @@
             this.btnDelete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDelete.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(528, 73);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDelete.Location = new System.Drawing.Point(396, 59);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(95, 31);
+            this.btnDelete.Size = new System.Drawing.Size(71, 25);
             this.btnDelete.TabIndex = 6;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -147,10 +143,9 @@
             this.btnEdit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnEdit.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEdit.Location = new System.Drawing.Point(312, 73);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(4);
+            this.btnEdit.Location = new System.Drawing.Point(234, 59);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(95, 31);
+            this.btnEdit.Size = new System.Drawing.Size(71, 25);
             this.btnEdit.TabIndex = 3;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
@@ -164,10 +159,9 @@
             this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSave.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(203, 73);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSave.Location = new System.Drawing.Point(152, 59);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(95, 31);
+            this.btnSave.Size = new System.Drawing.Size(71, 25);
             this.btnSave.TabIndex = 2;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -181,10 +175,9 @@
             this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAdd.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(84, 73);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAdd.Location = new System.Drawing.Point(63, 59);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(101, 31);
+            this.btnAdd.Size = new System.Drawing.Size(76, 25);
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "Add New";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -207,11 +200,11 @@
             this.grpCustomer.Controls.Add(this.lblCustomerAddress);
             this.grpCustomer.Controls.Add(this.lblCustomerName);
             this.grpCustomer.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold);
-            this.grpCustomer.Location = new System.Drawing.Point(23, 126);
-            this.grpCustomer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.grpCustomer.Location = new System.Drawing.Point(17, 102);
+            this.grpCustomer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.grpCustomer.Name = "grpCustomer";
-            this.grpCustomer.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.grpCustomer.Size = new System.Drawing.Size(767, 242);
+            this.grpCustomer.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpCustomer.Size = new System.Drawing.Size(575, 197);
             this.grpCustomer.TabIndex = 0;
             this.grpCustomer.TabStop = false;
             this.grpCustomer.Text = "Customer Details";
@@ -222,10 +215,9 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 11.25F);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label2.Location = new System.Drawing.Point(539, 198);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(404, 161);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(19, 21);
+            this.label2.Size = new System.Drawing.Size(15, 17);
             this.label2.TabIndex = 284;
             this.label2.Text = "*";
             // 
@@ -235,10 +227,9 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 11.25F);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label1.Location = new System.Drawing.Point(539, 76);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(404, 62);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(19, 21);
+            this.label1.Size = new System.Drawing.Size(15, 17);
             this.label1.TabIndex = 283;
             this.label1.Text = "*";
             // 
@@ -248,10 +239,9 @@
             this.label8.BackColor = System.Drawing.Color.Transparent;
             this.label8.Font = new System.Drawing.Font("Times New Roman", 11.25F);
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label8.Location = new System.Drawing.Point(539, 31);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Location = new System.Drawing.Point(404, 25);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(19, 21);
+            this.label8.Size = new System.Drawing.Size(15, 17);
             this.label8.TabIndex = 282;
             this.label8.Text = "*";
             // 
@@ -263,19 +253,19 @@
             this.cmbCustomerActiveStatus.Items.AddRange(new object[] {
             "Active",
             "InActive"});
-            this.cmbCustomerActiveStatus.Location = new System.Drawing.Point(215, 198);
-            this.cmbCustomerActiveStatus.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbCustomerActiveStatus.Location = new System.Drawing.Point(161, 161);
+            this.cmbCustomerActiveStatus.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmbCustomerActiveStatus.Name = "cmbCustomerActiveStatus";
-            this.cmbCustomerActiveStatus.Size = new System.Drawing.Size(319, 29);
+            this.cmbCustomerActiveStatus.Size = new System.Drawing.Size(240, 25);
             this.cmbCustomerActiveStatus.TabIndex = 3;
             // 
             // txtCustomerPhoneNo
             // 
             this.txtCustomerPhoneNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCustomerPhoneNo.Location = new System.Drawing.Point(215, 76);
-            this.txtCustomerPhoneNo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtCustomerPhoneNo.Location = new System.Drawing.Point(161, 62);
+            this.txtCustomerPhoneNo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtCustomerPhoneNo.Name = "txtCustomerPhoneNo";
-            this.txtCustomerPhoneNo.Size = new System.Drawing.Size(319, 29);
+            this.txtCustomerPhoneNo.Size = new System.Drawing.Size(240, 25);
             this.txtCustomerPhoneNo.TabIndex = 1;
             this.txtCustomerPhoneNo.Enter += new System.EventHandler(this.txtCustomerName_Enter);
             this.txtCustomerPhoneNo.Leave += new System.EventHandler(this.txtCustomerName_Leave);
@@ -284,11 +274,11 @@
             // 
             this.txtCustomerAddress.BackColor = System.Drawing.Color.White;
             this.txtCustomerAddress.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCustomerAddress.Location = new System.Drawing.Point(215, 122);
-            this.txtCustomerAddress.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtCustomerAddress.Location = new System.Drawing.Point(161, 99);
+            this.txtCustomerAddress.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtCustomerAddress.Multiline = true;
             this.txtCustomerAddress.Name = "txtCustomerAddress";
-            this.txtCustomerAddress.Size = new System.Drawing.Size(319, 61);
+            this.txtCustomerAddress.Size = new System.Drawing.Size(240, 50);
             this.txtCustomerAddress.TabIndex = 2;
             this.txtCustomerAddress.Enter += new System.EventHandler(this.txtCustomerName_Enter);
             this.txtCustomerAddress.Leave += new System.EventHandler(this.txtCustomerName_Leave);
@@ -296,10 +286,10 @@
             // txtCustomerName
             // 
             this.txtCustomerName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCustomerName.Location = new System.Drawing.Point(215, 31);
-            this.txtCustomerName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtCustomerName.Location = new System.Drawing.Point(161, 25);
+            this.txtCustomerName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtCustomerName.Name = "txtCustomerName";
-            this.txtCustomerName.Size = new System.Drawing.Size(319, 29);
+            this.txtCustomerName.Size = new System.Drawing.Size(240, 25);
             this.txtCustomerName.TabIndex = 0;
             this.txtCustomerName.Enter += new System.EventHandler(this.txtCustomerName_Enter);
             this.txtCustomerName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCustomerName_KeyDown);
@@ -311,10 +301,9 @@
             this.lblActiveStatusOfCustomer.AutoSize = true;
             this.lblActiveStatusOfCustomer.BackColor = System.Drawing.Color.Transparent;
             this.lblActiveStatusOfCustomer.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblActiveStatusOfCustomer.Location = new System.Drawing.Point(31, 203);
-            this.lblActiveStatusOfCustomer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblActiveStatusOfCustomer.Location = new System.Drawing.Point(23, 165);
             this.lblActiveStatusOfCustomer.Name = "lblActiveStatusOfCustomer";
-            this.lblActiveStatusOfCustomer.Size = new System.Drawing.Size(118, 21);
+            this.lblActiveStatusOfCustomer.Size = new System.Drawing.Size(94, 17);
             this.lblActiveStatusOfCustomer.TabIndex = 190;
             this.lblActiveStatusOfCustomer.Text = "Active Status :";
             // 
@@ -322,9 +311,10 @@
             // 
             this.lblCustomerPhoneNo.AutoSize = true;
             this.lblCustomerPhoneNo.Font = new System.Drawing.Font("Times New Roman", 11.25F);
-            this.lblCustomerPhoneNo.Location = new System.Drawing.Point(31, 81);
+            this.lblCustomerPhoneNo.Location = new System.Drawing.Point(23, 66);
+            this.lblCustomerPhoneNo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCustomerPhoneNo.Name = "lblCustomerPhoneNo";
-            this.lblCustomerPhoneNo.Size = new System.Drawing.Size(94, 21);
+            this.lblCustomerPhoneNo.Size = new System.Drawing.Size(74, 17);
             this.lblCustomerPhoneNo.TabIndex = 2;
             this.lblCustomerPhoneNo.Text = "Phone No :";
             // 
@@ -332,9 +322,10 @@
             // 
             this.lblCustomerAddress.AutoSize = true;
             this.lblCustomerAddress.Font = new System.Drawing.Font("Times New Roman", 11.25F);
-            this.lblCustomerAddress.Location = new System.Drawing.Point(31, 143);
+            this.lblCustomerAddress.Location = new System.Drawing.Point(23, 116);
+            this.lblCustomerAddress.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCustomerAddress.Name = "lblCustomerAddress";
-            this.lblCustomerAddress.Size = new System.Drawing.Size(82, 21);
+            this.lblCustomerAddress.Size = new System.Drawing.Size(64, 17);
             this.lblCustomerAddress.TabIndex = 1;
             this.lblCustomerAddress.Text = "Address :";
             // 
@@ -342,9 +333,10 @@
             // 
             this.lblCustomerName.AutoSize = true;
             this.lblCustomerName.Font = new System.Drawing.Font("Times New Roman", 11.25F);
-            this.lblCustomerName.Location = new System.Drawing.Point(31, 36);
+            this.lblCustomerName.Location = new System.Drawing.Point(23, 29);
+            this.lblCustomerName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCustomerName.Name = "lblCustomerName";
-            this.lblCustomerName.Size = new System.Drawing.Size(62, 21);
+            this.lblCustomerName.Size = new System.Drawing.Size(51, 17);
             this.lblCustomerName.TabIndex = 0;
             this.lblCustomerName.Text = "Name :";
             // 
@@ -357,11 +349,11 @@
             this.grpCustomerSearch.Controls.Add(this.rdShowAllOfCustomer);
             this.grpCustomerSearch.Controls.Add(this.rdSearchByCustomerName);
             this.grpCustomerSearch.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold);
-            this.grpCustomerSearch.Location = new System.Drawing.Point(23, 393);
-            this.grpCustomerSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.grpCustomerSearch.Location = new System.Drawing.Point(17, 317);
+            this.grpCustomerSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.grpCustomerSearch.Name = "grpCustomerSearch";
-            this.grpCustomerSearch.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.grpCustomerSearch.Size = new System.Drawing.Size(772, 68);
+            this.grpCustomerSearch.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpCustomerSearch.Size = new System.Drawing.Size(611, 55);
             this.grpCustomerSearch.TabIndex = 8;
             this.grpCustomerSearch.TabStop = false;
             this.grpCustomerSearch.Text = "Search";
@@ -370,10 +362,10 @@
             // 
             this.txtSearchByMobileNo.Enabled = false;
             this.txtSearchByMobileNo.Font = new System.Drawing.Font("Times New Roman", 11.25F);
-            this.txtSearchByMobileNo.Location = new System.Drawing.Point(508, 25);
-            this.txtSearchByMobileNo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtSearchByMobileNo.Location = new System.Drawing.Point(394, 20);
+            this.txtSearchByMobileNo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtSearchByMobileNo.Name = "txtSearchByMobileNo";
-            this.txtSearchByMobileNo.Size = new System.Drawing.Size(139, 29);
+            this.txtSearchByMobileNo.Size = new System.Drawing.Size(115, 25);
             this.txtSearchByMobileNo.TabIndex = 4;
             this.txtSearchByMobileNo.TextChanged += new System.EventHandler(this.txtSearchByMobileNo_TextChanged);
             this.txtSearchByMobileNo.Enter += new System.EventHandler(this.txtSearchByMobileNo_Enter);
@@ -383,10 +375,10 @@
             // 
             this.rdSearchByCustomerMobileNo.AutoSize = true;
             this.rdSearchByCustomerMobileNo.Font = new System.Drawing.Font("Times New Roman", 11.25F);
-            this.rdSearchByCustomerMobileNo.Location = new System.Drawing.Point(358, 27);
-            this.rdSearchByCustomerMobileNo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.rdSearchByCustomerMobileNo.Location = new System.Drawing.Point(278, 22);
+            this.rdSearchByCustomerMobileNo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rdSearchByCustomerMobileNo.Name = "rdSearchByCustomerMobileNo";
-            this.rdSearchByCustomerMobileNo.Size = new System.Drawing.Size(146, 25);
+            this.rdSearchByCustomerMobileNo.Size = new System.Drawing.Size(116, 21);
             this.rdSearchByCustomerMobileNo.TabIndex = 3;
             this.rdSearchByCustomerMobileNo.Text = "By Mobile No :";
             this.rdSearchByCustomerMobileNo.UseVisualStyleBackColor = true;
@@ -396,10 +388,10 @@
             // 
             this.txtSearchByCustomer.Enabled = false;
             this.txtSearchByCustomer.Font = new System.Drawing.Font("Times New Roman", 11.25F);
-            this.txtSearchByCustomer.Location = new System.Drawing.Point(205, 25);
-            this.txtSearchByCustomer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtSearchByCustomer.Location = new System.Drawing.Point(161, 20);
+            this.txtSearchByCustomer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtSearchByCustomer.Name = "txtSearchByCustomer";
-            this.txtSearchByCustomer.Size = new System.Drawing.Size(139, 29);
+            this.txtSearchByCustomer.Size = new System.Drawing.Size(110, 25);
             this.txtSearchByCustomer.TabIndex = 1;
             this.txtSearchByCustomer.TextChanged += new System.EventHandler(this.txtSearchByCustomer_TextChanged);
             this.txtSearchByCustomer.Enter += new System.EventHandler(this.txtCustomerName_Enter);
@@ -411,10 +403,10 @@
             this.rdShowAllOfCustomer.AutoSize = true;
             this.rdShowAllOfCustomer.Checked = true;
             this.rdShowAllOfCustomer.Font = new System.Drawing.Font("Times New Roman", 11.25F);
-            this.rdShowAllOfCustomer.Location = new System.Drawing.Point(664, 27);
-            this.rdShowAllOfCustomer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.rdShowAllOfCustomer.Location = new System.Drawing.Point(518, 22);
+            this.rdShowAllOfCustomer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rdShowAllOfCustomer.Name = "rdShowAllOfCustomer";
-            this.rdShowAllOfCustomer.Size = new System.Drawing.Size(99, 25);
+            this.rdShowAllOfCustomer.Size = new System.Drawing.Size(79, 21);
             this.rdShowAllOfCustomer.TabIndex = 2;
             this.rdShowAllOfCustomer.TabStop = true;
             this.rdShowAllOfCustomer.Text = "Show All";
@@ -425,10 +417,10 @@
             // 
             this.rdSearchByCustomerName.AutoSize = true;
             this.rdSearchByCustomerName.Font = new System.Drawing.Font("Times New Roman", 11.25F);
-            this.rdSearchByCustomerName.Location = new System.Drawing.Point(12, 27);
-            this.rdSearchByCustomerName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.rdSearchByCustomerName.Location = new System.Drawing.Point(7, 22);
+            this.rdSearchByCustomerName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rdSearchByCustomerName.Name = "rdSearchByCustomerName";
-            this.rdSearchByCustomerName.Size = new System.Drawing.Size(187, 25);
+            this.rdSearchByCustomerName.Size = new System.Drawing.Size(151, 21);
             this.rdSearchByCustomerName.TabIndex = 0;
             this.rdSearchByCustomerName.Text = "By Customer Name :";
             this.rdSearchByCustomerName.UseVisualStyleBackColor = true;
@@ -439,11 +431,11 @@
             this.grpCustomerGridview.BackColor = System.Drawing.Color.Transparent;
             this.grpCustomerGridview.Controls.Add(this.dgvCustomerMaster);
             this.grpCustomerGridview.Font = new System.Drawing.Font("Times New Roman", 11.25F);
-            this.grpCustomerGridview.Location = new System.Drawing.Point(23, 480);
-            this.grpCustomerGridview.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.grpCustomerGridview.Location = new System.Drawing.Point(17, 387);
+            this.grpCustomerGridview.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.grpCustomerGridview.Name = "grpCustomerGridview";
-            this.grpCustomerGridview.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.grpCustomerGridview.Size = new System.Drawing.Size(772, 192);
+            this.grpCustomerGridview.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpCustomerGridview.Size = new System.Drawing.Size(611, 156);
             this.grpCustomerGridview.TabIndex = 218;
             this.grpCustomerGridview.TabStop = false;
             this.grpCustomerGridview.Text = "List Of Customers";
@@ -454,13 +446,13 @@
             this.dgvCustomerMaster.AllowUserToDeleteRows = false;
             this.dgvCustomerMaster.BackgroundColor = System.Drawing.Color.White;
             this.dgvCustomerMaster.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCustomerMaster.Location = new System.Drawing.Point(5, 22);
-            this.dgvCustomerMaster.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgvCustomerMaster.Location = new System.Drawing.Point(4, 18);
+            this.dgvCustomerMaster.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvCustomerMaster.Name = "dgvCustomerMaster";
             this.dgvCustomerMaster.ReadOnly = true;
             this.dgvCustomerMaster.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvCustomerMaster.RowTemplate.Height = 24;
-            this.dgvCustomerMaster.Size = new System.Drawing.Size(761, 164);
+            this.dgvCustomerMaster.Size = new System.Drawing.Size(593, 133);
             this.dgvCustomerMaster.TabIndex = 0;
             this.dgvCustomerMaster.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomerMaster_CellDoubleClick);
             this.dgvCustomerMaster.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvCustomerMaster_DataBindingComplete);
@@ -470,20 +462,19 @@
             this.lblTotalRecords.AutoSize = true;
             this.lblTotalRecords.BackColor = System.Drawing.Color.Transparent;
             this.lblTotalRecords.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalRecords.Location = new System.Drawing.Point(24, 678);
-            this.lblTotalRecords.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTotalRecords.Location = new System.Drawing.Point(18, 550);
             this.lblTotalRecords.Name = "lblTotalRecords";
-            this.lblTotalRecords.Size = new System.Drawing.Size(150, 22);
+            this.lblTotalRecords.Size = new System.Drawing.Size(121, 17);
             this.lblTotalRecords.TabIndex = 219;
             this.lblTotalRecords.Text = "Total Records : 0";
             // 
             // Customer_Master
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(837, 700);
+            this.ClientSize = new System.Drawing.Size(628, 569);
             this.Controls.Add(this.lblTotalRecords);
             this.Controls.Add(this.grpCustomerGridview);
             this.Controls.Add(this.grpCustomerSearch);
@@ -496,7 +487,7 @@
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.Name = "Customer_Master";
             this.ShowIcon = false;

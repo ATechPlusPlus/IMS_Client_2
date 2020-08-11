@@ -48,6 +48,7 @@
             this.f4MasterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.f7ReplaceReturnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.enterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dtpSalesDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.lblCategoryName = new System.Windows.Forms.Label();
@@ -61,6 +62,20 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtBarCode = new System.Windows.Forms.TextBox();
             this.dgvProductDetails = new System.Windows.Forms.DataGridView();
+            this.ProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BarcodeNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QTY = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OIRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Adj_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Color = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SizeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColDelete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.IsReplaceReturn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtTotalItems = new System.Windows.Forms.Label();
             this.txtSubTotal = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -108,21 +123,6 @@
             this.label20 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
-            this.enterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BarcodeNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QTY = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OIRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Adj_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Color = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SizeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColDelete = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.IsReplaceReturn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).BeginInit();
@@ -332,6 +332,12 @@
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
+            // enterToolStripMenuItem
+            // 
+            this.enterToolStripMenuItem.Name = "enterToolStripMenuItem";
+            this.enterToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.enterToolStripMenuItem.Text = "Enter";
+            // 
             // dtpSalesDate
             // 
             this.dtpSalesDate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -397,7 +403,7 @@
             "InActive"});
             this.cmbShop.Location = new System.Drawing.Point(411, 47);
             this.cmbShop.Name = "cmbShop";
-            this.cmbShop.Size = new System.Drawing.Size(166, 27);
+            this.cmbShop.Size = new System.Drawing.Size(191, 27);
             this.cmbShop.TabIndex = 3;
             // 
             // txtCustomerMobile
@@ -498,9 +504,105 @@
             this.dgvProductDetails.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvProductDetails_CellBeginEdit);
             this.dgvProductDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellClick);
             this.dgvProductDetails.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellEndEdit);
+            this.dgvProductDetails.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvProductDetails_CellValidating);
+            this.dgvProductDetails.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvProductDetails_ColumnAdded);
             this.dgvProductDetails.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvProductDetails_DataBindingComplete);
+            this.dgvProductDetails.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvProductDetails_EditingControlShowing);
             this.dgvProductDetails.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvProductDetails_UserAddedRow);
             this.dgvProductDetails.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvProductDetails_KeyDown);
+            // 
+            // ProductID
+            // 
+            this.ProductID.DataPropertyName = "ProductID";
+            this.ProductID.HeaderText = "ProductID";
+            this.ProductID.Name = "ProductID";
+            this.ProductID.Visible = false;
+            // 
+            // ProductName
+            // 
+            this.ProductName.DataPropertyName = "ProductName";
+            this.ProductName.HeaderText = "Item";
+            this.ProductName.Name = "ProductName";
+            this.ProductName.ReadOnly = true;
+            // 
+            // BarcodeNo
+            // 
+            this.BarcodeNo.DataPropertyName = "BarcodeNo";
+            this.BarcodeNo.HeaderText = "BarcodeNo";
+            this.BarcodeNo.Name = "BarcodeNo";
+            // 
+            // Rate
+            // 
+            this.Rate.DataPropertyName = "Rate";
+            this.Rate.HeaderText = "Rate";
+            this.Rate.Name = "Rate";
+            this.Rate.ReadOnly = true;
+            // 
+            // QTY
+            // 
+            this.QTY.DataPropertyName = "QTY";
+            this.QTY.HeaderText = "QTY";
+            this.QTY.Name = "QTY";
+            // 
+            // OIRate
+            // 
+            this.OIRate.DataPropertyName = "OIRate";
+            this.OIRate.HeaderText = "Old_Invoice_Rate";
+            this.OIRate.Name = "OIRate";
+            this.OIRate.Visible = false;
+            // 
+            // Adj_Amount
+            // 
+            this.Adj_Amount.DataPropertyName = "Adj_Amount";
+            this.Adj_Amount.HeaderText = "Adj_Amount";
+            this.Adj_Amount.Name = "Adj_Amount";
+            this.Adj_Amount.Visible = false;
+            // 
+            // ColorID
+            // 
+            this.ColorID.DataPropertyName = "ColorID";
+            this.ColorID.HeaderText = "ColorID";
+            this.ColorID.Name = "ColorID";
+            this.ColorID.Visible = false;
+            // 
+            // Color
+            // 
+            this.Color.DataPropertyName = "Color";
+            this.Color.HeaderText = "Color";
+            this.Color.Name = "Color";
+            // 
+            // Size
+            // 
+            this.Size.DataPropertyName = "Size";
+            this.Size.HeaderText = "Size";
+            this.Size.Name = "Size";
+            // 
+            // SizeID
+            // 
+            this.SizeID.DataPropertyName = "SizeID";
+            this.SizeID.HeaderText = "SizeID";
+            this.SizeID.Name = "SizeID";
+            this.SizeID.Visible = false;
+            // 
+            // Total
+            // 
+            this.Total.DataPropertyName = "Total";
+            this.Total.HeaderText = "Total";
+            this.Total.Name = "Total";
+            this.Total.ReadOnly = true;
+            // 
+            // ColDelete
+            // 
+            this.ColDelete.DataPropertyName = "Delete";
+            this.ColDelete.HeaderText = "Delete";
+            this.ColDelete.Name = "ColDelete";
+            // 
+            // IsReplaceReturn
+            // 
+            this.IsReplaceReturn.DataPropertyName = "IsReplaceReturn";
+            this.IsReplaceReturn.HeaderText = "ReplaceReturn";
+            this.IsReplaceReturn.Name = "IsReplaceReturn";
+            this.IsReplaceReturn.Visible = false;
             // 
             // txtTotalItems
             // 
@@ -582,7 +684,6 @@
             this.txtGrandTotal.Size = new System.Drawing.Size(140, 25);
             this.txtGrandTotal.TabIndex = 210;
             this.txtGrandTotal.Text = "0";
-            this.txtGrandTotal.TextChanged += new System.EventHandler(this.txtGrandTotal_TextChanged);
             this.txtGrandTotal.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtGrandTotal_KeyDown);
             // 
             // label9
@@ -1103,105 +1204,6 @@
             this.label24.Size = new System.Drawing.Size(52, 17);
             this.label24.TabIndex = 262;
             this.label24.Text = "Delete";
-            // 
-            // enterToolStripMenuItem
-            // 
-            this.enterToolStripMenuItem.Name = "enterToolStripMenuItem";
-            this.enterToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.enterToolStripMenuItem.Text = "Enter";
-            // 
-            // ProductID
-            // 
-            this.ProductID.DataPropertyName = "ProductID";
-            this.ProductID.HeaderText = "ProductID";
-            this.ProductID.Name = "ProductID";
-            this.ProductID.Visible = false;
-            // 
-            // ProductName
-            // 
-            this.ProductName.DataPropertyName = "ProductName";
-            this.ProductName.HeaderText = "Item";
-            this.ProductName.Name = "ProductName";
-            this.ProductName.ReadOnly = true;
-            // 
-            // BarcodeNo
-            // 
-            this.BarcodeNo.DataPropertyName = "BarcodeNo";
-            this.BarcodeNo.HeaderText = "BarcodeNo";
-            this.BarcodeNo.Name = "BarcodeNo";
-            // 
-            // Rate
-            // 
-            this.Rate.DataPropertyName = "Rate";
-            this.Rate.HeaderText = "Rate";
-            this.Rate.Name = "Rate";
-            this.Rate.ReadOnly = true;
-            // 
-            // QTY
-            // 
-            this.QTY.DataPropertyName = "QTY";
-            this.QTY.HeaderText = "QTY";
-            this.QTY.Name = "QTY";
-            // 
-            // OIRate
-            // 
-            this.OIRate.DataPropertyName = "OIRate";
-            this.OIRate.HeaderText = "Old_Invoice_Rate";
-            this.OIRate.Name = "OIRate";
-            this.OIRate.Visible = false;
-            // 
-            // Adj_Amount
-            // 
-            this.Adj_Amount.DataPropertyName = "Adj_Amount";
-            this.Adj_Amount.HeaderText = "Adj_Amount";
-            this.Adj_Amount.Name = "Adj_Amount";
-            this.Adj_Amount.Visible = false;
-            // 
-            // ColorID
-            // 
-            this.ColorID.DataPropertyName = "ColorID";
-            this.ColorID.HeaderText = "ColorID";
-            this.ColorID.Name = "ColorID";
-            this.ColorID.Visible = false;
-            // 
-            // Color
-            // 
-            this.Color.DataPropertyName = "Color";
-            this.Color.HeaderText = "Color";
-            this.Color.Name = "Color";
-            // 
-            // Size
-            // 
-            this.Size.DataPropertyName = "Size";
-            this.Size.HeaderText = "Size";
-            this.Size.Name = "Size";
-            // 
-            // SizeID
-            // 
-            this.SizeID.DataPropertyName = "SizeID";
-            this.SizeID.HeaderText = "SizeID";
-            this.SizeID.Name = "SizeID";
-            this.SizeID.Visible = false;
-            // 
-            // Total
-            // 
-            this.Total.DataPropertyName = "Total";
-            this.Total.HeaderText = "Total";
-            this.Total.Name = "Total";
-            this.Total.ReadOnly = true;
-            // 
-            // ColDelete
-            // 
-            this.ColDelete.DataPropertyName = "Delete";
-            this.ColDelete.HeaderText = "Delete";
-            this.ColDelete.Name = "ColDelete";
-            // 
-            // IsReplaceReturn
-            // 
-            this.IsReplaceReturn.DataPropertyName = "IsReplaceReturn";
-            this.IsReplaceReturn.HeaderText = "ReplaceReturn";
-            this.IsReplaceReturn.Name = "IsReplaceReturn";
-            this.IsReplaceReturn.Visible = false;
             // 
             // Sales_Invoice
             // 

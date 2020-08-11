@@ -204,19 +204,17 @@ namespace IMS_Client_2.Masters
                             LoadData();
                             ClearAll();
                             grpProduct.Enabled = false;
-                            ObjDAL.ResetData();
                         }
                         else
                         {
                             clsUtility.ShowErrorMessage("'" + txtProductName.Text + "' Product is not Updated", clsUtility.strProjectTitle);
-                            ObjDAL.ResetData();
                         }
+                        ObjDAL.ResetData();
                     }
                     else
                     {
                         clsUtility.ShowErrorMessage("'" + txtProductName.Text + "' Product is already exist..", clsUtility.strProjectTitle);
                         txtProductName.Focus();
-                        ObjDAL.ResetData();
                     }
                 }
             }
@@ -502,6 +500,7 @@ namespace IMS_Client_2.Masters
                     }
                 }
             }
+            ObjDAL.ResetData();
             return imgProduct;
         }
 
@@ -527,6 +526,7 @@ namespace IMS_Client_2.Masters
                 {
                     dataGridView1.DataSource = null;
                 }
+                ObjDAL.ResetData();
             }
             else
             {
@@ -545,7 +545,6 @@ namespace IMS_Client_2.Masters
             {
                 cmbSearchByCategory.Enabled = false;
                 cmbSearchByCategory.SelectedIndex = -1;
-                rdShowAll.Checked = true;
             }
         }
     }

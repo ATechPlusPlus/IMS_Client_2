@@ -29,7 +29,6 @@ namespace IMS_Client_2.Purchase
         int flag = 0;
         int pPurchaseInvoiceID = 0;
         int ProductID = 0, SubProductID = 0;
-        int OldSize = 0;
         string OldColorName = string.Empty;
 
         Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
@@ -242,7 +241,7 @@ namespace IMS_Client_2.Purchase
                     {
                         flag = 1;
                         clsUtility.ShowInfoMessage("Color Name " + dgvQtycolor.Rows[e.RowIndex].Cells["Color"].Value + " is not present in Color Master", clsUtility.strProjectTitle);
-                        dgvQtycolor.Rows[e.RowIndex].Cells["Color"].Value = OldColorName;
+                        //dgvQtycolor.Rows[e.RowIndex].Cells["Color"].Value = OldColorName;
                     }
                     else
                     {
@@ -740,6 +739,10 @@ namespace IMS_Client_2.Purchase
         {
             try
             {
+                if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                {
+                    return;
+                }
                 if (dgvQtycolor.Columns.Contains("Total"))
                 {
                     txtTotalQTYEntered.Text = dgvQtycolor.Rows[e.RowIndex].Cells["Total"].Value.ToString();
@@ -771,7 +774,7 @@ namespace IMS_Client_2.Purchase
                 }
                 else
                 {
-                    clsUtility.ShowInfoMessage("Purchase Invoice Bill is already done OR not available for Bill No. " + txtSupplierBillNo.Text, clsUtility.strProjectTitle);
+                    clsUtility.ShowInfoMessage("Purchase Invoice Bill is not available for Bill No. " + txtSupplierBillNo.Text, clsUtility.strProjectTitle);
                     grpPurchaseBillDetail.Enabled = false;
                     txtTotalQTY.Text = "0";
                     dataGridView1.DataSource = null;
@@ -797,7 +800,6 @@ namespace IMS_Client_2.Purchase
             {
                 dataGridView1.DataSource = null;
             }
-
         }
 
         private void LoadModelListCMB()
@@ -881,10 +883,10 @@ namespace IMS_Client_2.Purchase
         }
         private void dgvQtycolor_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            if (dgvQtycolor.Rows[e.RowIndex].Cells["Color"].Value.ToString() != string.Empty)
-            {
-                OldColorName = dgvQtycolor.Rows[e.RowIndex].Cells["Color"].Value.ToString();
-            }
+            //if (dgvQtycolor.Rows[e.RowIndex].Cells["Color"].Value.ToString() != string.Empty)
+            //{
+            //    OldColorName = dgvQtycolor.Rows[e.RowIndex].Cells["Color"].Value.ToString();
+            //}
         }
         private void dgvQtycolor_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
@@ -961,7 +963,42 @@ namespace IMS_Client_2.Purchase
 
         private void cmbListBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
+            System.Threading.Thread.Sleep(2000);
+
             GetSelectedCMBModelNo();
+
+            this.Cursor = Cursors.Default;
+        }
+
+        private AutoCompleteStringCollection LoadAllColors()
+        {
+            AutoCompleteStringCollection str = new AutoCompleteStringCollection();
+            DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT ColorName FROM ColorMaster WITH(NOLOCK) WHERE ISNULL(ActiveStatus,1)=1");
+            if (ObjUtil.ValidateTable(dt))
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    str.Add(dt.Rows[i]["ColorName"].ToString());
+                }
+            }
+            return str;
+        }
+        private void dgvQtycolor_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            int column = dgvQtycolor.CurrentCell.ColumnIndex;
+            string headerText = dgvQtycolor.Columns[column].HeaderText;
+            if (headerText.Equals("Color"))
+            {
+                TextBox txt = (TextBox)e.Control;
+                if (txt != null)
+                {
+                    dgvQtycolor.Columns["Color"].Width = 100;
+                    txt.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                    txt.AutoCompleteCustomSource = LoadAllColors();
+                    txt.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                }
+            }
         }
 
         private void dgvQtycolor_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
@@ -975,8 +1012,8 @@ namespace IMS_Client_2.Purchase
                 if (!int.TryParse(e.FormattedValue.ToString(),
                     out newInteger) || newInteger < 0)
                 {
-                    e.Cancel = true;
                     clsUtility.ShowInfoMessage("Enter Only Numbers..", clsUtility.strProjectTitle);
+                    e.Cancel = true;
                     //dgvQtycolor.Rows[e.RowIndex].ErrorText = "Size must be a Positive integer";
                 }
             }
