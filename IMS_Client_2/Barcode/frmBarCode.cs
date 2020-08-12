@@ -228,7 +228,7 @@ namespace IMS_Client_2.Barcode
                     if (dgvProductDetails.Rows[i].Cells["colCHeck"].Value != DBNull.Value && Convert.ToBoolean(dgvProductDetails.Rows[i].Cells["colCHeck"].Value))
                     {
                         _PrintRowData = dgvProductDetails.Rows[i];
-                        _Current_BarCodeNumber = dgvProductDetails.Rows[0].Cells["BarcodeNo"].Value.ToString();
+                        _Current_BarCodeNumber = dgvProductDetails.Rows[i].Cells["BarcodeNo"].Value.ToString();
                         int QTY = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["ColQTY"].Value);
 
                         #region Manaually BarCode generate
