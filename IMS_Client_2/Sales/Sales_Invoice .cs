@@ -218,7 +218,7 @@ namespace IMS_Client_2.Sales
             InvoiceNumber = "INV-" + LastID;
             return InvoiceNumber;
         }
-
+        bool isfromdefaul = false;
         private void BindStoreDetails()
         {
             DataTable dt = null;
@@ -236,6 +236,7 @@ namespace IMS_Client_2.Sales
                 clsUtility.ShowInfoMessage("Please select the default shop for this client from Setting Window.", clsUtility.strProjectTitle);
                 Settings.frmOtherSetting otherSetting = new Settings.frmOtherSetting();
                 otherSetting.ShowDialog();
+                isfromdefaul = true;
                 this.Close();
             }
         }
@@ -670,6 +671,9 @@ namespace IMS_Client_2.Sales
 
         private void ClearAll()
         {
+            IsReplaceReturnMode = false;
+            Sales.frmReplaceReturnPopup.strReplaceInvoiceNumber = "0";
+            Sales.frmReplaceReturnPopup.IsReplaceInvoice = false;
             //txtOldBillAmount.ReadOnly = false;
             txtNewBillAmount.Text = "0";
             Other_Forms.frmDiscountLogin.IsValidAdmin = false;
@@ -1008,11 +1012,18 @@ namespace IMS_Client_2.Sales
                 {
                     int NewInvoiceID = DoNewSales();
 
-                   // clsUtility.ShowInfoMessage("Sale invoice has been genrated successfully.", clsUtility.strProjectTitle);
+                 
                     ClearAll();
 
                     if (button.Name == "btnSaveData")
                     {
+                        if (NewInvoiceID>0)
+                        {
+                            clsUtility.ShowInfoMessage("Sale invoice has been genrated successfully.", clsUtility.strProjectTitle);
+
+                        }
+                       
+                   
                         this.Close();
                     }
                     else if (button.Name == "btnPrint")
@@ -1679,6 +1690,27 @@ namespace IMS_Client_2.Sales
                 }
 
             }
+        }
+
+        private void Sales_Invoice_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (isfromdefaul)
+            {
+                return;
+            }
+          bool resul=  clsUtility.ShowQuestionMessage("Do you want to close this window ?");
+            if (resul)
+            {
+                ClearAll();
+                
+
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+            
+           
         }
     }
 }

@@ -1249,6 +1249,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sales Invoice";
             this.Activated += new System.EventHandler(this.Sales_Invoice_Activated);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Sales_Invoice_FormClosing);
             this.Load += new System.EventHandler(this.Sales_Invoice_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
