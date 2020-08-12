@@ -46,6 +46,7 @@
             frmReceivedBranchTransfer=47,
             frmDashBoardSettings=48,
             frmDashBoard=49,
+            frmQuickBarCodePrint=50,
 
             frmDatabaseMaintenance = 7///commented
         }
