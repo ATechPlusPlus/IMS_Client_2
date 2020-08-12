@@ -168,9 +168,9 @@ namespace IMS_Client_2
                 btnOpenCash.BackgroundImage = B_Leave;
 
                 clsUtility.DBName = "IMS_Client_2";
-                clsUtility.LoginID = 1;
+                //clsUtility.LoginID = 1;
                 //clsUtility.IsAdmin = false;
-                clsUtility.IsAdmin = true;
+                //clsUtility.IsAdmin = true;
                 clsUtility.strProjectTitle = "IMS";
                 if (clsUtility.LoginID > 0)
                 {
@@ -1045,8 +1045,19 @@ namespace IMS_Client_2
 
         private void quickBarcodePrintToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmQuickBarCodePrint frmQuickBarCodePrint = new frmQuickBarCodePrint();
-            frmQuickBarCodePrint.Show();
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmQuickBarCodePrint) || clsUtility.IsAdmin)
+            {
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Barcode.frmQuickBarCodePrint));
+                if (!b)
+                {
+                    frmQuickBarCodePrint frmQuickBarCodePrint = new frmQuickBarCodePrint();
+                    frmQuickBarCodePrint.Show();
+                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
     }
 }
