@@ -450,6 +450,7 @@
             this.txtSalesMan.TabIndex = 5;
             this.txtSalesMan.TextChanged += new System.EventHandler(this.txtSalesMan_TextChanged);
             this.txtSalesMan.Enter += new System.EventHandler(this.txtSalesMan_Enter);
+            this.txtSalesMan.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSalesMan_KeyDown);
             this.txtSalesMan.Leave += new System.EventHandler(this.txtSalesMan_Leave);
             // 
             // label4

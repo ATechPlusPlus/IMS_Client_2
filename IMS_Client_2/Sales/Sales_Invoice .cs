@@ -5,12 +5,14 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Lifetime;
 using System.Text;
 using System.Web.UI;
 using System.Windows.Forms;
 using System.Windows.Media;
 using CoreApp;
 using IMS_Client_2.Barcode;
+using IMS_Client_2.Other_Forms;
 
 namespace IMS_Client_2.Sales
 {
@@ -34,7 +36,7 @@ namespace IMS_Client_2.Sales
         Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
         private void Sales_Invoice_Load(object sender, EventArgs e)
         {
-            cboEntryMode.SelectedIndex = 0; // by default
+
 
             btnAdd.BackgroundImage = B_Leave;
             btnSave.BackgroundImage = B_Leave;
@@ -42,7 +44,7 @@ namespace IMS_Client_2.Sales
             btnSaveData.BackgroundImage = B_Leave;
 
             BindStoreDetails();
-            BindSalesManDetails();
+            //  BindSalesManDetails();
             // GenerateInvoiceNumber();
             InitItemTable();
             dtpSalesDate.Value = DateTime.Now;
@@ -700,7 +702,7 @@ namespace IMS_Client_2.Sales
             picProduct.Image = null;
             BindStoreDetails();
 
-            //txtSalesMan.Clear();
+            txtSalesMan.Clear();
             txtColorID.Clear();
             txtSizeID.Clear();
 
@@ -1006,7 +1008,7 @@ namespace IMS_Client_2.Sales
                 {
                     int NewInvoiceID = DoNewSales();
 
-                    clsUtility.ShowInfoMessage("Sale invoice has been genrated successfully.", clsUtility.strProjectTitle);
+                   // clsUtility.ShowInfoMessage("Sale invoice has been genrated successfully.", clsUtility.strProjectTitle);
                     ClearAll();
 
                     if (button.Name == "btnSaveData")
@@ -1068,45 +1070,35 @@ namespace IMS_Client_2.Sales
                 isSalesManbind = true;
                 txtEmpID.Text = dtEmployeeDetails.Rows[0]["EmpID"].ToString();
                 txtSalesMan.Text = dtEmployeeDetails.Rows[0]["EmployeeCode"].ToString();
-                txtSalesMan.Enabled = false;
+                txtSalesMan.Enabled = true;
             }
         }
         private void txtProductName_KeyDown(object sender, KeyEventArgs e)
         {
-            if (cboEntryMode.SelectedIndex == 0)
+            if (e.KeyData == Keys.Enter)
             {
-                if (e.KeyData == Keys.Enter)
+                if (txtBarCode.Text.Trim().Length == 0)
                 {
-                    if (txtBarCode.Text.Trim().Length == 0)
+                    clsUtility.ShowInfoMessage("Please Enter Barcode number.", clsUtility.strProjectTitle);
+                    return;
+                }
+                if (IsReplaceReturnMode && radReplace.Checked)
+                {
+                    // No Invoice ID is given when return/replace
+                    if (frmReplaceReturnPopup.strInvoiceID == "0")
                     {
-                        clsUtility.ShowInfoMessage("Please Enter Barcode number.", clsUtility.strProjectTitle);
-                        return;
-                    }
-                    if (IsReplaceReturnMode && radReplace.Checked)
-                    {
-                        // No Invoice ID is given when return/replace
-                        if (frmReplaceReturnPopup.strInvoiceID == "0")
-                        {
-                            // get the data from stock 
-                            GetItemDetailsByProductID(txtBarCode.Text, true);
-                        }
-                        else
-                        {
-                            // get the data froms sales.
-                            GetDataFromSales(txtBarCode.Text);
-                        }
+                        // get the data from stock 
+                        GetItemDetailsByProductID(txtBarCode.Text, true);
                     }
                     else
-                    {   //txtProductName contains barcode.
-                        GetItemDetailsByProductID(txtBarCode.Text, false);
+                    {
+                        // get the data froms sales.
+                        GetDataFromSales(txtBarCode.Text);
                     }
                 }
-            }
-            else
-            {
-                if (ObjUtil.GetDataPopup() != null)
-                {
-                    ObjUtil.GetDataPopup().Focus();
+                else
+                {   //txtProductName contains barcode.
+                    GetItemDetailsByProductID(txtBarCode.Text, false);
                 }
             }
         }
@@ -1662,6 +1654,30 @@ namespace IMS_Client_2.Sales
                     e.Cancel = true;
                 }
                 return;
+            }
+        }
+
+        private void txtSalesMan_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                // if customer name is given
+                if (txtCustomerID.Text.Trim().Length != 0)
+                {
+                    // if grand total amount is entered.
+                    if (Convert.ToDecimal(txtGrandTotal.Text) > 0)
+                    {
+                        if (frmPayment.lstPaymnetType.Count == 0)
+                        {
+                            clsUtility.ShowInfoMessage("Please select payment option.");
+                            return;
+                        }
+                    }
+
+                    btnAdd_Click_1(btnPrint, null);
+
+                }
+
             }
         }
     }

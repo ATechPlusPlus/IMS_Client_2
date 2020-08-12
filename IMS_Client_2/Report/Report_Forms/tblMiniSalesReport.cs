@@ -76,7 +76,7 @@ namespace IMS_Client_2.Report.Report_Forms
                 reportQuery = " SELECT v1.Name as GenericColumn  , SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
                                 " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
                                  " ON v1.id = v2.InvoiceID " +
-                                 " where v1.ShopeID = " + cmbShop.SelectedValue + " AND v1.InvoiceDate between '" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "' AND '" + dtpToDate.Value.ToString("yyyy-MM-dd") + "' " +
+                                 " where v1.ShopeID = " + cmbShop.SelectedValue + " AND v1.InvoiceDate between '" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "' AND '" + dtpToDate.Value.ToString("yyyy-MM-dd") + "' AND v2.Rate>0 " +
                                  " Group by Name";
 
                 strGenericColumn = "Sales Man";
@@ -86,7 +86,7 @@ namespace IMS_Client_2.Report.Report_Forms
                 reportQuery = " SELECT  v2.ColorName as GenericColumn  , SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
                                " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
                                 " ON v1.id = v2.InvoiceID " +
-                                " where v1.ShopeID = " + cmbShop.SelectedValue + " AND v1.InvoiceDate between '" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "' AND '" + dtpToDate.Value.ToString("yyyy-MM-dd") + "' " +
+                                " where v1.ShopeID = " + cmbShop.SelectedValue + " AND v1.InvoiceDate between '" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "' AND '" + dtpToDate.Value.ToString("yyyy-MM-dd") + "' AND v2.Rate>0" +
                                 " Group by ColorName";
 
                 strGenericColumn = "Color";
@@ -96,7 +96,7 @@ namespace IMS_Client_2.Report.Report_Forms
                 reportQuery = " SELECT  v2.ProductName as GenericColumn, SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
                               " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
                                " ON v1.id = v2.InvoiceID " +
-                               " where v1.ShopeID = " + cmbShop.SelectedValue + " AND v1.InvoiceDate between '" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "' AND '" + dtpToDate.Value.ToString("yyyy-MM-dd") + "' " +
+                               " where v1.ShopeID = " + cmbShop.SelectedValue + " AND v1.InvoiceDate between '" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "' AND '" + dtpToDate.Value.ToString("yyyy-MM-dd") + "' AND v2.Rate>0" +
                                " Group by  v2.ProductName";
 
                 strGenericColumn = "Item Name";
@@ -106,7 +106,7 @@ namespace IMS_Client_2.Report.Report_Forms
                 reportQuery = " SELECT  v1.InvoiceNumber as GenericColumn, SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
                               " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
                                " ON v1.id = v2.InvoiceID " +
-                               " where v1.ShopeID = " + cmbShop.SelectedValue + " AND v1.InvoiceDate between '" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "' AND '" + dtpToDate.Value.ToString("yyyy-MM-dd") + "' " +
+                               " where v1.ShopeID = " + cmbShop.SelectedValue + " AND v1.InvoiceDate between '" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "' AND '" + dtpToDate.Value.ToString("yyyy-MM-dd") + "' AND v2.Rate>0" +
                                " Group by  v1.InvoiceNumber";
 
                 strGenericColumn = "Invoice No";
@@ -116,7 +116,7 @@ namespace IMS_Client_2.Report.Report_Forms
                 reportQuery = " SELECT   (select CategoryName from CategoryMaster where CategoryID=v2.CategoryID )  as GenericColumn, SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
                               " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
                                " ON v1.id = v2.InvoiceID " +
-                               " where v1.ShopeID = " + cmbShop.SelectedValue + " AND v1.InvoiceDate between '" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "' AND '" + dtpToDate.Value.ToString("yyyy-MM-dd") + "' " +
+                               " where v1.ShopeID = " + cmbShop.SelectedValue + " AND v1.InvoiceDate between '" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "' AND '" + dtpToDate.Value.ToString("yyyy-MM-dd") + "' AND v2.Rate>0" +
                                " Group by  v2.CategoryID";
 
                 strGenericColumn = "Invoice No";
@@ -126,7 +126,7 @@ namespace IMS_Client_2.Report.Report_Forms
                 reportQuery = " SELECT  v2.ModelNo  as GenericColumn, SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
                               " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
                                " ON v1.id = v2.InvoiceID " +
-                               " where v1.ShopeID = " + cmbShop.SelectedValue + " AND v1.InvoiceDate between '" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "' AND '" + dtpToDate.Value.ToString("yyyy-MM-dd") + "' " +
+                               " where v1.ShopeID = " + cmbShop.SelectedValue + " AND v1.InvoiceDate between '" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "' AND '" + dtpToDate.Value.ToString("yyyy-MM-dd") + "' AND v2.Rate>0" +
                                " Group by  v2.ModelNo";
 
                 strGenericColumn = "ModelNo";
@@ -144,8 +144,8 @@ namespace IMS_Client_2.Report.Report_Forms
             DataTable dtSalesDetails = ObjDAL.ExecuteSelectStatement(reportQuery);
             if (ObjUtil.ValidateTable(dtSalesDetails))
             {
-                strTotalRate = dtSalesDetails.Compute("Sum(Rate)", string.Empty).ToString();
-                strTotalQTY = dtSalesDetails.Compute("Sum(QTY)", string.Empty).ToString();
+                strTotalRate = dtSalesDetails.Compute("Sum(Rate)", "Rate>0").ToString();
+                strTotalQTY = dtSalesDetails.Compute("Sum(QTY)","Rate>0").ToString();
 
                 string strDateFilter = "From : " + dtpFromDate.Value.ToShortDateString() + " To " + dtpToDate.Value.ToShortDateString();
 

@@ -60,6 +60,9 @@ namespace IMS_Client_2.Other_Forms
         {
             ObjUtil.SetDataGridProperty(dgvShopeDetails, DataGridViewAutoSizeColumnsMode.Fill);
             dgvShopeDetails.Columns[0].ReadOnly = false;
+
+
+
         }
         private bool AnyRightCheck()
         {

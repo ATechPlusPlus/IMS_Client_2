@@ -201,7 +201,11 @@ namespace IMS_Client_2.Barcode
                 {
                     return;
                 }
-
+                if (!IsBarCodeSettings())
+                {
+                    clsUtility.ShowInfoMessage("Please set the Barcode design before barcode printing." + Environment.NewLine + "To Design Barcode, Open Barcode designer from Barcode menu from main window.");
+                    return;
+                }
                 PrinterSettings printerSetting = new PrinterSettings();
                 if (clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.BarCodePrinter).Trim().Length == 0)
                 {
@@ -764,6 +768,22 @@ namespace IMS_Client_2.Barcode
             }
         }
 
+        private bool IsBarCodeSettings()
+        {
+            DataTable dataTable =ObjDAL.ExecuteSelectStatement("SELECT BarCodeSetting FROM " + clsUtility.DBName + ".dbo.tblBarCodeSettings WITH(NOLOCK)");
+            if (ObjUtil.ValidateTable(dataTable))
+            {
+                if (dataTable.Rows[0]["BarCodeSetting"] != DBNull.Value && dataTable.Rows[0]["BarCodeSetting"].ToString().Trim().Length > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
         private void button1_Click_1(object sender, EventArgs e)
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmBarCode, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
@@ -772,6 +792,12 @@ namespace IMS_Client_2.Barcode
                 {
                     clsUtility.ShowInfoMessage("Please enter QTY greater than 0", clsUtility.strProjectTitle);
                     return;
+                }
+
+                if (!IsBarCodeSettings())
+                {
+                    clsUtility.ShowInfoMessage("Please set the Barcode design before barcode printing." + Environment.NewLine + "To Design Barcode, Open Barcode designer from Barcode menu from main window.");
+                      return;
                 }
 
                 PrintDialog pd = new PrintDialog();

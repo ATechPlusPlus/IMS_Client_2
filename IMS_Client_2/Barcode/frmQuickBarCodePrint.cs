@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Printing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Windows.Forms;
 using CoreApp;
@@ -42,6 +43,11 @@ namespace IMS_Client_2.Barcode
         clsUtility ObjUtil = new clsUtility();
         private void btnPrintManualBarcode_Click(object sender, EventArgs e)
         {
+            if (!IsBarCodeSettings())
+            {
+                clsUtility.ShowInfoMessage("Please set the Barcode design before barcode printing." + Environment.NewLine + "To Design Barcode, Open Barcode designer from Barcode menu from main window.");
+                return;
+            }
             ObjCon.SetStoreProcedureData("BarCodeNo", SqlDbType.NVarChar, txtBarcodenumber.Text, clsConnection_DAL.ParamType.Input);
             DataSet ds= ObjCon.ExecuteStoreProcedure_Get("SPR_GetQuickBarCodeDetails");
             if (ObjUtil.ValidateDataSet(ds))
@@ -58,6 +64,22 @@ namespace IMS_Client_2.Barcode
                 }
                 
             }
+        }
+        private bool IsBarCodeSettings()
+        {
+            DataTable dataTable = ObjCon.ExecuteSelectStatement("SELECT BarCodeSetting FROM " + clsUtility.DBName + ".dbo.tblBarCodeSettings WITH(NOLOCK)");
+            if (ObjUtil.ValidateTable(dataTable))
+            {
+                if (dataTable.Rows[0]["BarCodeSetting"] != DBNull.Value && dataTable.Rows[0]["BarCodeSetting"].ToString().Trim().Length>0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
         }
         DataGridViewRow _PrintRowData;
         string _Current_BarCodeNumber = "";
