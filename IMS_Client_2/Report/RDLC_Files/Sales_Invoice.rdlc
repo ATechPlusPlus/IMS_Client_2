@@ -1362,7 +1362,7 @@
                     </GroupExpressions>
                   </Group>
                   <TablixHeader>
-                    <Size>0.97928in</Size>
+                    <Size>0.93951in</Size>
                     <CellContents>
                       <Textbox Name="Textbox25">
                         <CanGrow>true</CanGrow>
@@ -1397,7 +1397,7 @@
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>0.97928in</Size>
+                    <Size>0.93951in</Size>
                     <CellContents>
                       <Textbox Name="Textbox27">
                         <CanGrow>true</CanGrow>
@@ -1433,7 +1433,7 @@
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>0.97928in</Size>
+                    <Size>0.93951in</Size>
                     <CellContents>
                       <Textbox Name="Textbox2">
                         <CanGrow>true</CanGrow>
@@ -1468,7 +1468,7 @@
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>0.97928in</Size>
+                    <Size>0.93951in</Size>
                     <CellContents>
                       <Textbox Name="Textbox5">
                         <CanGrow>true</CanGrow>
@@ -1504,10 +1504,10 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>ds_InvoiceHeader</DataSetName>
-            <Top>3.00053in</Top>
-            <Left>1.27006in</Left>
+            <Top>2.98925in</Top>
+            <Left>1.30982in</Left>
             <Height>1.5in</Height>
-            <Width>1.63806in</Width>
+            <Width>1.59829in</Width>
             <ZIndex>18</ZIndex>
             <Style>
               <Border>
