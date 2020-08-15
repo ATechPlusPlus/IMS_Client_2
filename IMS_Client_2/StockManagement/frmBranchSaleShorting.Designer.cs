@@ -33,6 +33,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.dgvBranchStockDetails = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnPrint = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -95,6 +96,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.btnPrint);
             this.groupBox1.Controls.Add(this.btnReset);
             this.groupBox1.Controls.Add(this.btnSearch);
             this.groupBox1.Controls.Add(this.label3);
@@ -108,10 +110,26 @@
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 46);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(952, 100);
+            this.groupBox1.Size = new System.Drawing.Size(1105, 100);
             this.groupBox1.TabIndex = 233;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Branch Sale Shorting Report Option";
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnPrint.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPrint.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrint.Location = new System.Drawing.Point(1014, 63);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(80, 27);
+            this.btnPrint.TabIndex = 259;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.button1_Click);
+            this.btnPrint.MouseEnter += new System.EventHandler(this.btnSearch_MouseEnter);
+            this.btnPrint.MouseLeave += new System.EventHandler(this.btnSearch_MouseLeave);
             // 
             // btnReset
             // 
@@ -119,9 +137,9 @@
             this.btnReset.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnReset.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReset.Location = new System.Drawing.Point(729, 63);
+            this.btnReset.Location = new System.Drawing.Point(917, 63);
             this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(80, 30);
+            this.btnReset.Size = new System.Drawing.Size(80, 27);
             this.btnReset.TabIndex = 258;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = true;
@@ -135,9 +153,9 @@
             this.btnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSearch.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.Location = new System.Drawing.Point(729, 24);
+            this.btnSearch.Location = new System.Drawing.Point(821, 63);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(80, 30);
+            this.btnSearch.Size = new System.Drawing.Size(80, 27);
             this.btnSearch.TabIndex = 257;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
@@ -150,7 +168,7 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(368, 34);
+            this.label3.Location = new System.Drawing.Point(344, 27);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(50, 17);
             this.label3.TabIndex = 256;
@@ -210,7 +228,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(537, 32);
+            this.label1.Location = new System.Drawing.Point(513, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 17);
             this.label1.TabIndex = 250;
@@ -220,7 +238,7 @@
             // 
             this.dtpToDate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpToDate.Location = new System.Drawing.Point(572, 28);
+            this.dtpToDate.Location = new System.Drawing.Point(548, 25);
             this.dtpToDate.Name = "dtpToDate";
             this.dtpToDate.Size = new System.Drawing.Size(109, 25);
             this.dtpToDate.TabIndex = 249;
@@ -229,7 +247,7 @@
             // 
             this.dtpFromDate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFromDate.Location = new System.Drawing.Point(418, 28);
+            this.dtpFromDate.Location = new System.Drawing.Point(394, 25);
             this.dtpFromDate.Name = "dtpFromDate";
             this.dtpFromDate.Size = new System.Drawing.Size(107, 25);
             this.dtpFromDate.TabIndex = 248;
@@ -320,5 +338,6 @@
         private System.Windows.Forms.PictureBox picProduct;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Button btnPrint;
     }
 }
