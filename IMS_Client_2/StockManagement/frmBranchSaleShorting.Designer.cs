@@ -127,7 +127,7 @@
             this.btnPrint.TabIndex = 259;
             this.btnPrint.Text = "Print";
             this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.button1_Click);
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             this.btnPrint.MouseEnter += new System.EventHandler(this.btnSearch_MouseEnter);
             this.btnPrint.MouseLeave += new System.EventHandler(this.btnSearch_MouseLeave);
             // 
