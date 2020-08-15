@@ -321,7 +321,7 @@ namespace IMS_Client_2.StockManagement
         }
         private void GetItemDetailsByProductID(string _BarCodeValue)
         {
-            DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.GetProductDetailsByBarCode " + cmdFrom.SelectedValue + ", " + _BarCodeValue);
+            DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.GetProductDetailsByBarCode " + cmdFrom.SelectedValue + ", " + _BarCodeValue+",0");
             if (ObjUtil.ValidateTable(dt))
             {
                 string pID = dt.Rows[0]["ProductID"].ToString();
@@ -416,7 +416,15 @@ namespace IMS_Client_2.StockManagement
 
         private void dgvProductDetails_KeyDown(object sender, KeyEventArgs e)
         {
-            GetItemDetailsByProductID(txtBarCode.Text);
+            //if (e.KeyData==Keys.Enter)
+            //{
+            //    if (txtBarCode.Text.Trim().Length!=0)
+            //    {
+            //        GetItemDetailsByProductID(txtBarCode.Text);
+            //    }
+              
+            //}
+           
         }
 
         private void dgvProductDetails_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)

@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using CoreApp;
+using IMS_Client_2.Sales;
 
 namespace IMS_Client_2.Settings
 {
@@ -179,6 +180,10 @@ namespace IMS_Client_2.Settings
                 txtImagePath.Text = dt.Rows[0]["ImagePath"] == DBNull.Value ? "" : dt.Rows[0]["ImagePath"].ToString();
                 txtFileExtension.Text = dt.Rows[0]["Extension"] == DBNull.Value ? "" : dt.Rows[0]["Extension"].ToString();
 
+                chkSalesManName.Checked = dt.Rows[0]["SalesManIDMandatory"] == DBNull.Value ? false : Convert.ToBoolean(dt.Rows[0]["SalesManIDMandatory"]);
+                chkCustomerMobile.Checked = dt.Rows[0]["CustMobileMandatory"] == DBNull.Value ? false : Convert.ToBoolean(dt.Rows[0]["CustMobileMandatory"]);
+
+
                 //if (dt.Rows[0]["ImagePath"] != DBNull.Value)
                 //{
                 //    txtImagePath.Text = dt.Rows[0]["ImagePath"].ToString();
@@ -277,7 +282,8 @@ namespace IMS_Client_2.Settings
                     ObjDAL.UpdateColumnData("Extension", SqlDbType.NVarChar, GetExtension());
                     ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID);
                     ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-
+                    ObjDAL.UpdateColumnData("SalesManIDMandatory ", SqlDbType.Bit, chkSalesManName.Checked);
+                    ObjDAL.UpdateColumnData("CustMobileMandatory ", SqlDbType.Bit, chkCustomerMobile.Checked);
                     ObjDAL.UpdateData(clsUtility.DBName + ".dbo.DefaultStoreSetting", "1=1");
 
                     clsUtility.ShowInfoMessage("Settings has been updated.", clsUtility.strProjectTitle);
@@ -290,6 +296,8 @@ namespace IMS_Client_2.Settings
                     ObjDAL.SetColumnData("ImagePath", SqlDbType.NVarChar, txtImagePath.Text);
                     ObjDAL.SetColumnData("Extension", SqlDbType.NVarChar, GetExtension());
                     ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
+                    ObjDAL.SetColumnData("SalesManIDMandatory ", SqlDbType.Bit, chkSalesManName.Checked);
+                    ObjDAL.SetColumnData("CustMobileMandatory ", SqlDbType.Bit,chkCustomerMobile.Checked);
 
                     int r = ObjDAL.InsertData(clsUtility.DBName + ".[dbo].[DefaultStoreSetting]", false);
                     if (r > 0)
@@ -298,6 +306,11 @@ namespace IMS_Client_2.Settings
                     }
                     lblmsg.Visible = false;
                 }
+
+
+                Sales_Invoice._Is_SalesManIDMandat = chkSalesManName.Checked;
+                Sales_Invoice._Is_CustomerMobileMandat = chkCustomerMobile.Checked;
+            
             }
         }
 
@@ -529,6 +542,17 @@ namespace IMS_Client_2.Settings
                 int _stID = ObjDAL.ExecuteScalarInt(str);
                 cmbStoreCategory.SelectedIndex = _stID;
             }
+        }
+
+        private void button2_Click_2(object sender, EventArgs e)
+        {
+
+        }
+        private void SavemendatorySetting(bool SalesMan, bool CustMobile)
+        {
+
+           
+
         }
     }
 }

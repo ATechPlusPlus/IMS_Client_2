@@ -72,6 +72,7 @@ namespace IMS_Client_2.Other_Forms
             KNET_Number = "";
             VisaNumber = "";
             MasterCarNumber = "";
+            strAmountEntered = "0";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -141,13 +142,15 @@ namespace IMS_Client_2.Other_Forms
 
                 }
             }
+            strAmountEntered = txtAmount.Text;
             this.Close();
         }
-
+        public static string strAmountEntered = "0";
         private void button2_Click(object sender, EventArgs e)
         {
             txtPaymentAutoID.Clear();
             txtAmount.Text = "0";
+            strAmountEntered = "0";
             this.Close();
         }
 
@@ -229,6 +232,11 @@ namespace IMS_Client_2.Other_Forms
 
                 txtAmount.Focus();
             }
+        }
+
+        private void frmPayment_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //strAmountEntered = "0";
         }
     }
 }

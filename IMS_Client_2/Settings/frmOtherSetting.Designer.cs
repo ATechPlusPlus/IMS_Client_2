@@ -45,6 +45,8 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.txtFileExtension = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtImagePath = new System.Windows.Forms.TextBox();
@@ -63,6 +65,8 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.txtMachineName = new System.Windows.Forms.TextBox();
             this.cmbInvoicePrinter = new System.Windows.Forms.ComboBox();
@@ -73,10 +77,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.txtExtension = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.chkSalesManName = new System.Windows.Forms.CheckBox();
+            this.chkCustomerMobile = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -283,7 +285,9 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.chkCustomerMobile);
             this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Controls.Add(this.chkSalesManName);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.txtFileExtension);
             this.groupBox2.Controls.Add(this.label5);
@@ -297,15 +301,39 @@
             this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(8, 6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(427, 240);
+            this.groupBox2.Size = new System.Drawing.Size(427, 349);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Other Settings";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Transparent;
+            this.label12.Font = new System.Drawing.Font("Times New Roman", 11.25F);
+            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label12.Location = new System.Drawing.Point(177, 183);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(15, 17);
+            this.label12.TabIndex = 298;
+            this.label12.Text = "*";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.Transparent;
+            this.label11.Font = new System.Drawing.Font("Times New Roman", 11.25F);
+            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label11.Location = new System.Drawing.Point(409, 140);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(15, 17);
+            this.label11.TabIndex = 297;
+            this.label11.Text = "*";
+            // 
             // txtFileExtension
             // 
             this.txtFileExtension.BackColor = System.Drawing.Color.White;
-            this.txtFileExtension.Location = new System.Drawing.Point(92, 171);
+            this.txtFileExtension.Location = new System.Drawing.Point(92, 183);
             this.txtFileExtension.Name = "txtFileExtension";
             this.txtFileExtension.Size = new System.Drawing.Size(82, 25);
             this.txtFileExtension.TabIndex = 197;
@@ -315,7 +343,7 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(6, 176);
+            this.label5.Location = new System.Drawing.Point(6, 188);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(72, 17);
             this.label5.TabIndex = 196;
@@ -354,7 +382,7 @@
             this.btnFooterCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFooterCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnFooterCancel.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFooterCancel.Location = new System.Drawing.Point(335, 192);
+            this.btnFooterCancel.Location = new System.Drawing.Point(336, 301);
             this.btnFooterCancel.Name = "btnFooterCancel";
             this.btnFooterCancel.Size = new System.Drawing.Size(71, 25);
             this.btnFooterCancel.TabIndex = 2;
@@ -381,7 +409,7 @@
             this.btnFooterSave.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFooterSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnFooterSave.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFooterSave.Location = new System.Drawing.Point(247, 192);
+            this.btnFooterSave.Location = new System.Drawing.Point(248, 301);
             this.btnFooterSave.Name = "btnFooterSave";
             this.btnFooterSave.Size = new System.Drawing.Size(76, 25);
             this.btnFooterSave.TabIndex = 1;
@@ -543,6 +571,30 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Printer Setting";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.Transparent;
+            this.label10.Font = new System.Drawing.Font("Times New Roman", 11.25F);
+            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label10.Location = new System.Drawing.Point(388, 101);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(15, 17);
+            this.label10.TabIndex = 296;
+            this.label10.Text = "*";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.Transparent;
+            this.label9.Font = new System.Drawing.Font("Times New Roman", 11.25F);
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label9.Location = new System.Drawing.Point(388, 64);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(15, 17);
+            this.label9.TabIndex = 295;
+            this.label9.Text = "*";
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -660,53 +712,25 @@
             this.txtExtension.TabIndex = 82;
             this.txtExtension.Text = "Other Settings";
             // 
-            // label9
+            // chkSalesManName
             // 
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.Color.Transparent;
-            this.label9.Font = new System.Drawing.Font("Times New Roman", 11.25F);
-            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label9.Location = new System.Drawing.Point(388, 64);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(15, 17);
-            this.label9.TabIndex = 295;
-            this.label9.Text = "*";
+            this.chkSalesManName.AutoSize = true;
+            this.chkSalesManName.Location = new System.Drawing.Point(14, 229);
+            this.chkSalesManName.Name = "chkSalesManName";
+            this.chkSalesManName.Size = new System.Drawing.Size(238, 21);
+            this.chkSalesManName.TabIndex = 3;
+            this.chkSalesManName.Text = "Sales Man Name  ( Sales Window )";
+            this.chkSalesManName.UseVisualStyleBackColor = true;
             // 
-            // label10
+            // chkCustomerMobile
             // 
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.Font = new System.Drawing.Font("Times New Roman", 11.25F);
-            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label10.Location = new System.Drawing.Point(388, 101);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(15, 17);
-            this.label10.TabIndex = 296;
-            this.label10.Text = "*";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.BackColor = System.Drawing.Color.Transparent;
-            this.label11.Font = new System.Drawing.Font("Times New Roman", 11.25F);
-            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label11.Location = new System.Drawing.Point(409, 140);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(15, 17);
-            this.label11.TabIndex = 297;
-            this.label11.Text = "*";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.BackColor = System.Drawing.Color.Transparent;
-            this.label12.Font = new System.Drawing.Font("Times New Roman", 11.25F);
-            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label12.Location = new System.Drawing.Point(177, 171);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(15, 17);
-            this.label12.TabIndex = 298;
-            this.label12.Text = "*";
+            this.chkCustomerMobile.AutoSize = true;
+            this.chkCustomerMobile.Location = new System.Drawing.Point(14, 260);
+            this.chkCustomerMobile.Name = "chkCustomerMobile";
+            this.chkCustomerMobile.Size = new System.Drawing.Size(229, 21);
+            this.chkCustomerMobile.TabIndex = 4;
+            this.chkCustomerMobile.Text = "Customer Mobile ( Sales Window)";
+            this.chkCustomerMobile.UseVisualStyleBackColor = true;
             // 
             // frmOtherSetting
             // 
@@ -790,5 +814,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.CheckBox chkCustomerMobile;
+        private System.Windows.Forms.CheckBox chkSalesManName;
     }
 }

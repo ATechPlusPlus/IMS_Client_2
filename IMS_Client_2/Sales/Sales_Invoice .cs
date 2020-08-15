@@ -30,10 +30,45 @@ namespace IMS_Client_2.Sales
         bool isSalesManbind = false;
         decimal _StartValue = 0;
 
+
+      public static  bool _Is_SalesManIDMandat = false;
+        public static bool _Is_CustomerMobileMandat = false;
+
         DataTable dtItemDetails = new DataTable();
 
         Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
         Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
+        private void GetLastSalesMan()
+        {
+            string strQ = "select top(1) SalesMan from SalesInvoiceDetails where ShopeID="+cmbShop.SelectedValue+" order  by ID  desc";
+
+           int SalesManID= ObjDAL.ExecuteScalarInt(strQ);
+            if (SalesManID==0)
+            {
+                txtEmpID.Text = "0";
+            }
+            else
+            {
+                txtEmpID.Text = SalesManID.ToString();
+
+                string strQ2 = "select Name from EmployeeDetails where EmpID="+ SalesManID;
+
+              object name=  ObjDAL.ExecuteScalar(strQ2);
+                if (name!=null)
+                {
+                    isSalesManbind = true;
+                    txtSalesMan.Text = name.ToString();
+                }
+
+
+            }
+
+         
+
+
+
+
+        }
         private void Sales_Invoice_Load(object sender, EventArgs e)
         {
 
@@ -50,6 +85,8 @@ namespace IMS_Client_2.Sales
             dtpSalesDate.Value = DateTime.Now;
             txtBarCode.Focus();
             dtpSalesDate.MaxDate = DateTime.Now;
+            BindMandetorySettings();
+            GetLastSalesMan();
             if (!IsReplaceReturnMode)
             {
                 //radNewItem.Visible = false;
@@ -64,6 +101,20 @@ namespace IMS_Client_2.Sales
                 label16.Enabled = true;
                 // txtOldBillAmount.Enabled = true;
             }
+        }
+        private void BindMandetorySettings()
+        {
+            string strQ = " select SalesManIDMandatory, CustMobileMandatory FROM "+clsUtility.DBName+".[dbo].[DefaultStoreSetting]";
+
+            DataTable dtmandat= ObjDAL.ExecuteSelectStatement(strQ);
+            if (dtmandat.Rows.Count>0)
+            {
+               _Is_SalesManIDMandat = dtmandat.Rows[0]["SalesManIDMandatory"] == DBNull.Value ? false : Convert.ToBoolean(dtmandat.Rows[0]["SalesManIDMandatory"]);
+                _Is_CustomerMobileMandat = dtmandat.Rows[0]["CustMobileMandatory"] == DBNull.Value ? false : Convert.ToBoolean(dtmandat.Rows[0]["CustMobileMandatory"]);
+
+
+            }
+
         }
         private void btnAdd_MouseEnter(object sender, EventArgs e)
         {
@@ -90,7 +141,7 @@ namespace IMS_Client_2.Sales
 
             dtItemDetails.Columns.Add("OIRate");
             dtItemDetails.Columns.Add("Adj_Amount");
-            dtItemDetails.Columns.Add("Total");
+            dtItemDetails.Columns.Add("Total", typeof(decimal));
             dtItemDetails.Columns.Add("Delete");
             dtItemDetails.Columns.Add("SubProductID");
             dtItemDetails.Columns.Add("IsReplaceReturn", typeof(Boolean));
@@ -137,6 +188,7 @@ namespace IMS_Client_2.Sales
             //}
         }
 
+        
         private bool IsItemExist(string barCode, bool isReturn)
         {
             if (isReturn)
@@ -192,7 +244,7 @@ namespace IMS_Client_2.Sales
             }
             else
             {
-                if (CheckProductQTY(barCode, Convert.ToDecimal(NewQTY)))
+                if (CheckProductQTY(barCode, Convert.ToDecimal(NewQTY), isReplacereturn))
                 {
                     // set to col
                     dRow[0]["QTY"] = NewQTY.ToString();
@@ -313,19 +365,36 @@ namespace IMS_Client_2.Sales
         {
             if (e.KeyData == Keys.Enter)
             {
-                if (txtCustomerMobile.Text.Trim().Length == 0)
+                if (_Is_CustomerMobileMandat)
                 {
-                    txtCustomerMobile.Focus();
+                    if (txtCustomerMobile.Text.Trim().Length == 0)
+                    {
+                        txtCustomerMobile.Focus();
+                    }
+
+                }
+                else
+                {
+                    txtGrandTotal.Focus();
                 }
             }
         }
 
         private void Sales_Invoice_CellClick1(object sender, DataGridViewCellEventArgs e)
         {
-            if (txtCustomerMobile.Text.Trim().Length == 0)
+            if (_Is_CustomerMobileMandat)
             {
-                txtCustomerMobile.Focus();
+                if (txtCustomerMobile.Text.Trim().Length == 0)
+                {
+                    txtCustomerMobile.Focus();
+                }
+
             }
+            else
+            {
+                txtGrandTotal.Focus();
+            }
+
         }
 
         private Image GetProductPhoto(int SubProductID)
@@ -416,31 +485,15 @@ namespace IMS_Client_2.Sales
         }
 
 
-        private bool CheckProductQTY(string _BarCoeNumber, decimal CurQTY)
+        private bool CheckProductQTY(string _BarCoeNumber, decimal CurQTY, bool isReplaceReturn)
         {
-            string strSQL = "SELECT QTY FROM  " + clsUtility.DBName + ".[dbo].[ProductStockColorSizeMaster] WITH(NOLOCK) WHERE BarcodeNo=" + _BarCoeNumber + " AND StoreID=" + cmbShop.SelectedValue.ToString();
-
-            decimal TotalQTY = Convert.ToDecimal(ObjDAL.ExecuteScalar(strSQL));
-
-            if (CurQTY > TotalQTY)
+            // dont check the shop if item is returning, item can be return from any shope
+            if (!isReplaceReturn)
             {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-        private bool CheckReplaceProductQTY(string _BarCoeNumber, decimal CurQTY)
-        {
-            int TotalQTY = 0;
-            ObjDAL.SetStoreProcedureData("InvoiceID", SqlDbType.Int, frmReplaceReturnPopup.strInvoiceID);
-            ObjDAL.SetStoreProcedureData("BarCode", SqlDbType.NVarChar, _BarCoeNumber);
+                string strSQL = "SELECT QTY FROM  " + clsUtility.DBName + ".[dbo].[ProductStockColorSizeMaster] WITH(NOLOCK) WHERE BarcodeNo=" + _BarCoeNumber + " AND StoreID=" + cmbShop.SelectedValue.ToString();
 
-            DataSet dataSet = ObjDAL.ExecuteStoreProcedure_Get("spr_GetReplaceReturnDetails");
-            if (dataSet.Tables.Count > 0)
-            {
-                TotalQTY = Convert.ToInt32(dataSet.Tables[0].Rows[0]["QTY"]);
+                decimal TotalQTY = Convert.ToDecimal(ObjDAL.ExecuteScalar(strSQL));
+
                 if (CurQTY > TotalQTY)
                 {
                     return false;
@@ -450,7 +503,38 @@ namespace IMS_Client_2.Sales
                     return true;
                 }
             }
-            return false;
+
+            return true;
+        }
+        private bool CheckReplaceProductQTY(string _BarCoeNumber, decimal CurQTY)
+        {
+            if (frmReplaceReturnPopup.strInvoiceID=="0")
+            {
+                // we dont know the invoice so keep adding whatever customer is giving in return.
+                return true;
+            }
+            else
+            {
+                int TotalQTY = 0;
+                ObjDAL.SetStoreProcedureData("InvoiceID", SqlDbType.Int, frmReplaceReturnPopup.strInvoiceID);
+                ObjDAL.SetStoreProcedureData("BarCode", SqlDbType.NVarChar, _BarCoeNumber);
+
+                DataSet dataSet = ObjDAL.ExecuteStoreProcedure_Get("spr_GetReplaceReturnDetails");
+                if (dataSet.Tables.Count > 0)
+                {
+                    TotalQTY = Convert.ToInt32(dataSet.Tables[0].Rows[0]["QTY"]);
+                    if (CurQTY > TotalQTY)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+           
         }
 
         private bool CheckProductQTY_Non_BarCode(string PID, string SizeID, string ColorID, decimal CurQTY)
@@ -469,7 +553,7 @@ namespace IMS_Client_2.Sales
         }
         private void GetItemDetailsByProductID(string _BarCodeValue, bool isReplaceReturn)
         {
-            DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.GetProductDetailsByBarCode " + cmbShop.SelectedValue + ", " + _BarCodeValue);
+            DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.GetProductDetailsByBarCode " + cmbShop.SelectedValue + ", " + _BarCodeValue+ ","+ isReplaceReturn);
             if (ObjUtil.ValidateTable(dt))
             {
                 string pID = dt.Rows[0]["ProductID"].ToString();
@@ -494,13 +578,13 @@ namespace IMS_Client_2.Sales
                 decimal total = Convert.ToDecimal(rate) * Convert.ToDecimal(qty);
                 string subProductID = dt.Rows[0]["SubProductID"].ToString();
 
-                if (CheckProductQTY(barCode, Convert.ToDecimal(qty)))
+                if (CheckProductQTY(barCode, Convert.ToDecimal(qty), isReplaceReturn))
                 {
                     // if Item already there in the grid, then just increase the QTY
                     //may be invoice ID is not given and returning, but we will get to know by F7
                     if (IsItemExist(barCode, isReplaceReturn))
                     {
-                        UpdateQTYByOne(barCode.ToString(), Convert.ToDecimal(rate), false);
+                        UpdateQTYByOne(barCode.ToString(), Convert.ToDecimal(rate), isReplaceReturn);
                         picProduct.Image = GetProductPhoto(Convert.ToInt32(subProductID));
                     }
                     else
@@ -531,7 +615,7 @@ namespace IMS_Client_2.Sales
 
         private void CountQTY()
         {
-            object ob = dtItemDetails.Compute("SUM(QTY)", null);
+            object ob = dtItemDetails.Compute("SUM(QTY)", "Total > 0");
             txtTotalItems.Text = "Total QTY :" + ob.ToString();
         }
         private void dgvProductDetails_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -565,7 +649,7 @@ namespace IMS_Client_2.Sales
                 decimal Rate = Convert.ToDecimal(dgvProductDetails.Rows[e.RowIndex].Cells["Rate"].Value);
                 decimal Total = QTY * Rate;
                 string _barNo = dgvProductDetails.Rows[e.RowIndex].Cells["Barcodeno"].Value.ToString();
-
+                bool _isRepLaceR = Convert.ToBoolean(dgvProductDetails.Rows[e.RowIndex].Cells["IsReplaceReturn"].Value);
                 if (_barNo.Trim().Length == 0) // if barcode not found
                 {
                     if (CheckProductQTY_Non_BarCode(pID, sizeid, colorid, QTY))
@@ -583,7 +667,7 @@ namespace IMS_Client_2.Sales
                 }
                 else
                 {
-                    if (CheckProductQTY(_barNo, Convert.ToDecimal(QTY)))
+                    if (CheckProductQTY(_barNo, Convert.ToDecimal(QTY), _isRepLaceR))
                     {
                         dgvProductDetails.Rows[e.RowIndex].Cells["Total"].Value = Total.ToString();
                         CalculateGrandTotal();
@@ -671,6 +755,7 @@ namespace IMS_Client_2.Sales
 
         private void ClearAll()
         {
+            frmPayment.strAmountEntered = "0";
             IsReplaceReturnMode = false;
             Sales.frmReplaceReturnPopup.strReplaceInvoiceNumber = "0";
             Sales.frmReplaceReturnPopup.IsReplaceInvoice = false;
@@ -706,7 +791,7 @@ namespace IMS_Client_2.Sales
             picProduct.Image = null;
             BindStoreDetails();
 
-            txtSalesMan.Clear();
+          //  txtSalesMan.Clear();
             txtColorID.Clear();
             txtSizeID.Clear();
 
@@ -723,18 +808,30 @@ namespace IMS_Client_2.Sales
         }
         private bool SalesValidation(bool isSave)
         {
-            if (txtCustomerID.Text.Trim().Length == 0)
+            if (_Is_SalesManIDMandat)
             {
-                clsUtility.ShowInfoMessage("Please Enter Customer Mobile No.", clsUtility.strProjectTitle);
-                txtCustomerMobile.Focus();
-                return false;
+                if (txtEmpID.Text.Trim().Length == 0)
+                {
+                    clsUtility.ShowInfoMessage("Please Enter Sales Man Employee Code/ID.", clsUtility.strProjectTitle);
+                    txtSalesMan.Focus();
+                    return false;
+                }
+
             }
-            if (txtEmpID.Text.Trim().Length == 0)
+           
+
+            if (_Is_CustomerMobileMandat)
             {
-                clsUtility.ShowInfoMessage("Please Enter Sales Man Employee Code/ID.", clsUtility.strProjectTitle);
-                txtSalesMan.Focus();
-                return false;
+                if (txtCustomerID.Text.Trim().Length == 0)
+                {
+                    clsUtility.ShowInfoMessage("Please Enter Customer Mobile No.", clsUtility.strProjectTitle);
+                    txtCustomerMobile.Focus();
+                    return false;
+                }
+
             }
+          
+
 
             if (Convert.ToDecimal(txtGrandTotal.Text) > 0)
             {
@@ -890,8 +987,25 @@ namespace IMS_Client_2.Sales
             ObjDAL.SetColumnData("Tax", SqlDbType.Decimal, txtDeliveryCharges.Text);
             ObjDAL.SetColumnData("GrandTotal", SqlDbType.Decimal, txtGrandTotal.Text);
             ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
-            ObjDAL.SetColumnData("CustomerID", SqlDbType.Int, txtCustomerID.Text);
-            ObjDAL.SetColumnData("SalesMan", SqlDbType.Int, txtEmpID.Text);
+            if (txtCustomerID.Text.Trim().Length==0)
+            {
+                ObjDAL.SetColumnData("CustomerID", SqlDbType.Int, 0);
+            }
+            else
+            {
+                ObjDAL.SetColumnData("CustomerID", SqlDbType.Int, txtCustomerID.Text);
+            }
+
+
+            if (txtEmpID.Text.Trim().Length==0)
+            {
+                ObjDAL.SetColumnData("SalesMan", SqlDbType.Int, 0);
+            }
+            else
+            {
+                ObjDAL.SetColumnData("SalesMan", SqlDbType.Int, txtEmpID.Text);
+            }
+           
             ObjDAL.SetColumnData("ShopeID", SqlDbType.Int, cmbShop.SelectedValue.ToString());
 
             ObjDAL.SetColumnData("CashTendered", SqlDbType.Decimal, txtCashTendered.Text);
@@ -1228,35 +1342,72 @@ namespace IMS_Client_2.Sales
         {
             if (e.KeyData == Keys.Enter)
             {
-                if (txtSalesMan.Text.Trim().Length == 0)
+                if (_Is_SalesManIDMandat)
                 {
-                    txtSalesMan.Focus();
+                    if (txtSalesMan.Text.Trim().Length == 0)
+                    {
+                        txtSalesMan.Focus();
+                    }
+
+                }
+                else
+                {
+                    txtGrandTotal.Focus();
                 }
             }
         }
 
         private void Sales_Invoice_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (txtSalesMan.Text.Trim().Length == 0)
+            if (_Is_SalesManIDMandat)
             {
-                txtSalesMan.Focus();
+                if (txtSalesMan.Text.Trim().Length == 0)
+                {
+                    txtSalesMan.Focus();
+                }
+
             }
+            else
+            {
+                txtGrandTotal.Focus();
+            }
+           
         }
 
         private void picCash_Click(object sender, EventArgs e)
         {
-            if (txtCustomerID.Text.Trim().Length == 0)
+            if (_Is_SalesManIDMandat)
             {
-                clsUtility.ShowInfoMessage("Please Enter Customer Mobile No.", clsUtility.strProjectTitle);
-                txtCustomerMobile.Focus();
-                return;
+                if (txtEmpID.Text.Trim().Length == 0)
+                {
+                    clsUtility.ShowInfoMessage("Please Enter Sales Man Employee Code/ID.", clsUtility.strProjectTitle);
+                    txtSalesMan.Focus();
+                    return;
+
+                }
             }
-            if (txtEmpID.Text.Trim().Length == 0)
+            else
             {
-                clsUtility.ShowInfoMessage("Please Enter Sales Man Employee Code/ID.", clsUtility.strProjectTitle);
-                txtSalesMan.Focus();
-                return;
+              
+                txtGrandTotal.Focus();
             }
+
+            if (_Is_CustomerMobileMandat)
+            {
+                if (txtCustomerID.Text.Trim().Length == 0)
+                {
+                    clsUtility.ShowInfoMessage("Please Enter Customer Mobile No.", clsUtility.strProjectTitle);
+                    txtCustomerMobile.Focus();
+                    return ;
+                }
+
+            }
+            else
+            {
+              
+              
+            }
+
 
             //lblPMode.Text = "Cash";
             Other_Forms.frmPayment frmPayment = new Other_Forms.frmPayment();
@@ -1270,24 +1421,43 @@ namespace IMS_Client_2.Sales
             txtCredit.Text = Other_Forms.frmPayment.GetTotalCreditAmount().ToString();
             txtCashTendered.Text = Other_Forms.frmPayment.GetTotalCash().ToString();
             txtGrandTotal.Focus();
-
-            CalculateChange();
+            if (frmPayment.strAmountEntered!="0")
+            {
+                CalculateChange();
+            }
+          
         }
         private void picKnet_Click(object sender, EventArgs e)
         {
-            if (txtCustomerID.Text.Trim().Length == 0)
+            if (_Is_SalesManIDMandat)
             {
-                clsUtility.ShowInfoMessage("Please Enter Customer Mobile No.", clsUtility.strProjectTitle);
-                txtCustomerMobile.Focus();
-                return;
+                if (txtEmpID.Text.Trim().Length == 0)
+                {
+                    clsUtility.ShowInfoMessage("Please Enter Sales Man Employee Code/ID.", clsUtility.strProjectTitle);
+                    txtSalesMan.Focus();
+                    return;
+
+                }
             }
-            if (txtEmpID.Text.Trim().Length == 0)
+            else
             {
-                clsUtility.ShowInfoMessage("Please Enter Sales Man Employee Code/ID.", clsUtility.strProjectTitle);
-                txtSalesMan.Focus();
-                return;
+               
             }
 
+            if (_Is_CustomerMobileMandat)
+            {
+                if (txtCustomerID.Text.Trim().Length == 0)
+                {
+                    clsUtility.ShowInfoMessage("Please Enter Customer Mobile No.", clsUtility.strProjectTitle);
+                    txtCustomerMobile.Focus();
+                    return;
+                }
+
+            }
+            else
+            {
+               
+            }
             //lblPMode.Text = "K Net";
             Other_Forms.frmPayment frmPayment = new Other_Forms.frmPayment();
 
@@ -1300,7 +1470,10 @@ namespace IMS_Client_2.Sales
 
             txtGrandTotal.Focus();
 
-            CalculateChange();
+            if (frmPayment.strAmountEntered != "0")
+            {
+                CalculateChange();
+            }
         }
         private void CalculateChange()
         {
@@ -1313,17 +1486,34 @@ namespace IMS_Client_2.Sales
 
         private void picVisa_Click(object sender, EventArgs e)
         {
-            if (txtCustomerID.Text.Trim().Length == 0)
+            if (_Is_SalesManIDMandat)
             {
-                clsUtility.ShowInfoMessage("Please Enter Customer Mobile No.", clsUtility.strProjectTitle);
-                txtCustomerMobile.Focus();
-                return;
+                if (txtEmpID.Text.Trim().Length == 0)
+                {
+                    clsUtility.ShowInfoMessage("Please Enter Sales Man Employee Code/ID.", clsUtility.strProjectTitle);
+                    txtSalesMan.Focus();
+                    return;
+
+                }
             }
-            if (txtEmpID.Text.Trim().Length == 0)
+            else
             {
-                clsUtility.ShowInfoMessage("Please Enter Sales Man Employee Code/ID.", clsUtility.strProjectTitle);
-                txtSalesMan.Focus();
-                return;
+               
+            }
+
+            if (_Is_CustomerMobileMandat)
+            {
+                if (txtCustomerID.Text.Trim().Length == 0)
+                {
+                    clsUtility.ShowInfoMessage("Please Enter Customer Mobile No.", clsUtility.strProjectTitle);
+                    txtCustomerMobile.Focus();
+                    return;
+                }
+
+            }
+            else
+            {
+                
             }
             //lblPMode.Text = "Visa";
             Other_Forms.frmPayment frmPayment = new Other_Forms.frmPayment();
@@ -1337,21 +1527,41 @@ namespace IMS_Client_2.Sales
 
             txtGrandTotal.Focus();
 
-            CalculateChange();
+            if (frmPayment.strAmountEntered != "0")
+            {
+                CalculateChange();
+            }
         }
         private void PicMaster_Click(object sender, EventArgs e)
         {
-            if (txtCustomerID.Text.Trim().Length == 0)
+            if (_Is_SalesManIDMandat)
             {
-                clsUtility.ShowInfoMessage("Please Enter Customer Mobile No.", clsUtility.strProjectTitle);
-                txtCustomerMobile.Focus();
-                return;
+                if (txtEmpID.Text.Trim().Length == 0)
+                {
+                    clsUtility.ShowInfoMessage("Please Enter Sales Man Employee Code/ID.", clsUtility.strProjectTitle);
+                    txtSalesMan.Focus();
+                    return;
+
+                }
             }
-            if (txtEmpID.Text.Trim().Length == 0)
+            else
             {
-                clsUtility.ShowInfoMessage("Please Enter Sales Man Employee Code/ID.", clsUtility.strProjectTitle);
-                txtSalesMan.Focus();
-                return;
+               
+            }
+
+            if (_Is_CustomerMobileMandat)
+            {
+                if (txtCustomerID.Text.Trim().Length == 0)
+                {
+                    clsUtility.ShowInfoMessage("Please Enter Customer Mobile No.", clsUtility.strProjectTitle);
+                    txtCustomerMobile.Focus();
+                    return;
+                }
+
+            }
+            else
+            {
+               
             }
 
             //lblPMode.Text = "Master Card";
@@ -1366,7 +1576,10 @@ namespace IMS_Client_2.Sales
 
             txtGrandTotal.Focus();
 
-            CalculateChange();
+            if (frmPayment.strAmountEntered != "0")
+            {
+                CalculateChange();
+            }
         }
 
         private void lblActiveStatus_Click(object sender, EventArgs e)
@@ -1711,6 +1924,35 @@ namespace IMS_Client_2.Sales
             }
             
            
+        }
+
+        private void dgvProductDetails_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            if (txtEmpID.Visible)
+            {
+                txtEmpID.Visible = false;
+            }
+            else
+            {
+                txtEmpID.Visible = true;
+            }
+        }
+
+        private void lblCategoryName_Click(object sender, EventArgs e)
+        {
+            if (txtCustomerID.Visible)
+            {
+                txtCustomerID.Visible = false;
+            }
+            else
+            {
+                txtCustomerID.Visible = true;
+            }
         }
     }
 }

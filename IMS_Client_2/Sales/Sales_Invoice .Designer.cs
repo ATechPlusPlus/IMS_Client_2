@@ -102,7 +102,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSaveData = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
@@ -229,7 +228,8 @@
             // 
             // txtCustomerID
             // 
-            this.txtCustomerID.BackColor = System.Drawing.Color.White;
+            this.txtCustomerID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.txtCustomerID.Enabled = false;
             this.txtCustomerID.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCustomerID.Location = new System.Drawing.Point(808, 6);
             this.txtCustomerID.Name = "txtCustomerID";
@@ -250,7 +250,8 @@
             // 
             // txtEmpID
             // 
-            this.txtEmpID.BackColor = System.Drawing.Color.White;
+            this.txtEmpID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.txtEmpID.Enabled = false;
             this.txtEmpID.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmpID.Location = new System.Drawing.Point(738, 6);
             this.txtEmpID.Name = "txtEmpID";
@@ -368,6 +369,7 @@
             this.lblCategoryName.Size = new System.Drawing.Size(86, 17);
             this.lblCategoryName.TabIndex = 192;
             this.lblCategoryName.Text = "Cust Mobile :";
+            this.lblCategoryName.Click += new System.EventHandler(this.lblCategoryName_Click);
             // 
             // lblActiveStatus
             // 
@@ -439,6 +441,7 @@
             this.label3.Size = new System.Drawing.Size(77, 17);
             this.label3.TabIndex = 198;
             this.label3.Text = "Sales Man :";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // txtSalesMan
             // 
@@ -504,6 +507,7 @@
             this.dgvProductDetails.TabIndex = 0;
             this.dgvProductDetails.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvProductDetails_CellBeginEdit);
             this.dgvProductDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellClick);
+            this.dgvProductDetails.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellContentClick);
             this.dgvProductDetails.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellEndEdit);
             this.dgvProductDetails.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvProductDetails_CellValidating);
             this.dgvProductDetails.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvProductDetails_ColumnAdded);
@@ -927,24 +931,13 @@
             this.label16.AutoSize = true;
             this.label16.BackColor = System.Drawing.Color.Transparent;
             this.label16.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(209, 11);
+            this.label16.Location = new System.Drawing.Point(602, 15);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(109, 17);
             this.label16.TabIndex = 218;
             this.label16.Text = "Old Bill Amount :";
             this.label16.Visible = false;
             this.label16.Click += new System.EventHandler(this.label16_Click);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.BackColor = System.Drawing.Color.Transparent;
-            this.label11.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(18, 14);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(105, 17);
-            this.label11.TabIndex = 214;
-            this.label11.Text = "Payment Mode :";
             // 
             // panel1
             // 
@@ -956,7 +949,6 @@
             this.panel1.Controls.Add(this.label16);
             this.panel1.Controls.Add(this.btnAdd);
             this.panel1.Controls.Add(this.btnSave);
-            this.panel1.Controls.Add(this.label11);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 656);
             this.panel1.Name = "panel1";
@@ -1318,7 +1310,6 @@
         private System.Windows.Forms.PictureBox picVisa;
         private System.Windows.Forms.PictureBox picCash;
         private System.Windows.Forms.PictureBox picKnet;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.TextBox txtCustomerName;
         private System.Windows.Forms.TextBox txtColorID;

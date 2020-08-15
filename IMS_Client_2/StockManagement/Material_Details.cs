@@ -396,17 +396,17 @@ namespace IMS_Client_2.StockManagement
 
         private void printBarcodeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DataGridViewSelectedRowCollection dgvRows = dgvProductDetails.SelectedRows;
-            if (dgvProductDetails.SelectedRows != null && dgvProductDetails.SelectedRows.Count > 0)
-            {
-                Barcode.frmBarCodeStockPopup frmBarCode = new Barcode.frmBarCodeStockPopup();
-                frmBarCode.dgvRows = dgvRows;
-                frmBarCode.ShowDialog();
-            }
-            else
-            {
-                clsUtility.ShowInfoMessage("Please select record.", clsUtility.strProjectTitle);
-            }
+            //DataGridViewSelectedRowCollection dgvRows = dgvProductDetails.SelectedRows;
+            //if (dgvProductDetails.SelectedRows != null && dgvProductDetails.SelectedRows.Count > 0)
+            //{
+            //    Barcode.frmBarCodeStockPopup frmBarCode = new Barcode.frmBarCodeStockPopup();
+            //    frmBarCode.dgvRows = dgvRows;
+            //    frmBarCode.ShowDialog();
+            //}
+            //else
+            //{
+            //    clsUtility.ShowInfoMessage("Please select record.", clsUtility.strProjectTitle);
+            //}
         }
 
         private void txtSearchByStyleNo_TextChanged(object sender, EventArgs e)
