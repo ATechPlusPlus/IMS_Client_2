@@ -30,6 +30,10 @@ namespace IMS_Client_2.Purchase
                 txtSupplierBillNo.Focus();
                 return;
             }
+            dgvPurchaseInvoiceDetail.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+            //Most time consumption enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+            dgvPurchaseInvoiceDetail.RowHeadersVisible = false; // set it to false if not needed
+
             dgvPurchaseItem.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
             //Most time consumption enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
             dgvPurchaseItem.RowHeadersVisible = false; // set it to false if not needed

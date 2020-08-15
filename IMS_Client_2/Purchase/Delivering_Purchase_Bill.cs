@@ -631,7 +631,7 @@ namespace IMS_Client_2.Purchase
                         ObjDAL.UpdateColumnData("ProductID", SqlDbType.Int, ProductID);
                         ObjDAL.UpdateColumnData("SupplierBillNo", SqlDbType.NVarChar, txtSupplierBillNo.Text.Trim());
                         ObjDAL.UpdateColumnData("SizeTypeID", SqlDbType.Int, cmbSizeType.SelectedValue);
-                        ObjDAL.UpdateColumnData("ModelNo", SqlDbType.NVarChar, listBoxStyleNo.SelectedItem);
+                        ObjDAL.UpdateColumnData("ModelNo", SqlDbType.NVarChar, cmbListBox.Text);
                         ObjDAL.UpdateColumnData("StoreID", SqlDbType.Int, cmbStore.SelectedValue);
                         ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
                         ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
@@ -785,6 +785,10 @@ namespace IMS_Client_2.Purchase
         {
             if (!ObjUtil.IsControlTextEmpty(txtPurchaseInvoiceID))
             {
+                dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+                //Most time consumption enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+                dataGridView1.RowHeadersVisible = false; // set it to false if not needed
+
                 DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".[dbo].[Get_Delivering_PurchaseInvoice_BillDetails] " + txtPurchaseInvoiceID.Text + ",1");
                 if (ObjUtil.ValidateTable(dt))
                 {

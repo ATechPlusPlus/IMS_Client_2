@@ -168,9 +168,9 @@ namespace IMS_Client_2
                 btnOpenCash.BackgroundImage = B_Leave;
 
                 clsUtility.DBName = "IMS_Client_2";
-                //clsUtility.LoginID = 1;
+                clsUtility.LoginID = 2;
                 //clsUtility.IsAdmin = false;
-                //clsUtility.IsAdmin = true;
+                clsUtility.IsAdmin = true;
                 clsUtility.strProjectTitle = "IMS";
                 if (clsUtility.LoginID > 0)
                 {
@@ -675,22 +675,11 @@ namespace IMS_Client_2
 
         private void userCreationToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            //if (!ObjUserManag.IsHandleCreated)
-            //{
-            //    ObjUserManag = null;
-            //    ObjUserManag = new UserManagement.frmUserManagement();
-            //    ObjUserManag.LoginStatus(clsUtility.LoginID, clsUtility.IsAdmin);
-            //    ObjUserManag.Show();
-            //    ObjUserManag.BringToFront();
-            //}
-            //ObjUserManag.LoginStatus(clsUtility.LoginID, clsUtility.IsAdmin);
-            //ObjUserManag.Show();
-            //ObjUserManag.BringToFront();
-
             bool b = ObjUtil.IsAlreadyOpen(typeof(UserManagement.frmUserManagement));
             if (!b)
             {
                 UserManagement.frmUserManagement ObjUserManag = new UserManagement.frmUserManagement();
+                ObjUserManag.LoginStatus(clsUtility.LoginID, clsUtility.IsAdmin);
                 ObjUserManag.Show();
             }
         }
@@ -723,7 +712,6 @@ namespace IMS_Client_2
             {
                 clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
-
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -782,10 +770,6 @@ namespace IMS_Client_2
             }
         }
 
-        //private int GetDefaultStoreID()
-        //{
-        //    return ObjDAL.ExecuteScalarInt("SELECT StoreID FROM " + clsUtility.DBName + ".dbo.DefaultStoreSetting WITH(NOLOCK) WHERE MachineName='" + Environment.MachineName + "'");
-        //}
         private void OpenCashBox()
         {
             string NexCashNumber = GetCashNumber();
@@ -805,7 +789,6 @@ namespace IMS_Client_2
                 btnOpenCash.Text = "View Details";
                 LoadCashStatus();
             }
-
         }
         private string GetCashNumber()
         {

@@ -370,7 +370,6 @@
             this.barCodeToolStripMenuItem.Name = "barCodeToolStripMenuItem";
             this.barCodeToolStripMenuItem.Size = new System.Drawing.Size(229, 24);
             this.barCodeToolStripMenuItem.Text = "Bar Code Manually Print";
-            this.barCodeToolStripMenuItem.Visible = false;
             this.barCodeToolStripMenuItem.Click += new System.EventHandler(this.barCodeToolStripMenuItem_Click);
             // 
             // quickBarcodePrintToolStripMenuItem

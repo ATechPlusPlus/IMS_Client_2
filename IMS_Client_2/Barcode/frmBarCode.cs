@@ -944,18 +944,22 @@ namespace IMS_Client_2.Barcode
         {
             try
             {
-                DataTable dtBarCode = (DataTable)dgvProductDetails.DataSource;
-                DataTable dtBarCodePrint = (DataTable)dataGridView1.DataSource;
-                if (ObjUtil.ValidateTable(dtBarCode) || ObjUtil.ValidateTable(dtBarCodePrint))
+                bool b = clsUtility.ShowQuestionMessage("Are you Sure want to reset Print count?");
+                if (b)
                 {
-                    int a = ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.ProductStockMaster SET PrintCount = 0 WHERE PurchaseInvoiceID = " + txtPurchaseID.Text + " AND StoreID = " + frmHome.Home_StoreID);
-                    if (a > 0)
+                    DataTable dtBarCode = (DataTable)dgvProductDetails.DataSource;
+                    DataTable dtBarCodePrint = (DataTable)dataGridView1.DataSource;
+                    if (ObjUtil.ValidateTable(dtBarCode) || ObjUtil.ValidateTable(dtBarCodePrint))
                     {
-                        clsUtility.ShowInfoMessage("BarCode Print Count is reset for Supplier Bill NO. " + txtPurchaseInvoice.Text.Trim());
-                        LoadData();
+                        int a = ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.ProductStockMaster SET PrintCount = 0 WHERE PurchaseInvoiceID = " + txtPurchaseID.Text + " AND StoreID = " + frmHome.Home_StoreID);
+                        if (a > 0)
+                        {
+                            clsUtility.ShowInfoMessage("BarCode Print Count is reset for Supplier Bill NO. " + txtPurchaseInvoice.Text.Trim());
+                            LoadData();
+                        }
+                        else
+                            clsUtility.ShowInfoMessage("Unable to reset BarCode Print Count for Supplier Bill NO. " + txtPurchaseInvoice.Text.Trim());
                     }
-                    else
-                        clsUtility.ShowInfoMessage("Unable to reset BarCode Print Count for Supplier Bill NO. " + txtPurchaseInvoice.Text.Trim());
                 }
             }
             catch (Exception ex)

@@ -179,6 +179,10 @@ namespace IMS_Client_2.StockManagement
             {
                 dgvStockDetails.Columns["ProductID"].Visible = false;
             }
+            if (dgvStockDetails.Columns.Contains("SubProductID"))
+            {
+                dgvStockDetails.Columns["SubProductID"].Visible = false;
+            }
             if (dgvStockDetails.Columns.Contains("Photo"))
             {
                 dgvStockDetails.Columns["Photo"].Visible = false;

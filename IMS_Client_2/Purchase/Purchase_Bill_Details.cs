@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using CoreApp;
@@ -23,19 +24,21 @@ namespace IMS_Client_2.Purchase
 
         DataTable dtPurchaseInvoice = new DataTable();
         DataTable dtDefaultBillDetails = new DataTable();
+        DataTable dtModelNo = new DataTable();
 
         int pTotalQTY = 0;
-        double pTotalAmt = 0, LocalBillValue = 0, pAddRatio = 0, pCurrencyRate = 0;
         int PurchaseInvoiceID = 0;
         int _ProductID = 0, SubProductID = 0;
         int _QTY = 0;
+        double pTotalAmt = 0, LocalBillValue = 0, pAddRatio = 0, pCurrencyRate = 0;
+        decimal dSalesPrice = 0;
+        string StyleNo = string.Empty, sProductName = string.Empty;
         DateTime dtDate = DateTime.Now;
 
         Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
         Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
         private void ClearAll()
         {
-            txtPurchaseInvoiceID.Clear();
             txtSupplierBillNo.Clear();
             txtStyleNo.Clear();
             txtProductName.Clear();
@@ -48,6 +51,8 @@ namespace IMS_Client_2.Purchase
             cmbSupplier.SelectedIndex = -1;
             cmbBrand.SelectedIndex = -1;
             cmbAddRatio.SelectedIndex = -1;
+            sProductName = string.Empty;
+            StyleNo = string.Empty;
 
             dtpBillDate.Format = DateTimePickerFormat.Short;
             dtpBillDate.CustomFormat = " ";
@@ -56,6 +61,7 @@ namespace IMS_Client_2.Purchase
             dtPurchaseInvoice.Clear();
             dataGridView1.DataSource = dtDefaultBillDetails;
 
+            txtPurchaseInvoiceID.Text = "0";
             txtTotalQTYBill.Text = "0";
             txtTotalQTYEntered.Text = "0";
             txtTotalValueBill.Text = "0";
@@ -136,10 +142,16 @@ namespace IMS_Client_2.Purchase
                 txtRate.Focus();
                 return false;
             }
-            else if (CheckDuplicateStyleNo())
+            else //if (CheckDuplicateStyleNo())
             {
-                txtStyleNo.Focus();
-                return false;
+                StyleNo = txtStyleNo.Text.Trim();
+                sProductName = txtProductName.Text.Trim();
+                dSalesPrice = txtSalesPrice.Text == "" ? 0 : Convert.ToDecimal(txtSalesPrice.Text);
+                if (CheckDuplicateStyleNo(StyleNo, Convert.ToInt32(cmbBrand.SelectedValue)))
+                {
+                    txtStyleNo.Focus();
+                    return false;
+                }
             }
             return true;
         }
@@ -191,113 +203,134 @@ namespace IMS_Client_2.Purchase
                         _ID = 0; _SubProductID = 0;
                         //if (ValidatePurchaseBill(dtPurchaseInvoiceBill))
                         //{
-                            int PurchaseInvoiceDetailsID = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["PurchaseInvoiceDetailsID"]);
-                            if (PurchaseInvoiceDetailsID == 0)
+                        int PurchaseInvoiceDetailsID = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["PurchaseInvoiceDetailsID"]);
+                        if (PurchaseInvoiceDetailsID == 0)
+                        {
+                            if (clsFormRights.HasFormRight(clsFormRights.Forms.Purchase_Bill_Details, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
                             {
-                                if (clsFormRights.HasFormRight(clsFormRights.Forms.Purchase_Bill_Details, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
+                                _ProductID = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["ProductID"]);
+                                _SubProductID = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["SubProductID"]);
+                                if (_SubProductID == 0)
                                 {
-                                    _ProductID = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["ProductID"]);
-                                    _SubProductID = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["SubProductID"]);
-                                    if (_SubProductID == 0)
-                                    {
-                                        //Insert SubProductID
-                                        ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, _ProductID, clsConnection_DAL.ParamType.Input);
-                                        ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, dtPurchaseInvoiceBill.Rows[i]["ModelNo"].ToString(), clsConnection_DAL.ParamType.Input);
-                                        ObjDAL.SetStoreProcedureData("BrandID", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["BrandID"].ToString(), clsConnection_DAL.ParamType.Input);
-                                        ObjDAL.SetStoreProcedureData("EndUser", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["EndUser"].ToString(), clsConnection_DAL.ParamType.Input);
-                                        ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
-                                        ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
-                                        ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, _SubProductID, clsConnection_DAL.ParamType.Output);
+                                    //Insert SubProductID
+                                    ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, _ProductID, clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, dtPurchaseInvoiceBill.Rows[i]["ModelNo"].ToString(), clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("BrandID", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["BrandID"].ToString(), clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("EndUser", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["EndUser"].ToString(), clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, _SubProductID, clsConnection_DAL.ParamType.Output);
 
-                                        b = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_Insert_ProductWiseModelNo");
-                                        if (b)
+                                    b = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_Insert_ProductWiseModelNo");
+                                    if (b)
+                                    {
+                                        DataTable dt = ObjDAL.GetOutputParmData();
+                                        if (ObjUtil.ValidateTable(dt))
                                         {
-                                            DataTable dt = ObjDAL.GetOutputParmData();
-                                            if (ObjUtil.ValidateTable(dt))
-                                            {
-                                                SubProductID = Convert.ToInt32(dt.Rows[0][1]);
-                                                _SubProductID = SubProductID;
-                                            }
+                                            SubProductID = Convert.ToInt32(dt.Rows[0][1]);
+                                            _SubProductID = SubProductID;
                                         }
                                     }
-                                    else if (_SubProductID > 0 && b == false)
-                                    {
-                                        //Update SubProductID
-                                        ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, _ProductID, clsConnection_DAL.ParamType.Input);
-                                        ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, dtPurchaseInvoiceBill.Rows[i]["ModelNo"].ToString(), clsConnection_DAL.ParamType.Input);
-                                        ObjDAL.SetStoreProcedureData("BrandID", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["BrandID"].ToString(), clsConnection_DAL.ParamType.Input);
-                                        ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
-                                        ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, _SubProductID, clsConnection_DAL.ParamType.Input);
-                                        ObjDAL.SetStoreProcedureData("EndUser", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["EndUser"].ToString(), clsConnection_DAL.ParamType.Input);
-                                        ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
-                                        b = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_Update_ProductWiseModelNo");
-                                    }
-                                    //Insert Purchase bill
-                                    ObjDAL.SetColumnData("PurchaseInvoiceID", SqlDbType.Int, PurchaseInvoiceID);
-                                    ObjDAL.SetColumnData("ProductID", SqlDbType.Int, _ProductID);
-                                    ObjDAL.SetColumnData("ModelNo", SqlDbType.NVarChar, dtPurchaseInvoiceBill.Rows[i]["ModelNo"].ToString());
-                                    ObjDAL.SetColumnData("BrandID", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["BrandID"].ToString());
-                                    ObjDAL.SetColumnData("SupplierID", SqlDbType.Int, cmbSupplier.SelectedValue);
-                                    ObjDAL.SetColumnData("BillDate", SqlDbType.Date, dtpBillDate.Value.ToString("yyyy-MM-dd"));
-                                    ObjDAL.SetColumnData("Rate", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["Rate"].ToString());
-                                    ObjDAL.SetColumnData("SubProductID", SqlDbType.Int, _SubProductID);
-                                    _QTY = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["QTY"]);
-                                    ObjDAL.SetColumnData("QTY", SqlDbType.Int, _QTY);
-                                    ObjDAL.SetColumnData("Sales_Price", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["EndUser"].ToString());
-                                    ObjDAL.SetColumnData("AddedRatio", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["AddedRatio"].ToString());
-                                    ObjDAL.SetColumnData("SuppossedPrice", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["SuppossedPrice"].ToString());
-                                    ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
-                                    _ID = ObjDAL.InsertData(clsUtility.DBName + ".dbo.PurchaseInvoiceDetails", true);
                                 }
-                                else
+                                else if (_SubProductID > 0 && b == false)
                                 {
-                                    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
-                                    dataGridView1.DataSource = dtPurchaseInvoice;
-                                    return;
+                                    //Update SubProductID
+                                    ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, _ProductID, clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, dtPurchaseInvoiceBill.Rows[i]["ModelNo"].ToString(), clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("BrandID", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["BrandID"].ToString(), clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, _SubProductID, clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("EndUser", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["EndUser"].ToString(), clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
+                                    b = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_Update_ProductWiseModelNo");
                                 }
+                                //Insert Purchase bill
+                                ObjDAL.SetColumnData("PurchaseInvoiceID", SqlDbType.Int, PurchaseInvoiceID);
+                                ObjDAL.SetColumnData("ProductID", SqlDbType.Int, _ProductID);
+                                ObjDAL.SetColumnData("ModelNo", SqlDbType.NVarChar, dtPurchaseInvoiceBill.Rows[i]["ModelNo"].ToString());
+                                ObjDAL.SetColumnData("BrandID", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["BrandID"].ToString());
+                                ObjDAL.SetColumnData("SupplierID", SqlDbType.Int, cmbSupplier.SelectedValue);
+                                ObjDAL.SetColumnData("BillDate", SqlDbType.Date, dtpBillDate.Value.ToString("yyyy-MM-dd"));
+                                ObjDAL.SetColumnData("Rate", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["Rate"].ToString());
+                                ObjDAL.SetColumnData("SubProductID", SqlDbType.Int, _SubProductID);
+                                _QTY = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["QTY"]);
+                                ObjDAL.SetColumnData("QTY", SqlDbType.Int, _QTY);
+                                ObjDAL.SetColumnData("Sales_Price", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["EndUser"].ToString());
+                                ObjDAL.SetColumnData("AddedRatio", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["AddedRatio"].ToString());
+                                ObjDAL.SetColumnData("SuppossedPrice", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["SuppossedPrice"].ToString());
+                                ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
+                                _ID = ObjDAL.InsertData(clsUtility.DBName + ".dbo.PurchaseInvoiceDetails", true);
                             }
                             else
                             {
-                                //Update  Purchase bill
-                                if (clsFormRights.HasFormRight(clsFormRights.Forms.Purchase_Bill_Details, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
-                                {
-                                    _ProductID = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["ProductID"]);
-                                    _SubProductID = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["SubProductID"]);
-                                    if (_SubProductID > 0)
-                                    {
-                                        //Update  SubProductID
-                                        ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, _ProductID, clsConnection_DAL.ParamType.Input);
-                                        ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, dtPurchaseInvoiceBill.Rows[i]["ModelNo"].ToString(), clsConnection_DAL.ParamType.Input);
-                                        ObjDAL.SetStoreProcedureData("BrandID", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["BrandID"].ToString(), clsConnection_DAL.ParamType.Input);
-                                        ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
-                                        ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, _SubProductID, clsConnection_DAL.ParamType.Input);
-                                        ObjDAL.SetStoreProcedureData("EndUser", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["EndUser"].ToString(), clsConnection_DAL.ParamType.Input);
-                                        ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
-                                        b = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_Update_ProductWiseModelNo");
-                                    }
-                                    //ObjDAL.UpdateColumnData("ProductID", SqlDbType.Int, _ProductID);
-                                    //ObjDAL.UpdateColumnData("SubProductID", SqlDbType.Int, Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["SubProductID"]));
-                                    //ObjDAL.UpdateColumnData("ModelNo", SqlDbType.NVarChar, dtPurchaseInvoiceBill.Rows[i]["ModelNo"].ToString());
-                                    //ObjDAL.UpdateColumnData("BrandID", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["BrandID"].ToString());
-
-                                    ObjDAL.UpdateColumnData("SupplierID", SqlDbType.Int, cmbSupplier.SelectedValue);
-                                    ObjDAL.UpdateColumnData("BillDate", SqlDbType.Date, dtpBillDate.Value.ToString("yyyy-MM-dd"));
-                                    ObjDAL.UpdateColumnData("QTY", SqlDbType.Int, Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["QTY"]));
-                                    ObjDAL.UpdateColumnData("Rate", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["Rate"].ToString());
-                                    ObjDAL.UpdateColumnData("Sales_Price", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["EndUser"].ToString());
-                                    ObjDAL.UpdateColumnData("AddedRatio", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["AddedRatio"].ToString());
-                                    ObjDAL.UpdateColumnData("SuppossedPrice", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["SuppossedPrice"].ToString());
-                                    ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
-                                    ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                                    _ID = ObjDAL.UpdateData(clsUtility.DBName + ".dbo.PurchaseInvoiceDetails", "PurchaseInvoiceDetailsID = " + PurchaseInvoiceDetailsID + "");
-                                }
-                                else
-                                {
-                                    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
-                                    dataGridView1.DataSource = dtPurchaseInvoice;
-                                    return;
-                                }
+                                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                                dataGridView1.DataSource = dtPurchaseInvoice;
+                                return;
                             }
+                        }
+                        else
+                        {
+                            //Update  Purchase bill
+                            if (clsFormRights.HasFormRight(clsFormRights.Forms.Purchase_Bill_Details, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
+                            {
+                                _ProductID = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["ProductID"]);
+                                _SubProductID = Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["SubProductID"]);
+                                if (_SubProductID > 0)
+                                {
+                                    //Update  SubProductID
+                                    ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, _ProductID, clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, dtPurchaseInvoiceBill.Rows[i]["ModelNo"].ToString(), clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("BrandID", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["BrandID"].ToString(), clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, _SubProductID, clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("EndUser", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["EndUser"].ToString(), clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
+                                    b = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_Update_ProductWiseModelNo");
+                                }
+                                else if (_SubProductID == 0)
+                                {
+                                    //Insert SubProductID
+                                    ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, _ProductID, clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, dtPurchaseInvoiceBill.Rows[i]["ModelNo"].ToString(), clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("BrandID", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["BrandID"].ToString(), clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("EndUser", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["EndUser"].ToString(), clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
+                                    ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, _SubProductID, clsConnection_DAL.ParamType.Output);
+
+                                    b = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_Insert_ProductWiseModelNo");
+                                    if (b)
+                                    {
+                                        DataTable dt = ObjDAL.GetOutputParmData();
+                                        if (ObjUtil.ValidateTable(dt))
+                                        {
+                                            SubProductID = Convert.ToInt32(dt.Rows[0][1]);
+                                            _SubProductID = SubProductID;
+                                            ObjDAL.UpdateColumnData("SubProductID", SqlDbType.Int, _SubProductID);
+                                        }
+                                    }
+                                }
+                                ObjDAL.UpdateColumnData("ProductID", SqlDbType.Int, _ProductID);
+                                ObjDAL.UpdateColumnData("BrandID", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["BrandID"].ToString());
+                                ObjDAL.UpdateColumnData("ModelNo", SqlDbType.NVarChar, dtPurchaseInvoiceBill.Rows[i]["ModelNo"].ToString());
+                                ObjDAL.UpdateColumnData("SupplierID", SqlDbType.Int, cmbSupplier.SelectedValue);
+                                ObjDAL.UpdateColumnData("BillDate", SqlDbType.Date, dtpBillDate.Value.ToString("yyyy-MM-dd"));
+                                ObjDAL.UpdateColumnData("QTY", SqlDbType.Int, Convert.ToInt32(dtPurchaseInvoiceBill.Rows[i]["QTY"]));
+                                ObjDAL.UpdateColumnData("Rate", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["Rate"].ToString());
+                                ObjDAL.UpdateColumnData("Sales_Price", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["EndUser"].ToString());
+                                ObjDAL.UpdateColumnData("AddedRatio", SqlDbType.Int, dtPurchaseInvoiceBill.Rows[i]["AddedRatio"].ToString());
+                                ObjDAL.UpdateColumnData("SuppossedPrice", SqlDbType.Decimal, dtPurchaseInvoiceBill.Rows[i]["SuppossedPrice"].ToString());
+                                ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test
+                                ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                                _ID = ObjDAL.UpdateData(clsUtility.DBName + ".dbo.PurchaseInvoiceDetails", "PurchaseInvoiceDetailsID = " + PurchaseInvoiceDetailsID + "");
+                            }
+                            else
+                            {
+                                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                                dataGridView1.DataSource = dtPurchaseInvoice;
+                                return;
+                            }
+                        }
                         //}
                     }
 
@@ -341,7 +374,7 @@ namespace IMS_Client_2.Purchase
         {
             //btnSearch.BackgroundImage = B_Leave;
             btnSave.BackgroundImage = B_Leave;
-            btnCancel.BackgroundImage = B_Leave;
+            btnClear.BackgroundImage = B_Leave;
 
             ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.Beginning);
             FillSupplierData();
@@ -430,19 +463,21 @@ namespace IMS_Client_2.Purchase
             }
             catch (Exception ex)
             {
-                clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
+                //clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
             }
         }
 
         private void LoadData()
         {
             ObjDAL.SetStoreProcedureData("PurchaseInvoiceID", SqlDbType.Int, txtPurchaseInvoiceID.Text, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, "0", clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_PurchaseInvoice_BillDetails");
-            if (ds != null && ds.Tables.Count > 0)
+            if (ObjUtil.ValidateDataSet(ds))
             {
                 DataTable dtLoadData = ds.Tables[0];
                 if (ObjUtil.ValidateTable(dtLoadData))
                 {
+                    groupBox1.Enabled = true;
                     double TotalValueBill = 0, TotalQTYBill = 0, LocalValue = 0;
 
                     dtpBillDate.Value = dtLoadData.Rows[0]["BillDate"] != DBNull.Value ? Convert.ToDateTime(dtLoadData.Rows[0]["BillDate"]) : DateTime.Now;
@@ -501,6 +536,7 @@ namespace IMS_Client_2.Purchase
                     clsUtility.ShowInfoMessage("Purchase Invoice is not available for Bill No. " + txtSupplierBillNo.Text, clsUtility.strProjectTitle);
                     grpPurchaseBillDetail.Enabled = false;
                     btnSave.Enabled = false;
+                    groupBox1.Enabled = false;
                 }
             }
             else
@@ -508,6 +544,7 @@ namespace IMS_Client_2.Purchase
                 clsUtility.ShowInfoMessage("Purchase Invoice is not available for Bill No. " + txtSupplierBillNo.Text, clsUtility.strProjectTitle);
                 grpPurchaseBillDetail.Enabled = false;
                 btnSave.Enabled = false;
+                groupBox1.Enabled = false;
             }
         }
 
@@ -694,15 +731,14 @@ namespace IMS_Client_2.Purchase
             //ColDelete});
         }
 
-        private bool CheckDuplicateStyleNo()
+        private bool CheckDuplicateStyleNo(string NewStyleNo, int BrandID)//CheckDuplicateStyleNo()
         {
-            DataTable dtModelNo = new DataTable();
-            DataRow[] dRow = dtPurchaseInvoice.Select("ModelNo= '" + txtStyleNo.Text.Trim() + "' AND BrandID=" + cmbBrand.SelectedValue);
+            DataRow[] dRow = dtPurchaseInvoice.Select("ModelNo= '" + NewStyleNo + "' AND BrandID=" + BrandID);
             if (dRow.Length == 0)
             {
                 ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, txtProductID.Text, clsConnection_DAL.ParamType.Input);
-                ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, txtStyleNo.Text.Trim(), clsConnection_DAL.ParamType.Input);
-                ObjDAL.SetStoreProcedureData("BrandID", SqlDbType.Int, cmbBrand.SelectedValue, clsConnection_DAL.ParamType.Input);
+                ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, NewStyleNo, clsConnection_DAL.ParamType.Input);
+                ObjDAL.SetStoreProcedureData("BrandID", SqlDbType.Int, BrandID, clsConnection_DAL.ParamType.Input);
                 ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
                 DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_IsModelBrandExists");
                 if (ds != null && ds.Tables.Count > 0)
@@ -721,20 +757,20 @@ namespace IMS_Client_2.Purchase
                             if (SubProductID > 0)
                             {
                                 decimal EndUser = Convert.ToDecimal(dtModelNo.Rows[0]["EndUser"]);
-                                decimal UserEndUser = Convert.ToDecimal(txtSalesPrice.Text);
+                                decimal UserEndUser = dSalesPrice;
                                 string EndUserpricechange = string.Empty;
                                 if (EndUser != UserEndUser)
                                 {
                                     EndUserpricechange = "\n Entered Sales Price is different from previous Entered";
                                 }
-                                bool msg = clsUtility.ShowQuestionMessage("ModelNo. " + txtStyleNo.Text.Trim() + " is already exists for Item " + txtProductName.Text + "" + EndUserpricechange + "\n Do you want to Update it?", clsUtility.strProjectTitle);
+                                bool msg = clsUtility.ShowQuestionMessage("ModelNo. " + NewStyleNo + " is already exists for Item " + sProductName + "" + EndUserpricechange + "\n Do you want to Update it?", clsUtility.strProjectTitle);
                                 if (msg)
                                 {
                                     return false;
                                 }
                                 else
                                 {
-                                    clsUtility.ShowInfoMessage("Enter New Model No. for Item " + txtProductName.Text, clsUtility.strProjectTitle);
+                                    clsUtility.ShowInfoMessage("Enter New Model No. for Item " + sProductName, clsUtility.strProjectTitle);
                                     return true;
                                 }
                             }
@@ -746,7 +782,17 @@ namespace IMS_Client_2.Purchase
             }
             else if (dRow.Length > 0)
             {
-                clsUtility.ShowInfoMessage("ModelNo. " + txtStyleNo.Text.Trim() + " is already exists for Item " + dRow[0]["ProductName"] + " in List", clsUtility.strProjectTitle);
+                if (StyleNo.Length > 0)
+                {
+                    DataRow[] dRow1 = dtPurchaseInvoice.Select("ModelNo= '" + StyleNo + "' AND BrandID=" + BrandID);
+                    if (dRow1.Length > 0)
+                    {
+                        dRow1[0]["ModelNo"] = StyleNo;
+                        dtPurchaseInvoice.AcceptChanges();
+                        dataGridView1.DataSource = dtPurchaseInvoice;
+                    }
+                }
+                clsUtility.ShowInfoMessage("ModelNo. " + NewStyleNo + " is already exists for Item " + dRow[0]["ProductName"] + " in List", clsUtility.strProjectTitle);
                 return true;
             }
             return false;
@@ -962,6 +1008,10 @@ namespace IMS_Client_2.Purchase
             {
                 dataGridView1.Columns["EndUser"].ReadOnly = false;
             }
+            if (dataGridView1.Columns.Contains("ModelNo"))
+            {
+                dataGridView1.Columns["ModelNo"].ReadOnly = false;
+            }
         }
 
         private void dataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
@@ -1025,6 +1075,15 @@ namespace IMS_Client_2.Purchase
                 }
                 return;
             }
+            else if (headerText == "Style No")
+            {
+                if (e.FormattedValue == DBNull.Value || e.FormattedValue.ToString() == "")
+                {
+                    clsUtility.ShowInfoMessage("Enter Style No..");
+                    e.Cancel = true;
+                }
+                return;
+            }
         }
 
         private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -1054,6 +1113,82 @@ namespace IMS_Client_2.Purchase
             //string k = e.KeyChar.ToString();
             TextBox txt = (TextBox)sender;
             e.Handled = ObjUtil.IsDecimal(txt, e);
+        }
+
+        private void rdSearchByStyleNo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdSearchByStyleNo.Checked)
+            {
+                txtSearchByStyleNo.Enabled = true;
+                txtSearchByStyleNo.Focus();
+            }
+            else
+            {
+                txtSearchByStyleNo.Enabled = false;
+                txtSearchByStyleNo.Clear();
+                rdShowAll.Checked = true;
+            }
+        }
+
+        private void rdShowAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdShowAll.Checked)
+            {
+                txtSearchByStyleNo.Enabled = false;
+                txtSearchByStyleNo.Clear();
+                LoadData();
+            }
+        }
+
+        private void txtSearchByStyleNo_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtSearchByStyleNo.Text.Length > 0)
+                {
+                    ObjDAL.SetStoreProcedureData("PurchaseInvoiceID", SqlDbType.Int, txtPurchaseInvoiceID.Text, clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, txtSearchByStyleNo.Text.Trim(), clsConnection_DAL.ParamType.Input);
+                    DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_PurchaseInvoice_BillDetails");
+                    if (ds != null && ds.Tables.Count > 0)
+                    {
+                        DataTable dt = ds.Tables[0];
+                        if (ObjUtil.ValidateTable(dt))
+                        {
+                            dataGridView1.DataSource = dt;
+                        }
+                        else
+                        {
+                            dataGridView1.DataSource = dtDefaultBillDetails;
+                        }
+                    }
+                    else
+                    {
+                        dataGridView1.DataSource = dtDefaultBillDetails;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
+            }
+        }
+
+        private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                {
+                    if (dataGridView1.Columns[e.ColumnIndex].Name == "ModelNo")
+                    {
+                        StyleNo = dataGridView1.Rows[e.RowIndex].Cells["ModelNo"].Value.ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                clsUtility.ShowInfoMessage(ex.Message, clsUtility.strProjectTitle);
+            }
         }
 
         private void Purchase_Bill_Details_Supplier_KeyDown(object sender, KeyEventArgs e)
@@ -1117,6 +1252,31 @@ namespace IMS_Client_2.Purchase
                     dataGridView1.Rows[e.RowIndex].Cells["Total"].Value = Math.Round(Total, 2).ToString();
 
                     CalculateSubTotal();
+                }
+                else if (dataGridView1.Columns[e.ColumnIndex].Name == "ModelNo" && StyleNo.Length > 0)
+                {
+                    dtModelNo = null;
+                    int BrandID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["BrandID"].Value);
+                    string NewStyleNo = dataGridView1.Rows[e.RowIndex].Cells["ModelNo"].Value.ToString();
+                    int OldSubProductID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["SubProductID"].Value);
+                    txtProductID.Text = dataGridView1.Rows[e.RowIndex].Cells["ProductID"].Value.ToString();
+                    sProductName = dataGridView1.Rows[e.RowIndex].Cells["ProductName"].Value.ToString();
+                    dSalesPrice = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells["EndUser"].Value);
+                    bool b = CheckDuplicateStyleNo(NewStyleNo, BrandID);
+                    if (b)
+                    {
+                        string temp = StyleNo;
+                        StyleNo = string.Empty;
+                        //dataGridView1.Rows[e.RowIndex].Cells["ModelNo"].Value = temp;
+                        //dataGridView1.Rows[e.RowIndex].Cells["ModelNo"].Value = StyleNo;
+                    }
+                    else if (!b)
+                    {
+                        if (ObjUtil.ValidateTable(dtModelNo))
+                        {
+                            //dataGridView1.Rows[e.RowIndex].Cells["SubProductID"].Value = dtModelNo.Rows[0]["SubProductID"].ToString();
+                        }
+                    }
                 }
             }
         }

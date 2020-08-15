@@ -72,7 +72,7 @@ namespace IMS_Client_2.Purchase
                         ObjDAL.SetStoreProcedureData("SupplierBillNo", SqlDbType.VarChar, txtSupplierBillNo.Text, clsConnection_DAL.ParamType.Input);
                         ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
                         DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Insert_PurchaseInvoice_BulkPrint_Color_Size");
-                        if (ds != null && ds.Tables.Count > 0)
+                        if (ObjUtil.ValidateDataSet(ds))
                         {
                             DataTable dt = ds.Tables[0];
                             if (ObjUtil.ValidateTable(dt))
@@ -88,6 +88,7 @@ namespace IMS_Client_2.Purchase
                                 clsUtility.ShowInfoMessage("Posting Delivery Entry for '" + txtSupplierBillNo.Text + "' is not Saved Successfully..", clsUtility.strProjectTitle);
                             }
                         }
+                        ObjDAL.ResetData();
                     }
                 }
             }
@@ -189,20 +190,24 @@ namespace IMS_Client_2.Purchase
             }
         }
 
+        private void GetPostingDeliveryData()
+        {
+            txtSupplierBillNo.SelectionStart = txtSupplierBillNo.MaxLength;
+            txtSupplierBillNo.Focus();
+
+            DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Posting_Delivery_QTY " + txtPurchaseInvoiceID.Text);
+            if (ObjUtil.ValidateTable(dt))
+            {
+                cmbStore.SelectedValue = dt.Rows[0]["StoreID"].ToString();
+                txtTotalQTY.Text = dt.Rows[0]["Total"].ToString();
+            }
+        }
         private void Posting_Delivery_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView dgv = (DataGridView)sender;
             if (dgv.DataSource != null)
             {
-                txtSupplierBillNo.SelectionStart = txtSupplierBillNo.MaxLength;
-                txtSupplierBillNo.Focus();
-
-                DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Posting_Delivery_QTY " + txtPurchaseInvoiceID.Text);
-                if (ObjUtil.ValidateTable(dt))
-                {
-                    cmbStore.SelectedValue = dt.Rows[0]["StoreID"].ToString();
-                    txtTotalQTY.Text = dt.Rows[0]["Total"].ToString();
-                }
+                GetPostingDeliveryData();
             }
         }
 
@@ -210,15 +215,7 @@ namespace IMS_Client_2.Purchase
         {
             if (e.KeyData == Keys.Enter)
             {
-                txtSupplierBillNo.SelectionStart = txtSupplierBillNo.MaxLength;
-                txtSupplierBillNo.Focus();
-
-                DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Posting_Delivery_QTY " + txtPurchaseInvoiceID.Text);
-                if (ObjUtil.ValidateTable(dt))
-                {
-                    cmbStore.SelectedValue = dt.Rows[0]["StoreID"].ToString();
-                    txtTotalQTY.Text = dt.Rows[0]["Total"].ToString();
-                }
+                GetPostingDeliveryData();
             }
         }
     }
