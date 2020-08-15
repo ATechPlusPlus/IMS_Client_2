@@ -54,13 +54,13 @@ namespace IMS_Client_2.Sales
         {
             if (strCondition == string.Empty)
             {
-                string strQ = "select * from  " + clsUtility.DBName + ".dbo.View_SalesBillDetails";
+                string strQ = "select * from  " + clsUtility.DBName + ".dbo.View_SalesBillDetails order by  id desc";
                 dgvProductDetails.DataSource = ObjDAL.ExecuteSelectStatement(strQ);
                 lblCOunt.Text = dgvProductDetails.Rows.Count.ToString();
             }
             else
             {
-                string strQ = "select * from  " + clsUtility.DBName + ".dbo.View_SalesBillDetails where " + strCondition;
+                string strQ = "select * from  " + clsUtility.DBName + ".dbo.View_SalesBillDetails where " + strCondition+"  order by id desc";
                 dgvProductDetails.DataSource = ObjDAL.ExecuteSelectStatement(strQ);
                 lblCOunt.Text = dgvProductDetails.Rows.Count.ToString();
             }

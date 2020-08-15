@@ -569,7 +569,7 @@
             // 
             this.defaultStoreSettingsToolStripMenuItem.Name = "defaultStoreSettingsToolStripMenuItem";
             this.defaultStoreSettingsToolStripMenuItem.Size = new System.Drawing.Size(216, 24);
-            this.defaultStoreSettingsToolStripMenuItem.Text = "Other Settings";
+            this.defaultStoreSettingsToolStripMenuItem.Text = "Software Settings";
             this.defaultStoreSettingsToolStripMenuItem.Click += new System.EventHandler(this.defaultStoreSettingsToolStripMenuItem_Click);
             // 
             // loadPettyCashToolStripMenuItem

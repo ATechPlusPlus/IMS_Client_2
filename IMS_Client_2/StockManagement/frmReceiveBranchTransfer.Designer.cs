@@ -198,7 +198,7 @@
             this.lnkRefreshData.AutoSize = true;
             this.lnkRefreshData.BackColor = System.Drawing.Color.Transparent;
             this.lnkRefreshData.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnkRefreshData.Location = new System.Drawing.Point(626, 43);
+            this.lnkRefreshData.Location = new System.Drawing.Point(688, 43);
             this.lnkRefreshData.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lnkRefreshData.Name = "lnkRefreshData";
             this.lnkRefreshData.Size = new System.Drawing.Size(100, 19);

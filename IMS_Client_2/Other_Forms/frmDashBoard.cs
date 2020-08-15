@@ -97,7 +97,7 @@ namespace IMS_Client_2.Other_Forms
                                         " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
                                          " ON v1.id = v2.InvoiceID " +
                                          " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
-                                         "  AND  v1.SubTotal>0 Group by Name ) as tb";
+                                         "  AND  v2.Rate>0 Group by Name ) as tb";
 
                     }
                     else if (index == 1) //Color
@@ -112,7 +112,7 @@ namespace IMS_Client_2.Other_Forms
                                       " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
                                        " ON v1.id = v2.InvoiceID " +
                                        " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
-                                       " AND v1.SubTotal>0  Group by ColorName ) as tb";
+                                       " AND v2.Rate>0 Group by ColorName ) as tb";
 
                     }
                     else if (index == 2) //Product 
@@ -128,7 +128,7 @@ namespace IMS_Client_2.Other_Forms
                                     " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
                                      " ON v1.id = v2.InvoiceID " +
                                      " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
-                                     "  AND v1.SubTotal>0 Group by  v2.ProductName ) as tb";
+                                     "  AND v2.Rate>0 Group by  v2.ProductName ) as tb";
 
                     }
                     else if (index == 3) //Invoice/Bill No
@@ -144,7 +144,7 @@ namespace IMS_Client_2.Other_Forms
                                 " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
                                  " ON v1.id = v2.InvoiceID " +
                                  " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
-                                 " AND v1.SubTotal>0 Group by  v1.InvoiceNumber ) as tb";
+                                 " AND v2.Rate>0 Group by  v1.InvoiceNumber ) as tb";
 
                     }
                     else if (index == 4) // Category Department
@@ -159,7 +159,7 @@ namespace IMS_Client_2.Other_Forms
                                                              " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
                                                               " ON v1.id = v2.InvoiceID " +
                                                               " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
-                                                              "  AND v1.SubTotal>0  Group by  v2.CategoryID ) as tb";
+                                                              "  AND v2.Rate>0  Group by  v2.CategoryID ) as tb";
 
 
                     }
@@ -175,7 +175,7 @@ namespace IMS_Client_2.Other_Forms
                                                              " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
                                                               " ON v1.id = v2.InvoiceID " +
                                                               " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
-                                                              " AND v1.SubTotal>0 Group by  v2.ModelNo ) as tb";
+                                                              " AND v2.Rate>0 Group by  v2.ModelNo ) as tb";
 
 
                     }

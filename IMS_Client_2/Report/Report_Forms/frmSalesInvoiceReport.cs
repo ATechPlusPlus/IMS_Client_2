@@ -51,7 +51,8 @@ namespace IMS_Client_2.Report
              "" + clsUtility.DBName + ".dbo.fun_ToArabicNum((s1.Qty*s1.Rate)) AS Total,ps.barcodeNo as BarNumber FROM " + clsUtility.DBName + ".[dbo].[SalesDetails] s1 JOIN " + clsUtility.DBName + ".dbo.ProductMaster p1 " +
             " ON s1.ProductID = p1.ProductID " +
             "  JOIN " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster ps" +
-            "  ON s1.SubProductID=ps.SubProductID AND s1.ProductID = ps.ProductID AND ps.colorID=s1.ColorID AND ps.SizeID=s1.SizeID AND ps.StoreID=" + frmHome.Home_StoreID + " WHERE s1.InvoiceID = " + InvoiceID;
+            "  ON s1.SubProductID=ps.SubProductID AND s1.ProductID = ps.ProductID AND ps.colorID=s1.ColorID AND ps.SizeID=s1.SizeID "+
+            "  AND ps.StoreID=(select ShopeID from SalesInvoiceDetails where Id=s1.InvoiceID) WHERE s1.InvoiceID = " + InvoiceID;
 
                 PaymentQuery = " select PaymentType," + clsUtility.DBName + ".dbo.fun_ToArabicNum(Amount) as Amount from " + clsUtility.DBName + ".dbo.[tblSalesPayment]  where SalesInvoiceID=" + InvoiceID;
             }
@@ -62,7 +63,8 @@ namespace IMS_Client_2.Report
                 "(s1.Qty*s1.Rate) AS Total,ps.barcodeNo as BarNumber FROM " + clsUtility.DBName + ".[dbo].[SalesDetails] s1 JOIN " + clsUtility.DBName + ".dbo.ProductMaster p1 " +
                " ON s1.ProductID = p1.ProductID " +
                "  JOIN " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster ps" +
-               "  ON s1.SubProductID=ps.SubProductID AND s1.ProductID = ps.ProductID AND s1.ColorID=ps.ColorID AND s1.SizeID=ps.SizeID AND ps.StoreID=" + frmHome.Home_StoreID + " WHERE s1.InvoiceID = " + InvoiceID;
+               "  ON s1.SubProductID=ps.SubProductID AND s1.ProductID = ps.ProductID AND s1.ColorID=ps.ColorID AND s1.SizeID=ps.SizeID "+
+               " AND  ps.StoreID=(select ShopeID from SalesInvoiceDetails where Id=s1.InvoiceID)  WHERE s1.InvoiceID = " + InvoiceID;
 
                 PaymentQuery = "select PaymentTYpe,Amount from " + clsUtility.DBName + ".dbo.[tblSalesPayment] WITH(NOLOCK)  where SalesInvoiceID=" + InvoiceID;
             }

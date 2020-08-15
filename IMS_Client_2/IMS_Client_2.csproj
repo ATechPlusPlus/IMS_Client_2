@@ -199,6 +199,12 @@
     <Compile Include="Barcode\uRectangle.designer.cs">
       <DependentUpon>uRectangle.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\Report_Forms\frmBranchShortingReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\Report_Forms\frmBranchShortingReport.Designer.cs">
+      <DependentUpon>frmBranchShortingReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="SPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -714,12 +720,16 @@
     <EmbeddedResource Include="Report\frmPettyCashExpReport.resx">
       <DependentUpon>frmPettyCashExpReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\RDLC_Files\BranchShortingReport.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\CashClosingReport.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\MiniSalesReport.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\PettyCashReport.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\SalesInoviceReport.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\Sales_Invoice.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\StoreTransferDetails.rdlc" />
+    <EmbeddedResource Include="Report\Report_Forms\frmBranchShortingReport.resx">
+      <DependentUpon>frmBranchShortingReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\Report_Forms\frmClosingCashReport.resx">
       <DependentUpon>frmClosingCashReport.cs</DependentUpon>
     </EmbeddedResource>

@@ -53,6 +53,8 @@ namespace IMS_Client_2.StockManagement
             btnSearch.BackgroundImage = B_Leave;
             btnReset.BackgroundImage = B_Leave;
 
+           btnPrint.BackgroundImage = B_Leave;
+
             dtpFromDate.MaxDate = DateTime.Now;
             dtpToDate.MaxDate = DateTime.Now;
 
@@ -147,12 +149,12 @@ namespace IMS_Client_2.StockManagement
         {
             if (ObjUtil.IsControlTextEmpty(cmbBranch))
             {
-                clsUtility.ShowInfoMessage("Select Your Branch", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("Select Your Branch.", clsUtility.strProjectTitle);
                 return;
             }
             if (ObjUtil.IsControlTextEmpty(cmbToStore))
             {
-                clsUtility.ShowInfoMessage("Select Store..", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("Select Store.", clsUtility.strProjectTitle);
                 return;
             }
             SearchBranchSalesShorting();
@@ -187,6 +189,26 @@ namespace IMS_Client_2.StockManagement
             {
                 dgvStockDetails.Columns["Photo"].Visible = false;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (dgvBranchStockDetails.Rows.Count>0)
+            {
+                Report.Report_Forms.frmBranchShortingReport frmBranchShortingReport = new Report.Report_Forms.frmBranchShortingReport();
+                frmBranchShortingReport.Branch = cmbBranch.Text;
+                frmBranchShortingReport.ToStore = cmbToStore.Text;
+                frmBranchShortingReport.FromDate = "From :  " +  dtpFromDate.Value.ToShortDateString() + " To :  " + dtpToDate.Value.ToShortDateString();
+
+                frmBranchShortingReport.ddtBranchShorting = (DataTable)dgvBranchStockDetails.DataSource;
+                frmBranchShortingReport.Show();
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("No data found");
+            }
+           
+
         }
     }
 }
