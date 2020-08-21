@@ -80,9 +80,9 @@
             this.label12.ForeColor = System.Drawing.Color.White;
             this.label12.Location = new System.Drawing.Point(11, 9);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(166, 22);
+            this.label12.Size = new System.Drawing.Size(154, 22);
             this.label12.TabIndex = 82;
-            this.label12.Text = "Item Model Details";
+            this.label12.Text = "Item Style Details";
             // 
             // dgvProductDetails
             // 
@@ -248,7 +248,7 @@
             this.Name = "frmItemWiseModelNo";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Item Model Details";
+            this.Text = "Item Style Details";
             this.Load += new System.EventHandler(this.frmItemWiseModelNo_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();

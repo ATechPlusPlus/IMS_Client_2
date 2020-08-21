@@ -26,6 +26,11 @@ namespace IMS_Client_2.StockManagement
             cmbShop.SelectedValue = frmHome.Home_StoreID;
             rdSearchByShop.Checked = true;
             cmbShop.Enabled = true;
+
+            dgvProductDetails.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+            //Most time consumption enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+            dgvProductDetails.RowHeadersVisible = false; // set it to false if not needed
+
             SearchByStoreID();
 
             groupBox1.Focus();
@@ -37,7 +42,7 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, '0', clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_ItemWiseModelNo");
-            if (ds != null && ds.Tables.Count > 0)
+            if (ObjUtil.ValidateDataSet(ds))
             {
                 DataTable dtItemModel = ds.Tables[0];
                 if (ObjUtil.ValidateTable(dtItemModel))
@@ -117,7 +122,7 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, txtSearchByStyleNo.Text.Trim(), clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_ItemWiseModelNo");
-            if (ds != null && ds.Tables.Count > 0)
+            if (ObjUtil.ValidateDataSet(ds))
             {
                 DataTable dtItemModel = ds.Tables[0];
                 if (ObjUtil.ValidateTable(dtItemModel))
@@ -210,7 +215,7 @@ namespace IMS_Client_2.StockManagement
             }
             catch (Exception ex)
             {
-                clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
+                clsUtility.ShowErrorMessage(ex.ToString());
             }
         }
 

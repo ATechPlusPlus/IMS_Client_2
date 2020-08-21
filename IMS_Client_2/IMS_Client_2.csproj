@@ -73,9 +73,9 @@
     <ApplicationIcon>InventorySoftware.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CoreApp, Version=3.0.0.6, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="CoreApp, Version=3.0.0.7, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\CoreApp.dll</HintPath>
+      <HintPath>..\..\..\DLL Source Code\CoreApp\CoreApp\bin\x86\Release\CoreApp.dll</HintPath>
     </Reference>
     <Reference Include="CoreSys, Version=1.1.0.0, Culture=neutral, processorArchitecture=x86">
       <HintPath>..\packages\CoreAppLib.1.0.10\lib\CoreSys.dll</HintPath>

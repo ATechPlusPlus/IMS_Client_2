@@ -236,6 +236,7 @@
             this.txtSalesPrice.BackColor = System.Drawing.Color.White;
             this.txtSalesPrice.Location = new System.Drawing.Point(533, 120);
             this.txtSalesPrice.Name = "txtSalesPrice";
+            this.txtSalesPrice.ShortcutsEnabled = false;
             this.txtSalesPrice.Size = new System.Drawing.Size(206, 25);
             this.txtSalesPrice.TabIndex = 5;
             this.txtSalesPrice.Enter += new System.EventHandler(this.txtSupplierBillNo_Enter);
@@ -304,6 +305,7 @@
             this.txtQTY.BackColor = System.Drawing.Color.White;
             this.txtQTY.Location = new System.Drawing.Point(147, 77);
             this.txtQTY.Name = "txtQTY";
+            this.txtQTY.ShortcutsEnabled = false;
             this.txtQTY.Size = new System.Drawing.Size(206, 25);
             this.txtQTY.TabIndex = 1;
             this.txtQTY.Enter += new System.EventHandler(this.txtSupplierBillNo_Enter);

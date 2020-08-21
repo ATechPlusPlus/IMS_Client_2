@@ -26,7 +26,7 @@ namespace IMS_Client_2.Barcode
         clsUtility ObjUtil = new clsUtility();
 
         //Form1 obj;
-
+        bool IsMsgOk=false;
         string strCompanyName = "";
         string CurrentPurchaseInvoiceID = "";
         DataGridViewRow _PrintRowData;
@@ -44,7 +44,7 @@ namespace IMS_Client_2.Barcode
 
             strCompanyName = GetCompanyName();
 
-            txtPurchaseInvoice.Focus();
+            txtSupplierBillNo.Focus();
         }
         private void btnAdd_MouseEnter(object sender, EventArgs e)
         {
@@ -184,7 +184,6 @@ namespace IMS_Client_2.Barcode
             }
         }
 
-
         private string GetBarcodeNumber()
         {
             //SequenceInvoice : this is a sequance object created in SQL ( this is not a table)
@@ -196,7 +195,7 @@ namespace IMS_Client_2.Barcode
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmBarCode, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
-                bool result = clsUtility.ShowQuestionMessage("Are you sure, you want to print the barcode for all QTY ?", clsUtility.strProjectTitle);
+                bool result = clsUtility.ShowQuestionMessage("Are you sure, you want to print the barcode for all QTY ?");
                 if (result == false)
                 {
                     return;
@@ -209,7 +208,7 @@ namespace IMS_Client_2.Barcode
                 PrinterSettings printerSetting = new PrinterSettings();
                 if (clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.BarCodePrinter).Trim().Length == 0)
                 {
-                    bool b = clsUtility.ShowQuestionMessage("Printer Not Configured for barcode. Do you want to print on default printer?", clsUtility.strProjectTitle);
+                    bool b = clsUtility.ShowQuestionMessage("Printer Not Configured for barcode. Do you want to print on default printer?");
                     if (b == false)
                     {
                         return;
@@ -281,10 +280,11 @@ namespace IMS_Client_2.Barcode
 
                 this.Focus();
                 this.Activate();
-                clsUtility.ShowInfoMessage("Operation completed !", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("Operation completed !");
                 this.Focus();
                 this.BringToFront();
                 RefreshData();
+                IsMsgOk = false;
             }
         }
 
@@ -427,7 +427,6 @@ namespace IMS_Client_2.Barcode
 
                                             DrawRotatedTextAt(g, -90, captionText,
                                                objLable.Location.X, objLable.Location.Y + preferredSize.Width + padding, objLable.Font, Brushes.Black);
-
                                         }
                                         else if (strInfo[0] == "PictureBox")
                                         {
@@ -491,8 +490,6 @@ namespace IMS_Client_2.Barcode
                                                     break;
                                             }
                                             objRec.BorderColor = Color.FromArgb(Convert.ToInt32(strInfo[13].Trim()));
-
-
                                         }
                                         else if (strInfo[0] == "Line")
                                         {
@@ -580,7 +577,12 @@ namespace IMS_Client_2.Barcode
                     chkAll.Visible = false;
                     CurrentPurchaseInvoiceID = "";
                     //txtPurchaseID.Clear();
-                    clsUtility.ShowInfoMessage("No purchase invoice found for the given purhcase number.", clsUtility.strProjectTitle);
+
+                    if (!IsMsgOk)
+                    {
+                        IsMsgOk = true;
+                        clsUtility.ShowInfoMessage("No purchase invoice found for the given purhcase number.");
+                    }
                     cmbListBox.DataSource = null;
                 }
                 if (ds.Tables.Count >= 1)
@@ -636,7 +638,7 @@ namespace IMS_Client_2.Barcode
                     chkAll.Visible = false;
                     CurrentPurchaseInvoiceID = "";
                     //txtPurchaseID.Clear();
-                    clsUtility.ShowInfoMessage("No purchase invoice found for the given purhcase number.", clsUtility.strProjectTitle);
+                    clsUtility.ShowInfoMessage("No purchase invoice found for the given purhcase number.");
                 }
             }
         }
@@ -665,16 +667,16 @@ namespace IMS_Client_2.Barcode
         {
             try
             {
-                if (txtPurchaseInvoice.TextLength > 0)
+                if (txtSupplierBillNo.TextLength > 0)
                 {
                     //DataTable dt = ObjCon.ExecuteSelectStatement("EXEC  " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_Popup '" + txtPurchaseInvoice.Text + "', 1");
-                    DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC  " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_Popup '" + txtPurchaseInvoice.Text + "', 2");
+                    DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC  " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_Popup '" + txtSupplierBillNo.Text + "', 2");
                     if (ObjUtil.ValidateTable(dt))
                     {
-                        ObjUtil.SetControlData(txtPurchaseInvoice, "SupplierBillNo");
+                        ObjUtil.SetControlData(txtSupplierBillNo, "SupplierBillNo");
                         ObjUtil.SetControlData(txtPurchaseID, "PurchaseInvoiceID");
 
-                        ObjUtil.ShowDataPopup(dt, txtPurchaseInvoice, this, this);
+                        ObjUtil.ShowDataPopup(dt, txtSupplierBillNo, this, this);
 
                         if (ObjUtil.GetDataPopup() != null && ObjUtil.GetDataPopup().DataSource != null)
                         {
@@ -770,7 +772,7 @@ namespace IMS_Client_2.Barcode
 
         private bool IsBarCodeSettings()
         {
-            DataTable dataTable =ObjDAL.ExecuteSelectStatement("SELECT BarCodeSetting FROM " + clsUtility.DBName + ".dbo.tblBarCodeSettings WITH(NOLOCK)");
+            DataTable dataTable = ObjDAL.ExecuteSelectStatement("SELECT BarCodeSetting FROM " + clsUtility.DBName + ".dbo.tblBarCodeSettings WITH(NOLOCK)");
             if (ObjUtil.ValidateTable(dataTable))
             {
                 if (dataTable.Rows[0]["BarCodeSetting"] != DBNull.Value && dataTable.Rows[0]["BarCodeSetting"].ToString().Trim().Length > 0)
@@ -790,21 +792,21 @@ namespace IMS_Client_2.Barcode
             {
                 if (numericUpDown1.Value <= 0)
                 {
-                    clsUtility.ShowInfoMessage("Please enter QTY greater than 0", clsUtility.strProjectTitle);
+                    clsUtility.ShowInfoMessage("Please enter QTY greater than 0");
                     return;
                 }
 
                 if (!IsBarCodeSettings())
                 {
                     clsUtility.ShowInfoMessage("Please set the Barcode design before barcode printing." + Environment.NewLine + "To Design Barcode, Open Barcode designer from Barcode menu from main window.");
-                      return;
+                    return;
                 }
 
                 PrintDialog pd = new PrintDialog();
                 PrinterSettings printerSetting = new PrinterSettings();
                 if (clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.BarCodePrinter).Trim().Length == 0)
                 {
-                    bool b = clsUtility.ShowQuestionMessage("Printer Not Configured for barcode. Do you want to print on default printer?", clsUtility.strProjectTitle);
+                    bool b = clsUtility.ShowQuestionMessage("Printer Not Configured for barcode. Do you want to print on default printer?");
                     if (b == false)
                     {
                         return;
@@ -883,10 +885,10 @@ namespace IMS_Client_2.Barcode
                 }
                 this.Focus();
                 this.BringToFront();
-                clsUtility.ShowInfoMessage("Operation completed !", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("Operation completed !");
                 this.Activate();
                 RefreshData();
-
+                IsMsgOk = false;
                 //try
                 //{
                 //    if (obj!=null)
@@ -904,7 +906,7 @@ namespace IMS_Client_2.Barcode
 
         private void frmBarCode_Activated(object sender, EventArgs e)
         {
-            txtPurchaseInvoice.Focus();
+            txtSupplierBillNo.Focus();
         }
 
         private void cmbListBox_SelectionChangeCommitted(object sender, EventArgs e)
@@ -932,7 +934,7 @@ namespace IMS_Client_2.Barcode
         {
             if (rdShowAll.Checked)
             {
-                if (txtPurchaseInvoice.TextLength > 0)
+                if (txtSupplierBillNo.TextLength > 0)
                 {
                     cmbListBox.SelectedIndex = -1;
                     LoadData();
@@ -954,11 +956,12 @@ namespace IMS_Client_2.Barcode
                         int a = ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.ProductStockMaster SET PrintCount = 0 WHERE PurchaseInvoiceID = " + txtPurchaseID.Text + " AND StoreID = " + frmHome.Home_StoreID);
                         if (a > 0)
                         {
-                            clsUtility.ShowInfoMessage("BarCode Print Count is reset for Supplier Bill NO. " + txtPurchaseInvoice.Text.Trim());
+                            clsUtility.ShowInfoMessage("BarCode Print Count is reset for Supplier Bill NO. " + txtSupplierBillNo.Text.Trim());
+                            IsMsgOk = false;
                             LoadData();
                         }
                         else
-                            clsUtility.ShowInfoMessage("Unable to reset BarCode Print Count for Supplier Bill NO. " + txtPurchaseInvoice.Text.Trim());
+                            clsUtility.ShowInfoMessage("Unable to reset BarCode Print Count for Supplier Bill NO. " + txtSupplierBillNo.Text.Trim());
                     }
                 }
             }

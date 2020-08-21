@@ -355,5 +355,15 @@ namespace IMS_Client_2.StockManagement
                 }
             }
         }
+
+        private void dgvProductDetails_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            //EnterQTY
+            //dgvProductDetails.Columns[e.Column.Index].ReadOnly = true;
+            //if (dgvProductDetails.Columns.Contains("EnterQTY") && clsUtility.IsAdmin)
+            //{
+            //    dgvProductDetails.Columns["EnterQTY"].ReadOnly = false;
+            //}
+        }
     }
 }

@@ -542,11 +542,6 @@ namespace IMS_Client_2.StockManagement
             SearchByCategoryID();
         }
 
-        private void dgvStockDetails_CellClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private Image GetProductPhoto(int SubProductID)
         {
             Image imgProduct = null;
@@ -592,13 +587,20 @@ namespace IMS_Client_2.StockManagement
 
         private void printBarcodeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (dgvStockDetails.SelectedRows.Count>0)
+            if (dgvStockDetails.SelectedRows.Count > 0)
             {
-               string BarcodeNo = dgvStockDetails.SelectedRows[0].Cells["BarcodeNo"].Value.ToString();
-                frmQuickBarCodePrint frmQuickBarCodePrint = new frmQuickBarCodePrint();
-                frmQuickBarCodePrint.txtBarcodenumber.Text = BarcodeNo;
-               
-                frmQuickBarCodePrint.ShowDialog();
+                if (clsFormRights.HasFormRight(clsFormRights.Forms.frmQuickBarCodePrint) || clsUtility.IsAdmin)
+                {
+                    string BarcodeNo = dgvStockDetails.SelectedRows[0].Cells["BarcodeNo"].Value.ToString();
+                    frmQuickBarCodePrint frmQuickBarCodePrint = new frmQuickBarCodePrint();
+                    frmQuickBarCodePrint.txtBarcodenumber.Text = BarcodeNo;
+
+                    frmQuickBarCodePrint.ShowDialog();
+                }
+                else
+                {
+                    clsUtility.ShowInfoMessage("You have no rights to perform this task");
+                }
             }
             else
             {

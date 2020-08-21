@@ -38,7 +38,6 @@
             this.cmbListBox = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtItemName = new System.Windows.Forms.TextBox();
-            this.listBoxStyleNo = new System.Windows.Forms.ListBox();
             this.cmbCountry = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbCategory = new System.Windows.Forms.ComboBox();
@@ -152,7 +151,6 @@
             this.grpPurchaseBillDetail.Controls.Add(this.cmbListBox);
             this.grpPurchaseBillDetail.Controls.Add(this.label5);
             this.grpPurchaseBillDetail.Controls.Add(this.txtItemName);
-            this.grpPurchaseBillDetail.Controls.Add(this.listBoxStyleNo);
             this.grpPurchaseBillDetail.Controls.Add(this.cmbCountry);
             this.grpPurchaseBillDetail.Controls.Add(this.label2);
             this.grpPurchaseBillDetail.Controls.Add(this.cmbCategory);
@@ -207,19 +205,6 @@
             this.txtItemName.TabIndex = 3;
             this.txtItemName.Enter += new System.EventHandler(this.txtSupplierBillNo_Enter);
             this.txtItemName.Leave += new System.EventHandler(this.txtSupplierBillNo_Leave);
-            // 
-            // listBoxStyleNo
-            // 
-            this.listBoxStyleNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.listBoxStyleNo.FormattingEnabled = true;
-            this.listBoxStyleNo.ItemHeight = 17;
-            this.listBoxStyleNo.Location = new System.Drawing.Point(345, 108);
-            this.listBoxStyleNo.Name = "listBoxStyleNo";
-            this.listBoxStyleNo.Size = new System.Drawing.Size(59, 19);
-            this.listBoxStyleNo.TabIndex = 0;
-            this.listBoxStyleNo.Visible = false;
-            this.listBoxStyleNo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBoxModelNo_MouseClick);
-            this.listBoxStyleNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBoxModelNo_KeyDown);
             // 
             // cmbCountry
             // 
@@ -740,7 +725,6 @@
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.ListBox listBoxStyleNo;
         private System.Windows.Forms.TextBox txtItemName;
         private System.Windows.Forms.Label lblDiffQty;
         private System.Windows.Forms.TextBox txtDiffQty;

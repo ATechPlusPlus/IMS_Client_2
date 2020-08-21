@@ -72,7 +72,7 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, dgvBranchStockDetails.SelectedRows[0].Cells["ModelNo"].Value, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("CategoryID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_Material_NewDetails");
-            if (ds != null && ds.Tables.Count > 0)
+            if (ObjUtil.ValidateDataSet(ds))
             {
                 DataTable dt = ds.Tables[0];
                 if (ObjUtil.ValidateTable(dt))
@@ -100,6 +100,41 @@ namespace IMS_Client_2.StockManagement
             { return; }
 
             GetSelectedItemStockDetails();
+            int pSubProductID = Convert.ToInt32(dgvBranchStockDetails.SelectedRows[0].Cells["SubProductID"].Value);
+            picProduct.Image = GetProductPhoto(pSubProductID);
+        }
+
+        private Image GetProductPhoto(int SubProductID)
+        {
+            Image imgProduct = null;
+            ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, SubProductID, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_ProductPhoto");
+            if (ObjUtil.ValidateDataSet(ds))
+            {
+                DataTable dt = ds.Tables[0];
+                if (ObjUtil.ValidateTable(dt))
+                {
+                    if (Convert.ToInt32(dt.Rows[0]["Flag"]) == 1)
+                    {
+                        string img = dt.Rows[0]["ImgName"].ToString();
+                        if (System.IO.File.Exists(img))
+                        {
+                            imgProduct = Image.FromFile(img);
+                        }
+                        else
+                        {
+                            imgProduct = IMS_Client_2.Properties.Resources.NoImage;
+                        }
+                    }
+                    else
+                    {
+                        imgProduct = IMS_Client_2.Properties.Resources.NoImage;
+                        //clsUtility.ShowInfoMessage("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
+                    }
+                }
+            }
+            return imgProduct;
         }
 
         private void btnSearch_MouseEnter(object sender, EventArgs e)
@@ -126,12 +161,16 @@ namespace IMS_Client_2.StockManagement
 
         private void SearchBranchSalesShorting()
         {
+            dgvBranchStockDetails.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+            //Most time consumption enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+            dgvBranchStockDetails.RowHeadersVisible = false; // set it to false if not needed
+
             ObjDAL.SetStoreProcedureData("FromStoreID", SqlDbType.Int, cmbToStore.SelectedValue, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ToStoreID", SqlDbType.BigInt, cmbBranch.SelectedValue, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("FromDate", SqlDbType.Date, dtpFromDate.Value.ToString("yyy-MM-dd"), clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ToDate", SqlDbType.Date, dtpToDate.Value.ToString("yyy-MM-dd"), clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_BranchShorting_Details");
-            if (ds != null && ds.Tables.Count > 0)
+            if (ObjUtil.ValidateDataSet(ds))
             {
                 DataTable dt = ds.Tables[0];
                 if (ObjUtil.ValidateTable(dt))

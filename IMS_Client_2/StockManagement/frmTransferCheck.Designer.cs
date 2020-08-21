@@ -158,6 +158,7 @@
             this.dgvProductDetails.Size = new System.Drawing.Size(700, 268);
             this.dgvProductDetails.TabIndex = 210;
             this.dgvProductDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellClick);
+            this.dgvProductDetails.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvProductDetails_ColumnAdded);
             this.dgvProductDetails.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvProductDetails_DataBindingComplete);
             // 
             // contextMenuStrip1

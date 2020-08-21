@@ -537,6 +537,7 @@ namespace IMS_Client_2.Purchase
                     grpPurchaseBillDetail.Enabled = false;
                     btnSave.Enabled = false;
                     groupBox1.Enabled = false;
+                    dataGridView1.DataSource = dtDefaultBillDetails;
                 }
             }
             else
@@ -792,7 +793,7 @@ namespace IMS_Client_2.Purchase
                         dataGridView1.DataSource = dtPurchaseInvoice;
                     }
                 }
-                clsUtility.ShowInfoMessage("ModelNo. " + NewStyleNo + " is already exists for Item " + dRow[0]["ProductName"] + " in List", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("ModelNo. " + NewStyleNo + " is already exists for Item " + dRow[0]["ProductName"] + " in List");
                 return true;
             }
             return false;
@@ -887,6 +888,8 @@ namespace IMS_Client_2.Purchase
             {
                 if (txtSupplierBillNo.Text.Length > 0)
                 {
+                    rdShowAll.Checked = true;
+
                     DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_Popup '" + txtSupplierBillNo.Text + "'");
                     if (ObjUtil.ValidateTable(dt))
                     {
@@ -921,7 +924,7 @@ namespace IMS_Client_2.Purchase
             }
             catch (Exception ex)
             {
-                clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
+                clsUtility.ShowErrorMessage(ex.ToString());
             }
         }
 
@@ -1166,10 +1169,14 @@ namespace IMS_Client_2.Purchase
                         dataGridView1.DataSource = dtDefaultBillDetails;
                     }
                 }
+                else if (txtSearchByStyleNo.Text.Length == 0)
+                {
+                    LoadData();
+                }
             }
             catch (Exception ex)
             {
-                clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
+                clsUtility.ShowErrorMessage(ex.ToString());
             }
         }
 

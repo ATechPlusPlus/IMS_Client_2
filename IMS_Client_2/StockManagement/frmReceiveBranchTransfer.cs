@@ -24,17 +24,20 @@ namespace IMS_Client_2.StockManagement
         Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
         Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
 
+        DataTable dtDefault = new DataTable();
         private void frmReceivedBranchTransfer_Load(object sender, EventArgs e)
         {
             btnSaveData.BackgroundImage = B_Leave;
             btnClose.BackgroundImage = B_Leave;
+
+            dtDefault = (DataTable)dgvProductDetails.DataSource;
             LoadData();
         }
         private void LoadData()
         {
             ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_ReceiveBranch_Transfer_List");
-            if (ds != null && ds.Tables.Count > 0)
+            if (ObjUtil.ValidateDataSet(ds))
             {
                 DataTable dt = ds.Tables[0];
                 if (ObjUtil.ValidateTable(dt))
@@ -43,7 +46,7 @@ namespace IMS_Client_2.StockManagement
                 }
                 else
                 {
-                    dgvProductDetails.DataSource = null;
+                    dgvProductDetails.DataSource = dtDefault;
                 }
             }
         }
@@ -105,7 +108,7 @@ namespace IMS_Client_2.StockManagement
                 ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
                 ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
                 DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Insert_ReceiveBillDetails");
-                if (ds != null && ds.Tables.Count > 0)
+                if (ObjUtil.ValidateDataSet(ds))
                 {
                     DataTable dt = ds.Tables[0];
                     if (ObjUtil.ValidateTable(dt))
@@ -115,7 +118,7 @@ namespace IMS_Client_2.StockManagement
                             StoreBillDetailsID = 0;
                             LoadData();
                         }
-                        clsUtility.ShowInfoMessage(dt.Rows[0]["Msg"].ToString(), clsUtility.strProjectTitle);
+                        clsUtility.ShowInfoMessage(dt.Rows[0]["Msg"].ToString());
                     }
                 }
             }

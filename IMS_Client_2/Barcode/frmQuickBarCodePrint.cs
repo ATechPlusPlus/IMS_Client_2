@@ -20,12 +20,19 @@ namespace IMS_Client_2.Barcode
         {
             InitializeComponent();
         }
+        clsConnection_DAL ObjCon = new clsConnection_DAL(true);
+        clsUtility ObjUtil = new clsUtility();
+
         Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
         Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
+
+        DataGridViewRow _PrintRowData;
+        string _Current_BarCodeNumber = "";
+        string strCompanyName = "";
+
         private void frmQuickBarCodePrint_Load(object sender, EventArgs e)
         {
             btnPrintManualBarcode.BackgroundImage = B_Leave;
-           
         }
         private void btnAdd_MouseEnter(object sender, EventArgs e)
         {
@@ -38,9 +45,7 @@ namespace IMS_Client_2.Barcode
             Button btn = (Button)sender;
             btn.BackgroundImage = B_Leave;
         }
-        CoreApp.clsConnection_DAL ObjCon = new clsConnection_DAL(true);
 
-        clsUtility ObjUtil = new clsUtility();
         private void btnPrintManualBarcode_Click(object sender, EventArgs e)
         {
             if (!IsBarCodeSettings())
@@ -49,20 +54,18 @@ namespace IMS_Client_2.Barcode
                 return;
             }
             ObjCon.SetStoreProcedureData("BarCodeNo", SqlDbType.NVarChar, txtBarcodenumber.Text, clsConnection_DAL.ParamType.Input);
-            DataSet ds= ObjCon.ExecuteStoreProcedure_Get("SPR_GetQuickBarCodeDetails");
+            DataSet ds = ObjCon.ExecuteStoreProcedure_Get("SPR_GetQuickBarCodeDetails");
             if (ObjUtil.ValidateDataSet(ds))
             {
                 dgvProductDetails.DataSource = ds.Tables[0];
-                if (dgvProductDetails.Rows.Count>0)
+                if (dgvProductDetails.Rows.Count > 0)
                 {
                     PrintBarCode();
-
                 }
                 else
                 {
                     clsUtility.ShowInfoMessage("can not find the barcode number : " + txtBarcodenumber.Text + ".");
                 }
-                
             }
         }
         private bool IsBarCodeSettings()
@@ -70,7 +73,7 @@ namespace IMS_Client_2.Barcode
             DataTable dataTable = ObjCon.ExecuteSelectStatement("SELECT BarCodeSetting FROM " + clsUtility.DBName + ".dbo.tblBarCodeSettings WITH(NOLOCK)");
             if (ObjUtil.ValidateTable(dataTable))
             {
-                if (dataTable.Rows[0]["BarCodeSetting"] != DBNull.Value && dataTable.Rows[0]["BarCodeSetting"].ToString().Trim().Length>0)
+                if (dataTable.Rows[0]["BarCodeSetting"] != DBNull.Value && dataTable.Rows[0]["BarCodeSetting"].ToString().Trim().Length > 0)
                 {
                     return true;
                 }
@@ -81,56 +84,46 @@ namespace IMS_Client_2.Barcode
             }
             return false;
         }
-        DataGridViewRow _PrintRowData;
-        string _Current_BarCodeNumber = "";
-        string strCompanyName = "";
+
         private void PrintBarCode()
         {
-            
-                if (numericUpDown1.Value <= 0)
+            if (numericUpDown1.Value <= 0)
+            {
+                clsUtility.ShowInfoMessage("Please enter QTY greater than 0", clsUtility.strProjectTitle);
+                return;
+            }
+
+            PrintDialog pd = new PrintDialog();
+            PrinterSettings printerSetting = new PrinterSettings();
+            if (clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.BarCodePrinter).Trim().Length == 0)
+            {
+                bool b = clsUtility.ShowQuestionMessage("Printer Not Configured for barcode. Do you want to print on default printer?");
+                if (b == false)
                 {
-                    clsUtility.ShowInfoMessage("Please enter QTY greater than 0", clsUtility.strProjectTitle);
                     return;
                 }
+            }
+            printerSetting.PrinterName = clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.BarCodePrinter);
 
-                PrintDialog pd = new PrintDialog();
-                PrinterSettings printerSetting = new PrinterSettings();
-                if (clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.BarCodePrinter).Trim().Length == 0)
-                {
-                    bool b = clsUtility.ShowQuestionMessage("Printer Not Configured for barcode. Do you want to print on default printer?", clsUtility.strProjectTitle);
-                    if (b == false)
-                    {
-                        return;
-                    }
-                }
-                printerSetting.PrinterName = clsBarCodeUtility.GetPrinterName(clsBarCodeUtility.PrinterType.BarCodePrinter);
+            PrintDocument doc = new PrintDocument();
+            doc.PrinterSettings = printerSetting;
 
-                PrintDocument doc = new PrintDocument();
-                doc.PrinterSettings = printerSetting;
-
-                doc.PrintPage += Doc_PrintPage;
-                pd.Document = doc;
+            doc.PrintPage += Doc_PrintPage;
+            pd.Document = doc;
 
             _PrintRowData = dgvProductDetails.Rows[0];
             _Current_BarCodeNumber = dgvProductDetails.Rows[0].Cells["BarcodeNo"].Value.ToString();
-
 
             for (int Q = 0; Q < numericUpDown1.Value; Q++)
             {
                 doc.Print();
             }
 
-
-
             this.Focus();
-                this.BringToFront();
-            clsUtility.ShowInfoMessage("Operation completed !", clsUtility.strProjectTitle);
+            this.BringToFront();
+            clsUtility.ShowInfoMessage("Operation completed !");
             numericUpDown1.Value = 1;
-                this.Activate();
-              
-
-               
-            
+            this.Activate();
         }
         private string GetBarCodeSettings()
         {
@@ -217,8 +210,6 @@ namespace IMS_Client_2.Barcode
                                             }
                                             catch
                                             {
-
-
                                             }
                                             SetBarCodeValues(objLable, _PrintRowData);
 
@@ -232,7 +223,6 @@ namespace IMS_Client_2.Barcode
                                             string caption3 = string.Format(objLable.Text);
                                             if (objLable.TextAlign == ContentAlignment.MiddleCenter)
                                             {
-
                                                 // get the location of that control respective to bardcode panel
                                                 RectangleF drawRect = objLable.ClientRectangle;
                                                 drawRect.X = objLable.Location.X;
@@ -276,7 +266,6 @@ namespace IMS_Client_2.Barcode
 
                                             SetBarCodeValues(objLable, _PrintRowData);
 
-
                                             //obj.Controls.Add(objLable);
                                             // obj.Refresh();
 
@@ -307,7 +296,6 @@ namespace IMS_Client_2.Barcode
                                             if (!chkPrintRate.Checked)
                                             {
                                                 objPicBox.Height = objPicBox.Height + 15;
-
                                             }
 
                                             g.DrawImage(objPicBox.Image, objPicBox.Location.X, objPicBox.Location.Y, objPicBox.Width, objPicBox.Height);
@@ -356,8 +344,6 @@ namespace IMS_Client_2.Barcode
                                                     break;
                                             }
                                             objRec.BorderColor = Color.FromArgb(Convert.ToInt32(strInfo[13].Trim()));
-
-
                                         }
                                         else if (strInfo[0] == "Line")
                                         {
@@ -389,15 +375,12 @@ namespace IMS_Client_2.Barcode
             }
             catch (System.ComponentModel.Win32Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                clsUtility.ShowErrorMessage(ex.ToString());
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
-
+                clsUtility.ShowErrorMessage(ex.ToString());
             }
-
-
         }
 
         private void SetBarCodeValues(Control objLable, DataGridViewRow selectedRow)
@@ -457,8 +440,8 @@ namespace IMS_Client_2.Barcode
             {
                 string pID = selectedRow.Cells["ColProductID"].Value.ToString();
 
-                string str = "  select  ( select top(1) CategoryName from " + clsUtility.DBName + ".[dbo].[CategoryMaster] WITH(NOLOCK) where CategoryID=p1.CategoryID) as CategoryName " +
-                            "from " + clsUtility.DBName + ".[dbo].[ProductMaster] as p1 where p1.ProductID = " + pID;
+                string str = "  SELECT  ( SELECT TOP(1) CategoryName FROM " + clsUtility.DBName + ".[dbo].[CategoryMaster] WITH(NOLOCK) WHERE CategoryID=p1.CategoryID) as CategoryName " +
+                            "FROM " + clsUtility.DBName + ".[dbo].[ProductMaster] as p1 WHERE p1.ProductID = " + pID;
 
                 object cat = ObjCon.ExecuteScalar(str);
                 if (cat != null)
@@ -467,7 +450,6 @@ namespace IMS_Client_2.Barcode
                 }
             }
         }
-
 
         private void DrawRotatedTextAt(Graphics gr, float angle,
     string txt, int x, int y, Font the_font, Brush the_brush)
@@ -489,6 +471,5 @@ namespace IMS_Client_2.Barcode
             // Restore the graphics state.
             gr.Restore(state);
         }
-
     }
 }
