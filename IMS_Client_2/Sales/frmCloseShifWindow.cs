@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using CoreApp;
 using Button = System.Windows.Forms.Button;
 using Image = System.Drawing.Image;
+using TextBox = System.Windows.Forms.TextBox;
 
 namespace IMS_Client_2.Sales
 {
@@ -263,11 +264,6 @@ namespace IMS_Client_2.Sales
             int ID = 0;
             for (int i = 0; i < drow.Length; i++)//(int i = 0; i < dt.Rows.Count; i++)
             {
-                //ObjDAL.SetColumnData("MasterCashClosingID", SqlDbType.Int, dt.Rows[i]["MasterCashClosingID"]);
-                //ObjDAL.SetColumnData("CashBandID", SqlDbType.Int, dt.Rows[i]["CashBandID"]);
-                //ObjDAL.SetColumnData("Count", SqlDbType.Int, dt.Rows[i]["Count"] == DBNull.Value ? 0 : dt.Rows[i]["Count"]);
-                //ObjDAL.SetColumnData("Value", SqlDbType.Decimal, dt.Rows[i]["Value"] == DBNull.Value ? 0 : dt.Rows[i]["Value"]);
-
                 ObjDAL.SetColumnData("MasterCashClosingID", SqlDbType.Int, drow[i]["MasterCashClosingID"]);
                 ObjDAL.SetColumnData("CashBandID", SqlDbType.Int, drow[i]["CashBandID"]);
                 ObjDAL.SetColumnData("Count", SqlDbType.Int, drow[i]["Count"] == DBNull.Value ? 0 : drow[i]["Count"]);
@@ -286,7 +282,7 @@ namespace IMS_Client_2.Sales
                 int a = ObjDAL.UpdateData(clsUtility.DBName + ".[dbo].[tblMasterCashClosing]", "MasterCashClosingID=" + pMasterCashClosingID);
                 if (a > 0)
                 {
-                    clsUtility.ShowInfoMessage("Cash Box has been Closed !", clsUtility.strProjectTitle);
+                    clsUtility.ShowInfoMessage("Cash Box has been Closed !");
                 }
             }
             ObjDAL.ResetData();
@@ -366,58 +362,81 @@ namespace IMS_Client_2.Sales
                 }
                 else
                 {
-                    clsUtility.ShowInfoMessage("Please Enter CashBand for Closing Today's Cash.", clsUtility.strProjectTitle);
+                    clsUtility.ShowInfoMessage("Please Enter CashBand for Closing Today's Cash.");
                 }
             }
             else
             {
-                clsUtility.ShowInfoMessage("Please Select Cash Option from List.", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("Please Select Cash Option from List.");
             }
         }
 
         private void dgvCloseCash_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
+            int column = dgvCloseCash.CurrentCell.ColumnIndex;
+            string headerText = dgvCloseCash.Columns[column].HeaderText;
+
             if (listView1.Items[0].Selected)
             {
-                if (e.ColumnIndex == 3 && e.FormattedValue.ToString() != "")
+                e.Cancel = false;
+                if (headerText == "Count")
                 {
-                    e.Cancel = false;
-                    dgvCloseCash.Rows[e.RowIndex].ErrorText = "";
-                    int newInteger = 0;
-                    if (dgvCloseCash.Rows[e.RowIndex].IsNewRow) { return; }
-                    if (!int.TryParse(e.FormattedValue.ToString(),
-                        out newInteger) || newInteger < 0)
+                    if (e.FormattedValue == DBNull.Value || e.FormattedValue.ToString() == "")
                     {
+                        clsUtility.ShowInfoMessage("Enter Count..");
                         e.Cancel = true;
-                        clsUtility.ShowInfoMessage("Enter Only Numbers..", clsUtility.strProjectTitle);
                     }
+                    else if (Convert.ToInt32(e.FormattedValue) == 0)
+                    {
+                        clsUtility.ShowInfoMessage("Enter Valid Count..");
+                        e.Cancel = true;
+                    }
+                    return;
                 }
+
+                //if (e.ColumnIndex == 3 && e.FormattedValue.ToString() != "")
+                //{
+                //    e.Cancel = false;
+                //    dgvCloseCash.Rows[e.RowIndex].ErrorText = "";
+                //    int newInteger = 0;
+                //    if (dgvCloseCash.Rows[e.RowIndex].IsNewRow) { return; }
+                //    if (!int.TryParse(e.FormattedValue.ToString(),
+                //        out newInteger) || newInteger < 0)
+                //    {
+                //        e.Cancel = true;
+                //        clsUtility.ShowInfoMessage("Enter Only Numbers..");
+                //    }
+                //}
             }
             else if (listView1.Items[2].Selected)
             {
-                //if (e.ColumnIndex == 2 && e.FormattedValue.ToString() == "")
+                if (headerText == "ExpensesAmt")
+                {
+                    if (e.FormattedValue == DBNull.Value || e.FormattedValue.ToString() == "")
+                    {
+                        clsUtility.ShowInfoMessage("Enter Expenses Amount..");
+                        e.Cancel = true;
+                    }
+                    else if (Convert.ToDecimal(e.FormattedValue) == 0)
+                    {
+                        clsUtility.ShowInfoMessage("Enter Valid Expenses Amount..");
+                        e.Cancel = true;
+                    }
+                    return;
+                }
+                //if (e.ColumnIndex == 3 && e.FormattedValue.ToString() != "")
                 //{
-                //    e.Cancel = false;
                 //    if (dgvCloseCash.Rows[e.RowIndex].IsNewRow) { return; }
-                //    if (e.FormattedValue.ToString() == "")
+
+                //    decimal newDecimal = 0;
+                //    if (!decimal.TryParse(e.FormattedValue.ToString(),
+                //        out newDecimal) || newDecimal < 0)
                 //    {
                 //        e.Cancel = true;
-                //        clsUtility.ShowInfoMessage("Enter Particulars for Expenses..", clsUtility.strProjectTitle);
+                //        clsUtility.ShowInfoMessage("Enter Only Numbers..");
+                //        //dgvQtycolor.Rows[e.RowIndex].ErrorText = "Size must be a Positive integer";
                 //    }
                 //}
-                if (e.ColumnIndex == 3 && e.FormattedValue.ToString() != "")
-                {
-                    if (dgvCloseCash.Rows[e.RowIndex].IsNewRow) { return; }
-
-                    decimal newDecimal = 0;
-                    if (!decimal.TryParse(e.FormattedValue.ToString(),
-                        out newDecimal) || newDecimal < 0)
-                    {
-                        e.Cancel = true;
-                        clsUtility.ShowInfoMessage("Enter Only Numbers..", clsUtility.strProjectTitle);
-                        //dgvQtycolor.Rows[e.RowIndex].ErrorText = "Size must be a Positive integer";
-                    }
-                }
             }
         }
         private void FillStoreData()
@@ -435,8 +454,6 @@ namespace IMS_Client_2.Sales
             DataTable dt = dtCash;
             if (ObjUtil.ValidateTable(dt))
             {
-                //DataRow[] drow = dt.Select("SUM(Value)");
-                //txtTotalValue.Text = drow[0].ToString();
                 Cashtotal = dt.Compute("SUM(Value)", string.Empty);
                 txtTotalValue.Text = Cashtotal.ToString();
             }
@@ -545,7 +562,7 @@ namespace IMS_Client_2.Sales
             catch (Exception ex)
             {
                 LoadData();
-                clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
+                clsUtility.ShowErrorMessage(ex.ToString());
             }
         }
 
@@ -622,9 +639,13 @@ namespace IMS_Client_2.Sales
         {
             try
             {
+                int column = dgvCloseCash.CurrentCell.ColumnIndex;
+                string headerText = dgvCloseCash.Columns[column].HeaderText;
+
                 if (listView1.Items[0].Selected)
                 {
-                    if (e.ColumnIndex == 3)
+                    //if (e.ColumnIndex == 3)
+                    if (headerText == "Count")
                     {
                         double CashBand = dgvCloseCash.Rows[e.RowIndex].Cells["CashBand"].Value == DBNull.Value ? 0 : Convert.ToDouble(dgvCloseCash.Rows[e.RowIndex].Cells["CashBand"].Value);
                         int Count = dgvCloseCash.Rows[e.RowIndex].Cells["Count"].Value.ToString() == "" ? 0 : Convert.ToInt32(dgvCloseCash.Rows[e.RowIndex].Cells["Count"].Value);
@@ -657,6 +678,35 @@ namespace IMS_Client_2.Sales
             {
                 clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
             }
+        }
+
+        private void dgvCloseCash_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            int column = dgvCloseCash.CurrentCell.ColumnIndex;
+            string headerText = dgvCloseCash.Columns[column].HeaderText;
+
+            if (headerText == "ExpensesAmt")
+            {
+                e.Control.KeyPress += Decimal_Control_KeyPress;
+            }
+            else if (headerText == "Count")
+            {
+                e.Control.KeyPress += Int_Control_KeyPress;
+            }
+        }
+
+        private void Int_Control_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //string k = e.KeyChar.ToString();
+            //TextBox txt = (TextBox)sender;
+            e.Handled = ObjUtil.IsNumeric(e);
+        }
+
+        private void Decimal_Control_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //string k = e.KeyChar.ToString();
+            TextBox txt = (TextBox)sender;
+            e.Handled = ObjUtil.IsDecimal(txt, e);
         }
 
         private void btnPrint_Click(object sender, EventArgs e)

@@ -85,14 +85,12 @@ namespace IMS_Client_2.Settings
                 clsUtility.ShowInfoMessage("Please Select PC.", clsUtility.strProjectTitle);
                 cmbSelectPC.Focus();
                 return false;
-
             }
             else if (ObjUtil.IsControlTextEmpty(cmbStoreCategory))   //(cmbStoreCategory.SelectedIndex == -1)
             {
                 clsUtility.ShowInfoMessage("Please Select Store Category.", clsUtility.strProjectTitle);
                 cmbStoreCategory.Focus();
                 return false;
-
             }
             else if (ObjUtil.IsControlTextEmpty(cmbStoreName))    //(cmbStoreName.SelectedIndex == -1)
             {
@@ -182,7 +180,6 @@ namespace IMS_Client_2.Settings
 
                 chkSalesManName.Checked = dt.Rows[0]["SalesManIDMandatory"] == DBNull.Value ? false : Convert.ToBoolean(dt.Rows[0]["SalesManIDMandatory"]);
                 chkCustomerMobile.Checked = dt.Rows[0]["CustMobileMandatory"] == DBNull.Value ? false : Convert.ToBoolean(dt.Rows[0]["CustMobileMandatory"]);
-
 
                 //if (dt.Rows[0]["ImagePath"] != DBNull.Value)
                 //{
@@ -276,7 +273,7 @@ namespace IMS_Client_2.Settings
                 {
                     //ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.DefaultStoreSetting SET InvoiceFooterNote =N'" + txtFooterNote.Text + "', UserArabicNumbers='" + chkArabicPrice.Checked.ToString() + "', ImagePath='" + txtImagePath.Text + "', Extension='" + GetExtension() + "'");
 
-                    ObjDAL.UpdateColumnData("InvoiceFooterNote", SqlDbType.NVarChar, "N" + txtFooterNote.Text);
+                    ObjDAL.UpdateColumnData("InvoiceFooterNote", SqlDbType.NVarChar, txtFooterNote.Text);
                     ObjDAL.UpdateColumnData("UserArabicNumbers", SqlDbType.Bit, chkArabicPrice.Checked);
                     ObjDAL.UpdateColumnData("ImagePath", SqlDbType.NVarChar, txtImagePath.Text);
                     ObjDAL.UpdateColumnData("Extension", SqlDbType.NVarChar, GetExtension());
@@ -291,7 +288,7 @@ namespace IMS_Client_2.Settings
                 else
                 {
                     // else insert.
-                    ObjDAL.SetColumnData("InvoiceFooterNote", SqlDbType.NVarChar, "N" + txtFooterNote.Text);
+                    ObjDAL.SetColumnData("InvoiceFooterNote", SqlDbType.NVarChar, txtFooterNote.Text);
                     ObjDAL.SetColumnData("UserArabicNumbers", SqlDbType.Bit, chkArabicPrice.Checked);
                     ObjDAL.SetColumnData("ImagePath", SqlDbType.NVarChar, txtImagePath.Text);
                     ObjDAL.SetColumnData("Extension", SqlDbType.NVarChar, GetExtension());
@@ -306,11 +303,8 @@ namespace IMS_Client_2.Settings
                     }
                     lblmsg.Visible = false;
                 }
-
-
                 Sales_Invoice._Is_SalesManIDMandat = chkSalesManName.Checked;
                 Sales_Invoice._Is_CustomerMobileMandat = chkCustomerMobile.Checked;
-            
             }
         }
 
@@ -544,14 +538,8 @@ namespace IMS_Client_2.Settings
             }
         }
 
-        private void button2_Click_2(object sender, EventArgs e)
-        {
-
-        }
         private void SavemendatorySetting(bool SalesMan, bool CustMobile)
         {
-
-           
 
         }
     }

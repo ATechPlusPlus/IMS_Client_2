@@ -430,7 +430,7 @@ namespace IMS_Client_2.Masters
         private void txtBrandName_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = ObjUtil.IsString(e);
-            if (e.Handled == true)
+            if (e.Handled)
             {
                 clsUtility.ShowInfoMessage("Enter Only Charactors...", clsUtility.strProjectTitle);
                 txtBrandName.Focus();

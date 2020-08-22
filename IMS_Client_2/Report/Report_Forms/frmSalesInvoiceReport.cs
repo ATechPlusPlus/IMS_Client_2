@@ -51,7 +51,7 @@ namespace IMS_Client_2.Report
              "" + clsUtility.DBName + ".dbo.fun_ToArabicNum((s1.Qty*s1.Rate)) AS Total,ps.barcodeNo as BarNumber FROM " + clsUtility.DBName + ".[dbo].[SalesDetails] s1 JOIN " + clsUtility.DBName + ".dbo.ProductMaster p1 " +
             " ON s1.ProductID = p1.ProductID " +
             "  JOIN " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster ps" +
-            "  ON s1.SubProductID=ps.SubProductID AND s1.ProductID = ps.ProductID AND ps.colorID=s1.ColorID AND ps.SizeID=s1.SizeID "+
+            "  ON s1.SubProductID=ps.SubProductID AND s1.ProductID = ps.ProductID AND ps.colorID=s1.ColorID AND ps.SizeID=s1.SizeID " +
             "  AND ps.StoreID=(select ShopeID from SalesInvoiceDetails where Id=s1.InvoiceID) WHERE s1.InvoiceID = " + InvoiceID;
 
                 PaymentQuery = " select PaymentType," + clsUtility.DBName + ".dbo.fun_ToArabicNum(Amount) as Amount from " + clsUtility.DBName + ".dbo.[tblSalesPayment]  where SalesInvoiceID=" + InvoiceID;
@@ -63,7 +63,7 @@ namespace IMS_Client_2.Report
                 "(s1.Qty*s1.Rate) AS Total,ps.barcodeNo as BarNumber FROM " + clsUtility.DBName + ".[dbo].[SalesDetails] s1 JOIN " + clsUtility.DBName + ".dbo.ProductMaster p1 " +
                " ON s1.ProductID = p1.ProductID " +
                "  JOIN " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster ps" +
-               "  ON s1.SubProductID=ps.SubProductID AND s1.ProductID = ps.ProductID AND s1.ColorID=ps.ColorID AND s1.SizeID=ps.SizeID "+
+               "  ON s1.SubProductID=ps.SubProductID AND s1.ProductID = ps.ProductID AND s1.ColorID=ps.ColorID AND s1.SizeID=ps.SizeID " +
                " AND  ps.StoreID=(select ShopeID from SalesInvoiceDetails where Id=s1.InvoiceID)  WHERE s1.InvoiceID = " + InvoiceID;
 
                 PaymentQuery = "select PaymentTYpe,Amount from " + clsUtility.DBName + ".dbo.[tblSalesPayment] WITH(NOLOCK)  where SalesInvoiceID=" + InvoiceID;
@@ -81,7 +81,7 @@ namespace IMS_Client_2.Report
             }
             else
             {
-                strQueryHeader_Footer = "SELECT s1.InvoiceNumber,s1.InvoiceDate, c1.Name AS CustName,e1.Name AS empName,st1.StoreName AS StoreName,s1.SubTotal,s1.Discount,s1.Tax,s1.GrandTotal,s1.PaymentMode,s1.PaymentAutoID,c1.PhoneNo AS CustomerMobile,s1.CashTendered,s1.Change FROM " + clsUtility.DBName + ".dbo.SalesInvoiceDetails s1 left JOIN " +
+                strQueryHeader_Footer = "SELECT s1.InvoiceNumber,s1.InvoiceDate, c1.Name AS CustName,e1.Name AS empName,st1.StoreName AS StoreName,st1.Place [Address],s1.SubTotal,s1.Discount,s1.Tax,s1.GrandTotal,s1.PaymentMode,s1.PaymentAutoID,c1.PhoneNo AS CustomerMobile,s1.CashTendered,s1.Change FROM " + clsUtility.DBName + ".dbo.SalesInvoiceDetails s1 left JOIN " +
                                                          " " + clsUtility.DBName + ".dbo.EmployeeDetails e1 ON s1.SalesMan = e1.EmpID left JOIN" +
                                                          " " + clsUtility.DBName + ".[dbo].[CustomerMaster] c1 ON s1.CustomerID = c1.CustomerID left join" +
                                                          " " + clsUtility.DBName + ".dbo.StoreMaster st1 ON st1.StoreID = s1.ShopeID WHERE s1.Id=" + InvoiceID;
@@ -113,7 +113,10 @@ namespace IMS_Client_2.Report
             if (dtCompinfo != null && dtCompinfo.Rows.Count > 0)
             {
                 strcomName = dtCompinfo.Rows[0]["CompanyName"].ToString();
-                strAddress = dtCompinfo.Rows[0]["Address"].ToString();
+                //strAddress = dtCompinfo.Rows[0]["Address"].ToString();
+
+                if (dtSalesHeader_Footer != null && dtSalesHeader_Footer.Rows.Count > 0)
+                    strAddress = dtSalesHeader_Footer.Rows[0]["Address"].ToString();
             }
             else
             {
@@ -139,7 +142,7 @@ namespace IMS_Client_2.Report
             try
             {
                 DataTable dtNetAmount = ObjCon.ExecuteSelectStatement("select SUM(Amount) from " + clsUtility.DBName + ".dbo.[tblSalesPayment] WITH(NOLOCK) where SalesInvoiceID=" + InvoiceID);
-                if (dtNetAmount!=null && dtNetAmount.Rows.Count > 0)
+                if (dtNetAmount != null && dtNetAmount.Rows.Count > 0)
                 {
                     if (Convert.ToDecimal(dtNetAmount.Rows[0][0].ToString()) == 0)
                     {

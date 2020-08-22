@@ -209,6 +209,7 @@
             this.dgvCloseCash.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCloseCash_CellValueChanged);
             this.dgvCloseCash.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvCloseCash_ColumnAdded);
             this.dgvCloseCash.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvCloseCash_DataBindingComplete);
+            this.dgvCloseCash.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvCloseCash_EditingControlShowing);
             // 
             // btnPrint
             // 
