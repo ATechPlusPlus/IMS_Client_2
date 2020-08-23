@@ -35,8 +35,8 @@ namespace IMS_Client_2.StockManagement
             btnPrint.BackgroundImage = B_Leave;
 
             LoadFromStore();
-            LoadToStore();
             BindDefaultFromStore();
+            LoadToStore();
             InitItemTable();
         }
         private void btnAdd_MouseEnter(object sender, EventArgs e)

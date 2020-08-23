@@ -379,14 +379,15 @@ namespace IMS_Client_2.Sales
             if (listView1.Items[0].Selected)
             {
                 e.Cancel = false;
-                if (headerText == "Count")
+                if (headerText == "Count" && e.FormattedValue.ToString() != "")
                 {
-                    if (e.FormattedValue == DBNull.Value || e.FormattedValue.ToString() == "")
-                    {
-                        clsUtility.ShowInfoMessage("Enter Count..");
-                        e.Cancel = true;
-                    }
-                    else if (Convert.ToInt32(e.FormattedValue) == 0)
+                    //if (e.FormattedValue == DBNull.Value || e.FormattedValue.ToString() == "")
+                    //{
+                    //    clsUtility.ShowInfoMessage("Enter Count..");
+                    //    e.Cancel = true;
+                    //}
+                    //else 
+                    if (Convert.ToInt32(e.FormattedValue) == 0)
                     {
                         clsUtility.ShowInfoMessage("Enter Valid Count..");
                         e.Cancel = true;
@@ -410,14 +411,15 @@ namespace IMS_Client_2.Sales
             }
             else if (listView1.Items[2].Selected)
             {
-                if (headerText == "ExpensesAmt")
+                if (headerText == "ExpensesAmt" && e.FormattedValue.ToString() != "")
                 {
-                    if (e.FormattedValue == DBNull.Value || e.FormattedValue.ToString() == "")
-                    {
-                        clsUtility.ShowInfoMessage("Enter Expenses Amount..");
-                        e.Cancel = true;
-                    }
-                    else if (Convert.ToDecimal(e.FormattedValue) == 0)
+                    //if (e.FormattedValue == DBNull.Value || e.FormattedValue.ToString() == "")
+                    //{
+                    //    clsUtility.ShowInfoMessage("Enter Expenses Amount..");
+                    //    e.Cancel = true;
+                    //}
+                    //else 
+                    if (Convert.ToDecimal(e.FormattedValue) == 0)
                     {
                         clsUtility.ShowInfoMessage("Enter Valid Expenses Amount..");
                         e.Cancel = true;
@@ -644,8 +646,8 @@ namespace IMS_Client_2.Sales
 
                 if (listView1.Items[0].Selected)
                 {
-                    //if (e.ColumnIndex == 3)
-                    if (headerText == "Count")
+                    if (e.ColumnIndex == 3)
+                    //if (headerText == "Count")
                     {
                         double CashBand = dgvCloseCash.Rows[e.RowIndex].Cells["CashBand"].Value == DBNull.Value ? 0 : Convert.ToDouble(dgvCloseCash.Rows[e.RowIndex].Cells["CashBand"].Value);
                         int Count = dgvCloseCash.Rows[e.RowIndex].Cells["Count"].Value.ToString() == "" ? 0 : Convert.ToInt32(dgvCloseCash.Rows[e.RowIndex].Cells["Count"].Value);
