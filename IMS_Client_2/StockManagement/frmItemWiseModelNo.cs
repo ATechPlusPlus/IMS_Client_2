@@ -143,7 +143,7 @@ namespace IMS_Client_2.StockManagement
         private void dgvProductDetails_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             ObjUtil.SetRowNumber(dgvProductDetails);
-            ObjUtil.SetDataGridProperty(dgvProductDetails,DataGridViewAutoSizeColumnsMode.Fill);
+            ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill);
             dgvProductDetails.Columns["SubProductID"].Visible = false;
             dgvProductDetails.Columns["ProductID"].Visible = false;
             dgvProductDetails.Columns["StoreID"].Visible = false;
@@ -456,16 +456,32 @@ namespace IMS_Client_2.StockManagement
                     try
                     {
                         int SubProductID = Convert.ToInt32(dgvProductDetails.Rows[e.RowIndex].Cells["SubProductID"].Value);
+                        int ProductID = Convert.ToInt32(dgvProductDetails.Rows[e.RowIndex].Cells["ProductID"].Value);
                         decimal Rate = Convert.ToDecimal(dgvProductDetails.Rows[e.RowIndex].Cells["EndUser"].Value);
-                        int a = ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".[dbo].[tblProductWiseModelNo] SET EndUser=" + Rate + " WHERE SubProductID=" + SubProductID);
-                        if (a > 0)
+
+                        ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, SubProductID, clsConnection_DAL.ParamType.Input);
+                        ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, ProductID, clsConnection_DAL.ParamType.Input);
+                        ObjDAL.SetStoreProcedureData("EndUser", SqlDbType.Decimal, Rate, clsConnection_DAL.ParamType.Input);
+                        ObjDAL.SetStoreProcedureData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
+
+                        DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Update_EndUser_Price");
+                        if (ds != null && ds.Tables.Count > 0)
                         {
-                            clsUtility.ShowInfoMessage("EndUser Price is Updated..");
+                            DataTable dt = ds.Tables[0];
+                            if (ObjUtil.ValidateTable(dt))
+                            {
+                                clsUtility.ShowInfoMessage(dt.Rows[0]["Msg"].ToString());
+                            }
                         }
-                        else
-                        {
-                            clsUtility.ShowInfoMessage("Unable to Update EndUser Price..");
-                        }
+                        //int a = ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".[dbo].[tblProductWiseModelNo] SET EndUser=" + Rate + " WHERE SubProductID=" + SubProductID);
+                        //if (a > 0)
+                        //{
+                        //    clsUtility.ShowInfoMessage("EndUser Price is Updated..");
+                        //}
+                        //else
+                        //{
+                        //    clsUtility.ShowInfoMessage("Unable to Update EndUser Price..");
+                        //}
                     }
                     catch (Exception ex)
                     {

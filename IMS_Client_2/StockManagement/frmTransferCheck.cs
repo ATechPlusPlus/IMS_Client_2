@@ -109,7 +109,7 @@ namespace IMS_Client_2.StockManagement
                             row["StoreBillDetailsID"] = dt.Rows[0]["StoreBillDetailsID"];
                             row["Barcode"] = dt.Rows[0]["Barcode"];
                             row["CellColor"] = dt.Rows[0]["CellColor"];
-                            row["ModelNo"] = dt.Rows[0]["ModelNo"];
+                            row["StyleNo"] = dt.Rows[0]["StyleNo"];
                             row["ProductID"] = dt.Rows[0]["ProductID"];
                             row["SubProductID"] = dt.Rows[0]["SubProductID"];
                             row["BillQTY"] = 0;

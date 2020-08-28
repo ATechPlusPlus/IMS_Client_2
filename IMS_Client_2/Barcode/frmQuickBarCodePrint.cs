@@ -65,6 +65,8 @@ namespace IMS_Client_2.Barcode
                 else
                 {
                     clsUtility.ShowInfoMessage("can not find the barcode number : " + txtBarcodenumber.Text + ".");
+                    txtBarcodenumber.Clear();
+                    txtBarcodenumber.Focus();
                 }
             }
         }
@@ -122,6 +124,8 @@ namespace IMS_Client_2.Barcode
             this.Focus();
             this.BringToFront();
             clsUtility.ShowInfoMessage("Operation completed !");
+            txtBarcodenumber.Clear();
+            txtBarcodenumber.Focus();
             numericUpDown1.Value = 1;
             this.Activate();
         }
@@ -201,7 +205,6 @@ namespace IMS_Client_2.Barcode
                                             objLable.BackColor = Color.Green;
                                             objLable.BackColor = Color.FromArgb(Convert.ToInt32(strInfo[10]));
                                             objLable.Tag = strInfo[14];
-
 
                                             try
                                             {
