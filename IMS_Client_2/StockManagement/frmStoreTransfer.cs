@@ -68,14 +68,14 @@ namespace IMS_Client_2.StockManagement
             string strQ = "";
             if (clsUtility.IsAdmin)
             {
-                strQ = "SELECT StoreID,StoreName FROM " + clsUtility.DBName + ".dbo.StoreMaster WITH(NOLOCK)";
+                strQ = "SELECT StoreID,StoreName FROM " + clsUtility.DBName + ".dbo.StoreMaster WITH(NOLOCK) WHERE ISNULL(ActiveStatus,1)=1 ORDER BY StoreName ASC";
                 cmdFrom.Enabled = true;
             }
             else
             {
                 cmdFrom.Enabled = false;
-                strQ = "SELECT StoreID,StoreName FROM " + clsUtility.DBName + ".dbo.StoreMaster WHERE StoreID in  " +
-                           " (SELECT StoreID FROM  " + clsUtility.DBName + ".dbo.tblStoreUserRights WHERE UserID = " + clsUtility.LoginID + ")";
+                strQ = "SELECT StoreID,StoreName FROM " + clsUtility.DBName + ".dbo.StoreMaster WHERE ISNULL(ActiveStatus,1)=1 AND StoreID IN  " +
+                           " (SELECT StoreID FROM  " + clsUtility.DBName + ".dbo.tblStoreUserRights WHERE UserID = " + clsUtility.LoginID + ") ORDER BY StoreName ASC";
             }
             DataTable dtFromStore = ObjDAL.ExecuteSelectStatement(strQ);
             if (ObjUtil.ValidateTable(dtFromStore))
@@ -93,12 +93,12 @@ namespace IMS_Client_2.StockManagement
 
                 if (clsUtility.IsAdmin)
                 {
-                    strQ = "SELECT StoreID,StoreName FROM StoreMaster WITH(NOLOCK) WHERE StoreID NOT IN (" + cmdFrom.SelectedValue + ")";
+                    strQ = "SELECT StoreID,StoreName FROM " + clsUtility.DBName + ".[dbo].StoreMaster WITH(NOLOCK) WHERE ISNULL(ActiveStatus,1)=1 AND StoreID NOT IN (" + cmdFrom.SelectedValue + ")";
                 }
                 else
                 {
-                    strQ = "SELECT StoreID,StoreName FROM StoreMaster WHERE StoreID IN  " +
-                              " (SELECT StoreID FROM tblStoreUserRights WHERE UserID = " + clsUtility.LoginID + " AND StoreID NOT IN (" + cmdFrom.SelectedValue + "))";
+                    strQ = "SELECT StoreID,StoreName FROM " + clsUtility.DBName + ".[dbo].StoreMaster WHERE StoreID IN  " +
+                              " (SELECT StoreID FROM " + clsUtility.DBName + ".[dbo].tblStoreUserRights WHERE UserID = " + clsUtility.LoginID + " AND StoreID NOT IN (" + cmdFrom.SelectedValue + "))";
                 }
 
                 DataTable ftToStore = ObjDAL.ExecuteSelectStatement(strQ);

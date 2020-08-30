@@ -201,13 +201,11 @@
             this.cmbToStore.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbToStore.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbToStore.FormattingEnabled = true;
-            this.cmbToStore.Items.AddRange(new object[] {
-            "Active",
-            "InActive"});
             this.cmbToStore.Location = new System.Drawing.Point(115, 59);
             this.cmbToStore.Name = "cmbToStore";
             this.cmbToStore.Size = new System.Drawing.Size(208, 27);
             this.cmbToStore.TabIndex = 253;
+            this.cmbToStore.SelectionChangeCommitted += new System.EventHandler(this.cmbToStore_SelectionChangeCommitted);
             // 
             // cmbBranch
             // 
@@ -215,13 +213,11 @@
             this.cmbBranch.Enabled = false;
             this.cmbBranch.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbBranch.FormattingEnabled = true;
-            this.cmbBranch.Items.AddRange(new object[] {
-            "Active",
-            "InActive"});
             this.cmbBranch.Location = new System.Drawing.Point(115, 26);
             this.cmbBranch.Name = "cmbBranch";
             this.cmbBranch.Size = new System.Drawing.Size(208, 27);
             this.cmbBranch.TabIndex = 252;
+            this.cmbBranch.SelectionChangeCommitted += new System.EventHandler(this.cmbBranch_SelectionChangeCommitted);
             // 
             // label1
             // 
@@ -262,7 +258,7 @@
             this.dgvStockDetails.Location = new System.Drawing.Point(12, 396);
             this.dgvStockDetails.Name = "dgvStockDetails";
             this.dgvStockDetails.ReadOnly = true;
-            this.dgvStockDetails.Size = new System.Drawing.Size(871, 208);
+            this.dgvStockDetails.Size = new System.Drawing.Size(880, 208);
             this.dgvStockDetails.TabIndex = 234;
             this.dgvStockDetails.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvStockDetails_DataBindingComplete);
             // 
@@ -271,7 +267,7 @@
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
             this.groupBox2.Controls.Add(this.picProduct);
             this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(900, 393);
+            this.groupBox2.Location = new System.Drawing.Point(904, 393);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(217, 211);
             this.groupBox2.TabIndex = 253;
@@ -290,6 +286,7 @@
             // 
             // frmBranchSaleShorting
             // 
+            this.AcceptButton = this.btnSearch;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;

@@ -27,41 +27,84 @@ namespace IMS_Client_2.StockManagement
 
         private void LoadBranch()
         {
-            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".[dbo].[StoreMaster]", "StoreID,StoreName", "ISNULL(ActiveStatus,1)=1", "StoreName ASC");
-            if (ObjUtil.ValidateTable(dt))
+            string strQ = "";
+            if (clsUtility.IsAdmin)
             {
-                cmbBranch.DataSource = dt;
+                strQ = "SELECT StoreID,StoreName FROM " + clsUtility.DBName + ".dbo.StoreMaster WITH(NOLOCK) WHERE ISNULL(ActiveStatus,1)=1 ORDER BY StoreName ASC";
+                cmbBranch.Enabled = true;
+            }
+            else
+            {
+                cmbBranch.Enabled = false;
+                strQ = "SELECT StoreID,StoreName FROM " + clsUtility.DBName + ".dbo.StoreMaster WITH(NOLOCK) WHERE ISNULL(ActiveStatus,1)=1 AND StoreID IN  " +
+                           " (SELECT StoreID FROM  " + clsUtility.DBName + ".dbo.tblStoreUserRights WITH(NOLOCK) WHERE UserID = " + clsUtility.LoginID + ") ORDER BY StoreName ASC";
+            }
+            DataTable dtFromStore = ObjDAL.ExecuteSelectStatement(strQ);
+            if (ObjUtil.ValidateTable(dtFromStore))
+            {
+                cmbBranch.DataSource = dtFromStore;
                 cmbBranch.DisplayMember = "StoreName";
                 cmbBranch.ValueMember = "StoreID";
                 cmbBranch.SelectedIndex = -1;
             }
+
+            //DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".[dbo].[StoreMaster]", "StoreID,StoreName", "ISNULL(ActiveStatus,1)=1", "StoreName ASC");
+            //if (ObjUtil.ValidateTable(dt))
+            //{
+            //    cmbBranch.DataSource = dt;
+            //    cmbBranch.DisplayMember = "StoreName";
+            //    cmbBranch.ValueMember = "StoreID";
+            //    cmbBranch.SelectedIndex = -1;
+            //}
         }
 
         private void LoadStores()
         {
-            DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".[dbo].[StoreMaster]", "StoreID,StoreName", "ISNULL(ActiveStatus,1)=1 AND ISNULL(StoreCategory,0)=1", "StoreName ASC");
-            if (ObjUtil.ValidateTable(dt))
+            string strQ = "";
+            if (cmbBranch.SelectedValue != null)
             {
-                cmbToStore.DataSource = dt;
-                cmbToStore.DisplayMember = "StoreName";
-                cmbToStore.ValueMember = "StoreID";
+                if (clsUtility.IsAdmin)
+                {
+                    strQ = "SELECT StoreID,StoreName FROM " + clsUtility.DBName + ".[dbo].StoreMaster WITH(NOLOCK) WHERE ISNULL(ActiveStatus,1)=1 AND StoreID NOT IN (" + cmbBranch.SelectedValue + ")";
+                }
+                else
+                {
+                    strQ = "SELECT StoreID,StoreName FROM " + clsUtility.DBName + ".[dbo].StoreMaster WITH(NOLOCK) WHERE StoreID IN  " +
+                              " (SELECT StoreID FROM " + clsUtility.DBName + ".[dbo].tblStoreUserRights WHERE UserID = " + clsUtility.LoginID + " AND StoreID NOT IN (" + cmbBranch.SelectedValue + "))";
+                }
+
+                DataTable ftToStore = ObjDAL.ExecuteSelectStatement(strQ);
+                if (ObjUtil.ValidateTable(ftToStore))
+                {
+                    cmbToStore.DataSource = ftToStore;
+                    cmbToStore.DisplayMember = "StoreName";
+                    cmbToStore.ValueMember = "StoreID";
+                }
                 cmbToStore.SelectedIndex = -1;
             }
+
+            //DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".[dbo].[StoreMaster]", "StoreID,StoreName", "ISNULL(ActiveStatus,1)=1 AND ISNULL(StoreCategory,0)=1", "StoreName ASC");
+            //if (ObjUtil.ValidateTable(dt))
+            //{
+            //    cmbToStore.DataSource = dt;
+            //    cmbToStore.DisplayMember = "StoreName";
+            //    cmbToStore.ValueMember = "StoreID";
+            //    cmbToStore.SelectedIndex = -1;
+            //}
         }
         private void frmBranchSaleShorting_Load(object sender, EventArgs e)
         {
             btnSearch.BackgroundImage = B_Leave;
             btnReset.BackgroundImage = B_Leave;
-
             btnPrint.BackgroundImage = B_Leave;
 
             dtpFromDate.MaxDate = DateTime.Now;
             dtpToDate.MaxDate = DateTime.Now;
 
             LoadBranch();
-            LoadStores();
-
             cmbBranch.SelectedValue = frmHome.Home_StoreID;
+            LoadStores();
+            cmbToStore.SelectedIndex = -1;
         }
 
         private void GetSelectedItemStockDetails()
@@ -69,7 +112,7 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, dgvBranchStockDetails.SelectedRows[0].Cells["ProductID"].Value, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("BarcodeNo", SqlDbType.BigInt, dgvBranchStockDetails.SelectedRows[0].Cells["BarcodeNo"].Value, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
-            ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, dgvBranchStockDetails.SelectedRows[0].Cells["ModelNo"].Value, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, dgvBranchStockDetails.SelectedRows[0].Cells["Style No"].Value, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("CategoryID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_Material_NewDetails");
             if (ObjUtil.ValidateDataSet(ds))
@@ -246,6 +289,16 @@ namespace IMS_Client_2.StockManagement
             {
                 clsUtility.ShowInfoMessage("No data found");
             }
+        }
+
+        private void cmbToStore_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            btnSearch.Focus();
+        }
+
+        private void cmbBranch_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadStores();
         }
     }
 }
