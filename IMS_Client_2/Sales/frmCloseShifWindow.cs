@@ -28,6 +28,7 @@ namespace IMS_Client_2.Sales
         int pStoreID = 0;
         decimal ExpensesAmt = 0, PettyCashBAL = 0;
         object Cashtotal = 0;
+        DateTime CashBoxDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
 
         DataTable dtCash = new DataTable();
         DataTable dtCredit = new DataTable();
@@ -376,9 +377,9 @@ namespace IMS_Client_2.Sales
             int column = dgvCloseCash.CurrentCell.ColumnIndex;
             string headerText = dgvCloseCash.Columns[column].HeaderText;
 
+            e.Cancel = false;
             if (listView1.Items[0].Selected)
             {
-                e.Cancel = false;
                 if (headerText == "Count" && e.FormattedValue.ToString() != "")
                 {
                     //if (e.FormattedValue == DBNull.Value || e.FormattedValue.ToString() == "")
@@ -641,8 +642,8 @@ namespace IMS_Client_2.Sales
         {
             try
             {
-                int column = dgvCloseCash.CurrentCell.ColumnIndex;
-                string headerText = dgvCloseCash.Columns[column].HeaderText;
+                //int column = dgvCloseCash.CurrentCell.ColumnIndex;
+                //string headerText = dgvCloseCash.Columns[column].HeaderText;
 
                 if (listView1.Items[0].Selected)
                 {
@@ -660,7 +661,7 @@ namespace IMS_Client_2.Sales
                 }
                 else if (listView1.Items[2].Selected)
                 {
-                    if (ObjUtil.ValidateTable(dtExpenses))
+                    if (ObjUtil.ValidateTable(dtExpenses) && e.ColumnIndex >= 0)
                     {
                         dtExpenses.Rows[e.RowIndex]["MasterCashClosingID"] = pMasterCashClosingID;
                         dtExpenses.Rows[e.RowIndex]["PettyCashExpID"] = 0;
@@ -694,6 +695,10 @@ namespace IMS_Client_2.Sales
             else if (headerText == "Count")
             {
                 e.Control.KeyPress += Int_Control_KeyPress;
+            }
+            else if (headerText == "Particulars")
+            {
+                e.Control.KeyPress -= Int_Control_KeyPress;
             }
         }
 
