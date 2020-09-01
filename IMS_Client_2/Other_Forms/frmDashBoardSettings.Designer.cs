@@ -134,7 +134,7 @@
             "Item ( Product)",
             "Invoice/Bill No",
             "Category (Department)",
-            "Model No"});
+            "Style No"});
             this.cmbGenerate.Location = new System.Drawing.Point(403, 139);
             this.cmbGenerate.Name = "cmbGenerate";
             this.cmbGenerate.Size = new System.Drawing.Size(251, 27);

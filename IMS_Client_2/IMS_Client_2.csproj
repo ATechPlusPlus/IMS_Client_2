@@ -198,6 +198,9 @@
     <Compile Include="Barcode\uRectangle.designer.cs">
       <DependentUpon>uRectangle.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\RDLC_DataSets\ds_MiniSalesReport.cs">
+      <DependentUpon>ds_MiniSalesReport.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Report\Report_Forms\frmBranchShortingReport.cs">
       <SubType>Form</SubType>
     </Compile>

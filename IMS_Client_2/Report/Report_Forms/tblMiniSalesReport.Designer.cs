@@ -103,7 +103,7 @@
             "Item ( Product)",
             "Invoice/Bill No",
             "Category (Department)",
-            "Model No"});
+            "Style No"});
             this.cmbGenerate.Location = new System.Drawing.Point(18, 192);
             this.cmbGenerate.Name = "cmbGenerate";
             this.cmbGenerate.Size = new System.Drawing.Size(251, 27);
@@ -210,9 +210,9 @@
             this.label2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(15, 33);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 17);
+            this.label2.Size = new System.Drawing.Size(46, 17);
             this.label2.TabIndex = 210;
-            this.label2.Text = "Shop :";
+            this.label2.Text = "Store :";
             // 
             // cmbShop
             // 

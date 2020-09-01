@@ -28,12 +28,15 @@ namespace IMS_Client_2.Other_Forms
             btnAdd.BackgroundImage = B_Leave;
             btnSave.BackgroundImage = B_Leave;
 
+            dtpFromDate.MaxDate = DateTime.Now;
+            dtpToDate.MaxDate = DateTime.Now;
+
             LoadShop();
         }
         private void LoadShop()
         {
             DataTable dt = null;
-            dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.StoreMaster", "StoreID,StoreName,Place,case StoreCategory when 0 then 'Normal' when 1 then'WearHouse' end as Category ", "StoreName");
+            dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.StoreMaster", "StoreID,StoreName,Place,CASE StoreCategory WHEN 0 THEN 'Normal' WHEN 1 then'Warehouse' END AS Category ", "StoreName");
 
             if (ObjUtil.ValidateTable(dt))
             {
@@ -60,9 +63,6 @@ namespace IMS_Client_2.Other_Forms
         {
             ObjUtil.SetDataGridProperty(dgvShopeDetails, DataGridViewAutoSizeColumnsMode.Fill);
             dgvShopeDetails.Columns[0].ReadOnly = false;
-
-
-
         }
         private bool AnyRightCheck()
         {
@@ -120,7 +120,7 @@ namespace IMS_Client_2.Other_Forms
 
             string StoreID = bs.ToString().Remove(bs.ToString().Length - 1, 1);
 
-            ObjDAL.ExecuteNonQuery("Delete " + clsUtility.DBName + ".dbo.tblDashBoard ");
+            ObjDAL.ExecuteNonQuery("Delete " + clsUtility.DBName + ".dbo.tblDashBoard");
 
             ObjDAL.SetColumnData("Shopes", SqlDbType.NVarChar, StoreID);
             ObjDAL.SetColumnData("FromDate", SqlDbType.Date, dtpFromDate.Value.ToString("yyyy-MM-dd"));
@@ -129,7 +129,7 @@ namespace IMS_Client_2.Other_Forms
             ObjDAL.SetColumnData("RefreshRate", SqlDbType.Int, Convert.ToInt32(numericUpDown1.Value));
             ObjDAL.InsertData("" + clsUtility.DBName + ".dbo.tblDashBoard", false);
 
-            clsUtility.ShowInfoMessage("Dashboard settings has been saved.", clsUtility.strProjectTitle);
+            clsUtility.ShowInfoMessage("Dashboard settings has been saved.");
             this.Close();
         }
 

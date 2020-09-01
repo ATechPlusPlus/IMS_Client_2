@@ -50,10 +50,10 @@ namespace IMS_Client_2.Other_Forms
         private string GetShopeName(string shopID)
         {
             string strShope = "NA";
-            DataTable dt = ObjDAL.ExecuteSelectStatement("select StoreName from " + clsUtility.DBName + ".[dbo].[StoreMaster] WITH(NOLOCK) where StoreID=" + shopID);
+            DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT StoreName FROM " + clsUtility.DBName + ".[dbo].[StoreMaster] WITH(NOLOCK) WHERE StoreID=" + shopID);
             if (ObjUtil.ValidateTable(dt))
             {
-                strShope = dt.Rows[0][0].ToString();
+                strShope = dt.Rows[0]["StoreName"].ToString();
             }
             return strShope;
         }
@@ -79,125 +79,141 @@ namespace IMS_Client_2.Other_Forms
                 for (int i = 0; i < strShops.Length; i++)
                 {
                     string shopID = strShops[i];
-                    string TotalQTY_Rate = "";
-                    string reportQuery = "";
+                    //string TotalQTY_Rate = "";
+                    //string reportQuery = "";
 
                     string strShopeName = GetShopeName(shopID);
 
-                    if (index == 0) //Employee ( Sales Man)
-                    {
-                        reportQuery = " SELECT v1.Name as SalesMan  , SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
-                                        " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
-                                         " ON v1.id = v2.InvoiceID " +
-                                         " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
-                                         " AND v2.Rate>0 Group by Name";
+                    #region Commented Inline SQL Query
+                    //if (index == 0) //Employee ( Sales Man)
+                    //{
+                    //    reportQuery = " SELECT v1.Name as SalesMan  , SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
+                    //                    " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
+                    //                     " ON v1.id = v2.InvoiceID " +
+                    //                     " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
+                    //                     " AND v2.Rate>0 Group by Name";
 
 
-                        TotalQTY_Rate = "select SUM(QTY) as TotalQTY, SUM(Rate) as TotalRate  from ( SELECT v1.Name as SalesMan  , SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
-                                        " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
-                                         " ON v1.id = v2.InvoiceID " +
-                                         " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
-                                         "  AND  v2.Rate>0 Group by Name ) as tb";
+                    //    TotalQTY_Rate = "select SUM(QTY) as TotalQTY, SUM(Rate) as TotalRate  from ( SELECT v1.Name as SalesMan  , SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
+                    //                    " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
+                    //                     " ON v1.id = v2.InvoiceID " +
+                    //                     " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
+                    //                     "  AND  v2.Rate>0 Group by Name ) as tb";
 
-                    }
-                    else if (index == 1) //Color
-                    {
-                        reportQuery = " SELECT  v2.ColorName as Color  , SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
-                                       " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
-                                        " ON v1.id = v2.InvoiceID " +
-                                        " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
-                                        "  AND v2.Rate>0 Group by ColorName";
+                    //}
+                    //else if (index == 1) //Color
+                    //{
+                    //    reportQuery = " SELECT  v2.ColorName as Color  , SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
+                    //                   " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
+                    //                    " ON v1.id = v2.InvoiceID " +
+                    //                    " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
+                    //                    "  AND v2.Rate>0 Group by ColorName";
 
-                        TotalQTY_Rate = " select SUM(QTY) as TotalQTY,SUM(Rate) as TotalRate from ( SELECT  v2.ColorName as Color  , SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
-                                      " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
-                                       " ON v1.id = v2.InvoiceID " +
-                                       " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
-                                       " AND v2.Rate>0 Group by ColorName ) as tb";
+                    //    TotalQTY_Rate = " select SUM(QTY) as TotalQTY,SUM(Rate) as TotalRate from ( SELECT  v2.ColorName as Color  , SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
+                    //                  " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
+                    //                   " ON v1.id = v2.InvoiceID " +
+                    //                   " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
+                    //                   " AND v2.Rate>0 Group by ColorName ) as tb";
 
-                    }
-                    else if (index == 2) //Product 
-                    {
-                        reportQuery = " SELECT  v2.ProductName as ItemName, SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
-                                      " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
-                                       " ON v1.id = v2.InvoiceID " +
-                                       " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
-                                       " AND v2.Rate>0 Group by  v2.ProductName";
-
-
-                        TotalQTY_Rate = " select SUM(QTY) as TotalQTY,SUM(Rate) as TotalRate from ( SELECT  v2.ProductName as ItemName, SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
-                                    " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
-                                     " ON v1.id = v2.InvoiceID " +
-                                     " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
-                                     "  AND v2.Rate>0 Group by  v2.ProductName ) as tb";
-
-                    }
-                    else if (index == 3) //Invoice/Bill No
-                    {
-                        reportQuery = " SELECT  v1.InvoiceNumber as InvoiceNo, SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
-                                      " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
-                                       " ON v1.id = v2.InvoiceID " +
-                                       " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
-                                       "AND v2.Rate>0  Group by  v1.InvoiceNumber";
+                    //}
+                    //else if (index == 2) //Product 
+                    //{
+                    //    reportQuery = " SELECT  v2.ProductName as ItemName, SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
+                    //                  " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
+                    //                   " ON v1.id = v2.InvoiceID " +
+                    //                   " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
+                    //                   " AND v2.Rate>0 Group by  v2.ProductName";
 
 
-                        TotalQTY_Rate = "select SUM(QTY) as TotalQTY,SUM(Rate) as TotalRate from ( SELECT  v1.InvoiceNumber as InvoiceNo, SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
-                                " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
-                                 " ON v1.id = v2.InvoiceID " +
-                                 " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
-                                 " AND v2.Rate>0 Group by  v1.InvoiceNumber ) as tb";
+                    //    TotalQTY_Rate = " select SUM(QTY) as TotalQTY,SUM(Rate) as TotalRate from ( SELECT v2.ProductName as ItemName, SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
+                    //                " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
+                    //                 " ON v1.id = v2.InvoiceID " +
+                    //                 " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
+                    //                 "  AND v2.Rate>0 Group by  v2.ProductName ) as tb";
 
-                    }
-                    else if (index == 4) // Category Department
-                    {
-                        reportQuery = " SELECT   (select CategoryName from CategoryMaster where CategoryID=v2.CategoryID )  as Category, SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
-                                      " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
-                                       " ON v1.id = v2.InvoiceID " +
-                                       " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
-                                       "AND v2.Rate>0  Group by  v2.CategoryID";
-
-                        TotalQTY_Rate = "  select SUM(QTY) as TotalQTY,SUM(Rate) as TotalRate from (  SELECT   (select CategoryName from CategoryMaster where CategoryID=v2.CategoryID )  as Category, SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
-                                                             " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
-                                                              " ON v1.id = v2.InvoiceID " +
-                                                              " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
-                                                              "  AND v2.Rate>0  Group by  v2.CategoryID ) as tb";
+                    //}
+                    //else if (index == 3) //Invoice/Bill No
+                    //{
+                    //    reportQuery = " SELECT  v1.InvoiceNumber as InvoiceNo, SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
+                    //                  " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
+                    //                   " ON v1.id = v2.InvoiceID " +
+                    //                   " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
+                    //                   "AND v2.Rate>0  Group by  v1.InvoiceNumber";
 
 
-                    }
-                    else if (index == 5) // Model No
-                    {
-                        reportQuery = " SELECT  v2.ModelNo, SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
-                                      " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
-                                       " ON v1.id = v2.InvoiceID " +
-                                       " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
-                                       "AND v2.Rate>0 Group by  v2.ModelNo";
+                    //    TotalQTY_Rate = "select SUM(QTY) as TotalQTY,SUM(Rate) as TotalRate from ( SELECT  v1.InvoiceNumber as InvoiceNo, SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
+                    //            " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
+                    //             " ON v1.id = v2.InvoiceID " +
+                    //             " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
+                    //             " AND v2.Rate>0 Group by  v1.InvoiceNumber ) as tb";
 
-                        TotalQTY_Rate = "   select SUM(QTY) as TotalQTY,SUM(Rate) as TotalRate from (  SELECT   v2.ModelNo, SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
-                                                             " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
-                                                              " ON v1.id = v2.InvoiceID " +
-                                                              " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
-                                                              " AND v2.Rate>0 Group by  v2.ModelNo ) as tb";
+                    //}
+                    //else if (index == 4) // Category Department
+                    //{
+                    //    reportQuery = " SELECT   (select CategoryName from CategoryMaster where CategoryID=v2.CategoryID )  as Category, SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
+                    //                  " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
+                    //                   " ON v1.id = v2.InvoiceID " +
+                    //                   " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
+                    //                   "AND v2.Rate>0  Group by  v2.CategoryID";
+
+                    //    TotalQTY_Rate = "  select SUM(QTY) as TotalQTY,SUM(Rate) as TotalRate from (  SELECT   (select CategoryName from CategoryMaster where CategoryID=v2.CategoryID )  as Category, SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
+                    //                                         " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
+                    //                                          " ON v1.id = v2.InvoiceID " +
+                    //                                          " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
+                    //                                          "  AND v2.Rate>0  Group by  v2.CategoryID ) as tb";
 
 
-                    }
+                    //}
+                    //else if (index == 5) // Model No
+                    //{
+                    //    reportQuery = " SELECT  v2.ModelNo, SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
+                    //                  " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
+                    //                   " ON v1.id = v2.InvoiceID " +
+                    //                   " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
+                    //                   "AND v2.Rate>0 Group by  v2.ModelNo";
+
+                    //    TotalQTY_Rate = "   select SUM(QTY) as TotalQTY,SUM(Rate) as TotalRate from (  SELECT   v2.ModelNo, SUM(v2.QTY) as QTY, SUM(v2.Rate) as Rate  FROM  " +
+                    //                                         " " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " + clsUtility.DBName + ".dbo.View_SalesDetails v2 " +
+                    //                                          " ON v1.id = v2.InvoiceID " +
+                    //                                          " where v1.ShopeID = " + shopID + " AND v1.InvoiceDate between '" + fromDate.ToString("yyyy-MM-dd") + "' AND '" + toDate.ToString("yyyy-MM-dd") + "' " +
+                    //                                          " AND v2.Rate>0 Group by  v2.ModelNo ) as tb";
+
+
+                    //}
+                    #endregion
+
                     string TotalQTYValue = "0";
                     string TotalRateValue = "0";
 
-                    DataTable dtQTY_Rate = ObjDAL.ExecuteSelectStatement(TotalQTY_Rate);
-                    if (ObjUtil.ValidateTable(dtQTY_Rate))
+                    ObjDAL.SetStoreProcedureData("index", SqlDbType.Int, index, clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, shopID, clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("FromDate", SqlDbType.Date, fromDate, clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("ToDate", SqlDbType.Date, toDate, clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("ReportType", SqlDbType.VarChar, "Dash", clsConnection_DAL.ParamType.Input);
+                    ObjDAL.SetStoreProcedureData("GenericColumn", SqlDbType.VarChar, "", clsConnection_DAL.ParamType.Output);//Default value
+
+                    DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_GetDashBoard_MiniSales_Report");
+                    if (ObjUtil.ValidateDataSet(ds))
                     {
-                        TotalQTYValue = dtQTY_Rate.Rows[0]["TotalQTY"].ToString();
-                        TotalRateValue = dtQTY_Rate.Rows[0]["TotalRate"].ToString();
-
-                        if (TotalQTYValue.Trim().Length == 0)
+                        DataTable dtQTY_Rate = ds.Tables[1];
+                        //DataTable dtQTY_Rate = ObjDAL.ExecuteSelectStatement(TotalQTY_Rate);
+                        if (ObjUtil.ValidateTable(dtQTY_Rate))
                         {
-                            TotalQTYValue = "0";
-                        }
+                            TotalQTYValue = dtQTY_Rate.Rows[0]["TotalQTY"].ToString();
+                            TotalRateValue = dtQTY_Rate.Rows[0]["TotalRate"].ToString();
 
-                        if (TotalRateValue.Trim().Length == 0)
-                        {
-                            TotalRateValue = "0";
+                            if (TotalQTYValue.Trim().Length == 0)
+                            {
+                                TotalQTYValue = "0";
+                            }
+
+                            if (TotalRateValue.Trim().Length == 0)
+                            {
+                                TotalRateValue = "0";
+                            }
                         }
                     }
+                    ObjDAL.ResetData();
 
                     SPanel sPanel = new SPanel();
                     sPanel.Size = new Size(271, 307);
@@ -246,7 +262,8 @@ namespace IMS_Client_2.Other_Forms
 
 
                     DataGridView dgv = new DataGridView();
-                    dgv.DataSource = ObjDAL.ExecuteSelectStatement(reportQuery);
+                    //dgv.DataSource = ObjDAL.ExecuteSelectStatement(reportQuery);
+                    dgv.DataSource = ds.Tables[0];
                     dgv.DataBindingComplete += Dgv_DataBindingComplete;
                     dgv.Location = dataGridView1.Location;
                     dgv.Size = dataGridView1.Size;
@@ -258,8 +275,6 @@ namespace IMS_Client_2.Other_Forms
 
                     TotalHeaderRate = TotalHeaderRate + Convert.ToDecimal(TotalRateValue);
                     TotalHeaderQTY = TotalHeaderQTY + Convert.ToDecimal(TotalQTYValue);
-
-
                 }
                 lblHeaderQTY.Text = TotalHeaderQTY.ToString();
                 lblHeaderTotalRate.Text = TotalHeaderRate.ToString();
@@ -273,9 +288,8 @@ namespace IMS_Client_2.Other_Forms
         }
         private void ShowDashBoardDate()
         {
-
-            DataTable dtdate=  ObjDAL.ExecuteSelectStatement("select FromDate,ToDate from tblDashBoard ");
-            if (dtdate.Rows.Count>0)
+            DataTable dtdate = ObjDAL.ExecuteSelectStatement("SELECT FromDate,ToDate FROM tblDashBoard WITH(NOLOCK)");
+            if (ObjUtil.ValidateTable(dtdate))
             {
                 lblDate.Text = Convert.ToDateTime(dtdate.Rows[0]["FromDate"]).ToShortDateString() + " to " + Convert.ToDateTime(dtdate.Rows[0]["ToDate"]).ToShortDateString();
             }
@@ -298,17 +312,15 @@ namespace IMS_Client_2.Other_Forms
 
                 for (int i = 0; i < dgv.Rows.Count; i++)
                 {
-                    if (Convert.ToDecimal(dgv.Rows[i].Cells["Rate"].Value)<0)
+                    if (Convert.ToDecimal(dgv.Rows[i].Cells["Rate"].Value) < 0)
                     {
                         dgv.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
-                        dgv.Rows[i].DefaultCellStyle.ForeColor = Color.Black ;
+                        dgv.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
 
                         dgv.Rows[i].DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Yellow;
                         dgv.Rows[i].DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
-
                     }
                 }
-               
             }
             catch (Exception)
             {
@@ -331,6 +343,7 @@ namespace IMS_Client_2.Other_Forms
             settings.ShowDialog();
 
             LoadShop();
+            ShowDashBoardDate();
         }
     }
 }
