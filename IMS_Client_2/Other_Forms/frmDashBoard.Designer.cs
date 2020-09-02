@@ -39,14 +39,18 @@
             this.lblHeaderTotalRate = new System.Windows.Forms.Label();
             this.lblActiveStatus = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.sPanel1 = new IMS_Client_2.SPanel();
+            this.lblGrandTotalAmtValue = new System.Windows.Forms.Label();
+            this.lblTotalAmt = new System.Windows.Forms.Label();
+            this.lblDiscountValue = new System.Windows.Forms.Label();
+            this.lblDiscount = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -172,10 +176,18 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1212, 502);
             this.flowLayoutPanel1.TabIndex = 206;
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // sPanel1
             // 
             this.sPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(140)))), ((int)(((byte)(116)))));
             this.sPanel1.BorderColor = System.Drawing.Color.White;
+            this.sPanel1.Controls.Add(this.lblGrandTotalAmtValue);
+            this.sPanel1.Controls.Add(this.lblTotalAmt);
+            this.sPanel1.Controls.Add(this.lblDiscountValue);
+            this.sPanel1.Controls.Add(this.lblDiscount);
             this.sPanel1.Controls.Add(this.label8);
             this.sPanel1.Controls.Add(this.label7);
             this.sPanel1.Controls.Add(this.label6);
@@ -185,8 +197,55 @@
             this.sPanel1.Edge = 20;
             this.sPanel1.Location = new System.Drawing.Point(3, 3);
             this.sPanel1.Name = "sPanel1";
-            this.sPanel1.Size = new System.Drawing.Size(266, 307);
+            this.sPanel1.Size = new System.Drawing.Size(266, 364);
             this.sPanel1.TabIndex = 205;
+            // 
+            // lblGrandTotalAmtValue
+            // 
+            this.lblGrandTotalAmtValue.AutoSize = true;
+            this.lblGrandTotalAmtValue.BackColor = System.Drawing.Color.Transparent;
+            this.lblGrandTotalAmtValue.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGrandTotalAmtValue.ForeColor = System.Drawing.Color.White;
+            this.lblGrandTotalAmtValue.Location = new System.Drawing.Point(145, 334);
+            this.lblGrandTotalAmtValue.Name = "lblGrandTotalAmtValue";
+            this.lblGrandTotalAmtValue.Size = new System.Drawing.Size(32, 19);
+            this.lblGrandTotalAmtValue.TabIndex = 209;
+            this.lblGrandTotalAmtValue.Text = "NA";
+            // 
+            // lblTotalAmt
+            // 
+            this.lblTotalAmt.AutoSize = true;
+            this.lblTotalAmt.BackColor = System.Drawing.Color.Transparent;
+            this.lblTotalAmt.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalAmt.ForeColor = System.Drawing.Color.White;
+            this.lblTotalAmt.Location = new System.Drawing.Point(9, 334);
+            this.lblTotalAmt.Name = "lblTotalAmt";
+            this.lblTotalAmt.Size = new System.Drawing.Size(129, 19);
+            this.lblTotalAmt.TabIndex = 208;
+            this.lblTotalAmt.Text = "Total Grand Amt :";
+            // 
+            // lblDiscountValue
+            // 
+            this.lblDiscountValue.AutoSize = true;
+            this.lblDiscountValue.BackColor = System.Drawing.Color.Transparent;
+            this.lblDiscountValue.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDiscountValue.ForeColor = System.Drawing.Color.White;
+            this.lblDiscountValue.Location = new System.Drawing.Point(145, 305);
+            this.lblDiscountValue.Name = "lblDiscountValue";
+            this.lblDiscountValue.Size = new System.Drawing.Size(32, 19);
+            this.lblDiscountValue.TabIndex = 207;
+            this.lblDiscountValue.Text = "NA";
+            // 
+            // lblDiscount
+            // 
+            this.lblDiscount.BackColor = System.Drawing.Color.Transparent;
+            this.lblDiscount.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDiscount.ForeColor = System.Drawing.Color.White;
+            this.lblDiscount.Location = new System.Drawing.Point(9, 305);
+            this.lblDiscount.Name = "lblDiscount";
+            this.lblDiscount.Size = new System.Drawing.Size(115, 19);
+            this.lblDiscount.TabIndex = 206;
+            this.lblDiscount.Text = "Total Discount :";
             // 
             // label8
             // 
@@ -194,7 +253,7 @@
             this.label8.BackColor = System.Drawing.Color.Transparent;
             this.label8.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(125, 277);
+            this.label8.Location = new System.Drawing.Point(145, 277);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(32, 19);
             this.label8.TabIndex = 205;
@@ -206,7 +265,7 @@
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(122, 248);
+            this.label7.Location = new System.Drawing.Point(145, 248);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(32, 19);
             this.label7.TabIndex = 204;
@@ -259,10 +318,6 @@
             this.label4.Text = "Store Name";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // frmDashBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -309,5 +364,9 @@
         private System.Windows.Forms.Timer timer1;
         public System.Windows.Forms.Label lblDate;
         public System.Windows.Forms.Label label3;
+        public System.Windows.Forms.Label lblGrandTotalAmtValue;
+        public System.Windows.Forms.Label lblTotalAmt;
+        public System.Windows.Forms.Label lblDiscountValue;
+        public System.Windows.Forms.Label lblDiscount;
     }
 }

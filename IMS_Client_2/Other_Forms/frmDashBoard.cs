@@ -184,6 +184,7 @@ namespace IMS_Client_2.Other_Forms
 
                     string TotalQTYValue = "0";
                     string TotalRateValue = "0";
+                    string TotalDiscountValue = "0"; string TotalGrandTotalValue = "0";
 
                     ObjDAL.SetStoreProcedureData("index", SqlDbType.Int, index, clsConnection_DAL.ParamType.Input);
                     ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, shopID, clsConnection_DAL.ParamType.Input);
@@ -199,24 +200,25 @@ namespace IMS_Client_2.Other_Forms
                         //DataTable dtQTY_Rate = ObjDAL.ExecuteSelectStatement(TotalQTY_Rate);
                         if (ObjUtil.ValidateTable(dtQTY_Rate))
                         {
-                            TotalQTYValue = dtQTY_Rate.Rows[0]["TotalQTY"].ToString();
-                            TotalRateValue = dtQTY_Rate.Rows[0]["TotalRate"].ToString();
+                            TotalQTYValue = dtQTY_Rate.Rows[0]["TotalQTY"].ToString() == "" ? "0" : dtQTY_Rate.Rows[0]["TotalQTY"].ToString();
+                            TotalRateValue = dtQTY_Rate.Rows[0]["TotalRate"].ToString() == "" ? "0" : dtQTY_Rate.Rows[0]["TotalRate"].ToString();
+                            TotalDiscountValue = dtQTY_Rate.Rows[0]["TotalDiscount"].ToString() == "" ? "0" : dtQTY_Rate.Rows[0]["TotalDiscount"].ToString();
+                            TotalGrandTotalValue = dtQTY_Rate.Rows[0]["GrandTotal"].ToString() == "" ? "0" : dtQTY_Rate.Rows[0]["GrandTotal"].ToString();
 
-                            if (TotalQTYValue.Trim().Length == 0)
-                            {
-                                TotalQTYValue = "0";
-                            }
-
-                            if (TotalRateValue.Trim().Length == 0)
-                            {
-                                TotalRateValue = "0";
-                            }
+                            //if (TotalQTYValue.Trim().Length == 0)
+                            //{
+                            //    TotalQTYValue = "0";
+                            //}
+                            //if (TotalRateValue.Trim().Length == 0)
+                            //{
+                            //    TotalRateValue = "0";
+                            //}
                         }
                     }
                     ObjDAL.ResetData();
 
                     SPanel sPanel = new SPanel();
-                    sPanel.Size = new Size(271, 307);
+                    sPanel.Size = new Size(271, 364);
                     sPanel.BackColor = Color.FromArgb(33, 140, 116);
 
                     Label lblShopeName = new Label();
@@ -261,6 +263,39 @@ namespace IMS_Client_2.Other_Forms
                     sPanel.Controls.Add(lblTotalRateValue);
 
 
+                    Label lblDiscount1 = new Label();
+                    lblDiscount1.Text = "Total Discount :";
+                    lblDiscount1.Font = new Font("Times new Roman", 11.2F, FontStyle.Bold);
+                    lblDiscount1.AutoSize = false;
+                    lblDiscount1.Size = lblDiscount.Size;
+                    lblDiscount1.ForeColor = lblDiscount.ForeColor;
+                    lblDiscount1.Location = lblDiscount.Location;
+                    sPanel.Controls.Add(lblDiscount1);
+
+                    Label lblDiscountValue1 = new Label();
+                    lblDiscountValue1.Text = TotalDiscountValue;
+                    lblDiscountValue1.Font = lblDiscountValue.Font;
+                    lblDiscountValue1.ForeColor = lblDiscountValue.ForeColor;
+                    lblDiscountValue1.Location = lblDiscountValue.Location;
+                    sPanel.Controls.Add(lblDiscountValue1);
+
+
+                    Label lblTotalAmt1 = new Label();
+                    lblTotalAmt1.Text = "Total Grand Amt :";
+                    lblTotalAmt1.Size = lblTotalAmt.Size;
+                    lblTotalAmt1.Font = lblTotalAmt.Font;
+                    lblTotalAmt1.ForeColor = lblTotalAmt.ForeColor;
+                    lblTotalAmt1.Location = lblTotalAmt.Location;
+                    sPanel.Controls.Add(lblTotalAmt1);
+
+                    Label lblTotalAmtValue = new Label();
+                    lblTotalAmtValue.Text = TotalGrandTotalValue;
+                    lblTotalAmtValue.Font = lblGrandTotalAmtValue.Font;
+                    lblTotalAmtValue.ForeColor = lblGrandTotalAmtValue.ForeColor;
+                    lblTotalAmtValue.Location = lblGrandTotalAmtValue.Location;
+                    sPanel.Controls.Add(lblTotalAmtValue);
+
+
                     DataGridView dgv = new DataGridView();
                     //dgv.DataSource = ObjDAL.ExecuteSelectStatement(reportQuery);
                     dgv.DataSource = ds.Tables[0];
@@ -273,7 +308,8 @@ namespace IMS_Client_2.Other_Forms
 
                     flowLayoutPanel1.Controls.Add(sPanel);
 
-                    TotalHeaderRate = TotalHeaderRate + Convert.ToDecimal(TotalRateValue);
+                    //TotalHeaderRate = TotalHeaderRate + Convert.ToDecimal(TotalRateValue); 
+                    TotalHeaderRate = TotalHeaderRate + Convert.ToDecimal(TotalGrandTotalValue);
                     TotalHeaderQTY = TotalHeaderQTY + Convert.ToDecimal(TotalQTYValue);
                 }
                 lblHeaderQTY.Text = TotalHeaderQTY.ToString();
