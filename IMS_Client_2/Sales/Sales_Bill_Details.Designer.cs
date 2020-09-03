@@ -123,6 +123,7 @@
             // 
             // dtpToDate
             // 
+            this.dtpToDate.Enabled = false;
             this.dtpToDate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpToDate.Location = new System.Drawing.Point(271, 104);
@@ -158,6 +159,7 @@
             // 
             // dtpFromDate
             // 
+            this.dtpFromDate.Enabled = false;
             this.dtpFromDate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFromDate.Location = new System.Drawing.Point(127, 104);
@@ -225,10 +227,10 @@
             this.rdSearchByShop.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdSearchByShop.Location = new System.Drawing.Point(427, 26);
             this.rdSearchByShop.Name = "rdSearchByShop";
-            this.rdSearchByShop.Size = new System.Drawing.Size(83, 21);
+            this.rdSearchByShop.Size = new System.Drawing.Size(85, 21);
             this.rdSearchByShop.TabIndex = 2;
             this.rdSearchByShop.TabStop = true;
-            this.rdSearchByShop.Text = "By Shop :";
+            this.rdSearchByShop.Text = "By Store :";
             this.rdSearchByShop.UseVisualStyleBackColor = true;
             this.rdSearchByShop.CheckedChanged += new System.EventHandler(this.radByShope_CheckedChanged);
             // 

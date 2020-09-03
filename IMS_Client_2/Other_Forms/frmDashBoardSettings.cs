@@ -96,13 +96,12 @@ namespace IMS_Client_2.Other_Forms
         {
             if (cmbGenerate.SelectedIndex == -1)
             {
-                clsUtility.ShowInfoMessage("Please select the specification.", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("Please select the specification.");
                 return;
             }
-
             else if (AnyRightCheck() == false)
             {
-                CoreApp.clsUtility.ShowInfoMessage("Please select shop.", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("Please select Store.");
                 return;
             }
 

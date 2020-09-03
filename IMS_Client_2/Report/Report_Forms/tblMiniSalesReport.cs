@@ -63,18 +63,19 @@ namespace IMS_Client_2.Report.Report_Forms
 
         private void btnGenerateReport_Click(object sender, EventArgs e)
         {
-            if (ObjUtil.IsControlTextEmpty(cmbGenerate))
-            {
-                clsUtility.ShowInfoMessage("Please select Specification.");
-                cmbGenerate.Focus();
-                return;
-            }
             if (ObjUtil.IsControlTextEmpty(cmbShop))
             {
                 clsUtility.ShowInfoMessage("Please select Store.");
                 cmbShop.Focus();
                 return;
             }
+            if (ObjUtil.IsControlTextEmpty(cmbGenerate))
+            {
+                clsUtility.ShowInfoMessage("Please select Specification.");
+                cmbGenerate.Focus();
+                return;
+            }
+            
             //string strQuery = "select * from "+ clsUtility.DBName + ".dbo.View_SalesBillDetails";
 
             //string reportQuery = "";

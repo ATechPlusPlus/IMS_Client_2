@@ -54,13 +54,13 @@ namespace IMS_Client_2.Sales
         {
             if (strCondition == string.Empty)
             {
-                string strQ = "select * from  " + clsUtility.DBName + ".dbo.View_SalesBillDetails order by  id desc";
+                string strQ = "SELECT * FROM  " + clsUtility.DBName + ".dbo.View_SalesBillDetails ORDER BY id DESC";
                 dgvProductDetails.DataSource = ObjDAL.ExecuteSelectStatement(strQ);
                 lblCOunt.Text = dgvProductDetails.Rows.Count.ToString();
             }
             else
             {
-                string strQ = "select * from  " + clsUtility.DBName + ".dbo.View_SalesBillDetails where " + strCondition+"  order by id desc";
+                string strQ = "SELECT * FROM  " + clsUtility.DBName + ".dbo.View_SalesBillDetails WHERE " + strCondition+ "  ORDER BY id DESC";
                 dgvProductDetails.DataSource = ObjDAL.ExecuteSelectStatement(strQ);
                 lblCOunt.Text = dgvProductDetails.Rows.Count.ToString();
             }
@@ -217,7 +217,7 @@ namespace IMS_Client_2.Sales
                 clsUtility.ShowInfoMessage("From date can not be greater then To Date.", clsUtility.strProjectTitle);
                 return;
             }
-            string condition = " Convert(date,InvoiceDate) between Convert(Date,'" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "') and Convert(date,'" + dtpToDate.Value.ToString("yyyy-MM-dd") + "')";
+            string condition = " CONVERT(DATE,InvoiceDate) BETWEEN CONVERT(DATE,'" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "') AND CONVERT(DATE,'" + dtpToDate.Value.ToString("yyyy-MM-dd") + "')";
             LoadData(condition);
         }
 
@@ -253,7 +253,7 @@ namespace IMS_Client_2.Sales
                 clsUtility.ShowInfoMessage("From date can not be greater then To Date.", clsUtility.strProjectTitle);
                 return;
             }
-            string condition = " Convert(date,InvoiceDate) between Convert(Date,'" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "') and Convert(date,'" + dtpToDate.Value.ToString("yyyy-MM-dd") + "')";
+            string condition = " CONVERT(DATE,InvoiceDate) BETWEEN CONVERT(DATE,'" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "') AND CONVERT(DATE,'" + dtpToDate.Value.ToString("yyyy-MM-dd") + "')";
             LoadData(condition);
         }
 
@@ -261,17 +261,19 @@ namespace IMS_Client_2.Sales
         {
             if (dgvProductDetails.SelectedRows.Count == 0)
             {
-                clsUtility.ShowInfoMessage("Select a bill from the given list.", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("Select a bill from the given list.");
                 return;
-
             }
 
             string InvoiceID = dgvProductDetails.SelectedRows[0].Cells["id"].Value.ToString();
-            Report.frmSalesInvoiceReport frmSalesInvoice = new Report.frmSalesInvoiceReport();
-            frmSalesInvoice.InvoiceID = Convert.ToInt32(InvoiceID);
-            frmSalesInvoice.IsDirectPrint = false;
-            frmSalesInvoice.Show();
-
+            bool b = ObjUtil.IsAlreadyOpen(typeof(Report.frmSalesInvoiceReport));
+            if (!b)
+            {
+                Report.frmSalesInvoiceReport frmSalesInvoice = new Report.frmSalesInvoiceReport();
+                frmSalesInvoice.InvoiceID = Convert.ToInt32(InvoiceID);
+                frmSalesInvoice.IsDirectPrint = false;
+                frmSalesInvoice.Show();
+            }
         }
     }
 }
