@@ -1891,7 +1891,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>VoucherNumber :</Value>
+                    <Value>Voucher Number : </Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontWeight>Bold</FontWeight>

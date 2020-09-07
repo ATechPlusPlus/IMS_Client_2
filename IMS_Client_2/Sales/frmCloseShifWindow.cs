@@ -630,7 +630,7 @@ namespace IMS_Client_2.Sales
         }
         private string GetTotalCreditValue()
         {
-            DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT ISNULL(SUM(Value),0) FROM " + clsUtility.DBName + ".[dbo].[tblCreditClosing] WITH(NOLOCK) WHERE MasterCashClosingID=" + pMasterCashClosingID);
+            DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT ISNULL(SUM(Value),0) FROM " + clsUtility.DBName + ".[dbo].[tblCreditClosing] WITH(NOLOCK) WHERE MasterCashClosingID=" + pMasterCashClosingID +" AND [Type]!='Cash'");
             if (ObjUtil.ValidateTable(dt))
             {
                 return dt.Rows[0][0].ToString();
