@@ -1609,8 +1609,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox51</rd:DefaultName>
-            <Top>5.48002in</Top>
-            <Left>0.05659in</Left>
+            <Top>5.98002in</Top>
+            <Left>0.06223in</Left>
             <Height>0.25in</Height>
             <Width>0.42708in</Width>
             <ZIndex>22</ZIndex>
@@ -1641,7 +1641,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Note</rd:DefaultName>
-            <Top>5.46613in</Top>
+            <Top>5.96613in</Top>
             <Left>0.46373in</Left>
             <Height>0.51218in</Height>
             <Width>2.38599in</Width>
@@ -1873,8 +1873,84 @@
               </Border>
             </Style>
           </Line>
+          <Line Name="Line5">
+            <Top>5.84869in</Top>
+            <Height>0in</Height>
+            <Width>2.86085in</Width>
+            <ZIndex>27</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Textbox Name="Textbox52">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>VoucherNumber :</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox51</rd:DefaultName>
+            <Top>5.52924in</Top>
+            <Left>0.02597in</Left>
+            <Height>0.25in</Height>
+            <Width>1.25607in</Width>
+            <ZIndex>28</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="ParmVoucherNumber">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!ParmVoucherNumber.Value</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>ParmVoucherNumber</rd:DefaultName>
+            <Top>5.54313in</Top>
+            <Left>1.14228in</Left>
+            <Height>0.25in</Height>
+            <Width>1.69689in</Width>
+            <ZIndex>29</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>6.08in</Height>
+        <Height>6.53833in</Height>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1932,6 +2008,12 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="parmChange">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ParmVoucherNumber">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>

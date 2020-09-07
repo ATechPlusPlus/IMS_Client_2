@@ -43,7 +43,7 @@ namespace IMS_Client_2.Report
             string query = "";
             string strQueryHeader_Footer = "";
             string PaymentQuery = "";
-
+            string VoucherNumber = "NA";
             if (IsArabicEnabled())
             {
                 query = "SELECT p1.ProductName," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.QTY) as QTY," +
@@ -74,21 +74,28 @@ namespace IMS_Client_2.Report
 
             if (IsArabicEnabled())
             {
-                strQueryHeader_Footer = "SELECT s1.InvoiceNumber,s1.InvoiceDate, c1.Name AS CustName,e1.Name AS empName,st1.StoreName AS StoreName," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.SubTotal) as SubTotal," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.Discount) as Discount," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.Tax) as Tax," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.GrandTotal) as GrandTotal,s1.PaymentMode,s1.PaymentAutoID,c1.PhoneNo AS CustomerMobile,s1.CashTendered, s1.Change FROM " + clsUtility.DBName + ".dbo.SalesInvoiceDetails s1 left JOIN " +
+                strQueryHeader_Footer = "SELECT s1.InvoiceNumber,s1.InvoiceDate, c1.Name AS CustName,e1.Name AS empName,st1.StoreName AS StoreName," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.SubTotal) as SubTotal," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.Discount) as Discount," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.Tax) as Tax," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.GrandTotal) as GrandTotal,s1.PaymentMode,s1.PaymentAutoID,c1.PhoneNo AS CustomerMobile,s1.CashTendered, s1.Change,s1.VoucherNo FROM " + clsUtility.DBName + ".dbo.SalesInvoiceDetails s1 left JOIN " +
                                          " " + clsUtility.DBName + ".dbo.EmployeeDetails e1 ON s1.SalesMan = e1.EmpID left JOIN" +
                                          " " + clsUtility.DBName + ".[dbo].[CustomerMaster] c1 ON s1.CustomerID = c1.CustomerID left join" +
                                          " " + clsUtility.DBName + ".dbo.StoreMaster st1 ON st1.StoreID = s1.ShopeID WHERE s1.Id=" + InvoiceID;
             }
             else
             {
-                strQueryHeader_Footer = "SELECT s1.InvoiceNumber,s1.InvoiceDate, c1.Name AS CustName,e1.Name AS empName,st1.StoreName AS StoreName,st1.Place [Address],s1.SubTotal,s1.Discount,s1.Tax,s1.GrandTotal,s1.PaymentMode,s1.PaymentAutoID,c1.PhoneNo AS CustomerMobile,s1.CashTendered,s1.Change FROM " + clsUtility.DBName + ".dbo.SalesInvoiceDetails s1 left JOIN " +
+                strQueryHeader_Footer = "SELECT s1.InvoiceNumber,s1.InvoiceDate, c1.Name AS CustName,e1.Name AS empName,st1.StoreName AS StoreName,st1.Place [Address],s1.SubTotal,s1.Discount,s1.Tax,s1.GrandTotal,s1.PaymentMode,s1.PaymentAutoID,c1.PhoneNo AS CustomerMobile,s1.CashTendered,s1.Change, s1.VoucherNo FROM " + clsUtility.DBName + ".dbo.SalesInvoiceDetails s1 left JOIN " +
                                                          " " + clsUtility.DBName + ".dbo.EmployeeDetails e1 ON s1.SalesMan = e1.EmpID left JOIN" +
                                                          " " + clsUtility.DBName + ".[dbo].[CustomerMaster] c1 ON s1.CustomerID = c1.CustomerID left join" +
                                                          " " + clsUtility.DBName + ".dbo.StoreMaster st1 ON st1.StoreID = s1.ShopeID WHERE s1.Id=" + InvoiceID;
             }
 
             DataTable dtSalesHeader_Footer = ObjCon.ExecuteSelectStatement(strQueryHeader_Footer);
-
+            if (dtSalesHeader_Footer.Rows.Count>0)
+            {
+                VoucherNumber = dtSalesHeader_Footer.Rows[0]["VoucherNo"].ToString();
+                if (VoucherNumber.Trim().Length==0)
+                {
+                    VoucherNumber = "NA";
+                }
+            }
             Bitmap bmpBarCode = Barcode.clsBarCodeUtility.GenerateBarCode(dtSalesHeader_Footer.Rows[0]["InvoiceNumber"].ToString());
             string imgPath = "";
             if (bmpBarCode != null)
@@ -117,6 +124,7 @@ namespace IMS_Client_2.Report
 
                 if (dtSalesHeader_Footer != null && dtSalesHeader_Footer.Rows.Count > 0)
                     strAddress = dtSalesHeader_Footer.Rows[0]["Address"].ToString();
+
             }
             else
             {
@@ -164,6 +172,7 @@ namespace IMS_Client_2.Report
             ReportParameter param3 = new ReportParameter("Note", footerNoteDefault, true);
             ReportParameter param4 = new ReportParameter("NetAmount", NetAmt, true);
             ReportParameter param5 = new ReportParameter("BarCodeImage", imgPath, true);
+            ReportParameter param6 = new ReportParameter("ParmVoucherNumber", VoucherNumber, true);
 
             // adding the parameter in the report dynamically
             reportViewer1.LocalReport.SetParameters(param1);
@@ -171,6 +180,7 @@ namespace IMS_Client_2.Report
             reportViewer1.LocalReport.SetParameters(param3);
             reportViewer1.LocalReport.SetParameters(param4);
             reportViewer1.LocalReport.SetParameters(param5);
+            reportViewer1.LocalReport.SetParameters(param6);
 
             reportViewer1.LocalReport.DataSources.Add(rds);
             reportViewer1.LocalReport.DataSources.Add(rds2);
