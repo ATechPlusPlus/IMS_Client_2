@@ -131,6 +131,7 @@
             this.rdSearchByAll.TabIndex = 255;
             this.rdSearchByAll.Text = "Show All";
             this.rdSearchByAll.UseVisualStyleBackColor = true;
+            this.rdSearchByAll.Visible = false;
             this.rdSearchByAll.CheckedChanged += new System.EventHandler(this.rdSearchByAll_CheckedChanged);
             // 
             // rdByStore
@@ -311,7 +312,7 @@
             this.btnClose.TabIndex = 248;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.button2_Click);
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             this.btnClose.MouseEnter += new System.EventHandler(this.btnSave_MouseEnter);
             this.btnClose.MouseLeave += new System.EventHandler(this.btnSave_MouseLeave);
             // 

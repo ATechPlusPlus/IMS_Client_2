@@ -698,7 +698,7 @@ namespace IMS_Client_2.Sales
             }
             else if (headerText == "Particulars")
             {
-                e.Control.KeyPress -= Int_Control_KeyPress;
+                e.Control.KeyPress += String_Control_KeyPress;
             }
         }
 
@@ -714,6 +714,11 @@ namespace IMS_Client_2.Sales
             //string k = e.KeyChar.ToString();
             TextBox txt = (TextBox)sender;
             e.Handled = ObjUtil.IsDecimal(txt, e);
+        }
+
+        private void String_Control_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = ObjUtil.IsAlphaNumeric(e);
         }
 
         private void btnPrint_Click(object sender, EventArgs e)

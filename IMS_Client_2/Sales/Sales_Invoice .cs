@@ -268,7 +268,7 @@ namespace IMS_Client_2.Sales
             cmbShop.SelectedValue = deafultStoreID;
             if (deafultStoreID == 0)
             {
-                clsUtility.ShowInfoMessage("Please select the default shop for this client from Setting Window.", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("Please select the default shop for this client from Setting Window.");
                 Settings.frmOtherSetting otherSetting = new Settings.frmOtherSetting();
                 otherSetting.ShowDialog();
                 isfromdefaul = true;
@@ -739,7 +739,8 @@ namespace IMS_Client_2.Sales
             //txtOldBillAmount.ReadOnly = false;
             txtNewBillAmount.Text = "0";
             Other_Forms.frmDiscountLogin.IsValidAdmin = false;
-            txtDiscount.ReadOnly = false;
+            Other_Forms.frmDiscountLogin.VoucherNo = string.Empty;
+            txtDiscount.ReadOnly = true;
             txtCashTendered.Clear();
             txtCredit.Clear();
 
@@ -956,28 +957,32 @@ namespace IMS_Client_2.Sales
             ObjDAL.SetColumnData("Discount", SqlDbType.Decimal, txtDiscount.Text);
             ObjDAL.SetColumnData("Tax", SqlDbType.Decimal, txtDeliveryCharges.Text);
             ObjDAL.SetColumnData("GrandTotal", SqlDbType.Decimal, txtGrandTotal.Text);
+
+            if (Other_Forms.frmDiscountLogin.IsValidAdmin)
+                ObjDAL.SetColumnData("VoucherNo", SqlDbType.VarChar, frmDiscountLogin.VoucherNo);
+
             ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
-            if (txtCustomerID.Text.Trim().Length == 0)
-            {
-                ObjDAL.SetColumnData("CustomerID", SqlDbType.Int, 0);
-            }
-            else
-            {
-                ObjDAL.SetColumnData("CustomerID", SqlDbType.Int, txtCustomerID.Text);
-            }
-
-
-            if (txtEmpID.Text.Trim().Length == 0)
-            {
-                ObjDAL.SetColumnData("SalesMan", SqlDbType.Int, 0);
-            }
-            else
-            {
-                ObjDAL.SetColumnData("SalesMan", SqlDbType.Int, txtEmpID.Text);
-            }
+            ObjDAL.SetColumnData("CustomerID", SqlDbType.Int, txtCustomerID.Text.Trim().Length > 0 ? Convert.ToInt32(txtCustomerID.Text) : 0);
+            ObjDAL.SetColumnData("SalesMan", SqlDbType.Int, txtEmpID.Text.Trim().Length > 0 ? Convert.ToInt32(txtEmpID.Text) : 0);
+            
+            //if (txtCustomerID.Text.Trim().Length == 0)
+            //{
+            //    ObjDAL.SetColumnData("CustomerID", SqlDbType.Int, 0);
+            //}
+            //else
+            //{
+            //    ObjDAL.SetColumnData("CustomerID", SqlDbType.Int, txtCustomerID.Text);
+            //}
+            //if (txtEmpID.Text.Trim().Length == 0)
+            //{
+            //    ObjDAL.SetColumnData("SalesMan", SqlDbType.Int, 0);
+            //}
+            //else
+            //{
+            //    ObjDAL.SetColumnData("SalesMan", SqlDbType.Int, txtEmpID.Text);
+            //}
 
             ObjDAL.SetColumnData("ShopeID", SqlDbType.Int, cmbShop.SelectedValue.ToString());
-
             ObjDAL.SetColumnData("CashTendered", SqlDbType.Decimal, txtCashTendered.Text);
             ObjDAL.SetColumnData("Change", SqlDbType.Decimal, txtChange.Text);
 
@@ -1240,7 +1245,7 @@ namespace IMS_Client_2.Sales
                 }
                 catch (Exception ex)
                 {
-                    clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
+                    clsUtility.ShowErrorMessage(ex.ToString());
                 }
             }
             else
@@ -1396,7 +1401,7 @@ namespace IMS_Client_2.Sales
             {
                 if (txtCustomerID.Text.Trim().Length == 0)
                 {
-                    clsUtility.ShowInfoMessage("Please Enter Customer Mobile No.", clsUtility.strProjectTitle);
+                    clsUtility.ShowInfoMessage("Please Enter Customer Mobile No.");
                     txtCustomerMobile.Focus();
                     return;
                 }

@@ -47,7 +47,7 @@
             frmDashBoardSettings=48,
             frmDashBoard=49,
             frmQuickBarCodePrint=50,
-
+            frmDiscountLogin=51,
             frmDatabaseMaintenance = 7///commented
         }
         public enum Operation

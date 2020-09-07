@@ -20,6 +20,11 @@ namespace IMS_Client_2.Report
         clsConnection_DAL ObjDAL = new clsConnection_DAL(true);
         clsUtility ObjUtil = new clsUtility();
 
+        DateTime dtDate = DateTime.Now;
+
+        Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
+        Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
+
         private void LoadData()
         {
             ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, frmHome.Home_StoreID, clsConnection_DAL.ParamType.Input);
@@ -58,10 +63,15 @@ namespace IMS_Client_2.Report
             cmbStore.ValueMember = "StoreID";
             cmbStore.SelectedIndex = -1;
         }
-        Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
-        Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
+
         private void frmPettyCashExpReport_Load(object sender, EventArgs e)
         {
+            btnPrint.BackgroundImage = B_Leave;
+            btnClose.BackgroundImage = B_Leave;
+
+            dtpFromDate.MaxDate = dtDate;
+            dtpToDate.MaxDate = dtDate;
+
             FillStoreData();
 
             dgvPettyCashExp.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
@@ -71,9 +81,7 @@ namespace IMS_Client_2.Report
             LoadData();
 
             cmbStore.SelectedValue = frmHome.Home_StoreID;
-
-            btnPrint.BackgroundImage = B_Leave;
-            btnClose.BackgroundImage = B_Leave;
+            cmbStore.Enabled = true;
         }
 
         private void dgvPettyCashExp_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -121,8 +129,8 @@ namespace IMS_Client_2.Report
                 cmbStore.Enabled = true;
                 dtpFromDate.Enabled = false;
                 dtpToDate.Enabled = false;
-                dtpFromDate.Value = DateTime.Now;
-                dtpToDate.Value = DateTime.Now;
+                dtpFromDate.Value = dtDate;
+                dtpToDate.Value = dtDate;
 
                 dgvPettyCashExp.DataSource = null;
             }
@@ -141,8 +149,8 @@ namespace IMS_Client_2.Report
                 cmbStore.SelectedIndex = -1;
                 dtpFromDate.Enabled = false;
                 dtpToDate.Enabled = false;
-                dtpFromDate.Value = DateTime.Now;
-                dtpToDate.Value = DateTime.Now;
+                dtpFromDate.Value = dtDate;
+                dtpToDate.Value = dtDate;
 
                 LoadData();
             }
@@ -162,6 +170,16 @@ namespace IMS_Client_2.Report
             if (ds != null && ds.Tables.Count > 0)
             {
                 DataTable dt = ds.Tables[0];
+                if (ds.Tables.Count > 1)
+                {
+                    DataTable dtPettyCashBal = ds.Tables[1];
+                    if (ObjUtil.ValidateTable(dtPettyCashBal))
+                    {
+                        txtTotalPettyCash.Text = dtPettyCashBal.Rows[0]["TotalPettyCashAmt"].ToString();
+                        txtTotalExpenses.Text = dtPettyCashBal.Rows[0]["TotalPettyCashExpAmt"].ToString();
+                        txtPettyCashBAL.Text = dtPettyCashBal.Rows[0]["PettyCashBalance"].ToString();
+                    }
+                }
                 if (ObjUtil.ValidateTable(dt))
                 {
                     dgvPettyCashExp.DataSource = dt;
@@ -182,6 +200,16 @@ namespace IMS_Client_2.Report
             if (ds != null && ds.Tables.Count > 0)
             {
                 DataTable dt = ds.Tables[0];
+                if (ds.Tables.Count > 1)
+                {
+                    DataTable dtPettyCashBal = ds.Tables[1];
+                    if (ObjUtil.ValidateTable(dtPettyCashBal))
+                    {
+                        txtTotalPettyCash.Text = dtPettyCashBal.Rows[0]["TotalPettyCashAmt"].ToString();
+                        txtTotalExpenses.Text = dtPettyCashBal.Rows[0]["TotalPettyCashExpAmt"].ToString();
+                        txtPettyCashBAL.Text = dtPettyCashBal.Rows[0]["PettyCashBalance"].ToString();
+                    }
+                }
                 if (ObjUtil.ValidateTable(dt))
                 {
                     dgvPettyCashExp.DataSource = dt;
@@ -203,7 +231,7 @@ namespace IMS_Client_2.Report
             SearchByDate();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
