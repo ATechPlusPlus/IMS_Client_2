@@ -814,6 +814,12 @@ namespace IMS_Client_2.Sales
                     return false;
                 }
             }
+
+            if (dgvProductDetails.Rows.Count==0)
+            {
+                clsUtility.ShowInfoMessage("Please add items to sale.", clsUtility.strProjectTitle);
+                return false;
+            }
             // if only saving the dataa
             // as per salman, -ve should be printed.
             //if (isSave==false)
@@ -931,7 +937,7 @@ namespace IMS_Client_2.Sales
                     }
 
                     ObjDAL.SetColumnData("PaymentType", SqlDbType.NVarChar, IMS_Client_2.Other_Forms.frmPayment.lstPaymnetType[i].ToString());
-                    ObjDAL.SetColumnData("Amount", SqlDbType.Decimal, Convert.ToDecimal(amount));
+                    ObjDAL.SetColumnData("Amount", SqlDbType.Decimal, Convert.ToDecimal(txtGrandTotal.Text));
                     ObjDAL.SetColumnData("SalesInvoiceID", SqlDbType.Int, SalesInvoiceID);
                     ObjDAL.SetColumnData("PaymentNumber", SqlDbType.NVarChar, number);
 
@@ -1091,6 +1097,8 @@ namespace IMS_Client_2.Sales
                     {
                         return;
                     }
+
+
                 }
                 if (SalesValidation(button.Name == "btnSaveData"))
                 {
@@ -1878,6 +1886,11 @@ namespace IMS_Client_2.Sales
             {
                 txtCustomerID.Visible = true;
             }
+        }
+
+        private void dgvProductDetails_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
