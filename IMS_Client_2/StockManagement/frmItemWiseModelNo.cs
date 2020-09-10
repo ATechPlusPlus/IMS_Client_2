@@ -41,6 +41,7 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, '0', clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("Barcode", SqlDbType.BigInt, 0, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_ItemWiseModelNo");
             if (ObjUtil.ValidateDataSet(ds))
             {
@@ -77,8 +78,9 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, txtProductID.Text, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, '0', clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("Barcode", SqlDbType.BigInt, 0, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_ItemWiseModelNo");
-            if (ds != null && ds.Tables.Count > 0)
+            if (ObjUtil.ValidateDataSet(ds))
             {
                 DataTable dtItemModel = ds.Tables[0];
                 if (ObjUtil.ValidateTable(dtItemModel))
@@ -97,8 +99,9 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, '0', clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, cmbShop.SelectedValue, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("Barcode", SqlDbType.BigInt, 0, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_ItemWiseModelNo");
-            if (ds != null && ds.Tables.Count > 0)
+            if (ObjUtil.ValidateDataSet(ds))
             {
                 DataTable dtItemModel = ds.Tables[0];
                 if (ObjUtil.ValidateTable(dtItemModel))
@@ -121,6 +124,32 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, txtSearchByStyleNo.Text.Trim(), clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("Barcode", SqlDbType.BigInt, 0, clsConnection_DAL.ParamType.Input);
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_ItemWiseModelNo");
+            if (ObjUtil.ValidateDataSet(ds))
+            {
+                DataTable dtItemModel = ds.Tables[0];
+                if (ObjUtil.ValidateTable(dtItemModel))
+                {
+                    dgvProductDetails.DataSource = dtItemModel;
+                }
+                else
+                {
+                    dgvProductDetails.DataSource = null;
+                }
+            }
+            else
+            {
+                dgvProductDetails.DataSource = null;
+            }
+        }
+
+        private void SearchByBarcodeNo()
+        {
+            ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, '0', clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("Barcode", SqlDbType.BigInt, txtSearchByBarcode.Text, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_ItemWiseModelNo");
             if (ObjUtil.ValidateDataSet(ds))
             {
@@ -283,6 +312,7 @@ namespace IMS_Client_2.StockManagement
                 cmbShop.SelectedIndex = -1;
                 txtSearchByProductName.Clear();
                 txtSearchByStyleNo.Clear();
+                txtSearchByBarcode.Clear();
             }
         }
 
@@ -339,7 +369,7 @@ namespace IMS_Client_2.StockManagement
             }
             catch (Exception ex)
             {
-                clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
+                clsUtility.ShowErrorMessage(ex.ToString());
             }
         }
 
@@ -507,6 +537,34 @@ namespace IMS_Client_2.StockManagement
             //string k = e.KeyChar.ToString();
             TextBox txt = (TextBox)sender;
             e.Handled = ObjUtil.IsDecimal(txt, e);
+        }
+
+        private void rdSearchByBarcodeNo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdSearchByBarcodeNo.Checked)
+            {
+                txtSearchByBarcode.Enabled = true;
+                txtSearchByBarcode.Focus();
+            }
+            else
+            {
+                txtSearchByBarcode.Enabled = false;
+                txtSearchByBarcode.Clear();
+            }
+        }
+
+        private void txtSearchByBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                if (ObjUtil.IsControlTextEmpty(txtSearchByBarcode))
+                {
+                    clsUtility.ShowInfoMessage("Please Enter Barcode number.");
+                    txtSearchByBarcode.Focus();
+                    return;
+                }
+                SearchByBarcodeNo();
+            }
         }
     }
 }

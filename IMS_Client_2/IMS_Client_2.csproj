@@ -922,6 +922,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="InventorySoftware.ico" />
+    <None Include="Resources\expenses-1.png" />
+    <None Include="Resources\Credit card 1.jpg" />
+    <None Include="Resources\Cash in Hand light.png" />
     <None Include="Resources\news.png" />
     <None Include="Resources\Sales-Return.png" />
     <None Include="Resources\NoImage.jpg" />

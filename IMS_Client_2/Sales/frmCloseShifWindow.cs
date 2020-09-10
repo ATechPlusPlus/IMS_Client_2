@@ -149,10 +149,31 @@ namespace IMS_Client_2.Sales
 
             pStoreID = frmHome.Home_StoreID;
             FillStoreData();
-            listView1.Items[0].Selected = true;
+            
+            LoadListViewImage();
 
+            listView1.Items[0].Selected = true;
             cmbShop.SelectedValue = pStoreID;
             //LoadData();
+        }
+        ImageList imageList = new ImageList();
+        private void LoadListViewImage()
+        {
+            Image imgCash = Properties.Resources.Cash_in_Hand_light;
+            Image imgCredit = Properties.Resources.Credit_card_1;
+            Image imgExpense = Properties.Resources.expenses_1;
+
+
+            imageList.Images.Add(imgCash);
+            imageList.Images.Add(imgCredit);
+            imageList.Images.Add(imgExpense);
+            imageList.ImageSize = new Size(48, 48);
+            listView1.View = System.Windows.Forms.View.LargeIcon;
+            listView1.LargeImageList = imageList;
+
+            listView1.Items[0].ImageIndex = 0;
+            listView1.Items[1].ImageIndex = 1;
+            listView1.Items[2].ImageIndex = 2;
         }
 
         private void btnOpenCash_MouseEnter(object sender, EventArgs e)

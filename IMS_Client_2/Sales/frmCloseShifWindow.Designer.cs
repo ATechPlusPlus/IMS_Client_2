@@ -198,12 +198,12 @@
             this.dgvCloseCash.AllowUserToResizeRows = false;
             this.dgvCloseCash.BackgroundColor = System.Drawing.Color.White;
             this.dgvCloseCash.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCloseCash.Location = new System.Drawing.Point(38, 204);
+            this.dgvCloseCash.Location = new System.Drawing.Point(12, 204);
             this.dgvCloseCash.Margin = new System.Windows.Forms.Padding(2);
             this.dgvCloseCash.Name = "dgvCloseCash";
             this.dgvCloseCash.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvCloseCash.RowTemplate.Height = 24;
-            this.dgvCloseCash.Size = new System.Drawing.Size(353, 297);
+            this.dgvCloseCash.Size = new System.Drawing.Size(379, 297);
             this.dgvCloseCash.TabIndex = 122;
             this.dgvCloseCash.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvCloseCash_CellValidating);
             this.dgvCloseCash.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCloseCash_CellValueChanged);
@@ -303,6 +303,7 @@
             // 
             // listView1
             // 
+            this.listView1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.listView1.HideSelection = false;
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1,
@@ -310,10 +311,10 @@
             listViewItem3});
             this.listView1.Location = new System.Drawing.Point(406, 204);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(192, 104);
+            this.listView1.Size = new System.Drawing.Size(199, 192);
             this.listView1.TabIndex = 131;
             this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Tile;
+            this.listView1.View = System.Windows.Forms.View.List;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // grpPettyCashBAL

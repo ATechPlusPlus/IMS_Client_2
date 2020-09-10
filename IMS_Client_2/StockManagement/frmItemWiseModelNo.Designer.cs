@@ -43,6 +43,8 @@
             this.rdShowAll = new System.Windows.Forms.RadioButton();
             this.PicItem = new System.Windows.Forms.PictureBox();
             this.lblTotalRecord = new System.Windows.Forms.Label();
+            this.txtSearchByBarcode = new System.Windows.Forms.TextBox();
+            this.rdSearchByBarcodeNo = new System.Windows.Forms.RadioButton();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -105,6 +107,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.txtSearchByBarcode);
+            this.groupBox1.Controls.Add(this.rdSearchByBarcodeNo);
             this.groupBox1.Controls.Add(this.cmbShop);
             this.groupBox1.Controls.Add(this.rdSearchByShop);
             this.groupBox1.Controls.Add(this.txtSearchByProductName);
@@ -126,7 +130,7 @@
             this.cmbShop.Enabled = false;
             this.cmbShop.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbShop.FormattingEnabled = true;
-            this.cmbShop.Location = new System.Drawing.Point(125, 75);
+            this.cmbShop.Location = new System.Drawing.Point(108, 75);
             this.cmbShop.Name = "cmbShop";
             this.cmbShop.Size = new System.Drawing.Size(196, 27);
             this.cmbShop.TabIndex = 237;
@@ -151,7 +155,7 @@
             this.txtSearchByProductName.BackColor = System.Drawing.Color.White;
             this.txtSearchByProductName.Enabled = false;
             this.txtSearchByProductName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearchByProductName.Location = new System.Drawing.Point(125, 23);
+            this.txtSearchByProductName.Location = new System.Drawing.Point(108, 23);
             this.txtSearchByProductName.Name = "txtSearchByProductName";
             this.txtSearchByProductName.Size = new System.Drawing.Size(196, 25);
             this.txtSearchByProductName.TabIndex = 235;
@@ -164,7 +168,7 @@
             this.txtSearchByStyleNo.BackColor = System.Drawing.Color.White;
             this.txtSearchByStyleNo.Enabled = false;
             this.txtSearchByStyleNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearchByStyleNo.Location = new System.Drawing.Point(480, 23);
+            this.txtSearchByStyleNo.Location = new System.Drawing.Point(456, 23);
             this.txtSearchByStyleNo.Name = "txtSearchByStyleNo";
             this.txtSearchByStyleNo.Size = new System.Drawing.Size(196, 25);
             this.txtSearchByStyleNo.TabIndex = 234;
@@ -176,7 +180,7 @@
             // 
             this.rdSearchByModelNo.AutoSize = true;
             this.rdSearchByModelNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdSearchByModelNo.Location = new System.Drawing.Point(367, 24);
+            this.rdSearchByModelNo.Location = new System.Drawing.Point(343, 24);
             this.rdSearchByModelNo.Name = "rdSearchByModelNo";
             this.rdSearchByModelNo.Size = new System.Drawing.Size(105, 21);
             this.rdSearchByModelNo.TabIndex = 230;
@@ -200,7 +204,7 @@
             // 
             this.rdShowAll.AutoSize = true;
             this.rdShowAll.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdShowAll.Location = new System.Drawing.Point(367, 78);
+            this.rdShowAll.Location = new System.Drawing.Point(600, 75);
             this.rdShowAll.Name = "rdShowAll";
             this.rdShowAll.Size = new System.Drawing.Size(79, 21);
             this.rdShowAll.TabIndex = 106;
@@ -230,6 +234,31 @@
             this.lblTotalRecord.Size = new System.Drawing.Size(91, 17);
             this.lblTotalRecord.TabIndex = 257;
             this.lblTotalRecord.Text = "Total Record :";
+            // 
+            // txtSearchByBarcode
+            // 
+            this.txtSearchByBarcode.BackColor = System.Drawing.Color.White;
+            this.txtSearchByBarcode.Enabled = false;
+            this.txtSearchByBarcode.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearchByBarcode.Location = new System.Drawing.Point(456, 73);
+            this.txtSearchByBarcode.Name = "txtSearchByBarcode";
+            this.txtSearchByBarcode.Size = new System.Drawing.Size(134, 25);
+            this.txtSearchByBarcode.TabIndex = 239;
+            this.txtSearchByBarcode.Enter += new System.EventHandler(this.txtSearchByProductName_Enter);
+            this.txtSearchByBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearchByBarcode_KeyDown);
+            this.txtSearchByBarcode.Leave += new System.EventHandler(this.txtSearchByProductName_Leave);
+            // 
+            // rdSearchByBarcodeNo
+            // 
+            this.rdSearchByBarcodeNo.AutoSize = true;
+            this.rdSearchByBarcodeNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdSearchByBarcodeNo.Location = new System.Drawing.Point(343, 74);
+            this.rdSearchByBarcodeNo.Name = "rdSearchByBarcodeNo";
+            this.rdSearchByBarcodeNo.Size = new System.Drawing.Size(104, 21);
+            this.rdSearchByBarcodeNo.TabIndex = 238;
+            this.rdSearchByBarcodeNo.Text = "By Barcode :";
+            this.rdSearchByBarcodeNo.UseVisualStyleBackColor = true;
+            this.rdSearchByBarcodeNo.CheckedChanged += new System.EventHandler(this.rdSearchByBarcodeNo_CheckedChanged);
             // 
             // frmItemWiseModelNo
             // 
@@ -277,5 +306,7 @@
         private System.Windows.Forms.TextBox txtProductID;
         private System.Windows.Forms.PictureBox PicItem;
         private System.Windows.Forms.Label lblTotalRecord;
+        private System.Windows.Forms.TextBox txtSearchByBarcode;
+        private System.Windows.Forms.RadioButton rdSearchByBarcodeNo;
     }
 }

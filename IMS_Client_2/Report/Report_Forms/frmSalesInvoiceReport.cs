@@ -124,7 +124,6 @@ namespace IMS_Client_2.Report
 
                 if (dtSalesHeader_Footer != null && dtSalesHeader_Footer.Rows.Count > 0)
                     strAddress = dtSalesHeader_Footer.Rows[0]["Address"].ToString();
-
             }
             else
             {
