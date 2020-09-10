@@ -946,7 +946,7 @@ namespace IMS_Client_2.Sales
             }
             catch (Exception ex)
             {
-                clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
+                clsUtility.ShowErrorMessage(ex.ToString());
             }
         }
 
@@ -1097,8 +1097,6 @@ namespace IMS_Client_2.Sales
                     {
                         return;
                     }
-
-
                 }
                 if (SalesValidation(button.Name == "btnSaveData"))
                 {
@@ -1886,11 +1884,6 @@ namespace IMS_Client_2.Sales
             {
                 txtCustomerID.Visible = true;
             }
-        }
-
-        private void dgvProductDetails_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }
