@@ -1108,7 +1108,7 @@ namespace IMS_Client_2.Sales
                     {
                         if (NewInvoiceID > 0)
                         {
-                            clsUtility.ShowInfoMessage("Sale invoice has been genrated successfully.");
+                            clsUtility.ShowInfoMessage("Sale invoice has been generated successfully.");
                         }
                         //this.Close();
                     }
@@ -1272,7 +1272,7 @@ namespace IMS_Client_2.Sales
                 }
                 if (txtCustomerMobile.Text.Trim().Length > 0)
                 {
-                    string query = "SELECT CustomerID,[Name],PhoneNo FROM " + clsUtility.DBName + ".dbo.CustomerMaster WITH(NOLOCK) WHERE PhoneNo like '%" + txtCustomerMobile.Text + "%'";
+                    string query = "SELECT CustomerID,[Name],PhoneNo FROM " + clsUtility.DBName + ".dbo.CustomerMaster WITH(NOLOCK) WHERE PhoneNo LIKE '%" + txtCustomerMobile.Text + "%'";
                     DataTable dt = ObjDAL.ExecuteSelectStatement(query);
                     if (dt != null && dt.Rows.Count > 0)
                     {

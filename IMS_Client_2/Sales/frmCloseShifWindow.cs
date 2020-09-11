@@ -149,7 +149,7 @@ namespace IMS_Client_2.Sales
 
             pStoreID = frmHome.Home_StoreID;
             FillStoreData();
-            
+
             LoadListViewImage();
 
             listView1.Items[0].Selected = true;
@@ -222,6 +222,8 @@ namespace IMS_Client_2.Sales
                 {
                     dgvCloseCash.Columns["MasterCashClosingID"].Visible = false;
                 }
+
+                CalcTotalCredit();
             }
             else if (listView1.Items[2].Selected)
             {
@@ -483,6 +485,14 @@ namespace IMS_Client_2.Sales
             }
         }
 
+        private void CalcTotalCredit()
+        {
+            if (ObjUtil.ValidateTable(dtCredit))
+            {
+                txtTotalValue.Text = dtCredit.Compute("SUM(Value)", string.Empty).ToString();
+            }
+        }
+
         private void CalcTotalPettyCashExp()
         {
             try
@@ -651,7 +661,7 @@ namespace IMS_Client_2.Sales
         }
         private string GetTotalCreditValue()
         {
-            DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT ISNULL(SUM(Value),0) FROM " + clsUtility.DBName + ".[dbo].[tblCreditClosing] WITH(NOLOCK) WHERE MasterCashClosingID=" + pMasterCashClosingID +" AND [Type]!='Cash'");
+            DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT ISNULL(SUM(Value),0) FROM " + clsUtility.DBName + ".[dbo].[tblCreditClosing] WITH(NOLOCK) WHERE MasterCashClosingID=" + pMasterCashClosingID + " AND [Type]!='Cash'");
             if (ObjUtil.ValidateTable(dt))
             {
                 return dt.Rows[0][0].ToString();
@@ -669,7 +679,7 @@ namespace IMS_Client_2.Sales
                 if (listView1.Items[0].Selected)
                 {
                     if (e.ColumnIndex == 3)
-                    //if (headerText == "Count")
+                    //if (headerText == "Count") // dont uncomment because it's iterate
                     {
                         double CashBand = dgvCloseCash.Rows[e.RowIndex].Cells["CashBand"].Value == DBNull.Value ? 0 : Convert.ToDouble(dgvCloseCash.Rows[e.RowIndex].Cells["CashBand"].Value);
                         int Count = dgvCloseCash.Rows[e.RowIndex].Cells["Count"].Value.ToString() == "" ? 0 : Convert.ToInt32(dgvCloseCash.Rows[e.RowIndex].Cells["Count"].Value);
@@ -700,7 +710,7 @@ namespace IMS_Client_2.Sales
             }
             catch (Exception ex)
             {
-                clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
+                clsUtility.ShowErrorMessage(ex.ToString());
             }
         }
 
