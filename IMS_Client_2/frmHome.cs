@@ -86,7 +86,7 @@ namespace IMS_Client_2
 
         private void DisplayRegistrationInfo()
         {
-            object ob = ObjDAL.ExecuteScalar("SELECT CONVERT(date,RegDate) RegDate FROM " + clsUtility.DBName + ".[dbo].[RegistrationDetails] WITH(NOLOCK) where PcName='" + Environment.MachineName + "'");
+            object ob = ObjDAL.ExecuteScalar("SELECT CONVERT(DATE,RegDate) RegDate FROM " + clsUtility.DBName + ".[dbo].[RegistrationDetails] WITH(NOLOCK) where PcName='" + Environment.MachineName + "'");
             if (ob != null)
             {
                 lblRegistrationDate.Text = Convert.ToDateTime(ob).ToShortDateString();

@@ -29,11 +29,13 @@ namespace IMS_Client_2.Sales
         bool isFromTabChanged = false;
         public bool IsReplaceReturnMode = false;
         bool isSalesManbind = false;
-        decimal _StartValue = 0;
-
+        bool isOldInvoiceFlag = false;
+        public static bool isfromdefaul = false;
         public static bool _Is_SalesManIDMandat = false;
         public static bool _Is_CustomerMobileMandat = false;
-
+        
+        decimal _StartValue = 0;
+        decimal OldBillAmount = 0;
         DataTable dtItemDetails = new DataTable();
 
         Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
@@ -253,7 +255,7 @@ namespace IMS_Client_2.Sales
             InvoiceNumber = "INV-" + LastID;
             return InvoiceNumber;
         }
-        bool isfromdefaul = false;
+
         private void BindStoreDetails()
         {
             DataTable dt = null;
@@ -1000,7 +1002,6 @@ namespace IMS_Client_2.Sales
             }
             #endregion
             InsertPayment(InvoiceID);
-            decimal OldBillAmount = 0;
 
             for (int i = 0; i < dgvProductDetails.Rows.Count; i++)
             {
@@ -1260,7 +1261,7 @@ namespace IMS_Client_2.Sales
                 txtBarCode.Clear();
             }
         }
-        bool isOldInvoiceFlag = false;
+
         private void txtCustomerName_TextChanged(object sender, EventArgs e)
         {
             try
@@ -1696,9 +1697,9 @@ namespace IMS_Client_2.Sales
 
         private void BindOldInvoiceCustoemrDetails(string strInvoiceID)
         {
-            string strQ = "select c1.CustomerID, c1.Name,c1.PhoneNo from " + clsUtility.DBName + ".dbo.SalesInvoiceDetails  s1 inner join " +
+            string strQ = "SELECT c1.CustomerID, c1.Name,c1.PhoneNo FROM " + clsUtility.DBName + ".dbo.SalesInvoiceDetails  s1 INNER JOIN " +
                          " " + clsUtility.DBName + ".dbo.CustomerMaster c1 on s1.CustomerID = c1.CustomerID " +
-                         " where Id = " + strInvoiceID;
+                         " WHERE Id = " + strInvoiceID;
 
             DataTable dt = ObjDAL.ExecuteSelectStatement(strQ);
             if (ObjUtil.ValidateTable(dt))

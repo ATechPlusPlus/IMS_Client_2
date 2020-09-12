@@ -5,12 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Web.UI.WebControls;
+//using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using CoreApp;
-using Button = System.Windows.Forms.Button;
-using Image = System.Drawing.Image;
-using TextBox = System.Windows.Forms.TextBox;
 
 namespace IMS_Client_2.Sales
 {
@@ -78,8 +75,6 @@ namespace IMS_Client_2.Sales
                             btnPreview.Enabled = false;
                             btnPrint.Enabled = false;
 
-                            //btnPreview.Enabled = true;
-                            //btnPrint.Enabled = true;
                             dgvCloseCash.DataSource = dtCash;
                         }
                         else
@@ -99,9 +94,6 @@ namespace IMS_Client_2.Sales
                                 btnCloseCash.Enabled = false;
                                 btnPreview.Enabled = true;
                                 btnPrint.Enabled = true;
-
-                                //btnPreview.Enabled = false;
-                                //btnPrint.Enabled = false;
                             }
                         }
                         txtCashNo.Text = dt.Rows[0]["CashNo"].ToString();
@@ -136,7 +128,7 @@ namespace IMS_Client_2.Sales
             }
             catch (Exception ex)
             {
-                clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
+                clsUtility.ShowErrorMessage(ex.ToString());
             }
         }
 
@@ -162,7 +154,6 @@ namespace IMS_Client_2.Sales
             Image imgCash = Properties.Resources.Cash_in_Hand_light;
             Image imgCredit = Properties.Resources.Credit_card_1;
             Image imgExpense = Properties.Resources.expenses_1;
-
 
             imageList.Images.Add(imgCash);
             imageList.Images.Add(imgCredit);
@@ -286,7 +277,7 @@ namespace IMS_Client_2.Sales
         {
             DataRow[] drow = dt.Select("Count>0");
             int ID = 0;
-            for (int i = 0; i < drow.Length; i++)//(int i = 0; i < dt.Rows.Count; i++)
+            for (int i = 0; i < drow.Length; i++)
             {
                 ObjDAL.SetColumnData("MasterCashClosingID", SqlDbType.Int, drow[i]["MasterCashClosingID"]);
                 ObjDAL.SetColumnData("CashBandID", SqlDbType.Int, drow[i]["CashBandID"]);
@@ -382,6 +373,11 @@ namespace IMS_Client_2.Sales
                         listView1.Items[0].Selected = true;
                         listView1_SelectedIndexChanged(sender, e);
                         //LoadData();
+
+                        // Set isfromdefaul = true for closing form without confirmation
+                        Sales.Sales_Invoice.isfromdefaul = true;
+                        ObjUtil.CloseAlreadyOpen(typeof(Sales.Sales_Invoice));
+                        Sales.Sales_Invoice.isfromdefaul = false;
                     }
                 }
                 else
@@ -405,12 +401,6 @@ namespace IMS_Client_2.Sales
             {
                 if (headerText == "Count" && e.FormattedValue.ToString() != "")
                 {
-                    //if (e.FormattedValue == DBNull.Value || e.FormattedValue.ToString() == "")
-                    //{
-                    //    clsUtility.ShowInfoMessage("Enter Count..");
-                    //    e.Cancel = true;
-                    //}
-                    //else 
                     if (Convert.ToInt32(e.FormattedValue) == 0)
                     {
                         clsUtility.ShowInfoMessage("Enter Valid Count..");
@@ -436,13 +426,7 @@ namespace IMS_Client_2.Sales
             else if (listView1.Items[2].Selected)
             {
                 if (headerText == "ExpensesAmt" && e.FormattedValue.ToString() != "")
-                {
-                    //if (e.FormattedValue == DBNull.Value || e.FormattedValue.ToString() == "")
-                    //{
-                    //    clsUtility.ShowInfoMessage("Enter Expenses Amount..");
-                    //    e.Cancel = true;
-                    //}
-                    //else 
+                { 
                     if (Convert.ToDecimal(e.FormattedValue) == 0)
                     {
                         clsUtility.ShowInfoMessage("Enter Valid Expenses Amount..");
@@ -755,6 +739,17 @@ namespace IMS_Client_2.Sales
         private void btnPrint_Click(object sender, EventArgs e)
         {
             PrintReport(true);
+        }
+
+        private bool CloseSalesForm(Type formType)
+        {
+            foreach (Form form in Application.OpenForms)
+                if (form.GetType().Name == formType.Name)
+                {
+                    form.Close();
+                    return true;
+                }
+                return false;
         }
     }
 }
