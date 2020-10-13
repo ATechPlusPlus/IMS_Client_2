@@ -376,7 +376,7 @@ namespace IMS_Client_2.Sales
 
                         // Set isfromdefaul = true for closing form without confirmation
                         Sales.Sales_Invoice.isfromdefaul = true;
-                        ObjUtil.CloseAlreadyOpen(typeof(Sales.Sales_Invoice));
+                       // ObjUtil.CloseAutoExtender(typeof(Sales.Sales_Invoice));
                         Sales.Sales_Invoice.isfromdefaul = false;
                     }
                 }

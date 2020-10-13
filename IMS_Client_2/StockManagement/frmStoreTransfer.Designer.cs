@@ -343,7 +343,6 @@
             this.label5.Size = new System.Drawing.Size(78, 17);
             this.label5.TabIndex = 204;
             this.label5.Text = "Toatl QTY :";
-            this.label5.Visible = false;
             // 
             // txtTotalQTY
             // 
@@ -355,7 +354,6 @@
             this.txtTotalQTY.ReadOnly = true;
             this.txtTotalQTY.Size = new System.Drawing.Size(134, 25);
             this.txtTotalQTY.TabIndex = 205;
-            this.txtTotalQTY.Visible = false;
             // 
             // txtValue
             // 

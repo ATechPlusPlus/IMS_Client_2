@@ -75,6 +75,9 @@
             this.stockDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.scanItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inventoryCheckToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SalesReport_ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.pettyCashExpReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -125,6 +128,7 @@
             this.hardwarePartsToolStripMenuItem,
             this.dashboardToolStripMenuItem,
             this.toolStripMenuItem1,
+            this.toolStripMenuItem3,
             this.reportsToolStripMenuItem,
             this.otherArtsToolStripMenuItem,
             this.toolStripMenuItem2,
@@ -502,6 +506,29 @@
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(229, 24);
             this.viewToolStripMenuItem.Text = "View Item Model Details";
             this.viewToolStripMenuItem.Click += new System.EventHandler(this.viewToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.scanItemsToolStripMenuItem,
+            this.inventoryCheckToolStripMenuItem});
+            this.toolStripMenuItem3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem3.Image")));
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(98, 36);
+            this.toolStripMenuItem3.Text = "Inventory";
+            // 
+            // scanItemsToolStripMenuItem
+            // 
+            this.scanItemsToolStripMenuItem.Name = "scanItemsToolStripMenuItem";
+            this.scanItemsToolStripMenuItem.Size = new System.Drawing.Size(233, 24);
+            this.scanItemsToolStripMenuItem.Text = "Scan Inventory";
+            this.scanItemsToolStripMenuItem.Click += new System.EventHandler(this.scanItemsToolStripMenuItem_Click);
+            // 
+            // inventoryCheckToolStripMenuItem
+            // 
+            this.inventoryCheckToolStripMenuItem.Name = "inventoryCheckToolStripMenuItem";
+            this.inventoryCheckToolStripMenuItem.Size = new System.Drawing.Size(233, 24);
+            this.inventoryCheckToolStripMenuItem.Text = "Scaned  Inventory Details";
             // 
             // reportsToolStripMenuItem
             // 
@@ -928,5 +955,8 @@
         private System.Windows.Forms.ToolStripMenuItem branchesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem barCodeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quickBarcodePrintToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem scanItemsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inventoryCheckToolStripMenuItem;
     }
 }

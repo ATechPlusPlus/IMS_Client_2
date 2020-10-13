@@ -1042,5 +1042,12 @@ namespace IMS_Client_2
                 clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
+
+        private void scanItemsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Inventory.frmScanInventory objCheckinventory = new Inventory.frmScanInventory();
+            objCheckinventory.Show();
+
+        }
     }
 }
