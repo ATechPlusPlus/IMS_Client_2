@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmScanInventory));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.PicProductMaster = new System.Windows.Forms.PictureBox();
@@ -109,9 +109,9 @@
             this.label2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(19, 92);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 17);
+            this.label2.Size = new System.Drawing.Size(46, 17);
             this.label2.TabIndex = 212;
-            this.label2.Text = "Shop :";
+            this.label2.Text = "Store :";
             // 
             // cmdFrom
             // 
@@ -126,6 +126,7 @@
             this.cmdFrom.Name = "cmdFrom";
             this.cmdFrom.Size = new System.Drawing.Size(180, 27);
             this.cmdFrom.TabIndex = 211;
+            this.cmdFrom.SelectionChangeCommitted += new System.EventHandler(this.cmdFrom_SelectionChangeCommitted);
             // 
             // picProduct
             // 
@@ -203,14 +204,14 @@
             this.SizeID,
             this.Total,
             this.ColDelete});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProductDetails.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProductDetails.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvProductDetails.Location = new System.Drawing.Point(17, 159);
             this.dgvProductDetails.Name = "dgvProductDetails";
             this.dgvProductDetails.Size = new System.Drawing.Size(865, 268);
@@ -371,7 +372,7 @@
             this.btncancel.Name = "btncancel";
             this.btncancel.Size = new System.Drawing.Size(76, 25);
             this.btncancel.TabIndex = 251;
-            this.btncancel.Text = "Cancel";
+            this.btncancel.Text = "Clear";
             this.btncancel.UseVisualStyleBackColor = true;
             this.btncancel.Click += new System.EventHandler(this.btncancel_Click);
             this.btncancel.Enter += new System.EventHandler(this.btnAdd_MouseEnter);

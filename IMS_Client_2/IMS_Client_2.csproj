@@ -205,6 +205,18 @@
     <Compile Include="Inventory\frmScanInventory.Designer.cs">
       <DependentUpon>frmScanInventory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Inventory\frmScanInventoryCompare.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inventory\frmScanInventoryCompare.Designer.cs">
+      <DependentUpon>frmScanInventoryCompare.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\frmScanInventoryList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inventory\frmScanInventoryList.Designer.cs">
+      <DependentUpon>frmScanInventoryList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\RDLC_DataSets\ds_MiniSalesReport.cs">
       <DependentUpon>ds_MiniSalesReport.xsd</DependentUpon>
     </Compile>
@@ -634,6 +646,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Inventory\frmScanInventory.resx">
       <DependentUpon>frmScanInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inventory\frmScanInventoryCompare.resx">
+      <DependentUpon>frmScanInventoryCompare.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inventory\frmScanInventoryList.resx">
+      <DependentUpon>frmScanInventoryList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\Color_Master.resx">
       <DependentUpon>Color_Master.cs</DependentUpon>

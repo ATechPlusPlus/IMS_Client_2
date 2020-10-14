@@ -1045,9 +1045,23 @@ namespace IMS_Client_2
 
         private void scanItemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Inventory.frmScanInventory objCheckinventory = new Inventory.frmScanInventory();
-            objCheckinventory.Show();
+            bool b = ObjUtil.IsAlreadyOpen(typeof(Inventory.frmScanInventory));
+            if (!b)
+            {
+                Inventory.frmScanInventory objCheckinventory = new Inventory.frmScanInventory();
+                objCheckinventory.Show();
+            }
 
+        }
+
+        private void inventoryCheckToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //bool b = ObjUtil.IsAlreadyOpen(typeof(Inventory.frmScanInventory));
+            //if (!b)
+            //{
+                Inventory.frmScanInventoryList objCheckinventory = new Inventory.frmScanInventoryList();
+                objCheckinventory.ShowDialog();
+            //}
         }
     }
 }

@@ -520,15 +520,16 @@
             // scanItemsToolStripMenuItem
             // 
             this.scanItemsToolStripMenuItem.Name = "scanItemsToolStripMenuItem";
-            this.scanItemsToolStripMenuItem.Size = new System.Drawing.Size(233, 24);
+            this.scanItemsToolStripMenuItem.Size = new System.Drawing.Size(214, 24);
             this.scanItemsToolStripMenuItem.Text = "Scan Inventory";
             this.scanItemsToolStripMenuItem.Click += new System.EventHandler(this.scanItemsToolStripMenuItem_Click);
             // 
             // inventoryCheckToolStripMenuItem
             // 
             this.inventoryCheckToolStripMenuItem.Name = "inventoryCheckToolStripMenuItem";
-            this.inventoryCheckToolStripMenuItem.Size = new System.Drawing.Size(233, 24);
-            this.inventoryCheckToolStripMenuItem.Text = "Scaned  Inventory Details";
+            this.inventoryCheckToolStripMenuItem.Size = new System.Drawing.Size(214, 24);
+            this.inventoryCheckToolStripMenuItem.Text = "Scaned  Inventory List";
+            this.inventoryCheckToolStripMenuItem.Click += new System.EventHandler(this.inventoryCheckToolStripMenuItem_Click);
             // 
             // reportsToolStripMenuItem
             // 
