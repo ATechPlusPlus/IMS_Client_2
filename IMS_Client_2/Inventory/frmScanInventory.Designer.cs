@@ -315,7 +315,9 @@
             this.txtBarCode.Name = "txtBarCode";
             this.txtBarCode.Size = new System.Drawing.Size(180, 25);
             this.txtBarCode.TabIndex = 258;
+            this.txtBarCode.Enter += new System.EventHandler(this.txtBarCode_Enter);
             this.txtBarCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBarCode_KeyDown);
+            this.txtBarCode.Leave += new System.EventHandler(this.txtBarCode_Leave);
             // 
             // label4
             // 
@@ -356,7 +358,6 @@
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel1.Controls.Add(this.btncancel);
             this.panel1.Controls.Add(this.btnSaveData);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 559);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(894, 40);

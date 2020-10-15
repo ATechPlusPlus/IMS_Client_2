@@ -74,14 +74,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CoreApp, Version=3.0.0.9, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\DLL Source Code\CoreApp\CoreApp\bin\x86\Release\CoreApp.dll</HintPath>
+      <HintPath>..\packages\CoreAppLib.1.0.12\lib\CoreApp.dll</HintPath>
     </Reference>
     <Reference Include="CoreSys, Version=1.1.0.0, Culture=neutral, processorArchitecture=x86">
-      <HintPath>..\packages\CoreAppLib.1.0.11\lib\CoreSys.dll</HintPath>
+      <HintPath>..\packages\CoreAppLib.1.0.12\lib\CoreSys.dll</HintPath>
     </Reference>
     <Reference Include="DB_backupRestore, Version=2.1.5.9, Culture=neutral, processorArchitecture=x86">
-      <HintPath>..\packages\CoreAppLib.1.0.11\lib\DB_backupRestore.dll</HintPath>
+      <HintPath>..\packages\CoreAppLib.1.0.12\lib\DB_backupRestore.dll</HintPath>
     </Reference>
     <Reference Include="ExcelDataReader, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
       <HintPath>..\packages\ExcelDataReader.3.6.0\lib\net20\ExcelDataReader.dll</HintPath>
@@ -118,14 +117,14 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="RegistrationProcess, Version=1.3.4.6, Culture=neutral, processorArchitecture=x86">
-      <HintPath>..\packages\CoreAppLib.1.0.11\lib\RegistrationProcess.dll</HintPath>
+      <HintPath>..\packages\CoreAppLib.1.0.12\lib\RegistrationProcess.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.ServiceProcess, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\CoreAppLib.1.0.11\lib\System.ServiceProcess.dll</HintPath>
+      <HintPath>..\packages\CoreAppLib.1.0.12\lib\System.ServiceProcess.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
@@ -139,8 +138,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="UserManagement, Version=1.3.1.1, Culture=neutral, processorArchitecture=x86">
-      <HintPath>..\packages\CoreAppLib.1.0.11\lib\UserManagement.dll</HintPath>
+    <Reference Include="UserManagement, Version=1.3.3.1, Culture=neutral, processorArchitecture=x86">
+      <HintPath>..\packages\CoreAppLib.1.0.12\lib\UserManagement.dll</HintPath>
     </Reference>
     <Reference Include="zxing, Version=0.16.5.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
       <HintPath>..\packages\ZXing.Net.0.16.5\lib\net40\zxing.dll</HintPath>

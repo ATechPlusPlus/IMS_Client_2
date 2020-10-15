@@ -58,6 +58,10 @@ namespace IMS_Client_2.Inventory
             btnSaveData.BackgroundImage = B_Leave;
             btncancel.BackgroundImage = B_Leave;
 
+            dgvProductDetails.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+            //Most time consumption enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+            dgvProductDetails.RowHeadersVisible = false; // set it to false if not needed
+
             LoadData();
             DataBind();
             HighlightDiffQTY();
@@ -166,30 +170,44 @@ namespace IMS_Client_2.Inventory
 
         private void btnSaveData_Click(object sender, EventArgs e)
         {
-            int diffqty = txtDiffQTY.Text.Length == 0 ? 0 : Convert.ToInt32(txtDiffQTY.Text);
-            if (diffqty != 0)
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmScanInventoryCompare, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
-                bool q = clsUtility.ShowQuestionMessage("Are you sure want to update Inventory QTY?");
-                if (q)
+                int diffqty = txtDiffQTY.Text.Length == 0 ? 0 : Convert.ToInt32(txtDiffQTY.Text);
+                if (diffqty != 0)
                 {
-                    ObjDAL.SetStoreProcedureData("MasterScanID", SqlDbType.Int, pMasterScanID, clsConnection_DAL.ParamType.Input);
-                    ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, StoreID, clsConnection_DAL.ParamType.Input);
-                    ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
-                    ObjDAL.SetStoreProcedureData("Msg", SqlDbType.VarChar, 0, clsConnection_DAL.ParamType.Output);
-                    bool b = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_Update_StockColorSizeMaster");
-                    if (b)
+                    bool q = clsUtility.ShowQuestionMessage("Are you sure want to update Inventory QTY?");
+                    if (q)
                     {
-                        DataTable dt = ObjDAL.GetOutputParmData();
-                        if (ObjUtil.ValidateTable(dt))
+                        ObjDAL.SetStoreProcedureData("MasterScanID", SqlDbType.Int, pMasterScanID, clsConnection_DAL.ParamType.Input);
+                        ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, StoreID, clsConnection_DAL.ParamType.Input);
+                        ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
+                        ObjDAL.SetStoreProcedureData("Flag", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Output);
+                        ObjDAL.SetStoreProcedureData("Msg", SqlDbType.VarChar, 0, clsConnection_DAL.ParamType.Output);
+                        bool b = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_Update_StockColorSizeMaster");
+                        if (b)
                         {
-                            clsUtility.ShowInfoMessage(dt.Rows[0][1].ToString());
+                            DataTable dt = ObjDAL.GetOutputParmData();
+                            if (ObjUtil.ValidateTable(dt))
+                            {
+                                clsUtility.ShowInfoMessage(dt.Rows[1][1].ToString());
+                                if (Convert.ToInt32(dt.Rows[0][1]) == 1)
+                                {
+                                    LoadData();
+                                    HighlightDiffQTY();
+                                }
+                            }
                         }
+                        ObjDAL.ResetData();
                     }
+                }
+                else
+                {
+                    clsUtility.ShowInfoMessage("No Need to update System QTY..");
                 }
             }
             else
             {
-                clsUtility.ShowInfoMessage("No Need to update System QTY..");
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 

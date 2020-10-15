@@ -90,11 +90,11 @@ namespace IMS_Client_2.Masters
             txtAdd.Clear();
             PicEmployee.Image = null;
             cmbShop.SelectedIndex = -1;
+            cmbActiveStatus.SelectedIndex = -1;
             EmployeeID = 0;
             txtEmail.Clear();
             dtpDOB.Value = DateTime.Now;
             dtpDOB.Checked = false;
-
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -117,7 +117,7 @@ namespace IMS_Client_2.Masters
             ObjDAL.SetColumnData("Password", SqlDbType.NVarChar, ObjUtil.Encrypt(txtPass.Text.Trim(), true));
             ObjDAL.SetColumnData("EmailID", SqlDbType.NVarChar, txtEmail.Text.Trim());
             ObjDAL.SetColumnData("IsAdmin", SqlDbType.Bit, false);
-            ObjDAL.SetColumnData("IsBlock", SqlDbType.Bit, false);
+            ObjDAL.SetColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
             ObjDAL.SetColumnData("EmployeeID", SqlDbType.Int, EmployeeID);
 
             if (ObjDAL.InsertData(clsUtility.DBName + ".dbo.UserManagement", true) > 0)
@@ -150,7 +150,12 @@ namespace IMS_Client_2.Masters
                 txtName.Focus();
                 return false;
             }
-
+            else if (ObjUtil.IsControlTextEmpty(cmbActiveStatus))
+            {
+                clsUtility.ShowInfoMessage("Please Select ActiveStatus.", clsUtility.strProjectTitle);
+                cmbActiveStatus.Focus();
+                return false;
+            }
             else if (ObjUtil.IsControlTextEmpty(cmbShop))
             {
                 clsUtility.ShowInfoMessage("Please Select Shop.", clsUtility.strProjectTitle);
@@ -164,8 +169,6 @@ namespace IMS_Client_2.Masters
                 radMale.Focus();
                 radMale.Checked = false;
                 radFemale.Checked = false;
-
-
                 return false;
             }
 
@@ -201,6 +204,7 @@ namespace IMS_Client_2.Masters
         {
             ObjDAL.SetColumnData("EmployeeCode", SqlDbType.NVarChar, txtEmployeeCode.Text.Trim());
             ObjDAL.SetColumnData("Name", SqlDbType.NVarChar, txtName.Text.Trim());
+            ObjDAL.SetColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
             ObjDAL.SetColumnData("ShopID", SqlDbType.Int, cmbShop.SelectedValue);
             if (radMale.Checked)
             {
@@ -250,7 +254,7 @@ namespace IMS_Client_2.Masters
 
         private void LoadData()
         {
-            string q = "SELECT e1.EmpID,EmployeeCode,Name,ShopID,(CASE e1.Gender WHEN 1 THEN 'Male' WHEN 0 THEN 'Female' END) Gender,DOB,[Address],Photo, s1.StoreName FROM " + clsUtility.DBName + ".dbo.EmployeeDetails e1 JOIN " + clsUtility.DBName + ".dbo.StoreMaster s1" +
+            string q = "SELECT e1.EmpID,EmployeeCode,Name,ShopID,(CASE e1.Gender WHEN 1 THEN 'Male' WHEN 0 THEN 'Female' END) Gender,DOB,[Address],Photo, s1.StoreName,(CASE e1.ActiveStatus WHEN 1 THEN 'Active' WHEN 0 THEN 'InActive' END) ActiveStatus FROM " + clsUtility.DBName + ".dbo.EmployeeDetails e1 JOIN " + clsUtility.DBName + ".dbo.StoreMaster s1" +
               " ON e1.ShopID=s1.StoreID ORDER BY EmpID DESC";
             DataTable dataTable = ObjDAL.ExecuteSelectStatement(q);
             if (ObjUtil.ValidateTable(dataTable))
@@ -348,6 +352,7 @@ namespace IMS_Client_2.Masters
                     {
                         PicEmployee.Image = ObjUtil.GetImage((byte[])dgvEmployee.SelectedRows[0].Cells["Photo"].Value);
                     }
+                    cmbActiveStatus.SelectedItem = dgvEmployee.SelectedRows[0].Cells["ActiveStatus"].Value;
 
                     grpEmployee.Enabled = false;
                     BindUserDetails();
@@ -388,6 +393,7 @@ namespace IMS_Client_2.Masters
         {
             ObjDAL.UpdateColumnData("EmployeeCode", SqlDbType.NVarChar, txtEmployeeCode.Text.Trim());
             ObjDAL.UpdateColumnData("Name", SqlDbType.NVarChar, txtName.Text.Trim());
+            ObjDAL.UpdateColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
             ObjDAL.UpdateColumnData("ShopID", SqlDbType.Int, cmbShop.SelectedValue);
             if (radMale.Checked)
             {
@@ -423,7 +429,16 @@ namespace IMS_Client_2.Masters
 
                 if (txtUsername.Text.Trim().Length != 0 && txtPass.Text.Trim().Length != 0)
                 {
-                    UpdateUserDetails();
+                    int countuser = ObjDAL.ExecuteScalarInt("SELECT COUNT(1) FROM " + clsUtility.DBName + ".dbo.UserManagement WITH(NOLOCK) WHERE UserName='" + txtUsername.Text + "'");
+
+                    if (countuser > 0)
+                    {
+                        UpdateUserDetails();
+                    }
+                    else
+                    {
+                        CreateNewUser(EmployeeID);
+                    }
                 }
                 LoadData();
                 ClearAll();
@@ -442,6 +457,9 @@ namespace IMS_Client_2.Masters
             ObjDAL.UpdateColumnData("UserName", SqlDbType.NVarChar, txtUsername.Text.Trim());
             ObjDAL.UpdateColumnData("Password", SqlDbType.NVarChar, ObjUtil.Encrypt(txtPass.Text.Trim(), true));
             ObjDAL.UpdateColumnData("EmailID", SqlDbType.NVarChar, txtEmail.Text.Trim());
+            ObjDAL.UpdateColumnData("ActiveStatus", SqlDbType.Bit, cmbActiveStatus.SelectedItem.ToString() == "Active" ? 1 : 0);
+            ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
+            ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             //ObjDAL.UpdateColumnData("IsAdmin", SqlDbType.Bit, false); 
             //if user is blocked then if his details will update from this form then could be auto unblock
 
@@ -532,6 +550,11 @@ namespace IMS_Client_2.Masters
                 clsUtility.ShowInfoMessage("Enter Only Charactors...", clsUtility.strProjectTitle);
                 txtName.Focus();
             }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

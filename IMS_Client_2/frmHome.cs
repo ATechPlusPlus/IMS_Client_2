@@ -73,7 +73,7 @@ namespace IMS_Client_2
 
         private void otherArtsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmDatabaseMaintenance) || clsUtility.IsAdmin)
+            if (clsUtility.IsAdmin)
             {
                 DB_backupRestore.cs.frmDatabaseMaintenance Obj = new DB_backupRestore.cs.frmDatabaseMaintenance();
                 Obj.ShowDialog();
@@ -1045,23 +1045,37 @@ namespace IMS_Client_2
 
         private void scanItemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool b = ObjUtil.IsAlreadyOpen(typeof(Inventory.frmScanInventory));
-            if (!b)
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmScanInventory) || clsUtility.IsAdmin)
             {
-                Inventory.frmScanInventory objCheckinventory = new Inventory.frmScanInventory();
-                objCheckinventory.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Inventory.frmScanInventory));
+                if (!b)
+                {
+                    Inventory.frmScanInventory objCheckinventory = new Inventory.frmScanInventory();
+                    objCheckinventory.Show();
+                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
 
         }
 
         private void inventoryCheckToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //bool b = ObjUtil.IsAlreadyOpen(typeof(Inventory.frmScanInventory));
-            //if (!b)
-            //{
-                Inventory.frmScanInventoryList objCheckinventory = new Inventory.frmScanInventoryList();
-                objCheckinventory.ShowDialog();
-            //}
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmScanInventoryList) || clsUtility.IsAdmin)
+            {
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Inventory.frmScanInventoryList));
+                if (!b)
+                {
+                    Inventory.frmScanInventoryList objCheckinventory = new Inventory.frmScanInventoryList();
+                    objCheckinventory.Show();
+                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
     }
 }

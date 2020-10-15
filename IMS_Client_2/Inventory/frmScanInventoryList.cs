@@ -40,12 +40,14 @@ namespace IMS_Client_2.Inventory
                 }
                 else
                 {
-                    dgvProductDetails.DataSource = null;
+                    DataTable dt1 = null;
+                    dgvProductDetails.DataSource = dt1;
                 }
             }
             else
             {
-                dgvProductDetails.DataSource = null;
+                DataTable dt1 = null;
+                dgvProductDetails.DataSource = dt1;
             }
         }
 
@@ -65,11 +67,9 @@ namespace IMS_Client_2.Inventory
             if (clsUtility.IsAdmin)
             {
                 strQ = "SELECT StoreID,StoreName FROM " + clsUtility.DBName + ".dbo.StoreMaster WITH(NOLOCK) WHERE ISNULL(ActiveStatus,1)=1 ORDER BY StoreName ASC";
-                cmbSearchByStore.Enabled = true;
             }
             else
             {
-                cmbSearchByStore.Enabled = false;
                 strQ = "SELECT StoreID,StoreName FROM " + clsUtility.DBName + ".dbo.StoreMaster WHERE ISNULL(ActiveStatus,1)=1 AND StoreID IN  " +
                            " (SELECT StoreID FROM  " + clsUtility.DBName + ".dbo.tblStoreUserRights WHERE UserID = " + clsUtility.LoginID + ") ORDER BY StoreName ASC";
             }
@@ -80,6 +80,7 @@ namespace IMS_Client_2.Inventory
                 cmbSearchByStore.DisplayMember = "StoreName";
                 cmbSearchByStore.ValueMember = "StoreID";
             }
+            cmbSearchByStore.SelectedIndex = -1;
         }
 
         private void dgvProductDetails_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -115,18 +116,18 @@ namespace IMS_Client_2.Inventory
             if (dgvProductDetails.Columns[e.ColumnIndex].Name == "ColViewCompare")
             {
 
-                //if (clsFormRights.HasFormRight(clsFormRights.Forms.frmScanInventoryCompare) || clsUtility.IsAdmin)
-                //{
-                Inventory.frmScanInventoryCompare Obj = new frmScanInventoryCompare();
-                Obj.pMasterScanID = Convert.ToInt32(dgvProductDetails.SelectedRows[0].Cells["MasterScanID"].Value);
-                Obj.ShowDialog();
+                if (clsFormRights.HasFormRight(clsFormRights.Forms.frmScanInventoryCompare) || clsUtility.IsAdmin)
+                {
+                    Inventory.frmScanInventoryCompare Obj = new frmScanInventoryCompare();
+                    Obj.pMasterScanID = Convert.ToInt32(dgvProductDetails.SelectedRows[0].Cells["MasterScanID"].Value);
+                    Obj.ShowDialog();
 
-                LoadData();
-                //}
-                //else
-                //{
-                //    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
-                //}
+                    LoadData();
+                }
+                else
+                {
+                    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                }
             }
         }
 
@@ -140,11 +141,6 @@ namespace IMS_Client_2.Inventory
                 cmbCompareStatus.Enabled = false;
                 cmbSearchByStore.SelectedIndex = -1;
                 cmbSearchByStore.Enabled = false;
-
-                if (dgvProductDetails.Columns.Contains("ColViewCompare"))
-                {
-                    dgvProductDetails.Columns.Remove("ColViewCompare");
-                }
             }
             else
             {
@@ -162,11 +158,6 @@ namespace IMS_Client_2.Inventory
                 dtpToDate.Enabled = false;
                 dtpFromDate.Value = DateTime.Now;
                 dtpToDate.Value = DateTime.Now;
-
-                if (dgvProductDetails.Columns.Contains("ColViewCompare"))
-                {
-                    dgvProductDetails.Columns.Remove("ColViewCompare");
-                }
             }
             else
             {
@@ -184,11 +175,6 @@ namespace IMS_Client_2.Inventory
                 dtpToDate.Enabled = false;
                 dtpFromDate.Value = DateTime.Now;
                 dtpToDate.Value = DateTime.Now;
-
-                if (dgvProductDetails.Columns.Contains("ColViewCompare"))
-                {
-                    dgvProductDetails.Columns.Remove("ColViewCompare");
-                }
             }
             else
             {

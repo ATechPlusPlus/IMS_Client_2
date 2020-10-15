@@ -46,6 +46,16 @@ namespace IMS_Client_2.Inventory
                 cmdFrom.ValueMember = "StoreID";
             }
         }
+        private void txtBarCode_Enter(object sender, EventArgs e)
+        {
+            ObjUtil.SetTextHighlightColor(sender);
+        }
+
+        private void txtBarCode_Leave(object sender, EventArgs e)
+        {
+            ObjUtil.SetTextHighlightColor(sender, System.Drawing.Color.White);
+        }
+
         private void btnAdd_MouseEnter(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
@@ -64,52 +74,30 @@ namespace IMS_Client_2.Inventory
             {
                 ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, cmdFrom.SelectedValue, clsConnection_DAL.ParamType.Input);
 
-
-                //string strQ = "SELECT * FROM tblScanInventoryDetails WITH(NOLOCK) WHERE StoreID='" + cmdFrom.SelectedValue + "' AND CompareStatus=0";
-
-                //DataTable dtDetails = ObjDAL.ExecuteSelectStatement(strQ);
                 DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_ScanInventoryItemDetails");
                 if (ObjUtil.ValidateDataSet(ds))
                 {
                     DataTable dtOldBill = ds.Tables[0];
                     if (ObjUtil.ValidateTable(dtOldBill))
                     {
-                        //ScanID = dtDetails.Rows[0]["MasterScanID"].ToString();
-                        //cmdFrom.SelectedValue = dtDetails.Rows[0]["StoreID"];
+                        dtItemDetails.Clear();
+                        for (int i = 0; i < dtOldBill.Rows.Count; i++)
+                        {
+                            string pID = dtOldBill.Rows[i]["ProductID"].ToString();
+                            string name = dtOldBill.Rows[i]["ProductName"].ToString();
+                            string rate = dtOldBill.Rows[i]["Rate"].ToString();
+                            string barCode = dtOldBill.Rows[i]["Barcode"].ToString();
+                            string qty = dtOldBill.Rows[i]["BillQTY"].ToString();
+                            string SizeID = dtOldBill.Rows[i]["SizeID"].ToString();
+                            string Size = dtOldBill.Rows[i]["Size"].ToString();
+                            string ColorID = dtOldBill.Rows[i]["ColorID"].ToString();
+                            string ColorName = dtOldBill.Rows[i]["ColorName"].ToString();
+                            string total = dtOldBill.Rows[i]["Total"].ToString();
+                            string SubProductID = dtOldBill.Rows[i]["SubProductID"].ToString();
 
-                        //dtpSalesDate.Value = Convert.ToDateTime(dtDetails.Rows[0]["ScanDate"]);
-
-                        //string strItemQuery = "select sti.ProductID, ps.ProductName, sti.BillQTY,sti.Rate,sti.Total,sti.Barcode,sti.SizeID,sm.Size, sti.ColorID, col.ColorName,psm.QTY as StockQTY, psm.SubProductID from tblScanInventoryItemDetails sti join " +
-                        //  "ProductMaster ps on sti.ProductID = ps.ProductID " +
-                        //  "join ColorMaster as col on sti.ColorID = col.ColorID " +
-                        //  "join SizeMaster as sm on sti.SizeID = sm.SizeID " +
-                        //  "join ProductStockColorSizeMaster psm on sti.Barcode = psm.BarcodeNo " +
-                        //  "where psm.StoreID = " + cmdFrom.SelectedValue + " and psm.BarcodeNo = sti.Barcode " +
-                        //  "AND sti.MasterScanID = " + ScanID;
-
-
-                        //DataTable dtOldBill = ObjDAL.ExecuteSelectStatement(strItemQuery);
-                        //if (ObjUtil.ValidateTable(dtOldBill))
-                        //{
-                            dtItemDetails.Clear();
-                            for (int i = 0; i < dtOldBill.Rows.Count; i++)
-                            {
-                                string pID = dtOldBill.Rows[i]["ProductID"].ToString();
-                                string name = dtOldBill.Rows[i]["ProductName"].ToString();
-                                string rate = dtOldBill.Rows[i]["Rate"].ToString();
-                                string barCode = dtOldBill.Rows[i]["Barcode"].ToString();
-                                string qty = dtOldBill.Rows[i]["BillQTY"].ToString();
-                                string SizeID = dtOldBill.Rows[i]["SizeID"].ToString();
-                                string Size = dtOldBill.Rows[i]["Size"].ToString();
-                                string ColorID = dtOldBill.Rows[i]["ColorID"].ToString();
-                                string ColorName = dtOldBill.Rows[i]["ColorName"].ToString();
-                                string total = dtOldBill.Rows[i]["Total"].ToString();
-                                string SubProductID = dtOldBill.Rows[i]["SubProductID"].ToString();
-
-                                AddRowToItemDetails(pID, name, qty, rate, total.ToString(), barCode, SizeID, Size, ColorID, ColorName, SubProductID);
-                            }
-                            CalculateGrandTotal();
-                        //}
+                            AddRowToItemDetails(pID, name, qty, rate, total.ToString(), barCode, SizeID, Size, ColorID, ColorName, SubProductID);
+                        }
+                        CalculateGrandTotal();
                     }
                 }
             }
@@ -125,7 +113,7 @@ namespace IMS_Client_2.Inventory
 
             LoadFromStore();
             InitItemTable();
-            //BindScannedItems();
+            BindScannedItems();
         }
         private Image GetProductPhoto(int SubProductID)
         {
@@ -342,16 +330,24 @@ namespace IMS_Client_2.Inventory
             picProduct.Image = null;
             txtValue.Clear();
             txtTotalQTY.Clear();
+            cmdFrom.SelectedIndex = -1;
         }
         private void btnSaveData_Click(object sender, EventArgs e)
         {
-            if (dtItemDetails.Rows.Count > 0)
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmScanInventory, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
-                SaveScanInventory();
+                if (dtItemDetails.Rows.Count > 0)
+                {
+                    SaveScanInventory();
+                }
+                else
+                {
+                    clsUtility.ShowInfoMessage("Please Scan items before you save them.");
+                }
             }
             else
             {
-                clsUtility.ShowInfoMessage("Please Scan items before you save them.");
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
 
@@ -377,7 +373,7 @@ namespace IMS_Client_2.Inventory
                     string BarcodeNo = dgvProductDetails.Rows[i].Cells["BarcodeNo"].Value.ToString();
                     string SubProductID = dgvProductDetails.Rows[i].Cells["SubProductID"].Value.ToString();
 
-                    ObjDAL.SetColumnData("ScanInventoryID", SqlDbType.Int, ScanInventoryID);
+                    ObjDAL.SetColumnData("MasterScanID", SqlDbType.Int, ScanInventoryID);
 
                     ObjDAL.SetColumnData("ProductID", SqlDbType.Int, ProductID);
                     ObjDAL.SetColumnData("Barcode", SqlDbType.BigInt, BarcodeNo);
@@ -394,6 +390,10 @@ namespace IMS_Client_2.Inventory
                 ObjDAL.ResetData();
                 clsUtility.ShowInfoMessage("All Scan Items have been saved.", clsUtility.strProjectTitle);
                 ClearAll();
+            }
+            else
+            {
+                ObjDAL.DeleteData(clsUtility.DBName + ".dbo.tblScanInventoryDetails", "MasterScanID=" + ScanInventoryID);
             }
         }
 
