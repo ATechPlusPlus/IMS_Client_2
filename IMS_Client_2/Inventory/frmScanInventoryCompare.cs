@@ -72,13 +72,23 @@ namespace IMS_Client_2.Inventory
             DataTable dt = (DataTable)dgvProductDetails.DataSource;
             if (ObjUtil.ValidateTable(dt))
             {
+                object rate = dt.Compute("SUM(Rate)", string.Empty);
+                
                 object systemqty = dt.Compute("SUM([System QTY])", string.Empty);
                 object inventoryqty = dt.Compute("SUM([Inventory QTY])", string.Empty);
                 int diffqty = Convert.ToInt32(inventoryqty) - Convert.ToInt32(systemqty);
 
+                object systemrate = Convert.ToDouble(systemqty) * Convert.ToDouble(rate);
+                object inventoryrate = Convert.ToDouble(inventoryqty) * Convert.ToDouble(rate);
+                double diffrate = Convert.ToDouble(inventoryrate) - Convert.ToDouble(systemrate);
+
                 txtSystemQTY.Text = systemqty.ToString();
                 txtInventoryQTY.Text = inventoryqty.ToString();
                 txtDiffQTY.Text = diffqty.ToString();
+
+                txtSystemRate.Text = systemrate.ToString();
+                txtInventoryRate.Text = inventoryrate.ToString();
+                txtDiffRate.Text = diffrate.ToString();
             }
         }
 
@@ -214,6 +224,16 @@ namespace IMS_Client_2.Inventory
         private void btncancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void dgvProductDetails_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

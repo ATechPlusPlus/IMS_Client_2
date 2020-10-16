@@ -45,6 +45,12 @@
             this.txtInventoryQTY = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtStoreName = new System.Windows.Forms.TextBox();
+            this.txtInventoryRate = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtDiffRate = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtSystemRate = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picProduct)).BeginInit();
@@ -69,9 +75,10 @@
             this.dgvProductDetails.Location = new System.Drawing.Point(12, 119);
             this.dgvProductDetails.Name = "dgvProductDetails";
             this.dgvProductDetails.ReadOnly = true;
-            this.dgvProductDetails.Size = new System.Drawing.Size(865, 268);
+            this.dgvProductDetails.Size = new System.Drawing.Size(954, 268);
             this.dgvProductDetails.TabIndex = 261;
             this.dgvProductDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellClick);
+            this.dgvProductDetails.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellContentClick);
             this.dgvProductDetails.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvProductDetails_DataBindingComplete);
             // 
             // label2
@@ -95,7 +102,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 559);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(894, 40);
+            this.panel1.Size = new System.Drawing.Size(978, 40);
             this.panel1.TabIndex = 268;
             // 
             // btncancel
@@ -104,7 +111,7 @@
             this.btncancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btncancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btncancel.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btncancel.Location = new System.Drawing.Point(806, 9);
+            this.btncancel.Location = new System.Drawing.Point(896, 9);
             this.btncancel.Name = "btncancel";
             this.btncancel.Size = new System.Drawing.Size(76, 25);
             this.btncancel.TabIndex = 251;
@@ -120,7 +127,7 @@
             this.btnSaveData.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSaveData.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSaveData.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveData.Location = new System.Drawing.Point(724, 9);
+            this.btnSaveData.Location = new System.Drawing.Point(814, 9);
             this.btnSaveData.Name = "btnSaveData";
             this.btnSaveData.Size = new System.Drawing.Size(76, 25);
             this.btnSaveData.TabIndex = 250;
@@ -150,7 +157,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(894, 40);
+            this.panel2.Size = new System.Drawing.Size(978, 40);
             this.panel2.TabIndex = 270;
             // 
             // label12
@@ -170,7 +177,7 @@
             this.txtSystemQTY.BackColor = System.Drawing.Color.White;
             this.txtSystemQTY.Enabled = false;
             this.txtSystemQTY.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSystemQTY.Location = new System.Drawing.Point(324, 451);
+            this.txtSystemQTY.Location = new System.Drawing.Point(344, 451);
             this.txtSystemQTY.Name = "txtSystemQTY";
             this.txtSystemQTY.Size = new System.Drawing.Size(96, 25);
             this.txtSystemQTY.TabIndex = 271;
@@ -180,7 +187,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(227, 455);
+            this.label4.Location = new System.Drawing.Point(247, 455);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(92, 17);
             this.label4.TabIndex = 272;
@@ -191,7 +198,7 @@
             this.txtDiffQTY.BackColor = System.Drawing.Color.White;
             this.txtDiffQTY.Enabled = false;
             this.txtDiffQTY.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDiffQTY.Location = new System.Drawing.Point(752, 451);
+            this.txtDiffQTY.Location = new System.Drawing.Point(772, 451);
             this.txtDiffQTY.Name = "txtDiffQTY";
             this.txtDiffQTY.Size = new System.Drawing.Size(96, 25);
             this.txtDiffQTY.TabIndex = 273;
@@ -201,7 +208,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(668, 455);
+            this.label1.Location = new System.Drawing.Point(688, 455);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(73, 17);
             this.label1.TabIndex = 274;
@@ -212,7 +219,7 @@
             this.txtInventoryQTY.BackColor = System.Drawing.Color.White;
             this.txtInventoryQTY.Enabled = false;
             this.txtInventoryQTY.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtInventoryQTY.Location = new System.Drawing.Point(553, 451);
+            this.txtInventoryQTY.Location = new System.Drawing.Point(573, 451);
             this.txtInventoryQTY.Name = "txtInventoryQTY";
             this.txtInventoryQTY.Size = new System.Drawing.Size(96, 25);
             this.txtInventoryQTY.TabIndex = 275;
@@ -222,7 +229,7 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(445, 455);
+            this.label3.Location = new System.Drawing.Point(465, 455);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(105, 17);
             this.label3.TabIndex = 276;
@@ -238,13 +245,83 @@
             this.txtStoreName.Size = new System.Drawing.Size(188, 25);
             this.txtStoreName.TabIndex = 277;
             // 
+            // txtInventoryRate
+            // 
+            this.txtInventoryRate.BackColor = System.Drawing.Color.White;
+            this.txtInventoryRate.Enabled = false;
+            this.txtInventoryRate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtInventoryRate.Location = new System.Drawing.Point(573, 498);
+            this.txtInventoryRate.Name = "txtInventoryRate";
+            this.txtInventoryRate.Size = new System.Drawing.Size(96, 25);
+            this.txtInventoryRate.TabIndex = 282;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(465, 502);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(103, 17);
+            this.label5.TabIndex = 283;
+            this.label5.Text = "Inventory Rate :";
+            // 
+            // txtDiffRate
+            // 
+            this.txtDiffRate.BackColor = System.Drawing.Color.White;
+            this.txtDiffRate.Enabled = false;
+            this.txtDiffRate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDiffRate.Location = new System.Drawing.Point(772, 498);
+            this.txtDiffRate.Name = "txtDiffRate";
+            this.txtDiffRate.Size = new System.Drawing.Size(96, 25);
+            this.txtDiffRate.TabIndex = 280;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(688, 502);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(71, 17);
+            this.label6.TabIndex = 281;
+            this.label6.Text = "Diff Rate :";
+            // 
+            // txtSystemRate
+            // 
+            this.txtSystemRate.BackColor = System.Drawing.Color.White;
+            this.txtSystemRate.Enabled = false;
+            this.txtSystemRate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSystemRate.Location = new System.Drawing.Point(344, 498);
+            this.txtSystemRate.Name = "txtSystemRate";
+            this.txtSystemRate.Size = new System.Drawing.Size(96, 25);
+            this.txtSystemRate.TabIndex = 278;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(247, 502);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(90, 17);
+            this.label7.TabIndex = 279;
+            this.label7.Text = "System Rate :";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
+            // 
             // frmScanInventoryCompare
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(894, 599);
+            this.ClientSize = new System.Drawing.Size(978, 599);
+            this.Controls.Add(this.txtInventoryRate);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.txtDiffRate);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.txtSystemRate);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.txtStoreName);
             this.Controls.Add(this.txtInventoryQTY);
             this.Controls.Add(this.label3);
@@ -291,5 +368,11 @@
         private System.Windows.Forms.TextBox txtInventoryQTY;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtStoreName;
+        private System.Windows.Forms.TextBox txtInventoryRate;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtDiffRate;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtSystemRate;
+        private System.Windows.Forms.Label label7;
     }
 }

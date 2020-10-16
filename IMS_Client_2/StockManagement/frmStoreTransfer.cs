@@ -552,6 +552,7 @@ namespace IMS_Client_2.StockManagement
             }
             if (IsValidateQTY())
             {
+                Sales.frmQTYValidation.QTYConfirmation = 0;
                 Sales.frmQTYValidation frmQTYValidation = new Sales.frmQTYValidation();
                 frmQTYValidation.TotalQTY = Convert.ToInt32(txtTotalQTY.Text);
                 frmQTYValidation.ShowDialog();

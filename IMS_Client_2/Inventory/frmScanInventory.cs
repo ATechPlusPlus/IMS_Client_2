@@ -20,6 +20,9 @@ namespace IMS_Client_2.Inventory
         clsUtility ObjUtil = new clsUtility();
 
         string ScanID = "0";
+        int pMasterScanID = 0;
+        int OldTotalQTY = 0;
+
         public frmScanInventory()
         {
             InitializeComponent();
@@ -80,6 +83,9 @@ namespace IMS_Client_2.Inventory
                     DataTable dtOldBill = ds.Tables[0];
                     if (ObjUtil.ValidateTable(dtOldBill))
                     {
+                        pMasterScanID = Convert.ToInt32(dtOldBill.Rows[0]["ProductID"]);
+                        OldTotalQTY = Convert.ToInt32(dtOldBill.Compute("SUM(BillQTY)", string.Empty));
+
                         dtItemDetails.Clear();
                         for (int i = 0; i < dtOldBill.Rows.Count; i++)
                         {
@@ -291,6 +297,10 @@ namespace IMS_Client_2.Inventory
         {
             ObjUtil.SetRowNumber(dgvProductDetails);
 
+            if (dgvProductDetails.Columns.Contains("MasterScanID"))
+            {
+                dgvProductDetails.Columns["MasterScanID"].Visible = false;
+            }
             dgvProductDetails.Columns["ProductID"].Visible = false;
             dgvProductDetails.Columns["ColoriD"].Visible = false;
             dgvProductDetails.Columns["SizeiD"].Visible = false;
@@ -331,6 +341,7 @@ namespace IMS_Client_2.Inventory
             txtValue.Clear();
             txtTotalQTY.Clear();
             cmdFrom.SelectedIndex = -1;
+            pMasterScanID = 0;
         }
         private void btnSaveData_Click(object sender, EventArgs e)
         {
@@ -338,7 +349,27 @@ namespace IMS_Client_2.Inventory
             {
                 if (dtItemDetails.Rows.Count > 0)
                 {
-                    SaveScanInventory();
+                    int NewQTY = Convert.ToInt32(txtTotalQTY.Text) - OldTotalQTY;
+                    Sales.frmQTYValidation.QTYConfirmation = 0;
+                    Sales.frmQTYValidation frmQTYValidation = new Sales.frmQTYValidation();
+                    frmQTYValidation.TotalQTY = NewQTY;
+                    frmQTYValidation.ShowDialog();
+                    if (Sales.frmQTYValidation.QTYConfirmation == -1)
+                    {
+                        // Exit the bill -Dead bill
+                        this.Close();
+                    }
+                    else if (Sales.frmQTYValidation.QTYConfirmation == 1)
+                    {
+                        if (pMasterScanID == 0)
+                        {
+                            SaveScanInventory();
+                        }
+                        else
+                        {
+                            UpdateScanInventory();
+                        }
+                    }
                 }
                 else
                 {
@@ -374,7 +405,6 @@ namespace IMS_Client_2.Inventory
                     string SubProductID = dgvProductDetails.Rows[i].Cells["SubProductID"].Value.ToString();
 
                     ObjDAL.SetColumnData("MasterScanID", SqlDbType.Int, ScanInventoryID);
-
                     ObjDAL.SetColumnData("ProductID", SqlDbType.Int, ProductID);
                     ObjDAL.SetColumnData("Barcode", SqlDbType.BigInt, BarcodeNo);
                     ObjDAL.SetColumnData("SubProductID", SqlDbType.Int, SubProductID);
@@ -388,12 +418,47 @@ namespace IMS_Client_2.Inventory
                     ObjDAL.InsertData(clsUtility.DBName + ".dbo.tblScanInventoryItemDetails", false);
                 }
                 ObjDAL.ResetData();
-                clsUtility.ShowInfoMessage("All Scan Items have been saved.", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("All Scanned Items have been Saved.", clsUtility.strProjectTitle);
                 ClearAll();
             }
             else
             {
                 ObjDAL.DeleteData(clsUtility.DBName + ".dbo.tblScanInventoryDetails", "MasterScanID=" + ScanInventoryID);
+            }
+        }
+
+        private void UpdateScanInventory()
+        {
+            if (pMasterScanID > 0)
+            {
+                ObjDAL.DeleteData(clsUtility.DBName + ".dbo.tblScanInventoryItemDetails", "MasterScanID=" + pMasterScanID);
+                for (int i = 0; i < dgvProductDetails.Rows.Count; i++)
+                {
+                    string Total = dgvProductDetails.Rows[i].Cells["Total"].Value.ToString();
+                    string ProductID = dgvProductDetails.Rows[i].Cells["ProductID"].Value.ToString();
+                    string QTY = dgvProductDetails.Rows[i].Cells["BillQTY"].Value.ToString();
+                    string Rate = dgvProductDetails.Rows[i].Cells["Rate"].Value.ToString();
+                    string ColorID = dgvProductDetails.Rows[i].Cells["ColorID"].Value.ToString();
+                    string SizeID = dgvProductDetails.Rows[i].Cells["SizeID"].Value.ToString();
+                    string BarcodeNo = dgvProductDetails.Rows[i].Cells["BarcodeNo"].Value.ToString();
+                    string SubProductID = dgvProductDetails.Rows[i].Cells["SubProductID"].Value.ToString();
+
+                    ObjDAL.SetColumnData("MasterScanID", SqlDbType.Int, pMasterScanID);
+                    ObjDAL.SetColumnData("ProductID", SqlDbType.Int, ProductID);
+                    ObjDAL.SetColumnData("Barcode", SqlDbType.BigInt, BarcodeNo);
+                    ObjDAL.SetColumnData("SubProductID", SqlDbType.Int, SubProductID);
+                    ObjDAL.SetColumnData("Rate", SqlDbType.Decimal, Rate);
+                    ObjDAL.SetColumnData("BillQTY", SqlDbType.Int, QTY);
+                    ObjDAL.SetColumnData("ColorID", SqlDbType.Int, ColorID);
+                    ObjDAL.SetColumnData("SizeID", SqlDbType.Int, SizeID);
+                    ObjDAL.SetColumnData("Total", SqlDbType.Decimal, Total);
+                    ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
+
+                    ObjDAL.InsertData(clsUtility.DBName + ".dbo.tblScanInventoryItemDetails", false);
+                }
+                ObjDAL.ResetData();
+                clsUtility.ShowInfoMessage("All Scanned Items have been Updated.", clsUtility.strProjectTitle);
+                ClearAll();
             }
         }
 
