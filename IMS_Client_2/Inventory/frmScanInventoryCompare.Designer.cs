@@ -72,12 +72,14 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvProductDetails.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvProductDetails.Location = new System.Drawing.Point(12, 119);
+            this.dgvProductDetails.Location = new System.Drawing.Point(10, 119);
             this.dgvProductDetails.Name = "dgvProductDetails";
             this.dgvProductDetails.ReadOnly = true;
-            this.dgvProductDetails.Size = new System.Drawing.Size(954, 268);
+            this.dgvProductDetails.RowHeadersVisible = false;
+            this.dgvProductDetails.Size = new System.Drawing.Size(946, 268);
             this.dgvProductDetails.TabIndex = 261;
             this.dgvProductDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellClick);
+            this.dgvProductDetails.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvProductDetails_ColumnAdded);
             this.dgvProductDetails.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvProductDetails_DataBindingComplete);
             // 
             // label2
@@ -101,7 +103,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 559);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(978, 40);
+            this.panel1.Size = new System.Drawing.Size(964, 40);
             this.panel1.TabIndex = 268;
             // 
             // btncancel
@@ -156,7 +158,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(978, 40);
+            this.panel2.Size = new System.Drawing.Size(964, 40);
             this.panel2.TabIndex = 270;
             // 
             // label12
@@ -313,7 +315,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(978, 599);
+            this.ClientSize = new System.Drawing.Size(964, 599);
             this.Controls.Add(this.txtInventoryRate);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtDiffRate);
@@ -333,7 +335,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dgvProductDetails);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
             this.Name = "frmScanInventoryCompare";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

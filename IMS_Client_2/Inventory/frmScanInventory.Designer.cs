@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmScanInventory));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.PicProductMaster = new System.Windows.Forms.PictureBox();
@@ -206,16 +206,17 @@
             this.SizeID,
             this.Total,
             this.ColDelete});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProductDetails.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProductDetails.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvProductDetails.Location = new System.Drawing.Point(17, 159);
             this.dgvProductDetails.Name = "dgvProductDetails";
+            this.dgvProductDetails.ReadOnly = true;
             this.dgvProductDetails.Size = new System.Drawing.Size(865, 268);
             this.dgvProductDetails.TabIndex = 260;
             this.dgvProductDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellClick);
@@ -226,6 +227,7 @@
             this.ProductID.DataPropertyName = "ProductID";
             this.ProductID.HeaderText = "ProductID";
             this.ProductID.Name = "ProductID";
+            this.ProductID.ReadOnly = true;
             this.ProductID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // ProductName
@@ -241,6 +243,7 @@
             this.BarcodeNo.DataPropertyName = "BarcodeNo";
             this.BarcodeNo.HeaderText = "BarcodeNo";
             this.BarcodeNo.Name = "BarcodeNo";
+            this.BarcodeNo.ReadOnly = true;
             // 
             // Rate
             // 
@@ -254,12 +257,14 @@
             this.BillQTY.DataPropertyName = "BillQTY";
             this.BillQTY.HeaderText = "QTY";
             this.BillQTY.Name = "BillQTY";
+            this.BillQTY.ReadOnly = true;
             // 
             // StockQTY
             // 
             this.StockQTY.DataPropertyName = "StockQTY";
             this.StockQTY.HeaderText = "StockQTY";
             this.StockQTY.Name = "StockQTY";
+            this.StockQTY.ReadOnly = true;
             this.StockQTY.Visible = false;
             // 
             // Adj_Amount
@@ -267,6 +272,7 @@
             this.Adj_Amount.DataPropertyName = "Adj_Amount";
             this.Adj_Amount.HeaderText = "Adj_Amount";
             this.Adj_Amount.Name = "Adj_Amount";
+            this.Adj_Amount.ReadOnly = true;
             this.Adj_Amount.Visible = false;
             // 
             // ColorID
@@ -274,6 +280,7 @@
             this.ColorID.DataPropertyName = "ColorID";
             this.ColorID.HeaderText = "ColorID";
             this.ColorID.Name = "ColorID";
+            this.ColorID.ReadOnly = true;
             this.ColorID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.ColorID.Visible = false;
             // 
@@ -282,18 +289,21 @@
             this.Color.DataPropertyName = "Color";
             this.Color.HeaderText = "Color";
             this.Color.Name = "Color";
+            this.Color.ReadOnly = true;
             // 
             // Size
             // 
             this.Size.DataPropertyName = "Size";
             this.Size.HeaderText = "Size";
             this.Size.Name = "Size";
+            this.Size.ReadOnly = true;
             // 
             // SizeID
             // 
             this.SizeID.DataPropertyName = "SizeID";
             this.SizeID.HeaderText = "SizeID";
             this.SizeID.Name = "SizeID";
+            this.SizeID.ReadOnly = true;
             this.SizeID.Visible = false;
             // 
             // Total
@@ -308,6 +318,7 @@
             this.ColDelete.DataPropertyName = "Delete";
             this.ColDelete.HeaderText = "Delete";
             this.ColDelete.Name = "ColDelete";
+            this.ColDelete.ReadOnly = true;
             // 
             // txtBarCode
             // 
@@ -316,7 +327,7 @@
             this.txtBarCode.Location = new System.Drawing.Point(103, 126);
             this.txtBarCode.Name = "txtBarCode";
             this.txtBarCode.Size = new System.Drawing.Size(180, 25);
-            this.txtBarCode.TabIndex = 258;
+            this.txtBarCode.TabIndex = 0;
             this.txtBarCode.Enter += new System.EventHandler(this.txtBarCode_Enter);
             this.txtBarCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBarCode_KeyDown);
             this.txtBarCode.Leave += new System.EventHandler(this.txtBarCode_Leave);

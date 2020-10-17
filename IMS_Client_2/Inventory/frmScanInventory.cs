@@ -84,7 +84,7 @@ namespace IMS_Client_2.Inventory
                     DataTable dtOldBill = ds.Tables[0];
                     if (ObjUtil.ValidateTable(dtOldBill))
                     {
-                        pMasterScanID = Convert.ToInt32(dtOldBill.Rows[0]["ProductID"]);
+                        pMasterScanID = Convert.ToInt32(dtOldBill.Rows[0]["MasterScanID"]);
                         OldTotalQTY = Convert.ToInt32(dtOldBill.Compute("SUM(BillQTY)", string.Empty));
 
                         dtItemDetails.Clear();
@@ -255,7 +255,7 @@ namespace IMS_Client_2.Inventory
             dtItemDetails.Columns.Add("Delete");
             dtItemDetails.Columns.Add("SubProductID");
         }
-        
+
         private void AddRowToItemDetails(string productID, string name, string qty, string rate, string total,
        string BarCode, string SizeID, string Size, string ColorID, string Color, string SubProductID)
         {
@@ -328,10 +328,14 @@ namespace IMS_Client_2.Inventory
                     dgvProductDetails.Rows.RemoveAt(e.RowIndex);
                     dgvProductDetails.EndEdit();
                     CalculateGrandTotal();
+                    return;
                 }
             }
-            int _SUBPID = Convert.ToInt32(dgvProductDetails.Rows[e.RowIndex].Cells["SubProductID"].Value);
-            picProduct.Image = GetProductPhoto(Convert.ToInt32(_SUBPID));
+            if (ObjUtil.ValidateTable((DataTable)dgvProductDetails.DataSource))
+            {
+                int _SUBPID = Convert.ToInt32(dgvProductDetails.Rows[e.RowIndex].Cells["SubProductID"].Value);
+                picProduct.Image = GetProductPhoto(Convert.ToInt32(_SUBPID));
+            }
         }
 
         private void ClearAll()
@@ -352,27 +356,35 @@ namespace IMS_Client_2.Inventory
                 if (dtItemDetails.Rows.Count > 0)
                 {
                     int NewQTY = Convert.ToInt32(txtTotalQTY.Text) - OldTotalQTY;
-                    Sales.frmQTYValidation.QTYConfirmation = 0;
-                    Sales.frmQTYValidation frmQTYValidation = new Sales.frmQTYValidation();
-                    frmQTYValidation.TotalQTY = NewQTY;
-                    frmQTYValidation.ShowDialog();
-
-
-                    if (Sales.frmQTYValidation.QTYConfirmation == -1)
+                    if (NewQTY > 0)
                     {
-                        // Exit the bill -Dead bill
-                        this.Close();
+                        Sales.frmQTYValidation.QTYConfirmation = 0;
+                        Sales.frmQTYValidation frmQTYValidation = new Sales.frmQTYValidation();
+                        frmQTYValidation.TotalQTY = Math.Abs(NewQTY);
+                        frmQTYValidation.ShowDialog();
+
+
+                        if (Sales.frmQTYValidation.QTYConfirmation == -1)
+                        {
+                            // Exit the bill -Dead bill
+                            this.Close();
+                        }
+                        else if (Sales.frmQTYValidation.QTYConfirmation == 1)
+                        {
+                            if (pMasterScanID == 0)
+                            {
+                                SaveScanInventory();
+                            }
+                            else
+                            {
+                                UpdateScanInventory();
+                            }
+                        }
                     }
-                    else if (Sales.frmQTYValidation.QTYConfirmation == 1)
+                    else
                     {
-                        if (pMasterScanID == 0)
-                        {
-                            SaveScanInventory();
-                        }
-                        else
-                        {
-                            UpdateScanInventory();
-                        }
+                        clsUtility.ShowInfoMessage("There is no Scan item detected.");
+                        txtBarCode.Focus();
                     }
                 }
                 else

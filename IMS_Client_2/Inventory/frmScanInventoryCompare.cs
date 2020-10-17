@@ -69,6 +69,14 @@ namespace IMS_Client_2.Inventory
             LoadData();
             DataBind();
             HighlightDiffQTY();
+            if (comparestatus == 0)
+            {
+                btnSaveData.Enabled = false;
+            }
+            else
+            {
+                btnSaveData.Enabled = true;
+            }
         }
 
         private void DataBind()
@@ -103,10 +111,10 @@ namespace IMS_Client_2.Inventory
                 {
                     dgvProductDetails.Rows[i].DefaultCellStyle.ForeColor = Color.Red;
                 }
-                else
-                {
-                    dgvProductDetails.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
-                }
+                //else
+                //{
+                //    dgvProductDetails.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
+                //}
             }
         }
         private void dgvProductDetails_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -243,6 +251,11 @@ namespace IMS_Client_2.Inventory
         private void btncancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void dgvProductDetails_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            dgvProductDetails.Columns[e.Column.Index].SortMode = DataGridViewColumnSortMode.NotSortable;
         }
     }
 }
