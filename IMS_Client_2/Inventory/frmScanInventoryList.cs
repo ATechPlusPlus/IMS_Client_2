@@ -89,6 +89,7 @@ namespace IMS_Client_2.Inventory
             ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill);
             dgvProductDetails.Columns["MasterScanID"].Visible = false;
             dgvProductDetails.Columns["StoreID"].Visible = false;
+            dgvProductDetails.Columns["CompareStatus"].Visible = false;
 
             if (dgvProductDetails.DataSource != null)
             {
@@ -120,9 +121,11 @@ namespace IMS_Client_2.Inventory
                 {
                     Inventory.frmScanInventoryCompare Obj = new frmScanInventoryCompare();
                     Obj.pMasterScanID = Convert.ToInt32(dgvProductDetails.SelectedRows[0].Cells["MasterScanID"].Value);
+                    Obj.comparestatus= Convert.ToInt32(dgvProductDetails.SelectedRows[0].Cells["CompareStatus"].Value);
                     Obj.ShowDialog();
 
-                    LoadData();
+                    rdSearchByAll.Checked = true;
+                    SearchByALL();
                 }
                 else
                 {

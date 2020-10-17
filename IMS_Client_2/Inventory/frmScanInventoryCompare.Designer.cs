@@ -78,7 +78,6 @@
             this.dgvProductDetails.Size = new System.Drawing.Size(954, 268);
             this.dgvProductDetails.TabIndex = 261;
             this.dgvProductDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellClick);
-            this.dgvProductDetails.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellContentClick);
             this.dgvProductDetails.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvProductDetails_DataBindingComplete);
             // 
             // label2
@@ -307,7 +306,6 @@
             this.label7.Size = new System.Drawing.Size(90, 17);
             this.label7.TabIndex = 279;
             this.label7.Text = "System Rate :";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // frmScanInventoryCompare
             // 

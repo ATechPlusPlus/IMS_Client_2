@@ -20,7 +20,7 @@ namespace IMS_Client_2.Inventory
 
         public int pMasterScanID = 0;
         int StoreID = 0;
-
+        public int comparestatus = 0;
         public frmScanInventoryCompare()
         {
             InitializeComponent();
@@ -55,6 +55,10 @@ namespace IMS_Client_2.Inventory
             txtSystemQTY.Text = "0";
             txtInventoryQTY.Text = "0";
 
+            txtDiffRate.Text = "0";
+            txtSystemRate.Text = "0";
+            txtInventoryRate.Text = "0";
+
             btnSaveData.BackgroundImage = B_Leave;
             btncancel.BackgroundImage = B_Leave;
 
@@ -72,14 +76,12 @@ namespace IMS_Client_2.Inventory
             DataTable dt = (DataTable)dgvProductDetails.DataSource;
             if (ObjUtil.ValidateTable(dt))
             {
-                object rate = dt.Compute("SUM(Rate)", string.Empty);
-                
                 object systemqty = dt.Compute("SUM([System QTY])", string.Empty);
                 object inventoryqty = dt.Compute("SUM([Inventory QTY])", string.Empty);
                 int diffqty = Convert.ToInt32(inventoryqty) - Convert.ToInt32(systemqty);
 
-                object systemrate = Convert.ToDouble(systemqty) * Convert.ToDouble(rate);
-                object inventoryrate = Convert.ToDouble(inventoryqty) * Convert.ToDouble(rate);
+                object systemrate = dt.Compute("SUM([System Rate])", string.Empty);
+                object inventoryrate = dt.Compute("SUM([Inventory Rate])", string.Empty); ;
                 double diffrate = Convert.ToDouble(inventoryrate) - Convert.ToDouble(systemrate);
 
                 txtSystemQTY.Text = systemqty.ToString();
@@ -110,7 +112,7 @@ namespace IMS_Client_2.Inventory
         private void dgvProductDetails_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             ObjUtil.SetRowNumber(dgvProductDetails);
-            ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.DisplayedCells);
+            ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.DisplayedCells, Color.White);
             dgvProductDetails.Columns["ProductID"].Visible = false;
             dgvProductDetails.Columns["StoreID"].Visible = false;
             dgvProductDetails.Columns["SizeID"].Visible = false;
@@ -121,6 +123,8 @@ namespace IMS_Client_2.Inventory
             dgvProductDetails.ClearSelection();
             dgvProductDetails.RowsDefaultCellStyle.SelectionBackColor = Color.Transparent;
             dgvProductDetails.RowsDefaultCellStyle.SelectionForeColor = Color.Transparent;
+            dgvProductDetails.SelectionMode = DataGridViewSelectionMode.RowHeaderSelect;
+            //HighlightDiffQTY();
         }
 
         private Image GetProductPhoto(int SubProductID)
@@ -158,12 +162,26 @@ namespace IMS_Client_2.Inventory
 
         private void dgvProductDetails_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+
             if (e.RowIndex == -1 || e.ColumnIndex == -1)
             {
                 return;
             }
             int _SUBPID = Convert.ToInt32(dgvProductDetails.Rows[e.RowIndex].Cells["SubProductID"].Value);
             picProduct.Image = GetProductPhoto(Convert.ToInt32(_SUBPID));
+
+            //dgvProductDetails.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+
+            //int qty = Convert.ToInt32(dgvProductDetails.Rows[e.RowIndex].Cells["Diff QTY"].Value);
+            //if (qty < 0)
+            //{
+            //    dgvProductDetails.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
+            //}
+            //else
+            //{
+            //    dgvProductDetails.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
+            //}
+            //dgvProductDetails.Refresh();
         }
 
         private void btnSaveData_MouseEnter(object sender, EventArgs e)
@@ -204,6 +222,7 @@ namespace IMS_Client_2.Inventory
                                 {
                                     LoadData();
                                     HighlightDiffQTY();
+                                    btnSaveData.Enabled = false;
                                 }
                             }
                         }
@@ -224,16 +243,6 @@ namespace IMS_Client_2.Inventory
         private void btncancel_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void dgvProductDetails_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

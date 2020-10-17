@@ -19,7 +19,8 @@ namespace IMS_Client_2.Inventory
         clsConnection_DAL ObjDAL = new clsConnection_DAL(true);
         clsUtility ObjUtil = new clsUtility();
 
-        string ScanID = "0";
+        DataTable dtItemDetails = new DataTable();
+
         int pMasterScanID = 0;
         int OldTotalQTY = 0;
 
@@ -120,6 +121,7 @@ namespace IMS_Client_2.Inventory
             LoadFromStore();
             InitItemTable();
             BindScannedItems();
+            txtBarCode.Focus();
         }
         private Image GetProductPhoto(int SubProductID)
         {
@@ -253,7 +255,7 @@ namespace IMS_Client_2.Inventory
             dtItemDetails.Columns.Add("Delete");
             dtItemDetails.Columns.Add("SubProductID");
         }
-        DataTable dtItemDetails = new DataTable();
+        
         private void AddRowToItemDetails(string productID, string name, string qty, string rate, string total,
        string BarCode, string SizeID, string Size, string ColorID, string Color, string SubProductID)
         {
@@ -354,6 +356,8 @@ namespace IMS_Client_2.Inventory
                     Sales.frmQTYValidation frmQTYValidation = new Sales.frmQTYValidation();
                     frmQTYValidation.TotalQTY = NewQTY;
                     frmQTYValidation.ShowDialog();
+
+
                     if (Sales.frmQTYValidation.QTYConfirmation == -1)
                     {
                         // Exit the bill -Dead bill
@@ -374,6 +378,7 @@ namespace IMS_Client_2.Inventory
                 else
                 {
                     clsUtility.ShowInfoMessage("Please Scan items before you save them.");
+                    txtBarCode.Focus();
                 }
             }
             else

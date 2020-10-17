@@ -172,6 +172,7 @@
             this.txtTotalQTY.ReadOnly = true;
             this.txtTotalQTY.Size = new System.Drawing.Size(134, 25);
             this.txtTotalQTY.TabIndex = 262;
+            this.txtTotalQTY.Visible = false;
             // 
             // label5
             // 
@@ -183,6 +184,7 @@
             this.label5.Size = new System.Drawing.Size(78, 17);
             this.label5.TabIndex = 261;
             this.label5.Text = "Toatl QTY :";
+            this.label5.Visible = false;
             // 
             // dgvProductDetails
             // 
