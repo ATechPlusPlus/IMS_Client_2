@@ -112,7 +112,7 @@
             this.btncancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btncancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btncancel.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btncancel.Location = new System.Drawing.Point(896, 9);
+            this.btncancel.Location = new System.Drawing.Point(877, 9);
             this.btncancel.Name = "btncancel";
             this.btncancel.Size = new System.Drawing.Size(76, 25);
             this.btncancel.TabIndex = 251;
@@ -128,7 +128,7 @@
             this.btnSaveData.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSaveData.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSaveData.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveData.Location = new System.Drawing.Point(814, 9);
+            this.btnSaveData.Location = new System.Drawing.Point(795, 9);
             this.btnSaveData.Name = "btnSaveData";
             this.btnSaveData.Size = new System.Drawing.Size(76, 25);
             this.btnSaveData.TabIndex = 250;

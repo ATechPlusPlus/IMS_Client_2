@@ -71,11 +71,11 @@ namespace IMS_Client_2.Inventory
             HighlightDiffQTY();
             if (comparestatus == 0)
             {
-                btnSaveData.Enabled = false;
+                btnSaveData.Enabled = true;
             }
             else
             {
-                btnSaveData.Enabled = true;
+                btnSaveData.Enabled = false;
             }
         }
 

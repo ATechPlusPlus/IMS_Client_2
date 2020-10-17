@@ -44,7 +44,7 @@ namespace IMS_Client_2
             {
                 try
                 {
-                    DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.UserManagement", "UserID,UserName,Password,IsAdmin", "UserName='" + txtUserName.Text.Trim() + "' AND Password='" + objUtil.Encrypt(txtPassword.Text, true) + "' AND ISNULL(ActiveStatus,0)=0", "UserID DESC");
+                    DataTable dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.UserManagement", "UserID,UserName,Password,IsAdmin", "UserName='" + txtUserName.Text.Trim() + "' AND Password='" + objUtil.Encrypt(txtPassword.Text, true) + "' AND ISNULL(ActiveStatus,0)=1", "UserID DESC");
                     //int a = ObjDAL.ExecuteScalarInt("select Count(*) From CyberCafeManagement.dbo.login where UserName='" + txtUserName.Text.Trim() + "' and Password='" + txtPassword.Text.Trim() + "'");                 
                     if (dt != null && dt.Rows.Count > 0)
                     {
