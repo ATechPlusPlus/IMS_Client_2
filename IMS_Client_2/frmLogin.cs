@@ -90,6 +90,9 @@ namespace IMS_Client_2
                 if (ValidateLogin(txtUserName.Text, txtPassword.Text))
                 {
                     int a = InsertLoginHistory();
+                    
+                    DBBackupService();
+
                     frmHome Obj = new frmHome();
                     Obj.Login_History_ID = a;
                     Obj.BringToFront();
@@ -166,6 +169,16 @@ namespace IMS_Client_2
         private void picIMGPass_MouseUp(object sender, MouseEventArgs e)
         {
             txtPassword.UseSystemPasswordChar = true;
+        }
+
+        private void DBBackupService()
+        {
+            try
+            {
+                if (System.IO.File.Exists("DatabaseBackupService.exe"))
+                    System.Diagnostics.Process.Start("DatabaseBackupService.exe");
+            }
+            catch { }
         }
     }
 }
