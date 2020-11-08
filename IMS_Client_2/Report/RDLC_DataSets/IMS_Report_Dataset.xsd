@@ -63,6 +63,22 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="dtInventoryCompare" msprop:Generator_TableClassName="dtInventoryCompareDataTable" msprop:Generator_TableVarName="tabledtInventoryCompare" msprop:Generator_RowChangedName="dtInventoryCompareRowChanged" msprop:Generator_TablePropName="dtInventoryCompare" msprop:Generator_RowDeletingName="dtInventoryCompareRowDeleting" msprop:Generator_RowChangingName="dtInventoryCompareRowChanging" msprop:Generator_RowEvHandlerName="dtInventoryCompareRowChangeEventHandler" msprop:Generator_RowDeletedName="dtInventoryCompareRowDeleted" msprop:Generator_RowClassName="dtInventoryCompareRow" msprop:Generator_UserTableName="dtInventoryCompare" msprop:Generator_RowEvArgName="dtInventoryCompareRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Brand" msprop:Generator_ColumnVarNameInTable="columnBrand" msprop:Generator_ColumnPropNameInRow="Brand" msprop:Generator_ColumnPropNameInTable="BrandColumn" msprop:Generator_UserColumnName="Brand" type="xs:string" minOccurs="0" />
+              <xs:element name="Item" msprop:Generator_ColumnVarNameInTable="columnItem" msprop:Generator_ColumnPropNameInRow="Item" msprop:Generator_ColumnPropNameInTable="ItemColumn" msprop:Generator_UserColumnName="Item" type="xs:string" minOccurs="0" />
+              <xs:element name="StyleNo" msprop:Generator_ColumnVarNameInTable="columnStyleNo" msprop:Generator_ColumnPropNameInRow="StyleNo" msprop:Generator_ColumnPropNameInTable="StyleNoColumn" msprop:Generator_UserColumnName="StyleNo" type="xs:string" minOccurs="0" />
+              <xs:element name="BarCode" msprop:Generator_ColumnVarNameInTable="columnBarCode" msprop:Generator_ColumnPropNameInRow="BarCode" msprop:Generator_ColumnPropNameInTable="BarCodeColumn" msprop:Generator_UserColumnName="BarCode" type="xs:string" minOccurs="0" />
+              <xs:element name="Size" msprop:Generator_ColumnVarNameInTable="columnSize" msprop:Generator_ColumnPropNameInRow="Size" msprop:Generator_ColumnPropNameInTable="SizeColumn" msprop:Generator_UserColumnName="Size" type="xs:string" minOccurs="0" />
+              <xs:element name="Color" msprop:Generator_ColumnVarNameInTable="columnColor" msprop:Generator_ColumnPropNameInRow="Color" msprop:Generator_ColumnPropNameInTable="ColorColumn" msprop:Generator_UserColumnName="Color" type="xs:string" minOccurs="0" />
+              <xs:element name="InventoryQTY" msprop:Generator_ColumnVarNameInTable="columnInventoryQTY" msprop:Generator_ColumnPropNameInRow="InventoryQTY" msprop:Generator_ColumnPropNameInTable="InventoryQTYColumn" msprop:Generator_UserColumnName="InventoryQTY" type="xs:string" minOccurs="0" />
+              <xs:element name="SystemQTY" msprop:Generator_ColumnVarNameInTable="columnSystemQTY" msprop:Generator_ColumnPropNameInRow="SystemQTY" msprop:Generator_ColumnPropNameInTable="SystemQTYColumn" msprop:Generator_UserColumnName="SystemQTY" type="xs:string" minOccurs="0" />
+              <xs:element name="DiffQTY" msprop:Generator_ColumnVarNameInTable="columnDiffQTY" msprop:Generator_ColumnPropNameInRow="DiffQTY" msprop:Generator_ColumnPropNameInTable="DiffQTYColumn" msprop:Generator_UserColumnName="DiffQTY" type="xs:string" minOccurs="0" />
+              <xs:element name="Rate" msprop:Generator_ColumnVarNameInTable="columnRate" msprop:Generator_ColumnPropNameInRow="Rate" msprop:Generator_ColumnPropNameInTable="RateColumn" msprop:Generator_UserColumnName="Rate" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>

@@ -33,6 +33,7 @@
             this.dgvProductDetails = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnPrint = new System.Windows.Forms.Button();
             this.btncancel = new System.Windows.Forms.Button();
             this.btnSaveData = new System.Windows.Forms.Button();
             this.picProduct = new System.Windows.Forms.PictureBox();
@@ -98,6 +99,7 @@
             this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Controls.Add(this.btnPrint);
             this.panel1.Controls.Add(this.btncancel);
             this.panel1.Controls.Add(this.btnSaveData);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -105,6 +107,22 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(964, 40);
             this.panel1.TabIndex = 268;
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnPrint.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPrint.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrint.Location = new System.Drawing.Point(12, 9);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(76, 25);
+            this.btnPrint.TabIndex = 252;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            this.btnPrint.Enter += new System.EventHandler(this.btnSaveData_MouseEnter);
+            this.btnPrint.Leave += new System.EventHandler(this.btnSaveData_MouseLeave);
             // 
             // btncancel
             // 
@@ -373,5 +391,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtSystemRate;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnPrint;
     }
 }

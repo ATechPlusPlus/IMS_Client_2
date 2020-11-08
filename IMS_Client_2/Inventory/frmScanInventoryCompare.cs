@@ -26,6 +26,8 @@ namespace IMS_Client_2.Inventory
             InitializeComponent();
         }
 
+        public DateTime ComparedDate { get; set; }
+        public string ScanBy { get; set; }
         private void LoadData()
         {
             ObjDAL.SetStoreProcedureData("MasterScanID", SqlDbType.Int, pMasterScanID, clsConnection_DAL.ParamType.Input);
@@ -61,6 +63,8 @@ namespace IMS_Client_2.Inventory
 
             btnSaveData.BackgroundImage = B_Leave;
             btncancel.BackgroundImage = B_Leave;
+            btnPrint.BackgroundImage = B_Leave;
+
 
             dgvProductDetails.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
             //Most time consumption enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
@@ -256,6 +260,18 @@ namespace IMS_Client_2.Inventory
         private void dgvProductDetails_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
             dgvProductDetails.Columns[e.Column.Index].SortMode = DataGridViewColumnSortMode.NotSortable;
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            frmInventoryReport frmInventoryReport = new frmInventoryReport();
+            frmInventoryReport.pMasterScanID = pMasterScanID;
+            frmInventoryReport.ScanBy = ScanBy;
+            frmInventoryReport.CompareDDate = ComparedDate;
+            frmInventoryReport.StoreName = txtStoreName.Text;
+          
+          
+            frmInventoryReport.ShowDialog();
         }
     }
 }

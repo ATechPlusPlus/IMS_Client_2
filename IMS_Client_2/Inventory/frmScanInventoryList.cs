@@ -122,6 +122,9 @@ namespace IMS_Client_2.Inventory
                     Inventory.frmScanInventoryCompare Obj = new frmScanInventoryCompare();
                     Obj.pMasterScanID = Convert.ToInt32(dgvProductDetails.SelectedRows[0].Cells["MasterScanID"].Value);
                     Obj.comparestatus= Convert.ToInt32(dgvProductDetails.SelectedRows[0].Cells["CompareStatus"].Value);
+
+                    Obj.ScanBy = dgvProductDetails.SelectedRows[0].Cells["Scanned By"].Value.ToString();
+                    Obj.ComparedDate = Convert.ToDateTime(dgvProductDetails.SelectedRows[0].Cells["Compared Date"].Value);
                     Obj.ShowDialog();
 
                     rdSearchByAll.Checked = true;

@@ -32,6 +32,8 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
         
         private dtBranchShortingDataTable tabledtBranchShorting;
         
+        private dtInventoryCompareDataTable tabledtInventoryCompare;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -71,6 +73,9 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
                 }
                 if ((ds.Tables["dtBranchShorting"] != null)) {
                     base.Tables.Add(new dtBranchShortingDataTable(ds.Tables["dtBranchShorting"]));
+                }
+                if ((ds.Tables["dtInventoryCompare"] != null)) {
+                    base.Tables.Add(new dtInventoryCompareDataTable(ds.Tables["dtInventoryCompare"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -127,6 +132,16 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
         public dtBranchShortingDataTable dtBranchShorting {
             get {
                 return this.tabledtBranchShorting;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public dtInventoryCompareDataTable dtInventoryCompare {
+            get {
+                return this.tabledtInventoryCompare;
             }
         }
         
@@ -209,6 +224,9 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
                 if ((ds.Tables["dtBranchShorting"] != null)) {
                     base.Tables.Add(new dtBranchShortingDataTable(ds.Tables["dtBranchShorting"]));
                 }
+                if ((ds.Tables["dtInventoryCompare"] != null)) {
+                    base.Tables.Add(new dtInventoryCompareDataTable(ds.Tables["dtInventoryCompare"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -266,6 +284,12 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
                     this.tabledtBranchShorting.InitVars();
                 }
             }
+            this.tabledtInventoryCompare = ((dtInventoryCompareDataTable)(base.Tables["dtInventoryCompare"]));
+            if ((initTable == true)) {
+                if ((this.tabledtInventoryCompare != null)) {
+                    this.tabledtInventoryCompare.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -284,6 +308,8 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             base.Tables.Add(this.tabledtPettyCashExpenses);
             this.tabledtBranchShorting = new dtBranchShortingDataTable();
             base.Tables.Add(this.tabledtBranchShorting);
+            this.tabledtInventoryCompare = new dtInventoryCompareDataTable();
+            base.Tables.Add(this.tabledtInventoryCompare);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -307,6 +333,12 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private bool ShouldSerializedtBranchShorting() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private bool ShouldSerializedtInventoryCompare() {
             return false;
         }
         
@@ -376,6 +408,9 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void dtBranchShortingRowChangeEventHandler(object sender, dtBranchShortingRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public delegate void dtInventoryCompareRowChangeEventHandler(object sender, dtInventoryCompareRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1688,6 +1723,383 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class dtInventoryCompareDataTable : global::System.Data.TypedTableBase<dtInventoryCompareRow> {
+            
+            private global::System.Data.DataColumn columnBrand;
+            
+            private global::System.Data.DataColumn columnItem;
+            
+            private global::System.Data.DataColumn columnStyleNo;
+            
+            private global::System.Data.DataColumn columnBarCode;
+            
+            private global::System.Data.DataColumn columnSize;
+            
+            private global::System.Data.DataColumn columnColor;
+            
+            private global::System.Data.DataColumn columnInventoryQTY;
+            
+            private global::System.Data.DataColumn columnSystemQTY;
+            
+            private global::System.Data.DataColumn columnDiffQTY;
+            
+            private global::System.Data.DataColumn columnRate;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtInventoryCompareDataTable() {
+                this.TableName = "dtInventoryCompare";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal dtInventoryCompareDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected dtInventoryCompareDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn BrandColumn {
+                get {
+                    return this.columnBrand;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ItemColumn {
+                get {
+                    return this.columnItem;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn StyleNoColumn {
+                get {
+                    return this.columnStyleNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn BarCodeColumn {
+                get {
+                    return this.columnBarCode;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn SizeColumn {
+                get {
+                    return this.columnSize;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ColorColumn {
+                get {
+                    return this.columnColor;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn InventoryQTYColumn {
+                get {
+                    return this.columnInventoryQTY;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn SystemQTYColumn {
+                get {
+                    return this.columnSystemQTY;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn DiffQTYColumn {
+                get {
+                    return this.columnDiffQTY;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn RateColumn {
+                get {
+                    return this.columnRate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtInventoryCompareRow this[int index] {
+                get {
+                    return ((dtInventoryCompareRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event dtInventoryCompareRowChangeEventHandler dtInventoryCompareRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event dtInventoryCompareRowChangeEventHandler dtInventoryCompareRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event dtInventoryCompareRowChangeEventHandler dtInventoryCompareRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event dtInventoryCompareRowChangeEventHandler dtInventoryCompareRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void AdddtInventoryCompareRow(dtInventoryCompareRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtInventoryCompareRow AdddtInventoryCompareRow(string Brand, string Item, string StyleNo, string BarCode, string Size, string Color, string InventoryQTY, string SystemQTY, string DiffQTY, string Rate) {
+                dtInventoryCompareRow rowdtInventoryCompareRow = ((dtInventoryCompareRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        Brand,
+                        Item,
+                        StyleNo,
+                        BarCode,
+                        Size,
+                        Color,
+                        InventoryQTY,
+                        SystemQTY,
+                        DiffQTY,
+                        Rate};
+                rowdtInventoryCompareRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowdtInventoryCompareRow);
+                return rowdtInventoryCompareRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                dtInventoryCompareDataTable cln = ((dtInventoryCompareDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new dtInventoryCompareDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal void InitVars() {
+                this.columnBrand = base.Columns["Brand"];
+                this.columnItem = base.Columns["Item"];
+                this.columnStyleNo = base.Columns["StyleNo"];
+                this.columnBarCode = base.Columns["BarCode"];
+                this.columnSize = base.Columns["Size"];
+                this.columnColor = base.Columns["Color"];
+                this.columnInventoryQTY = base.Columns["InventoryQTY"];
+                this.columnSystemQTY = base.Columns["SystemQTY"];
+                this.columnDiffQTY = base.Columns["DiffQTY"];
+                this.columnRate = base.Columns["Rate"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            private void InitClass() {
+                this.columnBrand = new global::System.Data.DataColumn("Brand", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBrand);
+                this.columnItem = new global::System.Data.DataColumn("Item", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnItem.ExtendedProperties.Add("Generator_ColumnPropNameInRow", "Item");
+                this.columnItem.ExtendedProperties.Add("Generator_ColumnPropNameInTable", "ItemColumn");
+                this.columnItem.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "columnItem");
+                this.columnItem.ExtendedProperties.Add("Generator_UserColumnName", "Item");
+                base.Columns.Add(this.columnItem);
+                this.columnStyleNo = new global::System.Data.DataColumn("StyleNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnStyleNo);
+                this.columnBarCode = new global::System.Data.DataColumn("BarCode", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBarCode);
+                this.columnSize = new global::System.Data.DataColumn("Size", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSize);
+                this.columnColor = new global::System.Data.DataColumn("Color", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnColor);
+                this.columnInventoryQTY = new global::System.Data.DataColumn("InventoryQTY", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInventoryQTY);
+                this.columnSystemQTY = new global::System.Data.DataColumn("SystemQTY", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSystemQTY);
+                this.columnDiffQTY = new global::System.Data.DataColumn("DiffQTY", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDiffQTY);
+                this.columnRate = new global::System.Data.DataColumn("Rate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRate);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtInventoryCompareRow NewdtInventoryCompareRow() {
+                return ((dtInventoryCompareRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new dtInventoryCompareRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(dtInventoryCompareRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.dtInventoryCompareRowChanged != null)) {
+                    this.dtInventoryCompareRowChanged(this, new dtInventoryCompareRowChangeEvent(((dtInventoryCompareRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.dtInventoryCompareRowChanging != null)) {
+                    this.dtInventoryCompareRowChanging(this, new dtInventoryCompareRowChangeEvent(((dtInventoryCompareRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.dtInventoryCompareRowDeleted != null)) {
+                    this.dtInventoryCompareRowDeleted(this, new dtInventoryCompareRowChangeEvent(((dtInventoryCompareRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.dtInventoryCompareRowDeleting != null)) {
+                    this.dtInventoryCompareRowDeleting(this, new dtInventoryCompareRowChangeEvent(((dtInventoryCompareRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void RemovedtInventoryCompareRow(dtInventoryCompareRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                IMS_Report_Dataset ds = new IMS_Report_Dataset();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "dtInventoryCompareDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class dtStoreTransferRow : global::System.Data.DataRow {
@@ -2507,6 +2919,301 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class dtInventoryCompareRow : global::System.Data.DataRow {
+            
+            private dtInventoryCompareDataTable tabledtInventoryCompare;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal dtInventoryCompareRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tabledtInventoryCompare = ((dtInventoryCompareDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Brand {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtInventoryCompare.BrandColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Brand\' in table \'dtInventoryCompare\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtInventoryCompare.BrandColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Item {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtInventoryCompare.ItemColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Item\' in table \'dtInventoryCompare\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtInventoryCompare.ItemColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string StyleNo {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtInventoryCompare.StyleNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'StyleNo\' in table \'dtInventoryCompare\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtInventoryCompare.StyleNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string BarCode {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtInventoryCompare.BarCodeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'BarCode\' in table \'dtInventoryCompare\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtInventoryCompare.BarCodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Size {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtInventoryCompare.SizeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Size\' in table \'dtInventoryCompare\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtInventoryCompare.SizeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Color {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtInventoryCompare.ColorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Color\' in table \'dtInventoryCompare\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtInventoryCompare.ColorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string InventoryQTY {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtInventoryCompare.InventoryQTYColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'InventoryQTY\' in table \'dtInventoryCompare\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtInventoryCompare.InventoryQTYColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string SystemQTY {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtInventoryCompare.SystemQTYColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SystemQTY\' in table \'dtInventoryCompare\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtInventoryCompare.SystemQTYColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string DiffQTY {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtInventoryCompare.DiffQTYColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DiffQTY\' in table \'dtInventoryCompare\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtInventoryCompare.DiffQTYColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Rate {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtInventoryCompare.RateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Rate\' in table \'dtInventoryCompare\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtInventoryCompare.RateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsBrandNull() {
+                return this.IsNull(this.tabledtInventoryCompare.BrandColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetBrandNull() {
+                this[this.tabledtInventoryCompare.BrandColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsItemNull() {
+                return this.IsNull(this.tabledtInventoryCompare.ItemColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetItemNull() {
+                this[this.tabledtInventoryCompare.ItemColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsStyleNoNull() {
+                return this.IsNull(this.tabledtInventoryCompare.StyleNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetStyleNoNull() {
+                this[this.tabledtInventoryCompare.StyleNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsBarCodeNull() {
+                return this.IsNull(this.tabledtInventoryCompare.BarCodeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetBarCodeNull() {
+                this[this.tabledtInventoryCompare.BarCodeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsSizeNull() {
+                return this.IsNull(this.tabledtInventoryCompare.SizeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetSizeNull() {
+                this[this.tabledtInventoryCompare.SizeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsColorNull() {
+                return this.IsNull(this.tabledtInventoryCompare.ColorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetColorNull() {
+                this[this.tabledtInventoryCompare.ColorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsInventoryQTYNull() {
+                return this.IsNull(this.tabledtInventoryCompare.InventoryQTYColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetInventoryQTYNull() {
+                this[this.tabledtInventoryCompare.InventoryQTYColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsSystemQTYNull() {
+                return this.IsNull(this.tabledtInventoryCompare.SystemQTYColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetSystemQTYNull() {
+                this[this.tabledtInventoryCompare.SystemQTYColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsDiffQTYNull() {
+                return this.IsNull(this.tabledtInventoryCompare.DiffQTYColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetDiffQTYNull() {
+                this[this.tabledtInventoryCompare.DiffQTYColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsRateNull() {
+                return this.IsNull(this.tabledtInventoryCompare.RateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetRateNull() {
+                this[this.tabledtInventoryCompare.RateColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -2628,6 +3335,40 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public dtBranchShortingRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public class dtInventoryCompareRowChangeEvent : global::System.EventArgs {
+            
+            private dtInventoryCompareRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtInventoryCompareRowChangeEvent(dtInventoryCompareRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtInventoryCompareRow Row {
                 get {
                     return this.eventRow;
                 }
