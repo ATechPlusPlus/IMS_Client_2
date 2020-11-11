@@ -29,6 +29,7 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("CategoryID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("IsAdmin", SqlDbType.Int, clsUtility.IsAdmin, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_Material_NewDetails");
             if (ds != null && ds.Tables.Count > 0)
             {
@@ -232,6 +233,7 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("CategoryID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("IsAdmin", SqlDbType.Int, clsUtility.IsAdmin, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_Material_NewDetails");
             if (ds != null && ds.Tables.Count > 0)
             {
@@ -262,6 +264,7 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, cmbColor.SelectedValue, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("CategoryID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("IsAdmin", SqlDbType.Int, clsUtility.IsAdmin, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_Material_NewDetails");
             if (ds != null && ds.Tables.Count > 0)
             {
@@ -292,6 +295,7 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("CategoryID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("IsAdmin", SqlDbType.Int, clsUtility.IsAdmin, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_Material_NewDetails");
             if (ds != null && ds.Tables.Count > 0)
             {
@@ -463,6 +467,7 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, txtSearchByStyleNo.Text.Trim(), clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("CategoryID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("IsAdmin", SqlDbType.Int, clsUtility.IsAdmin, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_Material_NewDetails");
             if (ds != null && ds.Tables.Count > 0)
             {
@@ -486,6 +491,7 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("ColorID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("CategoryID", SqlDbType.Int, cmbCategory.SelectedValue, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("IsAdmin", SqlDbType.Int, clsUtility.IsAdmin, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_Material_NewDetails");
             if (ds != null && ds.Tables.Count > 0)
             {
