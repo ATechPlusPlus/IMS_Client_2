@@ -45,7 +45,9 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chkCustomerMobile = new System.Windows.Forms.CheckBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.chkSalesManName = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
             this.txtFileExtension = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -77,8 +79,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.txtExtension = new System.Windows.Forms.Label();
-            this.chkSalesManName = new System.Windows.Forms.CheckBox();
-            this.chkCustomerMobile = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -165,6 +165,7 @@
             this.lblPCName.Size = new System.Drawing.Size(40, 17);
             this.lblPCName.TabIndex = 195;
             this.lblPCName.Text = "None";
+            this.lblPCName.Click += new System.EventHandler(this.lblPCName_Click);
             // 
             // btnStorePopup
             // 
@@ -306,6 +307,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Other Settings";
             // 
+            // chkCustomerMobile
+            // 
+            this.chkCustomerMobile.AutoSize = true;
+            this.chkCustomerMobile.Location = new System.Drawing.Point(14, 260);
+            this.chkCustomerMobile.Name = "chkCustomerMobile";
+            this.chkCustomerMobile.Size = new System.Drawing.Size(229, 21);
+            this.chkCustomerMobile.TabIndex = 4;
+            this.chkCustomerMobile.Text = "Customer Mobile ( Sales Window)";
+            this.chkCustomerMobile.UseVisualStyleBackColor = true;
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -317,6 +328,16 @@
             this.label12.Size = new System.Drawing.Size(15, 17);
             this.label12.TabIndex = 298;
             this.label12.Text = "*";
+            // 
+            // chkSalesManName
+            // 
+            this.chkSalesManName.AutoSize = true;
+            this.chkSalesManName.Location = new System.Drawing.Point(14, 229);
+            this.chkSalesManName.Name = "chkSalesManName";
+            this.chkSalesManName.Size = new System.Drawing.Size(238, 21);
+            this.chkSalesManName.TabIndex = 3;
+            this.chkSalesManName.Text = "Sales Man Name  ( Sales Window )";
+            this.chkSalesManName.UseVisualStyleBackColor = true;
             // 
             // label11
             // 
@@ -711,26 +732,6 @@
             this.txtExtension.Size = new System.Drawing.Size(128, 22);
             this.txtExtension.TabIndex = 82;
             this.txtExtension.Text = "Other Settings";
-            // 
-            // chkSalesManName
-            // 
-            this.chkSalesManName.AutoSize = true;
-            this.chkSalesManName.Location = new System.Drawing.Point(14, 229);
-            this.chkSalesManName.Name = "chkSalesManName";
-            this.chkSalesManName.Size = new System.Drawing.Size(238, 21);
-            this.chkSalesManName.TabIndex = 3;
-            this.chkSalesManName.Text = "Sales Man Name  ( Sales Window )";
-            this.chkSalesManName.UseVisualStyleBackColor = true;
-            // 
-            // chkCustomerMobile
-            // 
-            this.chkCustomerMobile.AutoSize = true;
-            this.chkCustomerMobile.Location = new System.Drawing.Point(14, 260);
-            this.chkCustomerMobile.Name = "chkCustomerMobile";
-            this.chkCustomerMobile.Size = new System.Drawing.Size(229, 21);
-            this.chkCustomerMobile.TabIndex = 4;
-            this.chkCustomerMobile.Text = "Customer Mobile ( Sales Window)";
-            this.chkCustomerMobile.UseVisualStyleBackColor = true;
             // 
             // frmOtherSetting
             // 

@@ -542,5 +542,10 @@ namespace IMS_Client_2.Settings
         {
 
         }
+
+        private void lblPCName_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(lblPCName.Text);
+        }
     }
 }
