@@ -40,19 +40,19 @@ namespace IMS_Client_2.Report
 
             if (!ObjUtil.IsControlTextEmpty(txtInvoiceNumber))
             {
-                strCondition= "InvoiceNumber='" + txtInvoiceNumber.Text + "' AND ";
+                strCondition = "InvoiceNumber='" + txtInvoiceNumber.Text + "' AND ";
             }
 
             if (!ObjUtil.IsControlTextEmpty(txtEmpID))
             {
-                strCondition += "SalesMan=" + txtEmpID.Text+" AND ";
+                strCondition += "SalesMan=" + txtEmpID.Text + " AND ";
             }
 
-            if (cmbShop.SelectedValue!=null)
+            if (cmbShop.SelectedValue != null)
             {
-                strCondition += "ShopeID=" + cmbShop.SelectedValue.ToString()+" AND ";
+                strCondition += "ShopeID=" + cmbShop.SelectedValue.ToString() + " AND ";
             }
-            strCondition += "InvoiceDate between '"+dtpFromDate.Value.ToString("yyyy-MM-dd")+"' AND '"+ dtpToDate.Value.ToString("yyyy-MM-dd") + "'";
+            strCondition += "InvoiceDate between '" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "' AND '" + dtpToDate.Value.ToString("yyyy-MM-dd") + "'";
             return strCondition;
         }
         private void frmSalesReport_Load(object sender, EventArgs e)
@@ -125,9 +125,9 @@ namespace IMS_Client_2.Report
         {
             //string strQuery = "select * from "+ clsUtility.DBName + ".dbo.View_SalesBillDetails";
 
-            string strQuery = "SELECT * FROM "+clsUtility.DBName+".dbo.View_SalesBillDetails v1 JOIN " +
-                       clsUtility.DBName+".dbo.View_SalesDetails v2 ON v1.id = v2.InvoiceID WHERE " + GenerateCondition(); ;
-            
+            string strQuery = "SELECT * FROM " + clsUtility.DBName + ".dbo.View_SalesBillDetails v1 JOIN " +
+                       clsUtility.DBName + ".dbo.View_SalesDetails v2 ON v1.id = v2.InvoiceID WHERE " + GenerateCondition();
+
             DataTable dtSalesDetails = ObjDAL.ExecuteSelectStatement(strQuery);
             if (ObjUtil.ValidateTable(dtSalesDetails))
             {

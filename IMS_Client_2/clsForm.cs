@@ -50,7 +50,7 @@
             frmScanInventory =52,
             frmScanInventoryList=53,
             frmScanInventoryCompare=54,
-
+            frmCompanyMaster=55,
             //frmDatabaseMaintenance = /commented
         }
         public enum Operation

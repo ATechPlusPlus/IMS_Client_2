@@ -222,6 +222,12 @@
     <Compile Include="Inventory\frmScanInventoryList.Designer.cs">
       <DependentUpon>frmScanInventoryList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Masters\frmCompanyMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Masters\frmCompanyMaster.designer.cs">
+      <DependentUpon>frmCompanyMaster.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\RDLC_DataSets\ds_MiniSalesReport.cs">
       <DependentUpon>ds_MiniSalesReport.xsd</DependentUpon>
     </Compile>
@@ -669,6 +675,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\frmCloseCashBandMaster.resx">
       <DependentUpon>frmCloseCashBandMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Masters\frmCompanyMaster.resx">
+      <DependentUpon>frmCompanyMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Masters\Product_Master.resx">
       <DependentUpon>Product_Master.cs</DependentUpon>

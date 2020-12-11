@@ -107,6 +107,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.companyMasterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -177,6 +178,7 @@
             // mobilePartsToolStripMenuItem
             // 
             this.mobilePartsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.companyMasterToolStripMenuItem,
             this.CategoryMaster_ToolStrip,
             this.countryMasterToolStripMenuItem,
             this.StoreDetails_ToolStrip,
@@ -839,6 +841,13 @@
             this.label9.TabIndex = 28;
             this.label9.Text = "Today\'s Cash Box";
             // 
+            // companyMasterToolStripMenuItem
+            // 
+            this.companyMasterToolStripMenuItem.Name = "companyMasterToolStripMenuItem";
+            this.companyMasterToolStripMenuItem.Size = new System.Drawing.Size(227, 24);
+            this.companyMasterToolStripMenuItem.Text = "Company Master";
+            this.companyMasterToolStripMenuItem.Click += new System.EventHandler(this.companyMasterToolStripMenuItem_Click);
+            // 
             // frmHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -959,5 +968,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem scanItemsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem inventoryCheckToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem companyMasterToolStripMenuItem;
     }
 }
