@@ -616,6 +616,7 @@
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(70, 36);
             this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Visible = false;
             // 
             // statusStrip1
             // 

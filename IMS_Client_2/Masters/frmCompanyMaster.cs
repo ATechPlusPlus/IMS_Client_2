@@ -105,8 +105,8 @@ namespace IMS_Client_2.Masters
             }
             else if (chkDefaultCompany.Checked)
             {
-                int a = ObjDAL.ExecuteScalarInt("SELECT COUNT(1) FROM " + clsUtility.DBName + ".dbo.CompanyMaster WITH(NOLOCK)");
-                if (a > 0)
+                int a = ObjDAL.ExecuteScalarInt("SELECT COUNT(1) FROM " + clsUtility.DBName + ".dbo.CompanyMaster WITH(NOLOCK) WHERE ISNULL(IsDefault,0)=1");
+                if (a > 0 && ID == 0)
                 {
                     clsUtility.ShowInfoMessage("Already Default Company is presnet..");
                     return false;
@@ -232,6 +232,7 @@ namespace IMS_Client_2.Masters
                             ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterUpdate);
 
                             clsUtility.ShowInfoMessage("'" + txtCompanyName.Text + "' Company is Updated", clsUtility.strProjectTitle);
+                            ID = 0;
                             LoadData();
                             ClearAll();
                             grpCompany.Enabled = false;
@@ -267,6 +268,7 @@ namespace IMS_Client_2.Masters
                     if (b)
                     {
                         clsUtility.ShowInfoMessage("'" + txtCompanyName.Text + "' Company is deleted  ", clsUtility.strProjectTitle);
+                        ID = 0;
                         ClearAll();
                         LoadData();
                         grpCompany.Enabled = false;
