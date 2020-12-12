@@ -89,7 +89,7 @@ namespace IMS_Client_2.Report
                 {
                     return;
                 }
-                DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT Empid,Name FROM " + clsUtility.DBName + ".dbo.employeeDetails WITH(NOLOCK) WHERE Name Like '" + txtSalesMan.Text + "%'");
+                DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT Empid,[Name] FROM " + clsUtility.DBName + ".dbo.EmployeeDetails WITH(NOLOCK) WHERE [Name] LIKE '" + txtSalesMan.Text + "%'");
                 if (ObjUtil.ValidateTable(dt))
                 {
                     ObjUtil.SetControlData(txtSalesMan, "Name");

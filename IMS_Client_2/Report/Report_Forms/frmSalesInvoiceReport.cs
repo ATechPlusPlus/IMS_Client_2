@@ -115,7 +115,7 @@ namespace IMS_Client_2.Report
 
             string strcomName = "";
             string strAddress = "";
-            DataTable dtCompinfo = ObjCon.ExecuteSelectStatement("SELECT CompanyName,[Address] FROM " + clsUtility.DBName + ".dbo.CompanyMaster WITH(NOLOCK)");
+            DataTable dtCompinfo = ObjCon.ExecuteSelectStatement("SELECT CompanyName,[Address] FROM " + clsUtility.DBName + ".dbo.CompanyMaster WITH(NOLOCK) WHERE ISNULL(IsDefault,0)=1");
 
             if (dtCompinfo != null && dtCompinfo.Rows.Count > 0)
             {

@@ -114,7 +114,7 @@ namespace IMS_Client_2.Barcode
         }
         private string GetCompanyName()
         {
-            return Convert.ToString(ObjDAL.ExecuteScalar("SELECT CompanyName FROM " + clsUtility.DBName + ".dbo.CompanyMaster WITH(NOLOCK)"));
+            return Convert.ToString(ObjDAL.ExecuteScalar("SELECT CompanyName FROM " + clsUtility.DBName + ".dbo.CompanyMaster WITH(NOLOCK) WHERE ISNULL(IsDefault,0)=1"));
         }
         private void SetBarCodeValues(Control objLable, DataGridViewRow selectedRow)
         {
