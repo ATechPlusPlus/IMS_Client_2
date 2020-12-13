@@ -256,9 +256,11 @@
             // 
             // cmbDepartment
             // 
+            this.cmbDepartment.DropDownHeight = 406;
             this.cmbDepartment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDepartment.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbDepartment.FormattingEnabled = true;
+            this.cmbDepartment.IntegralHeight = false;
             this.cmbDepartment.Location = new System.Drawing.Point(162, 66);
             this.cmbDepartment.Name = "cmbDepartment";
             this.cmbDepartment.Size = new System.Drawing.Size(206, 27);

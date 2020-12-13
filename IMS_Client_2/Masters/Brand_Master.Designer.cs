@@ -237,9 +237,11 @@
             // 
             // cmbSupplier
             // 
+            this.cmbSupplier.DropDownHeight = 406;
             this.cmbSupplier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSupplier.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbSupplier.FormattingEnabled = true;
+            this.cmbSupplier.IntegralHeight = false;
             this.cmbSupplier.Items.AddRange(new object[] {
             "Active",
             "InActive"});
@@ -273,10 +275,12 @@
             // 
             // cmbCountry
             // 
+            this.cmbCountry.DropDownHeight = 306;
             this.cmbCountry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCountry.Enabled = false;
             this.cmbCountry.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCountry.FormattingEnabled = true;
+            this.cmbCountry.IntegralHeight = false;
             this.cmbCountry.Items.AddRange(new object[] {
             "Active",
             "InActive"});

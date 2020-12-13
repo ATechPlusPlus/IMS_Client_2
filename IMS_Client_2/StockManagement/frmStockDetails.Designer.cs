@@ -168,10 +168,12 @@
             // 
             // cmbCategory
             // 
+            this.cmbCategory.DropDownHeight = 206;
             this.cmbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCategory.Enabled = false;
             this.cmbCategory.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCategory.FormattingEnabled = true;
+            this.cmbCategory.IntegralHeight = false;
             this.cmbCategory.Location = new System.Drawing.Point(815, 26);
             this.cmbCategory.Name = "cmbCategory";
             this.cmbCategory.Size = new System.Drawing.Size(181, 27);

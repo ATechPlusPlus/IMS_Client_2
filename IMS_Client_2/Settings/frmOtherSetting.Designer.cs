@@ -137,9 +137,11 @@
             // 
             // cmbSelectPC
             // 
+            this.cmbSelectPC.DropDownHeight = 206;
             this.cmbSelectPC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSelectPC.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbSelectPC.FormattingEnabled = true;
+            this.cmbSelectPC.IntegralHeight = false;
             this.cmbSelectPC.Location = new System.Drawing.Point(135, 72);
             this.cmbSelectPC.Name = "cmbSelectPC";
             this.cmbSelectPC.Size = new System.Drawing.Size(206, 27);
@@ -196,9 +198,11 @@
             // 
             // cmbStoreName
             // 
+            this.cmbStoreName.DropDownHeight = 206;
             this.cmbStoreName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStoreName.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbStoreName.FormattingEnabled = true;
+            this.cmbStoreName.IntegralHeight = false;
             this.cmbStoreName.Location = new System.Drawing.Point(135, 115);
             this.cmbStoreName.Name = "cmbStoreName";
             this.cmbStoreName.Size = new System.Drawing.Size(206, 27);
@@ -218,10 +222,12 @@
             // 
             // cmbStoreCategory
             // 
+            this.cmbStoreCategory.DropDownHeight = 206;
             this.cmbStoreCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStoreCategory.Enabled = false;
             this.cmbStoreCategory.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbStoreCategory.FormattingEnabled = true;
+            this.cmbStoreCategory.IntegralHeight = false;
             this.cmbStoreCategory.Items.AddRange(new object[] {
             "Normal Store",
             "Warehouse"});
@@ -638,9 +644,11 @@
             // 
             // cmbInvoicePrinter
             // 
+            this.cmbInvoicePrinter.DropDownHeight = 206;
             this.cmbInvoicePrinter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbInvoicePrinter.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbInvoicePrinter.FormattingEnabled = true;
+            this.cmbInvoicePrinter.IntegralHeight = false;
             this.cmbInvoicePrinter.Location = new System.Drawing.Point(145, 101);
             this.cmbInvoicePrinter.Name = "cmbInvoicePrinter";
             this.cmbInvoicePrinter.Size = new System.Drawing.Size(240, 27);
@@ -659,9 +667,11 @@
             // 
             // cmbBarcodPrinter
             // 
+            this.cmbBarcodPrinter.DropDownHeight = 206;
             this.cmbBarcodPrinter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBarcodPrinter.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbBarcodPrinter.FormattingEnabled = true;
+            this.cmbBarcodPrinter.IntegralHeight = false;
             this.cmbBarcodPrinter.Location = new System.Drawing.Point(145, 64);
             this.cmbBarcodPrinter.Name = "cmbBarcodPrinter";
             this.cmbBarcodPrinter.Size = new System.Drawing.Size(240, 27);

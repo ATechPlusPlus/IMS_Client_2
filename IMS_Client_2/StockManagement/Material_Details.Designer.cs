@@ -152,10 +152,12 @@
             // 
             // cmbColor
             // 
+            this.cmbColor.DropDownHeight = 506;
             this.cmbColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbColor.Enabled = false;
             this.cmbColor.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbColor.FormattingEnabled = true;
+            this.cmbColor.IntegralHeight = false;
             this.cmbColor.Location = new System.Drawing.Point(452, 69);
             this.cmbColor.Name = "cmbColor";
             this.cmbColor.Size = new System.Drawing.Size(181, 27);
@@ -213,10 +215,12 @@
             // 
             // cmbShop
             // 
+            this.cmbShop.DropDownHeight = 206;
             this.cmbShop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbShop.Enabled = false;
             this.cmbShop.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbShop.FormattingEnabled = true;
+            this.cmbShop.IntegralHeight = false;
             this.cmbShop.Location = new System.Drawing.Point(159, 24);
             this.cmbShop.Name = "cmbShop";
             this.cmbShop.Size = new System.Drawing.Size(181, 27);
@@ -270,13 +274,13 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.printBarcodeToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(146, 26);
             // 
             // printBarcodeToolStripMenuItem
             // 
             this.printBarcodeToolStripMenuItem.Image = global::IMS_Client_2.Properties.Resources.barCode;
             this.printBarcodeToolStripMenuItem.Name = "printBarcodeToolStripMenuItem";
-            this.printBarcodeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.printBarcodeToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.printBarcodeToolStripMenuItem.Text = "Print Barcode";
             this.printBarcodeToolStripMenuItem.Click += new System.EventHandler(this.printBarcodeToolStripMenuItem_Click);
             // 

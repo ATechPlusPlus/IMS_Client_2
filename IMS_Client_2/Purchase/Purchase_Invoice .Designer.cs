@@ -492,9 +492,11 @@
             // 
             // cmbSupplier
             // 
+            this.cmbSupplier.DropDownHeight = 306;
             this.cmbSupplier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSupplier.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbSupplier.FormattingEnabled = true;
+            this.cmbSupplier.IntegralHeight = false;
             this.cmbSupplier.Location = new System.Drawing.Point(125, 67);
             this.cmbSupplier.Name = "cmbSupplier";
             this.cmbSupplier.Size = new System.Drawing.Size(206, 27);
@@ -624,10 +626,12 @@
             // 
             // cmbCountry
             // 
+            this.cmbCountry.DropDownHeight = 206;
             this.cmbCountry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCountry.Enabled = false;
             this.cmbCountry.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCountry.FormattingEnabled = true;
+            this.cmbCountry.IntegralHeight = false;
             this.cmbCountry.Location = new System.Drawing.Point(125, 15);
             this.cmbCountry.Name = "cmbCountry";
             this.cmbCountry.Size = new System.Drawing.Size(206, 27);

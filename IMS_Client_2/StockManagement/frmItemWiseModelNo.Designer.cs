@@ -34,6 +34,8 @@
             this.label12 = new System.Windows.Forms.Label();
             this.dgvProductDetails = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtSearchByBarcode = new System.Windows.Forms.TextBox();
+            this.rdSearchByBarcodeNo = new System.Windows.Forms.RadioButton();
             this.cmbShop = new System.Windows.Forms.ComboBox();
             this.rdSearchByShop = new System.Windows.Forms.RadioButton();
             this.txtSearchByProductName = new System.Windows.Forms.TextBox();
@@ -43,8 +45,6 @@
             this.rdShowAll = new System.Windows.Forms.RadioButton();
             this.PicItem = new System.Windows.Forms.PictureBox();
             this.lblTotalRecord = new System.Windows.Forms.Label();
-            this.txtSearchByBarcode = new System.Windows.Forms.TextBox();
-            this.rdSearchByBarcodeNo = new System.Windows.Forms.RadioButton();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -124,12 +124,39 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
             // 
+            // txtSearchByBarcode
+            // 
+            this.txtSearchByBarcode.BackColor = System.Drawing.Color.White;
+            this.txtSearchByBarcode.Enabled = false;
+            this.txtSearchByBarcode.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearchByBarcode.Location = new System.Drawing.Point(456, 73);
+            this.txtSearchByBarcode.Name = "txtSearchByBarcode";
+            this.txtSearchByBarcode.Size = new System.Drawing.Size(134, 25);
+            this.txtSearchByBarcode.TabIndex = 239;
+            this.txtSearchByBarcode.Enter += new System.EventHandler(this.txtSearchByProductName_Enter);
+            this.txtSearchByBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearchByBarcode_KeyDown);
+            this.txtSearchByBarcode.Leave += new System.EventHandler(this.txtSearchByProductName_Leave);
+            // 
+            // rdSearchByBarcodeNo
+            // 
+            this.rdSearchByBarcodeNo.AutoSize = true;
+            this.rdSearchByBarcodeNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdSearchByBarcodeNo.Location = new System.Drawing.Point(343, 74);
+            this.rdSearchByBarcodeNo.Name = "rdSearchByBarcodeNo";
+            this.rdSearchByBarcodeNo.Size = new System.Drawing.Size(104, 21);
+            this.rdSearchByBarcodeNo.TabIndex = 238;
+            this.rdSearchByBarcodeNo.Text = "By Barcode :";
+            this.rdSearchByBarcodeNo.UseVisualStyleBackColor = true;
+            this.rdSearchByBarcodeNo.CheckedChanged += new System.EventHandler(this.rdSearchByBarcodeNo_CheckedChanged);
+            // 
             // cmbShop
             // 
+            this.cmbShop.DropDownHeight = 206;
             this.cmbShop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbShop.Enabled = false;
             this.cmbShop.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbShop.FormattingEnabled = true;
+            this.cmbShop.IntegralHeight = false;
             this.cmbShop.Location = new System.Drawing.Point(108, 75);
             this.cmbShop.Name = "cmbShop";
             this.cmbShop.Size = new System.Drawing.Size(196, 27);
@@ -234,31 +261,6 @@
             this.lblTotalRecord.Size = new System.Drawing.Size(91, 17);
             this.lblTotalRecord.TabIndex = 257;
             this.lblTotalRecord.Text = "Total Record :";
-            // 
-            // txtSearchByBarcode
-            // 
-            this.txtSearchByBarcode.BackColor = System.Drawing.Color.White;
-            this.txtSearchByBarcode.Enabled = false;
-            this.txtSearchByBarcode.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearchByBarcode.Location = new System.Drawing.Point(456, 73);
-            this.txtSearchByBarcode.Name = "txtSearchByBarcode";
-            this.txtSearchByBarcode.Size = new System.Drawing.Size(134, 25);
-            this.txtSearchByBarcode.TabIndex = 239;
-            this.txtSearchByBarcode.Enter += new System.EventHandler(this.txtSearchByProductName_Enter);
-            this.txtSearchByBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearchByBarcode_KeyDown);
-            this.txtSearchByBarcode.Leave += new System.EventHandler(this.txtSearchByProductName_Leave);
-            // 
-            // rdSearchByBarcodeNo
-            // 
-            this.rdSearchByBarcodeNo.AutoSize = true;
-            this.rdSearchByBarcodeNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdSearchByBarcodeNo.Location = new System.Drawing.Point(343, 74);
-            this.rdSearchByBarcodeNo.Name = "rdSearchByBarcodeNo";
-            this.rdSearchByBarcodeNo.Size = new System.Drawing.Size(104, 21);
-            this.rdSearchByBarcodeNo.TabIndex = 238;
-            this.rdSearchByBarcodeNo.Text = "By Barcode :";
-            this.rdSearchByBarcodeNo.UseVisualStyleBackColor = true;
-            this.rdSearchByBarcodeNo.CheckedChanged += new System.EventHandler(this.rdSearchByBarcodeNo_CheckedChanged);
             // 
             // frmItemWiseModelNo
             // 

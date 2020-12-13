@@ -132,10 +132,12 @@
             // 
             // cmbSearchBySizeType
             // 
+            this.cmbSearchBySizeType.DropDownHeight = 406;
             this.cmbSearchBySizeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSearchBySizeType.Enabled = false;
             this.cmbSearchBySizeType.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbSearchBySizeType.FormattingEnabled = true;
+            this.cmbSearchBySizeType.IntegralHeight = false;
             this.cmbSearchBySizeType.Location = new System.Drawing.Point(157, 18);
             this.cmbSearchBySizeType.Name = "cmbSearchBySizeType";
             this.cmbSearchBySizeType.Size = new System.Drawing.Size(206, 27);
@@ -156,9 +158,11 @@
             // 
             // cmbSizeType
             // 
+            this.cmbSizeType.DropDownHeight = 406;
             this.cmbSizeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSizeType.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbSizeType.FormattingEnabled = true;
+            this.cmbSizeType.IntegralHeight = false;
             this.cmbSizeType.Location = new System.Drawing.Point(144, 26);
             this.cmbSizeType.Name = "cmbSizeType";
             this.cmbSizeType.Size = new System.Drawing.Size(206, 27);
