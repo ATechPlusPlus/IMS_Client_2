@@ -213,9 +213,9 @@
             </Paragraphs>
             <rd:DefaultName>CompanyAddress</rd:DefaultName>
             <Top>0.59944in</Top>
-            <Left>0.02597in</Left>
+            <Left>0.1493in</Left>
             <Height>0.35243in</Height>
-            <Width>2.10605in</Width>
+            <Width>1.98272in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -259,9 +259,9 @@
             </Paragraphs>
             <rd:DefaultName>StoreName</rd:DefaultName>
             <Top>0.34944in</Top>
-            <Left>0.01097in</Left>
+            <Left>0.06223in</Left>
             <Height>0.25in</Height>
-            <Width>2.12105in</Width>
+            <Width>2.06979in</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -681,16 +681,16 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.61202in</Width>
+                  <Width>0.59218in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.06676in</Width>
+                  <Width>1.04692in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.42624in</Width>
+                  <Width>0.4064in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.7465in</Width>
+                  <Width>0.72666in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -1014,9 +1014,9 @@
             </TablixRowHierarchy>
             <DataSetName>ds_SalesDetails</DataSetName>
             <Top>2.45887in</Top>
-            <Left>0.05659in</Left>
+            <Left>0.13597in</Left>
             <Height>0.5in</Height>
-            <Width>2.85152in</Width>
+            <Width>2.77216in</Width>
             <ZIndex>17</ZIndex>
             <Style>
               <Border>
@@ -1566,9 +1566,9 @@
             </Paragraphs>
             <rd:DefaultName>NetAmount</rd:DefaultName>
             <Top>4.50314in</Top>
-            <Left>0.1493in</Left>
+            <Left>0.25694in</Left>
             <Height>0.32292in</Height>
-            <Width>2.71584in</Width>
+            <Width>2.62209in</Width>
             <ZIndex>20</ZIndex>
             <Style>
               <Border>
@@ -1610,7 +1610,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox51</rd:DefaultName>
             <Top>5.98002in</Top>
-            <Left>0.06223in</Left>
+            <Left>0.13597in</Left>
             <Height>0.25in</Height>
             <Width>0.42708in</Width>
             <ZIndex>22</ZIndex>
@@ -1660,10 +1660,10 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.65166in</Width>
+                  <Width>0.64632in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.49176in</Width>
+                  <Width>0.48642in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -1835,9 +1835,9 @@
             </TablixRowHierarchy>
             <DataSetName>ds_Payment</DataSetName>
             <Top>2.98664in</Top>
-            <Left>0.13862in</Left>
+            <Left>0.1493in</Left>
             <Height>0.5in</Height>
-            <Width>1.14342in</Width>
+            <Width>1.13274in</Width>
             <ZIndex>24</ZIndex>
             <Style>
               <Border>
@@ -1903,9 +1903,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox51</rd:DefaultName>
             <Top>5.52924in</Top>
-            <Left>0.02597in</Left>
+            <Left>0.13597in</Left>
             <Height>0.25in</Height>
-            <Width>1.25607in</Width>
+            <Width>1.22246in</Width>
             <ZIndex>28</ZIndex>
             <Style>
               <Border>
@@ -1934,10 +1934,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>ParmVoucherNumber</rd:DefaultName>
-            <Top>5.54313in</Top>
-            <Left>1.14228in</Left>
+            <Top>5.52925in</Top>
+            <Left>1.42787in</Left>
             <Height>0.25in</Height>
-            <Width>1.69689in</Width>
+            <Width>1.26981in</Width>
             <ZIndex>29</ZIndex>
             <Style>
               <Border>
@@ -2006,7 +2006,7 @@
           </Border>
         </Style>
       </Body>
-      <Width>2.90811in</Width>
+      <Width>2.90813in</Width>
       <Page>
         <PageWidth>3.14in</PageWidth>
         <InteractiveHeight>11in</InteractiveHeight>
