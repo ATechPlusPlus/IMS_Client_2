@@ -180,9 +180,11 @@
             // 
             // cmbStoreCat
             // 
+            this.cmbStoreCat.DropDownHeight = 206;
             this.cmbStoreCat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStoreCat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbStoreCat.FormattingEnabled = true;
+            this.cmbStoreCat.IntegralHeight = false;
             this.cmbStoreCat.Items.AddRange(new object[] {
             "Normal Store",
             "Warehouse"});

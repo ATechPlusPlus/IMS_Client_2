@@ -198,9 +198,11 @@
             // 
             // cmbToStore
             // 
+            this.cmbToStore.DropDownHeight = 206;
             this.cmbToStore.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbToStore.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbToStore.FormattingEnabled = true;
+            this.cmbToStore.IntegralHeight = false;
             this.cmbToStore.Location = new System.Drawing.Point(115, 59);
             this.cmbToStore.Name = "cmbToStore";
             this.cmbToStore.Size = new System.Drawing.Size(208, 27);
@@ -209,10 +211,12 @@
             // 
             // cmbBranch
             // 
+            this.cmbBranch.DropDownHeight = 206;
             this.cmbBranch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBranch.Enabled = false;
             this.cmbBranch.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbBranch.FormattingEnabled = true;
+            this.cmbBranch.IntegralHeight = false;
             this.cmbBranch.Location = new System.Drawing.Point(115, 26);
             this.cmbBranch.Name = "cmbBranch";
             this.cmbBranch.Size = new System.Drawing.Size(208, 27);

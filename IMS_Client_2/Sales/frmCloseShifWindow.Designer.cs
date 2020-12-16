@@ -291,10 +291,12 @@
             // 
             // cmbShop
             // 
+            this.cmbShop.DropDownHeight = 206;
             this.cmbShop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbShop.Enabled = false;
             this.cmbShop.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbShop.FormattingEnabled = true;
+            this.cmbShop.IntegralHeight = false;
             this.cmbShop.Location = new System.Drawing.Point(15, 75);
             this.cmbShop.Margin = new System.Windows.Forms.Padding(2);
             this.cmbShop.Name = "cmbShop";

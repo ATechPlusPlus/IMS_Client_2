@@ -269,9 +269,11 @@
             // 
             // cmbCategory
             // 
+            this.cmbCategory.DropDownHeight = 406;
             this.cmbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCategory.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCategory.FormattingEnabled = true;
+            this.cmbCategory.IntegralHeight = false;
             this.cmbCategory.Location = new System.Drawing.Point(111, 73);
             this.cmbCategory.Name = "cmbCategory";
             this.cmbCategory.Size = new System.Drawing.Size(206, 27);
@@ -367,10 +369,12 @@
             // 
             // cmbSearchByCategory
             // 
+            this.cmbSearchByCategory.DropDownHeight = 406;
             this.cmbSearchByCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSearchByCategory.Enabled = false;
             this.cmbSearchByCategory.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbSearchByCategory.FormattingEnabled = true;
+            this.cmbSearchByCategory.IntegralHeight = false;
             this.cmbSearchByCategory.Location = new System.Drawing.Point(476, 20);
             this.cmbSearchByCategory.Name = "cmbSearchByCategory";
             this.cmbSearchByCategory.Size = new System.Drawing.Size(206, 27);

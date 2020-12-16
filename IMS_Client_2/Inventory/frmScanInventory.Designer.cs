@@ -115,10 +115,12 @@
             // 
             // cmdFrom
             // 
+            this.cmdFrom.DropDownHeight = 206;
             this.cmdFrom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmdFrom.Enabled = false;
             this.cmdFrom.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdFrom.FormattingEnabled = true;
+            this.cmdFrom.IntegralHeight = false;
             this.cmdFrom.Items.AddRange(new object[] {
             "Active",
             "InActive"});

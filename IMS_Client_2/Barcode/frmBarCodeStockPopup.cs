@@ -39,7 +39,7 @@ namespace IMS_Client_2.Barcode
         }
         private string GetStoreName()
         {
-            return Convert.ToString(ObjCon.ExecuteScalar("SELECT CompanyName FROM " + clsUtility.DBName + ".dbo.CompanyMaster WITH(NOLOCK)"));
+            return Convert.ToString(ObjCon.ExecuteScalar("SELECT CompanyName FROM " + clsUtility.DBName + ".dbo.CompanyMaster WITH(NOLOCK) WHERE ISNULL(IsDefault,0)=1"));
         }
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {

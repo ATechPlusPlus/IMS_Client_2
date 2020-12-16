@@ -312,9 +312,11 @@
             // 
             // cmbCountry
             // 
+            this.cmbCountry.DropDownHeight = 306;
             this.cmbCountry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCountry.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCountry.FormattingEnabled = true;
+            this.cmbCountry.IntegralHeight = false;
             this.cmbCountry.Items.AddRange(new object[] {
             "Active",
             "InActive"});

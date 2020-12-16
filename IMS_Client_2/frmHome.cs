@@ -96,7 +96,7 @@ namespace IMS_Client_2
                 lblRegistrationDate.Text = "NA";
             }
 
-            object company = ObjDAL.ExecuteScalar("SELECT CompanyName FROM " + clsUtility.DBName + ".[dbo].[CompanyMaster] WITH(NOLOCK)");
+            object company = ObjDAL.ExecuteScalar("SELECT CompanyName FROM " + clsUtility.DBName + ".[dbo].[CompanyMaster] WITH(NOLOCK) WHERE ISNULL(IsDefault,0)=1");
             if (company != null)
             {
                 lblLicensedTo.Text = company.ToString();

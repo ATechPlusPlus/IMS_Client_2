@@ -114,10 +114,12 @@
             // 
             // cmdFrom
             // 
+            this.cmdFrom.DropDownHeight = 206;
             this.cmdFrom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmdFrom.Enabled = false;
             this.cmdFrom.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdFrom.FormattingEnabled = true;
+            this.cmdFrom.IntegralHeight = false;
             this.cmdFrom.Location = new System.Drawing.Point(99, 46);
             this.cmdFrom.Name = "cmdFrom";
             this.cmdFrom.Size = new System.Drawing.Size(198, 27);
@@ -126,9 +128,11 @@
             // 
             // cmdTo
             // 
+            this.cmdTo.DropDownHeight = 206;
             this.cmdTo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmdTo.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdTo.FormattingEnabled = true;
+            this.cmdTo.IntegralHeight = false;
             this.cmdTo.Location = new System.Drawing.Point(99, 79);
             this.cmdTo.Name = "cmdTo";
             this.cmdTo.Size = new System.Drawing.Size(198, 27);
