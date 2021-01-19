@@ -153,10 +153,10 @@
             this.linkForgotPassword.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkForgotPassword.Location = new System.Drawing.Point(151, 398);
             this.linkForgotPassword.Name = "linkForgotPassword";
-            this.linkForgotPassword.Size = new System.Drawing.Size(114, 19);
+            this.linkForgotPassword.Size = new System.Drawing.Size(121, 19);
             this.linkForgotPassword.TabIndex = 3;
             this.linkForgotPassword.TabStop = true;
-            this.linkForgotPassword.Text = "Forgot Password";
+            this.linkForgotPassword.Text = "Forgot Password?";
             this.linkForgotPassword.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkForgotPassword_LinkClicked);
             // 
             // picIMGPass

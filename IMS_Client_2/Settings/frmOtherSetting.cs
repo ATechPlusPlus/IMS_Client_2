@@ -282,7 +282,7 @@ namespace IMS_Client_2.Settings
                     ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                     ObjDAL.UpdateColumnData("SalesManIDMandatory ", SqlDbType.Bit, chkSalesManName.Checked);
                     ObjDAL.UpdateColumnData("CustMobileMandatory ", SqlDbType.Bit, chkCustomerMobile.Checked);
-                    ObjDAL.UpdateColumnData("Commision ", SqlDbType.Decimal, txtCommision.Text);
+                    ObjDAL.UpdateColumnData("Commision ", SqlDbType.Decimal, txtCommision.TextLength > 0 ? txtCommision.Text : "0");
                     ObjDAL.UpdateData(clsUtility.DBName + ".dbo.DefaultStoreSetting", "1=1");
 
                     clsUtility.ShowInfoMessage("Settings has been updated.", clsUtility.strProjectTitle);
@@ -296,8 +296,8 @@ namespace IMS_Client_2.Settings
                     ObjDAL.SetColumnData("Extension", SqlDbType.NVarChar, GetExtension());
                     ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
                     ObjDAL.SetColumnData("SalesManIDMandatory ", SqlDbType.Bit, chkSalesManName.Checked);
-                    ObjDAL.SetColumnData("CustMobileMandatory ", SqlDbType.Bit,chkCustomerMobile.Checked);
-                    ObjDAL.SetColumnData("Decimal ", SqlDbType.Decimal, txtCommision.Text);
+                    ObjDAL.SetColumnData("CustMobileMandatory ", SqlDbType.Bit, chkCustomerMobile.Checked);
+                    ObjDAL.SetColumnData("Commision ", SqlDbType.Decimal, txtCommision.TextLength > 0 ? txtCommision.Text : "0");
 
                     int r = ObjDAL.InsertData(clsUtility.DBName + ".[dbo].[DefaultStoreSetting]", false);
                     if (r > 0)
@@ -541,14 +541,29 @@ namespace IMS_Client_2.Settings
             }
         }
 
-        private void SavemendatorySetting(bool SalesMan, bool CustMobile)
+        private void txtFooterNote_Enter(object sender, EventArgs e)
         {
+            ObjUtil.SetTextHighlightColor(sender);
+        }
 
+        private void txtFooterNote_Leave(object sender, EventArgs e)
+        {
+            ObjUtil.SetTextHighlightColor(sender, Color.White);
         }
 
         private void lblPCName_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(lblPCName.Text);
+        }
+
+        private void txtCommision_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = ObjUtil.IsDecimal(txtCommision, e);
+            if (e.Handled)
+            {
+                clsUtility.ShowInfoMessage("Enter Only Numbers...");
+                txtCommision.Focus();
+            }
         }
     }
 }
