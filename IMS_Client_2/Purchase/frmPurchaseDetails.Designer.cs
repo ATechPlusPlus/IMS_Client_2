@@ -122,6 +122,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.dgvPurchaseInvoice);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -136,6 +138,8 @@
             // 
             this.dgvPurchaseInvoice.AllowUserToAddRows = false;
             this.dgvPurchaseInvoice.AllowUserToDeleteRows = false;
+            this.dgvPurchaseInvoice.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPurchaseInvoice.BackgroundColor = System.Drawing.Color.White;
             this.dgvPurchaseInvoice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPurchaseInvoice.Location = new System.Drawing.Point(6, 24);
@@ -148,6 +152,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
             this.groupBox2.Controls.Add(this.dgvPurchaseInvoiceDetail);
             this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -162,6 +168,8 @@
             // 
             this.dgvPurchaseInvoiceDetail.AllowUserToAddRows = false;
             this.dgvPurchaseInvoiceDetail.AllowUserToDeleteRows = false;
+            this.dgvPurchaseInvoiceDetail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPurchaseInvoiceDetail.BackgroundColor = System.Drawing.Color.White;
             this.dgvPurchaseInvoiceDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPurchaseInvoiceDetail.Location = new System.Drawing.Point(9, 15);
@@ -174,6 +182,9 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.BackColor = System.Drawing.Color.Transparent;
             this.groupBox3.Controls.Add(this.dgvPurchaseItem);
             this.groupBox3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -190,11 +201,12 @@
             this.dgvPurchaseItem.AllowUserToDeleteRows = false;
             this.dgvPurchaseItem.BackgroundColor = System.Drawing.Color.White;
             this.dgvPurchaseItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPurchaseItem.Location = new System.Drawing.Point(9, 24);
+            this.dgvPurchaseItem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPurchaseItem.Location = new System.Drawing.Point(3, 21);
             this.dgvPurchaseItem.Name = "dgvPurchaseItem";
             this.dgvPurchaseItem.ReadOnly = true;
             this.dgvPurchaseItem.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dgvPurchaseItem.Size = new System.Drawing.Size(978, 203);
+            this.dgvPurchaseItem.Size = new System.Drawing.Size(987, 209);
             this.dgvPurchaseItem.TabIndex = 268;
             this.dgvPurchaseItem.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvPurchaseItem_DataBindingComplete);
             // 
@@ -218,6 +230,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Purchase Details";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmPurchaseDetails_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();

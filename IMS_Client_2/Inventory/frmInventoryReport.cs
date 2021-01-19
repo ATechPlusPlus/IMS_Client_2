@@ -30,7 +30,7 @@ namespace IMS_Client_2.Inventory
 
         public int pMasterScanID { get; set; }
 
-        public DateTime CompareDDate { get; set; }
+        public DateTime? CompareDDate { get; set; }
         CoreApp.clsConnection_DAL ObjDAL = new CoreApp.clsConnection_DAL(true);
         clsUtility ObjUtil = new clsUtility();
         private void LoadReport()
@@ -56,7 +56,7 @@ namespace IMS_Client_2.Inventory
             // creating the parameter with the extact name as in the report.
             ReportParameter param1 = new ReportParameter("parmStoreName", StoreName, true);
             ReportParameter param2 = new ReportParameter("parmScanBy", ScanBy, true);
-            ReportParameter param3 = new ReportParameter("parmCompareDate", CompareDDate.Date.ToString(), true);
+            ReportParameter param3 = new ReportParameter("parmCompareDate", CompareDDate.Value.Date.ToString(), true);
 
             // adding the parameter in the report dynamically
             reportViewer1.LocalReport.SetParameters(param1);

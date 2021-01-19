@@ -26,7 +26,7 @@ namespace IMS_Client_2.Inventory
             InitializeComponent();
         }
 
-        public DateTime ComparedDate { get; set; }
+        public DateTime? ComparedDate { get; set; }
         public string ScanBy { get; set; }
         private void LoadData()
         {
@@ -39,6 +39,7 @@ namespace IMS_Client_2.Inventory
                 {
                     dgvProductDetails.DataSource = dt;
                     txtStoreName.Text = dt.Rows[0]["StoreName"].ToString();
+                    //ComparedDate = Convert.ToDateTime(dt.Rows[0]["Compared Date"]);
                     StoreID = Convert.ToInt32(dt.Rows[0]["StoreID"]);
                 }
                 else
