@@ -181,6 +181,7 @@ namespace IMS_Client_2.Settings
                 chkSalesManName.Checked = dt.Rows[0]["SalesManIDMandatory"] == DBNull.Value ? false : Convert.ToBoolean(dt.Rows[0]["SalesManIDMandatory"]);
                 chkCustomerMobile.Checked = dt.Rows[0]["CustMobileMandatory"] == DBNull.Value ? false : Convert.ToBoolean(dt.Rows[0]["CustMobileMandatory"]);
 
+                txtCommision.Text = dt.Rows[0]["Commision"].ToString();
                 //if (dt.Rows[0]["ImagePath"] != DBNull.Value)
                 //{
                 //    txtImagePath.Text = dt.Rows[0]["ImagePath"].ToString();
@@ -281,6 +282,7 @@ namespace IMS_Client_2.Settings
                     ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                     ObjDAL.UpdateColumnData("SalesManIDMandatory ", SqlDbType.Bit, chkSalesManName.Checked);
                     ObjDAL.UpdateColumnData("CustMobileMandatory ", SqlDbType.Bit, chkCustomerMobile.Checked);
+                    ObjDAL.UpdateColumnData("Commision ", SqlDbType.Decimal, txtCommision.Text);
                     ObjDAL.UpdateData(clsUtility.DBName + ".dbo.DefaultStoreSetting", "1=1");
 
                     clsUtility.ShowInfoMessage("Settings has been updated.", clsUtility.strProjectTitle);
@@ -295,6 +297,7 @@ namespace IMS_Client_2.Settings
                     ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
                     ObjDAL.SetColumnData("SalesManIDMandatory ", SqlDbType.Bit, chkSalesManName.Checked);
                     ObjDAL.SetColumnData("CustMobileMandatory ", SqlDbType.Bit,chkCustomerMobile.Checked);
+                    ObjDAL.SetColumnData("Decimal ", SqlDbType.Decimal, txtCommision.Text);
 
                     int r = ObjDAL.InsertData(clsUtility.DBName + ".[dbo].[DefaultStoreSetting]", false);
                     if (r > 0)

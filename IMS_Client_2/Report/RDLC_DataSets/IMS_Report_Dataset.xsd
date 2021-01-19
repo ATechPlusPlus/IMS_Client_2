@@ -79,6 +79,21 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="dtEmployeeWiseSales" msprop:Generator_TableClassName="dtEmployeeWiseSalesDataTable" msprop:Generator_TableVarName="tabledtEmployeeWiseSales" msprop:Generator_RowChangedName="dtEmployeeWiseSalesRowChanged" msprop:Generator_TablePropName="dtEmployeeWiseSales" msprop:Generator_RowDeletingName="dtEmployeeWiseSalesRowDeleting" msprop:Generator_RowChangingName="dtEmployeeWiseSalesRowChanging" msprop:Generator_RowEvHandlerName="dtEmployeeWiseSalesRowChangeEventHandler" msprop:Generator_RowDeletedName="dtEmployeeWiseSalesRowDeleted" msprop:Generator_RowClassName="dtEmployeeWiseSalesRow" msprop:Generator_UserTableName="dtEmployeeWiseSales" msprop:Generator_RowEvArgName="dtEmployeeWiseSalesRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SalesMan" msprop:Generator_ColumnVarNameInTable="columnSalesMan" msprop:Generator_ColumnPropNameInRow="SalesMan" msprop:Generator_ColumnPropNameInTable="SalesManColumn" msprop:Generator_UserColumnName="SalesMan" type="xs:string" minOccurs="0" />
+              <xs:element name="QTY" msprop:Generator_ColumnVarNameInTable="columnQTY" msprop:Generator_ColumnPropNameInRow="QTY" msprop:Generator_ColumnPropNameInTable="QTYColumn" msprop:Generator_UserColumnName="QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="TotalSales" msprop:Generator_ColumnVarNameInTable="columnTotalSales" msprop:Generator_ColumnPropNameInRow="TotalSales" msprop:Generator_ColumnPropNameInTable="TotalSalesColumn" msprop:Generator_UserColumnName="TotalSales" type="xs:string" minOccurs="0" />
+              <xs:element name="LocalCost" msprop:Generator_ColumnVarNameInTable="columnLocalCost" msprop:Generator_ColumnPropNameInRow="LocalCost" msprop:Generator_ColumnPropNameInTable="LocalCostColumn" msprop:Generator_UserColumnName="LocalCost" type="xs:string" minOccurs="0" />
+              <xs:element name="GrossProfit" msprop:Generator_ColumnVarNameInTable="columnGrossProfit" msprop:Generator_ColumnPropNameInRow="GrossProfit" msprop:Generator_ColumnPropNameInTable="GrossProfitColumn" msprop:Generator_UserColumnName="GrossProfit" type="xs:string" minOccurs="0" />
+              <xs:element name="MonthlySalary" msprop:Generator_ColumnVarNameInTable="columnMonthlySalary" msprop:Generator_ColumnPropNameInRow="MonthlySalary" msprop:Generator_ColumnPropNameInTable="MonthlySalaryColumn" msprop:Generator_UserColumnName="MonthlySalary" type="xs:string" minOccurs="0" />
+              <xs:element name="AdmintraviteExp" msprop:Generator_ColumnVarNameInTable="columnAdmintraviteExp" msprop:Generator_ColumnPropNameInRow="AdmintraviteExp" msprop:Generator_ColumnPropNameInTable="AdmintraviteExpColumn" msprop:Generator_UserColumnName="AdmintraviteExp" type="xs:string" minOccurs="0" />
+              <xs:element name="Commision" msprop:Generator_ColumnVarNameInTable="columnCommision" msprop:Generator_ColumnPropNameInRow="Commision" msprop:Generator_ColumnPropNameInTable="CommisionColumn" msprop:Generator_UserColumnName="Commision" type="xs:string" minOccurs="0" />
+              <xs:element name="NetProfit" msprop:Generator_ColumnVarNameInTable="columnNetProfit" msprop:Generator_ColumnPropNameInRow="NetProfit" msprop:Generator_ColumnPropNameInTable="NetProfitColumn" msprop:Generator_UserColumnName="NetProfit" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>

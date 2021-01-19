@@ -1094,5 +1094,11 @@ namespace IMS_Client_2
                 clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
+
+        private void employeeSaleReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Report.Report_Forms.frmEmployeeSales frmEmployeeSales = new Report.Report_Forms.frmEmployeeSales();
+            frmEmployeeSales.Show();
+        }
     }
 }

@@ -79,6 +79,9 @@
             this.label8 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.txtExtension = new System.Windows.Forms.Label();
+            this.txtCommision = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -292,6 +295,9 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Controls.Add(this.txtCommision);
+            this.groupBox2.Controls.Add(this.label13);
             this.groupBox2.Controls.Add(this.chkCustomerMobile);
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.chkSalesManName);
@@ -308,7 +314,7 @@
             this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(8, 6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(427, 349);
+            this.groupBox2.Size = new System.Drawing.Size(427, 385);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Other Settings";
@@ -409,7 +415,7 @@
             this.btnFooterCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFooterCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnFooterCancel.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFooterCancel.Location = new System.Drawing.Point(336, 301);
+            this.btnFooterCancel.Location = new System.Drawing.Point(336, 344);
             this.btnFooterCancel.Name = "btnFooterCancel";
             this.btnFooterCancel.Size = new System.Drawing.Size(71, 25);
             this.btnFooterCancel.TabIndex = 2;
@@ -436,7 +442,7 @@
             this.btnFooterSave.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFooterSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnFooterSave.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFooterSave.Location = new System.Drawing.Point(248, 301);
+            this.btnFooterSave.Location = new System.Drawing.Point(248, 344);
             this.btnFooterSave.Name = "btnFooterSave";
             this.btnFooterSave.Size = new System.Drawing.Size(76, 25);
             this.btnFooterSave.TabIndex = 1;
@@ -593,7 +599,7 @@
             this.groupBox3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(441, 6);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(419, 240);
+            this.groupBox3.Size = new System.Drawing.Size(419, 227);
             this.groupBox3.TabIndex = 198;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Printer Setting";
@@ -743,6 +749,36 @@
             this.txtExtension.TabIndex = 82;
             this.txtExtension.Text = "Other Settings";
             // 
+            // txtCommision
+            // 
+            this.txtCommision.BackColor = System.Drawing.Color.White;
+            this.txtCommision.Location = new System.Drawing.Point(154, 289);
+            this.txtCommision.Name = "txtCommision";
+            this.txtCommision.Size = new System.Drawing.Size(52, 25);
+            this.txtCommision.TabIndex = 300;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.Transparent;
+            this.label13.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(6, 292);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(142, 17);
+            this.label13.TabIndex = 299;
+            this.label13.Text = "Employee Commision :";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.Transparent;
+            this.label14.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(212, 295);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(21, 17);
+            this.label14.TabIndex = 301;
+            this.label14.Text = "%";
+            // 
             // frmOtherSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -827,5 +863,8 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.CheckBox chkCustomerMobile;
         private System.Windows.Forms.CheckBox chkSalesManName;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox txtCommision;
+        private System.Windows.Forms.Label label13;
     }
 }

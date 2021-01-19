@@ -35,6 +35,7 @@
             this.userRightsManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.storeRightsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mobilePartsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.companyMasterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CategoryMaster_ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.countryMasterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StoreDetails_ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,6 +83,8 @@
             this.SalesReport_ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.pettyCashExpReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miniSalesReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
+            this.employeeSaleReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.otherArtsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.CurrencyValueSetting_ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
@@ -107,7 +110,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.companyMasterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salesAnalysisReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salesByDepartmentReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -196,6 +200,13 @@
             this.mobilePartsToolStripMenuItem.Size = new System.Drawing.Size(90, 36);
             this.mobilePartsToolStripMenuItem.Text = "Masters";
             this.mobilePartsToolStripMenuItem.ToolTipText = "Mobile Parts";
+            // 
+            // companyMasterToolStripMenuItem
+            // 
+            this.companyMasterToolStripMenuItem.Name = "companyMasterToolStripMenuItem";
+            this.companyMasterToolStripMenuItem.Size = new System.Drawing.Size(227, 24);
+            this.companyMasterToolStripMenuItem.Text = "Company Master";
+            this.companyMasterToolStripMenuItem.Click += new System.EventHandler(this.companyMasterToolStripMenuItem_Click);
             // 
             // CategoryMaster_ToolStrip
             // 
@@ -538,7 +549,11 @@
             this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SalesReport_ToolStrip,
             this.pettyCashExpReportToolStripMenuItem,
-            this.miniSalesReportToolStripMenuItem});
+            this.miniSalesReportToolStripMenuItem,
+            this.toolStripMenuItem7,
+            this.employeeSaleReportToolStripMenuItem,
+            this.salesAnalysisReportToolStripMenuItem,
+            this.salesByDepartmentReportToolStripMenuItem});
             this.reportsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("reportsToolStripMenuItem.Image")));
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             this.reportsToolStripMenuItem.Size = new System.Drawing.Size(89, 36);
@@ -566,6 +581,18 @@
             this.miniSalesReportToolStripMenuItem.Size = new System.Drawing.Size(218, 24);
             this.miniSalesReportToolStripMenuItem.Text = "Mini Sales Report";
             this.miniSalesReportToolStripMenuItem.Click += new System.EventHandler(this.miniSalesReportToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem7
+            // 
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(215, 6);
+            // 
+            // employeeSaleReportToolStripMenuItem
+            // 
+            this.employeeSaleReportToolStripMenuItem.Name = "employeeSaleReportToolStripMenuItem";
+            this.employeeSaleReportToolStripMenuItem.Size = new System.Drawing.Size(218, 24);
+            this.employeeSaleReportToolStripMenuItem.Text = "Employee Sale Report";
+            this.employeeSaleReportToolStripMenuItem.Click += new System.EventHandler(this.employeeSaleReportToolStripMenuItem_Click);
             // 
             // otherArtsToolStripMenuItem
             // 
@@ -842,12 +869,17 @@
             this.label9.TabIndex = 28;
             this.label9.Text = "Today\'s Cash Box";
             // 
-            // companyMasterToolStripMenuItem
+            // salesAnalysisReportToolStripMenuItem
             // 
-            this.companyMasterToolStripMenuItem.Name = "companyMasterToolStripMenuItem";
-            this.companyMasterToolStripMenuItem.Size = new System.Drawing.Size(227, 24);
-            this.companyMasterToolStripMenuItem.Text = "Company Master";
-            this.companyMasterToolStripMenuItem.Click += new System.EventHandler(this.companyMasterToolStripMenuItem_Click);
+            this.salesAnalysisReportToolStripMenuItem.Name = "salesAnalysisReportToolStripMenuItem";
+            this.salesAnalysisReportToolStripMenuItem.Size = new System.Drawing.Size(252, 24);
+            this.salesAnalysisReportToolStripMenuItem.Text = "Sales Analysis Report";
+            // 
+            // salesByDepartmentReportToolStripMenuItem
+            // 
+            this.salesByDepartmentReportToolStripMenuItem.Name = "salesByDepartmentReportToolStripMenuItem";
+            this.salesByDepartmentReportToolStripMenuItem.Size = new System.Drawing.Size(252, 24);
+            this.salesByDepartmentReportToolStripMenuItem.Text = "Sales By Department Report";
             // 
             // frmHome
             // 
@@ -970,5 +1002,9 @@
         private System.Windows.Forms.ToolStripMenuItem scanItemsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem inventoryCheckToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem companyMasterToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem7;
+        private System.Windows.Forms.ToolStripMenuItem employeeSaleReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem salesAnalysisReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem salesByDepartmentReportToolStripMenuItem;
     }
 }

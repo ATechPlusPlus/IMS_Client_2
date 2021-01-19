@@ -34,6 +34,8 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
         
         private dtInventoryCompareDataTable tabledtInventoryCompare;
         
+        private dtEmployeeWiseSalesDataTable tabledtEmployeeWiseSales;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -76,6 +78,9 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
                 }
                 if ((ds.Tables["dtInventoryCompare"] != null)) {
                     base.Tables.Add(new dtInventoryCompareDataTable(ds.Tables["dtInventoryCompare"]));
+                }
+                if ((ds.Tables["dtEmployeeWiseSales"] != null)) {
+                    base.Tables.Add(new dtEmployeeWiseSalesDataTable(ds.Tables["dtEmployeeWiseSales"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -142,6 +147,16 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
         public dtInventoryCompareDataTable dtInventoryCompare {
             get {
                 return this.tabledtInventoryCompare;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public dtEmployeeWiseSalesDataTable dtEmployeeWiseSales {
+            get {
+                return this.tabledtEmployeeWiseSales;
             }
         }
         
@@ -227,6 +242,9 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
                 if ((ds.Tables["dtInventoryCompare"] != null)) {
                     base.Tables.Add(new dtInventoryCompareDataTable(ds.Tables["dtInventoryCompare"]));
                 }
+                if ((ds.Tables["dtEmployeeWiseSales"] != null)) {
+                    base.Tables.Add(new dtEmployeeWiseSalesDataTable(ds.Tables["dtEmployeeWiseSales"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -290,6 +308,12 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
                     this.tabledtInventoryCompare.InitVars();
                 }
             }
+            this.tabledtEmployeeWiseSales = ((dtEmployeeWiseSalesDataTable)(base.Tables["dtEmployeeWiseSales"]));
+            if ((initTable == true)) {
+                if ((this.tabledtEmployeeWiseSales != null)) {
+                    this.tabledtEmployeeWiseSales.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -310,6 +334,8 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             base.Tables.Add(this.tabledtBranchShorting);
             this.tabledtInventoryCompare = new dtInventoryCompareDataTable();
             base.Tables.Add(this.tabledtInventoryCompare);
+            this.tabledtEmployeeWiseSales = new dtEmployeeWiseSalesDataTable();
+            base.Tables.Add(this.tabledtEmployeeWiseSales);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -339,6 +365,12 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private bool ShouldSerializedtInventoryCompare() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private bool ShouldSerializedtEmployeeWiseSales() {
             return false;
         }
         
@@ -411,6 +443,9 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void dtInventoryCompareRowChangeEventHandler(object sender, dtInventoryCompareRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public delegate void dtEmployeeWiseSalesRowChangeEventHandler(object sender, dtEmployeeWiseSalesRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -2100,6 +2135,365 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class dtEmployeeWiseSalesDataTable : global::System.Data.TypedTableBase<dtEmployeeWiseSalesRow> {
+            
+            private global::System.Data.DataColumn columnSalesMan;
+            
+            private global::System.Data.DataColumn columnQTY;
+            
+            private global::System.Data.DataColumn columnTotalSales;
+            
+            private global::System.Data.DataColumn columnLocalCost;
+            
+            private global::System.Data.DataColumn columnGrossProfit;
+            
+            private global::System.Data.DataColumn columnMonthlySalary;
+            
+            private global::System.Data.DataColumn columnAdmintraviteExp;
+            
+            private global::System.Data.DataColumn columnCommision;
+            
+            private global::System.Data.DataColumn columnNetProfit;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtEmployeeWiseSalesDataTable() {
+                this.TableName = "dtEmployeeWiseSales";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal dtEmployeeWiseSalesDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected dtEmployeeWiseSalesDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn SalesManColumn {
+                get {
+                    return this.columnSalesMan;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn QTYColumn {
+                get {
+                    return this.columnQTY;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn TotalSalesColumn {
+                get {
+                    return this.columnTotalSales;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn LocalCostColumn {
+                get {
+                    return this.columnLocalCost;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn GrossProfitColumn {
+                get {
+                    return this.columnGrossProfit;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn MonthlySalaryColumn {
+                get {
+                    return this.columnMonthlySalary;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn AdmintraviteExpColumn {
+                get {
+                    return this.columnAdmintraviteExp;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn CommisionColumn {
+                get {
+                    return this.columnCommision;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn NetProfitColumn {
+                get {
+                    return this.columnNetProfit;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtEmployeeWiseSalesRow this[int index] {
+                get {
+                    return ((dtEmployeeWiseSalesRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event dtEmployeeWiseSalesRowChangeEventHandler dtEmployeeWiseSalesRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event dtEmployeeWiseSalesRowChangeEventHandler dtEmployeeWiseSalesRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event dtEmployeeWiseSalesRowChangeEventHandler dtEmployeeWiseSalesRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event dtEmployeeWiseSalesRowChangeEventHandler dtEmployeeWiseSalesRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void AdddtEmployeeWiseSalesRow(dtEmployeeWiseSalesRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtEmployeeWiseSalesRow AdddtEmployeeWiseSalesRow(string SalesMan, string QTY, string TotalSales, string LocalCost, string GrossProfit, string MonthlySalary, string AdmintraviteExp, string Commision, string NetProfit) {
+                dtEmployeeWiseSalesRow rowdtEmployeeWiseSalesRow = ((dtEmployeeWiseSalesRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        SalesMan,
+                        QTY,
+                        TotalSales,
+                        LocalCost,
+                        GrossProfit,
+                        MonthlySalary,
+                        AdmintraviteExp,
+                        Commision,
+                        NetProfit};
+                rowdtEmployeeWiseSalesRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowdtEmployeeWiseSalesRow);
+                return rowdtEmployeeWiseSalesRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                dtEmployeeWiseSalesDataTable cln = ((dtEmployeeWiseSalesDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new dtEmployeeWiseSalesDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal void InitVars() {
+                this.columnSalesMan = base.Columns["SalesMan"];
+                this.columnQTY = base.Columns["QTY"];
+                this.columnTotalSales = base.Columns["TotalSales"];
+                this.columnLocalCost = base.Columns["LocalCost"];
+                this.columnGrossProfit = base.Columns["GrossProfit"];
+                this.columnMonthlySalary = base.Columns["MonthlySalary"];
+                this.columnAdmintraviteExp = base.Columns["AdmintraviteExp"];
+                this.columnCommision = base.Columns["Commision"];
+                this.columnNetProfit = base.Columns["NetProfit"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            private void InitClass() {
+                this.columnSalesMan = new global::System.Data.DataColumn("SalesMan", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSalesMan);
+                this.columnQTY = new global::System.Data.DataColumn("QTY", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnQTY);
+                this.columnTotalSales = new global::System.Data.DataColumn("TotalSales", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotalSales);
+                this.columnLocalCost = new global::System.Data.DataColumn("LocalCost", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLocalCost);
+                this.columnGrossProfit = new global::System.Data.DataColumn("GrossProfit", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnGrossProfit);
+                this.columnMonthlySalary = new global::System.Data.DataColumn("MonthlySalary", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMonthlySalary);
+                this.columnAdmintraviteExp = new global::System.Data.DataColumn("AdmintraviteExp", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAdmintraviteExp);
+                this.columnCommision = new global::System.Data.DataColumn("Commision", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCommision);
+                this.columnNetProfit = new global::System.Data.DataColumn("NetProfit", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNetProfit);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtEmployeeWiseSalesRow NewdtEmployeeWiseSalesRow() {
+                return ((dtEmployeeWiseSalesRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new dtEmployeeWiseSalesRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(dtEmployeeWiseSalesRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.dtEmployeeWiseSalesRowChanged != null)) {
+                    this.dtEmployeeWiseSalesRowChanged(this, new dtEmployeeWiseSalesRowChangeEvent(((dtEmployeeWiseSalesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.dtEmployeeWiseSalesRowChanging != null)) {
+                    this.dtEmployeeWiseSalesRowChanging(this, new dtEmployeeWiseSalesRowChangeEvent(((dtEmployeeWiseSalesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.dtEmployeeWiseSalesRowDeleted != null)) {
+                    this.dtEmployeeWiseSalesRowDeleted(this, new dtEmployeeWiseSalesRowChangeEvent(((dtEmployeeWiseSalesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.dtEmployeeWiseSalesRowDeleting != null)) {
+                    this.dtEmployeeWiseSalesRowDeleting(this, new dtEmployeeWiseSalesRowChangeEvent(((dtEmployeeWiseSalesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void RemovedtEmployeeWiseSalesRow(dtEmployeeWiseSalesRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                IMS_Report_Dataset ds = new IMS_Report_Dataset();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "dtEmployeeWiseSalesDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class dtStoreTransferRow : global::System.Data.DataRow {
@@ -3214,6 +3608,273 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class dtEmployeeWiseSalesRow : global::System.Data.DataRow {
+            
+            private dtEmployeeWiseSalesDataTable tabledtEmployeeWiseSales;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal dtEmployeeWiseSalesRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tabledtEmployeeWiseSales = ((dtEmployeeWiseSalesDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string SalesMan {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtEmployeeWiseSales.SalesManColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SalesMan\' in table \'dtEmployeeWiseSales\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtEmployeeWiseSales.SalesManColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string QTY {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtEmployeeWiseSales.QTYColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'QTY\' in table \'dtEmployeeWiseSales\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtEmployeeWiseSales.QTYColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string TotalSales {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtEmployeeWiseSales.TotalSalesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TotalSales\' in table \'dtEmployeeWiseSales\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtEmployeeWiseSales.TotalSalesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string LocalCost {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtEmployeeWiseSales.LocalCostColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'LocalCost\' in table \'dtEmployeeWiseSales\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtEmployeeWiseSales.LocalCostColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string GrossProfit {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtEmployeeWiseSales.GrossProfitColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'GrossProfit\' in table \'dtEmployeeWiseSales\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtEmployeeWiseSales.GrossProfitColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string MonthlySalary {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtEmployeeWiseSales.MonthlySalaryColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MonthlySalary\' in table \'dtEmployeeWiseSales\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtEmployeeWiseSales.MonthlySalaryColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string AdmintraviteExp {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtEmployeeWiseSales.AdmintraviteExpColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'AdmintraviteExp\' in table \'dtEmployeeWiseSales\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtEmployeeWiseSales.AdmintraviteExpColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Commision {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtEmployeeWiseSales.CommisionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Commision\' in table \'dtEmployeeWiseSales\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtEmployeeWiseSales.CommisionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string NetProfit {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtEmployeeWiseSales.NetProfitColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NetProfit\' in table \'dtEmployeeWiseSales\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtEmployeeWiseSales.NetProfitColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsSalesManNull() {
+                return this.IsNull(this.tabledtEmployeeWiseSales.SalesManColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetSalesManNull() {
+                this[this.tabledtEmployeeWiseSales.SalesManColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsQTYNull() {
+                return this.IsNull(this.tabledtEmployeeWiseSales.QTYColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetQTYNull() {
+                this[this.tabledtEmployeeWiseSales.QTYColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsTotalSalesNull() {
+                return this.IsNull(this.tabledtEmployeeWiseSales.TotalSalesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetTotalSalesNull() {
+                this[this.tabledtEmployeeWiseSales.TotalSalesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsLocalCostNull() {
+                return this.IsNull(this.tabledtEmployeeWiseSales.LocalCostColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetLocalCostNull() {
+                this[this.tabledtEmployeeWiseSales.LocalCostColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsGrossProfitNull() {
+                return this.IsNull(this.tabledtEmployeeWiseSales.GrossProfitColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetGrossProfitNull() {
+                this[this.tabledtEmployeeWiseSales.GrossProfitColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsMonthlySalaryNull() {
+                return this.IsNull(this.tabledtEmployeeWiseSales.MonthlySalaryColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetMonthlySalaryNull() {
+                this[this.tabledtEmployeeWiseSales.MonthlySalaryColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsAdmintraviteExpNull() {
+                return this.IsNull(this.tabledtEmployeeWiseSales.AdmintraviteExpColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetAdmintraviteExpNull() {
+                this[this.tabledtEmployeeWiseSales.AdmintraviteExpColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsCommisionNull() {
+                return this.IsNull(this.tabledtEmployeeWiseSales.CommisionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetCommisionNull() {
+                this[this.tabledtEmployeeWiseSales.CommisionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsNetProfitNull() {
+                return this.IsNull(this.tabledtEmployeeWiseSales.NetProfitColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetNetProfitNull() {
+                this[this.tabledtEmployeeWiseSales.NetProfitColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -3369,6 +4030,40 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public dtInventoryCompareRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public class dtEmployeeWiseSalesRowChangeEvent : global::System.EventArgs {
+            
+            private dtEmployeeWiseSalesRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtEmployeeWiseSalesRowChangeEvent(dtEmployeeWiseSalesRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtEmployeeWiseSalesRow Row {
                 get {
                     return this.eventRow;
                 }

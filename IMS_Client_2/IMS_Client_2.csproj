@@ -237,6 +237,24 @@
     <Compile Include="Report\Report_Forms\frmBranchShortingReport.Designer.cs">
       <DependentUpon>frmBranchShortingReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\Report_Forms\SalesByDepartment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\Report_Forms\SalesByDepartment.Designer.cs">
+      <DependentUpon>SalesByDepartment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\Report_Forms\frmSalesAnalysReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\Report_Forms\frmSalesAnalysReport.Designer.cs">
+      <DependentUpon>frmSalesAnalysReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\Report_Forms\frmEmployeeSales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\Report_Forms\frmEmployeeSales.Designer.cs">
+      <DependentUpon>frmEmployeeSales.cs</DependentUpon>
+    </Compile>
     <Compile Include="SPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -769,8 +787,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\RDLC_Files\BranchShortingReport.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\CashClosingReport.rdlc" />
+    <EmbeddedResource Include="Report\RDLC_Files\EmployeeSales.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\MiniSalesReport.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\PettyCashReport.rdlc" />
+    <EmbeddedResource Include="Report\RDLC_Files\SaleByDepartment.rdlc" />
+    <EmbeddedResource Include="Report\RDLC_Files\SalesAnalysisReport.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\SalesInoviceReport.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\Sales_Invoice.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\ScanInventory.rdlc" />
@@ -780,6 +801,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Report_Forms\frmClosingCashReport.resx">
       <DependentUpon>frmClosingCashReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Report_Forms\SalesByDepartment.resx">
+      <DependentUpon>SalesByDepartment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Report_Forms\frmSalesAnalysReport.resx">
+      <DependentUpon>frmSalesAnalysReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Report_Forms\frmEmployeeSales.resx">
+      <DependentUpon>frmEmployeeSales.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Report_Forms\frmPettyCashReport.resx">
       <DependentUpon>frmPettyCashReport.cs</DependentUpon>
