@@ -33,8 +33,8 @@
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.btnCancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dtFromDate = new System.Windows.Forms.DateTimePicker();
+            this.dtToDate = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -73,6 +73,7 @@
             // reportViewer1
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "IMS_Client_2.Report.RDLC_Files.SalesAnalysisReport.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(3, 21);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.Size = new System.Drawing.Size(864, 547);
@@ -90,6 +91,7 @@
             this.btnCancel.TabIndex = 201;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             this.btnCancel.Enter += new System.EventHandler(this.btnAdd_MouseEnter);
             // 
             // label1
@@ -103,21 +105,21 @@
             this.label1.TabIndex = 297;
             this.label1.Text = "Date :";
             // 
-            // dateTimePicker1
+            // dtFromDate
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(561, 24);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(115, 25);
-            this.dateTimePicker1.TabIndex = 298;
+            this.dtFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtFromDate.Location = new System.Drawing.Point(561, 24);
+            this.dtFromDate.Name = "dtFromDate";
+            this.dtFromDate.Size = new System.Drawing.Size(115, 25);
+            this.dtFromDate.TabIndex = 298;
             // 
-            // dateTimePicker2
+            // dtToDate
             // 
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker2.Location = new System.Drawing.Point(738, 24);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(115, 25);
-            this.dateTimePicker2.TabIndex = 299;
+            this.dtToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtToDate.Location = new System.Drawing.Point(738, 24);
+            this.dtToDate.Name = "dtToDate";
+            this.dtToDate.Size = new System.Drawing.Size(115, 25);
+            this.dtToDate.TabIndex = 299;
             // 
             // label2
             // 
@@ -136,8 +138,8 @@
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.cmbShop);
             this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Controls.Add(this.dateTimePicker2);
-            this.groupBox3.Controls.Add(this.dateTimePicker1);
+            this.groupBox3.Controls.Add(this.dtToDate);
+            this.groupBox3.Controls.Add(this.dtFromDate);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(12, 17);
@@ -201,8 +203,8 @@
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dtFromDate;
+        private System.Windows.Forms.DateTimePicker dtToDate;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label3;
