@@ -21,7 +21,7 @@ namespace IMS_Client_2.Inventory
         private void frmInventoryReport_Load(object sender, EventArgs e)
         {
             LoadReport();
-           
+
         }
         public DataTable dtIventory { get; set; }
 
@@ -43,37 +43,39 @@ namespace IMS_Client_2.Inventory
                 DataTable dt = ds.Tables[0];
                 if (ObjUtil.ValidateTable(dt))
                 {
-                   dtIventory= dt;
-                   
+                    dtIventory = dt;
+
                 }
-               
+
             }
             else
-           
-            reportViewer1.LocalReport.DataSources.Clear();
+
+                reportViewer1.LocalReport.DataSources.Clear();
             ReportDataSource rds = new ReportDataSource("dsInventory", dtIventory);
 
             // creating the parameter with the extact name as in the report.
             ReportParameter param1 = new ReportParameter("parmStoreName", StoreName, true);
             ReportParameter param2 = new ReportParameter("parmScanBy", ScanBy, true);
-            ReportParameter param3 = new ReportParameter("parmCompareDate", CompareDDate.Value.Date.ToString(), true);
-
+            ReportParameter param3 = null;
+            if (CompareDDate != null)
+            {
+                param3 = new ReportParameter("parmCompareDate", CompareDDate.Value.Date.ToString(), true);
+            }
             // adding the parameter in the report dynamically
             reportViewer1.LocalReport.SetParameters(param1);
             reportViewer1.LocalReport.SetParameters(param2);
-            reportViewer1.LocalReport.SetParameters(param3);
 
+            if (CompareDDate != null)
+            {
+                reportViewer1.LocalReport.SetParameters(param3);
+            }
 
             reportViewer1.LocalReport.DataSources.Add(rds);
-
 
             reportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout);
             reportViewer1.ZoomMode = ZoomMode.Percent;
             reportViewer1.ZoomPercent = 75;
             this.reportViewer1.RefreshReport();
-
-
-
 
             this.reportViewer1.RefreshReport();
         }
