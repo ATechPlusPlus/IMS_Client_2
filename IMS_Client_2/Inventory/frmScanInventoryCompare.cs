@@ -39,7 +39,14 @@ namespace IMS_Client_2.Inventory
                 {
                     dgvProductDetails.DataSource = dt;
                     txtStoreName.Text = dt.Rows[0]["StoreName"].ToString();
-                    //ComparedDate = Convert.ToDateTime(dt.Rows[0]["Compared Date"]);
+                    if (dt.Rows[0]["Compared Date"] != DBNull.Value)
+                    {
+                        ComparedDate = Convert.ToDateTime(dt.Rows[0]["Compared Date"]);
+                    }
+                    else
+                    {
+                        ComparedDate = null;
+                    }
                     StoreID = Convert.ToInt32(dt.Rows[0]["StoreID"]);
                 }
                 else
@@ -132,7 +139,7 @@ namespace IMS_Client_2.Inventory
             dgvProductDetails.Columns["ColorID"].Visible = false;
             dgvProductDetails.Columns["SubProductID"].Visible = false;
             dgvProductDetails.Columns["StoreName"].Visible = false;
-
+            dgvProductDetails.Columns["Compared Date"].Visible = false;
             dgvProductDetails.ClearSelection();
             dgvProductDetails.RowsDefaultCellStyle.SelectionBackColor = Color.Transparent;
             dgvProductDetails.RowsDefaultCellStyle.SelectionForeColor = Color.Transparent;
@@ -270,8 +277,8 @@ namespace IMS_Client_2.Inventory
             frmInventoryReport.ScanBy = ScanBy;
             frmInventoryReport.CompareDDate = ComparedDate;
             frmInventoryReport.StoreName = txtStoreName.Text;
-          
-          
+
+
             frmInventoryReport.ShowDialog();
         }
     }
