@@ -9,12 +9,15 @@ using System.Windows.Forms;
 
 namespace IMS_Client_2.Report.Report_Forms
 {
-    public partial class SalesByDepartment : Form
+    public partial class frmSalesByDepartment : Form
     {
-        public SalesByDepartment()
+        public frmSalesByDepartment()
         {
             InitializeComponent();
         }
+        CoreApp.clsConnection_DAL ObjCon = new CoreApp.clsConnection_DAL(true);
+        CoreApp.clsUtility ObjUtil = new CoreApp.clsUtility();
+
         Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
         Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
         private void frmEmployeeSales_Load(object sender, EventArgs e)
@@ -35,7 +38,6 @@ namespace IMS_Client_2.Report.Report_Forms
             Button btn = (Button)sender;
             btn.BackgroundImage = B_Leave;
         }
-
 
         private void btnPrinterSave_Click(object sender, EventArgs e)
         {

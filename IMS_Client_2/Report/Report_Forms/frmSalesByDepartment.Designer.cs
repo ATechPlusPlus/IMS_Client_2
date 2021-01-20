@@ -1,6 +1,6 @@
 ﻿namespace IMS_Client_2.Report.Report_Forms
 {
-    partial class SalesByDepartment
+    partial class frmSalesByDepartment
     {
         /// <summary>
         /// Required designer variable.
@@ -57,6 +57,7 @@
             this.btnPrinterSave.UseVisualStyleBackColor = true;
             this.btnPrinterSave.Click += new System.EventHandler(this.btnPrinterSave_Click);
             this.btnPrinterSave.Enter += new System.EventHandler(this.btnAdd_MouseEnter);
+            this.btnPrinterSave.Leave += new System.EventHandler(this.btnAdd_MouseLeave);
             // 
             // groupBox1
             // 
@@ -91,6 +92,7 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Enter += new System.EventHandler(this.btnAdd_MouseEnter);
+            this.btnCancel.Leave += new System.EventHandler(this.btnAdd_MouseLeave);
             // 
             // txtMachineName
             // 
@@ -167,7 +169,7 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Report Filiter";
             // 
-            // frmEmployeeSales
+            // frmSalesByDepartment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -179,7 +181,7 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnPrinterSave);
             this.MaximizeBox = false;
-            this.Name = "frmEmployeeSales";
+            this.Name = "frmSalesByDepartment";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Employee Sales Report";
