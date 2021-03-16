@@ -1097,14 +1097,53 @@ namespace IMS_Client_2
 
         private void employeeSaleReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Report.Report_Forms.frmEmployeeSales frmEmployeeSales = new Report.Report_Forms.frmEmployeeSales();
-            frmEmployeeSales.Show();
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmEmployeeSales) || clsUtility.IsAdmin)
+            {
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Report.Report_Forms.frmEmployeeSales));
+                if (!b)
+                {
+                    Report.Report_Forms.frmEmployeeSales frmEmployeeSales = new Report.Report_Forms.frmEmployeeSales();
+                    frmEmployeeSales.Show();
+                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
 
         private void salesAnalysisReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Report.Report_Forms.frmSalesAnalysReport frmSalesAnalysis = new Report.Report_Forms.frmSalesAnalysReport();
-            frmSalesAnalysis.Show();
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmSalesAnalysReport) || clsUtility.IsAdmin)
+            {
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Report.Report_Forms.frmSalesAnalysReport));
+                if (!b)
+                {
+                    Report.Report_Forms.frmSalesAnalysReport frmSalesAnalysis = new Report.Report_Forms.frmSalesAnalysReport();
+                    frmSalesAnalysis.Show();
+                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
+        }
+
+        private void salesByDepartmentReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmSalesByDepartment) || clsUtility.IsAdmin)
+            {
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Report.Report_Forms.frmSalesByDepartment));
+                if (!b)
+                {
+                    Report.Report_Forms.frmSalesByDepartment frmSalesByDepartment = new Report.Report_Forms.frmSalesByDepartment();
+                    frmSalesByDepartment.Show();
+                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
         }
     }
 }

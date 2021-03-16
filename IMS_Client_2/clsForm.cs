@@ -47,10 +47,14 @@
             frmDashBoard = 49,
             frmQuickBarCodePrint = 50,
             frmDiscountLogin = 51,
-            frmScanInventory =52,
-            frmScanInventoryList=53,
-            frmScanInventoryCompare=54,
-            frmCompanyMaster=55,
+            frmScanInventory = 52,
+            frmScanInventoryList = 53,
+            frmScanInventoryCompare = 54,
+            frmCompanyMaster = 55,
+
+            frmEmployeeSales = 56,
+            frmSalesAnalysReport = 57,
+            frmSalesByDepartment = 58,
             //frmDatabaseMaintenance = /commented
         }
         public enum Operation
