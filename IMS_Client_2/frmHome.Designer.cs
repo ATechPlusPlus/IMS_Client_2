@@ -606,6 +606,7 @@
             this.salesByDepartmentReportToolStripMenuItem.Name = "salesByDepartmentReportToolStripMenuItem";
             this.salesByDepartmentReportToolStripMenuItem.Size = new System.Drawing.Size(252, 24);
             this.salesByDepartmentReportToolStripMenuItem.Text = "Sales By Department Report";
+            this.salesByDepartmentReportToolStripMenuItem.Click += new System.EventHandler(this.salesByDepartmentReportToolStripMenuItem_Click);
             // 
             // otherArtsToolStripMenuItem
             // 

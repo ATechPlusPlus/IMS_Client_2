@@ -45,6 +45,9 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtCommision = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.chkCustomerMobile = new System.Windows.Forms.CheckBox();
             this.label12 = new System.Windows.Forms.Label();
             this.chkSalesManName = new System.Windows.Forms.CheckBox();
@@ -79,9 +82,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.txtExtension = new System.Windows.Forms.Label();
-            this.txtCommision = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -319,6 +319,40 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Other Settings";
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.Transparent;
+            this.label14.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(212, 295);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(21, 17);
+            this.label14.TabIndex = 301;
+            this.label14.Text = "%";
+            // 
+            // txtCommision
+            // 
+            this.txtCommision.BackColor = System.Drawing.Color.White;
+            this.txtCommision.Location = new System.Drawing.Point(154, 289);
+            this.txtCommision.Name = "txtCommision";
+            this.txtCommision.Size = new System.Drawing.Size(52, 25);
+            this.txtCommision.TabIndex = 300;
+            this.txtCommision.Text = "0";
+            this.txtCommision.Enter += new System.EventHandler(this.txtFooterNote_Enter);
+            this.txtCommision.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCommision_KeyPress);
+            this.txtCommision.Leave += new System.EventHandler(this.txtFooterNote_Leave);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.Transparent;
+            this.label13.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(6, 292);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(142, 17);
+            this.label13.TabIndex = 299;
+            this.label13.Text = "Employee Commision :";
+            // 
             // chkCustomerMobile
             // 
             this.chkCustomerMobile.AutoSize = true;
@@ -370,6 +404,8 @@
             this.txtFileExtension.Name = "txtFileExtension";
             this.txtFileExtension.Size = new System.Drawing.Size(82, 25);
             this.txtFileExtension.TabIndex = 197;
+            this.txtFileExtension.Enter += new System.EventHandler(this.txtFooterNote_Enter);
+            this.txtFileExtension.Leave += new System.EventHandler(this.txtFooterNote_Leave);
             // 
             // label5
             // 
@@ -389,6 +425,8 @@
             this.txtImagePath.Name = "txtImagePath";
             this.txtImagePath.Size = new System.Drawing.Size(315, 25);
             this.txtImagePath.TabIndex = 195;
+            this.txtImagePath.Enter += new System.EventHandler(this.txtFooterNote_Enter);
+            this.txtImagePath.Leave += new System.EventHandler(this.txtFooterNote_Leave);
             // 
             // chkArabicPrice
             // 
@@ -408,6 +446,8 @@
             this.txtFooterNote.Name = "txtFooterNote";
             this.txtFooterNote.Size = new System.Drawing.Size(352, 56);
             this.txtFooterNote.TabIndex = 0;
+            this.txtFooterNote.Enter += new System.EventHandler(this.txtFooterNote_Enter);
+            this.txtFooterNote.Leave += new System.EventHandler(this.txtFooterNote_Leave);
             // 
             // btnFooterCancel
             // 
@@ -647,6 +687,8 @@
             this.txtMachineName.ReadOnly = true;
             this.txtMachineName.Size = new System.Drawing.Size(240, 25);
             this.txtMachineName.TabIndex = 196;
+            this.txtMachineName.Enter += new System.EventHandler(this.txtFooterNote_Enter);
+            this.txtMachineName.Leave += new System.EventHandler(this.txtFooterNote_Leave);
             // 
             // cmbInvoicePrinter
             // 
@@ -748,36 +790,6 @@
             this.txtExtension.Size = new System.Drawing.Size(128, 22);
             this.txtExtension.TabIndex = 82;
             this.txtExtension.Text = "Other Settings";
-            // 
-            // txtCommision
-            // 
-            this.txtCommision.BackColor = System.Drawing.Color.White;
-            this.txtCommision.Location = new System.Drawing.Point(154, 289);
-            this.txtCommision.Name = "txtCommision";
-            this.txtCommision.Size = new System.Drawing.Size(52, 25);
-            this.txtCommision.TabIndex = 300;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.BackColor = System.Drawing.Color.Transparent;
-            this.label13.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(6, 292);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(142, 17);
-            this.label13.TabIndex = 299;
-            this.label13.Text = "Employee Commision :";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.BackColor = System.Drawing.Color.Transparent;
-            this.label14.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(212, 295);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(21, 17);
-            this.label14.TabIndex = 301;
-            this.label14.Text = "%";
             // 
             // frmOtherSetting
             // 

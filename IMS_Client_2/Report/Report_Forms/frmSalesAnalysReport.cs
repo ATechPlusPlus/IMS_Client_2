@@ -16,21 +16,26 @@ namespace IMS_Client_2.Report.Report_Forms
         {
             InitializeComponent();
         }
+        CoreApp.clsConnection_DAL ObjDAL = new CoreApp.clsConnection_DAL(true);
+        CoreApp.clsUtility ObjUtil = new CoreApp.clsUtility();
+
         Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
         Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
+        
+        int ShopeID = 0;
+
         private void frmEmployeeSales_Load(object sender, EventArgs e)
         {
             btnPrinterSave.BackgroundImage = B_Leave;
             btnCancel.BackgroundImage = B_Leave;
             dtFromDate.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             FillStoreData();
-
         }
-        CoreApp.clsConnection_DAL ObjDAL = new CoreApp.clsConnection_DAL(true);
+        
         private void FillStoreData()
         {
             DataTable dt = ObjDAL.GetDataCol(CoreApp.clsUtility.DBName + ".[dbo].[StoreMaster]", "StoreID,StoreName", "ISNULL(ActiveStatus,1)=1", "StoreName ASC");
-            if (dt.Rows.Count>0)
+            if (ObjUtil.ValidateTable(dt))
             {
                 cmbShop.DataSource = dt;
                 cmbShop.DisplayMember = "StoreName";
@@ -38,6 +43,7 @@ namespace IMS_Client_2.Report.Report_Forms
                 cmbShop.SelectedIndex = -1;
             }
         }
+
         private void btnAdd_MouseEnter(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
@@ -50,7 +56,6 @@ namespace IMS_Client_2.Report.Report_Forms
             btn.BackgroundImage = B_Leave;
         }
 
-        int ShopeID = 0;
         private void btnPrinterSave_Click(object sender, EventArgs e)
         {
             if (cmbShop.SelectedIndex == -1)
@@ -60,7 +65,6 @@ namespace IMS_Client_2.Report.Report_Forms
             else
             {
                 ShopeID = (int)(cmbShop.SelectedValue);
-
             }
             reportViewer1.LocalReport.DataSources.Clear();
 
@@ -69,7 +73,7 @@ namespace IMS_Client_2.Report.Report_Forms
             ObjDAL.SetStoreProcedureData("ToDate", SqlDbType.Date, dtToDate.Value.ToString("yyyy-MM-dd"));
          
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(CoreApp.clsUtility.DBName + ".dbo.SPR_Get_SaleAnalysis_Report");
-            if (ds.Tables.Count > 0)
+            if (ObjUtil.ValidateDataSet(ds))
             {
                 DataTable dtsalesAnaylisis = ds.Tables[0];
                 ReportDataSource rds = new ReportDataSource("dsSalesAnalysis", dtsalesAnaylisis);
@@ -77,7 +81,6 @@ namespace IMS_Client_2.Report.Report_Forms
                 string datefilter ="From : "+dtFromDate.Value.ToShortDateString() + " To " + dtToDate.Value.ToShortDateString();
                 ReportParameter param1 = new ReportParameter("parmDateFilter", datefilter, true);
                 string shopName = "";
-
 
                 if (cmbShop.SelectedIndex==-1)
                 {
@@ -95,7 +98,6 @@ namespace IMS_Client_2.Report.Report_Forms
 
                 reportViewer1.LocalReport.SetParameters(param3);
 
-
                 reportViewer1.LocalReport.DataSources.Add(rds);
                 reportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout);
                 reportViewer1.ZoomMode = ZoomMode.Percent;
@@ -110,7 +112,6 @@ namespace IMS_Client_2.Report.Report_Forms
          
             dtFromDate.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             reportViewer1.LocalReport.DataSources.Clear();
-
         }
     }
 }

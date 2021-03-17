@@ -57,6 +57,7 @@
             this.btnPrinterSave.UseVisualStyleBackColor = true;
             this.btnPrinterSave.Click += new System.EventHandler(this.btnPrinterSave_Click);
             this.btnPrinterSave.Enter += new System.EventHandler(this.btnAdd_MouseEnter);
+            this.btnPrinterSave.Leave += new System.EventHandler(this.btnAdd_MouseLeave);
             // 
             // groupBox1
             // 
@@ -93,6 +94,7 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             this.btnCancel.Enter += new System.EventHandler(this.btnAdd_MouseEnter);
+            this.btnCancel.Leave += new System.EventHandler(this.btnAdd_MouseLeave);
             // 
             // label1
             // 

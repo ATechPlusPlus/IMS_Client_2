@@ -231,17 +231,25 @@
     <Compile Include="Report\RDLC_DataSets\ds_MiniSalesReport.cs">
       <DependentUpon>ds_MiniSalesReport.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Report\RDLC_DataSets\ds_SalesDepartmentReport.cs">
+      <DependentUpon>ds_SalesDepartmentReport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Report\RDLC_DataSets\ds_SalesDepartmentReport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_SalesDepartmentReport.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Report\Report_Forms\frmBranchShortingReport.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Report\Report_Forms\frmBranchShortingReport.Designer.cs">
       <DependentUpon>frmBranchShortingReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Report\Report_Forms\SalesByDepartment.cs">
+    <Compile Include="Report\Report_Forms\frmSalesByDepartment.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Report\Report_Forms\SalesByDepartment.Designer.cs">
-      <DependentUpon>SalesByDepartment.cs</DependentUpon>
+    <Compile Include="Report\Report_Forms\frmSalesByDepartment.Designer.cs">
+      <DependentUpon>frmSalesByDepartment.cs</DependentUpon>
     </Compile>
     <Compile Include="Report\Report_Forms\frmSalesAnalysReport.cs">
       <SubType>Form</SubType>
@@ -802,8 +810,8 @@
     <EmbeddedResource Include="Report\Report_Forms\frmClosingCashReport.resx">
       <DependentUpon>frmClosingCashReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report\Report_Forms\SalesByDepartment.resx">
-      <DependentUpon>SalesByDepartment.cs</DependentUpon>
+    <EmbeddedResource Include="Report\Report_Forms\frmSalesByDepartment.resx">
+      <DependentUpon>frmSalesByDepartment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Report_Forms\frmSalesAnalysReport.resx">
       <DependentUpon>frmSalesAnalysReport.cs</DependentUpon>
@@ -927,6 +935,17 @@
     </None>
     <None Include="Report\RDLC_DataSets\ds_MiniSalesReport.xss">
       <DependentUpon>ds_MiniSalesReport.xsd</DependentUpon>
+    </None>
+    <None Include="Report\RDLC_DataSets\ds_SalesDepartmentReport.xsc">
+      <DependentUpon>ds_SalesDepartmentReport.xsd</DependentUpon>
+    </None>
+    <None Include="Report\RDLC_DataSets\ds_SalesDepartmentReport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_SalesDepartmentReport.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Report\RDLC_DataSets\ds_SalesDepartmentReport.xss">
+      <DependentUpon>ds_SalesDepartmentReport.xsd</DependentUpon>
     </None>
     <None Include="Report\RDLC_DataSets\ds_SalesDetails.xsc">
       <DependentUpon>ds_SalesDetails.xsd</DependentUpon>
