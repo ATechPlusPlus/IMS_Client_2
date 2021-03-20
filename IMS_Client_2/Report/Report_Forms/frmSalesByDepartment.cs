@@ -90,6 +90,7 @@ namespace IMS_Client_2.Report.Report_Forms
             {
                 cmbDepartment.DataSource = null;
             }
+            cmbDepartment.SelectedIndex = -1;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -97,6 +98,14 @@ namespace IMS_Client_2.Report.Report_Forms
             CategoryID = 0;
             cmbDepartment.SelectedIndex = -1;
             reportViewer1.LocalReport.DataSources.Clear();
+        }
+
+        private void cmbDepartment_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (cmbDepartment.SelectedValue != null)
+            {
+                CategoryID = Convert.ToInt32(cmbDepartment.SelectedValue);
+            }
         }
     }
 }
