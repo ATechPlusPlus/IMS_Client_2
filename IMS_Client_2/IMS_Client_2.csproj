@@ -231,14 +231,6 @@
     <Compile Include="Report\RDLC_DataSets\ds_MiniSalesReport.cs">
       <DependentUpon>ds_MiniSalesReport.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Report\RDLC_DataSets\ds_SalesDepartmentReport.cs">
-      <DependentUpon>ds_SalesDepartmentReport.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Report\RDLC_DataSets\ds_SalesDepartmentReport.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ds_SalesDepartmentReport.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Report\Report_Forms\frmBranchShortingReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -935,17 +927,6 @@
     </None>
     <None Include="Report\RDLC_DataSets\ds_MiniSalesReport.xss">
       <DependentUpon>ds_MiniSalesReport.xsd</DependentUpon>
-    </None>
-    <None Include="Report\RDLC_DataSets\ds_SalesDepartmentReport.xsc">
-      <DependentUpon>ds_SalesDepartmentReport.xsd</DependentUpon>
-    </None>
-    <None Include="Report\RDLC_DataSets\ds_SalesDepartmentReport.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ds_SalesDepartmentReport.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Report\RDLC_DataSets\ds_SalesDepartmentReport.xss">
-      <DependentUpon>ds_SalesDepartmentReport.xsd</DependentUpon>
     </None>
     <None Include="Report\RDLC_DataSets\ds_SalesDetails.xsc">
       <DependentUpon>ds_SalesDetails.xsd</DependentUpon>

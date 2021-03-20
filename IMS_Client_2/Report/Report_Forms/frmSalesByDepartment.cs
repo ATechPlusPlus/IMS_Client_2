@@ -61,11 +61,24 @@ namespace IMS_Client_2.Report.Report_Forms
                 {
                     reportViewer1.LocalReport.DataSources.Clear();
 
-                    ReportDataSource rds = new ReportDataSource("ds_SalesDepartmentReport", dt);
+                   
+
+                    ReportParameter param1 = new ReportParameter("parmDateFilter", "Date Filter : " + dtpFromDate.Value.ToShortDateString()+" to "+ dtpToDate.Value.ToShortDateString(), true);
+
+
+                    // adding the parameter in the report dynamically
+                    reportViewer1.LocalReport.SetParameters(param1);
+
+                    ReportDataSource rds = new ReportDataSource("dsSalesDepartmentReport", dt);
 
                     reportViewer1.LocalReport.DataSources.Add(rds);
 
+                    reportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout);
+                    reportViewer1.ZoomMode = ZoomMode.Percent;
+                    reportViewer1.ZoomPercent = 100;
                     this.reportViewer1.RefreshReport();
+
+                    
                 }
                 else
                 {
