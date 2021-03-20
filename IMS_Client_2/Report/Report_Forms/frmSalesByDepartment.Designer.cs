@@ -171,7 +171,7 @@
             this.groupBox3.Size = new System.Drawing.Size(870, 65);
             this.groupBox3.TabIndex = 199;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Report Filiter";
+            this.groupBox3.Text = "Report Filter";
             // 
             // cmbDepartment
             // 

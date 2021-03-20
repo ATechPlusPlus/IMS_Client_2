@@ -61,24 +61,18 @@ namespace IMS_Client_2.Report.Report_Forms
                 {
                     reportViewer1.LocalReport.DataSources.Clear();
 
-                   
-
-                    ReportParameter param1 = new ReportParameter("parmDateFilter", "Date Filter : " + dtpFromDate.Value.ToShortDateString()+" to "+ dtpToDate.Value.ToShortDateString(), true);
-
+                    ReportParameter param1 = new ReportParameter("parmDateFilter", "Date Filter : " + dtpFromDate.Value.ToShortDateString() + " to " + dtpToDate.Value.ToShortDateString(), true);
 
                     // adding the parameter in the report dynamically
                     reportViewer1.LocalReport.SetParameters(param1);
 
                     ReportDataSource rds = new ReportDataSource("dsSalesDepartmentReport", dt);
-
                     reportViewer1.LocalReport.DataSources.Add(rds);
 
                     reportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout);
                     reportViewer1.ZoomMode = ZoomMode.Percent;
                     reportViewer1.ZoomPercent = 100;
                     this.reportViewer1.RefreshReport();
-
-                    
                 }
                 else
                 {
@@ -95,15 +89,16 @@ namespace IMS_Client_2.Report.Report_Forms
 
             if (ObjUtil.ValidateTable(dt))
             {
-                cmbDepartment.SelectedValue = "CategoryID";
-                cmbDepartment.DisplayMember = "CategoryName";
                 cmbDepartment.DataSource = dt;
+                cmbDepartment.DisplayMember = "CategoryName";
+                cmbDepartment.ValueMember = "CategoryID";
+
+                cmbDepartment.SelectedIndex = -1;
             }
             else
             {
                 cmbDepartment.DataSource = null;
             }
-            cmbDepartment.SelectedIndex = -1;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

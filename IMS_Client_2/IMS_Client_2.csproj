@@ -228,6 +228,12 @@
     <Compile Include="Masters\frmCompanyMaster.designer.cs">
       <DependentUpon>frmCompanyMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="Other_Forms\frmItemCard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other_Forms\frmItemCard.Designer.cs">
+      <DependentUpon>frmItemCard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\RDLC_DataSets\ds_MiniSalesReport.cs">
       <DependentUpon>ds_MiniSalesReport.xsd</DependentUpon>
     </Compile>
@@ -738,6 +744,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Other_Forms\frmDiscountLogin.resx">
       <DependentUpon>frmDiscountLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other_Forms\frmItemCard.resx">
+      <DependentUpon>frmItemCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Other_Forms\frmPayment.resx">
       <DependentUpon>frmPayment.cs</DependentUpon>

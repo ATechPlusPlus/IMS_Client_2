@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEmployeeSales));
             this.btnPrinterSave = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
@@ -41,17 +42,21 @@
             this.cmbEmployee = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtAdmin = new System.Windows.Forms.TextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnPrinterSave
             // 
+            this.btnPrinterSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrinterSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnPrinterSave.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPrinterSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnPrinterSave.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrinterSave.Location = new System.Drawing.Point(718, 97);
+            this.btnPrinterSave.Location = new System.Drawing.Point(718, 129);
             this.btnPrinterSave.Name = "btnPrinterSave";
             this.btnPrinterSave.Size = new System.Drawing.Size(76, 25);
             this.btnPrinterSave.TabIndex = 1;
@@ -63,10 +68,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.reportViewer1);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 135);
+            this.groupBox1.Location = new System.Drawing.Point(12, 156);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(870, 552);
             this.groupBox1.TabIndex = 200;
@@ -84,11 +92,12 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCancel.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(806, 97);
+            this.btnCancel.Location = new System.Drawing.Point(806, 129);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(76, 25);
             this.btnCancel.TabIndex = 201;
@@ -149,6 +158,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.BackColor = System.Drawing.Color.Transparent;
             this.groupBox3.Controls.Add(this.cmbEmployee);
             this.groupBox3.Controls.Add(this.label2);
@@ -157,12 +168,12 @@
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(12, 17);
+            this.groupBox3.Location = new System.Drawing.Point(12, 50);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(870, 70);
             this.groupBox3.TabIndex = 199;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Report Filiter";
+            this.groupBox3.Text = "Report Filter";
             // 
             // cmbEmployee
             // 
@@ -178,7 +189,7 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(25, 98);
+            this.label3.Location = new System.Drawing.Point(25, 133);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(127, 17);
             this.label3.TabIndex = 301;
@@ -188,11 +199,34 @@
             // 
             this.txtAdmin.BackColor = System.Drawing.Color.White;
             this.txtAdmin.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAdmin.Location = new System.Drawing.Point(158, 95);
+            this.txtAdmin.Location = new System.Drawing.Point(158, 129);
             this.txtAdmin.Name = "txtAdmin";
             this.txtAdmin.Size = new System.Drawing.Size(198, 25);
             this.txtAdmin.TabIndex = 301;
             this.txtAdmin.Text = "0";
+            // 
+            // panel2
+            // 
+            this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
+            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel2.Controls.Add(this.label12);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(893, 40);
+            this.panel2.TabIndex = 302;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Transparent;
+            this.label12.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.White;
+            this.label12.Location = new System.Drawing.Point(11, 9);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(200, 22);
+            this.label12.TabIndex = 82;
+            this.label12.Text = "Employee Sales Report";
             // 
             // frmEmployeeSales
             // 
@@ -200,7 +234,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(893, 685);
+            this.ClientSize = new System.Drawing.Size(893, 711);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.txtAdmin);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnCancel);
@@ -216,6 +251,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -235,5 +272,7 @@
         private System.Windows.Forms.ComboBox cmbEmployee;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtAdmin;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label12;
     }
 }
