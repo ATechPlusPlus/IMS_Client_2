@@ -1145,5 +1145,23 @@ namespace IMS_Client_2
                 clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
             }
         }
+
+        private void itemCardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (clsUtility.IsAdmin)
+            {
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Other_Forms.frmItemCard));
+                if (!b)
+                {
+                    Other_Forms.frmItemCard Obj = new Other_Forms.frmItemCard();
+                    Obj.Show();
+                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+            }
+        }
+
     }
 }

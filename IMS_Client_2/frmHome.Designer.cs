@@ -112,6 +112,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.itemCardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -458,7 +459,8 @@
             this.transferWatchToolStripMenuItem,
             this.stockDetailsToolStripMenuItem,
             this.toolStripSeparator1,
-            this.viewToolStripMenuItem});
+            this.viewToolStripMenuItem,
+            this.itemCardToolStripMenuItem});
             this.toolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1.Image")));
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(135, 36);
@@ -883,6 +885,13 @@
             this.label9.TabIndex = 28;
             this.label9.Text = "Today\'s Cash Box";
             // 
+            // itemCardToolStripMenuItem
+            // 
+            this.itemCardToolStripMenuItem.Name = "itemCardToolStripMenuItem";
+            this.itemCardToolStripMenuItem.Size = new System.Drawing.Size(229, 24);
+            this.itemCardToolStripMenuItem.Text = "Item Card";
+            this.itemCardToolStripMenuItem.Click += new System.EventHandler(this.itemCardToolStripMenuItem_Click);
+            // 
             // frmHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -1008,5 +1017,6 @@
         private System.Windows.Forms.ToolStripMenuItem employeeSaleReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salesAnalysisReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salesByDepartmentReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem itemCardToolStripMenuItem;
     }
 }
