@@ -29,8 +29,11 @@ namespace IMS_Client_2.Report.Report_Forms
             btnPrinterSave.BackgroundImage = B_Leave;
             btnCancel.BackgroundImage = B_Leave;
 
+            dtpFromDate.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+
             LoadDepartment();
         }
+
         private void btnAdd_MouseEnter(object sender, EventArgs e)
         {
             Button btn = (Button)sender;

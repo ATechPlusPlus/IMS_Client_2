@@ -13,7 +13,7 @@
     <Shape ID="DesignTable:dtInventoryCompare" ZOrder="4" X="226" Y="216" Height="219" Width="187" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="215" />
     <Shape ID="DesignTable:dtEmployeeWiseSales" ZOrder="3" X="643" Y="27" Height="200" Width="192" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="196" />
     <Shape ID="DesignTable:dtSaleAnalysis" ZOrder="2" X="457" Y="229" Height="182" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="178" />
-    <Shape ID="DesignTable:SalesDepartmentReport" ZOrder="1" X="635" Y="255" Height="181" Width="205" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="177" />
+    <Shape ID="DesignTable:SalesDepartmentReport" ZOrder="1" X="634" Y="255" Height="219" Width="205" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="24" SplitterPosition="215" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

@@ -2893,13 +2893,17 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             
             private global::System.Data.DataColumn columnCategoryName;
             
-            private global::System.Data.DataColumn columnTotalSales;
-            
-            private global::System.Data.DataColumn columnLocalCost;
+            private global::System.Data.DataColumn columnBrandName;
             
             private global::System.Data.DataColumn columnQTY;
             
-            private global::System.Data.DataColumn columnLocal;
+            private global::System.Data.DataColumn columnRate;
+            
+            private global::System.Data.DataColumn columnLocalCost;
+            
+            private global::System.Data.DataColumn columnTotalSales;
+            
+            private global::System.Data.DataColumn columnSalesCost;
             
             private global::System.Data.DataColumn columnProfit;
             
@@ -2962,17 +2966,9 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn TotalSalesColumn {
+            public global::System.Data.DataColumn BrandNameColumn {
                 get {
-                    return this.columnTotalSales;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn LocalCostColumn {
-                get {
-                    return this.columnLocalCost;
+                    return this.columnBrandName;
                 }
             }
             
@@ -2986,9 +2982,33 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn LocalColumn {
+            public global::System.Data.DataColumn RateColumn {
                 get {
-                    return this.columnLocal;
+                    return this.columnRate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn LocalCostColumn {
+                get {
+                    return this.columnLocalCost;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn TotalSalesColumn {
+                get {
+                    return this.columnTotalSales;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn SalesCostColumn {
+                get {
+                    return this.columnSalesCost;
                 }
             }
             
@@ -3037,16 +3057,18 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public SalesDepartmentReportRow AddSalesDepartmentReportRow(string ModelNo, string ProductName, string CategoryName, string TotalSales, string LocalCost, string QTY, string Local, string Profit) {
+            public SalesDepartmentReportRow AddSalesDepartmentReportRow(string ModelNo, string ProductName, string CategoryName, string BrandName, string QTY, string Rate, string LocalCost, string TotalSales, string SalesCost, string Profit) {
                 SalesDepartmentReportRow rowSalesDepartmentReportRow = ((SalesDepartmentReportRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ModelNo,
                         ProductName,
                         CategoryName,
-                        TotalSales,
-                        LocalCost,
+                        BrandName,
                         QTY,
-                        Local,
+                        Rate,
+                        LocalCost,
+                        TotalSales,
+                        SalesCost,
                         Profit};
                 rowSalesDepartmentReportRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSalesDepartmentReportRow);
@@ -3073,10 +3095,12 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
                 this.columnModelNo = base.Columns["ModelNo"];
                 this.columnProductName = base.Columns["ProductName"];
                 this.columnCategoryName = base.Columns["CategoryName"];
-                this.columnTotalSales = base.Columns["TotalSales"];
-                this.columnLocalCost = base.Columns["LocalCost"];
+                this.columnBrandName = base.Columns["BrandName"];
                 this.columnQTY = base.Columns["QTY"];
-                this.columnLocal = base.Columns["Local"];
+                this.columnRate = base.Columns["Rate"];
+                this.columnLocalCost = base.Columns["LocalCost"];
+                this.columnTotalSales = base.Columns["TotalSales"];
+                this.columnSalesCost = base.Columns["SalesCost"];
                 this.columnProfit = base.Columns["Profit"];
             }
             
@@ -3089,14 +3113,18 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
                 base.Columns.Add(this.columnProductName);
                 this.columnCategoryName = new global::System.Data.DataColumn("CategoryName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCategoryName);
-                this.columnTotalSales = new global::System.Data.DataColumn("TotalSales", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTotalSales);
-                this.columnLocalCost = new global::System.Data.DataColumn("LocalCost", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnLocalCost);
+                this.columnBrandName = new global::System.Data.DataColumn("BrandName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBrandName);
                 this.columnQTY = new global::System.Data.DataColumn("QTY", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnQTY);
-                this.columnLocal = new global::System.Data.DataColumn("Local", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnLocal);
+                this.columnRate = new global::System.Data.DataColumn("Rate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRate);
+                this.columnLocalCost = new global::System.Data.DataColumn("LocalCost", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLocalCost);
+                this.columnTotalSales = new global::System.Data.DataColumn("TotalSales", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotalSales);
+                this.columnSalesCost = new global::System.Data.DataColumn("SalesCost", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSalesCost);
                 this.columnProfit = new global::System.Data.DataColumn("Profit", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnProfit);
                 this.columnProfit.Caption = "Profit %";
@@ -4854,33 +4882,17 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string TotalSales {
+            public string BrandName {
                 get {
                     try {
-                        return ((string)(this[this.tableSalesDepartmentReport.TotalSalesColumn]));
+                        return ((string)(this[this.tableSalesDepartmentReport.BrandNameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'TotalSales\' in table \'SalesDepartmentReport\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'BrandName\' in table \'SalesDepartmentReport\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableSalesDepartmentReport.TotalSalesColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string LocalCost {
-                get {
-                    try {
-                        return ((string)(this[this.tableSalesDepartmentReport.LocalCostColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'LocalCost\' in table \'SalesDepartmentReport\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableSalesDepartmentReport.LocalCostColumn] = value;
+                    this[this.tableSalesDepartmentReport.BrandNameColumn] = value;
                 }
             }
             
@@ -4902,17 +4914,65 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string Local {
+            public string Rate {
                 get {
                     try {
-                        return ((string)(this[this.tableSalesDepartmentReport.LocalColumn]));
+                        return ((string)(this[this.tableSalesDepartmentReport.RateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Local\' in table \'SalesDepartmentReport\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Rate\' in table \'SalesDepartmentReport\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableSalesDepartmentReport.LocalColumn] = value;
+                    this[this.tableSalesDepartmentReport.RateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string LocalCost {
+                get {
+                    try {
+                        return ((string)(this[this.tableSalesDepartmentReport.LocalCostColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'LocalCost\' in table \'SalesDepartmentReport\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSalesDepartmentReport.LocalCostColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string TotalSales {
+                get {
+                    try {
+                        return ((string)(this[this.tableSalesDepartmentReport.TotalSalesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TotalSales\' in table \'SalesDepartmentReport\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSalesDepartmentReport.TotalSalesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string SalesCost {
+                get {
+                    try {
+                        return ((string)(this[this.tableSalesDepartmentReport.SalesCostColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SalesCost\' in table \'SalesDepartmentReport\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSalesDepartmentReport.SalesCostColumn] = value;
                 }
             }
             
@@ -4970,26 +5030,14 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsTotalSalesNull() {
-                return this.IsNull(this.tableSalesDepartmentReport.TotalSalesColumn);
+            public bool IsBrandNameNull() {
+                return this.IsNull(this.tableSalesDepartmentReport.BrandNameColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetTotalSalesNull() {
-                this[this.tableSalesDepartmentReport.TotalSalesColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsLocalCostNull() {
-                return this.IsNull(this.tableSalesDepartmentReport.LocalCostColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetLocalCostNull() {
-                this[this.tableSalesDepartmentReport.LocalCostColumn] = global::System.Convert.DBNull;
+            public void SetBrandNameNull() {
+                this[this.tableSalesDepartmentReport.BrandNameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5006,14 +5054,50 @@ namespace IMS_Client_2.Report.RDLC_DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsLocalNull() {
-                return this.IsNull(this.tableSalesDepartmentReport.LocalColumn);
+            public bool IsRateNull() {
+                return this.IsNull(this.tableSalesDepartmentReport.RateColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetLocalNull() {
-                this[this.tableSalesDepartmentReport.LocalColumn] = global::System.Convert.DBNull;
+            public void SetRateNull() {
+                this[this.tableSalesDepartmentReport.RateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsLocalCostNull() {
+                return this.IsNull(this.tableSalesDepartmentReport.LocalCostColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetLocalCostNull() {
+                this[this.tableSalesDepartmentReport.LocalCostColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsTotalSalesNull() {
+                return this.IsNull(this.tableSalesDepartmentReport.TotalSalesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetTotalSalesNull() {
+                this[this.tableSalesDepartmentReport.TotalSalesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsSalesCostNull() {
+                return this.IsNull(this.tableSalesDepartmentReport.SalesCostColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetSalesCostNull() {
+                this[this.tableSalesDepartmentReport.SalesCostColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

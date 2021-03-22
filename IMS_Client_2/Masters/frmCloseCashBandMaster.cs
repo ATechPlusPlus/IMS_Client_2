@@ -292,7 +292,7 @@ namespace IMS_Client_2.Masters
         {
             TextBox txt = (TextBox)sender;
             e.Handled = ObjUtil.IsDecimal(txtCashBand, e);
-            if (e.Handled == true)
+            if (e.Handled)
             {
                 clsUtility.ShowInfoMessage("Enter Only Number...", clsUtility.strProjectTitle);
                 txtCashBand.Focus();

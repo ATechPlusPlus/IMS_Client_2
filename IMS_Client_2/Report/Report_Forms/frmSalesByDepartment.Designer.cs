@@ -61,8 +61,8 @@
             this.btnPrinterSave.Text = "Generate";
             this.btnPrinterSave.UseVisualStyleBackColor = true;
             this.btnPrinterSave.Click += new System.EventHandler(this.btnPrinterSave_Click);
-            this.btnPrinterSave.Enter += new System.EventHandler(this.btnAdd_MouseEnter);
-            this.btnPrinterSave.Leave += new System.EventHandler(this.btnAdd_MouseLeave);
+            this.btnPrinterSave.MouseEnter += new System.EventHandler(this.btnAdd_MouseEnter);
+            this.btnPrinterSave.MouseLeave += new System.EventHandler(this.btnAdd_MouseLeave);
             // 
             // groupBox1
             // 
@@ -102,8 +102,8 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            this.btnCancel.Enter += new System.EventHandler(this.btnAdd_MouseEnter);
-            this.btnCancel.Leave += new System.EventHandler(this.btnAdd_MouseLeave);
+            this.btnCancel.MouseEnter += new System.EventHandler(this.btnAdd_MouseEnter);
+            this.btnCancel.MouseLeave += new System.EventHandler(this.btnAdd_MouseLeave);
             // 
             // label7
             // 

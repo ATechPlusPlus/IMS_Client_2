@@ -103,5 +103,26 @@ namespace IMS_Client_2.Report.Report_Forms
             dtFromDate.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             reportViewer1.LocalReport.DataSources.Clear();
         }
+
+        private void txtAdmin_Enter(object sender, EventArgs e)
+        {
+            ObjUtil.SetTextHighlightColor(sender);
+        }
+
+        private void txtAdmin_Leave(object sender, EventArgs e)
+        {
+            ObjUtil.SetTextHighlightColor(sender, Color.White);
+        }
+
+        private void txtAdmin_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //TextBox txt = (TextBox)sender;
+            e.Handled = ObjUtil.IsNumeric(e);
+            if (e.Handled)
+            {
+                clsUtility.ShowInfoMessage("Enter Only Number...", clsUtility.strProjectTitle);
+                txtAdmin.Focus();
+            }
+        }
     }
 }

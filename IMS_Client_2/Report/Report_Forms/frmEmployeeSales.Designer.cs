@@ -63,8 +63,8 @@
             this.btnPrinterSave.Text = "Generate";
             this.btnPrinterSave.UseVisualStyleBackColor = true;
             this.btnPrinterSave.Click += new System.EventHandler(this.btnPrinterSave_Click);
-            this.btnPrinterSave.Enter += new System.EventHandler(this.btnAdd_MouseEnter);
-            this.btnPrinterSave.Leave += new System.EventHandler(this.btnAdd_MouseLeave);
+            this.btnPrinterSave.MouseEnter += new System.EventHandler(this.btnAdd_MouseEnter);
+            this.btnPrinterSave.MouseLeave += new System.EventHandler(this.btnAdd_MouseLeave);
             // 
             // groupBox1
             // 
@@ -104,8 +104,8 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            this.btnCancel.Enter += new System.EventHandler(this.btnAdd_MouseEnter);
-            this.btnCancel.Leave += new System.EventHandler(this.btnAdd_MouseLeave);
+            this.btnCancel.MouseEnter += new System.EventHandler(this.btnAdd_MouseEnter);
+            this.btnCancel.MouseLeave += new System.EventHandler(this.btnAdd_MouseLeave);
             // 
             // label7
             // 
@@ -204,6 +204,9 @@
             this.txtAdmin.Size = new System.Drawing.Size(198, 25);
             this.txtAdmin.TabIndex = 301;
             this.txtAdmin.Text = "0";
+            this.txtAdmin.Enter += new System.EventHandler(this.txtAdmin_Enter);
+            this.txtAdmin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAdmin_KeyPress);
+            this.txtAdmin.Leave += new System.EventHandler(this.txtAdmin_Leave);
             // 
             // panel2
             // 
