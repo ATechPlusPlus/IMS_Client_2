@@ -453,6 +453,10 @@ namespace IMS_Client_2.StockManagement
             {
                 dgvProductDetails.Columns["EndUser"].ReadOnly = false;
             }
+            if (dgvProductDetails.Columns.Contains("LocalCost"))
+            {
+                dgvProductDetails.Columns["LocalCost"].ReadOnly = false;
+            }
         }
 
         private void dgvProductDetails_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
@@ -471,6 +475,20 @@ namespace IMS_Client_2.StockManagement
                 else if (Convert.ToDecimal(e.FormattedValue) == 0)
                 {
                     clsUtility.ShowInfoMessage("Enter Valid EndUser Price..");
+                    e.Cancel = true;
+                }
+                return;
+            }
+            else if (headerText == "LocalCost")
+            {
+                if (e.FormattedValue == DBNull.Value || e.FormattedValue.ToString() == "")
+                {
+                    clsUtility.ShowInfoMessage("Enter Local Cost Price..");
+                    e.Cancel = true;
+                }
+                else if (Convert.ToDecimal(e.FormattedValue) == 0)
+                {
+                    clsUtility.ShowInfoMessage("Enter Valid Local Cost Price..");
                     e.Cancel = true;
                 }
                 return;
@@ -518,6 +536,32 @@ namespace IMS_Client_2.StockManagement
                         clsUtility.ShowErrorMessage(ex.ToString());
                     }
                 }
+                else if (true)
+                {
+                    try
+                    {
+                        int SubProductID = Convert.ToInt32(dgvProductDetails.Rows[e.RowIndex].Cells["SubProductID"].Value);
+                        decimal Rate = Convert.ToDecimal(dgvProductDetails.Rows[e.RowIndex].Cells["LocalCost"].Value);
+
+                        ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, SubProductID, clsConnection_DAL.ParamType.Input);
+                        ObjDAL.SetStoreProcedureData("LocalCost", SqlDbType.Decimal, Rate, clsConnection_DAL.ParamType.Input);
+                        ObjDAL.SetStoreProcedureData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
+
+                        DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Update_LocalCost_By_SubProductID");
+                        if (ds != null && ds.Tables.Count > 0)
+                        {
+                            DataTable dt = ds.Tables[0];
+                            if (ObjUtil.ValidateTable(dt))
+                            {
+                                clsUtility.ShowInfoMessage(dt.Rows[0]["Msg"].ToString());
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        clsUtility.ShowErrorMessage(ex.ToString());
+                    }
+                }
             }
         }
 
@@ -527,6 +571,10 @@ namespace IMS_Client_2.StockManagement
             string headerText = dgvProductDetails.Columns[column].HeaderText;
 
             if (headerText == "EndUser")
+            {
+                e.Control.KeyPress += Decimal_Control_KeyPress;
+            }
+            if (headerText == "LocalCost")
             {
                 e.Control.KeyPress += Decimal_Control_KeyPress;
             }

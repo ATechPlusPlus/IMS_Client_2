@@ -70,10 +70,11 @@
             // 
             // panel2
             // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel2.Controls.Add(this.label12);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(894, 40);
@@ -93,6 +94,7 @@
             // 
             // PicProductMaster
             // 
+            this.PicProductMaster.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.PicProductMaster.BackColor = System.Drawing.Color.Transparent;
             this.PicProductMaster.Image = ((System.Drawing.Image)(resources.GetObject("PicProductMaster.Image")));
             this.PicProductMaster.Location = new System.Drawing.Point(721, 46);
@@ -132,6 +134,7 @@
             // 
             // picProduct
             // 
+            this.picProduct.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.picProduct.BackColor = System.Drawing.Color.Transparent;
             this.picProduct.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picProduct.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -144,6 +147,7 @@
             // 
             // txtValue
             // 
+            this.txtValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.txtValue.BackColor = System.Drawing.Color.White;
             this.txtValue.Enabled = false;
             this.txtValue.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -155,6 +159,7 @@
             // 
             // label6
             // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -166,6 +171,7 @@
             // 
             // txtTotalQTY
             // 
+            this.txtTotalQTY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTotalQTY.BackColor = System.Drawing.Color.White;
             this.txtTotalQTY.Enabled = false;
             this.txtTotalQTY.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -178,6 +184,7 @@
             // 
             // label5
             // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -191,6 +198,9 @@
             // dgvProductDetails
             // 
             this.dgvProductDetails.AllowUserToAddRows = false;
+            this.dgvProductDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvProductDetails.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProductDetails.BackgroundColor = System.Drawing.Color.White;
             this.dgvProductDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -368,6 +378,8 @@
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -380,6 +392,7 @@
             // 
             // btncancel
             // 
+            this.btncancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btncancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btncancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btncancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -396,6 +409,7 @@
             // 
             // btnSaveData
             // 
+            this.btnSaveData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSaveData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnSaveData.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSaveData.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -432,7 +446,6 @@
             this.Controls.Add(this.cmdFrom);
             this.Controls.Add(this.PicProductMaster);
             this.Controls.Add(this.panel2);
-            this.MaximizeBox = false;
             this.Name = "frmScanInventory";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

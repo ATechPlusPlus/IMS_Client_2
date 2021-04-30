@@ -28,9 +28,15 @@ namespace IMS_Client_2.Inventory
 
         public DateTime? ComparedDate { get; set; }
         public string ScanBy { get; set; }
+
         private void LoadData()
         {
             ObjDAL.SetStoreProcedureData("MasterScanID", SqlDbType.Int, pMasterScanID, clsConnection_DAL.ParamType.Input);
+            if (!ObjUtil.IsControlTextEmpty(txtBarCode))
+            {
+                ObjDAL.SetStoreProcedureData("BarCode", SqlDbType.BigInt, txtBarCode.Text.Trim(), clsConnection_DAL.ParamType.Input);
+            }
+
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_ScanInventoryCompare");
             if (ObjUtil.ValidateDataSet(ds))
             {
@@ -48,10 +54,18 @@ namespace IMS_Client_2.Inventory
                         ComparedDate = null;
                     }
                     StoreID = Convert.ToInt32(dt.Rows[0]["StoreID"]);
+
+                    int _SUBPID = Convert.ToInt32(dt.Rows[0]["SubProductID"]);
+                    picProduct.Image = GetProductPhoto(Convert.ToInt32(_SUBPID));
                 }
                 else
                 {
+                    if (!ObjUtil.IsControlTextEmpty(txtBarCode))
+                        clsUtility.ShowInfoMessage("No Product Found for the barcode value : " + txtBarCode.Text.Trim());
+
                     dgvProductDetails.DataSource = null;
+
+                    picProduct.Image = null;
                 }
             }
             else
@@ -59,6 +73,7 @@ namespace IMS_Client_2.Inventory
                 dgvProductDetails.DataSource = null;
             }
         }
+
         private void frmScanInventoryList_Load(object sender, EventArgs e)
         {
             txtDiffQTY.Text = "0";
@@ -79,7 +94,7 @@ namespace IMS_Client_2.Inventory
             dgvProductDetails.RowHeadersVisible = false; // set it to false if not needed
 
             LoadData();
-            DataBind();
+            DataBindTextBox();
             HighlightDiffQTY();
             if (comparestatus == 0)
             {
@@ -91,7 +106,7 @@ namespace IMS_Client_2.Inventory
             }
         }
 
-        private void DataBind()
+        private void DataBindTextBox()
         {
             DataTable dt = (DataTable)dgvProductDetails.DataSource;
             if (ObjUtil.ValidateTable(dt))
@@ -132,7 +147,8 @@ namespace IMS_Client_2.Inventory
         private void dgvProductDetails_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             ObjUtil.SetRowNumber(dgvProductDetails);
-            ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.DisplayedCells, Color.White);
+            //ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.DisplayedCells, Color.White);
+            ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill, Color.White);
             dgvProductDetails.Columns["ProductID"].Visible = false;
             dgvProductDetails.Columns["StoreID"].Visible = false;
             dgvProductDetails.Columns["SizeID"].Visible = false;
@@ -280,6 +296,55 @@ namespace IMS_Client_2.Inventory
 
 
             frmInventoryReport.ShowDialog();
+        }
+
+        private void txtBarCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (txtBarCode.Text.Trim().Length != 0)
+            {
+                if (e.KeyData == Keys.Enter)
+                {
+                    LoadData();
+                    DataBindTextBox();
+                    HighlightDiffQTY();
+                    if (comparestatus == 0)
+                    {
+                        btnSaveData.Enabled = true;
+                    }
+                    else
+                    {
+                        btnSaveData.Enabled = false;
+                    }
+                }
+            }
+        }
+
+        private void txtBarCode_Enter(object sender, EventArgs e)
+        {
+            ObjUtil.SetTextHighlightColor(sender);
+        }
+
+        private void txtBarCode_Leave(object sender, EventArgs e)
+        {
+            ObjUtil.SetTextHighlightColor(sender, System.Drawing.Color.White);
+        }
+
+        private void txtBarCode_TextChanged(object sender, EventArgs e)
+        {
+            if (txtBarCode.Text.Trim().Length == 0)
+            {
+                LoadData();
+                DataBindTextBox();
+                HighlightDiffQTY();
+                if (comparestatus == 0)
+                {
+                    btnSaveData.Enabled = true;
+                }
+                else
+                {
+                    btnSaveData.Enabled = false;
+                }
+            }
         }
     }
 }

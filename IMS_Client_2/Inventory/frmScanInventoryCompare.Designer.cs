@@ -52,6 +52,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtSystemRate = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.txtBarCode = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picProduct)).BeginInit();
@@ -62,6 +64,9 @@
             // 
             this.dgvProductDetails.AllowUserToAddRows = false;
             this.dgvProductDetails.AllowUserToDeleteRows = false;
+            this.dgvProductDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvProductDetails.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProductDetails.BackgroundColor = System.Drawing.Color.White;
             this.dgvProductDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -96,13 +101,14 @@
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel1.Controls.Add(this.btnPrint);
             this.panel1.Controls.Add(this.btncancel);
             this.panel1.Controls.Add(this.btnSaveData);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 559);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(964, 40);
@@ -126,6 +132,7 @@
             // 
             // btncancel
             // 
+            this.btncancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btncancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btncancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btncancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -142,6 +149,7 @@
             // 
             // btnSaveData
             // 
+            this.btnSaveData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSaveData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnSaveData.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSaveData.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -158,6 +166,7 @@
             // 
             // picProduct
             // 
+            this.picProduct.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.picProduct.BackColor = System.Drawing.Color.Transparent;
             this.picProduct.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picProduct.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -193,6 +202,7 @@
             // 
             // txtSystemQTY
             // 
+            this.txtSystemQTY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtSystemQTY.BackColor = System.Drawing.Color.White;
             this.txtSystemQTY.Enabled = false;
             this.txtSystemQTY.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -203,6 +213,7 @@
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -214,6 +225,7 @@
             // 
             // txtDiffQTY
             // 
+            this.txtDiffQTY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtDiffQTY.BackColor = System.Drawing.Color.White;
             this.txtDiffQTY.Enabled = false;
             this.txtDiffQTY.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -224,6 +236,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -235,6 +248,7 @@
             // 
             // txtInventoryQTY
             // 
+            this.txtInventoryQTY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtInventoryQTY.BackColor = System.Drawing.Color.White;
             this.txtInventoryQTY.Enabled = false;
             this.txtInventoryQTY.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -245,6 +259,7 @@
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -257,15 +272,16 @@
             // txtStoreName
             // 
             this.txtStoreName.BackColor = System.Drawing.Color.White;
-            this.txtStoreName.Enabled = false;
             this.txtStoreName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStoreName.Location = new System.Drawing.Point(64, 74);
             this.txtStoreName.Name = "txtStoreName";
+            this.txtStoreName.ReadOnly = true;
             this.txtStoreName.Size = new System.Drawing.Size(188, 25);
             this.txtStoreName.TabIndex = 277;
             // 
             // txtInventoryRate
             // 
+            this.txtInventoryRate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtInventoryRate.BackColor = System.Drawing.Color.White;
             this.txtInventoryRate.Enabled = false;
             this.txtInventoryRate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -276,6 +292,7 @@
             // 
             // label5
             // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -287,6 +304,7 @@
             // 
             // txtDiffRate
             // 
+            this.txtDiffRate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtDiffRate.BackColor = System.Drawing.Color.White;
             this.txtDiffRate.Enabled = false;
             this.txtDiffRate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -297,6 +315,7 @@
             // 
             // label6
             // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -308,6 +327,7 @@
             // 
             // txtSystemRate
             // 
+            this.txtSystemRate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtSystemRate.BackColor = System.Drawing.Color.White;
             this.txtSystemRate.Enabled = false;
             this.txtSystemRate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -318,6 +338,7 @@
             // 
             // label7
             // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -327,6 +348,33 @@
             this.label7.TabIndex = 279;
             this.label7.Text = "System Rate :";
             // 
+            // txtBarCode
+            // 
+            this.txtBarCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBarCode.BackColor = System.Drawing.Color.White;
+            this.txtBarCode.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBarCode.Location = new System.Drawing.Point(765, 74);
+            this.txtBarCode.MaxLength = 10;
+            this.txtBarCode.Name = "txtBarCode";
+            this.txtBarCode.Size = new System.Drawing.Size(188, 25);
+            this.txtBarCode.TabIndex = 285;
+            this.txtBarCode.TextChanged += new System.EventHandler(this.txtBarCode_TextChanged);
+            this.txtBarCode.Enter += new System.EventHandler(this.txtBarCode_Enter);
+            this.txtBarCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBarCode_KeyDown);
+            this.txtBarCode.Leave += new System.EventHandler(this.txtBarCode_Leave);
+            // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(691, 77);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(68, 17);
+            this.label8.TabIndex = 284;
+            this.label8.Text = "BarCode :";
+            // 
             // frmScanInventoryCompare
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -334,6 +382,8 @@
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(964, 599);
+            this.Controls.Add(this.txtBarCode);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.txtInventoryRate);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtDiffRate);
@@ -392,5 +442,7 @@
         private System.Windows.Forms.TextBox txtSystemRate;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.TextBox txtBarCode;
+        private System.Windows.Forms.Label label8;
     }
 }
