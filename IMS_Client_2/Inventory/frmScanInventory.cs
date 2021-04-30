@@ -492,5 +492,10 @@ namespace IMS_Client_2.Inventory
         {
             BindScannedItems();
         }
+
+        private void frmScanInventory_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            GC.Collect();
+        }
     }
 }

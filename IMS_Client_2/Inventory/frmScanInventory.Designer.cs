@@ -450,6 +450,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Scan Inventory";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmScanInventory_FormClosed);
             this.Load += new System.EventHandler(this.frmScanInventory_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();

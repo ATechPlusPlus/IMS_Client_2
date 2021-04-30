@@ -87,6 +87,7 @@ namespace IMS_Client_2.Purchase
                             {
                                 clsUtility.ShowInfoMessage("Posting Delivery Entry for '" + txtSupplierBillNo.Text + "' is not Saved Successfully..", clsUtility.strProjectTitle);
                             }
+                            UpdateLocalCost();
                         }
                         ObjDAL.ResetData();
                     }
@@ -106,6 +107,32 @@ namespace IMS_Client_2.Purchase
             cmbStore.ValueMember = "StoreID";
 
             cmbStore.SelectedIndex = -1;
+        }
+
+        private void UpdateLocalCost()
+        {
+            try
+            {
+                ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.VarChar, "0", clsConnection_DAL.ParamType.Input);
+                ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+                DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Update_LocalCost");
+                if (ObjUtil.ValidateDataSet(ds))
+                {
+                    DataTable dt = ds.Tables[0];
+                    if (ObjUtil.ValidateTable(dt))
+                    {
+                        //int flag = Convert.ToInt32(dt.Rows[0]["Flag"]);
+                        //string Msg = dt.Rows[0]["Msg"].ToString();
+
+                        //clsUtility.ShowInfoMessage(Msg, clsUtility.strProjectTitle);
+                        //ClearAll();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                clsUtility.ShowErrorMessage(ex.Message);
+            }
         }
 
         private void txtSupplierBillNo_Enter(object sender, EventArgs e)
