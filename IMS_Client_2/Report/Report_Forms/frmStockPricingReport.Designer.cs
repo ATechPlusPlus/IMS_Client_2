@@ -33,11 +33,11 @@ namespace IMS_Client_2.Report.Report_Forms
             this.panel2 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.cmbShop = new System.Windows.Forms.ComboBox();
             this.btnClear = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
             this.btnGenerateReport = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cmbShop = new System.Windows.Forms.ComboBox();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.panel2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -84,16 +84,18 @@ namespace IMS_Client_2.Report.Report_Forms
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Report Filter";
             // 
-            // label7
+            // cmbShop
             // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(13, 28);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(44, 17);
-            this.label7.TabIndex = 197;
-            this.label7.Text = "Shop :";
+            this.cmbShop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbShop.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbShop.FormattingEnabled = true;
+            this.cmbShop.Items.AddRange(new object[] {
+            "Active",
+            "InActive"});
+            this.cmbShop.Location = new System.Drawing.Point(63, 24);
+            this.cmbShop.Name = "cmbShop";
+            this.cmbShop.Size = new System.Drawing.Size(251, 27);
+            this.cmbShop.TabIndex = 198;
             // 
             // btnClear
             // 
@@ -111,6 +113,17 @@ namespace IMS_Client_2.Report.Report_Forms
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             this.btnClear.MouseEnter += new System.EventHandler(this.btnViewDetails_MouseEnter);
             this.btnClear.MouseLeave += new System.EventHandler(this.btnViewDetails_MouseLeave);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(13, 28);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(44, 17);
+            this.label7.TabIndex = 197;
+            this.label7.Text = "Shop :";
             // 
             // btnGenerateReport
             // 
@@ -144,19 +157,6 @@ namespace IMS_Client_2.Report.Report_Forms
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Report";
             // 
-            // cmbShop
-            // 
-            this.cmbShop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbShop.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbShop.FormattingEnabled = true;
-            this.cmbShop.Items.AddRange(new object[] {
-            "Active",
-            "InActive"});
-            this.cmbShop.Location = new System.Drawing.Point(63, 24);
-            this.cmbShop.Name = "cmbShop";
-            this.cmbShop.Size = new System.Drawing.Size(251, 27);
-            this.cmbShop.TabIndex = 198;
-            // 
             // reportViewer1
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -168,6 +168,7 @@ namespace IMS_Client_2.Report.Report_Forms
             // 
             // frmStockPricingReport
             // 
+            this.AcceptButton = this.btnGenerateReport;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
@@ -182,7 +183,7 @@ namespace IMS_Client_2.Report.Report_Forms
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Stock Pricing Repot";
+            this.Text = "Stock Pricing Report";
             this.Load += new System.EventHandler(this.frmStockPricingReport_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
