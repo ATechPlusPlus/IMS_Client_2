@@ -79,7 +79,7 @@ namespace IMS_Client_2.Report.Report_Forms
                 }
                 else
                 {
-                    clsUtility.ShowInfoMessage("No Datafound for the given filter.", clsUtility.strProjectTitle);
+                    clsUtility.ShowInfoMessage("No Data found for the given filter.", clsUtility.strProjectTitle);
                     reportViewer1.LocalReport.DataSources.Clear();
                 }
             }
