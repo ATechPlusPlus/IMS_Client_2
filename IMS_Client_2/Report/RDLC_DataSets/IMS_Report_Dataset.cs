@@ -4,6 +4,10 @@
 
     partial class IMS_Report_Dataset
     {
+        partial class dtStockPricingReportDataTable
+        {
+        }
+
         partial class dtEmployeeWiseSalesDataTable
         {
         }

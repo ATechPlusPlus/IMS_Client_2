@@ -76,6 +76,7 @@
             this.stockDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemCardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.scanItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inventoryCheckToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -112,7 +113,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.itemCardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stockPricingReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -522,6 +523,13 @@
             this.viewToolStripMenuItem.Text = "View Item Model Details";
             this.viewToolStripMenuItem.Click += new System.EventHandler(this.viewToolStripMenuItem_Click);
             // 
+            // itemCardToolStripMenuItem
+            // 
+            this.itemCardToolStripMenuItem.Name = "itemCardToolStripMenuItem";
+            this.itemCardToolStripMenuItem.Size = new System.Drawing.Size(229, 24);
+            this.itemCardToolStripMenuItem.Text = "Item Card";
+            this.itemCardToolStripMenuItem.Click += new System.EventHandler(this.itemCardToolStripMenuItem_Click);
+            // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -555,7 +563,8 @@
             this.toolStripMenuItem7,
             this.employeeSaleReportToolStripMenuItem,
             this.salesAnalysisReportToolStripMenuItem,
-            this.salesByDepartmentReportToolStripMenuItem});
+            this.salesByDepartmentReportToolStripMenuItem,
+            this.stockPricingReportToolStripMenuItem});
             this.reportsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("reportsToolStripMenuItem.Image")));
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             this.reportsToolStripMenuItem.Size = new System.Drawing.Size(89, 36);
@@ -885,12 +894,12 @@
             this.label9.TabIndex = 28;
             this.label9.Text = "Today\'s Cash Box";
             // 
-            // itemCardToolStripMenuItem
+            // stockPricingReportToolStripMenuItem
             // 
-            this.itemCardToolStripMenuItem.Name = "itemCardToolStripMenuItem";
-            this.itemCardToolStripMenuItem.Size = new System.Drawing.Size(229, 24);
-            this.itemCardToolStripMenuItem.Text = "Item Card";
-            this.itemCardToolStripMenuItem.Click += new System.EventHandler(this.itemCardToolStripMenuItem_Click);
+            this.stockPricingReportToolStripMenuItem.Name = "stockPricingReportToolStripMenuItem";
+            this.stockPricingReportToolStripMenuItem.Size = new System.Drawing.Size(252, 24);
+            this.stockPricingReportToolStripMenuItem.Text = "Stock Pricing Report";
+            this.stockPricingReportToolStripMenuItem.Click += new System.EventHandler(this.stockPricingReportToolStripMenuItem_Click);
             // 
             // frmHome
             // 
@@ -1018,5 +1027,6 @@
         private System.Windows.Forms.ToolStripMenuItem salesAnalysisReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salesByDepartmentReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem itemCardToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stockPricingReportToolStripMenuItem;
     }
 }

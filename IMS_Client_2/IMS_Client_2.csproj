@@ -261,6 +261,12 @@
     <Compile Include="Report\Report_Forms\frmEmployeeSales.Designer.cs">
       <DependentUpon>frmEmployeeSales.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\Report_Forms\frmStockPricingReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\Report_Forms\frmStockPricingReport.Designer.cs">
+      <DependentUpon>frmStockPricingReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="SPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -804,6 +810,7 @@
     <EmbeddedResource Include="Report\RDLC_Files\SalesInoviceReport.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\Sales_Invoice.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\ScanInventory.rdlc" />
+    <EmbeddedResource Include="Report\RDLC_Files\StockPricingReport.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\StoreTransferDetails.rdlc" />
     <EmbeddedResource Include="Report\Report_Forms\frmBranchShortingReport.resx">
       <DependentUpon>frmBranchShortingReport.cs</DependentUpon>
@@ -828,6 +835,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Report_Forms\frmSalesReport.resx">
       <DependentUpon>frmSalesReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Report_Forms\frmStockPricingReport.resx">
+      <DependentUpon>frmStockPricingReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Report_Forms\frmStoreTransferReport.resx">
       <DependentUpon>frmStoreTransferReport.cs</DependentUpon>

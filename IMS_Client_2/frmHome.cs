@@ -1165,5 +1165,14 @@ namespace IMS_Client_2
             }
         }
 
+        private void stockPricingReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool b = ObjUtil.IsAlreadyOpen(typeof(Report.Report_Forms.frmStockPricingReport));
+            if (!b)
+            {
+                Report.Report_Forms.frmStockPricingReport frmSalesAnalysis = new Report.Report_Forms.frmStockPricingReport();
+                frmSalesAnalysis.Show();
+            }
+        }
     }
 }
