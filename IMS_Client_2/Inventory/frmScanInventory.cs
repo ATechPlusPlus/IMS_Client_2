@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace IMS_Client_2.Inventory
@@ -71,12 +72,45 @@ namespace IMS_Client_2.Inventory
             Button btn = (Button)sender;
             btn.BackgroundImage = B_Leave;
         }
+        public delegate void InvocationDelegate();
 
+        public void DoGuiStuff()
+        {
+            if (dgvProductDetails.InvokeRequired)
+            {
+                dgvProductDetails.Invoke(new InvocationDelegate(DoGuiStuff));
+                return;
+            }
+
+            //GUI manipulation here
+            dgvProductDetails.DataSource = dtItemDetails;
+            CalculateGrandTotal();
+            pnlLoading.Visible = false;
+            progressBar1.Value = 0;
+            this.Focus();
+        }
+        public delegate void InvocationDelegate2(int a, int b);
+
+        public void ReportProgress(int value, int MaxValue)
+        {
+            if (progressBar1.InvokeRequired)
+            {
+                progressBar1.Invoke(new InvocationDelegate2(ReportProgress), value, MaxValue);
+                return;
+            }
+            progressBar1.Maximum = MaxValue;
+            //GUI manipulation here
+            progressBar1.Value = value;
+
+            lblInfo.Text = "Loading Data Please wait.... [ "+ value .ToString()+ "/"+MaxValue.ToString()+"]";
+           
+        }
+        int SelectedStoreID = 0;
         private void BindScannedItems()
         {
             try
             {
-                ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, cmdFrom.SelectedValue, clsConnection_DAL.ParamType.Input);
+                ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, SelectedStoreID, clsConnection_DAL.ParamType.Input);
 
                 DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_ScanInventoryItemDetails");
                 if (ObjUtil.ValidateDataSet(ds))
@@ -102,11 +136,17 @@ namespace IMS_Client_2.Inventory
                             string total = dtOldBill.Rows[i]["Total"].ToString();
                             string SubProductID = dtOldBill.Rows[i]["SubProductID"].ToString();
 
+                            ReportProgress(i, dtOldBill.Rows.Count);
+
+                            System.Diagnostics.Debug.WriteLine(" i : " + i.ToString());
                             AddRowToItemDetails(pID, name, qty, rate, total.ToString(), barCode, SizeID, Size, ColorID, ColorName, SubProductID);
                         }
-                        CalculateGrandTotal();
+                       
                     }
+                  
+                   
                 }
+                DoGuiStuff();
             }
             catch (Exception ex)
             {
@@ -120,8 +160,12 @@ namespace IMS_Client_2.Inventory
 
             LoadFromStore();
             InitItemTable();
-            BindScannedItems();
+       
             txtBarCode.Focus();
+            pnlLoading.Visible = true;
+     SelectedStoreID =Convert.ToInt32( cmdFrom.SelectedValue); 
+            Thread thread = new Thread(new ThreadStart(BindScannedItems));
+            thread.Start();
         }
         private Image GetProductPhoto(int SubProductID)
         {
@@ -276,7 +320,7 @@ namespace IMS_Client_2.Inventory
             dtItemDetails.Rows.Add(dRow);
             dtItemDetails.AcceptChanges();
 
-            dgvProductDetails.DataSource = dtItemDetails;
+          
         }
 
         private void txtBarCode_KeyDown(object sender, KeyEventArgs e)
@@ -297,21 +341,42 @@ namespace IMS_Client_2.Inventory
 
         private void dgvProductDetails_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            ObjUtil.SetRowNumber(dgvProductDetails);
-
-            if (dgvProductDetails.Columns.Contains("MasterScanID"))
+            try
             {
-                dgvProductDetails.Columns["MasterScanID"].Visible = false;
-            }
-            dgvProductDetails.Columns["ProductID"].Visible = false;
-            dgvProductDetails.Columns["ColoriD"].Visible = false;
-            dgvProductDetails.Columns["SizeiD"].Visible = false;
-            dgvProductDetails.Columns["OIRate"].Visible = false;
-            dgvProductDetails.Columns["Adj_Amount"].Visible = false;
-            dgvProductDetails.Columns["SubProductID"].Visible = false;
+                ObjUtil.SetRowNumber(dgvProductDetails);
 
-            ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill, System.Drawing.Color.White);
-            dgvProductDetails.ClearSelection();
+                if (dgvProductDetails.Columns.Contains("MasterScanID"))
+                {
+                    dgvProductDetails.Columns["MasterScanID"].Visible = false;
+                }
+                dgvProductDetails.Columns["ProductID"].Visible = false;
+                dgvProductDetails.Columns["ColoriD"].Visible = false;
+                dgvProductDetails.Columns["SizeiD"].Visible = false;
+                if (dgvProductDetails.Columns["OIRate"]!=null)
+                {
+                    dgvProductDetails.Columns["OIRate"].Visible = false;
+                }
+                if (dgvProductDetails.Columns["Adj_Amount"] != null)
+                {
+                    dgvProductDetails.Columns["Adj_Amount"].Visible = false;
+                }
+                if (dgvProductDetails.Columns["SubProductID"] != null)
+                {
+                    dgvProductDetails.Columns["SubProductID"].Visible = false;
+
+                }
+              
+            
+
+                ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill, System.Drawing.Color.White);
+                dgvProductDetails.ClearSelection();
+            }
+            catch (System.NullReferenceException ex)
+            {
+
+               
+            }
+           
         }
 
         private void dgvProductDetails_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -490,7 +555,11 @@ namespace IMS_Client_2.Inventory
 
         private void cmdFrom_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            BindScannedItems();
+            pnlLoading.Visible = true;
+            SelectedStoreID = Convert.ToInt32(cmdFrom.SelectedValue);
+            Thread thread = new Thread(new ThreadStart(BindScannedItems));
+            thread.Start();
+         
         }
 
         private void frmScanInventory_FormClosed(object sender, FormClosedEventArgs e)

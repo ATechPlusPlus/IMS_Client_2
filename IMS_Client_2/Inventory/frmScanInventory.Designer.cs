@@ -61,11 +61,15 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btncancel = new System.Windows.Forms.Button();
             this.btnSaveData = new System.Windows.Forms.Button();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.pnlLoading = new System.Windows.Forms.Panel();
+            this.lblInfo = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PicProductMaster)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picProduct)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).BeginInit();
             this.panel1.SuspendLayout();
+            this.pnlLoading.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -424,6 +428,35 @@
             this.btnSaveData.Enter += new System.EventHandler(this.btnAdd_MouseEnter);
             this.btnSaveData.Leave += new System.EventHandler(this.btnAdd_MouseLeave);
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(18, 10);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(355, 17);
+            this.progressBar1.TabIndex = 268;
+            // 
+            // pnlLoading
+            // 
+            this.pnlLoading.BackColor = System.Drawing.Color.White;
+            this.pnlLoading.Controls.Add(this.lblInfo);
+            this.pnlLoading.Controls.Add(this.progressBar1);
+            this.pnlLoading.Location = new System.Drawing.Point(319, 46);
+            this.pnlLoading.Name = "pnlLoading";
+            this.pnlLoading.Size = new System.Drawing.Size(379, 74);
+            this.pnlLoading.TabIndex = 269;
+            this.pnlLoading.Visible = false;
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.BackColor = System.Drawing.Color.Transparent;
+            this.lblInfo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo.Location = new System.Drawing.Point(15, 30);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(30, 17);
+            this.lblInfo.TabIndex = 269;
+            this.lblInfo.Text = "NA";
+            // 
             // frmScanInventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -431,6 +464,7 @@
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(894, 599);
+            this.Controls.Add(this.pnlLoading);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.picProduct);
@@ -458,6 +492,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.picProduct)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.pnlLoading.ResumeLayout(false);
+            this.pnlLoading.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -496,5 +532,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btncancel;
         private System.Windows.Forms.Button btnSaveData;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Panel pnlLoading;
+        private System.Windows.Forms.Label lblInfo;
     }
 }

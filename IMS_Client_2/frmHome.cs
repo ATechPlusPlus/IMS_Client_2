@@ -1047,13 +1047,16 @@ namespace IMS_Client_2
 
         private void scanItemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmScanInventory) || clsUtility.IsAdmin)
             {
                 bool b = ObjUtil.IsAlreadyOpen(typeof(Inventory.frmScanInventory));
                 if (!b)
                 {
+                    this.Cursor = Cursors.WaitCursor;
                     Inventory.frmScanInventory objCheckinventory = new Inventory.frmScanInventory();
                     objCheckinventory.Show();
+                    this.Cursor = Cursors.Default;
                 }
             }
             else
