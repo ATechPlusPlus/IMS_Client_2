@@ -294,6 +294,13 @@ namespace IMS_Client_2.Inventory
             frmInventoryReport.CompareDDate = ComparedDate;
             frmInventoryReport.StoreName = txtStoreName.Text;
 
+            frmInventoryReport._SysQTY = txtSystemQTY.Text;
+            frmInventoryReport._InventoryQTY = txtInventoryQTY.Text;
+            frmInventoryReport._DiffQTY = txtDiffQTY.Text;
+
+            frmInventoryReport._SysRate = txtSystemRate.Text;
+            frmInventoryReport._InvRate = txtInventoryRate.Text;
+            frmInventoryReport._DiffRate = txtDiffRate.Text;
 
             frmInventoryReport.ShowDialog();
         }

@@ -84,6 +84,7 @@ namespace IMS_Client_2.Inventory
 
             //GUI manipulation here
             dgvProductDetails.DataSource = dtItemDetails;
+            dgvProductDetails.Refresh();
             CalculateGrandTotal();
             pnlLoading.Visible = false;
             progressBar1.Value = 0;
@@ -93,16 +94,30 @@ namespace IMS_Client_2.Inventory
 
         public void ReportProgress(int value, int MaxValue)
         {
-            if (progressBar1.InvokeRequired)
+            try
             {
-                progressBar1.Invoke(new InvocationDelegate2(ReportProgress), value, MaxValue);
-                return;
-            }
-            progressBar1.Maximum = MaxValue;
-            //GUI manipulation here
-            progressBar1.Value = value;
+                if (progressBar1.InvokeRequired)
+                {
+                    progressBar1.Invoke(new InvocationDelegate2(ReportProgress), value, MaxValue);
+                    return;
+                }
+                progressBar1.Maximum = MaxValue;
+                //GUI manipulation hereg
+                progressBar1.Value = value;
 
-            lblInfo.Text = "Loading Data Please wait.... [ "+ value .ToString()+ "/"+MaxValue.ToString()+"]";
+                lblInfo.Text = "Loading Data Please wait.... [ " + value.ToString() + "/" + MaxValue.ToString() + "]";
+            }
+            catch(ThreadAbortException)
+            {
+
+            }
+                
+            catch (Exception)
+            {
+
+               
+            }
+           
            
         }
         int SelectedStoreID = 0;
@@ -143,10 +158,23 @@ namespace IMS_Client_2.Inventory
                         }
                        
                     }
+                    else
+                    {
+                        dtItemDetails.Clear();
+                       
+                        AddRowToItemDetails("0", "NA", "0", "0","0", "NA", "0", "0", "", "NA", "0");
+                        
+                       
+                    }
+                   
                   
                    
                 }
                 DoGuiStuff();
+            }
+            catch(ThreadAbortException ex)
+            {
+
             }
             catch (Exception ex)
             {
@@ -163,8 +191,9 @@ namespace IMS_Client_2.Inventory
        
             txtBarCode.Focus();
             pnlLoading.Visible = true;
+           
      SelectedStoreID =Convert.ToInt32( cmdFrom.SelectedValue); 
-            Thread thread = new Thread(new ThreadStart(BindScannedItems));
+             thread = new Thread(new ThreadStart(BindScannedItems));
             thread.Start();
         }
         private Image GetProductPhoto(int SubProductID)
@@ -270,17 +299,31 @@ namespace IMS_Client_2.Inventory
         }
         private void UpdateQTYByOne(string barCode, decimal rate)
         {
-            DataRow[] dRow = dtItemDetails.Select("BarcodeNo='" + barCode + "'");
-            // add one qty
-            decimal NewQTY = Convert.ToDecimal(dRow[0]["BillQTY"]) + 1;
-            // set to col
-            dRow[0]["BillQTY"] = NewQTY.ToString();
-            // cal total
-            decimal total = rate * NewQTY;
-            // set the total
-            dRow[0]["Total"] = total.ToString();
-            dtItemDetails.AcceptChanges();
-            dgvProductDetails.DataSource = dtItemDetails;
+            try
+            {
+                if (dtItemDetails.Rows.Count>0)
+                {
+                    DataRow[] dRow = dtItemDetails.Select("BarcodeNo='" + barCode + "'");
+                    // add one qty
+                    decimal NewQTY = Convert.ToDecimal(dRow[0]["BillQTY"]) + 1;
+                    // set to col
+                    dRow[0]["BillQTY"] = NewQTY.ToString();
+                    // cal total
+                    decimal total = rate * NewQTY;
+                    // set the total
+                    dRow[0]["Total"] = total.ToString();
+                    dtItemDetails.AcceptChanges();
+                    dgvProductDetails.DataSource = dtItemDetails;
+
+                }
+             
+            }
+            catch (Exception)
+            {
+
+              
+            }
+          
         }
         private void InitItemTable()
         {
@@ -371,12 +414,17 @@ namespace IMS_Client_2.Inventory
                 ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill, System.Drawing.Color.White);
                 dgvProductDetails.ClearSelection();
             }
+           
             catch (System.NullReferenceException ex)
             {
 
                
             }
-           
+            catch (Exception)
+            {
+
+            }
+
         }
 
         private void dgvProductDetails_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -552,19 +600,41 @@ namespace IMS_Client_2.Inventory
                 ClearAll();
             }
         }
-
+        Thread thread;
         private void cmdFrom_SelectionChangeCommitted(object sender, EventArgs e)
         {
             pnlLoading.Visible = true;
             SelectedStoreID = Convert.ToInt32(cmdFrom.SelectedValue);
-            Thread thread = new Thread(new ThreadStart(BindScannedItems));
+
+            dgvProductDetails.DataSource = null;
+
+            thread = new Thread(new ThreadStart(BindScannedItems));
             thread.Start();
          
         }
 
         private void frmScanInventory_FormClosed(object sender, FormClosedEventArgs e)
         {
+            if (thread!=null)
+            {
+                try
+                {
+                    thread.Abort();
+                }
+                catch 
+                {
+
+                   
+                }
+             
+
+            }
             GC.Collect();
+        }
+
+        private void dgvProductDetails_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+
         }
     }
 }

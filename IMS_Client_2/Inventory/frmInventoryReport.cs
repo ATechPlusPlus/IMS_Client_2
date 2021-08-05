@@ -33,6 +33,14 @@ namespace IMS_Client_2.Inventory
         public DateTime? CompareDDate { get; set; }
         CoreApp.clsConnection_DAL ObjDAL = new CoreApp.clsConnection_DAL(true);
         clsUtility ObjUtil = new clsUtility();
+
+        public string _SysQTY { get; set; }
+        public string _InventoryQTY { get; set; }
+        public string _DiffQTY { get; set; }
+
+        public string _SysRate { get; set; }
+        public string _InvRate { get; set; }
+        public string _DiffRate { get; set; }
         private void LoadReport()
         {
 
@@ -61,6 +69,16 @@ namespace IMS_Client_2.Inventory
             {
                 param3 = new ReportParameter("parmCompareDate", CompareDDate.Value.Date.ToString(), true);
             }
+
+            ReportParameter p1 = new ReportParameter("ParmSysQTY", _SysQTY, true);
+            ReportParameter p2 = new ReportParameter("ParmInventoryQTY", _InventoryQTY, true);
+            ReportParameter p3 = new ReportParameter("ParmDiffQTY", _DiffQTY, true);
+
+            ReportParameter p4 = new ReportParameter("ParmSysRate", _SysRate, true);
+            ReportParameter p5 = new ReportParameter("ParmInventoryRate", _InventoryQTY, true);
+            ReportParameter p6 = new ReportParameter("ParmDiffRate", _DiffRate, true);
+
+
             // adding the parameter in the report dynamically
             reportViewer1.LocalReport.SetParameters(param1);
             reportViewer1.LocalReport.SetParameters(param2);
@@ -69,6 +87,14 @@ namespace IMS_Client_2.Inventory
             {
                 reportViewer1.LocalReport.SetParameters(param3);
             }
+
+            reportViewer1.LocalReport.SetParameters(p1);
+            reportViewer1.LocalReport.SetParameters(p2);
+            reportViewer1.LocalReport.SetParameters(p3);
+            reportViewer1.LocalReport.SetParameters(p4);
+            reportViewer1.LocalReport.SetParameters(p5);
+            reportViewer1.LocalReport.SetParameters(p6);
+            
 
             reportViewer1.LocalReport.DataSources.Add(rds);
 
