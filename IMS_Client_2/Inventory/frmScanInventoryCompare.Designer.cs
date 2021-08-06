@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmScanInventoryCompare));
             this.dgvProductDetails = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
@@ -70,19 +70,18 @@
             this.dgvProductDetails.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProductDetails.BackgroundColor = System.Drawing.Color.White;
             this.dgvProductDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProductDetails.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvProductDetails.Location = new System.Drawing.Point(10, 119);
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProductDetails.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvProductDetails.Location = new System.Drawing.Point(10, 88);
             this.dgvProductDetails.Name = "dgvProductDetails";
-            this.dgvProductDetails.ReadOnly = true;
             this.dgvProductDetails.RowHeadersVisible = false;
-            this.dgvProductDetails.Size = new System.Drawing.Size(946, 268);
+            this.dgvProductDetails.Size = new System.Drawing.Size(946, 299);
             this.dgvProductDetails.TabIndex = 261;
             this.dgvProductDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellClick);
             this.dgvProductDetails.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvProductDetails_ColumnAdded);
@@ -93,7 +92,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 77);
+            this.label2.Location = new System.Drawing.Point(12, 60);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 17);
             this.label2.TabIndex = 263;
@@ -273,7 +272,7 @@
             // 
             this.txtStoreName.BackColor = System.Drawing.Color.White;
             this.txtStoreName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStoreName.Location = new System.Drawing.Point(64, 74);
+            this.txtStoreName.Location = new System.Drawing.Point(64, 57);
             this.txtStoreName.Name = "txtStoreName";
             this.txtStoreName.ReadOnly = true;
             this.txtStoreName.Size = new System.Drawing.Size(188, 25);
@@ -353,7 +352,7 @@
             this.txtBarCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBarCode.BackColor = System.Drawing.Color.White;
             this.txtBarCode.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBarCode.Location = new System.Drawing.Point(765, 74);
+            this.txtBarCode.Location = new System.Drawing.Point(765, 57);
             this.txtBarCode.MaxLength = 10;
             this.txtBarCode.Name = "txtBarCode";
             this.txtBarCode.Size = new System.Drawing.Size(188, 25);
@@ -369,7 +368,7 @@
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.Color.Transparent;
             this.label8.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(691, 77);
+            this.label8.Location = new System.Drawing.Point(691, 60);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(68, 17);
             this.label8.TabIndex = 284;
@@ -407,6 +406,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Scan Inventory Compare";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmScanInventoryCompare_FormClosed);
             this.Load += new System.EventHandler(this.frmScanInventoryList_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductDetails)).EndInit();
             this.panel1.ResumeLayout(false);

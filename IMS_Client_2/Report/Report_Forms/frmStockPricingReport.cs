@@ -67,7 +67,7 @@ namespace IMS_Client_2.Report.Report_Forms
             {
                 if (cmbShop.SelectedIndex < 0)
                 {
-                    clsUtility.ShowInfoMessage("Enter Shop Name           ", clsUtility.strProjectTitle);
+                    clsUtility.ShowInfoMessage("Select Shop Name           ", clsUtility.strProjectTitle);
                     cmbShop.Focus();
                 }
                 else

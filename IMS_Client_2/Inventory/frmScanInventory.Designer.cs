@@ -232,19 +232,21 @@
             this.dgvProductDetails.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvProductDetails.Location = new System.Drawing.Point(17, 159);
             this.dgvProductDetails.Name = "dgvProductDetails";
-            this.dgvProductDetails.ReadOnly = true;
             this.dgvProductDetails.Size = new System.Drawing.Size(865, 268);
             this.dgvProductDetails.TabIndex = 260;
             this.dgvProductDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellClick);
+            this.dgvProductDetails.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvProductDetails_CellValidating);
+            this.dgvProductDetails.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellValueChanged);
+            this.dgvProductDetails.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvProductDetails_ColumnAdded);
             this.dgvProductDetails.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvProductDetails_DataBindingComplete);
             this.dgvProductDetails.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvProductDetails_DataError);
+            this.dgvProductDetails.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvProductDetails_EditingControlShowing);
             // 
             // ProductID
             // 
             this.ProductID.DataPropertyName = "ProductID";
             this.ProductID.HeaderText = "ProductID";
             this.ProductID.Name = "ProductID";
-            this.ProductID.ReadOnly = true;
             this.ProductID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // ProductName
@@ -252,7 +254,6 @@
             this.ProductName.DataPropertyName = "ProductName";
             this.ProductName.HeaderText = "ProductName";
             this.ProductName.Name = "ProductName";
-            this.ProductName.ReadOnly = true;
             this.ProductName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // BarcodeNo
@@ -260,28 +261,24 @@
             this.BarcodeNo.DataPropertyName = "BarcodeNo";
             this.BarcodeNo.HeaderText = "BarcodeNo";
             this.BarcodeNo.Name = "BarcodeNo";
-            this.BarcodeNo.ReadOnly = true;
             // 
             // Rate
             // 
             this.Rate.DataPropertyName = "Rate";
             this.Rate.HeaderText = "Rate";
             this.Rate.Name = "Rate";
-            this.Rate.ReadOnly = true;
             // 
             // BillQTY
             // 
             this.BillQTY.DataPropertyName = "BillQTY";
             this.BillQTY.HeaderText = "QTY";
             this.BillQTY.Name = "BillQTY";
-            this.BillQTY.ReadOnly = true;
             // 
             // StockQTY
             // 
             this.StockQTY.DataPropertyName = "StockQTY";
             this.StockQTY.HeaderText = "StockQTY";
             this.StockQTY.Name = "StockQTY";
-            this.StockQTY.ReadOnly = true;
             this.StockQTY.Visible = false;
             // 
             // Adj_Amount
@@ -289,7 +286,6 @@
             this.Adj_Amount.DataPropertyName = "Adj_Amount";
             this.Adj_Amount.HeaderText = "Adj_Amount";
             this.Adj_Amount.Name = "Adj_Amount";
-            this.Adj_Amount.ReadOnly = true;
             this.Adj_Amount.Visible = false;
             // 
             // ColorID
@@ -297,7 +293,6 @@
             this.ColorID.DataPropertyName = "ColorID";
             this.ColorID.HeaderText = "ColorID";
             this.ColorID.Name = "ColorID";
-            this.ColorID.ReadOnly = true;
             this.ColorID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.ColorID.Visible = false;
             // 
@@ -306,21 +301,18 @@
             this.Color.DataPropertyName = "Color";
             this.Color.HeaderText = "Color";
             this.Color.Name = "Color";
-            this.Color.ReadOnly = true;
             // 
             // Size
             // 
             this.Size.DataPropertyName = "Size";
             this.Size.HeaderText = "Size";
             this.Size.Name = "Size";
-            this.Size.ReadOnly = true;
             // 
             // SizeID
             // 
             this.SizeID.DataPropertyName = "SizeID";
             this.SizeID.HeaderText = "SizeID";
             this.SizeID.Name = "SizeID";
-            this.SizeID.ReadOnly = true;
             this.SizeID.Visible = false;
             // 
             // Total
@@ -328,14 +320,12 @@
             this.Total.DataPropertyName = "Total";
             this.Total.HeaderText = "Total";
             this.Total.Name = "Total";
-            this.Total.ReadOnly = true;
             // 
             // ColDelete
             // 
             this.ColDelete.DataPropertyName = "Delete";
             this.ColDelete.HeaderText = "Delete";
             this.ColDelete.Name = "ColDelete";
-            this.ColDelete.ReadOnly = true;
             // 
             // txtBarCode
             // 
@@ -347,6 +337,7 @@
             this.txtBarCode.TabIndex = 0;
             this.txtBarCode.Enter += new System.EventHandler(this.txtBarCode_Enter);
             this.txtBarCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBarCode_KeyDown);
+            this.txtBarCode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBarCode_KeyPress);
             this.txtBarCode.Leave += new System.EventHandler(this.txtBarCode_Leave);
             // 
             // label4

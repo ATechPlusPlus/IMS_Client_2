@@ -613,5 +613,10 @@ namespace IMS_Client_2.StockManagement
                 clsUtility.ShowInfoMessage("Please select your record.");
             }
         }
+
+        private void frmStockDetails_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            GC.Collect();
+        }
     }
 }

@@ -55,6 +55,7 @@
             frmEmployeeSales = 56,
             frmSalesAnalysReport = 57,
             frmSalesByDepartment = 58,
+            frmStockPricingReport = 59,
             //frmDatabaseMaintenance = /commented
         }
         public enum Operation

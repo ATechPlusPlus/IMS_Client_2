@@ -310,6 +310,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Stock Details";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmStockDetails_FormClosed);
             this.Load += new System.EventHandler(this.frmStockDetails_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();

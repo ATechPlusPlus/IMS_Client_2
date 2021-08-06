@@ -18,10 +18,12 @@ namespace IMS_Client_2.Inventory
             InitializeComponent();
         }
 
+        clsConnection_DAL ObjDAL = new clsConnection_DAL(true);
+        clsUtility ObjUtil = new clsUtility();
+
         private void frmInventoryReport_Load(object sender, EventArgs e)
         {
             LoadReport();
-
         }
         public DataTable dtIventory { get; set; }
 
@@ -31,8 +33,6 @@ namespace IMS_Client_2.Inventory
         public int pMasterScanID { get; set; }
 
         public DateTime? CompareDDate { get; set; }
-        CoreApp.clsConnection_DAL ObjDAL = new CoreApp.clsConnection_DAL(true);
-        clsUtility ObjUtil = new clsUtility();
 
         public string _SysQTY { get; set; }
         public string _InventoryQTY { get; set; }
@@ -41,9 +41,9 @@ namespace IMS_Client_2.Inventory
         public string _SysRate { get; set; }
         public string _InvRate { get; set; }
         public string _DiffRate { get; set; }
+
         private void LoadReport()
         {
-
             ObjDAL.SetStoreProcedureData("MasterScanID", SqlDbType.Int, pMasterScanID, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_GenerateInventoryReport");
             if (ObjUtil.ValidateDataSet(ds))
@@ -52,13 +52,12 @@ namespace IMS_Client_2.Inventory
                 if (ObjUtil.ValidateTable(dt))
                 {
                     dtIventory = dt;
-
                 }
-
             }
             else
-
+            {
                 reportViewer1.LocalReport.DataSources.Clear();
+            }
             ReportDataSource rds = new ReportDataSource("dsInventory", dtIventory);
 
             // creating the parameter with the extact name as in the report.
@@ -75,9 +74,8 @@ namespace IMS_Client_2.Inventory
             ReportParameter p3 = new ReportParameter("ParmDiffQTY", _DiffQTY, true);
 
             ReportParameter p4 = new ReportParameter("ParmSysRate", _SysRate, true);
-            ReportParameter p5 = new ReportParameter("ParmInventoryRate", _InventoryQTY, true);
+            ReportParameter p5 = new ReportParameter("ParmInventoryRate", _InvRate, true);
             ReportParameter p6 = new ReportParameter("ParmDiffRate", _DiffRate, true);
-
 
             // adding the parameter in the report dynamically
             reportViewer1.LocalReport.SetParameters(param1);
@@ -104,6 +102,11 @@ namespace IMS_Client_2.Inventory
             this.reportViewer1.RefreshReport();
 
             this.reportViewer1.RefreshReport();
+        }
+
+        private void frmInventoryReport_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            GC.Collect();
         }
     }
 }

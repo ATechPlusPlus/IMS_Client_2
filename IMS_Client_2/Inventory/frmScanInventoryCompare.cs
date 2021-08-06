@@ -95,7 +95,7 @@ namespace IMS_Client_2.Inventory
 
             LoadData();
             DataBindTextBox();
-            HighlightDiffQTY();
+            //HighlightDiffQTY();
             if (comparestatus == 0)
             {
                 btnSaveData.Enabled = true;
@@ -125,30 +125,40 @@ namespace IMS_Client_2.Inventory
 
                 txtSystemRate.Text = systemrate.ToString();
                 txtInventoryRate.Text = inventoryrate.ToString();
-                txtDiffRate.Text = diffrate.ToString();
+                txtDiffRate.Text = Math.Round(diffrate, 3).ToString();
             }
         }
 
         private void HighlightDiffQTY()
         {
-            for (int i = 0; i < dgvProductDetails.Rows.Count; i++)
+            try
             {
-                int qty = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["Diff QTY"].Value);
-                if (qty < 0)
+                for (int i = 0; i < dgvProductDetails.Rows.Count; i++)
                 {
-                    dgvProductDetails.Rows[i].DefaultCellStyle.ForeColor = Color.Red;
+                    int qty = Convert.ToInt32(dgvProductDetails.Rows[i].Cells["Diff QTY"].Value);
+                    if (qty < 0)
+                    {
+                        dgvProductDetails.Rows[i].DefaultCellStyle.ForeColor = Color.Red;
+                    }
+                    //else
+                    //{
+                    //    dgvProductDetails.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
+                    //}
                 }
-                //else
-                //{
-                //    dgvProductDetails.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
-                //}
+            }
+            catch (Exception ex)
+            {
+                clsUtility.ShowErrorMessage(ex.ToString());
             }
         }
         private void dgvProductDetails_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
+            dgvProductDetails.ClearSelection();
             ObjUtil.SetRowNumber(dgvProductDetails);
+            
+
             //ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.DisplayedCells, Color.White);
-            ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill, Color.White);
+            //ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill, Color.White);
             dgvProductDetails.Columns["ProductID"].Visible = false;
             dgvProductDetails.Columns["StoreID"].Visible = false;
             dgvProductDetails.Columns["SizeID"].Visible = false;
@@ -156,11 +166,29 @@ namespace IMS_Client_2.Inventory
             dgvProductDetails.Columns["SubProductID"].Visible = false;
             dgvProductDetails.Columns["StoreName"].Visible = false;
             dgvProductDetails.Columns["Compared Date"].Visible = false;
-            dgvProductDetails.ClearSelection();
-            dgvProductDetails.RowsDefaultCellStyle.SelectionBackColor = Color.Transparent;
-            dgvProductDetails.RowsDefaultCellStyle.SelectionForeColor = Color.Transparent;
-            dgvProductDetails.SelectionMode = DataGridViewSelectionMode.RowHeaderSelect;
-            //HighlightDiffQTY();
+
+            //dgvProductDetails.RowsDefaultCellStyle.SelectionBackColor = Color.Transparent;
+            //dgvProductDetails.RowsDefaultCellStyle.SelectionForeColor = Color.Transparent;
+
+            ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill, Color.White);
+            dgvProductDetails.SelectionMode = DataGridViewSelectionMode.CellSelect;
+
+            if (!ObjUtil.IsControlTextEmpty(txtBarCode))
+            {
+                foreach (DataGridViewRow row in dgvProductDetails.Rows)
+                {
+                    if (row.Cells["Barcode"].Value.ToString() == "" + txtBarCode.Text.Trim() + "")
+                    {
+                        dgvProductDetails.Rows[row.Index].Cells["Barcode"].Selected = true;
+                        dgvProductDetails.FirstDisplayedScrollingRowIndex = row.Index;
+
+                        break;
+                    }
+                }
+                txtBarCode.Clear();
+            }
+
+            HighlightDiffQTY();
         }
 
         private Image GetProductPhoto(int SubProductID)
@@ -189,7 +217,6 @@ namespace IMS_Client_2.Inventory
                     else
                     {
                         imgProduct = IMS_Client_2.Properties.Resources.NoImage;
-                        //clsUtility.ShowInfoMessage("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
                     }
                 }
             }
@@ -198,26 +225,12 @@ namespace IMS_Client_2.Inventory
 
         private void dgvProductDetails_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
             if (e.RowIndex == -1 || e.ColumnIndex == -1)
             {
                 return;
             }
             int _SUBPID = Convert.ToInt32(dgvProductDetails.Rows[e.RowIndex].Cells["SubProductID"].Value);
             picProduct.Image = GetProductPhoto(Convert.ToInt32(_SUBPID));
-
-            //dgvProductDetails.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
-
-            //int qty = Convert.ToInt32(dgvProductDetails.Rows[e.RowIndex].Cells["Diff QTY"].Value);
-            //if (qty < 0)
-            //{
-            //    dgvProductDetails.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
-            //}
-            //else
-            //{
-            //    dgvProductDetails.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
-            //}
-            //dgvProductDetails.Refresh();
         }
 
         private void btnSaveData_MouseEnter(object sender, EventArgs e)
@@ -283,7 +296,8 @@ namespace IMS_Client_2.Inventory
 
         private void dgvProductDetails_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
-            dgvProductDetails.Columns[e.Column.Index].SortMode = DataGridViewColumnSortMode.NotSortable;
+            //dgvProductDetails.Columns[e.Column.Index].SortMode = DataGridViewColumnSortMode.NotSortable;
+            dgvProductDetails.Columns[e.Column.Index].ReadOnly = true;
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
@@ -311,9 +325,13 @@ namespace IMS_Client_2.Inventory
             {
                 if (e.KeyData == Keys.Enter)
                 {
-                    LoadData();
+                    //LoadData();
+                    DataTable dt = (DataTable)dgvProductDetails.DataSource;
+                    dgvProductDetails.DataSource = null;
+                    dgvProductDetails.DataSource = dt;
+
                     DataBindTextBox();
-                    HighlightDiffQTY();
+                    //HighlightDiffQTY();
                     if (comparestatus == 0)
                     {
                         btnSaveData.Enabled = true;
@@ -342,7 +360,7 @@ namespace IMS_Client_2.Inventory
             {
                 LoadData();
                 DataBindTextBox();
-                HighlightDiffQTY();
+                //HighlightDiffQTY();
                 if (comparestatus == 0)
                 {
                     btnSaveData.Enabled = true;
@@ -352,6 +370,11 @@ namespace IMS_Client_2.Inventory
                     btnSaveData.Enabled = false;
                 }
             }
+        }
+
+        private void frmScanInventoryCompare_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            GC.Collect();
         }
     }
 }

@@ -80,7 +80,7 @@ namespace IMS_Client_2
             }
             else
             {
-                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("You have no rights to perform this task");
             }
         }
 
@@ -170,7 +170,7 @@ namespace IMS_Client_2
                 clsUtility.DBName = "IMS_Client_2";
                 clsUtility.LoginID = 2;
                 //clsUtility.IsAdmin = false;
-               clsUtility.IsAdmin = true;
+                clsUtility.IsAdmin = true;
 
                 clsUtility.strProjectTitle = "IMS";
 
@@ -874,7 +874,7 @@ namespace IMS_Client_2
             }
             else
             {
-                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("You have no rights to perform this task");
             }
         }
 
@@ -887,7 +887,7 @@ namespace IMS_Client_2
             }
             else
             {
-                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("You have no rights to perform this task");
             }
         }
 
@@ -904,7 +904,7 @@ namespace IMS_Client_2
             }
             else
             {
-                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("You have no rights to perform this task");
             }
         }
 
@@ -917,7 +917,7 @@ namespace IMS_Client_2
             }
             else
             {
-                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("You have no rights to perform this task");
             }
         }
 
@@ -934,7 +934,7 @@ namespace IMS_Client_2
             }
             else
             {
-                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("You have no rights to perform this task");
             }
         }
 
@@ -951,7 +951,7 @@ namespace IMS_Client_2
             }
             else
             {
-                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("You have no rights to perform this task");
             }
         }
 
@@ -968,7 +968,7 @@ namespace IMS_Client_2
             }
             else
             {
-                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("You have no rights to perform this task");
             }
         }
 
@@ -985,7 +985,7 @@ namespace IMS_Client_2
             }
             else
             {
-                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("You have no rights to perform this task");
             }
         }
 
@@ -1002,7 +1002,7 @@ namespace IMS_Client_2
             }
             else
             {
-                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("You have no rights to perform this task");
             }
         }
 
@@ -1061,7 +1061,7 @@ namespace IMS_Client_2
             }
             else
             {
-                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("You have no rights to perform this task");
             }
 
         }
@@ -1079,7 +1079,7 @@ namespace IMS_Client_2
             }
             else
             {
-                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("You have no rights to perform this task");
             }
         }
 
@@ -1096,7 +1096,7 @@ namespace IMS_Client_2
             }
             else
             {
-                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("You have no rights to perform this task");
             }
         }
 
@@ -1113,7 +1113,7 @@ namespace IMS_Client_2
             }
             else
             {
-                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("You have no rights to perform this task");
             }
         }
 
@@ -1130,7 +1130,7 @@ namespace IMS_Client_2
             }
             else
             {
-                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("You have no rights to perform this task");
             }
         }
 
@@ -1164,17 +1164,24 @@ namespace IMS_Client_2
             }
             else
             {
-                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("You have no rights to perform this task");
             }
         }
 
         private void stockPricingReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool b = ObjUtil.IsAlreadyOpen(typeof(Report.Report_Forms.frmStockPricingReport));
-            if (!b)
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmStockPricingReport) || clsUtility.IsAdmin)
             {
-                Report.Report_Forms.frmStockPricingReport frmSalesAnalysis = new Report.Report_Forms.frmStockPricingReport();
-                frmSalesAnalysis.Show();
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Report.Report_Forms.frmStockPricingReport));
+                if (!b)
+                {
+                    Report.Report_Forms.frmStockPricingReport frmSalesAnalysis = new Report.Report_Forms.frmStockPricingReport();
+                    frmSalesAnalysis.Show();
+                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task");
             }
         }
     }

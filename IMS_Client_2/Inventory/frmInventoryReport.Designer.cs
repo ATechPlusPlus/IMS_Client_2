@@ -52,6 +52,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inventory Report";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmInventoryReport_FormClosed);
             this.Load += new System.EventHandler(this.frmInventoryReport_Load);
             this.ResumeLayout(false);
 
