@@ -357,7 +357,7 @@
             this.txtBarCode.Name = "txtBarCode";
             this.txtBarCode.Size = new System.Drawing.Size(188, 25);
             this.txtBarCode.TabIndex = 285;
-            this.txtBarCode.TextChanged += new System.EventHandler(this.txtBarCode_TextChanged);
+            this.txtBarCode.Click += new System.EventHandler(this.txtBarCode_Click);
             this.txtBarCode.Enter += new System.EventHandler(this.txtBarCode_Enter);
             this.txtBarCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBarCode_KeyDown);
             this.txtBarCode.Leave += new System.EventHandler(this.txtBarCode_Leave);

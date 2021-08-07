@@ -325,6 +325,7 @@ namespace IMS_Client_2.Inventory
                         }
                         else
                         {
+                            qty = qty == 0 ? 1 : qty;
                             NewQTY = qty;
                         }
                         // set to col
@@ -717,6 +718,7 @@ namespace IMS_Client_2.Inventory
 
                 int newQTY = dgvProductDetails.Rows[e.RowIndex].Cells["BillQTY"].Value.ToString() == "" ? 0 : Convert.ToInt32(dgvProductDetails.Rows[e.RowIndex].Cells["BillQTY"].Value);
 
+                newQTY = newQTY == 1 ? 0 : newQTY;
                 UpdateQTYByOne(strBarCodeValue, rate, newQTY);
                 CalculateGrandTotal();
             }

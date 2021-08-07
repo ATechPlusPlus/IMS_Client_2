@@ -155,7 +155,6 @@ namespace IMS_Client_2.Inventory
         {
             dgvProductDetails.ClearSelection();
             ObjUtil.SetRowNumber(dgvProductDetails);
-            
 
             //ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.DisplayedCells, Color.White);
             //ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill, Color.White);
@@ -185,10 +184,9 @@ namespace IMS_Client_2.Inventory
                         break;
                     }
                 }
-                txtBarCode.Clear();
             }
-
             HighlightDiffQTY();
+            //txtBarCode.Clear();
         }
 
         private Image GetProductPhoto(int SubProductID)
@@ -325,6 +323,8 @@ namespace IMS_Client_2.Inventory
             {
                 if (e.KeyData == Keys.Enter)
                 {
+                    label1.Focus();
+
                     //LoadData();
                     DataTable dt = (DataTable)dgvProductDetails.DataSource;
                     dgvProductDetails.DataSource = null;
@@ -356,25 +356,30 @@ namespace IMS_Client_2.Inventory
 
         private void txtBarCode_TextChanged(object sender, EventArgs e)
         {
-            if (txtBarCode.Text.Trim().Length == 0)
-            {
-                LoadData();
-                DataBindTextBox();
-                //HighlightDiffQTY();
-                if (comparestatus == 0)
-                {
-                    btnSaveData.Enabled = true;
-                }
-                else
-                {
-                    btnSaveData.Enabled = false;
-                }
-            }
+            //if (txtBarCode.Text.Trim().Length == 0)
+            //{
+            //    LoadData();
+            //    DataBindTextBox();
+            //    //HighlightDiffQTY();
+            //    if (comparestatus == 0)
+            //    {
+            //        btnSaveData.Enabled = true;
+            //    }
+            //    else
+            //    {
+            //        btnSaveData.Enabled = false;
+            //    }
+            //}
         }
 
         private void frmScanInventoryCompare_FormClosed(object sender, FormClosedEventArgs e)
         {
             GC.Collect();
+        }
+
+        private void txtBarCode_Click(object sender, EventArgs e)
+        {
+            txtBarCode.Clear();
         }
     }
 }
