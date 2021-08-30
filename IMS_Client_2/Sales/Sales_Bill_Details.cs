@@ -33,7 +33,6 @@ namespace IMS_Client_2.Sales
         {
             FillStoreData();
             rdSearchByShop.Checked = true;
-            
             cmbShop.Enabled = true;
             cmbShop.SelectedValue = frmHome.Home_StoreID;
 
@@ -46,12 +45,13 @@ namespace IMS_Client_2.Sales
             dtpToDate.MaxDate = DateTime.Now;
             dtpFromDate.MaxDate = DateTime.Now;
             //radByDate.Checked = true;
-            //string condition = " Convert(date,InvoiceDate) between Convert(Date,'" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "') and Convert(date,'" + dtpToDate.Value.ToString("yyyy-MM-dd") + "')";
+            //string condition = " ShopeID=" + frmHome.Home_StoreID + " AND Convert(date,InvoiceDate) BETWEEN CONVERT(DATE,'" + dtpFromDate.Value.ToString("yyyy-MM-dd") + "') AND CONVERT(DATE,'" + dtpToDate.Value.ToString("yyyy-MM-dd") + "')";
             //LoadData(condition);
         }
 
         private void LoadData(string strCondition)
         {
+            this.Cursor = Cursors.WaitCursor;
             if (strCondition == string.Empty)
             {
                 string strQ = "SELECT * FROM  " + clsUtility.DBName + ".dbo.View_SalesBillDetails ORDER BY id DESC";
@@ -60,10 +60,11 @@ namespace IMS_Client_2.Sales
             }
             else
             {
-                string strQ = "SELECT * FROM  " + clsUtility.DBName + ".dbo.View_SalesBillDetails WHERE " + strCondition+ "  ORDER BY id DESC";
+                string strQ = "SELECT * FROM  " + clsUtility.DBName + ".dbo.View_SalesBillDetails WHERE " + strCondition + "  ORDER BY id DESC";
                 dgvProductDetails.DataSource = ObjDAL.ExecuteSelectStatement(strQ);
                 lblCOunt.Text = dgvProductDetails.Rows.Count.ToString();
             }
+            this.Cursor = Cursors.Default;
         }
 
         private void FillStoreData()
@@ -167,7 +168,7 @@ namespace IMS_Client_2.Sales
                 {
                     return;
                 }
-                DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT Empid,Name FROM " + clsUtility.DBName + ".dbo.employeeDetails WHERE Name LIKE '" + txtSalesMan.Text + "%'");
+                DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT Empid,[Name] FROM " + clsUtility.DBName + ".dbo.employeeDetails WITH(NOLOCK) WHERE [Name] LIKE '" + txtSalesMan.Text + "%'");
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     ObjUtil.SetControlData(txtSalesMan, "Name");

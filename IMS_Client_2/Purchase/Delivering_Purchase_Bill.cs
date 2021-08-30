@@ -137,10 +137,25 @@ namespace IMS_Client_2.Purchase
             LoadData();
         }
 
+        private void ResizeGridView()
+        {
+            if (WindowState == FormWindowState.Maximized)
+            {
+                ObjUtil.SetDataGridProperty(dataGridView1, DataGridViewAutoSizeColumnsMode.Fill);
+            }
+
+            else if (WindowState == FormWindowState.Normal)
+            {
+                ObjUtil.SetDataGridProperty(dataGridView1, DataGridViewAutoSizeColumnsMode.ColumnHeader);
+            }
+        }
+
         private void dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             ObjUtil.SetRowNumber(dataGridView1);
-            ObjUtil.SetDataGridProperty(dataGridView1, DataGridViewAutoSizeColumnsMode.ColumnHeader);
+
+            ResizeGridView();
+
             dataGridView1.Columns["ModelNo"].HeaderText = "Style No.";
             dataGridView1.Columns["PurchaseInvoiceDetailsID"].Visible = false;
             dataGridView1.Columns["PurchaseInvoiceID"].Visible = false;
@@ -500,7 +515,7 @@ namespace IMS_Client_2.Purchase
                 ObjDAL.UpdateColumnData("Total", SqlDbType.Int, Convert.ToInt32(dtPurchaseQTYColor.Rows[i]["Total"]));
                 ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
                 ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
-                a = ObjDAL.UpdateData(clsUtility.DBName + ".dbo.DeliveryPurchaseBill3", "DeliveryPurchaseID1=" + ID1 + " AND DeliveryPurchaseID2=" + ID2 + " AND DeliveryPurchaseID3 = " + Convert.ToInt32(dtPurchaseQTYColor.Rows[i]["DeliveryPurchaseID3"]));
+                a = ObjDAL.UpdateData(clsUtility.DBName + ".dbo.DeliveryPurchaseBill3", "DeliveryPurchaseID1=" + ID1 + " AND DeliveryPurchaseID3 = " + Convert.ToInt32(dtPurchaseQTYColor.Rows[i]["DeliveryPurchaseID3"]));
             }
             return a;
         }
@@ -994,7 +1009,7 @@ namespace IMS_Client_2.Purchase
         private AutoCompleteStringCollection LoadAllColors()
         {
             AutoCompleteStringCollection str = new AutoCompleteStringCollection();
-            DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT ColorName FROM ColorMaster WITH(NOLOCK) WHERE ISNULL(ActiveStatus,1)=1");
+            DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT ColorName FROM " + clsUtility.DBName + ".dbo.ColorMaster WITH(NOLOCK) WHERE ISNULL(ActiveStatus,1)=1");
             if (ObjUtil.ValidateTable(dt))
             {
                 for (int i = 0; i < dt.Rows.Count; i++)
@@ -1004,6 +1019,12 @@ namespace IMS_Client_2.Purchase
             }
             return str;
         }
+
+        private void Delivering_Purchase_Bill_Resize(object sender, EventArgs e)
+        {
+            ResizeGridView();
+        }
+
         private void dgvQtycolor_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             int column = dgvQtycolor.CurrentCell.ColumnIndex;

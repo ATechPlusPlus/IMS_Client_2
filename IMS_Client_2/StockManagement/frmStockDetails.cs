@@ -31,7 +31,7 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("CategoryID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("IsAdmin", SqlDbType.Int, clsUtility.IsAdmin, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_Material_NewDetails");
-            if (ds != null && ds.Tables.Count > 0)
+            if (ObjUtil.ValidateDataSet(ds))
             {
                 DataTable dt = ds.Tables[0];
                 if (ObjUtil.ValidateTable(dt))

@@ -191,7 +191,7 @@
             this.groupBox3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(12, 349);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(993, 233);
+            this.groupBox3.Size = new System.Drawing.Size(993, 251);
             this.groupBox3.TabIndex = 253;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Purchase Item Details";
@@ -200,14 +200,16 @@
             // 
             this.dgvPurchaseItem.AllowUserToAddRows = false;
             this.dgvPurchaseItem.AllowUserToDeleteRows = false;
+            this.dgvPurchaseItem.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPurchaseItem.BackgroundColor = System.Drawing.Color.White;
             this.dgvPurchaseItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPurchaseItem.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPurchaseItem.Location = new System.Drawing.Point(3, 21);
             this.dgvPurchaseItem.Name = "dgvPurchaseItem";
             this.dgvPurchaseItem.ReadOnly = true;
             this.dgvPurchaseItem.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dgvPurchaseItem.Size = new System.Drawing.Size(987, 209);
+            this.dgvPurchaseItem.Size = new System.Drawing.Size(984, 206);
             this.dgvPurchaseItem.TabIndex = 268;
             this.dgvPurchaseItem.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvPurchaseItem_DataBindingComplete);
             // 

@@ -80,6 +80,7 @@
             // 
             // btnSearch
             // 
+            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSearch.Enabled = false;
@@ -149,6 +150,8 @@
             // 
             // grpPurchaseBillDetail
             // 
+            this.grpPurchaseBillDetail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grpPurchaseBillDetail.BackColor = System.Drawing.Color.Transparent;
             this.grpPurchaseBillDetail.Controls.Add(this.cmbListBox);
             this.grpPurchaseBillDetail.Controls.Add(this.label5);
@@ -339,6 +342,8 @@
             this.dgvQtycolor.AllowUserToDeleteRows = false;
             this.dgvQtycolor.AllowUserToResizeColumns = false;
             this.dgvQtycolor.AllowUserToResizeRows = false;
+            this.dgvQtycolor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvQtycolor.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvQtycolor.BackgroundColor = System.Drawing.Color.White;
             this.dgvQtycolor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -522,6 +527,9 @@
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(4, 504);
@@ -534,6 +542,7 @@
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -545,6 +554,7 @@
             // 
             // txtTotalQTY
             // 
+            this.txtTotalQTY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtTotalQTY.BackColor = System.Drawing.Color.White;
             this.txtTotalQTY.Font = new System.Drawing.Font("Times New Roman", 11.25F);
             this.txtTotalQTY.Location = new System.Drawing.Point(140, 658);
@@ -579,6 +589,7 @@
             // 
             // txtPurchaseInvoiceID
             // 
+            this.txtPurchaseInvoiceID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPurchaseInvoiceID.BackColor = System.Drawing.Color.White;
             this.txtPurchaseInvoiceID.Enabled = false;
             this.txtPurchaseInvoiceID.Font = new System.Drawing.Font("Times New Roman", 11.25F);
@@ -693,12 +704,12 @@
             this.Controls.Add(this.lblSupplierBillNo);
             this.Controls.Add(this.txtSupplierBillNo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
             this.Name = "Delivering_Purchase_Bill";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Delivering Purchase Bill";
             this.Load += new System.EventHandler(this.Delivering_Purchase_Bill_Load);
+            this.Resize += new System.EventHandler(this.Delivering_Purchase_Bill_Resize);
             this.grpPurchaseBillDetail.ResumeLayout(false);
             this.grpPurchaseBillDetail.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQtycolor)).EndInit();

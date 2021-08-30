@@ -172,7 +172,7 @@ namespace IMS_Client_2
                 //clsUtility.IsAdmin = false;
                 clsUtility.IsAdmin = true;
 
-                //clsUtility.strProjectTitle = "IMS";
+                clsUtility.strProjectTitle = "IMS";
 
                 if (clsUtility.LoginID > 0)
                 {
