@@ -93,6 +93,9 @@
             // 
             this.dgvStockDetails.AllowUserToAddRows = false;
             this.dgvStockDetails.AllowUserToDeleteRows = false;
+            this.dgvStockDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvStockDetails.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvStockDetails.BackgroundColor = System.Drawing.Color.White;
             this.dgvStockDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -122,6 +125,7 @@
             // 
             // PicItem
             // 
+            this.PicItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.PicItem.BackColor = System.Drawing.Color.Transparent;
             this.PicItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PicItem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -134,6 +138,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.rdSearchByCategory);
             this.groupBox1.Controls.Add(this.cmbCategory);
@@ -305,7 +311,6 @@
             this.Controls.Add(this.dgvStockDetails);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
             this.Name = "frmStockDetails";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

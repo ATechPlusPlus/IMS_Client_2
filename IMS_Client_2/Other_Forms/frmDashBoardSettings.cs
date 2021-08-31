@@ -36,7 +36,7 @@ namespace IMS_Client_2.Other_Forms
         private void LoadShop()
         {
             DataTable dt = null;
-            dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.StoreMaster", "StoreID,StoreName,Place,CASE StoreCategory WHEN 0 THEN 'Normal' WHEN 1 then'Warehouse' END AS Category ", "StoreName");
+            dt = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.StoreMaster", "StoreID,StoreName,Place,CASE StoreCategory WHEN 0 THEN 'Normal' WHEN 1 then'Warehouse' END AS Category ", "ISNULL(ActiveStatus,1)=1", "StoreName");
 
             if (ObjUtil.ValidateTable(dt))
             {

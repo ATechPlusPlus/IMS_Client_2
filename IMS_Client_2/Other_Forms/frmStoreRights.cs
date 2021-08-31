@@ -40,7 +40,7 @@ namespace IMS_Client_2.Other_Forms
         {
             if (clsUtility.IsAdmin)
             {
-                string str = " select distinct s1.UserID,u.UserName from "+clsUtility.DBName+".dbo.tblStoreUserRights s1 join " +
+                string str = " select distinct s1.UserID,u.UserName from " + clsUtility.DBName + ".dbo.tblStoreUserRights s1 join " +
                             " UserManagement u on s1.UserID = u.UserID ";
 
                 DataTable dtuser = ObjCon.ExecuteSelectStatement(str);
@@ -77,11 +77,11 @@ namespace IMS_Client_2.Other_Forms
                 {
                     ObjUtil.SetControlData(txtName, "USERNAME");
                     ObjUtil.SetControlData(txtUserID, "USERID");
-             
+
                     ObjUtil.ShowDataPopup(dt, txtName, this, this);
                     if (ObjUtil.GetDataPopup() != null && ObjUtil.GetDataPopup().DataSource != null)
                     {
-                      
+
                         // if there is only one column
                         ObjUtil.GetDataPopup().AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                         if (ObjUtil.GetDataPopup().ColumnCount > 0)
@@ -124,7 +124,7 @@ namespace IMS_Client_2.Other_Forms
         private void LoadShop()
         {
             DataTable dt = null;
-            dt = ObjCon.GetDataCol(clsUtility.DBName + ".dbo.StoreMaster", "StoreID,StoreName,Place,case StoreCategory when 0 then 'Normal' when 1 then'WearHouse' end as Category ", "StoreName");
+            dt = ObjCon.GetDataCol(clsUtility.DBName + ".dbo.StoreMaster", "StoreID,StoreName,Place,case StoreCategory when 0 then 'Normal' when 1 then 'Ware House' end as Category ", "ISNULL(ActiveStatus, 1) = 1", "StoreName");
 
             if (ObjUtil.ValidateTable(dt))
             {
@@ -144,19 +144,19 @@ namespace IMS_Client_2.Other_Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtName.Text.Trim().Length==0)
+            if (txtName.Text.Trim().Length == 0)
             {
                 CoreApp.clsUtility.ShowInfoMessage("Please enter user name.", clsUtility.strProjectTitle);
                 return;
             }
-            else if (AnyRightCheck()==false)
+            else if (AnyRightCheck() == false)
             {
                 CoreApp.clsUtility.ShowInfoMessage("Please select shop.", clsUtility.strProjectTitle);
                 return;
 
             }
             SaveUserRights();
-            
+
         }
         private bool AnyRightCheck()
         {
@@ -202,11 +202,11 @@ namespace IMS_Client_2.Other_Forms
 
                     ObjCon.InsertData(clsUtility.DBName + ".dbo.tblStoreUserRights", false);
                 }
-               
+
             }
             Clear();
             clsUtility.ShowInfoMessage("User Shop rights have been saved.", clsUtility.strProjectTitle);
-           
+
         }
         private void UpdateRights()
         {
@@ -233,7 +233,7 @@ namespace IMS_Client_2.Other_Forms
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-             if (AnyRightCheck() == false)
+            if (AnyRightCheck() == false)
             {
                 CoreApp.clsUtility.ShowInfoMessage("Please select shop.", clsUtility.strProjectTitle);
                 return;
@@ -253,13 +253,13 @@ namespace IMS_Client_2.Other_Forms
         private void Clear()
         {
             chkAll.Checked = false;
-                txtName.Clear();
-                txtUserID.Clear();
-                dgvShopeDetails.Enabled = false;
-                LoadShop();
-                txtName.Enabled = false;
-                grpRights.Enabled = false;
-                ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterCancel);
+            txtName.Clear();
+            txtUserID.Clear();
+            dgvShopeDetails.Enabled = false;
+            LoadShop();
+            txtName.Enabled = false;
+            grpRights.Enabled = false;
+            ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterCancel);
             //ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterCancel, clsUtility.IsAdmin);
             loadUser();
 
@@ -275,12 +275,12 @@ namespace IMS_Client_2.Other_Forms
                 ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterGridClick);
 
 
-               DataTable dtStoreRights= ObjCon.ExecuteSelectStatement("select StoreID from "+clsUtility.DBName+".dbo.tblStoreUserRights where UserID="+ UserID);
+                DataTable dtStoreRights = ObjCon.ExecuteSelectStatement("select StoreID from " + clsUtility.DBName + ".dbo.tblStoreUserRights where UserID=" + UserID);
                 for (int i = 0; i < dtStoreRights.Rows.Count; i++)
                 {
                     for (int k = 0; k < dgvShopeDetails.Rows.Count; k++)
                     {
-                        int gridValue=Convert.ToInt32(dgvShopeDetails.Rows[k].Cells["StoreID"].Value);
+                        int gridValue = Convert.ToInt32(dgvShopeDetails.Rows[k].Cells["StoreID"].Value);
                         if (gridValue == Convert.ToInt32(dtStoreRights.Rows[i]["StoreID"]))
                         {
                             dgvShopeDetails.Rows[k].Cells[0].Value = true;
@@ -321,7 +321,7 @@ namespace IMS_Client_2.Other_Forms
                 for (int k = 0; k < dgvShopeDetails.Rows.Count; k++)
                 {
                     dgvShopeDetails.Rows[k].Cells["colCheck"].Value = true;
-                    
+
                 }
                 dgvShopeDetails.EndEdit();
             }
