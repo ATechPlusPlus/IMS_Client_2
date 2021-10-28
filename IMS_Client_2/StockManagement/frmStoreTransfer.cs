@@ -586,7 +586,7 @@ namespace IMS_Client_2.StockManagement
         {
             try
             {
-                string strQ = "SELECT * FROM tblStoreTransferBillDetails WITH(NOLOCK) WHERE BillNo='" + txtInvoiceNumber.Text + "'";
+                string strQ = "SELECT * FROM " + clsUtility.DBName + ".dbo.tblStoreTransferBillDetails WITH(NOLOCK) WHERE BillNo='" + txtInvoiceNumber.Text + "'";
 
                 DataTable dtDetails = ObjDAL.ExecuteSelectStatement(strQ);
                 if (ObjUtil.ValidateTable(dtDetails))
@@ -597,11 +597,11 @@ namespace IMS_Client_2.StockManagement
                     lblBillStatus.Text = dtDetails.Rows[0]["BillStatus"].ToString();
                     dtpSalesDate.Value = Convert.ToDateTime(dtDetails.Rows[0]["BillDate"]);
 
-                    string strItemQuery = "select sti.ProductID, ps.ProductName, sti.BillQTY,sti.Rate,sti.Total,sti.Barcode,sti.SizeID,sm.Size, sti.ColorID, col.ColorName,psm.QTY as StockQTY, psm.SubProductID from tblStoreTransferItemDetails sti join " +
-                                        " ProductMaster ps on sti.ProductID = ps.ProductID " +
-                                        " join ColorMaster as col on sti.ColorID = col.ColorID " +
-                                        " join SizeMaster as sm on sti.SizeID = sm.SizeID " +
-                                        " join ProductStockColorSizeMaster psm on sti.Barcode = psm.BarcodeNo " +
+                    string strItemQuery = "select sti.ProductID, ps.ProductName, sti.BillQTY,sti.Rate,sti.Total,sti.Barcode,sti.SizeID,sm.Size, sti.ColorID, col.ColorName,psm.QTY as StockQTY, psm.SubProductID from " + clsUtility.DBName + ".dbo.tblStoreTransferItemDetails sti join " +
+                                        " " + clsUtility.DBName + ".dbo.ProductMaster ps on sti.ProductID = ps.ProductID " +
+                                        " join " + clsUtility.DBName + ".dbo.ColorMaster as col on sti.ColorID = col.ColorID " +
+                                        " join " + clsUtility.DBName + ".dbo.SizeMaster as sm on sti.SizeID = sm.SizeID " +
+                                        " join " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster psm on sti.Barcode = psm.BarcodeNo " +
                                         " where psm.StoreID = " + cmdFrom.SelectedValue + " and psm.BarcodeNo = sti.Barcode " +
                                         " AND sti.StoreBillDetailsID =  " + Bill_ID;
 
@@ -650,7 +650,7 @@ namespace IMS_Client_2.StockManagement
         private string GetLoginEmployee()
         {
             string emp = "NA";
-            string str = "  select e1.Name from EmployeeDetails e1 join  " +
+            string str = "  select e1.Name from " + clsUtility.DBName + ".dbo.EmployeeDetails e1 join  " +
                          " UserManagement u1 on e1.EmpID = u1.EmployeeID" +
                          " where u1.UserID = " + clsUtility.LoginID;
 

@@ -11,26 +11,26 @@ namespace IMS_Client_2.Barcode
 {
     class clsBarCodeUtility
     {
-       public  enum PrinterType
+        public enum PrinterType
         {
-           BarCodePrinter,
-           InvoicePrinter
+            BarCodePrinter,
+            InvoicePrinter
         }
-        public static string GetPrinterName(PrinterType printerType )
+        public static string GetPrinterName(PrinterType printerType)
         {
             CoreApp.clsConnection_DAL ObjCon = new clsConnection_DAL(true);
             string printerName = "";
-            if (printerType==PrinterType.BarCodePrinter)
+            if (printerType == PrinterType.BarCodePrinter)
             {
-                DataTable dtPrinter = ObjCon.ExecuteSelectStatement("SELECT * FROM [tblPrinterSetting] WITH(NOLOCK) WHERE machineName='" + Environment.MachineName + "' ");
+                DataTable dtPrinter = ObjCon.ExecuteSelectStatement("SELECT * FROM " + clsUtility.DBName + ".dbo.[tblPrinterSetting] WITH(NOLOCK) WHERE machineName='" + Environment.MachineName + "' ");
                 if (dtPrinter.Rows.Count > 0)
                 {
                     printerName = dtPrinter.Rows[0]["BarCodePrinter"].ToString();
                 }
             }
-            else if (printerType==PrinterType.InvoicePrinter)
+            else if (printerType == PrinterType.InvoicePrinter)
             {
-                DataTable dtPrinter = ObjCon.ExecuteSelectStatement("SELECT * FROM [tblPrinterSetting] WITH(NOLOCK) WHERE machineName='" + Environment.MachineName + "' ");
+                DataTable dtPrinter = ObjCon.ExecuteSelectStatement("SELECT * FROM " + clsUtility.DBName + ".dbo.[tblPrinterSetting] WITH(NOLOCK) WHERE machineName='" + Environment.MachineName + "' ");
                 if (dtPrinter.Rows.Count > 0)
                 {
                     printerName = dtPrinter.Rows[0]["InvoicePrinter"].ToString();

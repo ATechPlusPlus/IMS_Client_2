@@ -43,7 +43,7 @@ namespace IMS_Client_2.Inventory
             else
             {
                 cmdFrom.Enabled = false;
-                strQ = "SELECT StoreID,StoreName FROM " + clsUtility.DBName + ".dbo.StoreMaster WHERE ISNULL(ActiveStatus,1)=1 AND StoreID IN  " +
+                strQ = "SELECT StoreID,StoreName FROM " + clsUtility.DBName + ".dbo.StoreMaster WITH(NOLOCK) WHERE ISNULL(ActiveStatus,1)=1 AND StoreID IN  " +
                            " (SELECT StoreID FROM  " + clsUtility.DBName + ".dbo.tblStoreUserRights WHERE UserID = " + clsUtility.LoginID + ") ORDER BY StoreName ASC";
             }
             DataTable dtFromStore = ObjDAL.ExecuteSelectStatement(strQ);

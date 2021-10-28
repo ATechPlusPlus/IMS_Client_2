@@ -324,7 +324,7 @@ namespace IMS_Client_2.Other_Forms
         }
         private void ShowDashBoardDate()
         {
-            DataTable dtdate = ObjDAL.ExecuteSelectStatement("SELECT FromDate,ToDate FROM tblDashBoard WITH(NOLOCK)");
+            DataTable dtdate = ObjDAL.ExecuteSelectStatement("SELECT FromDate,ToDate FROM " + clsUtility.DBName + ".dbo.tblDashBoard WITH(NOLOCK)");
             if (ObjUtil.ValidateTable(dtdate))
             {
                 lblDate.Text = Convert.ToDateTime(dtdate.Rows[0]["FromDate"]).ToShortDateString() + " to " + Convert.ToDateTime(dtdate.Rows[0]["ToDate"]).ToShortDateString();

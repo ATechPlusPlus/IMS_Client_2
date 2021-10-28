@@ -97,7 +97,7 @@ namespace IMS_Client_2.Barcode
 
         private void LoadData()
         {
-            DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT SupplierBillNo FROM PurchaseInvoice WITH(NOLOCK) WHERE PurchaseInvoiceID IN(SELECT DISTINCT PurchaseInvoiceID FROM ProductStockMaster WITH(NOLOCK) where QTY > 0) ");
+            DataTable dt = ObjDAL.ExecuteSelectStatement("SELECT SupplierBillNo FROM " + clsUtility.DBName + ".dbo.PurchaseInvoice WITH(NOLOCK) WHERE PurchaseInvoiceID IN(SELECT DISTINCT PurchaseInvoiceID FROM " + clsUtility.DBName + ".dbo.ProductStockMaster WITH(NOLOCK) where QTY > 0) ");
             if (ObjUtil.ValidateTable(dt))
             {
                 dataGridView1.DataSource = dt;
