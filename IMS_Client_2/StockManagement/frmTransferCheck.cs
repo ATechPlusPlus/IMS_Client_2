@@ -23,6 +23,7 @@ namespace IMS_Client_2.StockManagement
 
         public int StoreBillDetailsID = 0;
         public int fromShopID = 0;
+        string strBarcode = string.Empty;
 
         DataTable dtStoreTransfer = new DataTable();
         Image B_Leave = IMS_Client_2.Properties.Resources.B_click;
@@ -40,6 +41,10 @@ namespace IMS_Client_2.StockManagement
 
         private void LoadData()
         {
+            dgvProductDetails.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+            //Most time consumption enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+            dgvProductDetails.RowHeadersVisible = false; // set it to false if not needed
+
             ObjDAL.SetStoreProcedureData("StoreBillDetailsID", SqlDbType.Int, StoreBillDetailsID, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_StoreTransfer_ItemDetails");
             if (ds != null && ds.Tables.Count > 0)
@@ -69,6 +74,7 @@ namespace IMS_Client_2.StockManagement
         {
             if (e.KeyData == Keys.Enter)
             {
+                strBarcode = txtBarCode.Text.Trim();
                 DataRow[] drow = dtStoreTransfer.Select("Barcode='" + txtBarCode.Text + "'");
                 if (drow.Length > 0)
                 {
@@ -87,6 +93,9 @@ namespace IMS_Client_2.StockManagement
                     }
                     drow[0]["EnterQTY"] = pTotal;
                     dtStoreTransfer.AcceptChanges();
+
+
+
                     dgvProductDetails.DataSource = dtStoreTransfer;
 
                     picProduct.Image = GetProductPhoto(Convert.ToInt32(drow[0]["SubProductID"]));
@@ -153,43 +162,63 @@ namespace IMS_Client_2.StockManagement
 
         private void dgvProductDetails_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            ObjUtil.SetRowNumber(dgvProductDetails);
-            ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill, Color.White);
-
-            dgvProductDetails.Columns["TransferItemID"].Visible = false;
-            dgvProductDetails.Columns["StoreBillDetailsID"].Visible = false;
-            dgvProductDetails.Columns["ProductID"].Visible = false;
-            dgvProductDetails.Columns["SubProductID"].Visible = false;
-            dgvProductDetails.Columns["BillDate"].Visible = false;
-            dgvProductDetails.Columns["BillNo"].Visible = false;
-            dgvProductDetails.Columns["TotalQTY"].Visible = false;
-            dgvProductDetails.Columns["Total"].Visible = false;
-            dgvProductDetails.Columns["CellColor"].Visible = false;
-            dgvProductDetails.Columns["ColorID"].Visible = false;
-            dgvProductDetails.Columns["SizeID"].Visible = false;
-
-            for (int i = 0; i < dgvProductDetails.Rows.Count; i++)
+            try
             {
-                if (dgvProductDetails.Rows[i].Cells["CellColor"].Value.ToString() == "Green")
+                dgvProductDetails.ClearSelection();
+                ObjUtil.SetRowNumber(dgvProductDetails);
+                ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill, Color.White);
+
+                dgvProductDetails.Columns["TransferItemID"].Visible = false;
+                dgvProductDetails.Columns["StoreBillDetailsID"].Visible = false;
+                dgvProductDetails.Columns["ProductID"].Visible = false;
+                dgvProductDetails.Columns["SubProductID"].Visible = false;
+                dgvProductDetails.Columns["BillDate"].Visible = false;
+                dgvProductDetails.Columns["BillNo"].Visible = false;
+                dgvProductDetails.Columns["TotalQTY"].Visible = false;
+                dgvProductDetails.Columns["Total"].Visible = false;
+                dgvProductDetails.Columns["CellColor"].Visible = false;
+                dgvProductDetails.Columns["ColorID"].Visible = false;
+                dgvProductDetails.Columns["SizeID"].Visible = false;
+
+                ObjUtil.SetDataGridProperty(dgvProductDetails, DataGridViewAutoSizeColumnsMode.Fill, Color.White);
+                dgvProductDetails.SelectionMode = DataGridViewSelectionMode.CellSelect;
+
+                for (int i = 0; i < dgvProductDetails.Rows.Count; i++)
                 {
-                    dgvProductDetails.Rows[i].Cells["State"].Style.BackColor = Color.Green;
+                    if (strBarcode != string.Empty)
+                    {
+                        if (dgvProductDetails.Rows[i].Cells["Barcode"].Value.ToString() == "" + strBarcode + "")
+                        {
+                            dgvProductDetails.Rows[i].Cells["Barcode"].Selected = true;
+                            dgvProductDetails.FirstDisplayedScrollingRowIndex = i;
+                        }
+                    }
+                    if (dgvProductDetails.Rows[i].Cells["CellColor"].Value.ToString() == "Green")
+                    {
+                        dgvProductDetails.Rows[i].Cells["State"].Style.BackColor = Color.Green;
+                    }
+                    else if (dgvProductDetails.Rows[i].Cells["CellColor"].Value.ToString() == "Red")
+                    {
+                        dgvProductDetails.Rows[i].Cells["State"].Style.BackColor = Color.Red;
+                    }
+                    else if (dgvProductDetails.Rows[i].Cells["CellColor"].Value.ToString() == "Orange")
+                    {
+                        dgvProductDetails.Rows[i].Cells["State"].Style.BackColor = Color.Orange;
+                    }
+                    else if (dgvProductDetails.Rows[i].Cells["CellColor"].Value.ToString() == "Violet")
+                    {
+                        dgvProductDetails.Rows[i].Cells["State"].Style.BackColor = Color.Violet;
+                    }
                 }
-                else if (dgvProductDetails.Rows[i].Cells["CellColor"].Value.ToString() == "Red")
-                {
-                    dgvProductDetails.Rows[i].Cells["State"].Style.BackColor = Color.Red;
-                }
-                else if (dgvProductDetails.Rows[i].Cells["CellColor"].Value.ToString() == "Orange")
-                {
-                    dgvProductDetails.Rows[i].Cells["State"].Style.BackColor = Color.Orange;
-                }
-                else if (dgvProductDetails.Rows[i].Cells["CellColor"].Value.ToString() == "Violet")
-                {
-                    dgvProductDetails.Rows[i].Cells["State"].Style.BackColor = Color.Violet;
-                }
+
+                //dgvProductDetails.ClearSelection();
+                //dgvProductDetails.RowsDefaultCellStyle.SelectionBackColor = Color.Transparent;
+                //dgvProductDetails.RowsDefaultCellStyle.SelectionForeColor = Color.Transparent;
             }
-            dgvProductDetails.ClearSelection();
-            dgvProductDetails.RowsDefaultCellStyle.SelectionBackColor = Color.Transparent;
-            dgvProductDetails.RowsDefaultCellStyle.SelectionForeColor = Color.Transparent;
+            catch (Exception ex)
+            {
+                //clsUtility.ShowErrorMessage(ex.Message);
+            }
         }
 
         private Image GetProductPhoto(int SubProductID)
@@ -308,12 +337,13 @@ namespace IMS_Client_2.StockManagement
                 {
                     return;
                 }
-                int pSubProductID = Convert.ToInt32(dgvProductDetails.SelectedRows[0].Cells["SubProductID"].Value);
+                //int pSubProductID = Convert.ToInt32(dgvProductDetails.SelectedRows[0].Cells["SubProductID"].Value);
+                int pSubProductID = Convert.ToInt32(dgvProductDetails.Rows[e.RowIndex].Cells["SubProductID"].Value);
                 picProduct.Image = GetProductPhoto(pSubProductID);
             }
             catch (Exception ex)
             {
-                clsUtility.ShowInfoMessage(ex.ToString(), clsUtility.strProjectTitle);
+                clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
             }
         }
 

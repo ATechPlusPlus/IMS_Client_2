@@ -23,6 +23,10 @@ namespace IMS_Client_2.StockManagement
         public int pStoreBillDetailsID = 0;
         private void LoadData()
         {
+            dgvTransferWatch.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+            //Most time consumption enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+            dgvTransferWatch.RowHeadersVisible = false; // set it to false if not needed
+
             ObjDAL.SetStoreProcedureData("StoreBillDetailsID", SqlDbType.Int, pStoreBillDetailsID, clsConnection_DAL.ParamType.Input);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_StoreTransfer_ListItems");
             //DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_StoreTransfer_ItemDetails");

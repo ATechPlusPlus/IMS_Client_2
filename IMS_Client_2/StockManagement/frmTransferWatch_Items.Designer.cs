@@ -88,11 +88,11 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvTransferWatch.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvTransferWatch.Location = new System.Drawing.Point(11, 116);
+            this.dgvTransferWatch.Location = new System.Drawing.Point(9, 116);
             this.dgvTransferWatch.MultiSelect = false;
             this.dgvTransferWatch.Name = "dgvTransferWatch";
             this.dgvTransferWatch.ReadOnly = true;
-            this.dgvTransferWatch.Size = new System.Drawing.Size(744, 293);
+            this.dgvTransferWatch.Size = new System.Drawing.Size(753, 332);
             this.dgvTransferWatch.TabIndex = 212;
             this.dgvTransferWatch.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvTransferWatch_DataBindingComplete);
             // 
@@ -111,7 +111,7 @@
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(540, 49);
+            this.label10.Location = new System.Drawing.Point(527, 49);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(101, 17);
             this.label10.TabIndex = 275;
@@ -121,7 +121,7 @@
             // 
             this.txtStoreName.BackColor = System.Drawing.Color.White;
             this.txtStoreName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStoreName.Location = new System.Drawing.Point(369, 84);
+            this.txtStoreName.Location = new System.Drawing.Point(351, 84);
             this.txtStoreName.Name = "txtStoreName";
             this.txtStoreName.ReadOnly = true;
             this.txtStoreName.Size = new System.Drawing.Size(151, 25);
@@ -153,7 +153,7 @@
             // 
             this.txtBillNo.BackColor = System.Drawing.Color.White;
             this.txtBillNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBillNo.Location = new System.Drawing.Point(369, 46);
+            this.txtBillNo.Location = new System.Drawing.Point(351, 46);
             this.txtBillNo.Name = "txtBillNo";
             this.txtBillNo.ReadOnly = true;
             this.txtBillNo.Size = new System.Drawing.Size(151, 25);
@@ -216,11 +216,11 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(540, 84);
+            this.label5.Location = new System.Drawing.Point(527, 84);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(114, 17);
+            this.label5.Size = new System.Drawing.Size(130, 17);
             this.label5.TabIndex = 279;
-            this.label5.Text = "Total Enter QTY :";
+            this.label5.Text = "Total Receive QTY :";
             // 
             // frmTransferWatch_Items
             // 

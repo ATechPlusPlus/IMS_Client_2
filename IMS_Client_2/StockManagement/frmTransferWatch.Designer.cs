@@ -54,7 +54,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(969, 40);
+            this.panel2.Size = new System.Drawing.Size(1060, 40);
             this.panel2.TabIndex = 114;
             // 
             // label12
@@ -87,7 +87,7 @@
             this.dgvTransferWatch.Location = new System.Drawing.Point(4, 128);
             this.dgvTransferWatch.Name = "dgvTransferWatch";
             this.dgvTransferWatch.ReadOnly = true;
-            this.dgvTransferWatch.Size = new System.Drawing.Size(953, 293);
+            this.dgvTransferWatch.Size = new System.Drawing.Size(1044, 293);
             this.dgvTransferWatch.TabIndex = 211;
             this.dgvTransferWatch.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTransferWatch_CellClick);
             this.dgvTransferWatch.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvTransferWatch_DataBindingComplete);
@@ -105,7 +105,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold);
             this.groupBox1.Location = new System.Drawing.Point(7, 45);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(950, 66);
+            this.groupBox1.Size = new System.Drawing.Size(1041, 66);
             this.groupBox1.TabIndex = 212;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
@@ -115,7 +115,7 @@
             this.rdSearchByAll.AutoSize = true;
             this.rdSearchByAll.Checked = true;
             this.rdSearchByAll.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdSearchByAll.Location = new System.Drawing.Point(821, 28);
+            this.rdSearchByAll.Location = new System.Drawing.Point(939, 28);
             this.rdSearchByAll.Name = "rdSearchByAll";
             this.rdSearchByAll.Size = new System.Drawing.Size(79, 21);
             this.rdSearchByAll.TabIndex = 255;
@@ -128,7 +128,7 @@
             // 
             this.rdByBillStatus.AutoSize = true;
             this.rdByBillStatus.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdByBillStatus.Location = new System.Drawing.Point(427, 28);
+            this.rdByBillStatus.Location = new System.Drawing.Point(443, 28);
             this.rdByBillStatus.Name = "rdByBillStatus";
             this.rdByBillStatus.Size = new System.Drawing.Size(113, 21);
             this.rdByBillStatus.TabIndex = 254;
@@ -145,7 +145,7 @@
             this.cmbBillStatus.Items.AddRange(new object[] {
             "Not Received",
             "Received"});
-            this.cmbBillStatus.Location = new System.Drawing.Point(555, 25);
+            this.cmbBillStatus.Location = new System.Drawing.Point(571, 25);
             this.cmbBillStatus.Name = "cmbBillStatus";
             this.cmbBillStatus.Size = new System.Drawing.Size(198, 27);
             this.cmbBillStatus.TabIndex = 253;
@@ -156,7 +156,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(216, 32);
+            this.label1.Location = new System.Drawing.Point(232, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 17);
             this.label1.TabIndex = 251;
@@ -167,7 +167,7 @@
             this.dtpToDate.Enabled = false;
             this.dtpToDate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpToDate.Location = new System.Drawing.Point(256, 28);
+            this.dtpToDate.Location = new System.Drawing.Point(272, 28);
             this.dtpToDate.Name = "dtpToDate";
             this.dtpToDate.Size = new System.Drawing.Size(109, 25);
             this.dtpToDate.TabIndex = 250;
@@ -178,7 +178,7 @@
             this.dtpFromDate.Enabled = false;
             this.dtpFromDate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFromDate.Location = new System.Drawing.Point(95, 28);
+            this.dtpFromDate.Location = new System.Drawing.Point(111, 28);
             this.dtpFromDate.Name = "dtpFromDate";
             this.dtpFromDate.Size = new System.Drawing.Size(107, 25);
             this.dtpFromDate.TabIndex = 249;
@@ -188,7 +188,7 @@
             // 
             this.rdByDate.AutoSize = true;
             this.rdByDate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdByDate.Location = new System.Drawing.Point(8, 28);
+            this.rdByDate.Location = new System.Drawing.Point(24, 28);
             this.rdByDate.Name = "rdByDate";
             this.rdByDate.Size = new System.Drawing.Size(83, 21);
             this.rdByDate.TabIndex = 248;
@@ -202,7 +202,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(969, 450);
+            this.ClientSize = new System.Drawing.Size(1060, 450);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvTransferWatch);
             this.Controls.Add(this.panel2);

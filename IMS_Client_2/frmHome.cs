@@ -1047,7 +1047,7 @@ namespace IMS_Client_2
 
         private void scanItemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmScanInventory) || clsUtility.IsAdmin)
             {
                 bool b = ObjUtil.IsAlreadyOpen(typeof(Inventory.frmScanInventory));

@@ -108,10 +108,10 @@
             // txtDate
             // 
             this.txtDate.BackColor = System.Drawing.Color.White;
-            this.txtDate.Enabled = false;
             this.txtDate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDate.Location = new System.Drawing.Point(103, 48);
             this.txtDate.Name = "txtDate";
+            this.txtDate.ReadOnly = true;
             this.txtDate.Size = new System.Drawing.Size(152, 25);
             this.txtDate.TabIndex = 206;
             // 
@@ -129,10 +129,10 @@
             // txtBillNo
             // 
             this.txtBillNo.BackColor = System.Drawing.Color.White;
-            this.txtBillNo.Enabled = false;
             this.txtBillNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBillNo.Location = new System.Drawing.Point(378, 48);
             this.txtBillNo.Name = "txtBillNo";
+            this.txtBillNo.ReadOnly = true;
             this.txtBillNo.Size = new System.Drawing.Size(178, 25);
             this.txtBillNo.TabIndex = 208;
             // 
@@ -304,7 +304,7 @@
             this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnClear.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClear.Location = new System.Drawing.Point(826, 12);
+            this.btnClear.Location = new System.Drawing.Point(826, 8);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(76, 25);
             this.btnClear.TabIndex = 251;
@@ -320,7 +320,7 @@
             this.btnSaveData.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSaveData.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSaveData.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveData.Location = new System.Drawing.Point(744, 12);
+            this.btnSaveData.Location = new System.Drawing.Point(744, 8);
             this.btnSaveData.Name = "btnSaveData";
             this.btnSaveData.Size = new System.Drawing.Size(76, 25);
             this.btnSaveData.TabIndex = 250;
@@ -333,7 +333,6 @@
             // txtValue
             // 
             this.txtValue.BackColor = System.Drawing.Color.White;
-            this.txtValue.Enabled = false;
             this.txtValue.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtValue.Location = new System.Drawing.Point(718, 93);
             this.txtValue.Name = "txtValue";
@@ -355,7 +354,6 @@
             // txtTotalQTY
             // 
             this.txtTotalQTY.BackColor = System.Drawing.Color.White;
-            this.txtTotalQTY.Enabled = false;
             this.txtTotalQTY.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotalQTY.Location = new System.Drawing.Point(378, 96);
             this.txtTotalQTY.Name = "txtTotalQTY";
