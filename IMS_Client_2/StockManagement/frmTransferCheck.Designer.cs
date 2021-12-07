@@ -79,7 +79,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(914, 40);
+            this.panel2.Size = new System.Drawing.Size(951, 40);
             this.panel2.TabIndex = 113;
             // 
             // label12
@@ -120,7 +120,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(297, 51);
+            this.label2.Location = new System.Drawing.Point(359, 51);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 17);
             this.label2.TabIndex = 209;
@@ -130,7 +130,7 @@
             // 
             this.txtBillNo.BackColor = System.Drawing.Color.White;
             this.txtBillNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBillNo.Location = new System.Drawing.Point(378, 48);
+            this.txtBillNo.Location = new System.Drawing.Point(443, 48);
             this.txtBillNo.Name = "txtBillNo";
             this.txtBillNo.ReadOnly = true;
             this.txtBillNo.Size = new System.Drawing.Size(178, 25);
@@ -152,10 +152,10 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvProductDetails.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvProductDetails.Location = new System.Drawing.Point(12, 141);
+            this.dgvProductDetails.Location = new System.Drawing.Point(12, 113);
             this.dgvProductDetails.Name = "dgvProductDetails";
             this.dgvProductDetails.ReadOnly = true;
-            this.dgvProductDetails.Size = new System.Drawing.Size(700, 268);
+            this.dgvProductDetails.Size = new System.Drawing.Size(734, 296);
             this.dgvProductDetails.TabIndex = 210;
             this.dgvProductDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellClick);
             this.dgvProductDetails.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvProductDetails_ColumnAdded);
@@ -180,7 +180,7 @@
             // 
             this.txtBarCode.BackColor = System.Drawing.Color.White;
             this.txtBarCode.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBarCode.Location = new System.Drawing.Point(103, 99);
+            this.txtBarCode.Location = new System.Drawing.Point(103, 82);
             this.txtBarCode.Name = "txtBarCode";
             this.txtBarCode.Size = new System.Drawing.Size(152, 25);
             this.txtBarCode.TabIndex = 0;
@@ -191,7 +191,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(18, 102);
+            this.label4.Location = new System.Drawing.Point(18, 85);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(68, 17);
             this.label4.TabIndex = 212;
@@ -205,7 +205,7 @@
             this.picProduct.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picProduct.Location = new System.Drawing.Point(3, 21);
             this.picProduct.Name = "picProduct";
-            this.picProduct.Size = new System.Drawing.Size(186, 244);
+            this.picProduct.Size = new System.Drawing.Size(186, 272);
             this.picProduct.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picProduct.TabIndex = 257;
             this.picProduct.TabStop = false;
@@ -215,9 +215,9 @@
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.picProduct);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(718, 133);
+            this.groupBox1.Location = new System.Drawing.Point(752, 113);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(192, 268);
+            this.groupBox1.Size = new System.Drawing.Size(192, 296);
             this.groupBox1.TabIndex = 258;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Item Image ";
@@ -247,7 +247,7 @@
             // 
             this.pnlRed.BackColor = System.Drawing.Color.Red;
             this.pnlRed.Controls.Add(this.label6);
-            this.pnlRed.Location = new System.Drawing.Point(249, 413);
+            this.pnlRed.Location = new System.Drawing.Point(259, 413);
             this.pnlRed.Name = "pnlRed";
             this.pnlRed.Size = new System.Drawing.Size(194, 63);
             this.pnlRed.TabIndex = 264;
@@ -268,7 +268,7 @@
             // 
             this.pnlOrange.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.pnlOrange.Controls.Add(this.label8);
-            this.pnlOrange.Location = new System.Drawing.Point(483, 413);
+            this.pnlOrange.Location = new System.Drawing.Point(503, 413);
             this.pnlOrange.Name = "pnlOrange";
             this.pnlOrange.Size = new System.Drawing.Size(194, 63);
             this.pnlOrange.TabIndex = 265;
@@ -295,7 +295,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel5.Location = new System.Drawing.Point(0, 479);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(914, 40);
+            this.panel5.Size = new System.Drawing.Size(951, 40);
             this.panel5.TabIndex = 266;
             // 
             // btnClear
@@ -304,7 +304,7 @@
             this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnClear.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClear.Location = new System.Drawing.Point(826, 8);
+            this.btnClear.Location = new System.Drawing.Point(866, 7);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(76, 25);
             this.btnClear.TabIndex = 251;
@@ -320,7 +320,7 @@
             this.btnSaveData.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSaveData.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSaveData.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveData.Location = new System.Drawing.Point(744, 8);
+            this.btnSaveData.Location = new System.Drawing.Point(784, 7);
             this.btnSaveData.Name = "btnSaveData";
             this.btnSaveData.Size = new System.Drawing.Size(76, 25);
             this.btnSaveData.TabIndex = 250;
@@ -334,7 +334,7 @@
             // 
             this.txtValue.BackColor = System.Drawing.Color.White;
             this.txtValue.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtValue.Location = new System.Drawing.Point(718, 93);
+            this.txtValue.Location = new System.Drawing.Point(824, 48);
             this.txtValue.Name = "txtValue";
             this.txtValue.ReadOnly = true;
             this.txtValue.Size = new System.Drawing.Size(99, 25);
@@ -345,7 +345,7 @@
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.Color.Transparent;
             this.label9.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(600, 93);
+            this.label9.Location = new System.Drawing.Point(731, 51);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(81, 17);
             this.label9.TabIndex = 269;
@@ -355,7 +355,7 @@
             // 
             this.txtTotalQTY.BackColor = System.Drawing.Color.White;
             this.txtTotalQTY.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalQTY.Location = new System.Drawing.Point(378, 96);
+            this.txtTotalQTY.Location = new System.Drawing.Point(443, 82);
             this.txtTotalQTY.Name = "txtTotalQTY";
             this.txtTotalQTY.ReadOnly = true;
             this.txtTotalQTY.Size = new System.Drawing.Size(178, 25);
@@ -366,7 +366,7 @@
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(297, 99);
+            this.label10.Location = new System.Drawing.Point(359, 85);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(78, 17);
             this.label10.TabIndex = 267;
@@ -376,7 +376,7 @@
             // 
             this.pnlViolet.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.pnlViolet.Controls.Add(this.label11);
-            this.pnlViolet.Location = new System.Drawing.Point(717, 413);
+            this.pnlViolet.Location = new System.Drawing.Point(747, 413);
             this.pnlViolet.Name = "pnlViolet";
             this.pnlViolet.Size = new System.Drawing.Size(194, 63);
             this.pnlViolet.TabIndex = 271;
@@ -399,7 +399,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(914, 519);
+            this.ClientSize = new System.Drawing.Size(951, 519);
             this.Controls.Add(this.pnlViolet);
             this.Controls.Add(this.txtValue);
             this.Controls.Add(this.label9);

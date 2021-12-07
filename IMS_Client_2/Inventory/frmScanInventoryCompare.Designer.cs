@@ -78,10 +78,10 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvProductDetails.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvProductDetails.Location = new System.Drawing.Point(10, 88);
+            this.dgvProductDetails.Location = new System.Drawing.Point(10, 79);
             this.dgvProductDetails.Name = "dgvProductDetails";
             this.dgvProductDetails.RowHeadersVisible = false;
-            this.dgvProductDetails.Size = new System.Drawing.Size(946, 299);
+            this.dgvProductDetails.Size = new System.Drawing.Size(946, 308);
             this.dgvProductDetails.TabIndex = 261;
             this.dgvProductDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellClick);
             this.dgvProductDetails.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvProductDetails_ColumnAdded);
@@ -92,7 +92,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 60);
+            this.label2.Location = new System.Drawing.Point(12, 51);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 17);
             this.label2.TabIndex = 263;
@@ -272,7 +272,7 @@
             // 
             this.txtStoreName.BackColor = System.Drawing.Color.White;
             this.txtStoreName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStoreName.Location = new System.Drawing.Point(64, 57);
+            this.txtStoreName.Location = new System.Drawing.Point(64, 48);
             this.txtStoreName.Name = "txtStoreName";
             this.txtStoreName.ReadOnly = true;
             this.txtStoreName.Size = new System.Drawing.Size(188, 25);
@@ -352,12 +352,12 @@
             this.txtBarCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBarCode.BackColor = System.Drawing.Color.White;
             this.txtBarCode.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBarCode.Location = new System.Drawing.Point(765, 57);
+            this.txtBarCode.Location = new System.Drawing.Point(765, 48);
             this.txtBarCode.MaxLength = 10;
             this.txtBarCode.Name = "txtBarCode";
             this.txtBarCode.Size = new System.Drawing.Size(188, 25);
             this.txtBarCode.TabIndex = 285;
-            this.txtBarCode.Click += new System.EventHandler(this.txtBarCode_Click);            
+            this.txtBarCode.Click += new System.EventHandler(this.txtBarCode_Click);
             this.txtBarCode.Enter += new System.EventHandler(this.txtBarCode_Enter);
             this.txtBarCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBarCode_KeyDown);
             this.txtBarCode.Leave += new System.EventHandler(this.txtBarCode_Leave);
@@ -368,7 +368,7 @@
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.Color.Transparent;
             this.label8.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(691, 60);
+            this.label8.Location = new System.Drawing.Point(691, 51);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(68, 17);
             this.label8.TabIndex = 284;

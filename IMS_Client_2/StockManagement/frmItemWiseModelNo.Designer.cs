@@ -97,9 +97,9 @@
             this.dgvProductDetails.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProductDetails.BackgroundColor = System.Drawing.Color.White;
             this.dgvProductDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProductDetails.Location = new System.Drawing.Point(12, 222);
+            this.dgvProductDetails.Location = new System.Drawing.Point(8, 222);
             this.dgvProductDetails.Name = "dgvProductDetails";
-            this.dgvProductDetails.Size = new System.Drawing.Size(863, 343);
+            this.dgvProductDetails.Size = new System.Drawing.Size(873, 352);
             this.dgvProductDetails.TabIndex = 208;
             this.dgvProductDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductDetails_CellClick);
             this.dgvProductDetails.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvProductDetails_CellValidating);
@@ -251,9 +251,9 @@
             this.PicItem.BackColor = System.Drawing.Color.Transparent;
             this.PicItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.PicItem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PicItem.Location = new System.Drawing.Point(710, 46);
+            this.PicItem.Location = new System.Drawing.Point(708, 46);
             this.PicItem.Name = "PicItem";
-            this.PicItem.Size = new System.Drawing.Size(165, 170);
+            this.PicItem.Size = new System.Drawing.Size(173, 170);
             this.PicItem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PicItem.TabIndex = 234;
             this.PicItem.TabStop = false;

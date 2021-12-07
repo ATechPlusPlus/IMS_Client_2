@@ -351,10 +351,12 @@ namespace IMS_Client_2.StockManagement
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmTransferCheck, clsFormRights.Operation.Delete) || clsUtility.IsAdmin)
             {
-                if (dgvProductDetails.SelectedRows != null && dgvProductDetails.SelectedRows.Count > 0)
+                if (dgvProductDetails.CurrentCell != null && dgvProductDetails.CurrentCell.RowIndex >= 0)
                 {
+                    int row = dgvProductDetails.CurrentCell.RowIndex;
+
                     DataTable dt = (DataTable)dgvProductDetails.DataSource;
-                    dt.Rows[dgvProductDetails.SelectedRows[0].Index].Delete();
+                    dt.Rows[row].Delete();
                     dt.AcceptChanges();
                     //dgvProductDetails.Rows.RemoveAt(dgvProductDetails.SelectedRows[0].Index);
                     //dgvProductDetails.EndEdit();
@@ -373,16 +375,25 @@ namespace IMS_Client_2.StockManagement
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
-            if (dgvProductDetails.SelectedRows != null && dgvProductDetails.SelectedRows.Count > 0)
+            try
             {
-                if (dgvProductDetails.SelectedRows[0].Cells["CellColor"].Value.ToString() == "Violet")
+                //if (dgvProductDetails.SelectedRows != null && dgvProductDetails.SelectedRows.Count > 0)
+                if (dgvProductDetails.CurrentCell != null && dgvProductDetails.CurrentCell.RowIndex >= 0)
                 {
-                    contextMenuStrip1.Items[0].Enabled = true;
+                    int row = dgvProductDetails.CurrentCell.RowIndex;
+                    if (dgvProductDetails.Rows[row].Cells["CellColor"].Value.ToString() == "Violet")
+                    {
+                        contextMenuStrip1.Items[0].Enabled = true;
+                    }
+                    else
+                    {
+                        contextMenuStrip1.Items[0].Enabled = false;
+                    }
                 }
-                else
-                {
-                    contextMenuStrip1.Items[0].Enabled = false;
-                }
+            }
+            catch (Exception ex)
+            {
+                clsUtility.ShowErrorMessage(ex.ToString());
             }
         }
 

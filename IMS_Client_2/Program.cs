@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.ServiceProcess;
 using System.Windows.Forms;
 [assembly: SuppressIldasm]

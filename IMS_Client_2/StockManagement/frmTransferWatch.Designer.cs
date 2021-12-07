@@ -84,10 +84,10 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvTransferWatch.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvTransferWatch.Location = new System.Drawing.Point(4, 128);
+            this.dgvTransferWatch.Location = new System.Drawing.Point(4, 117);
             this.dgvTransferWatch.Name = "dgvTransferWatch";
             this.dgvTransferWatch.ReadOnly = true;
-            this.dgvTransferWatch.Size = new System.Drawing.Size(1044, 293);
+            this.dgvTransferWatch.Size = new System.Drawing.Size(1044, 332);
             this.dgvTransferWatch.TabIndex = 211;
             this.dgvTransferWatch.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTransferWatch_CellClick);
             this.dgvTransferWatch.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvTransferWatch_DataBindingComplete);
