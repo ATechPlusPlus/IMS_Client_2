@@ -493,7 +493,9 @@ namespace IMS_Client_2.Purchase
             }
             ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
             ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
-            return ObjDAL.UpdateData(clsUtility.DBName + ".dbo.DeliveryPurchaseBill2", "DeliveryPurchaseID1=" + ID);
+            //return ObjDAL.UpdateData(clsUtility.DBName + ".dbo.DeliveryPurchaseBill2", "DeliveryPurchaseID1=" + ID);
+            ObjDAL.UpdateData(clsUtility.DBName + ".dbo.DeliveryPurchaseBill2", "DeliveryPurchaseID1=" + ID);
+            return ObjDAL.ExecuteScalarInt("SELECT DeliveryPurchaseID2 FROM " + clsUtility.DBName + ".dbo.DeliveryPurchaseBill2 WITH(NOLOCK) WHERE DeliveryPurchaseID1=" + ID);
         }
         private int DataUpdateDeliveryPurchaseBill3(int ID1, int ID2)
         {
@@ -627,7 +629,7 @@ namespace IMS_Client_2.Purchase
                         if (DeliveryPurchaseBillID > 0)
                         {
                             int DeliveryPurchaseBillID2 = DataUpdateDeliveryPurchaseBill2(ID);
-                            int DeliveryPurchaseBillID3 = DataUpdateDeliveryPurchaseBill3(ID, ID);
+                            int DeliveryPurchaseBillID3 = DataUpdateDeliveryPurchaseBill3(ID, DeliveryPurchaseBillID2);
 
                             bool b = BarCodeGenerate();
 
