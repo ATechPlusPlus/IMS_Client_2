@@ -84,5 +84,10 @@ namespace IMS_Client_2.Sales
                 CoreApp.clsUtility.ShowInfoMessage("Enter Only Numbers...", CoreApp.clsUtility.strProjectTitle);
             }
         }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

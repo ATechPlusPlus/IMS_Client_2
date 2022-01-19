@@ -127,6 +127,7 @@
             this.btnClose.TabIndex = 252;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             this.btnClose.MouseEnter += new System.EventHandler(this.btnSaveData_MouseEnter);
             this.btnClose.MouseLeave += new System.EventHandler(this.btnSaveData_MouseLeave);
             // 

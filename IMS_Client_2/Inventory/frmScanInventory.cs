@@ -496,6 +496,7 @@ namespace IMS_Client_2.Inventory
                 if (dtItemDetails.Rows.Count > 0)
                 {
                     int NewQTY = Convert.ToInt32(txtTotalQTY.Text) - OldTotalQTY;
+                    NewQTY = Math.Abs(NewQTY);
                     if (NewQTY > 0)
                     {
                         Sales.frmQTYValidation.QTYConfirmation = 0;
