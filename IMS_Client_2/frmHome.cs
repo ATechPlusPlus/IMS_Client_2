@@ -1183,5 +1183,39 @@ namespace IMS_Client_2
                 clsUtility.ShowInfoMessage("You have no rights to perform this task");
             }
         }
+
+        private void stockMoveReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmStockMovesReport) || clsUtility.IsAdmin)
+            {
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Report.Report_Forms.frmStockMovesReport));
+                if (!b)
+                {
+                    Report.Report_Forms.frmStockMovesReport frm = new Report.Report_Forms.frmStockMovesReport();
+                    frm.Show();
+                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task");
+            }
+        }
+
+        private void postDeliveringPurchaseBillToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (clsFormRights.HasFormRight(clsFormRights.Forms.frmPost_Delivering_Purchase_Bill) || clsUtility.IsAdmin)
+            {
+                bool b = ObjUtil.IsAlreadyOpen(typeof(Purchase.frmPost_Delivering_Purchase_Bill));
+                if (!b)
+                {
+                    Purchase.frmPost_Delivering_Purchase_Bill frm = new Purchase.frmPost_Delivering_Purchase_Bill();
+                    frm.Show();
+                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task");
+            }
+        }
     }
 }

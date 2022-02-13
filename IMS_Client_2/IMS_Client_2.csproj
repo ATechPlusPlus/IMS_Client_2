@@ -234,6 +234,12 @@
     <Compile Include="Other_Forms\frmItemCard.Designer.cs">
       <DependentUpon>frmItemCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Purchase\frmPost_Delivering_Purchase_Bill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase\frmPost_Delivering_Purchase_Bill.Designer.cs">
+      <DependentUpon>frmPost_Delivering_Purchase_Bill.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\RDLC_DataSets\ds_MiniSalesReport.cs">
       <DependentUpon>ds_MiniSalesReport.xsd</DependentUpon>
     </Compile>
@@ -260,6 +266,12 @@
     </Compile>
     <Compile Include="Report\Report_Forms\frmEmployeeSales.Designer.cs">
       <DependentUpon>frmEmployeeSales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\Report_Forms\frmStockMovesReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\Report_Forms\frmStockMovesReport.Designer.cs">
+      <DependentUpon>frmStockMovesReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Report\Report_Forms\frmStockPricingReport.cs">
       <SubType>Form</SubType>
@@ -785,6 +797,9 @@
     <EmbeddedResource Include="Purchase\frmDiffPurchaseReceviedDetails.resx">
       <DependentUpon>frmDiffPurchaseReceviedDetails.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Purchase\frmPost_Delivering_Purchase_Bill.resx">
+      <DependentUpon>frmPost_Delivering_Purchase_Bill.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Purchase\frmPurchaseDetails.resx">
       <DependentUpon>frmPurchaseDetails.cs</DependentUpon>
     </EmbeddedResource>
@@ -810,6 +825,7 @@
     <EmbeddedResource Include="Report\RDLC_Files\SalesInoviceReport.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\Sales_Invoice.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\ScanInventory.rdlc" />
+    <EmbeddedResource Include="Report\RDLC_Files\StockMovesReport.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\StockPricingReport.rdlc" />
     <EmbeddedResource Include="Report\RDLC_Files\StoreTransferDetails.rdlc" />
     <EmbeddedResource Include="Report\Report_Forms\frmBranchShortingReport.resx">
@@ -835,6 +851,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Report_Forms\frmSalesReport.resx">
       <DependentUpon>frmSalesReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Report_Forms\frmStockMovesReport.resx">
+      <DependentUpon>frmStockMovesReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Report_Forms\frmStockPricingReport.resx">
       <DependentUpon>frmStockPricingReport.cs</DependentUpon>

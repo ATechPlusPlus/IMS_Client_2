@@ -7,61 +7,77 @@
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>73b8b52b-ca26-4ebf-aabd-eed557f7c97f</rd:DataSourceID>
+      <rd:DataSourceID>f83eef53-ea1c-4926-9579-76b80c8f6d73</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="dsSalesDepartmentReport">
+    <DataSet Name="dsStockMovesReport">
       <Query>
         <DataSourceName>IMS_Report_Dataset</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
-        <Field Name="ModelNo">
-          <DataField>ModelNo</DataField>
+        <Field Name="Branch">
+          <DataField>Branch</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="ProductName">
-          <DataField>ProductName</DataField>
+        <Field Name="InitQTY">
+          <DataField>InitQTY</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="CategoryName">
-          <DataField>CategoryName</DataField>
+        <Field Name="InitCost">
+          <DataField>InitCost</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="BrandName">
-          <DataField>BrandName</DataField>
+        <Field Name="BalQTY">
+          <DataField>BalQTY</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="QTY">
-          <DataField>QTY</DataField>
+        <Field Name="BalCost">
+          <DataField>BalCost</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Rate">
-          <DataField>Rate</DataField>
+        <Field Name="PurQTY">
+          <DataField>PurQTY</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="LocalCost">
-          <DataField>LocalCost</DataField>
+        <Field Name="PurCost">
+          <DataField>PurCost</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="TotalSales">
-          <DataField>TotalSales</DataField>
+        <Field Name="TotalQTY">
+          <DataField>TotalQTY</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TotalCost">
+          <DataField>TotalCost</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SalesQTY">
+          <DataField>SalesQTY</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="SalesCost">
           <DataField>SalesCost</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Profit">
-          <DataField>Profit</DataField>
+        <Field Name="SalesRate">
+          <DataField>SalesRate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CurrQTY">
+          <DataField>CurrQTY</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CurrCost">
+          <DataField>CurrCost</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>IMS_Report_Dataset</rd:DataSetName>
-        <rd:SchemaPath>D:\Mateen\Professional soft\Tauseef KUWAIT\IMS_Client_2\IMS_Client_2\Report\RDLC_DataSets\IMS_Report_Dataset.xsd</rd:SchemaPath>
-        <rd:TableName>SalesDepartmentReport</rd:TableName>
+        <rd:SchemaPath>D:\Mateen\Professional soft\Mohammed KUWAIT\IMS_Client_2\IMS_Client_2\Report\RDLC_DataSets\IMS_Report_Dataset.xsd</rd:SchemaPath>
+        <rd:TableName>dtStockMoveReport</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
         <rd:TableAdapterName />
@@ -77,7 +93,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Sales By Department Report</Value>
+                    <Value>Stock Moves Report</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>14pt</FontSize>
@@ -91,8 +107,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.13021in</Top>
-            <Left>2.52083in</Left>
+            <Top>0.07094in</Top>
+            <Left>2.42083in</Left>
             <Height>0.38542in</Height>
             <Width>2.97917in</Width>
             <Style>
@@ -106,10 +122,10 @@
             </Style>
           </Textbox>
           <Line Name="Line1">
-            <Top>0.89062in</Top>
-            <Left>0.11458in</Left>
+            <Top>0.95635in</Top>
+            <Left>0.01458in</Left>
             <Height>0in</Height>
-            <Width>7.85542in</Width>
+            <Width>11.6148in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -121,37 +137,319 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.98854in</Width>
+                  <Width>1.21771in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.98854in</Width>
+                  <Width>0.45416in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.98854in</Width>
+                  <Width>0.84271in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.76187in</Width>
+                  <Width>0.44603in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.48979in</Width>
+                  <Width>0.67626in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.68521in</Width>
+                  <Width>0.48729in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.82479in</Width>
+                  <Width>0.73104in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.98854in</Width>
+                  <Width>0.5448in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.87396in</Width>
+                  <Width>0.72813in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.78021in</Width>
+                  <Width>0.57188in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.875in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.54167in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.875in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox30">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Branch</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox30</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox31">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Initial Stock</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox31</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>2</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox33">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Balance</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox33</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>2</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox35">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Purchase Stock</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox35</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>2</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox37">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Total Stock</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox37</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>2</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox39">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Sales</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox39</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>3</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox42">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Current Stock</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox42</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>2</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                  </TablixCells>
+                </TablixRow>
                 <TablixRow>
                   <Height>0.25in</Height>
                   <TablixCells>
@@ -164,7 +462,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Model No</Value>
+                                  <Value>Branch</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -200,7 +498,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Item Name</Value>
+                                  <Value>QTY</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -236,7 +534,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Category</Value>
+                                  <Value>Cost</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -272,7 +570,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Brand</Value>
+                                  <Value>QTY</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -308,7 +606,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>QTY</Value>
+                                  <Value>Cost</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -344,7 +642,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>EndUser</Value>
+                                  <Value>QTY</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -380,7 +678,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Local Cost</Value>
+                                  <Value>Cost</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -416,7 +714,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Total Sales</Value>
+                                  <Value>QTY</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -452,7 +750,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Sales Cost</Value>
+                                  <Value>Cost</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -488,7 +786,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Profit (%)</Value>
+                                  <Value>QTY</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -515,6 +813,150 @@
                         </Textbox>
                       </CellContents>
                     </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox23">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Cost</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox23</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox25">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Sales Rate</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox25</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox27">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>QTY</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox27</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox29">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Cost</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox29</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
@@ -522,14 +964,14 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="ModelNo">
+                        <Textbox Name="Branch">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!ModelNo.Value</Value>
+                                  <Value>=Fields!Branch.Value</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                   </Style>
@@ -540,7 +982,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>ModelNo</rd:DefaultName>
+                          <rd:DefaultName>Branch</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -556,14 +998,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="ProductName">
+                        <Textbox Name="InitQTY">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!ProductName.Value</Value>
+                                  <Value>=Fields!InitQTY.Value</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                   </Style>
@@ -574,7 +1016,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>ProductName</rd:DefaultName>
+                          <rd:DefaultName>InitQTY</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -590,14 +1032,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="CategoryName">
+                        <Textbox Name="InitCost">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!CategoryName.Value</Value>
+                                  <Value>=Fields!InitCost.Value</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                   </Style>
@@ -608,7 +1050,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>CategoryName</rd:DefaultName>
+                          <rd:DefaultName>InitCost</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -624,14 +1066,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="BrandName">
+                        <Textbox Name="BalQTY">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!BrandName.Value</Value>
+                                  <Value>=Fields!BalQTY.Value</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                   </Style>
@@ -642,7 +1084,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>BrandName</rd:DefaultName>
+                          <rd:DefaultName>BalQTY</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -658,14 +1100,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="QTY">
+                        <Textbox Name="BalCost">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!QTY.Value</Value>
+                                  <Value>=Fields!BalCost.Value</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                   </Style>
@@ -676,7 +1118,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>QTY</rd:DefaultName>
+                          <rd:DefaultName>BalCost</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -692,14 +1134,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Rate">
+                        <Textbox Name="PurQTY">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Rate.Value</Value>
+                                  <Value>=Fields!PurQTY.Value</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                   </Style>
@@ -710,7 +1152,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Rate</rd:DefaultName>
+                          <rd:DefaultName>PurQTY</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -726,14 +1168,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="LocalCost">
+                        <Textbox Name="PurCost">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!LocalCost.Value</Value>
+                                  <Value>=Fields!PurCost.Value</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                   </Style>
@@ -744,7 +1186,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>LocalCost</rd:DefaultName>
+                          <rd:DefaultName>PurCost</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -760,14 +1202,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="TotalSales">
+                        <Textbox Name="TotalQTY">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!TotalSales.Value</Value>
+                                  <Value>=Fields!TotalQTY.Value</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                   </Style>
@@ -778,7 +1220,75 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>TotalSales</rd:DefaultName>
+                          <rd:DefaultName>TotalQTY</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="TotalCost">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!TotalCost.Value</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>TotalCost</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="SalesQTY">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!SalesQTY.Value</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>SalesQTY</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -828,14 +1338,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Profit">
+                        <Textbox Name="SalesRate">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Profit.Value</Value>
+                                  <Value>=Fields!SalesRate.Value</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                   </Style>
@@ -846,7 +1356,75 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Profit</rd:DefaultName>
+                          <rd:DefaultName>SalesRate</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="CurrQTY">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!CurrQTY.Value</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>CurrQTY</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="CurrCost">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!CurrCost.Value</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>CurrCost</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -876,6 +1454,10 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -884,16 +1466,17 @@
                   <KeepWithGroup>After</KeepWithGroup>
                 </TablixMember>
                 <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
                   <Group Name="Details" />
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <FixedRowHeaders>true</FixedRowHeaders>
-            <DataSetName>dsSalesDepartmentReport</DataSetName>
-            <Top>1.23833in</Top>
-            <Left>0.1in</Left>
-            <Height>0.5in</Height>
-            <Width>8.36999in</Width>
+            <DataSetName>dsStockMovesReport</DataSetName>
+            <Top>1.30406in</Top>
+            <Height>0.75in</Height>
+            <Width>9.99168in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -920,10 +1503,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>parmDateFilter</rd:DefaultName>
-            <Top>0.57118in</Top>
-            <Left>0.11458in</Left>
+            <Top>0.63691in</Top>
+            <Left>0.01458in</Left>
             <Height>0.25in</Height>
-            <Width>2.64583in</Width>
+            <Width>2.94603in</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -936,11 +1519,15 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>4.8125in</Height>
+        <Height>3.9375in</Height>
         <Style />
       </Body>
-      <Width>8.47001in</Width>
+      <Width>12.77521in</Width>
       <Page>
+        <LeftMargin>1in</LeftMargin>
+        <RightMargin>1in</RightMargin>
+        <TopMargin>1in</TopMargin>
+        <BottomMargin>1in</BottomMargin>
         <Style />
       </Page>
   <ReportParameters>
@@ -952,6 +1539,6 @@
     </ReportParameter>
   </ReportParameters>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
-  <rd:ReportID>dc45e6cc-6743-43db-bdde-86a739831479</rd:ReportID>
+  <rd:ReportID>8ac56900-2828-4e40-9b27-070e76dd14d3</rd:ReportID>
 </Report>
 

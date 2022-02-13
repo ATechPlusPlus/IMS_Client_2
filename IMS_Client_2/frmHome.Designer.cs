@@ -88,6 +88,8 @@
             this.employeeSaleReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salesAnalysisReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salesByDepartmentReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stockPricingReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stockMoveReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.otherArtsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.CurrencyValueSetting_ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
@@ -113,7 +115,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.stockPricingReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.postDeliveringPurchaseBillToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -303,7 +306,9 @@
             this.diffBwPurchaseReceivedToolStripMenuItem,
             this.postingDeliveryToolStripMenuItem,
             this.toolStripMenuItem5,
-            this.purchaseDetailsToolStripMenuItem});
+            this.purchaseDetailsToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.postDeliveringPurchaseBillToolStripMenuItem});
             this.toolStripMenuItem4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem4.Image")));
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
             this.toolStripMenuItem4.Size = new System.Drawing.Size(96, 36);
@@ -564,7 +569,8 @@
             this.employeeSaleReportToolStripMenuItem,
             this.salesAnalysisReportToolStripMenuItem,
             this.salesByDepartmentReportToolStripMenuItem,
-            this.stockPricingReportToolStripMenuItem});
+            this.stockPricingReportToolStripMenuItem,
+            this.stockMoveReportToolStripMenuItem});
             this.reportsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("reportsToolStripMenuItem.Image")));
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             this.reportsToolStripMenuItem.Size = new System.Drawing.Size(89, 36);
@@ -618,6 +624,20 @@
             this.salesByDepartmentReportToolStripMenuItem.Size = new System.Drawing.Size(252, 24);
             this.salesByDepartmentReportToolStripMenuItem.Text = "Sales By Department Report";
             this.salesByDepartmentReportToolStripMenuItem.Click += new System.EventHandler(this.salesByDepartmentReportToolStripMenuItem_Click);
+            // 
+            // stockPricingReportToolStripMenuItem
+            // 
+            this.stockPricingReportToolStripMenuItem.Name = "stockPricingReportToolStripMenuItem";
+            this.stockPricingReportToolStripMenuItem.Size = new System.Drawing.Size(252, 24);
+            this.stockPricingReportToolStripMenuItem.Text = "Stock Pricing Report";
+            this.stockPricingReportToolStripMenuItem.Click += new System.EventHandler(this.stockPricingReportToolStripMenuItem_Click);
+            // 
+            // stockMoveReportToolStripMenuItem
+            // 
+            this.stockMoveReportToolStripMenuItem.Name = "stockMoveReportToolStripMenuItem";
+            this.stockMoveReportToolStripMenuItem.Size = new System.Drawing.Size(252, 24);
+            this.stockMoveReportToolStripMenuItem.Text = "Stock Moves Report";
+            this.stockMoveReportToolStripMenuItem.Click += new System.EventHandler(this.stockMoveReportToolStripMenuItem_Click);
             // 
             // otherArtsToolStripMenuItem
             // 
@@ -894,12 +914,17 @@
             this.label9.TabIndex = 28;
             this.label9.Text = "Today\'s Cash Box";
             // 
-            // stockPricingReportToolStripMenuItem
+            // postDeliveringPurchaseBillToolStripMenuItem
             // 
-            this.stockPricingReportToolStripMenuItem.Name = "stockPricingReportToolStripMenuItem";
-            this.stockPricingReportToolStripMenuItem.Size = new System.Drawing.Size(252, 24);
-            this.stockPricingReportToolStripMenuItem.Text = "Stock Pricing Report";
-            this.stockPricingReportToolStripMenuItem.Click += new System.EventHandler(this.stockPricingReportToolStripMenuItem_Click);
+            this.postDeliveringPurchaseBillToolStripMenuItem.Name = "postDeliveringPurchaseBillToolStripMenuItem";
+            this.postDeliveringPurchaseBillToolStripMenuItem.Size = new System.Drawing.Size(251, 24);
+            this.postDeliveringPurchaseBillToolStripMenuItem.Text = "Post Delivering Purchase Bill";
+            this.postDeliveringPurchaseBillToolStripMenuItem.Click += new System.EventHandler(this.postDeliveringPurchaseBillToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(248, 6);
             // 
             // frmHome
             // 
@@ -1028,5 +1053,8 @@
         private System.Windows.Forms.ToolStripMenuItem salesByDepartmentReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem itemCardToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stockPricingReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stockMoveReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem postDeliveringPurchaseBillToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }

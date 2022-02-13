@@ -56,6 +56,8 @@
             frmSalesAnalysReport = 57,
             frmSalesByDepartment = 58,
             frmStockPricingReport = 59,
+            frmStockMovesReport = 60,
+            frmPost_Delivering_Purchase_Bill = 61,
             //frmDatabaseMaintenance = /commented
         }
         public enum Operation
