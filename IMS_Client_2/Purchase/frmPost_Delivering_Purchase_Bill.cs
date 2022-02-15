@@ -156,7 +156,7 @@ namespace IMS_Client_2.Purchase
                 dgvQtycolor.Enabled = false;
                 //cmbStore.Enabled = true;
                 LoadData();
-                LoadModelData();
+                //LoadModelData();
             }
         }
         private void Delivering_Purchase_Bill_KeyDown(object sender, KeyEventArgs e)
@@ -169,7 +169,7 @@ namespace IMS_Client_2.Purchase
                 dgvQtycolor.Enabled = false;
                 cmbStore.Enabled = true;
                 LoadData();
-                LoadModelData();
+                //LoadModelData();
             }
         }
 
@@ -204,11 +204,44 @@ namespace IMS_Client_2.Purchase
             }
         }
 
+        private Image GetProductPhoto(int SubProductID)
+        {
+            Image imgProduct = null;
+            ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, SubProductID, clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_ProductPhoto");
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                DataTable dt = ds.Tables[0];
+                if (ObjUtil.ValidateTable(dt))
+                {
+                    if (Convert.ToInt32(dt.Rows[0]["Flag"]) == 1)
+                    {
+                        string img = dt.Rows[0]["ImgName"].ToString();
+                        if (System.IO.File.Exists(img))
+                        {
+                            imgProduct = Image.FromFile(img);
+                        }
+                        else
+                        {
+                            imgProduct = IMS_Client_2.Properties.Resources.NoImage;
+                        }
+                    }
+                    else
+                    {
+                        imgProduct = IMS_Client_2.Properties.Resources.NoImage;
+                        //clsUtility.ShowInfoMessage("Image file for the selected product doesn't exist.", clsUtility.strProjectTitle);
+                    }
+                }
+            }
+            return imgProduct;
+        }
+
         private void LoadData()
         {
             if (!ObjUtil.IsControlTextEmpty(txtPurchaseInvoiceID))
             {
-                dtPurchaseInvoice = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".[dbo].[Get_Delivering_PurchaseInvoice_BillDetails] " + txtPurchaseInvoiceID.Text + ",0");
+                dtPurchaseInvoice = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".[dbo].[Get_Delivering_PurchaseInvoice_BillDetails] " + txtPurchaseInvoiceID.Text + ",1");
 
                 if (ObjUtil.ValidateTable(dtPurchaseInvoice))
                 {
@@ -222,32 +255,8 @@ namespace IMS_Client_2.Purchase
                     clsUtility.ShowInfoMessage("Purchase Invoice Bill is not available for Bill No. " + txtSupplierBillNo.Text);
                     grpPurchaseBillDetail.Enabled = false;
                     txtTotalQTY.Text = "0";
-                    dataGridView1.DataSource = null;
+                    //dataGridView1.DataSource = null;
                 }
-            }
-        }
-        private void LoadModelData()
-        {
-            if (!ObjUtil.IsControlTextEmpty(txtPurchaseInvoiceID))
-            {
-                dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
-                //Most time consumption enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
-                dataGridView1.RowHeadersVisible = false; // set it to false if not needed
-
-                DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".[dbo].[Get_Delivering_PurchaseInvoice_BillDetails] " + txtPurchaseInvoiceID.Text + ",1");
-                if (ObjUtil.ValidateTable(dt))
-                {
-                    dataGridView1.DataSource = null;
-                    dataGridView1.DataSource = dt;
-                }
-                else
-                {
-                    dataGridView1.DataSource = null;
-                }
-            }
-            else
-            {
-                dataGridView1.DataSource = null;
             }
         }
 
@@ -414,6 +423,11 @@ namespace IMS_Client_2.Purchase
 
             GetSelectedCMBModelNo();
 
+            if (SubProductID > 0)
+                PicItem.Image = GetProductPhoto(SubProductID);
+            else
+                PicItem.Image = null;
+
             this.Cursor = Cursors.Default;
         }
 
@@ -560,7 +574,6 @@ namespace IMS_Client_2.Purchase
         {
             txtPurchaseInvoiceID.Clear();
             txtSupplierBillNo.Clear();
-            txtSupplierBillNo.Enabled = false;
             txtItemName.Clear();
             txtDiffQty.Text = "0";
             txtTotalQTY.Text = "0";
@@ -578,7 +591,6 @@ namespace IMS_Client_2.Purchase
             }
             dtPurchaseInvoice.Clear();
             dgvQtycolor.DataSource = null;
-            dataGridView1.DataSource = null;
         }
 
         private bool Validateform()

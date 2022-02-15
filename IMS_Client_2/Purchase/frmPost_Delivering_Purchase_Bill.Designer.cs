@@ -30,14 +30,13 @@ namespace IMS_Client_2.Purchase
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPost_Delivering_Purchase_Bill));
-            this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.txtPurchaseInvoiceID = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.txtTotalQTY = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.lblDiffQty = new System.Windows.Forms.Label();
             this.txtDiffQty = new System.Windows.Forms.TextBox();
             this.lblTotalQtyBill = new System.Windows.Forms.Label();
@@ -60,30 +59,18 @@ namespace IMS_Client_2.Purchase
             this.lblStyleNo = new System.Windows.Forms.Label();
             this.lblSupplier = new System.Windows.Forms.Label();
             this.cmbStore = new System.Windows.Forms.ComboBox();
-            this.btnSearch = new System.Windows.Forms.Button();
             this.lblSupplierBillNo = new System.Windows.Forms.Label();
             this.txtSupplierBillNo = new System.Windows.Forms.TextBox();
             this.dgvQtycolor = new System.Windows.Forms.DataGridView();
             this.cmbSizeType = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnEdit = new System.Windows.Forms.Button();
+            this.PicItem = new System.Windows.Forms.PictureBox();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.grpPurchaseBillDetail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQtycolor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicItem)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Times New Roman", 11.25F);
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label7.Location = new System.Drawing.Point(810, 227);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(15, 17);
-            this.label7.TabIndex = 327;
-            this.label7.Text = "*";
             // 
             // label10
             // 
@@ -134,13 +121,29 @@ namespace IMS_Client_2.Purchase
             this.label12.TabIndex = 82;
             this.label12.Text = "Post Delivering Purchase Bill";
             // 
+            // btnSearch
+            // 
+            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSearch.Enabled = false;
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSearch.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.Location = new System.Drawing.Point(813, 6);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(64, 25);
+            this.btnSearch.TabIndex = 310;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Visible = false;
+            // 
             // label4
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(4, 668);
+            this.label4.Location = new System.Drawing.Point(5, 643);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(82, 17);
             this.label4.TabIndex = 322;
@@ -151,37 +154,20 @@ namespace IMS_Client_2.Purchase
             this.txtTotalQTY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtTotalQTY.BackColor = System.Drawing.Color.White;
             this.txtTotalQTY.Font = new System.Drawing.Font("Times New Roman", 11.25F);
-            this.txtTotalQTY.Location = new System.Drawing.Point(140, 663);
+            this.txtTotalQTY.Location = new System.Drawing.Point(154, 640);
             this.txtTotalQTY.Name = "txtTotalQTY";
             this.txtTotalQTY.ReadOnly = true;
             this.txtTotalQTY.Size = new System.Drawing.Size(133, 25);
             this.txtTotalQTY.TabIndex = 321;
             this.txtTotalQTY.Text = "0";
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(4, 641);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dataGridView1.Size = new System.Drawing.Size(971, 15);
-            this.dataGridView1.TabIndex = 320;
-            // 
             // lblDiffQty
             // 
+            this.lblDiffQty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblDiffQty.AutoSize = true;
             this.lblDiffQty.BackColor = System.Drawing.Color.Transparent;
             this.lblDiffQty.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDiffQty.Location = new System.Drawing.Point(701, 588);
+            this.lblDiffQty.Location = new System.Drawing.Point(3, 592);
             this.lblDiffQty.Name = "lblDiffQty";
             this.lblDiffQty.Size = new System.Drawing.Size(113, 17);
             this.lblDiffQty.TabIndex = 319;
@@ -189,9 +175,10 @@ namespace IMS_Client_2.Purchase
             // 
             // txtDiffQty
             // 
+            this.txtDiffQty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtDiffQty.BackColor = System.Drawing.Color.White;
             this.txtDiffQty.Font = new System.Drawing.Font("Times New Roman", 11.25F);
-            this.txtDiffQty.Location = new System.Drawing.Point(832, 584);
+            this.txtDiffQty.Location = new System.Drawing.Point(154, 589);
             this.txtDiffQty.Name = "txtDiffQty";
             this.txtDiffQty.ReadOnly = true;
             this.txtDiffQty.Size = new System.Drawing.Size(133, 25);
@@ -200,10 +187,11 @@ namespace IMS_Client_2.Purchase
             // 
             // lblTotalQtyBill
             // 
+            this.lblTotalQtyBill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblTotalQtyBill.AutoSize = true;
             this.lblTotalQtyBill.BackColor = System.Drawing.Color.Transparent;
             this.lblTotalQtyBill.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalQtyBill.Location = new System.Drawing.Point(324, 588);
+            this.lblTotalQtyBill.Location = new System.Drawing.Point(3, 547);
             this.lblTotalQtyBill.Name = "lblTotalQtyBill";
             this.lblTotalQtyBill.Size = new System.Drawing.Size(134, 17);
             this.lblTotalQtyBill.TabIndex = 317;
@@ -211,9 +199,10 @@ namespace IMS_Client_2.Purchase
             // 
             // txtTotalQTYBill
             // 
+            this.txtTotalQTYBill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtTotalQTYBill.BackColor = System.Drawing.Color.White;
             this.txtTotalQTYBill.Font = new System.Drawing.Font("Times New Roman", 11.25F);
-            this.txtTotalQTYBill.Location = new System.Drawing.Point(486, 584);
+            this.txtTotalQTYBill.Location = new System.Drawing.Point(154, 544);
             this.txtTotalQTYBill.Name = "txtTotalQTYBill";
             this.txtTotalQTYBill.ReadOnly = true;
             this.txtTotalQTYBill.Size = new System.Drawing.Size(133, 25);
@@ -222,10 +211,11 @@ namespace IMS_Client_2.Purchase
             // 
             // lblTotalEnteredQty
             // 
+            this.lblTotalEnteredQty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblTotalEnteredQty.AutoSize = true;
             this.lblTotalEnteredQty.BackColor = System.Drawing.Color.Transparent;
             this.lblTotalEnteredQty.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalEnteredQty.Location = new System.Drawing.Point(4, 588);
+            this.lblTotalEnteredQty.Location = new System.Drawing.Point(1, 506);
             this.lblTotalEnteredQty.Name = "lblTotalEnteredQty";
             this.lblTotalEnteredQty.Size = new System.Drawing.Size(130, 17);
             this.lblTotalEnteredQty.TabIndex = 315;
@@ -233,9 +223,10 @@ namespace IMS_Client_2.Purchase
             // 
             // txtTotalQTYEntered
             // 
+            this.txtTotalQTYEntered.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtTotalQTYEntered.BackColor = System.Drawing.Color.White;
             this.txtTotalQTYEntered.Font = new System.Drawing.Font("Times New Roman", 11.25F);
-            this.txtTotalQTYEntered.Location = new System.Drawing.Point(140, 584);
+            this.txtTotalQTYEntered.Location = new System.Drawing.Point(154, 502);
             this.txtTotalQTYEntered.Name = "txtTotalQTYEntered";
             this.txtTotalQTYEntered.ReadOnly = true;
             this.txtTotalQTYEntered.Size = new System.Drawing.Size(133, 25);
@@ -249,7 +240,7 @@ namespace IMS_Client_2.Purchase
             this.btnUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnUpdate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.Location = new System.Drawing.Point(894, 139);
+            this.btnUpdate.Location = new System.Drawing.Point(894, 146);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(71, 25);
             this.btnUpdate.TabIndex = 306;
@@ -266,7 +257,7 @@ namespace IMS_Client_2.Purchase
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCancel.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(895, 195);
+            this.btnCancel.Location = new System.Drawing.Point(894, 195);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(71, 25);
             this.btnCancel.TabIndex = 308;
@@ -329,6 +320,7 @@ namespace IMS_Client_2.Purchase
             // 
             // txtItemName
             // 
+            this.txtItemName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtItemName.BackColor = System.Drawing.Color.White;
             this.txtItemName.Enabled = false;
             this.txtItemName.Font = new System.Drawing.Font("Times New Roman", 11.25F);
@@ -339,6 +331,7 @@ namespace IMS_Client_2.Purchase
             // 
             // cmbCountry
             // 
+            this.cmbCountry.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbCountry.DropDownHeight = 206;
             this.cmbCountry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCountry.Enabled = false;
@@ -355,6 +348,7 @@ namespace IMS_Client_2.Purchase
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -390,6 +384,7 @@ namespace IMS_Client_2.Purchase
             // 
             // lblBrand
             // 
+            this.lblBrand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBrand.AutoSize = true;
             this.lblBrand.BackColor = System.Drawing.Color.Transparent;
             this.lblBrand.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -401,6 +396,7 @@ namespace IMS_Client_2.Purchase
             // 
             // cmbBrand
             // 
+            this.cmbBrand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbBrand.DropDownHeight = 406;
             this.cmbBrand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBrand.Enabled = false;
@@ -417,6 +413,7 @@ namespace IMS_Client_2.Purchase
             // 
             // lblProductName
             // 
+            this.lblProductName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblProductName.AutoSize = true;
             this.lblProductName.BackColor = System.Drawing.Color.Transparent;
             this.lblProductName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -439,6 +436,7 @@ namespace IMS_Client_2.Purchase
             // 
             // lblSupplier
             // 
+            this.lblSupplier.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSupplier.AutoSize = true;
             this.lblSupplier.BackColor = System.Drawing.Color.Transparent;
             this.lblSupplier.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -450,6 +448,7 @@ namespace IMS_Client_2.Purchase
             // 
             // cmbStore
             // 
+            this.cmbStore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbStore.DropDownHeight = 206;
             this.cmbStore.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStore.Enabled = false;
@@ -463,22 +462,6 @@ namespace IMS_Client_2.Purchase
             this.cmbStore.Name = "cmbStore";
             this.cmbStore.Size = new System.Drawing.Size(206, 27);
             this.cmbStore.TabIndex = 298;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSearch.Enabled = false;
-            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSearch.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.Location = new System.Drawing.Point(813, 6);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(64, 25);
-            this.btnSearch.TabIndex = 310;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Visible = false;
             // 
             // lblSupplierBillNo
             // 
@@ -517,7 +500,7 @@ namespace IMS_Client_2.Purchase
             this.dgvQtycolor.Location = new System.Drawing.Point(4, 260);
             this.dgvQtycolor.Name = "dgvQtycolor";
             this.dgvQtycolor.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dgvQtycolor.Size = new System.Drawing.Size(971, 300);
+            this.dgvQtycolor.Size = new System.Drawing.Size(971, 226);
             this.dgvQtycolor.TabIndex = 313;
             this.dgvQtycolor.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQtycolor_CellClick);
             this.dgvQtycolor.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQtycolor_CellEndEdit);
@@ -528,6 +511,7 @@ namespace IMS_Client_2.Purchase
             // 
             // cmbSizeType
             // 
+            this.cmbSizeType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbSizeType.DropDownHeight = 206;
             this.cmbSizeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSizeType.Enabled = false;
@@ -542,6 +526,7 @@ namespace IMS_Client_2.Purchase
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -568,6 +553,19 @@ namespace IMS_Client_2.Purchase
             this.btnEdit.MouseEnter += new System.EventHandler(this.btnAdd_MouseEnter);
             this.btnEdit.MouseLeave += new System.EventHandler(this.btnAdd_MouseLeave);
             // 
+            // PicItem
+            // 
+            this.PicItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.PicItem.BackColor = System.Drawing.Color.Transparent;
+            this.PicItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PicItem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PicItem.Location = new System.Drawing.Point(757, 494);
+            this.PicItem.Name = "PicItem";
+            this.PicItem.Size = new System.Drawing.Size(218, 194);
+            this.PicItem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PicItem.TabIndex = 329;
+            this.PicItem.TabStop = false;
+            // 
             // frmPost_Delivering_Purchase_Bill
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -575,13 +573,12 @@ namespace IMS_Client_2.Purchase
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(978, 692);
+            this.Controls.Add(this.PicItem);
             this.Controls.Add(this.btnEdit);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtTotalQTY);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.lblDiffQty);
             this.Controls.Add(this.txtDiffQty);
             this.Controls.Add(this.lblTotalQtyBill);
@@ -606,25 +603,22 @@ namespace IMS_Client_2.Purchase
             this.Load += new System.EventHandler(this.frmPost_Delivering_Purchase_Bill_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.grpPurchaseBillDetail.ResumeLayout(false);
             this.grpPurchaseBillDetail.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQtycolor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicItem)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtPurchaseInvoiceID;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtTotalQTY;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label lblDiffQty;
         private System.Windows.Forms.TextBox txtDiffQty;
         private System.Windows.Forms.Label lblTotalQtyBill;
@@ -654,5 +648,6 @@ namespace IMS_Client_2.Purchase
         private System.Windows.Forms.ComboBox cmbSizeType;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.PictureBox PicItem;
     }
 }
