@@ -56,6 +56,8 @@
             this.postingDeliveryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.purchaseDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.postDeliveringPurchaseBillToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BarcodeStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.barCodePrintingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,6 +79,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemCardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.bulkPriceUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.scanItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inventoryCheckToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -115,8 +119,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.postDeliveringPurchaseBillToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -318,49 +320,61 @@
             // PurchaseInvoice_ToolStrip
             // 
             this.PurchaseInvoice_ToolStrip.Name = "PurchaseInvoice_ToolStrip";
-            this.PurchaseInvoice_ToolStrip.Size = new System.Drawing.Size(250, 24);
+            this.PurchaseInvoice_ToolStrip.Size = new System.Drawing.Size(251, 24);
             this.PurchaseInvoice_ToolStrip.Text = "Purchase Invoice ";
             this.PurchaseInvoice_ToolStrip.Click += new System.EventHandler(this.PurchaseInvoice_ToolStrip_Click);
             // 
             // PurchaseBillDetails_ToolStrip
             // 
             this.PurchaseBillDetails_ToolStrip.Name = "PurchaseBillDetails_ToolStrip";
-            this.PurchaseBillDetails_ToolStrip.Size = new System.Drawing.Size(250, 24);
+            this.PurchaseBillDetails_ToolStrip.Size = new System.Drawing.Size(251, 24);
             this.PurchaseBillDetails_ToolStrip.Text = "Purchase Bill Details";
             this.PurchaseBillDetails_ToolStrip.Click += new System.EventHandler(this.PurchaseBillDetails_ToolStrip_Click);
             // 
             // deliveringPurchaseBillToolStripMenuItem
             // 
             this.deliveringPurchaseBillToolStripMenuItem.Name = "deliveringPurchaseBillToolStripMenuItem";
-            this.deliveringPurchaseBillToolStripMenuItem.Size = new System.Drawing.Size(250, 24);
+            this.deliveringPurchaseBillToolStripMenuItem.Size = new System.Drawing.Size(251, 24);
             this.deliveringPurchaseBillToolStripMenuItem.Text = "Delivering Purchase Bill";
             this.deliveringPurchaseBillToolStripMenuItem.Click += new System.EventHandler(this.deliveringPurchaseBillToolStripMenuItem_Click);
             // 
             // diffBwPurchaseReceivedToolStripMenuItem
             // 
             this.diffBwPurchaseReceivedToolStripMenuItem.Name = "diffBwPurchaseReceivedToolStripMenuItem";
-            this.diffBwPurchaseReceivedToolStripMenuItem.Size = new System.Drawing.Size(250, 24);
+            this.diffBwPurchaseReceivedToolStripMenuItem.Size = new System.Drawing.Size(251, 24);
             this.diffBwPurchaseReceivedToolStripMenuItem.Text = "Diff b/w Purchase & Received";
             this.diffBwPurchaseReceivedToolStripMenuItem.Click += new System.EventHandler(this.diffBwPurchaseReceivedToolStripMenuItem_Click);
             // 
             // postingDeliveryToolStripMenuItem
             // 
             this.postingDeliveryToolStripMenuItem.Name = "postingDeliveryToolStripMenuItem";
-            this.postingDeliveryToolStripMenuItem.Size = new System.Drawing.Size(250, 24);
+            this.postingDeliveryToolStripMenuItem.Size = new System.Drawing.Size(251, 24);
             this.postingDeliveryToolStripMenuItem.Text = "Posting Delivery";
             this.postingDeliveryToolStripMenuItem.Click += new System.EventHandler(this.postingDeliveryToolStripMenuItem_Click);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(247, 6);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(248, 6);
             // 
             // purchaseDetailsToolStripMenuItem
             // 
             this.purchaseDetailsToolStripMenuItem.Name = "purchaseDetailsToolStripMenuItem";
-            this.purchaseDetailsToolStripMenuItem.Size = new System.Drawing.Size(250, 24);
+            this.purchaseDetailsToolStripMenuItem.Size = new System.Drawing.Size(251, 24);
             this.purchaseDetailsToolStripMenuItem.Text = "View Purchase Details";
             this.purchaseDetailsToolStripMenuItem.Click += new System.EventHandler(this.purchaseDetailsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(248, 6);
+            // 
+            // postDeliveringPurchaseBillToolStripMenuItem
+            // 
+            this.postDeliveringPurchaseBillToolStripMenuItem.Name = "postDeliveringPurchaseBillToolStripMenuItem";
+            this.postDeliveringPurchaseBillToolStripMenuItem.Size = new System.Drawing.Size(251, 24);
+            this.postDeliveringPurchaseBillToolStripMenuItem.Text = "Post Delivering Purchase Bill";
+            this.postDeliveringPurchaseBillToolStripMenuItem.Click += new System.EventHandler(this.postDeliveringPurchaseBillToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -466,7 +480,9 @@
             this.stockDetailsToolStripMenuItem,
             this.toolStripSeparator1,
             this.viewToolStripMenuItem,
-            this.itemCardToolStripMenuItem});
+            this.itemCardToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.bulkPriceUpdateToolStripMenuItem});
             this.toolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1.Image")));
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(135, 36);
@@ -534,6 +550,18 @@
             this.itemCardToolStripMenuItem.Size = new System.Drawing.Size(229, 24);
             this.itemCardToolStripMenuItem.Text = "Item Card";
             this.itemCardToolStripMenuItem.Click += new System.EventHandler(this.itemCardToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(226, 6);
+            // 
+            // bulkPriceUpdateToolStripMenuItem
+            // 
+            this.bulkPriceUpdateToolStripMenuItem.Name = "bulkPriceUpdateToolStripMenuItem";
+            this.bulkPriceUpdateToolStripMenuItem.Size = new System.Drawing.Size(229, 24);
+            this.bulkPriceUpdateToolStripMenuItem.Text = "Bulk Price Update";
+            this.bulkPriceUpdateToolStripMenuItem.Click += new System.EventHandler(this.bulkPriceUpdateToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
@@ -914,18 +942,6 @@
             this.label9.TabIndex = 28;
             this.label9.Text = "Today\'s Cash Box";
             // 
-            // postDeliveringPurchaseBillToolStripMenuItem
-            // 
-            this.postDeliveringPurchaseBillToolStripMenuItem.Name = "postDeliveringPurchaseBillToolStripMenuItem";
-            this.postDeliveringPurchaseBillToolStripMenuItem.Size = new System.Drawing.Size(251, 24);
-            this.postDeliveringPurchaseBillToolStripMenuItem.Text = "Post Delivering Purchase Bill";
-            this.postDeliveringPurchaseBillToolStripMenuItem.Click += new System.EventHandler(this.postDeliveringPurchaseBillToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(248, 6);
-            // 
             // frmHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -1056,5 +1072,7 @@
         private System.Windows.Forms.ToolStripMenuItem stockMoveReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem postDeliveringPurchaseBillToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem bulkPriceUpdateToolStripMenuItem;
     }
 }

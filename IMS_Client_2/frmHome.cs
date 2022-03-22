@@ -1217,5 +1217,11 @@ namespace IMS_Client_2
                 clsUtility.ShowInfoMessage("You have no rights to perform this task");
             }
         }
+
+        private void bulkPriceUpdateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StockManagement.frmBulkPriceUpdate frmBulkPriceUpdate = new StockManagement.frmBulkPriceUpdate();
+            frmBulkPriceUpdate.ShowDialog();
+        }
     }
 }
