@@ -46,8 +46,8 @@ namespace IMS_Client_2.StockManagement
                             dtExcelData.Rows.RemoveAt(0);
                             dtExcelData.AcceptChanges();
 
-                            dtExcelData.Columns[0].ColumnName = "Style No";
-                            dtExcelData.Columns[1].ColumnName = "Sale Price";
+                            dtExcelData.Columns[0].ColumnName = "StyleNo";
+                            dtExcelData.Columns[1].ColumnName = "SalePrice";
                             dtExcelData.Columns[2].ColumnName = "Brand";
 
                             dgvBulkPriceUpdate.DataSource = dtExcelData;
@@ -77,13 +77,39 @@ namespace IMS_Client_2.StockManagement
         {
             ObjUtil.SetRowNumber(dgvBulkPriceUpdate);
             ObjUtil.SetDataGridProperty(dgvBulkPriceUpdate, DataGridViewAutoSizeColumnsMode.Fill);
+
+            if (dgvBulkPriceUpdate.Rows.Count>=0)
+            {
+                dgvBulkPriceUpdate.Columns[0].HeaderText = "Style No";
+                dgvBulkPriceUpdate.Columns[1].HeaderText = "Sales Price";
+                dgvBulkPriceUpdate.Columns[2].HeaderText = "Brand";
+            }
           
         }
-
+        CoreApp.clsConnection_DAL ObjDAL = new clsConnection_DAL(true);
         private void btnUpdatePrice_Click(object sender, EventArgs e)
         {
             if(clsUtility.ShowQuestionMessage("Are you sure, you want to update all price data"))
             {
+                DataTable dtExcelTable = new DataTable();
+                dtExcelTable.Columns.Add("StyleNo", typeof(string));
+                dtExcelTable.Columns.Add("SalePrice", typeof(decimal));
+                dtExcelTable.Columns.Add("Brand", typeof(string));
+
+                var dt = dgvBulkPriceUpdate.DataSource as DataTable;
+                  dtExcelTable= dt.Copy();
+             
+                ObjDAL.SetStoreProcedureData("ExcelTable", SqlDbType.Structured, dtExcelTable);
+                ObjDAL.SetStoreProcedureData("LoginBy", SqlDbType.Int,clsUtility.LoginID);
+               bool result=    ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_BulkPriceUpdate");
+                if (result)
+                {
+                    
+                    clsUtility.ShowInfoMessage("Sales price has been udpated.");
+
+                }
+
+
 
 
             }

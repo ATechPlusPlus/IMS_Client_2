@@ -127,7 +127,7 @@ namespace IMS_Client_2.StockManagement
             this.btnUpdatePrice.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdatePrice.Location = new System.Drawing.Point(325, 447);
             this.btnUpdatePrice.Name = "btnUpdatePrice";
-            this.btnUpdatePrice.Size = new System.Drawing.Size(102, 25);
+            this.btnUpdatePrice.Size = new System.Drawing.Size(102, 33);
             this.btnUpdatePrice.TabIndex = 210;
             this.btnUpdatePrice.Text = "Update Price";
             this.btnUpdatePrice.UseVisualStyleBackColor = true;
