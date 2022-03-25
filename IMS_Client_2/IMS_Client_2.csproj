@@ -927,6 +927,7 @@
     <EmbeddedResource Include="StockManagement\Material_Details.resx">
       <DependentUpon>Material_Details.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="bin\x86\Debug\Template\BulkPriceUpdate.xlsx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

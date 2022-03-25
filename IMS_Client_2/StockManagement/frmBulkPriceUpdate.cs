@@ -64,6 +64,7 @@ namespace IMS_Client_2.StockManagement
         FileStream stream;
         IExcelDataReader excelReader;
         DataTable dtExcelData;
+
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (File.Exists(Application.StartupPath + "//Template/BulkPriceUpdate.xlsx"))
@@ -91,28 +92,63 @@ namespace IMS_Client_2.StockManagement
         {
             if(clsUtility.ShowQuestionMessage("Are you sure, you want to update all price data"))
             {
-                DataTable dtExcelTable = new DataTable();
-                dtExcelTable.Columns.Add("StyleNo", typeof(string));
-                dtExcelTable.Columns.Add("SalePrice", typeof(decimal));
-                dtExcelTable.Columns.Add("Brand", typeof(string));
+              
+               var  dtExcelTable = dgvBulkPriceUpdate.DataSource as DataTable;
 
-                var dt = dgvBulkPriceUpdate.DataSource as DataTable;
-                  dtExcelTable= dt.Copy();
-             
-                ObjDAL.SetStoreProcedureData("ExcelTable", SqlDbType.Structured, dtExcelTable);
-                ObjDAL.SetStoreProcedureData("LoginBy", SqlDbType.Int,clsUtility.LoginID);
-               bool result=    ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_BulkPriceUpdate");
-                if (result)
+              var spDataTable=   ConvertToSpTable(dtExcelTable);
+                if (spDataTable!=null)
                 {
-                    
-                    clsUtility.ShowInfoMessage("Sales price has been udpated.");
+                    ObjDAL.SetStoreProcedureData("ExcelTable", SqlDbType.Structured, spDataTable);
+                    ObjDAL.SetStoreProcedureData("LoginBy", SqlDbType.Int, clsUtility.LoginID);
+                    bool result = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_BulkPriceUpdate");
+                    if (result)
+                    {
 
+                        clsUtility.ShowInfoMessage("Sales price has been udpated.");
+
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Excel data not in correct format.");
                 }
 
 
+               
 
 
             }
+        }
+
+        private DataTable ConvertToSpTable(DataTable dt)
+        {
+            try
+            {
+                DataTable dtEx = new DataTable();
+                dtEx.Columns.Add("StyleNo", typeof(string));
+                dtEx.Columns.Add("SalePrice", typeof(decimal));
+                dtEx.Columns.Add("Brand", typeof(string));
+
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    DataRow dRow = dtEx.NewRow();
+                    dRow["StyleNo"] = dt.Rows[i][0].ToString();
+                    dRow["SalePrice"] = Convert.ToDecimal(dt.Rows[i][1]);
+                    dRow["Brand"] = dt.Rows[i][2].ToString();
+
+                    dtEx.Rows.Add(dRow);
+                }
+
+                return dtEx;
+            }
+            catch (Exception)
+            {
+
+               
+            }
+
+            return null;
         }
     }
 }
