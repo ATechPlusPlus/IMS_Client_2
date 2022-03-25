@@ -71,6 +71,10 @@ namespace IMS_Client_2.StockManagement
             {
                 System.Diagnostics.Process.Start(Application.StartupPath + "//Template");
             }
+            else
+            {
+                clsUtility.ShowInfoMessage("Excel Template not found at :" + Application.StartupPath + "//Template/BulkPriceUpdate.xlsx");
+            }
           
         }
 
