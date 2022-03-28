@@ -617,6 +617,12 @@
     <Compile Include="StockManagement\frmBranchSaleShorting.Designer.cs">
       <DependentUpon>frmBranchSaleShorting.cs</DependentUpon>
     </Compile>
+    <Compile Include="StockManagement\frmBulkPriceUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManagement\frmBulkPriceUpdate.Designer.cs">
+      <DependentUpon>frmBulkPriceUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="StockManagement\frmItemWiseModelNo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -894,6 +900,9 @@
     <EmbeddedResource Include="StockManagement\frmBranchSaleShorting.resx">
       <DependentUpon>frmBranchSaleShorting.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="StockManagement\frmBulkPriceUpdate.resx">
+      <DependentUpon>frmBulkPriceUpdate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StockManagement\frmItemWiseModelNo.resx">
       <DependentUpon>frmItemWiseModelNo.cs</DependentUpon>
     </EmbeddedResource>
@@ -918,6 +927,7 @@
     <EmbeddedResource Include="StockManagement\Material_Details.resx">
       <DependentUpon>Material_Details.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="bin\x86\Debug\Template\BulkPriceUpdate.xlsx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
