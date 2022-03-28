@@ -58,44 +58,52 @@ namespace IMS_Client_2.Purchase
 
         private void btnPost_Click(object sender, EventArgs e)
         {
-            if (clsFormRights.HasFormRight(clsFormRights.Forms.Posting_Delivery, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
+            try
             {
-                if (validateform())
+                if (clsFormRights.HasFormRight(clsFormRights.Forms.Posting_Delivery, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
                 {
-                    bool b = clsUtility.ShowQuestionMessage("Are you sure want to post for " + txtSupplierBillNo.Text + " ?", clsUtility.strProjectTitle);
-                    if (b)
+                    if (validateform())
                     {
-                        ObjDAL.SetStoreProcedureData("PurchaseInvoiceID", SqlDbType.Int, txtPurchaseInvoiceID.Text, clsConnection_DAL.ParamType.Input);
-                        ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, cmbStore.SelectedValue, clsConnection_DAL.ParamType.Input);
-                        ObjDAL.SetStoreProcedureData("TotalQTY", SqlDbType.Int, txtTotalQTY.Text, clsConnection_DAL.ParamType.Input);
-                        ObjDAL.SetStoreProcedureData("EntryType", SqlDbType.Int, cmbEntryType.SelectedIndex, clsConnection_DAL.ParamType.Input);
-                        ObjDAL.SetStoreProcedureData("SupplierBillNo", SqlDbType.VarChar, txtSupplierBillNo.Text, clsConnection_DAL.ParamType.Input);
-                        ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
-                        DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Insert_PurchaseInvoice_BulkPrint_Color_Size");
-                        if (ObjUtil.ValidateDataSet(ds))
+                        bool b = clsUtility.ShowQuestionMessage("Are you sure want to post for " + txtSupplierBillNo.Text + " ?", clsUtility.strProjectTitle);
+                        if (b)
                         {
-                            DataTable dt = ds.Tables[0];
-                            if (ObjUtil.ValidateTable(dt))
+                            ObjDAL.SetStoreProcedureData("PurchaseInvoiceID", SqlDbType.Int, txtPurchaseInvoiceID.Text, clsConnection_DAL.ParamType.Input);
+                            ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, cmbStore.SelectedValue, clsConnection_DAL.ParamType.Input);
+                            ObjDAL.SetStoreProcedureData("TotalQTY", SqlDbType.Int, txtTotalQTY.Text, clsConnection_DAL.ParamType.Input);
+                            ObjDAL.SetStoreProcedureData("EntryType", SqlDbType.Int, cmbEntryType.SelectedIndex, clsConnection_DAL.ParamType.Input);
+                            ObjDAL.SetStoreProcedureData("SupplierBillNo", SqlDbType.VarChar, txtSupplierBillNo.Text, clsConnection_DAL.ParamType.Input);
+                            ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
+                            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Insert_PurchaseInvoice_BulkPrint_Color_Size");
+                            if (ObjUtil.ValidateDataSet(ds))
                             {
-                                int flag = Convert.ToInt32(dt.Rows[0]["Flag"]);
-                                string Msg = dt.Rows[0]["Msg"].ToString();
+                                DataTable dt = ds.Tables[0];
+                                if (ObjUtil.ValidateTable(dt))
+                                {
+                                    int flag = Convert.ToInt32(dt.Rows[0]["Flag"]);
+                                    string Msg = dt.Rows[0]["Msg"].ToString();
 
-                                clsUtility.ShowInfoMessage(Msg, clsUtility.strProjectTitle);
-                                ClearAll();
+                                    clsUtility.ShowInfoMessage(Msg, clsUtility.strProjectTitle);
+                                    ClearAll();
+                                }
+                                else
+                                {
+                                    clsUtility.ShowInfoMessage("Posting Delivery Entry for '" + txtSupplierBillNo.Text + "' is not Saved Successfully..", clsUtility.strProjectTitle);
+                                }
+                                UpdateLocalCost();
                             }
-                            else
-                            {
-                                clsUtility.ShowInfoMessage("Posting Delivery Entry for '" + txtSupplierBillNo.Text + "' is not Saved Successfully..", clsUtility.strProjectTitle);
-                            }
-                            UpdateLocalCost();
+                            ObjDAL.ResetData();
                         }
-                        ObjDAL.ResetData();
                     }
                 }
+                else
+                {
+                    clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                string temp = "Supplier Bill No.: " + txtSupplierBillNo.Text + " PurchaseInvoiceID: " + txtPurchaseInvoiceID + " TotalQTY: " + txtTotalQTY.Text + " LoginID: " + clsUtility.LoginID + " ";
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
             }
         }
 
@@ -131,6 +139,9 @@ namespace IMS_Client_2.Purchase
             }
             catch (Exception ex)
             {
+                string temp = "Supplier Bill No.: " + txtSupplierBillNo.Text + " PurchaseInvoiceID: " + txtPurchaseInvoiceID + " TotalQTY: " + txtTotalQTY.Text + " LoginID: " + clsUtility.LoginID + " ";
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+
                 clsUtility.ShowErrorMessage(ex.Message);
             }
         }
@@ -213,20 +224,31 @@ namespace IMS_Client_2.Purchase
             }
             catch (Exception ex)
             {
+                string temp = "Supplier Bill No.: " + txtSupplierBillNo.Text + " PurchaseInvoiceID: " + txtPurchaseInvoiceID + " TotalQTY: " + txtTotalQTY.Text + " LoginID: " + clsUtility.LoginID + " ";
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+
                 clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
             }
         }
 
         private void GetPostingDeliveryData()
         {
-            txtSupplierBillNo.SelectionStart = txtSupplierBillNo.MaxLength;
-            txtSupplierBillNo.Focus();
-
-            DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Posting_Delivery_QTY " + txtPurchaseInvoiceID.Text);
-            if (ObjUtil.ValidateTable(dt))
+            try
             {
-                cmbStore.SelectedValue = dt.Rows[0]["StoreID"].ToString();
-                txtTotalQTY.Text = dt.Rows[0]["Total"].ToString();
+                txtSupplierBillNo.SelectionStart = txtSupplierBillNo.MaxLength;
+                txtSupplierBillNo.Focus();
+
+                DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_Posting_Delivery_QTY " + txtPurchaseInvoiceID.Text);
+                if (ObjUtil.ValidateTable(dt))
+                {
+                    cmbStore.SelectedValue = dt.Rows[0]["StoreID"].ToString();
+                    txtTotalQTY.Text = dt.Rows[0]["Total"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                string temp = "Supplier Bill No.: " + txtSupplierBillNo.Text + " PurchaseInvoiceID: " + txtPurchaseInvoiceID + " TotalQTY: " + txtTotalQTY.Text + " LoginID: " + clsUtility.LoginID + " ";
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
             }
         }
         private void Posting_Delivery_CellClick(object sender, DataGridViewCellEventArgs e)

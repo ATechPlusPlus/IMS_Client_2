@@ -1205,10 +1205,10 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmPost_Delivering_Purchase_Bill) || clsUtility.IsAdmin)
             {
-                bool b = ObjUtil.IsAlreadyOpen(typeof(Purchase.frmPost_Delivering_Purchase_Bill));
+                bool b = ObjUtil.IsAlreadyOpen(typeof(StockManagement.frmPost_Delivering_Purchase_Bill));
                 if (!b)
                 {
-                    Purchase.frmPost_Delivering_Purchase_Bill frm = new Purchase.frmPost_Delivering_Purchase_Bill();
+                    StockManagement.frmPost_Delivering_Purchase_Bill frm = new StockManagement.frmPost_Delivering_Purchase_Bill();
                     frm.Show();
                 }
             }

@@ -33,7 +33,7 @@ namespace IMS_Client_2.Sales
         public static bool isfromdefaul = false;
         public static bool _Is_SalesManIDMandat = false;
         public static bool _Is_CustomerMobileMandat = false;
-        
+
         decimal _StartValue = 0;
         decimal OldBillAmount = 0;
         DataTable dtItemDetails = new DataTable();
@@ -817,7 +817,7 @@ namespace IMS_Client_2.Sales
                 }
             }
 
-            if (dgvProductDetails.Rows.Count==0)
+            if (dgvProductDetails.Rows.Count == 0)
             {
                 clsUtility.ShowInfoMessage("Please add items to sale.", clsUtility.strProjectTitle);
                 return false;
@@ -948,140 +948,158 @@ namespace IMS_Client_2.Sales
             }
             catch (Exception ex)
             {
+                string temp = "SalesInvoiceID: " + SalesInvoiceID + " LoginID: " + clsUtility.LoginID + " ";
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+
                 clsUtility.ShowErrorMessage(ex.ToString());
             }
         }
 
         private int DoNewSales()
         {
-            dgvProductDetails.EndEdit();
-
-            string InvoiceDateTime = dtpSalesDate.Value.ToString("yyyy-MM-dd") + " " + DateTime.Now.ToString("HH:mm:ss");
-
-            #region SalesInvoiceDetails
-            ObjDAL.SetColumnData("InvoiceNumber", SqlDbType.NVarChar, GenerateInvoiceNumber());
-            ObjDAL.SetColumnData("InvoiceDate", SqlDbType.DateTime, InvoiceDateTime);
-            ObjDAL.SetColumnData("SubTotal", SqlDbType.Decimal, txtSubTotal.Text);
-            ObjDAL.SetColumnData("Discount", SqlDbType.Decimal, txtDiscount.Text);
-            ObjDAL.SetColumnData("Tax", SqlDbType.Decimal, txtDeliveryCharges.Text);
-            ObjDAL.SetColumnData("GrandTotal", SqlDbType.Decimal, txtGrandTotal.Text);
-
-            if (Other_Forms.frmDiscountLogin.IsValidAdmin)
-                ObjDAL.SetColumnData("VoucherNo", SqlDbType.VarChar, frmDiscountLogin.VoucherNo);
-
-            ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
-            ObjDAL.SetColumnData("CustomerID", SqlDbType.Int, txtCustomerID.Text.Trim().Length > 0 ? Convert.ToInt32(txtCustomerID.Text) : 0);
-            ObjDAL.SetColumnData("SalesMan", SqlDbType.Int, txtEmpID.Text.Trim().Length > 0 ? Convert.ToInt32(txtEmpID.Text) : 0);
-            
-            //if (txtCustomerID.Text.Trim().Length == 0)
-            //{
-            //    ObjDAL.SetColumnData("CustomerID", SqlDbType.Int, 0);
-            //}
-            //else
-            //{
-            //    ObjDAL.SetColumnData("CustomerID", SqlDbType.Int, txtCustomerID.Text);
-            //}
-            //if (txtEmpID.Text.Trim().Length == 0)
-            //{
-            //    ObjDAL.SetColumnData("SalesMan", SqlDbType.Int, 0);
-            //}
-            //else
-            //{
-            //    ObjDAL.SetColumnData("SalesMan", SqlDbType.Int, txtEmpID.Text);
-            //}
-
-            ObjDAL.SetColumnData("ShopeID", SqlDbType.Int, cmbShop.SelectedValue.ToString());
-            ObjDAL.SetColumnData("CashTendered", SqlDbType.Decimal, txtCashTendered.Text);
-            ObjDAL.SetColumnData("Change", SqlDbType.Decimal, txtChange.Text);
-
-            int InvoiceID = ObjDAL.InsertData(clsUtility.DBName + ".dbo.SalesInvoiceDetails", true);
-            if (InvoiceID == -1)
+            int InvoiceID = 0;
+            string strInvoiceNo = string.Empty;
+            try
             {
-                ObjDAL.ResetData();
-                return InvoiceID;
-            }
-            #endregion
-            InsertPayment(InvoiceID);
+                dgvProductDetails.EndEdit();
 
-            for (int i = 0; i < dgvProductDetails.Rows.Count; i++)
-            {
-                string Total = dgvProductDetails.Rows[i].Cells["Total"].Value.ToString();
-                string ProductID = dgvProductDetails.Rows[i].Cells["ProductID"].Value.ToString();
-                string QTY = dgvProductDetails.Rows[i].Cells["QTY"].Value.ToString();
-                string Rate = dgvProductDetails.Rows[i].Cells["Rate"].Value.ToString();
-                string ColorID = dgvProductDetails.Rows[i].Cells["ColorID"].Value.ToString();
-                string SizeID = dgvProductDetails.Rows[i].Cells["SizeID"].Value.ToString();
-                string subProductID = dgvProductDetails.Rows[i].Cells["SubProductID"].Value.ToString();
-                string BarCode = dgvProductDetails.Rows[i].Cells["BarCodeNo"].Value.ToString();
-                bool IsReplaceReturn = Convert.ToBoolean(dgvProductDetails.Rows[i].Cells["IsReplaceReturn"].Value);
+                string InvoiceDateTime = dtpSalesDate.Value.ToString("yyyy-MM-dd") + " " + DateTime.Now.ToString("HH:mm:ss");
 
-                ObjDAL.SetColumnData("InvoiceID", SqlDbType.Int, InvoiceID);
-                ObjDAL.SetColumnData("ProductID", SqlDbType.Int, ProductID);
-                ObjDAL.SetColumnData("QTY", SqlDbType.Decimal, QTY);
+                #region SalesInvoiceDetails
+                strInvoiceNo = GenerateInvoiceNumber();
+                ObjDAL.SetColumnData("InvoiceNumber", SqlDbType.NVarChar, strInvoiceNo);
+                ObjDAL.SetColumnData("InvoiceDate", SqlDbType.DateTime, InvoiceDateTime);
+                ObjDAL.SetColumnData("SubTotal", SqlDbType.Decimal, txtSubTotal.Text);
+                ObjDAL.SetColumnData("Discount", SqlDbType.Decimal, txtDiscount.Text);
+                ObjDAL.SetColumnData("Tax", SqlDbType.Decimal, txtDeliveryCharges.Text);
+                ObjDAL.SetColumnData("GrandTotal", SqlDbType.Decimal, txtGrandTotal.Text);
+
+                if (Other_Forms.frmDiscountLogin.IsValidAdmin)
+                    ObjDAL.SetColumnData("VoucherNo", SqlDbType.VarChar, frmDiscountLogin.VoucherNo);
+
                 ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
-                ObjDAL.SetColumnData("Rate", SqlDbType.Decimal, Rate);
-                ObjDAL.SetColumnData("ColorID", SqlDbType.Int, ColorID);
-                ObjDAL.SetColumnData("SizeID", SqlDbType.Int, SizeID);
+                ObjDAL.SetColumnData("CustomerID", SqlDbType.Int, txtCustomerID.Text.Trim().Length > 0 ? Convert.ToInt32(txtCustomerID.Text) : 0);
+                ObjDAL.SetColumnData("SalesMan", SqlDbType.Int, txtEmpID.Text.Trim().Length > 0 ? Convert.ToInt32(txtEmpID.Text) : 0);
 
-                ObjDAL.SetColumnData("SubProductID", SqlDbType.Int, subProductID);
-                ObjDAL.SetColumnData("BarCode", SqlDbType.NVarChar, BarCode);
-                ObjDAL.SetColumnData("IsReplaceReturn", SqlDbType.Bit, Convert.ToBoolean(IsReplaceReturn));
+                #region Commented if else Code
+                //if (txtCustomerID.Text.Trim().Length == 0)
+                //{
+                //    ObjDAL.SetColumnData("CustomerID", SqlDbType.Int, 0);
+                //}
+                //else
+                //{
+                //    ObjDAL.SetColumnData("CustomerID", SqlDbType.Int, txtCustomerID.Text);
+                //}
+                //if (txtEmpID.Text.Trim().Length == 0)
+                //{
+                //    ObjDAL.SetColumnData("SalesMan", SqlDbType.Int, 0);
+                //}
+                //else
+                //{
+                //    ObjDAL.SetColumnData("SalesMan", SqlDbType.Int, txtEmpID.Text);
+                //}
+                #endregion
 
-                int result = ObjDAL.InsertData(clsUtility.DBName + ".dbo.SalesDetails", false);
-                if (result == -1)
+                ObjDAL.SetColumnData("ShopeID", SqlDbType.Int, cmbShop.SelectedValue.ToString());
+                ObjDAL.SetColumnData("CashTendered", SqlDbType.Decimal, txtCashTendered.Text);
+                ObjDAL.SetColumnData("Change", SqlDbType.Decimal, txtChange.Text);
+
+                InvoiceID = ObjDAL.InsertData(clsUtility.DBName + ".dbo.SalesInvoiceDetails", true);
+                if (InvoiceID == -1)
                 {
                     ObjDAL.ResetData();
-                    return -1;
+                    return InvoiceID;
                 }
+                #endregion
+                InsertPayment(InvoiceID);
 
-                if (IsReplaceReturn)// if replace return, Add the QTY
+                for (int i = 0; i < dgvProductDetails.Rows.Count; i++)
                 {
-                    OldBillAmount = OldBillAmount + Convert.ToDecimal(Rate);
+                    string Total = dgvProductDetails.Rows[i].Cells["Total"].Value.ToString();
+                    string ProductID = dgvProductDetails.Rows[i].Cells["ProductID"].Value.ToString();
+                    string QTY = dgvProductDetails.Rows[i].Cells["QTY"].Value.ToString();
+                    string Rate = dgvProductDetails.Rows[i].Cells["Rate"].Value.ToString();
+                    string ColorID = dgvProductDetails.Rows[i].Cells["ColorID"].Value.ToString();
+                    string SizeID = dgvProductDetails.Rows[i].Cells["SizeID"].Value.ToString();
+                    string subProductID = dgvProductDetails.Rows[i].Cells["SubProductID"].Value.ToString();
+                    string BarCode = dgvProductDetails.Rows[i].Cells["BarCodeNo"].Value.ToString();
+                    bool IsReplaceReturn = Convert.ToBoolean(dgvProductDetails.Rows[i].Cells["IsReplaceReturn"].Value);
 
-                    ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster " +
-                                       "SET QTY=QTY+" + QTY + ", UpdatedOn=GETDATE(), UpdatedBy=" + clsUtility.LoginID + " WHERE ProductID=" + ProductID + " AND StoreID=" + cmbShop.SelectedValue.ToString() + " AND ColorID=" + ColorID + " AND SizeID=" + SizeID + " AND SubProductID=" + subProductID);
-                }
-                else
-                {
-                    ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster " +
-                                       "SET QTY=QTY-" + QTY + ", UpdatedOn=GETDATE(), UpdatedBy=" + clsUtility.LoginID + " WHERE ProductID=" + ProductID + " AND StoreID=" + cmbShop.SelectedValue.ToString() + " AND ColorID=" + ColorID + " AND SizeID=" + SizeID + " AND SubProductID=" + subProductID);
-                }
-            }
-            // data will be saved to tblCreditClosing, only if he is paying something.
-            if (Convert.ToDecimal(txtGrandTotal.Text) >= 0)
-            {
-                InsertIntoCreditCosing();
-            }
-            // if Old Bill amount is greater than zero means customer has returned something.
-            if (Math.Abs(OldBillAmount) > 0)
-            {
-                int MasterCashClosingID = frmHome.Home_MasterCashClosingID;
-
-                int count = ObjDAL.ExecuteScalarInt("SELECT COUNT(1) FROM " + clsUtility.DBName + ".[dbo].[tblCashReturn] WITH(NOLOCK) WHERE MasterCashClosingID=" + MasterCashClosingID);
-                if (count == 0)  // if NOT found for today
-                {
-                    ObjDAL.SetColumnData("MasterCashClosingID", SqlDbType.Int, MasterCashClosingID);
-                    ObjDAL.SetColumnData("Value", SqlDbType.Decimal, Math.Abs(OldBillAmount));
+                    ObjDAL.SetColumnData("InvoiceID", SqlDbType.Int, InvoiceID);
+                    ObjDAL.SetColumnData("ProductID", SqlDbType.Int, ProductID);
+                    ObjDAL.SetColumnData("QTY", SqlDbType.Decimal, QTY);
                     ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
-                    ObjDAL.InsertData(clsUtility.DBName + ".[dbo].[tblCashReturn]", false);
+                    ObjDAL.SetColumnData("Rate", SqlDbType.Decimal, Rate);
+                    ObjDAL.SetColumnData("ColorID", SqlDbType.Int, ColorID);
+                    ObjDAL.SetColumnData("SizeID", SqlDbType.Int, SizeID);
+
+                    ObjDAL.SetColumnData("SubProductID", SqlDbType.Int, subProductID);
+                    ObjDAL.SetColumnData("BarCode", SqlDbType.NVarChar, BarCode);
+                    ObjDAL.SetColumnData("IsReplaceReturn", SqlDbType.Bit, Convert.ToBoolean(IsReplaceReturn));
+
+                    int result = ObjDAL.InsertData(clsUtility.DBName + ".dbo.SalesDetails", false);
+                    if (result == -1)
+                    {
+                        ObjDAL.ResetData();
+                        return -1;
+                    }
+
+                    if (IsReplaceReturn)// if replace return, Add the QTY
+                    {
+                        OldBillAmount = OldBillAmount + Convert.ToDecimal(Rate);
+
+                        ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster " +
+                                           "SET QTY=QTY+" + QTY + ", UpdatedOn=GETDATE(), UpdatedBy=" + clsUtility.LoginID + " WHERE ProductID=" + ProductID + " AND StoreID=" + cmbShop.SelectedValue.ToString() + " AND ColorID=" + ColorID + " AND SizeID=" + SizeID + " AND SubProductID=" + subProductID);
+                    }
+                    else
+                    {
+                        ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster " +
+                                           "SET QTY=QTY-" + QTY + ", UpdatedOn=GETDATE(), UpdatedBy=" + clsUtility.LoginID + " WHERE ProductID=" + ProductID + " AND StoreID=" + cmbShop.SelectedValue.ToString() + " AND ColorID=" + ColorID + " AND SizeID=" + SizeID + " AND SubProductID=" + subProductID);
+                    }
                 }
-                else
+                // data will be saved to tblCreditClosing, only if he is paying something.
+                if (Convert.ToDecimal(txtGrandTotal.Text) >= 0)
                 {
-                    // update the tblCashReturn, Add value the exsting value
-
-                    string strUpdate = "  UPDATE " + clsUtility.DBName + ".[dbo].[tblCashReturn] SET Value=value+" + Math.Abs(OldBillAmount) +
-                                          " , UpdatedBy=" + clsUtility.LoginID + ", UpdatedOn=GETDATE() WHERE MasterCashClosingID=" + MasterCashClosingID;
-
-                    ObjDAL.ExecuteNonQuery(strUpdate);
+                    InsertIntoCreditCosing();
                 }
+                // if Old Bill amount is greater than zero means customer has returned something.
+                if (Math.Abs(OldBillAmount) > 0)
+                {
+                    int MasterCashClosingID = frmHome.Home_MasterCashClosingID;
+
+                    int count = ObjDAL.ExecuteScalarInt("SELECT COUNT(1) FROM " + clsUtility.DBName + ".[dbo].[tblCashReturn] WITH(NOLOCK) WHERE MasterCashClosingID=" + MasterCashClosingID);
+                    if (count == 0)  // if NOT found for today
+                    {
+                        ObjDAL.SetColumnData("MasterCashClosingID", SqlDbType.Int, MasterCashClosingID);
+                        ObjDAL.SetColumnData("Value", SqlDbType.Decimal, Math.Abs(OldBillAmount));
+                        ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
+                        ObjDAL.InsertData(clsUtility.DBName + ".[dbo].[tblCashReturn]", false);
+                    }
+                    else
+                    {
+                        // update the tblCashReturn, Add value the exsting value
+
+                        string strUpdate = "  UPDATE " + clsUtility.DBName + ".[dbo].[tblCashReturn] SET Value=value+" + Math.Abs(OldBillAmount) +
+                                              " , UpdatedBy=" + clsUtility.LoginID + ", UpdatedOn=GETDATE() WHERE MasterCashClosingID=" + MasterCashClosingID;
+
+                        ObjDAL.ExecuteNonQuery(strUpdate);
+                    }
+                }
+                // update the crossponding old invoice ID
+                ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".[dbo].[SalesInvoiceDetails] set  OldInvoiceID=" + frmReplaceReturnPopup.strInvoiceID + " where id=" + InvoiceID);
             }
-            // update the crossponding old invoice ID
-            ObjDAL.ExecuteNonQuery("UPDATE " + clsUtility.DBName + ".[dbo].[SalesInvoiceDetails] set  OldInvoiceID=" + frmReplaceReturnPopup.strInvoiceID + " where id=" + InvoiceID);
+            catch (Exception ex)
+            {
+                string temp = "InvoiceNumber: " + strInvoiceNo + " VoucherNo: " + frmDiscountLogin.VoucherNo + " GrandTotal: " + txtGrandTotal.Text + " CustomerID: " + txtCustomerID.Text + " SalesMan: " + txtEmpID.Text + " MasterCashClosingID: " + frmHome.Home_MasterCashClosingID + " LoginID: " + clsUtility.LoginID + " ";
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+            }
             return InvoiceID;
         }
 
         private void btnAdd_Click_1(object sender, EventArgs e)
         {
+            // Pass all insert data into datatable to SP instead of one by one product item insert.
+
             Button button = (Button)sender;
             if (clsFormRights.HasFormRight(clsFormRights.Forms.Sales_Invoice, clsFormRights.Operation.Save) || clsUtility.IsAdmin)
             {
@@ -1665,33 +1683,41 @@ namespace IMS_Client_2.Sales
         }
         private void DoF7()
         {
-            if (IsReplaceReturnMode == false)
+            try
             {
-                ReplaceMode();
-                // opening for the first time.
-                if (Sales.frmReplaceReturnPopup.strReplaceInvoiceNumber.Trim().Length == 0)
+                if (IsReplaceReturnMode == false)
                 {
-                    Sales.frmReplaceReturnPopup obj = new Sales.frmReplaceReturnPopup();
-                    obj.ShowDialog();
-
-                    if (Sales.frmReplaceReturnPopup.strInvoiceID != "0")
+                    ReplaceMode();
+                    // opening for the first time.
+                    if (Sales.frmReplaceReturnPopup.strReplaceInvoiceNumber.Trim().Length == 0)
                     {
-                        BindOldInvoiceCustoemrDetails(Sales.frmReplaceReturnPopup.strInvoiceID);
-                    }
-                }
+                        Sales.frmReplaceReturnPopup obj = new Sales.frmReplaceReturnPopup();
+                        obj.ShowDialog();
 
-                if (Sales.frmReplaceReturnPopup.IsReplaceInvoice == false)
-                {
-                    NewSaleMode();
+                        if (Sales.frmReplaceReturnPopup.strInvoiceID != "0")
+                        {
+                            BindOldInvoiceCustoemrDetails(Sales.frmReplaceReturnPopup.strInvoiceID);
+                        }
+                    }
+
+                    if (Sales.frmReplaceReturnPopup.IsReplaceInvoice == false)
+                    {
+                        NewSaleMode();
+                    }
+                    else
+                    {
+                        txtInvoiceNumber.Text = Sales.frmReplaceReturnPopup.strReplaceInvoiceNumber;
+                    }
                 }
                 else
                 {
-                    txtInvoiceNumber.Text = Sales.frmReplaceReturnPopup.strReplaceInvoiceNumber;
+                    NewSaleMode();
                 }
             }
-            else
+            catch (Exception ex)
             {
-                NewSaleMode();
+                string temp = "strInvoiceID: " + Sales.frmReplaceReturnPopup.strInvoiceID + " IsReplaceInvoice: " + Sales.frmReplaceReturnPopup.IsReplaceInvoice + " IsReplaceReturnMode: " + IsReplaceReturnMode + " LoginID: " + clsUtility.LoginID + " ";
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
             }
         }
 

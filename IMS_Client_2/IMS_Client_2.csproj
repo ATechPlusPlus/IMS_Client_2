@@ -234,10 +234,10 @@
     <Compile Include="Other_Forms\frmItemCard.Designer.cs">
       <DependentUpon>frmItemCard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Purchase\frmPost_Delivering_Purchase_Bill.cs">
+    <Compile Include="StockManagement\frmPost_Delivering_Purchase_Bill.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Purchase\frmPost_Delivering_Purchase_Bill.Designer.cs">
+    <Compile Include="StockManagement\frmPost_Delivering_Purchase_Bill.Designer.cs">
       <DependentUpon>frmPost_Delivering_Purchase_Bill.cs</DependentUpon>
     </Compile>
     <Compile Include="Report\RDLC_DataSets\ds_MiniSalesReport.cs">
@@ -797,7 +797,7 @@
     <EmbeddedResource Include="Purchase\frmDiffPurchaseReceviedDetails.resx">
       <DependentUpon>frmDiffPurchaseReceviedDetails.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Purchase\frmPost_Delivering_Purchase_Bill.resx">
+    <EmbeddedResource Include="StockManagement\frmPost_Delivering_Purchase_Bill.resx">
       <DependentUpon>frmPost_Delivering_Purchase_Bill.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase\frmPurchaseDetails.resx">

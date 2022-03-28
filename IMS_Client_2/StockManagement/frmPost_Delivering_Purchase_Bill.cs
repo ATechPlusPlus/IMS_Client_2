@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace IMS_Client_2.Purchase
+namespace IMS_Client_2.StockManagement
 {
     public partial class frmPost_Delivering_Purchase_Bill : Form
     {
@@ -181,7 +181,8 @@ namespace IMS_Client_2.Purchase
                 txtTotalQTYEntered.Text = ob.ToString();
             }
             int pTotal = txtTotalQTYEntered.Text.Length > 0 ? Convert.ToInt32(txtTotalQTYEntered.Text) : 0;
-            txtDiffQty.Text = (Convert.ToInt32(txtTotalQTYBill.Text) - pTotal).ToString();
+            //txtDiffQty.Text = (Convert.ToInt32(txtTotalQTYBill.Text) - pTotal).ToString();
+            txtDiffQty.Text = (pTotal - Convert.ToInt32(txtTotalQTYBill.Text)).ToString();
         }
 
         private void dgvQtycolor_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -241,7 +242,7 @@ namespace IMS_Client_2.Purchase
         {
             if (!ObjUtil.IsControlTextEmpty(txtPurchaseInvoiceID))
             {
-                dtPurchaseInvoice = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".[dbo].[Get_Delivering_PurchaseInvoice_BillDetails] " + txtPurchaseInvoiceID.Text + ",1");
+                dtPurchaseInvoice = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".[dbo].[Get_Delivering_PurchaseInvoice_BillDetails] " + txtPurchaseInvoiceID.Text + ",2");
 
                 if (ObjUtil.ValidateTable(dtPurchaseInvoice))
                 {
@@ -377,7 +378,7 @@ namespace IMS_Client_2.Purchase
                     CalcTotalColorQTY();
                     if (Convert.ToInt32(txtTotalQTYEntered.Text) > Convert.ToInt32(txtTotalQTYBill.Text))
                     {
-                        clsUtility.ShowInfoMessage("Entered QTY can't be greater then QTY Bill");
+                        //clsUtility.ShowInfoMessage("Entered QTY can't be greater then QTY Bill");
                         //dgvQtycolor.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = OldSize;
                     }
                     if (e.RowIndex + 1 == dgvQtycolor.Rows.Count)
@@ -504,6 +505,8 @@ namespace IMS_Client_2.Purchase
                 txtSupplierBillNo.SelectionStart = txtSupplierBillNo.MaxLength;
                 dgvQtycolor.ReadOnly = false;
                 dgvQtycolor.Enabled = true;
+                btnUpdate.Enabled = true;
+                btnCancel.Enabled = true;
             }
             else
             {
@@ -543,14 +546,239 @@ namespace IMS_Client_2.Purchase
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (clsFormRights.HasFormRight(clsFormRights.Forms.Delivering_Purchase_Bill, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
+            try
             {
-                if (Validateform())
+                if (clsFormRights.HasFormRight(clsFormRights.Forms.Delivering_Purchase_Bill, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
                 {
-                    if (DuplicateUser(ID))
+                    if (Validateform())
                     {
+                        if (DuplicateUser(ID))
+                        {
+                            if (Convert.ToInt32(txtTotalQTYEntered.Text) > Convert.ToInt32(txtTotalQTYBill.Text))
+                            {
+                                //clsUtility.ShowInfoMessage("Entered QTY can't be greater then QTY Bill");
+                                //dgvQtycolor.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = OldSize;
+                                bool b = clsUtility.ShowQuestionMessage("Entered QTY is greater then Bill QTY?");
+                                if (!b)
+                                {
+                                    GetSelectedCMBModelNo();
+                                    return;
+                                }
+                            }
+                            else
+                            {
+                                bool b = clsUtility.ShowQuestionMessage("Entered QTY is less then Bill QTY?");
+                                if (!b)
+                                {
+                                    GetSelectedCMBModelNo();
+                                    return;
+                                }
+                            }
+                            int DeliveryPurchaseBillID = 0;
+                            ObjDAL.UpdateColumnData("ProductID", SqlDbType.Int, ProductID);
+                            ObjDAL.UpdateColumnData("SupplierBillNo", SqlDbType.NVarChar, txtSupplierBillNo.Text.Trim());
+                            ObjDAL.UpdateColumnData("SizeTypeID", SqlDbType.Int, cmbSizeType.SelectedValue);
+                            ObjDAL.UpdateColumnData("ModelNo", SqlDbType.NVarChar, cmbListBox.Text);
+                            ObjDAL.UpdateColumnData("StoreID", SqlDbType.Int, cmbStore.SelectedValue);
+                            ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
+                            ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
+                            DeliveryPurchaseBillID = ObjDAL.UpdateData(clsUtility.DBName + ".dbo.DeliveryPurchaseBill1", "DeliveryPurchaseID1=" + ID);
+                            if (DeliveryPurchaseBillID > 0)
+                            {
+                                int DeliveryPurchaseBillID2 = DataUpdateDeliveryPurchaseBill2(ID);
+                                int DeliveryPurchaseBillID3 = DataUpdateDeliveryPurchaseBill3(ID, DeliveryPurchaseBillID2);
+
+                                bool b = BarCodeGenerate();
+
+                                ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave);
+                                clsUtility.ShowInfoMessage(clsUtility.MsgDataUpdated);
+                                Clear_ColorSize();
+                                //LoadData();
+                                LoadModelData();
+                                txtSupplierBillNo.Enabled = false;
+                                btnSearch.Enabled = false;
+                                //grpPurchaseBillDetail.Enabled = false;
+                            }
+                            else
+                            {
+                                clsUtility.ShowInfoMessage(clsUtility.MsgDatanotUpdated);
+                            }
+                            ObjDAL.ResetData();
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                string temp = "Supplier Bill No.: " + txtSupplierBillNo.Text + " PurchaseInvoiceID: " + pPurchaseInvoiceID + " ProductID: " + ProductID + " SubProductID: " + SubProductID + " SizeTypeID: " + cmbSizeType.SelectedValue + " DeliveryPurchaseID1: " + ID + " LoginID: " + clsUtility.LoginID + " ";
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+            }
+        }
+
+        private int DataUpdateDeliveryPurchaseBill2(int ID)
+        {
+            int pDeliveryPurchaseID2 = 0;
+            try
+            {
+                dtSize = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.SizeMaster", "SizeID,Size,SizeTypeID", "ISNULL(ActiveStatus,1) = 1 AND SizeTypeID = " + cmbSizeType.SelectedValue, null);
+                for (int i = 3; i < dtPurchaseQTYColor.Columns.Count - 1; i++)
+                {
+                    string col = dtPurchaseQTYColor.Columns[i].ColumnName.ToString();
+                    DataRow[] drow = dtSize.Select("Size = '" + col + "' AND SizeTypeID=" + cmbSizeType.SelectedValue);
+                    if (drow.Length > 0)
+                    {
+                        ObjDAL.UpdateColumnData("Col" + (i - 2), SqlDbType.Int, drow[0]["SizeID"].ToString());
+                    }
+                }
+                ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
+                ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
+                //return ObjDAL.UpdateData(clsUtility.DaBName + ".dbo.DeliveryPurchaseBill2", "DeliveryPurchaseID1=" + ID);
+                ObjDAL.UpdateData(clsUtility.DBName + ".dbo.DeliveryPurchaseBill2", "DeliveryPurchaseID1=" + ID);
+
+                pDeliveryPurchaseID2 = ObjDAL.ExecuteScalarInt("SELECT DeliveryPurchaseID2 FROM " + clsUtility.DBName + ".dbo.DeliveryPurchaseBill2 WITH(NOLOCK) WHERE DeliveryPurchaseID1=" + ID);
+            }
+            catch (Exception ex)
+            {
+                string temp = "Supplier Bill No.: " + txtSupplierBillNo.Text + " PurchaseInvoiceID: " + pPurchaseInvoiceID + " ProductID: " + ProductID + " SubProductID: " + SubProductID + " SizeTypeID: " + cmbSizeType.SelectedValue + " DeliveryPurchaseID1: " + ID + " DeliveryPurchaseID2: " + pDeliveryPurchaseID2 + " LoginID: " + clsUtility.LoginID + " ";
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+            }
+            return pDeliveryPurchaseID2;
+        }
+
+        private int DataUpdateDeliveryPurchaseBill3(int ID1, int ID2)
+        {
+            int a = 0, pDeliveryPurchaseID3 = 0;
+            try
+            {
+                for (int i = 0; i < dtPurchaseQTYColor.Rows.Count; i++)
+                {
+                    pDeliveryPurchaseID3 = dtPurchaseQTYColor.Rows[i]["DeliveryPurchaseID3"] != DBNull.Value ? Convert.ToInt32(dtPurchaseQTYColor.Rows[i]["DeliveryPurchaseID3"]) : 0;
+                    if (pDeliveryPurchaseID3 == 0)
+                    {
+                        DeliveryPurchaseID3 = i;// Storing index of newly record to insert
+                        int b = DataSavedDeliveryPurchaseBill3(ID1, ID2);
+                        continue;
+                    }
+                    ObjDAL.UpdateColumnData("ColorID", SqlDbType.Int, Convert.ToInt32(dtPurchaseQTYColor.Rows[i]["ColorID"]));
+                    for (int j = 3; j < dtPurchaseQTYColor.Columns.Count - 1; j++)
+                    {
+                        ObjDAL.UpdateColumnData("Col" + (j - 2), SqlDbType.Int, dtPurchaseQTYColor.Rows[i][j] != DBNull.Value ? Convert.ToInt32(dtPurchaseQTYColor.Rows[i][j]) : 0);
+                    }
+                    ObjDAL.UpdateColumnData("Total", SqlDbType.Int, Convert.ToInt32(dtPurchaseQTYColor.Rows[i]["Total"]));
+                    ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
+                    ObjDAL.UpdateColumnData("UpdatedOn", SqlDbType.DateTime, DateTime.Now);
+                    a = ObjDAL.UpdateData(clsUtility.DBName + ".dbo.DeliveryPurchaseBill3", "DeliveryPurchaseID1=" + ID1 + " AND DeliveryPurchaseID3 = " + Convert.ToInt32(dtPurchaseQTYColor.Rows[i]["DeliveryPurchaseID3"]));
+                }
+            }
+            catch (Exception ex)
+            {
+                string temp = "Supplier Bill No.: " + txtSupplierBillNo.Text + " PurchaseInvoiceID: " + pPurchaseInvoiceID + " ProductID: " + ProductID + " SubProductID: " + SubProductID + " SizeTypeID: " + cmbSizeType.SelectedValue + " DeliveryPurchaseID1: " + ID1 + " DeliveryPurchaseID2: " + ID2 + " DeliveryPurchaseID3: " + pDeliveryPurchaseID3 + " LoginID: " + clsUtility.LoginID + " ";
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+            }
+            return a;
+        }
+
+        private int DataSavedDeliveryPurchaseBill3(int ID1, int ID2)
+        {
+            int a = 0;
+            try
+            {
+                for (int i = DeliveryPurchaseID3; i < dtPurchaseQTYColor.Rows.Count; i++)
+                {
+                    ObjDAL.SetColumnData("DeliveryPurchaseID1", SqlDbType.Int, ID1);
+                    ObjDAL.SetColumnData("DeliveryPurchaseID2", SqlDbType.Int, ID2);
+                    ObjDAL.SetColumnData("ColorID", SqlDbType.Int, Convert.ToInt32(dtPurchaseQTYColor.Rows[i]["ColorID"]));
+                    for (int j = 3; j < dtPurchaseQTYColor.Columns.Count - 1; j++)
+                    {
+                        ObjDAL.SetColumnData("Col" + (j - 2), SqlDbType.Int, !string.IsNullOrEmpty(dtPurchaseQTYColor.Rows[i][j].ToString()) ?
+                            Convert.ToInt32(dtPurchaseQTYColor.Rows[i][j]) : 0);
+                    }
+                    ObjDAL.SetColumnData("Total", SqlDbType.Int, Convert.ToInt32(dtPurchaseQTYColor.Rows[i]["Total"]));
+                    ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID); //if LoginID=0 then Test Admin else user
+                    a = ObjDAL.InsertData(clsUtility.DBName + ".dbo.DeliveryPurchaseBill3", true);
+                }
+                return a;
+            }
+            catch (Exception ex)
+            {
+                ObjDAL.SetStoreProcedureData("PurchaseInvoiceID", SqlDbType.Int, pPurchaseInvoiceID, clsConnection_DAL.ParamType.Input);
+                ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_Delete_Delivering_PurchaseBill");
+
+                string temp = "Supplier Bill No.: " + txtSupplierBillNo.Text + " PurchaseInvoiceID: " + pPurchaseInvoiceID + " ProductID: " + ProductID + " SubProductID: " + SubProductID + " SizeTypeID: " + cmbSizeType.SelectedValue + " DeliveryPurchaseID1: " + ID1 + " DeliveryPurchaseID2: " + ID2 + " DeliveryPurchaseID3: " + a + " LoginID: " + clsUtility.LoginID + " ";
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+
+                return a;
+            }
+        }
+
+        private bool BarCodeGenerate()
+        {
+            bool b = false;
+            try
+            {
+                ObjDAL.SetStoreProcedureData("PurchaseInvoiceID", SqlDbType.Int, pPurchaseInvoiceID, clsConnection_DAL.ParamType.Input);
+                ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, SubProductID, clsConnection_DAL.ParamType.Input);
+                ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, cmbStore.SelectedValue, clsConnection_DAL.ParamType.Input);
+                ObjDAL.SetStoreProcedureData("SupplierBillNo", SqlDbType.VarChar, txtSupplierBillNo.Text.Trim(), clsConnection_DAL.ParamType.Input);
+                ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID, clsConnection_DAL.ParamType.Input);
+                DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_PurchaseInvoice_Barcode_Generated_Test");
+                if (ObjUtil.ValidateDataSet(ds))
+                {
+                    DataTable dtItemModel = ds.Tables[0];
+                    if (ObjUtil.ValidateTable(dtItemModel))
+                    {
+                        b = true;
+                        //clsUtility.ShowInfoMessage(dtItemModel.Rows[0]["Msg"].ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                string temp = "Supplier Bill No.: " + txtSupplierBillNo.Text + " PurchaseInvoiceID: " + pPurchaseInvoiceID + " ProductID: " + ProductID + " SubProductID: " + SubProductID + " SizeTypeID: " + cmbSizeType.SelectedValue + " StoreID: " + cmbStore.SelectedValue + " LoginID: " + clsUtility.LoginID + " ";
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+            }
+            return b;
+        }
+
+        private void Clear_ColorSize()
+        {
+            //txtPurchaseInvoiceID.Clear();
+            txtItemName.Clear();
+            cmbBrand.SelectedIndex = -1;
+            cmbCountry.SelectedIndex = -1;
+            cmbCategory.SelectedIndex = -1;
+            txtDiffQty.Text = "0";
+            //txtTotalQTY.Text = "0";
+            txtTotalQTYBill.Text = "0";
+            txtTotalQTYEntered.Text = "0";
+            DeliveryPurchaseID3 = 0;
+            cmbSizeType.SelectedIndex = -1;
+            dtPurchaseQTYColor.Clear();
+            dgvQtycolor.DataSource = null;
+        }
+
+        private void LoadModelData()
+        {
+            if (!ObjUtil.IsControlTextEmpty(txtPurchaseInvoiceID))
+            {
+                dgvQtycolor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+                //Most time consumption enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+                dgvQtycolor.RowHeadersVisible = false; // set it to false if not needed
+
+                DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".[dbo].[Get_Delivering_PurchaseInvoice_BillDetails] " + txtPurchaseInvoiceID.Text + ",2");
+                if (ObjUtil.ValidateTable(dt))
+                {
+                    dgvQtycolor.DataSource = null;
+                    dgvQtycolor.DataSource = dt;
+                }
+                else
+                {
+                    dgvQtycolor.DataSource = null;
+                }
+            }
+            else
+            {
+                dgvQtycolor.DataSource = null;
             }
         }
 
@@ -566,6 +794,7 @@ namespace IMS_Client_2.Purchase
             {
                 ClearAll();
                 //LoadData();
+                btnUpdate.Enabled = false;
                 grpPurchaseBillDetail.Enabled = false;
             }
         }
@@ -643,19 +872,20 @@ namespace IMS_Client_2.Purchase
                 dtPurchaseQTYColor.AcceptChanges();
                 //return true;
             }
-            if (Convert.ToInt32(txtDiffQty.Text) < 0)
-            {
-                clsUtility.ShowInfoMessage("Entered QTY can't be greater then Billed QTY");
-                dgvQtycolor.Focus();
-                return false;
-            }
-            else if (Convert.ToInt32(txtDiffQty.Text) > 0)
-            {
-                clsUtility.ShowInfoMessage("Entered QTY can't be less then Billed QTY");
-                dgvQtycolor.Focus();
-                return false;
-            }
-            else if (!ObjUtil.ValidateTable((DataTable)dgvQtycolor.DataSource))
+            //if (Convert.ToInt32(txtDiffQty.Text) < 0)
+            //{
+            //    clsUtility.ShowInfoMessage("Entered QTY can't be greater then Billed QTY");
+            //    dgvQtycolor.Focus();
+            //    return false;
+            //}
+            //else if (Convert.ToInt32(txtDiffQty.Text) > 0)
+            //{
+            //    clsUtility.ShowInfoMessage("Entered QTY can't be less then Billed QTY");
+            //    dgvQtycolor.Focus();
+            //    return false;
+            //}
+            //else if (!ObjUtil.ValidateTable((DataTable)dgvQtycolor.DataSource))
+            if (!ObjUtil.ValidateTable((DataTable)dgvQtycolor.DataSource))
             {
                 clsUtility.ShowInfoMessage("Select Size Type OR enter Color for " + txtItemName.Text);
                 FillColorSizeGrid();
