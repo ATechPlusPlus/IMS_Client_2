@@ -109,6 +109,8 @@ namespace IMS_Client_2.StockManagement
                     DataTable dt = ObjDAL.ExecuteSelectStatement("EXEC " + clsUtility.DBName + ".dbo.Get_PurchaseInvoice_Popup '" + txtSupplierBillNo.Text + "', 1");
                     if (ObjUtil.ValidateTable(dt))
                     {
+                        dgvQtycolor.DataSource = null;
+
                         ObjUtil.SetControlData(txtSupplierBillNo, "SupplierBillNo");
                         ObjUtil.SetControlData(txtPurchaseInvoiceID, "PurchaseInvoiceID");
                         ObjUtil.ShowDataPopup(dt, txtSupplierBillNo, this, this);
@@ -183,6 +185,12 @@ namespace IMS_Client_2.StockManagement
             int pTotal = txtTotalQTYEntered.Text.Length > 0 ? Convert.ToInt32(txtTotalQTYEntered.Text) : 0;
             //txtDiffQty.Text = (Convert.ToInt32(txtTotalQTYBill.Text) - pTotal).ToString();
             txtDiffQty.Text = (pTotal - Convert.ToInt32(txtTotalQTYBill.Text)).ToString();
+            if (Convert.ToInt32(txtDiffQty.Text) < 0)
+                txtDiffQty.BackColor = Color.Red;
+            else
+                txtDiffQty.BackColor = Color.White;
+            txtDiffQty.Font = new Font("Times New Roman", 11.25F, FontStyle.Bold);
+
         }
 
         private void dgvQtycolor_CellClick(object sender, DataGridViewCellEventArgs e)
