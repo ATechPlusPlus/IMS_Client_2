@@ -68,7 +68,7 @@ namespace IMS_Client_2.StockManagement
                 catch (Exception ex)
                 {
                     string temp = "LoginID: " + clsUtility.LoginID + " ";
-                    ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+                    ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
 
                     clsUtility.ShowErrorMessage(ex.ToString());
                 }
@@ -142,7 +142,7 @@ namespace IMS_Client_2.StockManagement
             catch (Exception ex)
             {
                 string temp = " LoginID: " + clsUtility.LoginID + " ";
-                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
             }
         }
 
@@ -170,7 +170,7 @@ namespace IMS_Client_2.StockManagement
             catch (Exception ex)
             {
                 string temp = " LoginID: " + clsUtility.LoginID + " ";
-                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
             }
             return null;
         }

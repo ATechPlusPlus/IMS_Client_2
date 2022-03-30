@@ -513,7 +513,7 @@ namespace IMS_Client_2.StockManagement
                 txtSupplierBillNo.SelectionStart = txtSupplierBillNo.MaxLength;
                 dgvQtycolor.ReadOnly = false;
                 dgvQtycolor.Enabled = true;
-                btnUpdate.Enabled = true;
+                //btnUpdate.Enabled = true;
                 btnCancel.Enabled = true;
             }
             else
@@ -619,7 +619,7 @@ namespace IMS_Client_2.StockManagement
             catch (Exception ex)
             {
                 string temp = "Supplier Bill No.: " + txtSupplierBillNo.Text + " PurchaseInvoiceID: " + pPurchaseInvoiceID + " ProductID: " + ProductID + " SubProductID: " + SubProductID + " SizeTypeID: " + cmbSizeType.SelectedValue + " DeliveryPurchaseID1: " + ID + " LoginID: " + clsUtility.LoginID + " ";
-                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
             }
         }
 
@@ -648,7 +648,7 @@ namespace IMS_Client_2.StockManagement
             catch (Exception ex)
             {
                 string temp = "Supplier Bill No.: " + txtSupplierBillNo.Text + " PurchaseInvoiceID: " + pPurchaseInvoiceID + " ProductID: " + ProductID + " SubProductID: " + SubProductID + " SizeTypeID: " + cmbSizeType.SelectedValue + " DeliveryPurchaseID1: " + ID + " DeliveryPurchaseID2: " + pDeliveryPurchaseID2 + " LoginID: " + clsUtility.LoginID + " ";
-                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
             }
             return pDeliveryPurchaseID2;
         }
@@ -681,7 +681,7 @@ namespace IMS_Client_2.StockManagement
             catch (Exception ex)
             {
                 string temp = "Supplier Bill No.: " + txtSupplierBillNo.Text + " PurchaseInvoiceID: " + pPurchaseInvoiceID + " ProductID: " + ProductID + " SubProductID: " + SubProductID + " SizeTypeID: " + cmbSizeType.SelectedValue + " DeliveryPurchaseID1: " + ID1 + " DeliveryPurchaseID2: " + ID2 + " DeliveryPurchaseID3: " + pDeliveryPurchaseID3 + " LoginID: " + clsUtility.LoginID + " ";
-                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
             }
             return a;
         }
@@ -713,7 +713,7 @@ namespace IMS_Client_2.StockManagement
                 ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_Delete_Delivering_PurchaseBill");
 
                 string temp = "Supplier Bill No.: " + txtSupplierBillNo.Text + " PurchaseInvoiceID: " + pPurchaseInvoiceID + " ProductID: " + ProductID + " SubProductID: " + SubProductID + " SizeTypeID: " + cmbSizeType.SelectedValue + " DeliveryPurchaseID1: " + ID1 + " DeliveryPurchaseID2: " + ID2 + " DeliveryPurchaseID3: " + a + " LoginID: " + clsUtility.LoginID + " ";
-                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
 
                 return a;
             }
@@ -743,7 +743,7 @@ namespace IMS_Client_2.StockManagement
             catch (Exception ex)
             {
                 string temp = "Supplier Bill No.: " + txtSupplierBillNo.Text + " PurchaseInvoiceID: " + pPurchaseInvoiceID + " ProductID: " + ProductID + " SubProductID: " + SubProductID + " SizeTypeID: " + cmbSizeType.SelectedValue + " StoreID: " + cmbStore.SelectedValue + " LoginID: " + clsUtility.LoginID + " ";
-                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
             }
             return b;
         }

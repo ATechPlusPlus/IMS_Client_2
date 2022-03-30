@@ -949,7 +949,7 @@ namespace IMS_Client_2.Sales
             catch (Exception ex)
             {
                 string temp = "SalesInvoiceID: " + SalesInvoiceID + " LoginID: " + clsUtility.LoginID + " ";
-                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
 
                 clsUtility.ShowErrorMessage(ex.ToString());
             }
@@ -1091,7 +1091,7 @@ namespace IMS_Client_2.Sales
             catch (Exception ex)
             {
                 string temp = "InvoiceNumber: " + strInvoiceNo + " VoucherNo: " + frmDiscountLogin.VoucherNo + " GrandTotal: " + txtGrandTotal.Text + " CustomerID: " + txtCustomerID.Text + " SalesMan: " + txtEmpID.Text + " MasterCashClosingID: " + frmHome.Home_MasterCashClosingID + " LoginID: " + clsUtility.LoginID + " ";
-                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
             }
             return InvoiceID;
         }
@@ -1717,7 +1717,7 @@ namespace IMS_Client_2.Sales
             catch (Exception ex)
             {
                 string temp = "strInvoiceID: " + Sales.frmReplaceReturnPopup.strInvoiceID + " IsReplaceInvoice: " + Sales.frmReplaceReturnPopup.IsReplaceInvoice + " IsReplaceReturnMode: " + IsReplaceReturnMode + " LoginID: " + clsUtility.LoginID + " ";
-                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
             }
         }
 

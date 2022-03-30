@@ -103,7 +103,7 @@ namespace IMS_Client_2.Purchase
             catch (Exception ex)
             {
                 string temp = "Supplier Bill No.: " + txtSupplierBillNo.Text + " PurchaseInvoiceID: " + txtPurchaseInvoiceID + " TotalQTY: " + txtTotalQTY.Text + " LoginID: " + clsUtility.LoginID + " ";
-                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
             }
         }
 
@@ -140,7 +140,7 @@ namespace IMS_Client_2.Purchase
             catch (Exception ex)
             {
                 string temp = "Supplier Bill No.: " + txtSupplierBillNo.Text + " PurchaseInvoiceID: " + txtPurchaseInvoiceID + " TotalQTY: " + txtTotalQTY.Text + " LoginID: " + clsUtility.LoginID + " ";
-                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
 
                 clsUtility.ShowErrorMessage(ex.Message);
             }
@@ -225,7 +225,7 @@ namespace IMS_Client_2.Purchase
             catch (Exception ex)
             {
                 string temp = "Supplier Bill No.: " + txtSupplierBillNo.Text + " PurchaseInvoiceID: " + txtPurchaseInvoiceID + " TotalQTY: " + txtTotalQTY.Text + " LoginID: " + clsUtility.LoginID + " ";
-                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
 
                 clsUtility.ShowErrorMessage(ex.ToString(), clsUtility.strProjectTitle);
             }
@@ -248,7 +248,7 @@ namespace IMS_Client_2.Purchase
             catch (Exception ex)
             {
                 string temp = "Supplier Bill No.: " + txtSupplierBillNo.Text + " PurchaseInvoiceID: " + txtPurchaseInvoiceID + " TotalQTY: " + txtTotalQTY.Text + " LoginID: " + clsUtility.LoginID + " ";
-                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
             }
         }
         private void Posting_Delivery_CellClick(object sender, DataGridViewCellEventArgs e)

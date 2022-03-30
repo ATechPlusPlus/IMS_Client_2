@@ -598,7 +598,7 @@ namespace IMS_Client_2.Purchase
             catch (Exception ex)
             {
                 string temp = "Supplier Bill No.: " + txtSupplierBillNo.Text + " PurchaseInvoiceID: " + pPurchaseInvoiceID + " ProductID: " + ProductID + " SubProductID: " + SubProductID + " DeliveryPurchaseBillID1: " + DeliveryPurchaseBillID + " SizeTypeID: " + cmbSizeType.SelectedValue + " StoreID: " + cmbStore.SelectedValue + " LoginID: " + clsUtility.LoginID + " ";
-                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
             }
         }
         private void btnEdit_Click(object sender, EventArgs e)
@@ -673,7 +673,7 @@ namespace IMS_Client_2.Purchase
             catch (Exception ex)
             {
                 string temp = "Supplier Bill No.: " + txtSupplierBillNo.Text + " PurchaseInvoiceID: " + pPurchaseInvoiceID + " ProductID: " + ProductID + " SubProductID: " + SubProductID + " DeliveryPurchaseBillID: " + ID + " SizeTypeID: " + cmbSizeType.SelectedValue + " StoreID: " + cmbStore.SelectedValue + " LoginID: " + clsUtility.LoginID + " ";
-                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
             }
         }
         private void btnDelete_Click(object sender, EventArgs e)
@@ -744,7 +744,7 @@ namespace IMS_Client_2.Purchase
             catch (Exception ex)
             {
                 string temp = "Supplier Bill No.: " + txtSupplierBillNo.Text + " PurchaseInvoiceID: " + pPurchaseInvoiceID + " ProductID: " + ProductID + " SubProductID: " + SubProductID + " DeliveryPurchaseID3: " + pDeliveryPurchaseID3 + " LoginID: " + clsUtility.LoginID + " ";
-                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
             }
         }
         private void btnCancel_Click(object sender, EventArgs e)
@@ -783,7 +783,7 @@ namespace IMS_Client_2.Purchase
             catch (Exception ex)
             {
                 string temp = "Supplier Bill No.: " + txtSupplierBillNo.Text + " PurchaseInvoiceID: " + pPurchaseInvoiceID + " ProductID: " + ProductID + " SubProductID: " + SubProductID + " StoreID: " + cmbStore.SelectedValue + " LoginID: " + clsUtility.LoginID + " ";
-                ObjUtil.WriteToFile(temp + ex.ToString(), "Error Log");
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
             }
             return b;
         }
