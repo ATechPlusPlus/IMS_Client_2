@@ -349,6 +349,7 @@
             this.dgvQtycolor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvQtycolor.Location = new System.Drawing.Point(4, 312);
             this.dgvQtycolor.Name = "dgvQtycolor";
+            this.dgvQtycolor.RowHeadersVisible = false;
             this.dgvQtycolor.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvQtycolor.Size = new System.Drawing.Size(971, 147);
             this.dgvQtycolor.TabIndex = 258;

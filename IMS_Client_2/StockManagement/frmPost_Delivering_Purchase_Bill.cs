@@ -24,6 +24,7 @@ namespace IMS_Client_2.StockManagement
         Image B_Enter = IMS_Client_2.Properties.Resources.B_on;
 
         DataTable dtPurchaseQTYColor = new DataTable();
+        DataTable dtOldPurchaseQTYColor = new DataTable();
         DataTable dtPurchaseInvoice = new DataTable();
         DataTable dtSize = new DataTable();
 
@@ -440,12 +441,29 @@ namespace IMS_Client_2.StockManagement
             this.Cursor = Cursors.Default;
         }
 
+        private void GetOldDeliveryPurchaseBillDetails(int PurchaseInvoiceID, int SubProductID)
+        {
+            ObjDAL.SetStoreProcedureData("PurchaseInvoiceID", SqlDbType.Int, PurchaseInvoiceID);
+            ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, SubProductID);
+            ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, cmbStore.SelectedValue);
+
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_Delivering_PurchaseInvoice_BillDetails_AfterPost");
+            if (ObjUtil.ValidateDataSet(ds))
+            {
+                dtOldPurchaseQTYColor = ds.Tables[0];
+            }
+            else
+            {
+                dtOldPurchaseQTYColor = null;
+            }
+        }
+
         private void GetSelectedCMBModelNo()
         {
             try
             {
                 DataRow[] dRow = dtPurchaseInvoice.Select("ModelNo= '" + cmbListBox.Text + "'");
-                if (dRow.Length > 0)
+                if (dRow != null && dRow.Length > 0)
                 {
                     pPurchaseInvoiceID = Convert.ToInt32(dRow[0]["PurchaseInvoiceID"]);
                     ID = Convert.ToInt32(dRow[0]["DeliveryPurchaseID1"]);
@@ -471,6 +489,7 @@ namespace IMS_Client_2.StockManagement
                     {
                         CalcTotalColorQTY();
                     }
+                    GetOldDeliveryPurchaseBillDetails(pPurchaseInvoiceID, SubProductID);
                 }
                 else
                     cmbSizeType.Enabled = false;

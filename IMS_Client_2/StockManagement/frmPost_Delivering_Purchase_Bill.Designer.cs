@@ -501,6 +501,7 @@ namespace IMS_Client_2.StockManagement
             this.dgvQtycolor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvQtycolor.Location = new System.Drawing.Point(4, 260);
             this.dgvQtycolor.Name = "dgvQtycolor";
+            this.dgvQtycolor.RowHeadersVisible = false;
             this.dgvQtycolor.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvQtycolor.Size = new System.Drawing.Size(971, 226);
             this.dgvQtycolor.TabIndex = 313;
