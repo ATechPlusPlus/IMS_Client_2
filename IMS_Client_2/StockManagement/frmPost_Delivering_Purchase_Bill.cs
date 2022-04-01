@@ -447,7 +447,7 @@ namespace IMS_Client_2.StockManagement
             ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, SubProductID);
             ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, cmbStore.SelectedValue);
 
-            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.Get_Delivering_PurchaseInvoice_BillDetails_AfterPost");
+            DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_Delivering_PurchaseInvoice_BillDetails_AfterPost");
             if (ObjUtil.ValidateDataSet(ds))
             {
                 dtOldPurchaseQTYColor = ds.Tables[0];
