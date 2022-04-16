@@ -111,6 +111,10 @@ namespace IMS_Client_2.StockManagement
                     if (ObjUtil.ValidateTable(dt))
                     {
                         dgvQtycolor.DataSource = null;
+                        ID = 0;
+                        flag = 0;
+                        pPurchaseInvoiceID = 0;
+                        ProductID = 0; SubProductID = 0; DeliveryPurchaseID3 = 0;
 
                         ObjUtil.SetControlData(txtSupplierBillNo, "SupplierBillNo");
                         ObjUtil.SetControlData(txtPurchaseInvoiceID, "PurchaseInvoiceID");
@@ -443,6 +447,8 @@ namespace IMS_Client_2.StockManagement
 
         private void GetOldDeliveryPurchaseBillDetails(int PurchaseInvoiceID, int SubProductID)
         {
+            dtOldPurchaseQTYColor = null;
+
             ObjDAL.SetStoreProcedureData("PurchaseInvoiceID", SqlDbType.Int, PurchaseInvoiceID);
             ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, SubProductID);
             ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, cmbStore.SelectedValue);
@@ -451,10 +457,6 @@ namespace IMS_Client_2.StockManagement
             if (ObjUtil.ValidateDataSet(ds))
             {
                 dtOldPurchaseQTYColor = ds.Tables[0];
-            }
-            else
-            {
-                dtOldPurchaseQTYColor = null;
             }
         }
 
@@ -507,6 +509,7 @@ namespace IMS_Client_2.StockManagement
                 dgvQtycolor.DataSource = dtPurchaseQTYColor;
                 dgvQtycolor.Refresh();
                 dgvQtycolor.ReadOnly = true;
+                btnEdit.Enabled = true;
                 cmbSizeType.Enabled = false;
             }
             else
@@ -525,19 +528,20 @@ namespace IMS_Client_2.StockManagement
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (clsFormRights.HasFormRight(clsFormRights.Forms.Delivering_Purchase_Bill, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
+            if (clsUtility.IsAdmin)
             {
                 grpPurchaseBillDetail.Enabled = true;
                 txtSupplierBillNo.Focus();
                 txtSupplierBillNo.SelectionStart = txtSupplierBillNo.MaxLength;
                 dgvQtycolor.ReadOnly = false;
                 dgvQtycolor.Enabled = true;
-                //btnUpdate.Enabled = true;
+                btnUpdate.Enabled = true;
                 btnCancel.Enabled = true;
+                btnEdit.Enabled = false;
             }
             else
             {
-                clsUtility.ShowInfoMessage("You have no rights to perform this task", clsUtility.strProjectTitle);
+                clsUtility.ShowInfoMessage("You have no rights to perform this task");
             }
         }
 
@@ -545,7 +549,7 @@ namespace IMS_Client_2.StockManagement
         {
             if (cmbSizeType.SelectedValue != null)
             {
-                dtSize = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.SizeMaster", "SizeID,Size,SizeTypeID", "ISNULL(ActiveStatus,1) = 1 AND SizeTypeID = " + cmbSizeType.SelectedValue, null);
+                dtSize = ObjDAL.GetDataCol(clsUtility.DBName + ".dbo.SizeMaster", "SizeID,Size,SizeTypeID", "ISNULL(ActiveStatus,1) = 1 AND SizeTypeID = " + cmbSizeType.SelectedValue, "Size");
                 if (ObjUtil.ValidateTable(dtSize))
                 {
                     InitItemTable();
@@ -575,7 +579,7 @@ namespace IMS_Client_2.StockManagement
         {
             try
             {
-                if (clsFormRights.HasFormRight(clsFormRights.Forms.Delivering_Purchase_Bill, clsFormRights.Operation.Update) || clsUtility.IsAdmin)
+                if (clsUtility.IsAdmin)
                 {
                     if (Validateform())
                     {
@@ -601,6 +605,8 @@ namespace IMS_Client_2.StockManagement
                                     return;
                                 }
                             }
+                            this.Cursor = Cursors.WaitCursor;
+
                             int DeliveryPurchaseBillID = 0;
                             ObjDAL.UpdateColumnData("ProductID", SqlDbType.Int, ProductID);
                             ObjDAL.UpdateColumnData("SupplierBillNo", SqlDbType.NVarChar, txtSupplierBillNo.Text.Trim());
@@ -616,20 +622,30 @@ namespace IMS_Client_2.StockManagement
                                 int DeliveryPurchaseBillID3 = DataUpdateDeliveryPurchaseBill3(ID, DeliveryPurchaseBillID2);
 
                                 bool b = BarCodeGenerate();
+                                if (b)
+                                {
+                                    PostDeliveryPurchaseBill();
+                                    //bool isPost = PostDeliveryPurchaseBill();
+                                    //if (isPost)
+                                    //{
+                                    //    clsUtility.ShowInfoMessage(clsUtility.MsgDataUpdated);
+                                    //    Clear_ColorSize();
+                                    //}
+                                }
 
-                                ObjUtil.SetCommandButtonStatus(clsCommon.ButtonStatus.AfterSave);
-                                clsUtility.ShowInfoMessage(clsUtility.MsgDataUpdated);
-                                Clear_ColorSize();
                                 //LoadData();
-                                LoadModelData();
-                                txtSupplierBillNo.Enabled = false;
+                                //LoadModelData();
+
+                                //txtSupplierBillNo.Enabled = false;
                                 btnSearch.Enabled = false;
+                                btnUpdate.Enabled = false;
                                 //grpPurchaseBillDetail.Enabled = false;
                             }
                             else
                             {
                                 clsUtility.ShowInfoMessage(clsUtility.MsgDatanotUpdated);
                             }
+                            this.Cursor = Cursors.Default;
                             ObjDAL.ResetData();
                         }
                     }
@@ -637,9 +653,53 @@ namespace IMS_Client_2.StockManagement
             }
             catch (Exception ex)
             {
+                this.Cursor = Cursors.Default;
                 string temp = "Supplier Bill No.: " + txtSupplierBillNo.Text + " PurchaseInvoiceID: " + pPurchaseInvoiceID + " ProductID: " + ProductID + " SubProductID: " + SubProductID + " SizeTypeID: " + cmbSizeType.SelectedValue + " DeliveryPurchaseID1: " + ID + " LoginID: " + clsUtility.LoginID + " ";
                 ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
             }
+        }
+
+        private void PostDeliveryPurchaseBill()
+        {
+            //bool b = false;
+            if (ObjUtil.ValidateTable(dtOldPurchaseQTYColor))
+            {
+                if (dtOldPurchaseQTYColor.Columns.Contains("TempID"))
+                    dtOldPurchaseQTYColor.Columns.Remove("TempID");
+
+                if (dtOldPurchaseQTYColor.Columns.Contains("Rate"))
+                    dtOldPurchaseQTYColor.Columns.Remove("Rate");
+            }
+            ObjDAL.SetStoreProcedureData("PurchaseInvoiceID", SqlDbType.Int, pPurchaseInvoiceID);
+            ObjDAL.SetStoreProcedureData("StoreID", SqlDbType.Int, cmbStore.SelectedValue);
+            ObjDAL.SetStoreProcedureData("SupplierBillNo", SqlDbType.VarChar, txtSupplierBillNo.Text);
+            ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, SubProductID);
+            ObjDAL.SetStoreProcedureData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
+            ObjDAL.SetStoreProcedureData("dtOldPurchase", SqlDbType.Structured, dtOldPurchaseQTYColor);
+
+            ObjDAL.SetStoreProcedureData("Flag", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Output);
+            ObjDAL.SetStoreProcedureData("Message", SqlDbType.VarChar, "", clsConnection_DAL.ParamType.Output);
+
+            bool b = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.spr_Update_PurchaseInvoice_BulkPrint_Color_Size");
+            DataTable dt = ObjDAL.GetOutputParmData();
+            if (ObjUtil.ValidateTable(dt))
+            {
+                int Flag = Convert.ToInt32(dt.Rows[0][1]);
+                string status = dt.Rows[1][1].ToString();
+                if (Flag == 1)
+                {
+                    clsUtility.ShowInfoMessage(clsUtility.MsgDataUpdated);
+                    Clear_ColorSize();
+                }
+                else if (Flag < 0)
+                {
+                    string temp = "Supplier Bill No.: " + txtSupplierBillNo.Text + " PurchaseInvoiceID: " + pPurchaseInvoiceID + " ProductID: " + ProductID + " SubProductID: " + SubProductID + " SizeTypeID: " + cmbSizeType.SelectedValue + " DeliveryPurchaseID1: " + ID + " DeliveryPurchaseID3: " + DeliveryPurchaseID3 + " LoginID: " + clsUtility.LoginID + " ";
+                    ObjUtil.WriteToFile(temp + " Failed to update After Post delivery, " + status, "Error");
+
+                    clsUtility.ShowErrorMessage(clsUtility.MsgDatanotUpdated + "\n" + status);
+                }
+            }
+            //return b;
         }
 
         private int DataUpdateDeliveryPurchaseBill2(int ID)
@@ -821,6 +881,7 @@ namespace IMS_Client_2.StockManagement
             {
                 ClearAll();
                 //LoadData();
+                btnEdit.Enabled = false;
                 btnUpdate.Enabled = false;
                 grpPurchaseBillDetail.Enabled = false;
             }

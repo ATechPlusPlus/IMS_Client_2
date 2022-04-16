@@ -166,7 +166,7 @@ namespace IMS_Client_2
             try
             {
                 btnOpenCash.BackgroundImage = B_Leave;
-
+                clsUtility.IsAutoLog = true;
                 clsUtility.DBName = "IMS_Client_2";
                 clsUtility.LoginID = 2;
                 //clsUtility.IsAdmin = false;
