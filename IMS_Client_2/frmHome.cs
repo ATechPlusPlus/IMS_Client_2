@@ -167,10 +167,12 @@ namespace IMS_Client_2
             {
                 btnOpenCash.BackgroundImage = B_Leave;
                 clsUtility.IsAutoLog = true;
+
                 clsUtility.DBName = "IMS_Client_2";
                 clsUtility.LoginID = 2;
-                //clsUtility.IsAdmin = false;
                 clsUtility.IsAdmin = true;
+                //clsUtility.IsAdmin = false;
+
                 clsUtility.strProjectTitle = "IMS";
 
                 if (clsUtility.LoginID > 0)
@@ -1220,8 +1222,19 @@ namespace IMS_Client_2
 
         private void bulkPriceUpdateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StockManagement.frmBulkPriceUpdate frmBulkPriceUpdate = new StockManagement.frmBulkPriceUpdate();
-            frmBulkPriceUpdate.ShowDialog();
+            if (clsUtility.IsAdmin)
+            {
+                bool b = ObjUtil.IsAlreadyOpen(typeof(StockManagement.frmBulkPriceUpdate));
+                if (!b)
+                {
+                    StockManagement.frmBulkPriceUpdate frmBulkPriceUpdate = new StockManagement.frmBulkPriceUpdate();
+                    frmBulkPriceUpdate.Show();
+                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task");
+            }            
         }
     }
 }
