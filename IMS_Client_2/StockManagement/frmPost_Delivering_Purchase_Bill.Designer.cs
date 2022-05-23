@@ -1,5 +1,5 @@
 ﻿
-namespace IMS_Client_2.Purchase
+namespace IMS_Client_2.StockManagement
 {
     partial class frmPost_Delivering_Purchase_Bill
     {
@@ -117,9 +117,9 @@ namespace IMS_Client_2.Purchase
             this.label12.ForeColor = System.Drawing.Color.White;
             this.label12.Location = new System.Drawing.Point(11, 9);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(249, 22);
+            this.label12.Size = new System.Drawing.Size(296, 22);
             this.label12.TabIndex = 82;
-            this.label12.Text = "Post Delivering Purchase Bill";
+            this.label12.Text = "After Post Delivering Purchase Bill";
             // 
             // btnSearch
             // 
@@ -238,6 +238,7 @@ namespace IMS_Client_2.Purchase
             this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnUpdate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUpdate.Enabled = false;
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnUpdate.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdate.Location = new System.Drawing.Point(894, 146);
@@ -326,6 +327,7 @@ namespace IMS_Client_2.Purchase
             this.txtItemName.Font = new System.Drawing.Font("Times New Roman", 11.25F);
             this.txtItemName.Location = new System.Drawing.Point(596, 63);
             this.txtItemName.Name = "txtItemName";
+            this.txtItemName.ReadOnly = true;
             this.txtItemName.Size = new System.Drawing.Size(206, 25);
             this.txtItemName.TabIndex = 3;
             // 
@@ -499,6 +501,7 @@ namespace IMS_Client_2.Purchase
             this.dgvQtycolor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvQtycolor.Location = new System.Drawing.Point(4, 260);
             this.dgvQtycolor.Name = "dgvQtycolor";
+            this.dgvQtycolor.RowHeadersVisible = false;
             this.dgvQtycolor.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvQtycolor.Size = new System.Drawing.Size(971, 226);
             this.dgvQtycolor.TabIndex = 313;
@@ -541,6 +544,7 @@ namespace IMS_Client_2.Purchase
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnEdit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEdit.Enabled = false;
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnEdit.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEdit.Location = new System.Drawing.Point(894, 94);

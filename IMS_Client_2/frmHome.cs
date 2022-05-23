@@ -166,11 +166,13 @@ namespace IMS_Client_2
             try
             {
                 btnOpenCash.BackgroundImage = B_Leave;
+                clsUtility.IsAutoLog = true;
 
                 clsUtility.DBName = "IMS_Client_2";
                 clsUtility.LoginID = 2;
-                //clsUtility.IsAdmin = false;
                 clsUtility.IsAdmin = true;
+                //clsUtility.IsAdmin = false;
+
                 clsUtility.strProjectTitle = "IMS";
 
                 if (clsUtility.LoginID > 0)
@@ -1205,10 +1207,10 @@ namespace IMS_Client_2
         {
             if (clsFormRights.HasFormRight(clsFormRights.Forms.frmPost_Delivering_Purchase_Bill) || clsUtility.IsAdmin)
             {
-                bool b = ObjUtil.IsAlreadyOpen(typeof(Purchase.frmPost_Delivering_Purchase_Bill));
+                bool b = ObjUtil.IsAlreadyOpen(typeof(StockManagement.frmPost_Delivering_Purchase_Bill));
                 if (!b)
                 {
-                    Purchase.frmPost_Delivering_Purchase_Bill frm = new Purchase.frmPost_Delivering_Purchase_Bill();
+                    StockManagement.frmPost_Delivering_Purchase_Bill frm = new StockManagement.frmPost_Delivering_Purchase_Bill();
                     frm.Show();
                 }
             }
@@ -1220,8 +1222,19 @@ namespace IMS_Client_2
 
         private void bulkPriceUpdateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StockManagement.frmBulkPriceUpdate frmBulkPriceUpdate = new StockManagement.frmBulkPriceUpdate();
-            frmBulkPriceUpdate.ShowDialog();
+            if (clsUtility.IsAdmin)
+            {
+                bool b = ObjUtil.IsAlreadyOpen(typeof(StockManagement.frmBulkPriceUpdate));
+                if (!b)
+                {
+                    StockManagement.frmBulkPriceUpdate frmBulkPriceUpdate = new StockManagement.frmBulkPriceUpdate();
+                    frmBulkPriceUpdate.Show();
+                }
+            }
+            else
+            {
+                clsUtility.ShowInfoMessage("You have no rights to perform this task");
+            }            
         }
     }
 }

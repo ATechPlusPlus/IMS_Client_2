@@ -49,7 +49,7 @@ namespace IMS_Client_2.Other_Forms
                     stream = new FileStream(Obj.FileName, FileMode.Open);
                     excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
                     DataSet result = excelReader.AsDataSet();
-                    if (result.Tables.Count > 0)
+                    if (result != null && result.Tables.Count > 0)
                     {
                         dtExcelData = result.Tables[0];
                         if (ObjUtil.ValidateTable(dtExcelData))
@@ -101,7 +101,7 @@ namespace IMS_Client_2.Other_Forms
         }
 
         //private void Insert_UpdateData(string ProductName, string CategoryID, string Rate, string ActiveStatus, string CreatedBy)
-        private void Insert_UpdateData(string ProductName, string CategoryID,string ProductArabicName)
+        private void Insert_UpdateData(string ProductName, string CategoryID, string ProductArabicName)
         {
             try
             {
@@ -144,7 +144,7 @@ namespace IMS_Client_2.Other_Forms
                         }
                         excelReader.Close();
                         stream.Close();
-                        
+
                         SetProgressPercent(0, 100);
                         SetLableText("Operation completed");
                         clsUtility.ShowInfoMessage("Data Imported.", clsUtility.strProjectTitle);

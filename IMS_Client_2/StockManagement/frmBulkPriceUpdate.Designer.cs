@@ -61,9 +61,9 @@ namespace IMS_Client_2.StockManagement
             this.label12.ForeColor = System.Drawing.Color.White;
             this.label12.Location = new System.Drawing.Point(11, 9);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(170, 22);
+            this.label12.Size = new System.Drawing.Size(208, 22);
             this.label12.TabIndex = 82;
-            this.label12.Text = "Bulk Price Update :";
+            this.label12.Text = "Bulk Sales Price Update";
             // 
             // txtFilePath
             // 
@@ -73,6 +73,7 @@ namespace IMS_Client_2.StockManagement
             this.txtFilePath.Margin = new System.Windows.Forms.Padding(2);
             this.txtFilePath.MaxLength = 100;
             this.txtFilePath.Name = "txtFilePath";
+            this.txtFilePath.ReadOnly = true;
             this.txtFilePath.Size = new System.Drawing.Size(568, 25);
             this.txtFilePath.TabIndex = 114;
             // 
@@ -101,6 +102,8 @@ namespace IMS_Client_2.StockManagement
             this.btnBrowse.Text = "Browse..";
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            this.btnBrowse.MouseEnter += new System.EventHandler(this.btnBrowse_MouseEnter);
+            this.btnBrowse.MouseLeave += new System.EventHandler(this.btnBrowse_MouseLeave);
             // 
             // dgvBulkPriceUpdate
             // 
@@ -132,6 +135,8 @@ namespace IMS_Client_2.StockManagement
             this.btnUpdatePrice.Text = "Update Price";
             this.btnUpdatePrice.UseVisualStyleBackColor = true;
             this.btnUpdatePrice.Click += new System.EventHandler(this.btnUpdatePrice_Click);
+            this.btnUpdatePrice.MouseEnter += new System.EventHandler(this.btnBrowse_MouseEnter);
+            this.btnUpdatePrice.MouseLeave += new System.EventHandler(this.btnBrowse_MouseLeave);
             // 
             // linkLabel1
             // 
@@ -140,14 +145,15 @@ namespace IMS_Client_2.StockManagement
             this.linkLabel1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkLabel1.Location = new System.Drawing.Point(101, 87);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(163, 17);
+            this.linkLabel1.Size = new System.Drawing.Size(210, 17);
             this.linkLabel1.TabIndex = 211;
             this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Download Excel Template";
+            this.linkLabel1.Text = "Download Sample Excel Template";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // frmBulkPriceUpdate
             // 
+            this.AcceptButton = this.btnUpdatePrice;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IMS_Client_2.Properties.Resources.back;

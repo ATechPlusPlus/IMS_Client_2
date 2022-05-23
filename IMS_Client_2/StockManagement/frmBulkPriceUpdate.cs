@@ -18,27 +18,35 @@ namespace IMS_Client_2.StockManagement
         {
             InitializeComponent();
         }
+        clsUtility ObjUtil = new clsUtility();
+        clsConnection_DAL ObjDAL = new clsConnection_DAL(true);
+
+        FileStream stream;
+        IExcelDataReader excelReader;
+        DataTable dtExcelData;
+
+        Image B_Leave = Properties.Resources.B_click;
+        Image B_Enter = Properties.Resources.B_on;
 
         private void frmBulkPriceUpdate_Load(object sender, EventArgs e)
         {
-            btnBrowse.BackgroundImage = Properties.Resources.B_on;
-            btnUpdatePrice.BackgroundImage = Properties.Resources.B_on;
+            btnBrowse.BackgroundImage = B_Leave;
+            btnUpdatePrice.BackgroundImage = B_Leave;
         }
-        clsUtility ObjUtil = new clsUtility();
+
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm";
-            if (openFileDialog.ShowDialog()==DialogResult.OK)
+            openFileDialog.Filter = "Excel Files|*.xls;*.xlsx";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                txtFilePath.Text = openFileDialog.FileName;
-
                 try
                 {
+                    txtFilePath.Text = openFileDialog.FileName;
                     stream = new FileStream(openFileDialog.FileName, FileMode.Open);
                     excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
                     DataSet result = excelReader.AsDataSet();
-                    if (result.Tables.Count > 0)
+                    if (result != null && result.Tables.Count > 0)
                     {
                         dtExcelData = result.Tables[0];
                         if (ObjUtil.ValidateTable(dtExcelData))
@@ -53,17 +61,19 @@ namespace IMS_Client_2.StockManagement
                             dgvBulkPriceUpdate.DataSource = dtExcelData;
                         }
                     }
+                    excelReader.Close();
+                    //stream.Flush();
+                    stream.Close();
                 }
                 catch (Exception ex)
                 {
+                    string temp = "LoginID: " + clsUtility.LoginID + " ";
+                    ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
 
-                    MessageBox.Show(ex.ToString());
+                    clsUtility.ShowErrorMessage(ex.ToString());
                 }
             }
         }
-        FileStream stream;
-        IExcelDataReader excelReader;
-        DataTable dtExcelData;
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -75,7 +85,6 @@ namespace IMS_Client_2.StockManagement
             {
                 clsUtility.ShowInfoMessage("Excel Template not found at :" + Application.StartupPath + "//Template/BulkPriceUpdate.xlsx");
             }
-          
         }
 
         private void dgvBulkPriceUpdate_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -83,44 +92,57 @@ namespace IMS_Client_2.StockManagement
             ObjUtil.SetRowNumber(dgvBulkPriceUpdate);
             ObjUtil.SetDataGridProperty(dgvBulkPriceUpdate, DataGridViewAutoSizeColumnsMode.Fill);
 
-            if (dgvBulkPriceUpdate.Rows.Count>=0)
+            if (dgvBulkPriceUpdate.Rows.Count >= 0)
             {
                 dgvBulkPriceUpdate.Columns[0].HeaderText = "Style No";
                 dgvBulkPriceUpdate.Columns[1].HeaderText = "Sales Price";
                 dgvBulkPriceUpdate.Columns[2].HeaderText = "Brand";
             }
-          
+
         }
-        CoreApp.clsConnection_DAL ObjDAL = new clsConnection_DAL(true);
+
         private void btnUpdatePrice_Click(object sender, EventArgs e)
         {
-            if(clsUtility.ShowQuestionMessage("Are you sure, you want to update all price data"))
+            try
             {
-              
-               var  dtExcelTable = dgvBulkPriceUpdate.DataSource as DataTable;
-
-              var spDataTable=   ConvertToSpTable(dtExcelTable);
-                if (spDataTable!=null)
+                if (clsUtility.ShowQuestionMessage("Are you sure, you want to update all price data"))
                 {
-                    ObjDAL.SetStoreProcedureData("ExcelTable", SqlDbType.Structured, spDataTable);
-                    ObjDAL.SetStoreProcedureData("LoginBy", SqlDbType.Int, clsUtility.LoginID);
-                    bool result = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_BulkPriceUpdate");
-                    if (result)
+                    var dtExcelTable = dgvBulkPriceUpdate.DataSource as DataTable;
+
+                    var spDataTable = ConvertToSpTable(dtExcelTable);
+                    if (spDataTable != null)
                     {
-
-                        clsUtility.ShowInfoMessage("Sales price has been udpated.");
-
+                        ObjDAL.SetStoreProcedureData("ExcelTable", SqlDbType.Structured, spDataTable);
+                        ObjDAL.SetStoreProcedureData("LoginBy", SqlDbType.Int, clsUtility.LoginID);
+                        ObjDAL.SetStoreProcedureData("Flag", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Output);
+                        bool result = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_BulkPriceUpdate");
+                        if (result)
+                        {
+                            DataTable dt = ObjDAL.GetOutputParmData();
+                            if (ObjUtil.ValidateTable(dt))
+                            {
+                                int Flag = Convert.ToInt32(dt.Rows[0][1]);
+                                if (Flag == 1)
+                                    clsUtility.ShowInfoMessage("Sales price has been udpated.");
+                                else
+                                    clsUtility.ShowErrorMessage("Sales price has not been udpated due to Model No. or Brand is mismatching.");
+                            }
+                            else
+                            {
+                                clsUtility.ShowErrorMessage("Sales price has not been udpated.");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        clsUtility.ShowInfoMessage("Excel data not in correct format.");
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Excel data not in correct format.");
-                }
-
-
-               
-
-
+            }
+            catch (Exception ex)
+            {
+                string temp = " LoginID: " + clsUtility.LoginID + " ";
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
             }
         }
 
@@ -132,7 +154,6 @@ namespace IMS_Client_2.StockManagement
                 dtEx.Columns.Add("StyleNo", typeof(string));
                 dtEx.Columns.Add("SalePrice", typeof(decimal));
                 dtEx.Columns.Add("Brand", typeof(string));
-
 
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
@@ -146,13 +167,24 @@ namespace IMS_Client_2.StockManagement
 
                 return dtEx;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-               
+                string temp = " LoginID: " + clsUtility.LoginID + " ";
+                ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
             }
-
             return null;
+        }
+
+        private void btnBrowse_MouseEnter(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            btn.BackgroundImage = B_Enter;
+        }
+
+        private void btnBrowse_MouseLeave(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            btn.BackgroundImage = B_Leave;
         }
     }
 }
