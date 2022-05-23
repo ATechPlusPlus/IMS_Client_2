@@ -939,7 +939,8 @@ namespace IMS_Client_2.Sales
                     }
 
                     ObjDAL.SetColumnData("PaymentType", SqlDbType.NVarChar, IMS_Client_2.Other_Forms.frmPayment.lstPaymnetType[i].ToString());
-                    ObjDAL.SetColumnData("Amount", SqlDbType.Decimal, Convert.ToDecimal(txtGrandTotal.Text));
+                    // Bug :ObjDAL.SetColumnData("Amount", SqlDbType.Decimal, Convert.ToDecimal(txtGrandTotal.Text));
+                    ObjDAL.SetColumnData("Amount", SqlDbType.Decimal, Convert.ToDecimal(amount));
                     ObjDAL.SetColumnData("SalesInvoiceID", SqlDbType.Int, SalesInvoiceID);
                     ObjDAL.SetColumnData("PaymentNumber", SqlDbType.NVarChar, number);
 
