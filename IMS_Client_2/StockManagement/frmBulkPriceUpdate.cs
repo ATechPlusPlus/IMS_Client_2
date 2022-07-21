@@ -42,8 +42,10 @@ namespace IMS_Client_2.StockManagement
             {
                 try
                 {
+                    btnUpdatePrice.Enabled = true;
+                    dgvBulkPriceUpdate.DataSource = null;
                     txtFilePath.Text = openFileDialog.FileName;
-                    stream = new FileStream(openFileDialog.FileName, FileMode.Open);
+                    stream = new FileStream(openFileDialog.FileName, FileMode.Open, FileAccess.Read);
                     excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
                     DataSet result = excelReader.AsDataSet();
                     if (result != null && result.Tables.Count > 0)
@@ -62,13 +64,26 @@ namespace IMS_Client_2.StockManagement
                         }
                     }
                     excelReader.Close();
-                    //stream.Flush();
+                    ////stream.Flush();
                     stream.Close();
+                }
+                catch (IOException ex)
+                {
+                    if (ex.Message.Contains("used by another process"))
+                    {
+                        clsUtility.ShowInfoMessage("Please close the Opened '" + openFileDialog.SafeFileName + "' Excel file");
+                    }
+                    else
+                    {
+                        string temp = "LoginID: " + clsUtility.LoginID + " FilePath : " + txtFilePath.Text + " ";
+                        ObjUtil.WriteToFile(temp + "\nIOException : " + ex.ToString(), "Error");
+                        clsUtility.ShowErrorMessage(ex.ToString());
+                    }
                 }
                 catch (Exception ex)
                 {
-                    string temp = "LoginID: " + clsUtility.LoginID + " ";
-                    ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
+                    string temp = "LoginID: " + clsUtility.LoginID + " FilePath : " + txtFilePath.Text + " ";
+                    ObjUtil.WriteToFile(temp + "\nException : " + ex.ToString(), "Error");
 
                     clsUtility.ShowErrorMessage(ex.ToString());
                 }
@@ -115,23 +130,48 @@ namespace IMS_Client_2.StockManagement
                         ObjDAL.SetStoreProcedureData("ExcelTable", SqlDbType.Structured, spDataTable);
                         ObjDAL.SetStoreProcedureData("LoginBy", SqlDbType.Int, clsUtility.LoginID);
                         ObjDAL.SetStoreProcedureData("Flag", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Output);
-                        bool result = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_BulkPriceUpdate");
-                        if (result)
+                        DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_BulkPriceUpdate");
+                        if (ObjUtil.ValidateDataSet(ds))
                         {
-                            DataTable dt = ObjDAL.GetOutputParmData();
-                            if (ObjUtil.ValidateTable(dt))
+                            DataTable dtOut = ObjDAL.GetOutputParmData();
+                            if (ObjUtil.ValidateTable(dtOut))
                             {
-                                int Flag = Convert.ToInt32(dt.Rows[0][1]);
+                                int Flag = Convert.ToInt32(dtOut.Rows[0][1]);
                                 if (Flag == 1)
                                     clsUtility.ShowInfoMessage("Sales price has been udpated.");
                                 else
-                                    clsUtility.ShowErrorMessage("Sales price has not been udpated due to Model No. or Brand is mismatching.");
+                                {
+                                    clsUtility.ShowErrorMessage("Sales price has not been udpated due to Model No. or Brand is mismatching.\nClick Ok to view mismatched Model No.");
+                                    DataTable dt = ds.Tables[0];
+                                    if (ObjUtil.ValidateTable(dt))
+                                    {
+                                        btnUpdatePrice.Enabled = false;
+                                        dgvBulkPriceUpdate.DataSource = dt;
+                                    }
+                                }
                             }
                             else
                             {
                                 clsUtility.ShowErrorMessage("Sales price has not been udpated.");
                             }
                         }
+                        //bool result = ObjDAL.ExecuteStoreProcedure_DML(clsUtility.DBName + ".dbo.SPR_BulkPriceUpdate");
+                        //if (result)
+                        //{
+                        //    DataTable dt = ObjDAL.GetOutputParmData();
+                        //    if (ObjUtil.ValidateTable(dt))
+                        //    {
+                        //        int Flag = Convert.ToInt32(dt.Rows[0][1]);
+                        //        if (Flag == 1)
+                        //            clsUtility.ShowInfoMessage("Sales price has been udpated.");
+                        //        else
+                        //            clsUtility.ShowErrorMessage("Sales price has not been udpated due to Model No. or Brand is mismatching.");
+                        //    }
+                        //    else
+                        //    {
+                        //        clsUtility.ShowErrorMessage("Sales price has not been udpated.");
+                        //    }
+                        //}
                     }
                     else
                     {
@@ -142,7 +182,7 @@ namespace IMS_Client_2.StockManagement
             catch (Exception ex)
             {
                 string temp = " LoginID: " + clsUtility.LoginID + " ";
-                ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
+                ObjUtil.WriteToFile(temp + "\nException : " + ex.ToString(), "Error");
             }
         }
 
@@ -169,8 +209,8 @@ namespace IMS_Client_2.StockManagement
             }
             catch (Exception ex)
             {
-                string temp = " LoginID: " + clsUtility.LoginID + " ";
-                ObjUtil.WriteToFile(temp + ex.ToString(), "Error");
+                string temp = " LoginID : " + clsUtility.LoginID + " ";
+                ObjUtil.WriteToFile(temp + "\nException : " + ex.ToString(), "Error");
             }
             return null;
         }
