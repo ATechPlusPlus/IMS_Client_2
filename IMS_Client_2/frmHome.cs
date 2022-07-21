@@ -169,9 +169,9 @@ namespace IMS_Client_2
                 clsUtility.IsAutoLog = true;
 
                 clsUtility.DBName = "IMS_Client_2";
-                clsUtility.LoginID = 2;
+                clsUtility.LoginID = 0;
                 clsUtility.IsAdmin = true;
-                //clsUtility.IsAdmin = false;
+                ////clsUtility.IsAdmin = false;
 
                 clsUtility.strProjectTitle = "IMS";
 
