@@ -29,6 +29,7 @@ namespace IMS_Client_2
         {
             lblversion.Text = lblversion.Text + " " + Application.ProductVersion;
             clsUtility.strProjectTitle = "Inventory Management System";
+            clsUtility.IsAutoLog = true;
 
             if (System.IO.Directory.Exists("AppConfig") && System.IO.File.Exists("AppConfig\\ServerConfig.sc"))
             {
