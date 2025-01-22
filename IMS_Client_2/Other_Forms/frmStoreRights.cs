@@ -41,7 +41,7 @@ namespace IMS_Client_2.Other_Forms
             if (clsUtility.IsAdmin)
             {
                 string str = " select distinct s1.UserID,u.UserName from " + clsUtility.DBName + ".dbo.tblStoreUserRights s1 join " +
-                            " UserManagement u on s1.UserID = u.UserID ";
+                            clsUtility.DBName + ".dbo.UserManagement u on s1.UserID = u.UserID ";
 
                 DataTable dtuser = ObjCon.ExecuteSelectStatement(str);
                 dgvUser.DataSource = dtuser;

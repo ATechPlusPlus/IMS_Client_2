@@ -103,7 +103,13 @@ namespace IMS_Client_2.Other_Forms
                 {
                     dgvPriceDetails.DataSource = dt;
                     Calculation(dt);
-                    FillItemDetailsByModelNo();
+
+                    int pSubProductID = 0;
+                    if (ObjUtil.ValidateTable(dt))
+                    {
+                        pSubProductID = Convert.ToInt32(dt.Rows[0]["SubProductID"]);
+                    }
+                    FillItemDetailsByModelNo(pSubProductID);
                 }
                 else
                 {
@@ -115,11 +121,12 @@ namespace IMS_Client_2.Other_Forms
             ObjDAL.ResetData();
         }
 
-        private void FillItemDetailsByModelNo()
+        private void FillItemDetailsByModelNo(int pSubProductID = 0)
         {
             //ObjDAL.SetStoreProcedureData("ProductID", SqlDbType.Int, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("BarCode", SqlDbType.BigInt, 0, clsConnection_DAL.ParamType.Input);
             ObjDAL.SetStoreProcedureData("ModelNo", SqlDbType.NVarChar, txtSearchByModelNo.Text.Trim(), clsConnection_DAL.ParamType.Input);
+            ObjDAL.SetStoreProcedureData("SubProductID", SqlDbType.Int, pSubProductID);
             DataSet ds = ObjDAL.ExecuteStoreProcedure_Get(clsUtility.DBName + ".dbo.SPR_Get_ItemCard_Material_Details");
             if (ObjUtil.ValidateDataSet(ds))
             {
@@ -290,20 +297,20 @@ namespace IMS_Client_2.Other_Forms
             dgvPriceDetails.Columns["QTY"].Visible = false;
         }
 
-        private void Calculation(DataTable dt)
+        private void Calculation(DataTable dt, int index = 0)
         {
-            int CurrentQty = Convert.ToInt32(dt.Rows[0]["QTY"]);
-            int SoldQty = Convert.ToInt32(dt.Rows[0]["SoldQTY"]);
+            int CurrentQty = Convert.ToInt32(dt.Rows[index]["QTY"]);
+            int SoldQty = Convert.ToInt32(dt.Rows[index]["SoldQTY"]);
             int ReceivedQty = CurrentQty + SoldQty;
 
-            decimal Soldprice = Convert.ToDecimal(dt.Rows[0]["EndUser"]);
-            decimal Localprice = Convert.ToDecimal(dt.Rows[0]["LocalCost"]);
+            decimal Soldprice = Convert.ToDecimal(dt.Rows[index]["EndUser"]);
+            decimal Localprice = Convert.ToDecimal(dt.Rows[index]["LocalCost"]);
 
             txtCurrentQty.Text = CurrentQty.ToString();
             txtSoldQty.Text = SoldQty.ToString();
             txtReceivedQty.Text = ReceivedQty.ToString();
             //int temp = SoldQty == 0 ? 1 : SoldQty;                            // Handle divide by zero exception
-            txtSoldPer.Text = Math.Round( (Convert.ToDouble(SoldQty) / Convert.ToDouble(ReceivedQty)) * 100 ,3).ToString()+"%";
+            txtSoldPer.Text = Math.Round((Convert.ToDouble(SoldQty) / Convert.ToDouble(ReceivedQty)) * 100, 3).ToString() + "%";
 
             txtReceivedCost.Text = (Localprice * ReceivedQty).ToString();
             txtSoldCost.Text = (Localprice * SoldQty).ToString();
@@ -349,6 +356,9 @@ namespace IMS_Client_2.Other_Forms
             {
                 int pSubProductID = Convert.ToInt32(dgvPriceDetails.SelectedRows[0].Cells["SubProductID"].Value);
                 picProduct.Image = GetProductPhoto(pSubProductID);
+
+                Calculation((DataTable)dgvPriceDetails.DataSource, e.RowIndex);
+                FillItemDetailsByModelNo(pSubProductID);
             }
             else
             {
