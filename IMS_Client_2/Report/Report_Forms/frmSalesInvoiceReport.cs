@@ -38,6 +38,18 @@ namespace IMS_Client_2.Report
                 return false;
             }
         }
+        private bool IsArabicProductEnabled()
+        {
+            int count = ObjCon.ExecuteScalarInt("SELECT COUNT(1) FROM " + clsUtility.DBName + ".[dbo].[DefaultStoreSetting] WITH(NOLOCK) where ISNULL(UserArabicProduct,0)=1 and MachineName='" + Environment.MachineName + "'");
+            if (count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         private void frmSalesInvoice_Load(object sender, EventArgs e)
         {
             string query = "";
@@ -46,26 +58,28 @@ namespace IMS_Client_2.Report
             string VoucherNumber = "NA";
             if (IsArabicEnabled())
             {
-                query = "SELECT p1.ProductName," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.QTY) as QTY," +
-             "" + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.Rate) as Rate," +
-             "" + clsUtility.DBName + ".dbo.fun_ToArabicNum((s1.Qty*s1.Rate)) AS Total,ps.barcodeNo as BarNumber FROM " + clsUtility.DBName + ".[dbo].[SalesDetails] s1 JOIN " + clsUtility.DBName + ".dbo.ProductMaster p1 " +
-            " ON s1.ProductID = p1.ProductID " +
-            "  JOIN " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster ps" +
-            "  ON s1.SubProductID=ps.SubProductID AND s1.ProductID = ps.ProductID AND ps.colorID=s1.ColorID AND ps.SizeID=s1.SizeID " +
-            "  AND ps.StoreID=(select ShopeID from SalesInvoiceDetails where Id=s1.InvoiceID) WHERE s1.InvoiceID = " + InvoiceID;
+                //    query = "SELECT p1.ProductName," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.QTY) as QTY," +
+                // "" + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.Rate) as Rate," +
+                // "" + clsUtility.DBName + ".dbo.fun_ToArabicNum((s1.Qty*s1.Rate)) AS Total,ps.barcodeNo as BarNumber FROM " + clsUtility.DBName + ".[dbo].[SalesDetails] s1 JOIN " + clsUtility.DBName + ".dbo.ProductMaster p1 " +
+                //" ON s1.ProductID = p1.ProductID " +
+                //"  JOIN " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster ps" +
+                //"  ON s1.SubProductID=ps.SubProductID AND s1.ProductID = ps.ProductID AND ps.colorID=s1.ColorID AND ps.SizeID=s1.SizeID " +
+                //"  AND ps.StoreID=(select ShopeID from " + clsUtility.DBName + ".dbo.SalesInvoiceDetails where Id=s1.InvoiceID) WHERE s1.InvoiceID = " + InvoiceID;
 
+                query = "EXEC " + clsUtility.DBName + ".dbo.SPR_Get_SalesInvoiceDetails " + InvoiceID + ",1";
                 PaymentQuery = " select PaymentType," + clsUtility.DBName + ".dbo.fun_ToArabicNum(Amount) as Amount from " + clsUtility.DBName + ".dbo.[tblSalesPayment]  where SalesInvoiceID=" + InvoiceID;
             }
             else
             {
-                query = "SELECT p1.ProductName,s1.QTY," +
-                "s1.Rate," +
-                "(s1.Qty*s1.Rate) AS Total,ps.barcodeNo as BarNumber FROM " + clsUtility.DBName + ".[dbo].[SalesDetails] s1 JOIN " + clsUtility.DBName + ".dbo.ProductMaster p1 " +
-               " ON s1.ProductID = p1.ProductID " +
-               "  JOIN " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster ps" +
-               "  ON s1.SubProductID=ps.SubProductID AND s1.ProductID = ps.ProductID AND s1.ColorID=ps.ColorID AND s1.SizeID=ps.SizeID " +
-               " AND  ps.StoreID=(select ShopeID from SalesInvoiceDetails where Id=s1.InvoiceID)  WHERE s1.InvoiceID = " + InvoiceID;
+                // query = "SELECT p1.ProductName,s1.QTY," +
+                // "s1.Rate," +
+                // "(s1.Qty*s1.Rate) AS Total,ps.barcodeNo as BarNumber FROM " + clsUtility.DBName + ".[dbo].[SalesDetails] s1 JOIN " + clsUtility.DBName + ".dbo.ProductMaster p1 " +
+                //" ON s1.ProductID = p1.ProductID " +
+                //"  JOIN " + clsUtility.DBName + ".dbo.ProductStockColorSizeMaster ps" +
+                //"  ON s1.SubProductID=ps.SubProductID AND s1.ProductID = ps.ProductID AND s1.ColorID=ps.ColorID AND s1.SizeID=ps.SizeID " +
+                //" AND  ps.StoreID=(select ShopeID from " + clsUtility.DBName + ".dbo.SalesInvoiceDetails where Id=s1.InvoiceID)  WHERE s1.InvoiceID = " + InvoiceID;
 
+                query = "EXEC " + clsUtility.DBName + ".dbo.SPR_Get_SalesInvoiceDetails " + InvoiceID + ",0";
                 PaymentQuery = "select PaymentTYpe,Amount from " + clsUtility.DBName + ".dbo.[tblSalesPayment] WITH(NOLOCK)  where SalesInvoiceID=" + InvoiceID;
             }
 
@@ -74,7 +88,7 @@ namespace IMS_Client_2.Report
 
             if (IsArabicEnabled())
             {
-                strQueryHeader_Footer = "SELECT s1.InvoiceNumber,s1.InvoiceDate, c1.Name AS CustName,e1.Name AS empName,st1.StoreName AS StoreName," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.SubTotal) as SubTotal," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.Discount) as Discount," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.Tax) as Tax," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.GrandTotal) as GrandTotal,s1.PaymentMode,s1.PaymentAutoID,c1.PhoneNo AS CustomerMobile,s1.CashTendered, s1.Change,s1.VoucherNo FROM " + clsUtility.DBName + ".dbo.SalesInvoiceDetails s1 left JOIN " +
+                strQueryHeader_Footer = "SELECT s1.InvoiceNumber,s1.InvoiceDate, c1.Name AS CustName,e1.Name AS empName,st1.StoreName AS StoreName,st1.Place [Address]," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.SubTotal) as SubTotal," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.Discount) as Discount," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.Tax) as Tax," + clsUtility.DBName + ".dbo.fun_ToArabicNum(s1.GrandTotal) as GrandTotal,s1.PaymentMode,s1.PaymentAutoID,c1.PhoneNo AS CustomerMobile,s1.CashTendered, s1.Change,s1.VoucherNo FROM " + clsUtility.DBName + ".dbo.SalesInvoiceDetails s1 left JOIN " +
                                          " " + clsUtility.DBName + ".dbo.EmployeeDetails e1 ON s1.SalesMan = e1.EmpID left JOIN" +
                                          " " + clsUtility.DBName + ".[dbo].[CustomerMaster] c1 ON s1.CustomerID = c1.CustomerID left join" +
                                          " " + clsUtility.DBName + ".dbo.StoreMaster st1 ON st1.StoreID = s1.ShopeID WHERE s1.Id=" + InvoiceID;
@@ -88,10 +102,10 @@ namespace IMS_Client_2.Report
             }
 
             DataTable dtSalesHeader_Footer = ObjCon.ExecuteSelectStatement(strQueryHeader_Footer);
-            if (dtSalesHeader_Footer.Rows.Count>0)
+            if (dtSalesHeader_Footer.Rows.Count > 0)
             {
                 VoucherNumber = dtSalesHeader_Footer.Rows[0]["VoucherNo"].ToString();
-                if (VoucherNumber.Trim().Length==0)
+                if (VoucherNumber.Trim().Length == 0)
                 {
                     VoucherNumber = "NA";
                 }
@@ -107,7 +121,17 @@ namespace IMS_Client_2.Report
                     bmpBarCode.Save(imgPath);
                 }
             }
+
+            bool isArabic = IsArabicProductEnabled();//Added On 20-SEPT-2025
             reportViewer1.LocalReport.DataSources.Clear();
+
+            // Build dynamic path based on your folder structure
+            string reportFolder = Path.Combine(Application.StartupPath, "RDLC_Files");
+            string reportPath = Path.Combine(reportFolder,
+                isArabic ? "Sales_Invoice_arabic.rdlc" : "Sales_Invoice.rdlc");
+
+            reportViewer1.LocalReport.ReportPath = reportPath;
+
 
             ReportDataSource rds = new ReportDataSource("ds_SalesDetails", dtSalesDetails);
             ReportDataSource rds2 = new ReportDataSource("ds_InvoiceHeader", dtSalesHeader_Footer);

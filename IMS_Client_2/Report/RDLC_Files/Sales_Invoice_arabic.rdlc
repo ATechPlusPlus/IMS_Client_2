@@ -282,7 +282,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Date :</Value>
+                    <Value>تاريخ :</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                     </Style>
@@ -448,7 +448,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Invoice No :</Value>
+                    <Value>رقم الفاتوره :</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                     </Style>
@@ -708,7 +708,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Code</Value>
+                                  <Value>باركود</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -745,7 +745,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Item</Value>
+                                  <Value>الصنف</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -782,7 +782,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>QTY</Value>
+                                  <Value>الكميه</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -819,7 +819,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Total</Value>
+                                  <Value>المجموع</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -1040,7 +1040,7 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>Sub Total :</Value>
+                                <Value>المجموع الفرعي :</Value>
                                 <Style>
                                   <FontFamily>times New Roman</FontFamily>
                                   <FontWeight>Bold</FontWeight>
@@ -1074,7 +1074,7 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>Discount :</Value>
+                                <Value>الخصم :</Value>
                                 <Style>
                                   <FontFamily>times New Roman</FontFamily>
                                   <FontWeight>Bold</FontWeight>
@@ -1408,7 +1408,7 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>Grand Total :</Value>
+                                <Value>المجموع الإجمالي :</Value>
                                 <Style>
                                   <FontFamily>times New Roman</FontFamily>
                                   <FontWeight>Bold</FontWeight>
@@ -1444,7 +1444,7 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>Cash Tendered</Value>
+                                <Value>نقدي</Value>
                                 <Style>
                                   <FontFamily>times New Roman</FontFamily>
                                   <FontWeight>Bold</FontWeight>
@@ -1479,7 +1479,7 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>Change :</Value>
+                                <Value> الباقي :</Value>
                                 <Style>
                                   <FontFamily>times New Roman</FontFamily>
                                   <FontWeight>Bold</FontWeight>

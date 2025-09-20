@@ -174,6 +174,22 @@ namespace IMS_Client_2.Settings
                 {
                     chkArabicPrice.Checked = false;
                 }
+                //Added on 20-SEPT-2025
+                if (dt.Rows[0]["UserArabicProduct"] != DBNull.Value)
+                {
+                    if ((Convert.ToBoolean(dt.Rows[0]["UserArabicProduct"])))
+                    {
+                        chkArabicProduct.Checked = true;
+                    }
+                    else
+                    {
+                        chkArabicProduct.Checked = false;
+                    }
+                }
+                else
+                {
+                    chkArabicProduct.Checked = false;
+                }
 
                 txtImagePath.Text = dt.Rows[0]["ImagePath"] == DBNull.Value ? "" : dt.Rows[0]["ImagePath"].ToString();
                 txtFileExtension.Text = dt.Rows[0]["Extension"] == DBNull.Value ? "" : dt.Rows[0]["Extension"].ToString();
@@ -276,6 +292,7 @@ namespace IMS_Client_2.Settings
 
                     ObjDAL.UpdateColumnData("InvoiceFooterNote", SqlDbType.NVarChar, txtFooterNote.Text);
                     ObjDAL.UpdateColumnData("UserArabicNumbers", SqlDbType.Bit, chkArabicPrice.Checked);
+                    ObjDAL.UpdateColumnData("UserArabicProduct", SqlDbType.Bit, chkArabicProduct.Checked);//Added for printing productname and used arabic rdlc 20-SEPT 2025
                     ObjDAL.UpdateColumnData("ImagePath", SqlDbType.NVarChar, txtImagePath.Text);
                     ObjDAL.UpdateColumnData("Extension", SqlDbType.NVarChar, GetExtension());
                     ObjDAL.UpdateColumnData("UpdatedBy", SqlDbType.Int, clsUtility.LoginID);
@@ -292,6 +309,7 @@ namespace IMS_Client_2.Settings
                     // else insert.
                     ObjDAL.SetColumnData("InvoiceFooterNote", SqlDbType.NVarChar, txtFooterNote.Text);
                     ObjDAL.SetColumnData("UserArabicNumbers", SqlDbType.Bit, chkArabicPrice.Checked);
+                    ObjDAL.SetColumnData("UserArabicProduct", SqlDbType.Bit, chkArabicProduct.Checked);//Added for printing productname and used arabic rdlc 20-SEPT 2025
                     ObjDAL.SetColumnData("ImagePath", SqlDbType.NVarChar, txtImagePath.Text);
                     ObjDAL.SetColumnData("Extension", SqlDbType.NVarChar, GetExtension());
                     ObjDAL.SetColumnData("CreatedBy", SqlDbType.Int, clsUtility.LoginID);
