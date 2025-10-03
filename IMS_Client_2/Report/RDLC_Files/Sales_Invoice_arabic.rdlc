@@ -168,8 +168,8 @@
                   <TextRun>
                     <Value>=Parameters!CompanyName.Value</Value>
                     <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontSize>12pt</FontSize>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>ExtraBold</FontWeight>
                       <TextDecoration>Overline</TextDecoration>
                     </Style>
@@ -214,10 +214,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>CompanyAddress</rd:DefaultName>
-            <Top>0.59944in</Top>
-            <Left>0.1493in</Left>
-            <Height>0.35243in</Height>
-            <Width>1.98272in</Width>
+            <Top>0.60777in</Top>
+            <Left>0.13862in</Left>
+            <Height>0.29028in</Height>
+            <Width>2.00173in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -250,7 +250,7 @@
                   <TextRun>
                     <Value>=First(Fields!StoreName.Value, "ds_InvoiceHeader")</Value>
                     <Style>
-                      <FontFamily>Times New Roman</FontFamily>
+                      <FontFamily>Segoe UI</FontFamily>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -260,8 +260,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>StoreName</rd:DefaultName>
-            <Top>0.34944in</Top>
-            <Left>0.06223in</Left>
+            <Top>0.35777in</Top>
+            <Left>0.07056in</Left>
             <Height>0.25in</Height>
             <Width>2.06979in</Width>
             <ZIndex>3</ZIndex>
@@ -284,7 +284,8 @@
                   <TextRun>
                     <Value>تاريخ :</Value>
                     <Style>
-                      <FontFamily>Times New Roman</FontFamily>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -292,7 +293,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>1.14806in</Top>
+            <Top>0.96749in</Top>
             <Left>0.13597in</Left>
             <Height>0.19445in</Height>
             <Width>0.65431in</Width>
@@ -316,7 +317,7 @@
                   <TextRun>
                     <Value>=First(Fields!InvoiceDate.Value, "ds_InvoiceHeader")</Value>
                     <Style>
-                      <FontFamily>Times New Roman</FontFamily>
+                      <FontFamily>Segoe UI</FontFamily>
                       <Format>dd-MMM-yy</Format>
                     </Style>
                   </TextRun>
@@ -327,7 +328,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>InvoiceDate</rd:DefaultName>
-            <Top>1.13417in</Top>
+            <Top>0.9536in</Top>
             <Left>0.85973in</Left>
             <Height>0.22222in</Height>
             <Width>1in</Width>
@@ -351,7 +352,7 @@
                   <TextRun>
                     <Value>Time : </Value>
                     <Style>
-                      <FontFamily>Times New Roman</FontFamily>
+                      <FontFamily>Segoe UI</FontFamily>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -359,7 +360,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>1.14806in</Top>
+            <Top>0.89806in</Top>
             <Left>1.87035in</Left>
             <Height>0.19445in</Height>
             <Width>0.45833in</Width>
@@ -383,7 +384,7 @@
                   <TextRun>
                     <Value>=First(Fields!InvoiceDate.Value, "ds_InvoiceHeader")</Value>
                     <Style>
-                      <FontFamily>Times New Roman</FontFamily>
+                      <FontFamily>Segoe UI</FontFamily>
                       <Format>H:mm</Format>
                     </Style>
                   </TextRun>
@@ -394,7 +395,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>InvoiceDate1</rd:DefaultName>
-            <Top>1.14806in</Top>
+            <Top>0.89806in</Top>
             <Left>2.29248in</Left>
             <Height>0.22222in</Height>
             <Width>0.57266in</Width>
@@ -418,7 +419,7 @@
                   <TextRun>
                     <Value>=First(Fields!InvoiceNumber.Value, "ds_InvoiceHeader")</Value>
                     <Style>
-                      <FontFamily>Times New Roman</FontFamily>
+                      <FontFamily>Segoe UI</FontFamily>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -426,7 +427,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>InvoiceNumber</rd:DefaultName>
-            <Top>1.37028in</Top>
+            <Top>1.18971in</Top>
             <Left>0.86402in</Left>
             <Height>0.20833in</Height>
             <Width>2.00112in</Width>
@@ -450,7 +451,8 @@
                   <TextRun>
                     <Value>رقم الفاتوره :</Value>
                     <Style>
-                      <FontFamily>Times New Roman</FontFamily>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -458,7 +460,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>1.37028in</Top>
+            <Top>1.18971in</Top>
             <Left>0.13597in</Left>
             <Height>0.20833in</Height>
             <Width>0.76972in</Width>
@@ -482,7 +484,8 @@
                   <TextRun>
                     <Value>Salesman:</Value>
                     <Style>
-                      <FontFamily>Times New Roman</FontFamily>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -492,7 +495,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>1.60639in</Top>
+            <Top>1.42582in</Top>
             <Left>0.13862in</Left>
             <Height>0.19948in</Height>
             <Width>0.66555in</Width>
@@ -516,7 +519,7 @@
                   <TextRun>
                     <Value>=First(Fields!empName.Value, "ds_InvoiceHeader")</Value>
                     <Style>
-                      <FontFamily>Times New Roman</FontFamily>
+                      <FontFamily>Segoe UI</FontFamily>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -524,7 +527,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>empName</rd:DefaultName>
-            <Top>1.60639in</Top>
+            <Top>1.42582in</Top>
             <Left>0.86402in</Left>
             <Height>0.1997in</Height>
             <Width>2.00112in</Width>
@@ -548,7 +551,7 @@
                   <TextRun>
                     <Value>=First(Fields!CustName.Value, "ds_InvoiceHeader")</Value>
                     <Style>
-                      <FontFamily>Times New Roman</FontFamily>
+                      <FontFamily>Segoe UI</FontFamily>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -556,7 +559,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>CustName</rd:DefaultName>
-            <Top>1.82832in</Top>
+            <Top>1.64775in</Top>
             <Left>0.85973in</Left>
             <Height>0.22222in</Height>
             <Width>2.00112in</Width>
@@ -580,7 +583,8 @@
                   <TextRun>
                     <Value>Customer :</Value>
                     <Style>
-                      <FontFamily>Times New Roman</FontFamily>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -588,7 +592,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox16</rd:DefaultName>
-            <Top>1.82832in</Top>
+            <Top>1.64775in</Top>
             <Left>0.13862in</Left>
             <Height>0.20834in</Height>
             <Width>0.67944in</Width>
@@ -612,7 +616,8 @@
                   <TextRun>
                     <Value>Mobile:</Value>
                     <Style>
-                      <FontFamily>Times New Roman</FontFamily>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -620,7 +625,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox16</rd:DefaultName>
-            <Top>2.07516in</Top>
+            <Top>1.89459in</Top>
             <Left>0.13862in</Left>
             <Height>0.23633in</Height>
             <Width>0.60542in</Width>
@@ -644,7 +649,7 @@
                   <TextRun>
                     <Value>=First(Fields!CustomerMobile.Value, "ds_InvoiceHeader")</Value>
                     <Style>
-                      <FontFamily>Times New Roman</FontFamily>
+                      <FontFamily>Segoe UI</FontFamily>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -652,7 +657,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>CustomerMobile</rd:DefaultName>
-            <Top>2.06442in</Top>
+            <Top>1.88385in</Top>
             <Left>0.85334in</Left>
             <Height>0.23611in</Height>
             <Width>2.00112in</Width>
@@ -668,7 +673,7 @@
             </Style>
           </Textbox>
           <Line Name="Line2">
-            <Top>2.35609in</Top>
+            <Top>2.23109in</Top>
             <Left>0.06223in</Left>
             <Height>0in</Height>
             <Width>2.80291in</Width>
@@ -863,7 +868,8 @@
                                 <TextRun>
                                   <Value>=Fields!BarNumber.Value</Value>
                                   <Style>
-                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -898,7 +904,8 @@
                                 <TextRun>
                                   <Value>=Fields!ProductName.Value</Value>
                                   <Style>
-                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -933,7 +940,8 @@
                                 <TextRun>
                                   <Value>=Fields!QTY.Value</Value>
                                   <Style>
-                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -968,7 +976,8 @@
                                 <TextRun>
                                   <Value>=Fields!Total.Value</Value>
                                   <Style>
-                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1015,7 +1024,7 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>ds_SalesDetails</DataSetName>
-            <Top>2.45887in</Top>
+            <Top>2.33387in</Top>
             <Left>0.13597in</Left>
             <Height>0.5in</Height>
             <Width>2.77216in</Width>
@@ -1042,7 +1051,8 @@
                               <TextRun>
                                 <Value>المجموع الفرعي :</Value>
                                 <Style>
-                                  <FontFamily>times New Roman</FontFamily>
+                                  <FontFamily>Segoe UI</FontFamily>
+                                  <FontSize>9pt</FontSize>
                                   <FontWeight>Bold</FontWeight>
                                 </Style>
                               </TextRun>
@@ -1076,7 +1086,8 @@
                               <TextRun>
                                 <Value>الخصم :</Value>
                                 <Style>
-                                  <FontFamily>times New Roman</FontFamily>
+                                  <FontFamily>Segoe UI</FontFamily>
+                                  <FontSize>9pt</FontSize>
                                   <FontWeight>Bold</FontWeight>
                                 </Style>
                               </TextRun>
@@ -1375,7 +1386,8 @@
                               <TextRun>
                                 <Value>Delivery : </Value>
                                 <Style>
-                                  <FontFamily>times New Roman</FontFamily>
+                                  <FontFamily>Segoe UI</FontFamily>
+                                  <FontSize>9pt</FontSize>
                                   <FontWeight>Bold</FontWeight>
                                 </Style>
                               </TextRun>
@@ -1410,7 +1422,8 @@
                               <TextRun>
                                 <Value>المجموع الإجمالي :</Value>
                                 <Style>
-                                  <FontFamily>times New Roman</FontFamily>
+                                  <FontFamily>Segoe UI</FontFamily>
+                                  <FontSize>9pt</FontSize>
                                   <FontWeight>Bold</FontWeight>
                                 </Style>
                               </TextRun>
@@ -1446,7 +1459,8 @@
                               <TextRun>
                                 <Value>نقدي</Value>
                                 <Style>
-                                  <FontFamily>times New Roman</FontFamily>
+                                  <FontFamily>Segoe UI</FontFamily>
+                                  <FontSize>9pt</FontSize>
                                   <FontWeight>Bold</FontWeight>
                                 </Style>
                               </TextRun>
@@ -1481,7 +1495,8 @@
                               <TextRun>
                                 <Value> الباقي :</Value>
                                 <Style>
-                                  <FontFamily>times New Roman</FontFamily>
+                                  <FontFamily>Segoe UI</FontFamily>
+                                  <FontSize>9pt</FontSize>
                                   <FontWeight>Bold</FontWeight>
                                 </Style>
                               </TextRun>
@@ -1506,7 +1521,7 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>ds_InvoiceHeader</DataSetName>
-            <Top>2.98925in</Top>
+            <Top>2.86425in</Top>
             <Left>1.30982in</Left>
             <Height>1.5in</Height>
             <Width>1.59829in</Width>
@@ -1514,7 +1529,9 @@
             <Style>
               <Border>
                 <Style>None</Style>
+                <Width>0.3pt</Width>
               </Border>
+              <Color>LightGrey</Color>
             </Style>
           </Tablix>
           <Textbox Name="Textbox29">
@@ -1536,7 +1553,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox20</rd:DefaultName>
             <Top>4.25053in</Top>
-            <Left>0.13862in</Left>
+            <Left>0.13597in</Left>
             <Height>0.25in</Height>
             <Width>0.93778in</Width>
             <ZIndex>19</ZIndex>
@@ -1567,10 +1584,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>NetAmount</rd:DefaultName>
-            <Top>4.50314in</Top>
-            <Left>0.25694in</Left>
-            <Height>0.32292in</Height>
-            <Width>2.62209in</Width>
+            <Top>4.39203in</Top>
+            <Left>0.13597in</Left>
+            <Height>0.29514in</Height>
+            <Width>2.54879in</Width>
             <ZIndex>20</ZIndex>
             <Style>
               <Border>
@@ -1583,7 +1600,7 @@
             </Style>
           </Textbox>
           <Line Name="Line3">
-            <Top>4.88162in</Top>
+            <Top>4.75662in</Top>
             <Height>0in</Height>
             <Width>2.83917in</Width>
             <ZIndex>21</ZIndex>
@@ -1611,10 +1628,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox51</rd:DefaultName>
-            <Top>5.98002in</Top>
-            <Left>0.13597in</Left>
+            <Top>5.73002in</Top>
+            <Left>0.13387in</Left>
             <Height>0.25in</Height>
-            <Width>0.42708in</Width>
+            <Width>0.45486in</Width>
             <ZIndex>22</ZIndex>
             <Style>
               <Border>
@@ -1635,7 +1652,8 @@
                   <TextRun>
                     <Value>=Parameters!Note.Value</Value>
                     <Style>
-                      <FontFamily>Times New Roman</FontFamily>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1643,19 +1661,18 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Note</rd:DefaultName>
-            <Top>5.96613in</Top>
-            <Left>0.46373in</Left>
-            <Height>0.51218in</Height>
-            <Width>2.38599in</Width>
+            <Top>5.71613in</Top>
+            <Left>0.65817in</Left>
+            <Height>0.26389in</Height>
+            <Width>2.19155in</Width>
             <ZIndex>23</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
             </Style>
           </Textbox>
           <Tablix Name="Tablix2">
@@ -1758,7 +1775,8 @@
                                 <TextRun>
                                   <Value>=Fields!PaymentType.Value</Value>
                                   <Style>
-                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1792,7 +1810,8 @@
                                 <TextRun>
                                   <Value>=Fields!Amount.Value</Value>
                                   <Style>
-                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1836,8 +1855,8 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>ds_Payment</DataSetName>
-            <Top>2.98664in</Top>
-            <Left>0.1493in</Left>
+            <Top>2.86164in</Top>
+            <Left>0.13862in</Left>
             <Height>0.5in</Height>
             <Width>1.13274in</Width>
             <ZIndex>24</ZIndex>
@@ -1852,7 +1871,7 @@
             <Value>="file:" &amp; Parameters!BarCodeImage.Value</Value>
             <MIMEType>image/jpeg</MIMEType>
             <Sizing>Fit</Sizing>
-            <Top>4.93717in</Top>
+            <Top>4.81217in</Top>
             <Left>0.6134in</Left>
             <Height>0.40396in</Height>
             <Width>1.67321in</Width>
@@ -1864,7 +1883,7 @@
             </Style>
           </Image>
           <Line Name="Line4">
-            <Top>5.41058in</Top>
+            <Top>5.28558in</Top>
             <Left>0.01055in</Left>
             <Height>0in</Height>
             <Width>2.83917in</Width>
@@ -1876,7 +1895,7 @@
             </Style>
           </Line>
           <Line Name="Line5">
-            <Top>5.84869in</Top>
+            <Top>5.72369in</Top>
             <Height>0in</Height>
             <Width>2.86085in</Width>
             <ZIndex>27</ZIndex>
@@ -1904,7 +1923,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox51</rd:DefaultName>
-            <Top>5.52924in</Top>
+            <Top>5.40424in</Top>
             <Left>0.13597in</Left>
             <Height>0.25in</Height>
             <Width>1.22246in</Width>
@@ -1936,7 +1955,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>ParmVoucherNumber</rd:DefaultName>
-            <Top>5.52925in</Top>
+            <Top>5.40425in</Top>
             <Left>1.42787in</Left>
             <Height>0.25in</Height>
             <Width>1.26981in</Width>
@@ -1956,7 +1975,7 @@
             <Value>logo</Value>
             <Sizing>FitProportional</Sizing>
             <Top>0.02084in</Top>
-            <Left>2.14591in</Left>
+            <Left>2.1598in</Left>
             <Height>0.73833in</Height>
             <Width>0.73312in</Width>
             <ZIndex>30</ZIndex>
@@ -2000,7 +2019,7 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>6.53833in</Height>
+        <Height>6.06687in</Height>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2010,9 +2029,14 @@
       </Body>
       <Width>2.90813in</Width>
       <Page>
+        <PageHeight>9.5in</PageHeight>
         <PageWidth>3.14in</PageWidth>
-        <InteractiveHeight>11in</InteractiveHeight>
+        <InteractiveHeight>9.5in</InteractiveHeight>
         <InteractiveWidth>3.14in</InteractiveWidth>
+        <LeftMargin>0cm</LeftMargin>
+        <RightMargin>0cm</RightMargin>
+        <TopMargin>0cm</TopMargin>
+        <BottomMargin>0cm</BottomMargin>
         <Style>
           <Border>
             <Style>None</Style>
